@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  *********************************************************************************************************************
+
+  Tidalwave - blueHour
+  %%
+  Copyright (C) 2013 - 2013 Tidalwave_s.a.s. (http://tidalwave.it)
+  %%
+  *********************************************************************************************************************
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+  the License. You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+  an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations under the License.
+
+  *********************************************************************************************************************
+
+  $Id$
+
+*********************************************************************************************************************
+#L%
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>it-tidalwave-accounting</groupId>
+        <artifactId>bluehour-modules</artifactId>
+        <version>1.0-ALPHA-1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <!-- ===============================================================================================================
+
+        This is the "Application module" of the project. There's no code here, but the list of dependencies for each
+        NBM module that you want to be part of the application, plus some optional configuration. 
+
+    ================================================================================================================ -->
+
+    <groupId>it-tidalwave-accounting</groupId>
+    <artifactId>bluehour-application</artifactId>
+    <version>1.0-ALPHA-1-SNAPSHOT</version>
+    <packaging>nbm-application</packaging>
+    <name>blueHour (application)</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>it-tidalwave-accounting</groupId>
+            <artifactId>bluehour-branding</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it-tidalwave-accounting</groupId>
+            <artifactId>bluehour-application-customization</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it-tidalwave-accounting</groupId>
+            <artifactId>bluehour-module1</artifactId>
+        </dependency>
+
+<!-- Uncomment if you want to enable the License Panel feature
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-licensepanel</artifactId>
+        </dependency> 
+-->
+
+<!-- Uncomment if you want look and feel management 
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-lookandfeel</artifactId>
+        </dependency>
+-->
+
+<!-- Uncomment if you want to expose AutoUpdate services
+
+                <dependency>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-modules-autoupdate-services</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-modules-autoupdate-ui</artifactId> 
+                </dependency>
+        -->
+
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-core-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-applemenu</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-masterfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-core-nativeaccess</artifactId>
+        </dependency>
+
+        <!-- TODO: add your dependencies here -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- The default configuration would create jar and test-jar, with the jar contents overriding
+            the war contents when initializing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-jar</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <configuration>
+                    <etcConfFile>config/bluehour.conf</etcConfFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>
+
