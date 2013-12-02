@@ -31,6 +31,7 @@ import java.util.List;
 import java.io.File;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
+import corny.addressbook.data.MultiValue;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.Customer;
@@ -75,16 +76,19 @@ public class ImportTest
               }
 
             final Contact contact = contacts.get(0);
+            final MultiValue<String> phone = contact.getPhone();
+            final MultiValue<String> email = contact.getEmail();
+
             String vat = "";
 
-            if (contact.getEmail() != null)
+            if (email != null)
               {
-                vat = contact.getEmail().getFirstHomeValue(); // VAT is also there in my address book...
+                vat = email.getFirstHomeValue(); // VAT is also there in my address book...
               }
 
-            if (vat.equals("") && contact.getPhone()!= null)
+            if (vat.equals("") && (phone != null))
               {
-                vat = contact.getPhone().getFirstHomeValue(); // VAT is also there in my address book...
+                vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
               }
 
             final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
