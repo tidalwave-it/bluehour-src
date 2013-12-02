@@ -82,7 +82,7 @@
 
         <netbeans.hint.jdkPlatform>JDK_1.7.0_17</netbeans.hint.jdkPlatform>
         <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
-        <netbeans.compile.on.save>none</netbeans.compile.on.save>
+        <netbeans.compile.on.save>all</netbeans.compile.on.save>
 
         <netbeans.brandingToken>bluehour</netbeans.brandingToken>
         <netbeans.cluster>bluehour</netbeans.cluster>
