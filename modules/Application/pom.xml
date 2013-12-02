@@ -63,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>it-tidalwave-accounting</groupId>
-            <artifactId>bluehour-module1</artifactId>
+            <artifactId>it-tidalwave-accounting-model</artifactId>
         </dependency>
 
 <!-- Uncomment if you want to enable the License Panel feature

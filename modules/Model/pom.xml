@@ -26,7 +26,7 @@
 #L%
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -41,22 +41,30 @@
 
     <!-- ===============================================================================================================
 
-        This is an example module of your project. Here you write code and expose services. 
+        This is an example module of your project. Here you write code and expose services.
 
     ================================================================================================================ -->
     <groupId>it-tidalwave-accounting</groupId>
-    <artifactId>bluehour-module1</artifactId>
+    <artifactId>it-tidalwave-accounting-model</artifactId>
     <packaging>nbm</packaging>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
-    <name>blueHour - Module 1</name>
-    
+    <name>blueHour - Model</name>
+
     <dependencies>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>org-slf4j-jdk14</artifactId>
         </dependency>
-        
+
         <!-- TEST DEPENDENCIES -->
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,7 +74,7 @@
                 <artifactId>nbm-maven-plugin</artifactId>
                 <configuration>
                     <publicPackages>
-                        <!-- TODO: enumerate public packages here -->
+                        <publicPackage>it.tidalwave.accounting.model</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
