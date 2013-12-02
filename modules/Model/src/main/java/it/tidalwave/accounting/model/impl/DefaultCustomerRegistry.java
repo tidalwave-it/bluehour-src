@@ -25,16 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.PRIVATE;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.util.Finder;
 
 /***********************************************************************************************************************
  *
@@ -42,43 +38,17 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
-public class Customer
+public class DefaultCustomerRegistry implements CustomerRegistry
   {
-    @AllArgsConstructor(access = PRIVATE)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
+    @Override @Nonnull
+    public Finder<Customer> findCustomer()
       {
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-
-        @Nonnull
-        public Customer create()
-          {
-            return new Customer(this);
-          }
+        throw new UnsupportedOperationException("Not supported yet.");
       }
 
-    @Nonnull
-    private final String name;
-
-    @Nonnull
-    private final Address billingAddress;
-
-    @Nonnull
-    private final String vatNumber;
-
-    @Nonnull
-    public static Builder builder()
+    @Override @Nonnull
+    public Customer.Builder addCustomer()
       {
-        return new Builder("", Address.EMPTY, "");
-      }
-
-    public Customer (final @Nonnull Builder builder)
-      {
-        this.name = builder.getName();
-        this.billingAddress = builder.getBillingAddress();
-        this.vatNumber = builder.getVatNumber();
+        return Customer.builder();
       }
   }

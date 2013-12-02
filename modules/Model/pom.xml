@@ -52,18 +52,50 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>joda-time</artifactId>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-jdk14</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org-slf4j-jdk14</artifactId>
+                    <groupId>com.kenai.nbpwr</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>org-slf4j-jdk14</artifactId>
+            <artifactId>joda-time</artifactId>
         </dependency>
 
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-util</artifactId>
+            <artifactId>it-tidalwave-util-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jabaddressbook</groupId>
+            <artifactId>jabaddressbook</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jabaddressbook</groupId>
+            <artifactId>addressbook</artifactId>
+            <type>jnilib</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -76,6 +108,40 @@
                     <publicPackages>
                         <publicPackage>it.tidalwave.accounting.model</publicPackage>
                     </publicPackages>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>jabaddressbook</groupId>
+                                    <artifactId>addressbook</artifactId>
+                                    <type>jnilib</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target</outputDirectory>
+                                    <destFileName>libAddressBook.jnilib</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Djava.library.path=target</argLine>
                 </configuration>
             </plugin>
         </plugins>

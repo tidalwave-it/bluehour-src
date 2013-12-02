@@ -45,6 +45,8 @@ import static lombok.AccessLevel.PRIVATE;
 @Immutable @EqualsAndHashCode @ToString
 public class Address
   {
+    public static final Address EMPTY = builder().create();
+
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
@@ -74,7 +76,7 @@ public class Address
     private final String zip;
 
     @Nonnull
-    public static Builder create()
+    public static Builder builder()
       {
         return new Builder("", "", "", "");
       }
