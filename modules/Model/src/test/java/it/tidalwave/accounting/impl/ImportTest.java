@@ -78,6 +78,7 @@ public class ImportTest
             final Contact contact = contacts.get(0);
             final MultiValue<String> phone = contact.getPhone();
             final MultiValue<String> email = contact.getEmail();
+            final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
 
             String vat = "";
 
@@ -91,7 +92,6 @@ public class ImportTest
                 vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
               }
 
-            final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
             final Address address = Address.builder().withCity(addr.getCity())
                                                      .withState(addr.getCountry())
                                                      .withStreet(addr.getStreet())
