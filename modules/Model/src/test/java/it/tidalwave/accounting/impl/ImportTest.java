@@ -101,7 +101,7 @@ public class ImportTest
                                                                     .withBillingAddress(address)
                                                                     .withVatNumber(vat)
                                                                     .create();
-            log.info("CUSTOMER: {}", customer);
+            log.info("{}", customer);
           }
       }
   }
