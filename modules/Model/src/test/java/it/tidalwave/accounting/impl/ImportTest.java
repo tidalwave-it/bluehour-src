@@ -103,5 +103,7 @@ public class ImportTest
                                                                     .create();
             log.info("{}", customer);
           }
+
+        // TODO: assertions; but we must first anonymize the data
       }
   }
