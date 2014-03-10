@@ -38,6 +38,8 @@ import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
+ * This class models a customer.
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -75,7 +77,7 @@ public class Customer
         return new Builder("", Address.EMPTY, "");
       }
 
-    public Customer (final @Nonnull Builder builder)
+    protected Customer (final @Nonnull Builder builder)
       {
         this.name = builder.getName();
         this.billingAddress = builder.getBillingAddress();
