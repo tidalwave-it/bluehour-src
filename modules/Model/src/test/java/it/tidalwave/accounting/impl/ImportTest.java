@@ -85,7 +85,17 @@ public class ImportTest
             final Contact contact = contacts.get(0);
             final MultiValue<String> phone = contact.getPhone();
             final MultiValue<String> email = contact.getEmail();
-            final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
+
+            Address.Builder addressBuilder = Address.builder();
+
+            if (contact.getAddress() != null)
+              {
+                final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
+                addressBuilder = addressBuilder.withCity(addr.getCity())
+                                               .withState(addr.getCountry())
+                                               .withStreet(addr.getStreet())
+                                               .withZip("" + addr.getZip());
+              }
 
             String vat = "";
 
@@ -99,13 +109,8 @@ public class ImportTest
                 vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
               }
 
-            final Address address = Address.builder().withCity(addr.getCity())
-                                                     .withState(addr.getCountry())
-                                                     .withStreet(addr.getStreet())
-                                                     .withZip("" + addr.getZip())
-                                                     .create();
             final Customer customer = customerRegistry.addCustomer().withName(firstName)
-                                                                    .withBillingAddress(address)
+                                                                    .withBillingAddress(addressBuilder.create())
                                                                     .withVatNumber(vat)
                                                                     .create();
             log.info("{}", customer);
