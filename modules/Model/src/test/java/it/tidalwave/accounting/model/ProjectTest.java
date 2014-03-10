@@ -27,9 +27,11 @@
  */
 package it.tidalwave.accounting.model;
 
+import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.testng.annotations.Test;
+import static it.tidalwave.accounting.impl.test.TestUtils.DATETIME_FORMATTER;
+import org.joda.time.DateMidnight;
 
 /***********************************************************************************************************************
  *
@@ -56,8 +58,8 @@ public class ProjectTest
                                             .withCustomer(c1)
                                             .withName("Project 1")
                                             .withDescription("description of project 1")
-                   //                         .withStartDate(null)
-                   //                         .withEndDate(null)
+                                            .withStartDate(DATETIME_FORMATTER.parseDateTime("2014-01-03T00:00:00.0").toDateMidnight())
+                                            .withEndDate(DATETIME_FORMATTER.parseDateTime("2014-02-12T00:00:00.0").toDateMidnight())
                                             .withNotes("Notes for project 1")
                                             .withNumber("1")
                                             .withHourlyRate(new Money(43, "EUR"))
@@ -67,6 +69,9 @@ public class ProjectTest
                                            + "state=CA, country=USA, zip=12345), vatNumber=1233455345), "
                                            + "name=Project 1, number=1, description=description of project 1, "
                                            + "notes=Notes for project 1, hourlyRate=43 EUR, amount=10500 EUR, "
-                                           + "startDate=null, endDate=null)"));
+                                           + "startDate=2014-01-03T00:00:00.000+01:00, "
+                                           + "endDate=2014-02-12T00:00:00.000+01:00)"));
+
+
       }
   }

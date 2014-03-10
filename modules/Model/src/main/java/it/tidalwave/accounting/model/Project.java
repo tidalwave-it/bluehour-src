@@ -29,18 +29,18 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
+import org.joda.time.DateMidnight;
 import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
  * This class models a project.
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -59,8 +59,8 @@ public class Project
         private final String notes;
         private final Money hourlyRate;
         private final Money amount;
-        private final Date startDate;
-        private final Date endDate;
+        private final DateMidnight startDate;
+        private final DateMidnight endDate;
 
         @Nonnull
         public Project create()
@@ -91,10 +91,10 @@ public class Project
     private final Money amount;
 
     @Nonnull
-    private final Date startDate;
+    private final DateMidnight startDate;
 
     @Nonnull
-    private final Date endDate;
+    private final DateMidnight endDate;
 
     @Nonnull
     public static Project.Builder builder()

@@ -54,4 +54,12 @@ public class TestUtils
                                           .appendMillisOfSecond(3)
                                           .appendTimeZoneOffset("", true, 2, 2)
                                           .toFormatter();
+
+    public static final DateTimeFormatter DATE_FORMATTER =
+            new DateTimeFormatterBuilder().appendYear(4, 4)
+                                          .appendLiteral("-")
+                                          .appendMonthOfYear(2)
+                                          .appendLiteral("-")
+                                          .appendDayOfMonth(2)
+                                          .toFormatter();
   }
