@@ -27,10 +27,7 @@
  */
 package it.tidalwave.accounting.impl;
 
-import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.io.File;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import corny.addressbook.NativeAddressBook;
