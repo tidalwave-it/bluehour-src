@@ -30,7 +30,7 @@ package it.tidalwave.accounting.model;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
-import static it.tidalwave.accounting.impl.test.TestUtils.*;
+import static it.tidalwave.accounting.importer.ibiz.TestUtils.*;
 
 /***********************************************************************************************************************
  *

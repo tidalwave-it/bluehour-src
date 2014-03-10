@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
@@ -41,7 +41,6 @@ import it.tidalwave.role.Composite;
 import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,7 +51,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class ImportTest
+public class IBizImporterTest
   {
     @Test
     public void testImport()

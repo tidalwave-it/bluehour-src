@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl.test;
+package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
 import org.joda.time.DateMidnight;
