@@ -27,7 +27,6 @@
  */
 package it.tidalwave.accounting.model;
 
-import java.math.BigDecimal;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import org.joda.time.DateTime;
@@ -39,6 +38,8 @@ import lombok.experimental.Wither;
 import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
+ *
+ * This class models a single job event.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
