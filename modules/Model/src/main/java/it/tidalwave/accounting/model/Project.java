@@ -94,6 +94,12 @@ public class Project
     @Nonnull
     private final Date endDate;
 
+    @Nonnull
+    public static Project.Builder builder()
+      {
+        return new Project.Builder(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null);
+      }
+
     public Project (final @Nonnull Builder builder)
       {
         this.customer = builder.getCustomer();
