@@ -27,24 +27,39 @@
  */
 package it.tidalwave.accounting.model;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  *
+ * This class models an amount of money.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable
-@RequiredArgsConstructor @ToString
+@RequiredArgsConstructor
 public class Money
   {
     public static final Money ZERO = new Money(BigDecimal.ZERO, "EUR");
 
+    @Nonnull
     private final BigDecimal amount;
 
+    @Nonnull
     private final String currency;
+
+    public Money(final long amount, final @Nonnull String currency)
+      {
+        this(BigDecimal.valueOf(amount), currency);
+      }
+
+    @Override @Nonnull
+    public String toString()
+      {
+        return String.format("%s %s", amount, currency);
+      }
   }
