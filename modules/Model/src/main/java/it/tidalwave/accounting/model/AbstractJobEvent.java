@@ -25,62 +25,72 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import java.util.Collections;
 import java.util.List;
-import it.tidalwave.role.Composite;
-import it.tidalwave.role.SimpleComposite;
-import it.tidalwave.accounting.model.AbstractJobEvent;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.importer.ibiz.IBizImporter;
-import org.testng.annotations.Test;
-import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.Wither;
+import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
+ *
+ * This class models a single job event.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class ImportTest
+@Immutable @EqualsAndHashCode @ToString
+public abstract class AbstractJobEvent
   {
-    @Test
-    public void testImport()
-      throws Exception
+    @AllArgsConstructor(access = PRIVATE)
+    @Immutable @Wither @Getter @ToString
+    public static class Builder
       {
-        final String path = "/Users/fritz/Settings/iBiz/"; // FIXME
-        final IBizImporter importer = IBizImporter.builder()
-                                                  .withPath2(path)
-                                                  .create();
+        private final DateTime startDateTime;
+        private final DateTime endDateTime;
+        private final String name;
+        private final String description;
+        private final Money earnings;
+        private final Money rate;
+        private final List<AbstractJobEvent> events; // FIXME: immutable
 
-        importer.run();
-
-        for (final Project project : importer.getProjectRegistry().findProjects().results())
+        @Nonnull
+        public AbstractJobEvent create()
           {
-            log.info("PROJECT: {}", project);
-            dump(project.findChildren().results(), "");
-          }
-
-        // TODO: assertions; but we must first anonymize the data
-      }
-
-    private static void dump (final @Nonnull List<? extends AbstractJobEvent> events, final @Nonnull String prefix)
-      {
-        for (final AbstractJobEvent event : events)
-          {
-            dump(event, prefix);
+            if ((events != null) && !events.isEmpty())
+              {
+                return new JobEventGroup(this);
+              }
+            else
+              {
+                return new JobEvent(this);
+              }
           }
       }
 
-    private static void dump (final @Nonnull AbstractJobEvent event, final @Nonnull String prefix)
-      {
-        log.info("{}{}", prefix, event);
+    @Nonnull
+    protected final String name;
 
-        if (event instanceof Composite)
-          {
-            dump(((SimpleComposite<AbstractJobEvent>)event).findChildren().results(), prefix + "  ");
-          }
+    @Nonnull
+    protected final String description;
+
+    @Nonnull
+    public static AbstractJobEvent.Builder builder()
+      {
+        return new AbstractJobEvent.Builder(null, null, "", "", Money.ZERO, Money.ZERO, Collections.<AbstractJobEvent>emptyList()); // FIXME: avoid nulls
+      }
+
+    protected AbstractJobEvent (final @Nonnull Builder builder)
+      {
+        this.name = builder.getName();
+        this.description = builder.getDescription();
       }
   }

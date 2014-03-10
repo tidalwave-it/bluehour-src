@@ -52,7 +52,7 @@ import static lombok.AccessLevel.PRIVATE;
  **********************************************************************************************************************/
 @Immutable @Wither
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events"})
-public class Project implements SimpleComposite<JobEvent>
+public class Project implements SimpleComposite<AbstractJobEvent>
   {
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
@@ -80,7 +80,7 @@ public class Project implements SimpleComposite<JobEvent>
         private final Money amount;
         private final DateMidnight startDate;
         private final DateMidnight endDate;
-        private final List<JobEvent> events; // FIXME: immutable
+        private final List<AbstractJobEvent> events; // FIXME: immutable
         private final Callback callback;
 
         public Builder()
@@ -91,7 +91,7 @@ public class Project implements SimpleComposite<JobEvent>
         public Builder (final @Nonnull Callback callback)
           {
              // FIXME: avoid null
-            this(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList(), callback);
+            this(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<AbstractJobEvent>emptyList(), callback);
           }
 
         @Nonnull
@@ -131,7 +131,7 @@ public class Project implements SimpleComposite<JobEvent>
     private final DateMidnight endDate;
 
     @Nonnull
-    private final List<JobEvent> events; // FIXME: immutable
+    private final List<AbstractJobEvent> events; // FIXME: immutable
 
     @Nonnull
     public static Project.Builder builder()
@@ -154,12 +154,12 @@ public class Project implements SimpleComposite<JobEvent>
       }
 
     @Override @Nonnull
-    public Finder<JobEvent> findChildren()
+    public Finder<AbstractJobEvent> findChildren()
       {
-        return new SimpleFinderSupport<JobEvent>()
+        return new SimpleFinderSupport<AbstractJobEvent>()
           {
             @Override
-            protected List<? extends JobEvent> computeResults()
+            protected List<? extends AbstractJobEvent> computeResults()
               {
                 return events;
               }

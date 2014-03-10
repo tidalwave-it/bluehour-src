@@ -41,8 +41,8 @@ public interface JobEventRegistry
     public static final Class<JobEventRegistry> JobEventRegistry = JobEventRegistry.class;
 
     @Nonnull
-    public Finder<JobEvent> findJobEvent();
+    public Finder<AbstractJobEvent> findJobEvent();
 
     @Nonnull
-    public JobEvent addJobEvent();
+    public AbstractJobEvent addJobEvent();
   }

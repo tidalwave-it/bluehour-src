@@ -39,7 +39,7 @@ import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
@@ -124,10 +124,10 @@ public class IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private List<JobEvent> importJobEvents (final @Nonnull List<Object> jobEvents)
+    private List<AbstractJobEvent> importJobEvents (final @Nonnull List<Object> jobEvents)
       throws ConfigurationException
       {
-        final List<JobEvent> result = new ArrayList<>();
+        final List<AbstractJobEvent> result = new ArrayList<>();
 
         for (final Object j : jobEvents)
           {
@@ -144,7 +144,7 @@ public class IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private JobEvent importJobEvent (final @Nonnull Configuration jobEvent2)
+    private AbstractJobEvent importJobEvent (final @Nonnull Configuration jobEvent2)
       throws ConfigurationException
       {
         final ConfigurationDecorator jobEvent = new ConfigurationDecorator(jobEvent2);
@@ -165,7 +165,7 @@ public class IBizProjectImporter
         final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
-        return JobEvent.builder().withStartDateTime(startDate)
+        return AbstractJobEvent.builder().withStartDateTime(startDate)
                                  .withEndDateTime(endDate)
                                  .withName(name)
                                  .withDescription(notes)
