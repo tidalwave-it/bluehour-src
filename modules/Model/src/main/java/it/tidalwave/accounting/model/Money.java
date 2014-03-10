@@ -42,6 +42,8 @@ import lombok.ToString;
 @RequiredArgsConstructor @ToString
 public class Money
   {
+    public static final Money ZERO = new Money(BigDecimal.ZERO, "EUR");
+
     private final BigDecimal amount;
 
     private final String currency;
