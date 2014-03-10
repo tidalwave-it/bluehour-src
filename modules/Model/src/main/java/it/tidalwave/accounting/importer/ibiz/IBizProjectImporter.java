@@ -165,17 +165,14 @@ public class IBizProjectImporter
         final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
-        JobEvent event = JobEvent.builder().withStartDateTime(startDate)
-                                           .withEndDateTime(endDate)
-                                           .withName(name)
-                                           .withDescription(notes)
-                                           .withRate(rate)
-                                           .withEarnings(earnings)
-                                           .create();
-//        log.info("TYPE {}: {}", type, event);
-        event = event.withEvents(importJobEvents(jobEvent.getList("children")));
-
-        return event;
+        return JobEvent.builder().withStartDateTime(startDate)
+                                 .withEndDateTime(endDate)
+                                 .withName(name)
+                                 .withDescription(notes)
+                                 .withRate(rate)
+                                 .withEarnings(earnings)
+                                 .withEvents(importJobEvents(jobEvent.getList("children")))
+                                 .create();
         /*
                                         <key>tax1</key>
                                         <real>22</real>

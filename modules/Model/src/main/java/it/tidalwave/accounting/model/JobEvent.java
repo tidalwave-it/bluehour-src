@@ -50,7 +50,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Wither @AllArgsConstructor(access = PRIVATE)
+@Immutable @AllArgsConstructor(access = PRIVATE)
 @EqualsAndHashCode @ToString(exclude = { "events" })
 //@EqualsAndHashCode @ToString(exclude = { "project", "events" })
 public class JobEvent implements SimpleComposite<JobEvent>
