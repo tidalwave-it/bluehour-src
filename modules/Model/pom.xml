@@ -39,6 +39,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <properties>
+        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
+    </properties>
+
     <!-- ===============================================================================================================
 
         This is an example module of your project. Here you write code and expose services.
@@ -46,24 +50,17 @@
     ================================================================================================================ -->
     <groupId>it-tidalwave-accounting</groupId>
     <artifactId>it-tidalwave-accounting-model</artifactId>
-    <packaging>nbm</packaging>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
     <name>blueHour - Model</name>
 
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-role</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-util</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-jdk14</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>org-slf4j-jdk14</artifactId>
-                    <groupId>com.kenai.nbpwr</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
