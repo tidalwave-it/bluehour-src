@@ -28,6 +28,7 @@
 package it.tidalwave.accounting.importer.ibiz;
 
 import it.tidalwave.accounting.model.Money;
+import it.tidalwave.util.Id;
 import java.math.MathContext;
 import java.util.Date;
 import javax.annotation.Nonnull;
@@ -50,6 +51,12 @@ public class ConfigurationDecorator implements Configuration
 
     @Nonnull @Delegate
     private final Configuration delegate;
+
+    @Nonnull
+    public Id getId (final @Nonnull String key)
+      {
+        return new Id(delegate.getString(key));
+      }
 
     @Nonnull
     public Money getMoney (final @Nonnull String key)

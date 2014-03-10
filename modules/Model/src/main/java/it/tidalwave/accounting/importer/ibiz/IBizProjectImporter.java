@@ -30,13 +30,11 @@ package it.tidalwave.accounting.importer.ibiz;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.joda.time.DateTime;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Customer;
@@ -94,20 +92,20 @@ public class IBizProjectImporter
       }
 
     @Nonnull
-    private Project.Builder importProject (final @Nonnull ConfigurationDecorator config)
+    private Project.Builder importProject (final @Nonnull ConfigurationDecorator projectConfig)
       throws NotFoundException
       {
-        final Id customerId = new Id(config.getString("clientIdentifier"));
+        final Id customerId = projectConfig.getId("clientIdentifier");
         final Customer customer = customerRegistry.findCustomers().withId(customerId).result();
-        return projectRegistry.addProject().withAmount(config.getMoney("projectEstimate"))
+        return projectRegistry.addProject().withAmount(projectConfig.getMoney("projectEstimate"))
                                            .withCustomer(customer)
-                                           .withName(config.getString("projectName"))
+                                           .withName(projectConfig.getString("projectName"))
 //                                           .withDescription("description of project 1")
-                                           .withStartDate(config.getDate("projectStartDate"))
-                                           .withEndDate(config.getDate("projectDueDate"))
-                                           .withNotes(config.getString("projectNotes"))
-                                           .withNumber(config.getString("projectNumber"))
-                                           .withHourlyRate(config.getMoney("projectRate"));
+                                           .withStartDate(projectConfig.getDate("projectStartDate"))
+                                           .withEndDate(projectConfig.getDate("projectDueDate"))
+                                           .withNotes(projectConfig.getString("projectNotes"))
+                                           .withNumber(projectConfig.getString("projectNumber"))
+                                           .withHourlyRate(projectConfig.getMoney("projectRate"));
 /*       <key>lastModifiedDate</key>
         <date>2014-03-10T11:45:22Z</date>
         <key>projectEarnings</key>

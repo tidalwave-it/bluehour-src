@@ -61,14 +61,14 @@ public class IBizCustomerImporter
 
         final File file = new File("/Users/fritz/Settings/iBiz/clients"); // FIXME
         final Configuration x = new XMLPropertyListConfiguration(file);
-        final List<Object> clients = x.getList("clients");
+        final List<Object> customersConfig = x.getList("clients");
 
-        for (final Object c : clients)
+        for (final Object c : customersConfig)
           {
-            final Configuration client = (Configuration)c;
-            final String clientCompany = client.getString("clientCompany");
-            final String firstName = client.getString("firstName").trim();
-            final Id addressBookId = new Id(client.getString("addressBookId"));
+            final ConfigurationDecorator customerConfig = new ConfigurationDecorator((Configuration)c);
+            final String clientCompany = customerConfig.getString("clientCompany");
+            final String firstName = customerConfig.getString("firstName").trim();
+            final Id addressBookId = customerConfig.getId("addressBookId");
 
             List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
 
