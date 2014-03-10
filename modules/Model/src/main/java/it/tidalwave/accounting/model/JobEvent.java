@@ -51,14 +51,15 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @Immutable @Wither @AllArgsConstructor(access = PRIVATE)
-@EqualsAndHashCode @ToString(exclude = { "project", "events" })
+@EqualsAndHashCode @ToString(exclude = { "events" })
+//@EqualsAndHashCode @ToString(exclude = { "project", "events" })
 public class JobEvent implements SimpleComposite<JobEvent>
   {
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
-        private final Project project;
+//        private final Project project;
         private final DateTime startDateTime;
         private final DateTime endDateTime;
         private final String name;
@@ -74,8 +75,8 @@ public class JobEvent implements SimpleComposite<JobEvent>
           }
       }
 
-    @Nonnull
-    private final Project project;
+//    @Nonnull
+//    private final Project project;
 
     @Nonnull
     private final String name;
@@ -101,12 +102,12 @@ public class JobEvent implements SimpleComposite<JobEvent>
     @Nonnull
     public static JobEvent.Builder builder()
       {
-        return new JobEvent.Builder(null, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList()); // FIXME: avoid nulls
+        return new JobEvent.Builder(null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList()); // FIXME: avoid nulls
       }
 
     protected JobEvent (final @Nonnull Builder builder)
       {
-        this.project = builder.getProject();
+//        this.project = builder.getProject();
         this.startDateTime = builder.getStartDateTime();
         this.endDateTime = builder.getEndDateTime();
         this.name = builder.getName();

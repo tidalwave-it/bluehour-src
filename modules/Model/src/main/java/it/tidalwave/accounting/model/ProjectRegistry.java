@@ -25,16 +25,10 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.impl;
+package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 import it.tidalwave.util.Finder;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.util.spi.SimpleFinderSupport;
-import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  *
@@ -42,35 +36,13 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class DefaultProjectRegistry implements ProjectRegistry
+public interface ProjectRegistry
   {
-    private final List<Project> projects = new ArrayList<>();
+    public static final Class<ProjectRegistry> CustomerRegistry = ProjectRegistry.class;
 
-    @Override @Nonnull
-    public Finder<Project> findProjects()
-      {
-        return new SimpleFinderSupport<Project>()
-          {
-            @Override @Nonnull
-            protected List<? extends Project> computeResults()
-              {
-                return projects;
-              }
-          };
-      }
+    @Nonnull
+    public Finder<Project> findProjects();
 
-    @Override @Nonnull
-    public Project.Builder addProject()
-      {
-        return new Project.Builder(new Project.Builder.Callback()
-          {
-            @Override
-            public void register (final @Nonnull Project project)
-              {
-                log.info("{}: {}", project);
-                projects.add(project);
-              }
-          });
-      }
+    @Nonnull
+    public Project.Builder addProject();
   }

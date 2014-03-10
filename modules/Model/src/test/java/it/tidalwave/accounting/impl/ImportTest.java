@@ -53,9 +53,13 @@ public class ImportTest
                                                   .withPath2(path)
                                                   .create();
 
-        final Project project = importer.run();
-        log.info("PROJECT: {}", project);
-        dump(project.findChildren().results(), "");
+        importer.run();
+
+        for (final Project project : importer.getProjectRegistry().findProjects().results())
+          {
+            log.info("PROJECT: {}", project);
+            dump(project.findChildren().results(), "");
+          }
 
         // TODO: assertions; but we must first anonymize the data
       }

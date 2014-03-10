@@ -44,6 +44,9 @@ import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
@@ -61,6 +64,9 @@ public class IBizProjectImporter
         EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
       }
 
+    @Getter
+    private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
+
     @Nonnull
     private final Path path;
 
@@ -75,17 +81,14 @@ public class IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Project run()
+    public void run()
       throws IOException
       {
         try
           {
             final File file = path.toFile();
             final ConfigurationDecorator c = new ConfigurationDecorator(new XMLPropertyListConfiguration(file));
-    //        final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
-
-            project = importProject(c);
-            return project.withEvents(importJobEvents(c.getList("jobEvents")));
+            importProject(c).withEvents(importJobEvents(c.getList("jobEvents"))).create();
           }
         catch (ConfigurationException | NotFoundException e)
           {
@@ -94,22 +97,20 @@ public class IBizProjectImporter
       }
 
     @Nonnull
-    private Project importProject (final @Nonnull ConfigurationDecorator c)
+    private Project.Builder importProject (final @Nonnull ConfigurationDecorator c)
       throws NotFoundException
       {
         final Id customerId = new Id(c.getString("clientIdentifier"));
         final Customer customer = customerRegistry.findCustomer().withId(customerId).result();
-        final Project p = Project.builder().withAmount(c.getMoney("projectEstimate"))
+        return projectRegistry.addProject().withAmount(c.getMoney("projectEstimate"))
                                            .withCustomer(customer)
                                            .withName(c.getString("projectName"))
-                                           .withDescription("description of project 1")
+//                                           .withDescription("description of project 1")
                                            .withStartDate(c.getDate("projectStartDate"))
                                            .withEndDate(c.getDate("projectDueDate"))
                                            .withNotes(c.getString("projectNotes"))
                                            .withNumber(c.getString("projectNumber"))
-                                           .withHourlyRate(c.getMoney("projectRate"))
-                                           .create();
-        return p;
+                                           .withHourlyRate(c.getMoney("projectRate"));
 /*       <key>lastModifiedDate</key>
         <date>2014-03-10T11:45:22Z</date>
         <key>projectEarnings</key>
@@ -166,8 +167,7 @@ public class IBizProjectImporter
         final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
-        JobEvent event = JobEvent.builder().withProject(project)
-                                           .withStartDateTime(startDate)
+        JobEvent event = JobEvent.builder().withStartDateTime(startDate)
                                            .withEndDateTime(endDate)
                                            .withName(name)
                                            .withDescription(notes)

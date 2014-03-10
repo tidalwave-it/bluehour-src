@@ -82,7 +82,6 @@ public class Customer implements Identifiable
             this(new Id(""), "", Address.EMPTY, "", callback);
           }
 
-
         @Nonnull
         public Customer create()
           {

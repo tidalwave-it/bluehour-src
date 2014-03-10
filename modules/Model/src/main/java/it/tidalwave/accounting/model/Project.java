@@ -58,6 +58,19 @@ public class Project implements SimpleComposite<JobEvent>
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
+        public static interface Callback // Lombok @Wither doesn't support builder subclasses
+          {
+            public void register (final @Nonnull Project project);
+
+            public static final Callback DEFAULT = new Callback()
+              {
+                @Override
+                public void register (final @Nonnull Project project)
+                  {
+                  }
+              };
+          }
+
         private final Customer customer;
         private final String name;
         private final String number;
@@ -68,12 +81,25 @@ public class Project implements SimpleComposite<JobEvent>
         private final DateMidnight startDate;
         private final DateMidnight endDate;
         private final List<JobEvent> events; // FIXME: immutable
+        private final Callback callback;
 
+        public Builder()
+          {
+            this(Callback.DEFAULT);
+          }
+
+        public Builder (final @Nonnull Callback callback)
+          {
+             // FIXME: avoid null
+            this(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList(), callback);
+          }
 
         @Nonnull
         public Project create()
           {
-            return new Project(this);
+            final Project project = new Project(this);
+            callback.register(project);
+            return project;
           }
       }
 
@@ -110,7 +136,7 @@ public class Project implements SimpleComposite<JobEvent>
     @Nonnull
     public static Project.Builder builder()
       {
-        return new Project.Builder(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList()); // FIXME: avoid null
+        return new Project.Builder();
       }
 
     protected Project (final @Nonnull Builder builder)

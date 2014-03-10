@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -106,10 +106,21 @@ public class IBizImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Project run()
+    public ProjectRegistry getProjectRegistry()
+      {
+        return projectImporter.getProjectRegistry();
+      }
+
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public void run()
       throws Exception
       {
         customerImporter.run();
-        return projectImporter.run();
+        projectImporter.run();
       }
   }
