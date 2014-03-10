@@ -27,18 +27,25 @@
  */
 package it.tidalwave.accounting.impl;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.io.File;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
-import lombok.extern.slf4j.Slf4j;
+import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
 import org.testng.annotations.Test;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.accounting.impl.test.TestUtils.*;
 
 /***********************************************************************************************************************
  *
@@ -105,5 +112,65 @@ public class ImportTest
           }
 
         // TODO: assertions; but we must first anonymize the data
+      }
+
+    @Test
+    public void importProjects()
+      throws ConfigurationException
+      {
+        final File file = new File("/Users/fritz/Settings/iBiz/Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
+        final XMLPropertyListConfiguration x = new XMLPropertyListConfiguration(file);
+
+        final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
+
+        final List<Object> jobEvents = x.getList("jobEvents");
+
+        for (final Object j : jobEvents)
+          {
+            final XMLPropertyListConfiguration jobEvent = (XMLPropertyListConfiguration)j;
+            importJobEvent(jobEvent);
+          }
+      }
+
+    private void importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent)
+      throws ConfigurationException
+      {
+        final List<Object> childEvents = jobEvent.getList("children");
+
+        for (final Object c : childEvents)
+          {
+            final XMLPropertyListConfiguration childEvent = (XMLPropertyListConfiguration)c;
+            importJobEvent(childEvent);
+          }
+
+        final boolean checkedOut = jobEvent.getBoolean("checkedout");
+        final boolean isExpense = jobEvent.getBoolean("isExpense");
+        final boolean nonBillable = jobEvent.getBoolean("nonBillable");
+        final int taxable = jobEvent.getInt("taxable");
+        final Money earnings = new Money(jobEvent.getBigDecimal("jobEventEarnings"), "EUR");
+        final String startDate = jobEvent.getString("jobEventStartDate");
+        final String endDate = jobEvent.getString("jobEventEndDate");
+        final String lastModifiedDate = jobEvent.getString("lastModifiedDate");
+        final String name =jobEvent.getString("jobEventName");
+        final String notes = jobEvent.getString("jobEventNotes");
+        final int paid = jobEvent.getInt("jobEventPaid");
+        final int type = jobEvent.getInt("jobEventType");
+        final Money rate = new Money(jobEvent.getBigDecimal("jobEventRate"), "EUR");
+
+        final JobEvent ee = JobEvent.builder().withStartDateTime(parseDateTime(startDate))
+                                              .withEndDateTime(parseDateTime(endDate))
+                                              .withName(name)
+                                              .withDescription(notes)
+                                              .withRate(rate)
+                                              .withEarnings(earnings)
+                                              .create();
+          System.err.println(ee);
+        /*
+                                        <key>tax1</key>
+                                        <real>22</real>
+                                        <key>uniqueIdentifier</key>
+                                        <string>E4EA6321-75FE-45A9-AB1F-CB456E918293</string>
+
+         */
       }
   }

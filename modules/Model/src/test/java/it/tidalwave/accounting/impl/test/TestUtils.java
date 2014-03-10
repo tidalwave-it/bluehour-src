@@ -27,6 +27,9 @@
  */
 package it.tidalwave.accounting.impl.test;
 
+import javax.annotation.Nonnull;
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 
@@ -38,7 +41,7 @@ import org.joda.time.format.DateTimeFormatterBuilder;
  **********************************************************************************************************************/
 public class TestUtils
   {
-    public static final DateTimeFormatter DATETIME_FORMATTER =
+    private static final DateTimeFormatter DATETIME_FORMATTER =
             new DateTimeFormatterBuilder().appendYear(4, 4)
                                           .appendLiteral("-")
                                           .appendMonthOfYear(2)
@@ -55,11 +58,16 @@ public class TestUtils
                                           .appendTimeZoneOffset("", true, 2, 2)
                                           .toFormatter();
 
-    public static final DateTimeFormatter DATE_FORMATTER =
-            new DateTimeFormatterBuilder().appendYear(4, 4)
-                                          .appendLiteral("-")
-                                          .appendMonthOfYear(2)
-                                          .appendLiteral("-")
-                                          .appendDayOfMonth(2)
-                                          .toFormatter();
+    @Nonnull
+    public static DateTime parseDateTime (final @Nonnull String text)
+      {
+        return DATETIME_FORMATTER.parseDateTime(text);
+      }
+
+    @Nonnull
+    public static DateMidnight parseDate (final @Nonnull String text)
+      {
+        return DATETIME_FORMATTER.parseDateTime(text + "T00:00:00.0").toDateMidnight();
+      }
+
   }
