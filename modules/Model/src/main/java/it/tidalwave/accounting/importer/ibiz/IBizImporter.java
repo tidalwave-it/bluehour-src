@@ -29,17 +29,16 @@ package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -70,12 +69,6 @@ public class IBizImporter
     public static class Builder
       {
         private final Path path;
-
-        @Nonnull
-        public IBizImporter.Builder withPath2 (final @Nonnull String path) // FIXME: rename
-          {
-            return withPath(Paths.get(path));
-          }
 
         @Nonnull
         public IBizImporter create()

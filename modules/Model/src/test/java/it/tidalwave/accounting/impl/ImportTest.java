@@ -29,17 +29,19 @@ package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import it.tidalwave.role.Composite;
 import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
-import java.util.ArrayList;
-import java.util.Collection;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,9 +58,9 @@ public class ImportTest
     public void testImport()
       throws Exception
       {
-        final String path = "/Users/fritz/Settings/iBiz/"; // FIXME
+        final Path path = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
         final IBizImporter importer = IBizImporter.builder()
-                                                  .withPath2(path)
+                                                  .withPath(path)
                                                   .create();
 
         importer.run();
