@@ -35,6 +35,12 @@ import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
+import java.nio.file.Files;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -115,9 +121,26 @@ public class IBizImporter
         final IBizCustomerImporter customerImporter = new IBizCustomerImporter(customerRegistry);
         customerImporter.run();
 
-        final Path path2 = path.resolve("Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
-        final IBizProjectImporter projectImporter = new IBizProjectImporter(customerRegistry, projectRegistry, path2);
+//        final Path path2 = path.resolve("Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
+        final Path projectsPath = path.resolve("Projects");
 
-        projectImporter.run();
+        Files.walkFileTree(projectsPath, new SimpleFileVisitor<Path>()
+          {
+            @Override
+            public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
+              throws IOException
+              {
+                new IBizProjectImporter(customerRegistry, projectRegistry, file).run();
+                return FileVisitResult.CONTINUE;
+              }
+
+            @Override
+            public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
+              throws IOException
+              {
+                System.err.println("FATAL ERROR VISITING " + file);
+                return FileVisitResult.TERMINATE;
+              }
+          });
       }
   }
