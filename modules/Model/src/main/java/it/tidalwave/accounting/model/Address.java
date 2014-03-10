@@ -38,6 +38,8 @@ import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
+ * This class models the address of a customer.
+ *
  * @author Fabrizio Giudici
  * @version $Id$
  *
