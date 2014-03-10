@@ -86,7 +86,9 @@ public class Customer implements Identifiable
         @Nonnull
         public Customer create()
           {
-            return new Customer(this);
+            final Customer customer = new Customer(this);
+            callback.register(customer);
+            return customer;
           }
       }
 
