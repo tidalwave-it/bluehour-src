@@ -33,8 +33,8 @@ import java.math.MathContext;
 import org.apache.commons.configuration.Configuration;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
-import it.tidalwave.accounting.model.Money;
 import it.tidalwave.util.Id;
+import it.tidalwave.accounting.model.Money;
 import lombok.Delegate;
 import lombok.RequiredArgsConstructor;
 
