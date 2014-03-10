@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.model;
 
+import java.math.BigDecimal;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import org.joda.time.DateTime;
@@ -43,7 +44,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
+@Immutable @EqualsAndHashCode @ToString(exclude = { "project" })
 public class JobEvent
   {
     @AllArgsConstructor(access = PRIVATE)
@@ -53,6 +54,10 @@ public class JobEvent
         private final Project project;
         private final DateTime startDateTime;
         private final DateTime endDateTime;
+        private final String name;
+        private final String description;
+        private final Money earnings;
+        private final Money rate;
 
         @Nonnull
         public JobEvent create()
@@ -65,15 +70,37 @@ public class JobEvent
     private final Project project;
 
     @Nonnull
+    private final String name;
+
+    @Nonnull
+    private final String description;
+
+    @Nonnull
     private final DateTime startDateTime;
 
     @Nonnull
     private final DateTime endDateTime;
 
-    public JobEvent (final @Nonnull Builder builder)
+    @Nonnull
+    private final Money earnings;
+
+    @Nonnull
+    private final Money rate;
+
+    @Nonnull
+    public static JobEvent.Builder builder()
+      {
+        return new JobEvent.Builder(null, null, null, "", "", Money.ZERO, Money.ZERO); // FIXME: avoid nulls
+      }
+
+    protected JobEvent (final @Nonnull Builder builder)
       {
         this.project = builder.getProject();
         this.startDateTime = builder.getStartDateTime();
         this.endDateTime = builder.getEndDateTime();
+        this.name = builder.getName();
+        this.description = builder.getDescription();
+        this.earnings = builder.getEarnings();
+        this.rate = builder.getRate();
       }
   }
