@@ -27,7 +27,9 @@
  */
 package it.tidalwave.accounting.impl;
 
+import javax.annotation.Nonnull;
 import java.util.List;
+import java.io.IOException;
 import java.io.File;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
@@ -36,8 +38,8 @@ import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
-import java.io.IOException;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -126,6 +128,21 @@ public class ImportTest
         final IBizProjectImporter importer = IBizProjectImporter.builder()
                                                                 .withPath2(path)
                                                                 .create();
-        importer.run();
+        final List<JobEvent> events = importer.run();
+        dump(events, "");
+      }
+
+    private static void dump (final @Nonnull List<? extends JobEvent> events, final @Nonnull String prefix)
+      {
+        for (final JobEvent event : events)
+          {
+            dump(event, prefix);
+          }
+      }
+
+    private static void dump (final @Nonnull JobEvent event, final @Nonnull String prefix)
+      {
+        log.info("{}{}", prefix, event);
+        dump(event.findChildren().results(), prefix + "  ");
       }
   }

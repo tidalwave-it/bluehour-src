@@ -110,17 +110,18 @@ public class IBizProjectImporter
      *
      *
      ******************************************************************************************************************/
-    public void run()
+    @Nonnull
+    public List<JobEvent> run()
       throws IOException
       {
         try
           {
             final File file = path.toFile();
-            final XMLPropertyListConfiguration x = new XMLPropertyListConfiguration(file);
+            final XMLPropertyListConfiguration c = new XMLPropertyListConfiguration(file);
 
     //        final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
 
-            importJobEvents(x.getList("jobEvents"));
+            return importJobEvents(c.getList("jobEvents"));
           }
         catch (ConfigurationException e)
           {
@@ -158,7 +159,6 @@ public class IBizProjectImporter
       throws ConfigurationException
       {
         final ConfigurationDecorator jobEvent = new ConfigurationDecorator(jobEvent2);
-        importJobEvents(jobEvent.getList("children"));
 
 //        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
 
@@ -176,14 +176,16 @@ public class IBizProjectImporter
         final ImportTest.IBizJobEventType type = ImportTest.IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
-        final JobEvent event = JobEvent.builder().withStartDateTime(startDate)
-                                                 .withEndDateTime(endDate)
-                                                 .withName(name)
-                                                 .withDescription(notes)
-                                                 .withRate(rate)
-                                                 .withEarnings(earnings)
-                                                 .create();
-        log.info("TYPE {}: {}", type, event);
+        JobEvent event = JobEvent.builder().withStartDateTime(startDate)
+                                           .withEndDateTime(endDate)
+                                           .withName(name)
+                                           .withDescription(notes)
+                                           .withRate(rate)
+                                           .withEarnings(earnings)
+                                           .create();
+//        log.info("TYPE {}: {}", type, event);
+        event = event.withEvents(importJobEvents(jobEvent.getList("children")));
+
         return event;
         /*
                                         <key>tax1</key>

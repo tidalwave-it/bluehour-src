@@ -29,7 +29,12 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.Collections;
+import java.util.List;
 import org.joda.time.DateTime;
+import it.tidalwave.util.Finder;
+import it.tidalwave.role.SimpleComposite;
+import it.tidalwave.util.spi.SimpleFinderSupport;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,8 +50,9 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = { "project" })
-public class JobEvent
+@Immutable @Wither @AllArgsConstructor(access = PRIVATE)
+@EqualsAndHashCode @ToString(exclude = { "project", "events" })
+public class JobEvent implements SimpleComposite<JobEvent>
   {
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
@@ -59,6 +65,7 @@ public class JobEvent
         private final String description;
         private final Money earnings;
         private final Money rate;
+        private final List<JobEvent> events; // FIXME: immutable
 
         @Nonnull
         public JobEvent create()
@@ -67,7 +74,7 @@ public class JobEvent
           }
       }
 
-    @Nonnull
+//    @Nonnull
     private final Project project;
 
     @Nonnull
@@ -89,9 +96,12 @@ public class JobEvent
     private final Money rate;
 
     @Nonnull
+    private final List<JobEvent> events; // FIXME: immutable
+
+    @Nonnull
     public static JobEvent.Builder builder()
       {
-        return new JobEvent.Builder(null, null, null, "", "", Money.ZERO, Money.ZERO); // FIXME: avoid nulls
+        return new JobEvent.Builder(null, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList()); // FIXME: avoid nulls
       }
 
     protected JobEvent (final @Nonnull Builder builder)
@@ -103,5 +113,19 @@ public class JobEvent
         this.description = builder.getDescription();
         this.earnings = builder.getEarnings();
         this.rate = builder.getRate();
+        this.events = builder.getEvents();
+      }
+
+    @Override @Nonnull
+    public Finder<JobEvent> findChildren()
+      {
+        return new SimpleFinderSupport<JobEvent>()
+          {
+            @Override
+            protected List<? extends JobEvent> computeResults()
+              {
+                return events;
+              }
+          };
       }
   }
