@@ -31,6 +31,10 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.io.IOException;
+import java.nio.file.Path;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 
 /***********************************************************************************************************************
  *
@@ -40,7 +44,6 @@ import java.util.List;
  **********************************************************************************************************************/
 public final class IBizUtils
   {
-
     /*******************************************************************************************************************
      *
      *
@@ -57,5 +60,24 @@ public final class IBizUtils
           }
 
         return list;
+      }
+
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public static ConfigurationDecorator loadConfiguration (final @Nonnull Path path)
+      throws IOException
+      {
+        try
+          {
+            return new ConfigurationDecorator(new XMLPropertyListConfiguration(path.toFile()));
+          }
+        catch (ConfigurationException e)
+          {
+            throw new IOException(e);
+          }
       }
   }

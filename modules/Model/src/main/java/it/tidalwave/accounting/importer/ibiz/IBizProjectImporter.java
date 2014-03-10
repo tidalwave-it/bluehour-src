@@ -84,9 +84,8 @@ public class IBizProjectImporter
       {
         try
           {
-            final File file = path.toFile();
-            final ConfigurationDecorator c = new ConfigurationDecorator(new XMLPropertyListConfiguration(file));
-            importProject(c).withEvents(importJobEvents(c.getList("jobEvents"))).create();
+            final ConfigurationDecorator config = IBizUtils.loadConfiguration(path);
+            importProject(config).withEvents(importJobEvents(config.getList("jobEvents"))).create();
           }
         catch (ConfigurationException | NotFoundException e)
           {
@@ -95,20 +94,20 @@ public class IBizProjectImporter
       }
 
     @Nonnull
-    private Project.Builder importProject (final @Nonnull ConfigurationDecorator c)
+    private Project.Builder importProject (final @Nonnull ConfigurationDecorator config)
       throws NotFoundException
       {
-        final Id customerId = new Id(c.getString("clientIdentifier"));
+        final Id customerId = new Id(config.getString("clientIdentifier"));
         final Customer customer = customerRegistry.findCustomers().withId(customerId).result();
-        return projectRegistry.addProject().withAmount(c.getMoney("projectEstimate"))
+        return projectRegistry.addProject().withAmount(config.getMoney("projectEstimate"))
                                            .withCustomer(customer)
-                                           .withName(c.getString("projectName"))
+                                           .withName(config.getString("projectName"))
 //                                           .withDescription("description of project 1")
-                                           .withStartDate(c.getDate("projectStartDate"))
-                                           .withEndDate(c.getDate("projectDueDate"))
-                                           .withNotes(c.getString("projectNotes"))
-                                           .withNumber(c.getString("projectNumber"))
-                                           .withHourlyRate(c.getMoney("projectRate"));
+                                           .withStartDate(config.getDate("projectStartDate"))
+                                           .withEndDate(config.getDate("projectDueDate"))
+                                           .withNotes(config.getString("projectNotes"))
+                                           .withNumber(config.getString("projectNumber"))
+                                           .withHourlyRate(config.getMoney("projectRate"));
 /*       <key>lastModifiedDate</key>
         <date>2014-03-10T11:45:22Z</date>
         <key>projectEarnings</key>
