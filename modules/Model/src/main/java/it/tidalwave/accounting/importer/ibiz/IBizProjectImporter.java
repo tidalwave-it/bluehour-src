@@ -28,14 +28,11 @@
 package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.joda.time.DateTime;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -47,12 +44,8 @@ import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
-import static lombok.AccessLevel.PRIVATE;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -60,38 +53,12 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
+@Slf4j @RequiredArgsConstructor
 public class IBizProjectImporter
   {
     enum IBizJobEventType
       {
         EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
-      }
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    @AllArgsConstructor(access = PRIVATE)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
-      {
-        private final Path path;
-
-        private final CustomerRegistry customerRegistry;
-
-        @Nonnull
-        public Builder withPath2 (final @Nonnull String path) // FIXME: rename
-          {
-            return withPath(Paths.get(path));
-          }
-
-        @Nonnull
-        public IBizProjectImporter create()
-          {
-            return new IBizProjectImporter(this);
-          }
       }
 
     @Nonnull
@@ -101,28 +68,6 @@ public class IBizProjectImporter
     private final CustomerRegistry customerRegistry;
 
     private Project project;
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public static IBizProjectImporter.Builder builder()
-      {
-        return new IBizProjectImporter.Builder(null, null); // FIXME: null
-      }
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    protected IBizProjectImporter (final @Nonnull Builder builder)
-      {
-        this.path = builder.getPath();
-        this.customerRegistry = builder.getCustomerRegistry();
-      }
 
     /*******************************************************************************************************************
      *
@@ -240,23 +185,5 @@ public class IBizProjectImporter
                                         <string>E4EA6321-75FE-45A9-AB1F-CB456E918293</string>
 
          */
-      }
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    private static <T> List<T> toList (final @Nonnull Iterator<T> i)
-      {
-        final List<T> list = new ArrayList<>();
-
-        while (i.hasNext())
-          {
-            list.add(i.next());
-          }
-
-        return list;
       }
   }

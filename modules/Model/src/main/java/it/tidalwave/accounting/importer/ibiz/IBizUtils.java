@@ -25,15 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.importer.ibiz.IBizImporter;
-import org.testng.annotations.Test;
-import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  *
@@ -41,36 +38,24 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class ImportTest
+public final class IBizUtils
   {
-    @Test
-    public void testImport()
-      throws Exception
+
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public static <T> List<T> toList (final @Nonnull Iterator<T> i)
       {
-        final String path = "/Users/fritz/Settings/iBiz/"; // FIXME
-        final IBizImporter importer = IBizImporter.builder()
-                                                  .withPath2(path)
-                                                  .create();
+        final List<T> list = new ArrayList<>();
 
-        final Project project = importer.run();
-        log.info("PROJECT: {}", project);
-        dump(project.findChildren().results(), "");
-
-        // TODO: assertions; but we must first anonymize the data
-      }
-
-    private static void dump (final @Nonnull List<? extends JobEvent> events, final @Nonnull String prefix)
-      {
-        for (final JobEvent event : events)
+        while (i.hasNext())
           {
-            dump(event, prefix);
+            list.add(i.next());
           }
-      }
 
-    private static void dump (final @Nonnull JobEvent event, final @Nonnull String prefix)
-      {
-        log.info("{}{}", prefix, event);
-        dump(event.findChildren().results(), prefix + "  ");
+        return list;
       }
   }
