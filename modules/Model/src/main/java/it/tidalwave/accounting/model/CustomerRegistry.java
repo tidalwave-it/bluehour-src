@@ -28,7 +28,7 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.Finder;
+import it.tidalwave.util.Id;
 
 /***********************************************************************************************************************
  *
@@ -38,10 +38,16 @@ import it.tidalwave.util.Finder;
  **********************************************************************************************************************/
 public interface CustomerRegistry
   {
+    public static interface Finder extends it.tidalwave.util.Finder<Customer>
+      {
+        @Nonnull
+        public Finder withId (@Nonnull Id id);
+      }
+
     public static final Class<CustomerRegistry> CustomerRegistry = CustomerRegistry.class;
 
     @Nonnull
-    public Finder<Customer> findCustomer();
+    public Finder findCustomer();
 
     @Nonnull
     public Customer.Builder addCustomer();
