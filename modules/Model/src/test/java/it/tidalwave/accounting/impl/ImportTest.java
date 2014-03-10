@@ -28,9 +28,7 @@
 package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
-import java.math.MathContext;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.io.File;
@@ -45,9 +43,7 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
-import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
-import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,7 +58,7 @@ public class ImportTest
   {
     enum IBizJobEventType
       {
-        EVENT, FIXED, BOH2, BOH3, BOH4, GROUP
+        EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
       }
 
     @Test
@@ -146,10 +142,10 @@ public class ImportTest
           }
       }
 
-    private void importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent)
+    private void importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent2)
       throws ConfigurationException
       {
-        final MathContext rounding = new MathContext(6);
+        final ConfigurationDecorator jobEvent = new ConfigurationDecorator(jobEvent2);
 
         final List<Object> childEvents = jobEvent.getList("children");
 
@@ -161,19 +157,19 @@ public class ImportTest
 
 //        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
 
-        final boolean checkedOut = jobEvent.getBoolean("checkedout");
-        final boolean isExpense = jobEvent.getBoolean("isExpense");
-        final boolean nonBillable = jobEvent.getBoolean("nonBillable");
+//        final boolean checkedOut = jobEvent.getBoolean("checkedout");
+//        final boolean isExpense = jobEvent.getBoolean("isExpense");
+//        final boolean nonBillable = jobEvent.getBoolean("nonBillable");
 //        final int taxable = jobEvent.getInt("taxable");
-        final Money earnings = new Money(jobEvent.getBigDecimal("jobEventEarnings").round(rounding), "EUR");
-        final DateTime startDate = new DateTime((Date)jobEvent.getProperty("jobEventStartDate"));
-        final DateTime endDate = new DateTime((Date)jobEvent.getProperty("jobEventEndDate"));
-        final DateTime lastModifiedDate = new DateTime((Date)jobEvent.getProperty("lastModifiedDate"));
+        final Money earnings = jobEvent.getMoney("jobEventEarnings");
+        final DateTime startDate = jobEvent.getDateTime("jobEventStartDate");
+        final DateTime endDate = jobEvent.getDateTime("jobEventEndDate");
+//        final DateTime lastModifiedDate = jobEvent.getDateTime("lastModifiedDate");
         final String name =jobEvent.getString("jobEventName");
         final String notes = jobEvent.getString("jobEventNotes");
-        final int paid = jobEvent.getInt("jobEventPaid");
+//        final int paid = jobEvent.getInt("jobEventPaid");
         final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
-        final Money rate = new Money(jobEvent.getBigDecimal("jobEventRate").round(rounding), "EUR");
+        final Money rate = jobEvent.getMoney("jobEventRate");
 
         final JobEvent event = JobEvent.builder().withStartDateTime(startDate)
                                                  .withEndDateTime(endDate)
