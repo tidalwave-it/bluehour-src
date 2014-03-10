@@ -28,12 +28,18 @@
 package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import it.tidalwave.role.Composite;
 import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,11 +82,51 @@ public class ImportTest
 
     private static void dump (final @Nonnull AbstractJobEvent event, final @Nonnull String prefix)
       {
-        log.info("{}{}", prefix, event);
+        log.info("{}{}", prefix, toString(event));
 
         if (event instanceof Composite)
           {
             dump(((SimpleComposite<AbstractJobEvent>)event).findChildren().results(), prefix + "  ");
           }
+      }
+
+    @Nonnull
+    private static String toString (final @Nonnull AbstractJobEvent event)
+      {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(event.getClass().getSimpleName()).append("(");
+
+        final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
+        fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
+        Collections.sort(fields, new Comparator<Field>()
+          {
+            @Override
+            public int compare (final @Nonnull Field f1, final @Nonnull Field f2)
+              {
+                return f1.getName().compareTo(f2.getName());
+              }
+          });
+
+        String separator = "";
+
+        for (final Field field : fields)
+          {
+            if (!Collection.class.isAssignableFrom(field.getType()))
+              {
+                try
+                  {
+                    field.setAccessible(true);
+                    builder.append(separator);
+                    builder.append(String.format("%s=%s", field.getName(), field.get(event)));
+                    separator = ", ";
+                  }
+                catch (IllegalArgumentException | IllegalAccessException e)
+                  {
+                    throw new RuntimeException(e);
+                  }
+              }
+          }
+
+        return builder.append(")").toString();
       }
   }
