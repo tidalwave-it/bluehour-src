@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.joda.time.DateTime;
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import it.tidalwave.util.Id;
@@ -154,15 +155,15 @@ public class IBizProjectImporter
         final Id customerId = new Id(c.getString("clientIdentifier"));
         final Customer customer = customerRegistry.findCustomer().withId(customerId).result();
         final Project p = Project.builder().withAmount(c.getMoney("projectEstimate"))
-                                            .withCustomer(customer)
-                                            .withName(c.getString("projectName"))
-                                            .withDescription("description of project 1")
-                                            .withStartDate(c.getDate("projectStartDate"))
-                                            .withEndDate(c.getDate("projectDueDate"))
-                                            .withNotes(c.getString("projectNotes"))
-                                            .withNumber(c.getString("projectNumber"))
-                                            .withHourlyRate(c.getMoney("projectRate"))
-                                            .create();
+                                           .withCustomer(customer)
+                                           .withName(c.getString("projectName"))
+                                           .withDescription("description of project 1")
+                                           .withStartDate(c.getDate("projectStartDate"))
+                                           .withEndDate(c.getDate("projectDueDate"))
+                                           .withNotes(c.getString("projectNotes"))
+                                           .withNumber(c.getString("projectNumber"))
+                                           .withHourlyRate(c.getMoney("projectRate"))
+                                           .create();
         return p;
 /*       <key>lastModifiedDate</key>
         <date>2014-03-10T11:45:22Z</date>
@@ -186,7 +187,7 @@ public class IBizProjectImporter
 
         for (final Object j : jobEvents)
           {
-            final XMLPropertyListConfiguration jobEvent = (XMLPropertyListConfiguration)j;
+            final Configuration jobEvent = (Configuration)j;
             result.add(importJobEvent(jobEvent));
           }
 
@@ -199,7 +200,7 @@ public class IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private JobEvent importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent2)
+    private JobEvent importJobEvent (final @Nonnull Configuration jobEvent2)
       throws ConfigurationException
       {
         final ConfigurationDecorator jobEvent = new ConfigurationDecorator(jobEvent2);

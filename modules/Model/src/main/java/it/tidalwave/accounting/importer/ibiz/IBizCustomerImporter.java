@@ -29,6 +29,7 @@ package it.tidalwave.accounting.importer.ibiz;
 
 import java.util.List;
 import java.io.File;
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
@@ -59,12 +60,12 @@ public class IBizCustomerImporter
         final NativeAddressBook addressBook = NativeAddressBook.instance();
 
         final File file = new File("/Users/fritz/Settings/iBiz/clients"); // FIXME
-        final XMLPropertyListConfiguration x = new XMLPropertyListConfiguration(file);
+        final Configuration x = new XMLPropertyListConfiguration(file);
         final List<Object> clients = x.getList("clients");
 
         for (final Object c : clients)
           {
-            final XMLPropertyListConfiguration client = (XMLPropertyListConfiguration)c;
+            final Configuration client = (Configuration)c;
             final String clientCompany = client.getString("clientCompany");
             final String firstName = client.getString("firstName").trim();
             final Id addressBookId = new Id(client.getString("addressBookId"));
