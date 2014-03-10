@@ -54,6 +54,9 @@ public abstract class AbstractJobEvent
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
+        public enum Type { TIMED, FLAT };
+
+        private final Type type;
         private final DateTime startDateTime;
         private final DateTime endDateTime;
         private final String name;
@@ -62,6 +65,11 @@ public abstract class AbstractJobEvent
         private final Money rate;
         private final List<AbstractJobEvent> events; // FIXME: immutable
 
+        public Builder()
+          {
+            this(Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<AbstractJobEvent>emptyList());
+          }
+
         @Nonnull
         public AbstractJobEvent create()
           {
@@ -69,9 +77,13 @@ public abstract class AbstractJobEvent
               {
                 return new JobEventGroup(this);
               }
+            else if (type == Type.TIMED)
+              {
+                return new TimedJobEvent(this);
+              }
             else
               {
-                return new JobEvent(this);
+                return new FlatJobEvent(this);
               }
           }
       }
@@ -85,7 +97,7 @@ public abstract class AbstractJobEvent
     @Nonnull
     public static AbstractJobEvent.Builder builder()
       {
-        return new AbstractJobEvent.Builder(null, null, "", "", Money.ZERO, Money.ZERO, Collections.<AbstractJobEvent>emptyList()); // FIXME: avoid nulls
+        return new AbstractJobEvent.Builder(); // FIXME: avoid nulls
       }
 
     protected AbstractJobEvent (final @Nonnull Builder builder)

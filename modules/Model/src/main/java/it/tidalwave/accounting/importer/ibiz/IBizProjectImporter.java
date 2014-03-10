@@ -43,6 +43,8 @@ import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
@@ -55,9 +57,18 @@ import lombok.RequiredArgsConstructor;
 @Slf4j @RequiredArgsConstructor
 public class IBizProjectImporter
   {
+    @AllArgsConstructor
     enum IBizJobEventType
       {
-        EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
+        EVENT(AbstractJobEvent.Builder.Type.TIMED),
+        FIXED(AbstractJobEvent.Builder.Type.FLAT),
+        UNKNOWN2(AbstractJobEvent.Builder.Type.TIMED),
+        UNKNOWN3(AbstractJobEvent.Builder.Type.TIMED),
+        UNKNOWN4(AbstractJobEvent.Builder.Type.TIMED),
+        GROUP(AbstractJobEvent.Builder.Type.FLAT);
+
+        @Getter
+        private AbstractJobEvent.Builder.Type mappedType;
       }
 
     @Nonnull
@@ -165,14 +176,15 @@ public class IBizProjectImporter
         final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
-        return AbstractJobEvent.builder().withStartDateTime(startDate)
-                                 .withEndDateTime(endDate)
-                                 .withName(name)
-                                 .withDescription(notes)
-                                 .withRate(rate)
-                                 .withEarnings(earnings)
-                                 .withEvents(importJobEvents(jobEvent.getList("children")))
-                                 .create();
+        return AbstractJobEvent.builder().withType(type.getMappedType())
+                                         .withStartDateTime(startDate)
+                                         .withEndDateTime(endDate)
+                                         .withName(name)
+                                         .withDescription(notes)
+                                         .withRate(rate)
+                                         .withEarnings(earnings)
+                                         .withEvents(importJobEvents(jobEvent.getList("children")))
+                                         .create();
         /*
                                         <key>tax1</key>
                                         <real>22</real>
