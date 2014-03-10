@@ -71,9 +71,10 @@ public class JobEventTest
                                               .withEarnings(new Money(430, "EUR"))
                                               .create();
 
-        assertThat(j1.toString(), is("JobEvent(name=Consultancy, description=Consultancy description, "
-                                             + "startDateTime=2014-01-05T13:34:56.000+01:00, "
-                                             + "endDateTime=2014-01-05T14:45:34.000+01:00, "
-                                             + "earnings=430 EUR, rate=48 EUR)"));
+        assertThat(j1.toString(), is("TimedJobEvent("
+                                   + "super=AbstractJobEvent(name=Consultancy, description=Consultancy description), "
+                                   + "startDateTime=2014-01-05T13:34:56.000+01:00, "
+                                   + "endDateTime=2014-01-05T14:45:34.000+01:00, "
+                                   + "earnings=430 EUR, rate=48 EUR)"));
       }
   }

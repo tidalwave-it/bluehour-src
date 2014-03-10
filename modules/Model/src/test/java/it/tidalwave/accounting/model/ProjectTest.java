@@ -63,12 +63,11 @@ public class ProjectTest
                                             .withNumber("1")
                                             .withHourlyRate(new Money(43, "EUR"))
                                             .create();
-        assertThat(p.toString(), is("Project(customer=Customer(name=Acme Corp., billingAddress="
-                                           + "Address(street=Foo Bar rd 20, city=San Francisco, "
-                                           + "state=CA, country=USA, zip=12345), vatNumber=1233455345), "
-                                           + "name=Project 1, number=1, description=description of project 1, "
-                                           + "notes=Notes for project 1, hourlyRate=43 EUR, amount=10500 EUR, "
-                                           + "startDate=2014-01-03T00:00:00.000+01:00, "
-                                           + "endDate=2014-02-12T00:00:00.000+01:00)"));
+        assertThat(p.toString(), is("Project(customer=Customer(id=, name=Acme Corp., billingAddress="
+                                  + "Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345), "
+                                  + "vatNumber=1233455345), name=Project 1, number=1, "
+                                  + "description=description of project 1, notes=Notes for project 1, hourlyRate=43 EUR, "
+                                  + "amount=10500 EUR, "
+                                  + "startDate=2014-01-03T00:00:00.000+01:00, endDate=2014-02-12T00:00:00.000+01:00)"));
       }
   }
