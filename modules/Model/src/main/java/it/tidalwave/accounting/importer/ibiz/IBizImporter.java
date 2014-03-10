@@ -31,7 +31,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
+import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -46,9 +49,11 @@ import static lombok.AccessLevel.PRIVATE;
  **********************************************************************************************************************/
 public class IBizImporter
   {
-    private final IBizCustomerImporter customerImporter = new IBizCustomerImporter();
+    @Getter
+    private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry();
 
-    private final IBizProjectImporter projectImporter;
+    @Getter
+    private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
 
     /*******************************************************************************************************************
      *
@@ -96,19 +101,6 @@ public class IBizImporter
     protected IBizImporter (final @Nonnull IBizImporter.Builder builder)
       {
         this.path = builder.getPath();
-        final Path path2 = path.resolve("Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
-        projectImporter = new IBizProjectImporter(path2, customerImporter.getCustomerRegistry());
-      }
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry getProjectRegistry()
-      {
-        return projectImporter.getProjectRegistry();
       }
 
     /*******************************************************************************************************************
@@ -120,7 +112,12 @@ public class IBizImporter
     public void run()
       throws Exception
       {
+        final IBizCustomerImporter customerImporter = new IBizCustomerImporter(customerRegistry);
         customerImporter.run();
+
+        final Path path2 = path.resolve("Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
+        final IBizProjectImporter projectImporter = new IBizProjectImporter(customerRegistry, projectRegistry, path2);
+
         projectImporter.run();
       }
   }

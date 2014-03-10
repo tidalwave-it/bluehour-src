@@ -43,8 +43,6 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
@@ -62,14 +60,14 @@ public class IBizProjectImporter
         EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
       }
 
-    @Getter
-    private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
+    @Nonnull
+    private final CustomerRegistry customerRegistry;
+
+    @Nonnull
+    private final ProjectRegistry projectRegistry;
 
     @Nonnull
     private final Path path;
-
-    @Nonnull
-    private final CustomerRegistry customerRegistry;
 
     /*******************************************************************************************************************
      *
@@ -91,6 +89,11 @@ public class IBizProjectImporter
           }
       }
 
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
     @Nonnull
     private Project.Builder importProject (final @Nonnull ConfigurationDecorator projectConfig)
       throws NotFoundException

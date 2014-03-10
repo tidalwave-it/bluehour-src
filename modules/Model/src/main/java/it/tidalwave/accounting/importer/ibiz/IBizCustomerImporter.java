@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.io.File;
 import org.apache.commons.configuration.Configuration;
@@ -36,10 +37,8 @@ import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Address;
-import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
-import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -48,11 +47,11 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
+@RequiredArgsConstructor @Slf4j
 public class IBizCustomerImporter
   {
-    @Getter
-    private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry();
+    @Nonnull
+    private final CustomerRegistry customerRegistry;
 
     public void run()
       throws Exception
@@ -104,11 +103,11 @@ public class IBizCustomerImporter
                 vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
               }
 
-            final Customer customer = customerRegistry.addCustomer().withId(addressBookId)
-                                                                    .withName(firstName)
-                                                                    .withBillingAddress(addressBuilder.create())
-                                                                    .withVatNumber(vat)
-                                                                    .create();
+            customerRegistry.addCustomer().withId(addressBookId)
+                                          .withName(firstName)
+                                          .withBillingAddress(addressBuilder.create())
+                                          .withVatNumber(vat)
+                                          .create();
           }
       }
   }
