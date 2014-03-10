@@ -37,7 +37,6 @@ import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
-import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -116,12 +115,32 @@ public class IBizImporter
      ******************************************************************************************************************/
     @Nonnull
     public void run()
-      throws Exception
+      throws IOException
       {
-        final IBizCustomerImporter customerImporter = new IBizCustomerImporter(customerRegistry);
-        customerImporter.run();
+        importCustomers();
+        importProjects();
+      }
 
-//        final Path path2 = path.resolve("Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+    private void importCustomers()
+      throws IOException
+      {
+        final Path customersPath = path.resolve("clients");
+        new IBizCustomerImporter(customerRegistry, customersPath).run();
+      }
+
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+    private void importProjects()
+      throws IOException
+      {
         final Path projectsPath = path.resolve("Projects");
 
         Files.walkFileTree(projectsPath, new SimpleFileVisitor<Path>()

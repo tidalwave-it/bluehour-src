@@ -29,15 +29,15 @@ package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.io.File;
+import java.io.IOException;
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import java.nio.file.Path;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,14 +53,15 @@ public class IBizCustomerImporter
     @Nonnull
     private final CustomerRegistry customerRegistry;
 
+    @Nonnull
+    private final Path path;
+
     public void run()
-      throws Exception
+      throws IOException
       {
         final NativeAddressBook addressBook = NativeAddressBook.instance();
-
-        final File file = new File("/Users/fritz/Settings/iBiz/clients"); // FIXME
-        final Configuration x = new XMLPropertyListConfiguration(file);
-        final List<Object> customersConfig = x.getList("clients");
+        final Configuration config = IBizUtils.loadConfiguration(path);
+        final List<Object> customersConfig = config.getList("clients");
 
         for (final Object c : customersConfig)
           {
