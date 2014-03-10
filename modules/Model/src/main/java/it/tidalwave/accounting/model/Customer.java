@@ -29,6 +29,8 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import it.tidalwave.util.Id;
+import it.tidalwave.role.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,16 +46,42 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
-public class Customer
+@Immutable @Getter @EqualsAndHashCode @ToString
+public class Customer implements Identifiable
   {
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
+        public static interface Callback // Lombok @Wither doesn't support builder subclasses
+          {
+            public void register (final @Nonnull Customer customer);
+
+            public static final Callback DEFAULT = new Callback()
+              {
+                @Override
+                public void register (final @Nonnull Customer customer)
+                  {
+                  }
+              };
+          }
+
+        private final Id id;
         private final String name;
         private final Address billingAddress;
         private final String vatNumber;
+        private final Callback callback;
+
+        public Builder()
+          {
+            this(Callback.DEFAULT);
+          }
+
+        public Builder (final @Nonnull Callback callback)
+          {
+            this(new Id(""), "", Address.EMPTY, "", callback);
+          }
+
 
         @Nonnull
         public Customer create()
@@ -61,6 +89,9 @@ public class Customer
             return new Customer(this);
           }
       }
+
+    @Nonnull
+    private final Id id;
 
     @Nonnull
     private final String name;
@@ -74,11 +105,12 @@ public class Customer
     @Nonnull
     public static Builder builder()
       {
-        return new Builder("", Address.EMPTY, "");
+        return new Builder();
       }
 
     protected Customer (final @Nonnull Builder builder)
       {
+        this.id = builder.getId();
         this.name = builder.getName();
         this.billingAddress = builder.getBillingAddress();
         this.vatNumber = builder.getVatNumber();
