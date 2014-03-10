@@ -101,7 +101,7 @@ public class IBizProjectImporter
       throws NotFoundException
       {
         final Id customerId = new Id(c.getString("clientIdentifier"));
-        final Customer customer = customerRegistry.findCustomer().withId(customerId).result();
+        final Customer customer = customerRegistry.findCustomers().withId(customerId).result();
         return projectRegistry.addProject().withAmount(c.getMoney("projectEstimate"))
                                            .withCustomer(customer)
                                            .withName(c.getString("projectName"))

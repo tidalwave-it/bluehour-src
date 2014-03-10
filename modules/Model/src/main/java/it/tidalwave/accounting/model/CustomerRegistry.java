@@ -47,7 +47,7 @@ public interface CustomerRegistry
     public static final Class<CustomerRegistry> CustomerRegistry = CustomerRegistry.class;
 
     @Nonnull
-    public Finder findCustomer();
+    public Finder findCustomers();
 
     @Nonnull
     public Customer.Builder addCustomer();

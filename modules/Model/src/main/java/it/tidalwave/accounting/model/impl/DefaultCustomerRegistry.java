@@ -85,7 +85,7 @@ public class DefaultCustomerRegistry implements CustomerRegistry
       }
 
     @Override @Nonnull
-    public CustomerRegistry.Finder findCustomer()
+    public CustomerRegistry.Finder findCustomers()
       {
         return new DefaultCustomerFinder();
       }
