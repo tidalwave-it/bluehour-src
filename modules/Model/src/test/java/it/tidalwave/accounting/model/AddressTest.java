@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 public class AddressTest
   {
     @Test
-    public void testSomeMethod()
+    public void toString_must_return_all_the_fields()
       {
         final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
                                             .withCity("San Francisco")
