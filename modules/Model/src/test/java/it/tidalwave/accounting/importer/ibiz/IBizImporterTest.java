@@ -53,6 +53,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IBizImporterTest
   {
+    private static final String INDENT = "    ";
+
     @Test
     public void testImport()
       throws Exception
@@ -66,8 +68,8 @@ public class IBizImporterTest
 
         for (final Project project : importer.getProjectRegistry().findProjects().results())
           {
-            log.info("PROJECT: {}", project);
-            dump(project.findChildren().results(), "");
+            log.info("{}", project);
+            dump(project.findChildren().results(), INDENT);
           }
 
         // TODO: assertions; but we must first anonymize the data
@@ -87,7 +89,7 @@ public class IBizImporterTest
 
         if (event instanceof Composite)
           {
-            dump(((SimpleComposite<AbstractJobEvent>)event).findChildren().results(), prefix + "  ");
+            dump(((SimpleComposite<AbstractJobEvent>)event).findChildren().results(), prefix + INDENT);
           }
       }
 
