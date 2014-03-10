@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.importer.ibiz;
 
 import it.tidalwave.accounting.model.Money;
 import java.math.MathContext;

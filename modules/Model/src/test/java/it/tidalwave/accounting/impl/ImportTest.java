@@ -31,6 +31,8 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.importer.ibiz.IBizCustomerImporter;
+import it.tidalwave.accounting.importer.ibiz.IBizProjectImporter;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,11 +45,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ImportTest
   {
-    enum IBizJobEventType
-      {
-        EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
-      }
-
     @Test
     public void testImport()
       throws Exception

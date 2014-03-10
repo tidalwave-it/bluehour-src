@@ -66,27 +66,24 @@
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
-
-        <!-- TEST DEPENDENCIES -->
-        <dependency>
-            <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-util-test</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>jabaddressbook</groupId>
             <artifactId>jabaddressbook</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>jabaddressbook</groupId>
             <artifactId>addressbook</artifactId>
             <type>jnilib</type>
+        </dependency>
+
+        <!-- TEST DEPENDENCIES -->
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

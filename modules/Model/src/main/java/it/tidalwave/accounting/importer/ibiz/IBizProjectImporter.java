@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.importer.ibiz;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
@@ -62,6 +62,11 @@ import static lombok.AccessLevel.PRIVATE;
 @Slf4j
 public class IBizProjectImporter
   {
+    enum IBizJobEventType
+      {
+        EVENT, FIXED, UNKNOWN2, UNKNOWN3, UNKNOWN4, GROUP
+      }
+
     /*******************************************************************************************************************
      *
      *
@@ -212,7 +217,7 @@ public class IBizProjectImporter
         final String name =jobEvent.getString("jobEventName");
         final String notes = jobEvent.getString("jobEventNotes");
 //        final int paid = jobEvent.getInt("jobEventPaid");
-        final ImportTest.IBizJobEventType type = ImportTest.IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
+        final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
         JobEvent event = JobEvent.builder().withProject(project)

@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.importer.ibiz;
 
 import java.util.List;
 import java.io.File;
