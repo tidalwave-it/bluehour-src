@@ -74,7 +74,7 @@ public class JobEvent implements SimpleComposite<JobEvent>
           }
       }
 
-//    @Nonnull
+    @Nonnull
     private final Project project;
 
     @Nonnull

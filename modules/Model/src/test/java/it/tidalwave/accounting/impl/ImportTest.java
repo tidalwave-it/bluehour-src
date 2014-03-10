@@ -39,6 +39,7 @@ import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +75,7 @@ public class ImportTest
             final XMLPropertyListConfiguration client = (XMLPropertyListConfiguration)c;
             final String clientCompany = client.getString("clientCompany");
             final String firstName = client.getString("firstName").trim();
-//            final String addressBookId = client.getString("addressBookId");
+            final String addressBookId = client.getString("addressBookId");
 
             List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
 
@@ -114,7 +115,7 @@ public class ImportTest
                                                                     .withBillingAddress(addressBuilder.create())
                                                                     .withVatNumber(vat)
                                                                     .create();
-            log.info("{}", customer);
+            log.info("{}: {}", addressBookId, customer);
           }
 
         // TODO: assertions; but we must first anonymize the data
@@ -128,8 +129,9 @@ public class ImportTest
         final IBizProjectImporter importer = IBizProjectImporter.builder()
                                                                 .withPath2(path)
                                                                 .create();
-        final List<JobEvent> events = importer.run();
-        dump(events, "");
+        final Project project = importer.run();
+        log.info("PROJECT: {}", project);
+        dump(project.findChildren().results(), "");
       }
 
     private static void dump (final @Nonnull List<? extends JobEvent> events, final @Nonnull String prefix)

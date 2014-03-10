@@ -27,14 +27,19 @@
  */
 package it.tidalwave.accounting.model;
 
+import java.util.Collections;
+import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import org.joda.time.DateMidnight;
+import it.tidalwave.role.SimpleComposite;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.spi.SimpleFinderSupport;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import org.joda.time.DateMidnight;
 import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
@@ -45,8 +50,9 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
-public class Project
+@Immutable @Wither
+@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events"})
+public class Project implements SimpleComposite<JobEvent>
   {
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
@@ -61,6 +67,8 @@ public class Project
         private final Money amount;
         private final DateMidnight startDate;
         private final DateMidnight endDate;
+        private final List<JobEvent> events; // FIXME: immutable
+
 
         @Nonnull
         public Project create()
@@ -97,9 +105,12 @@ public class Project
     private final DateMidnight endDate;
 
     @Nonnull
+    private final List<JobEvent> events; // FIXME: immutable
+
+    @Nonnull
     public static Project.Builder builder()
       {
-        return new Project.Builder(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null); // FIXME: avoid null
+        return new Project.Builder(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList()); // FIXME: avoid null
       }
 
     protected Project (final @Nonnull Builder builder)
@@ -113,5 +124,19 @@ public class Project
         this.amount = builder.getAmount();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
+        this.events = builder.getEvents();
+      }
+
+    @Override @Nonnull
+    public Finder<JobEvent> findChildren()
+      {
+        return new SimpleFinderSupport<JobEvent>()
+          {
+            @Override
+            protected List<? extends JobEvent> computeResults()
+              {
+                return events;
+              }
+          };
       }
   }

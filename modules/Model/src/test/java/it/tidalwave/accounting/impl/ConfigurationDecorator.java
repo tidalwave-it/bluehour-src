@@ -34,6 +34,7 @@ import javax.annotation.Nonnull;
 import lombok.Delegate;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.configuration.Configuration;
+import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 
 /***********************************************************************************************************************
@@ -60,5 +61,11 @@ public class ConfigurationDecorator implements Configuration
     public DateTime getDateTime (final @Nonnull String key)
       {
         return new DateTime((Date)delegate.getProperty(key));
+      }
+
+    @Nonnull
+    public DateMidnight getDate (final @Nonnull String key)
+      {
+        return new DateTime((Date)delegate.getProperty(key)).toDateMidnight();
       }
   }

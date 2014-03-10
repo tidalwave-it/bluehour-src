@@ -27,6 +27,9 @@
  */
 package it.tidalwave.accounting.impl;
 
+import static it.tidalwave.accounting.impl.test.TestUtils.parseDate;
+import it.tidalwave.accounting.model.Address;
+import it.tidalwave.accounting.model.Customer;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
@@ -41,12 +44,15 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.Project;
+import javax.annotation.CheckForNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
 import static lombok.AccessLevel.PRIVATE;
+import org.apache.commons.configuration.Configuration;
 
 /***********************************************************************************************************************
  *
@@ -84,6 +90,8 @@ public class IBizProjectImporter
     @Nonnull
     private final Path path;
 
+    private Project project;
+
     /*******************************************************************************************************************
      *
      *
@@ -111,22 +119,56 @@ public class IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    public List<JobEvent> run()
+    public Project run()
       throws IOException
       {
         try
           {
             final File file = path.toFile();
-            final XMLPropertyListConfiguration c = new XMLPropertyListConfiguration(file);
-
+            final ConfigurationDecorator c = new ConfigurationDecorator(new XMLPropertyListConfiguration(file));
     //        final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
 
-            return importJobEvents(c.getList("jobEvents"));
+            project = importProject(c);
+            return project.withEvents(importJobEvents(c.getList("jobEvents")));
           }
         catch (ConfigurationException e)
           {
             throw new IOException(e);
           }
+      }
+
+    @Nonnull
+    private Project importProject (final @Nonnull ConfigurationDecorator c)
+      {
+        final String clientId = c.getString("clientIdentifier");
+        final Address a1 = Address.builder().withStreet("Foo Bar rd 20") // FIXME
+                                            .withCity("San Francisco")
+                                            .withZip("12345")
+                                            .withState("CA")
+                                            .withCountry("USA")
+                                            .create();
+        final Customer c1 = Customer.builder().withName("Acme Corp.") // FIXME
+                                              .withVatNumber("1233455345")
+                                              .withBillingAddress(a1)
+                                              .create();
+        final Project p = Project.builder().withAmount(c.getMoney("projectEstimate"))
+                                            .withCustomer(c1)
+                                            .withName(c.getString("projectName"))
+                                            .withDescription("description of project 1")
+                                            .withStartDate(c.getDate("projectStartDate"))
+                                            .withEndDate(c.getDate("projectDueDate"))
+                                            .withNotes(c.getString("projectNotes"))
+                                            .withNumber(c.getString("projectNumber"))
+                                            .withHourlyRate(c.getMoney("projectRate"))
+                                            .create();
+        return p;
+/*       <key>lastModifiedDate</key>
+        <date>2014-03-10T11:45:22Z</date>
+        <key>projectEarnings</key>
+        <real>8560</real>
+        <key>projectStatus</key>
+        <integer>1</integer>
+ */
       }
 
     /*******************************************************************************************************************
@@ -176,7 +218,8 @@ public class IBizProjectImporter
         final ImportTest.IBizJobEventType type = ImportTest.IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
         final Money rate = jobEvent.getMoney("jobEventRate");
 
-        JobEvent event = JobEvent.builder().withStartDateTime(startDate)
+        JobEvent event = JobEvent.builder().withProject(project)
+                                           .withStartDateTime(startDate)
                                            .withEndDateTime(endDate)
                                            .withName(name)
                                            .withDescription(notes)
