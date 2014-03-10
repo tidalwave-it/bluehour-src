@@ -87,7 +87,7 @@ public class Address
         return new Builder("", "", "", "", "");
       }
 
-    public Address (final @Nonnull Builder builder)
+    protected Address (final @Nonnull Builder builder)
       {
         this.street = builder.getStreet();
         this.city = builder.getCity();
