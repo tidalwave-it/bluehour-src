@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.util.Id;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.testng.annotations.Test;
@@ -48,12 +49,13 @@ public class CustomerTest
                                             .withState("CA")
                                             .withCountry("USA")
                                             .create();
-        final Customer c1 = Customer.builder().withName("Acme Corp.")
+        final Customer c1 = Customer.builder().withId(new Id("the id"))
+                                              .withName("Acme Corp.")
                                               .withVatNumber("1233455345")
                                               .withBillingAddress(a1)
                                               .create();
 
-        assertThat(c1.toString(), is("Customer(name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
+        assertThat(c1.toString(), is("Customer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
                                    + "city=San Francisco, state=CA, country=USA, zip=12345), vatNumber=1233455345)"));
       }
   }
