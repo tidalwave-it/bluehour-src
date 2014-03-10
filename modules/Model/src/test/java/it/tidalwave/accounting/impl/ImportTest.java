@@ -29,18 +29,8 @@ package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.io.IOException;
-import java.io.File;
-import corny.addressbook.NativeAddressBook;
-import corny.addressbook.data.Contact;
-import corny.addressbook.data.MultiValue;
-import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
-import it.tidalwave.accounting.model.Address;
-import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,79 +49,24 @@ public class ImportTest
       }
 
     @Test
-    public void importFromAddressBookTest()
+    public void testImport()
       throws Exception
       {
-        final NativeAddressBook addressBook = NativeAddressBook.instance();
+        // FIXME: use a Builder
+        final IBizCustomerImporter customerImporter = new IBizCustomerImporter();
 
-        final File file = new File("/Users/fritz/Settings/iBiz/clients"); // FIXME
-        final XMLPropertyListConfiguration x = new XMLPropertyListConfiguration(file);
-        final List<Object> clients = x.getList("clients");
-
-        final CustomerRegistry customerRegistry = new DefaultCustomerRegistry();
-
-        for (final Object c : clients)
-          {
-            final XMLPropertyListConfiguration client = (XMLPropertyListConfiguration)c;
-            final String clientCompany = client.getString("clientCompany");
-            final String firstName = client.getString("firstName").trim();
-            final String addressBookId = client.getString("addressBookId");
-
-            List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
-
-            if (contacts.isEmpty())
-              {
-                contacts = addressBook.getContactsWithSomeAttribute(clientCompany);
-              }
-
-            final Contact contact = contacts.get(0);
-            final MultiValue<String> phone = contact.getPhone();
-            final MultiValue<String> email = contact.getEmail();
-
-            Address.Builder addressBuilder = Address.builder();
-
-            if (contact.getAddress() != null)
-              {
-                final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
-                addressBuilder = addressBuilder.withCity(addr.getCity())
-                                               .withState(addr.getCountry())
-                                               .withStreet(addr.getStreet())
-                                               .withZip("" + addr.getZip());
-              }
-
-            String vat = "";
-
-            if (email != null)
-              {
-                vat = email.getFirstHomeValue(); // VAT is also there in my address book...
-              }
-
-            if (vat.equals("") && (phone != null))
-              {
-                vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
-              }
-
-            final Customer customer = customerRegistry.addCustomer().withName(firstName)
-                                                                    .withBillingAddress(addressBuilder.create())
-                                                                    .withVatNumber(vat)
-                                                                    .create();
-            log.info("{}: {}", addressBookId, customer);
-          }
-
-        // TODO: assertions; but we must first anonymize the data
-      }
-
-    @Test
-    public void importProject()
-      throws IOException
-      {
         final String path = "/Users/fritz/Settings/iBiz/Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"; // FIXME
         final IBizProjectImporter importer = IBizProjectImporter.builder()
                                                                 .withPath2(path)
+                                                                .withCustomerRegistry(customerImporter.getCustomerRegistry())
                                                                 .create();
+
+        customerImporter.run();
         final Project project = importer.run();
         log.info("PROJECT: {}", project);
         dump(project.findChildren().results(), "");
+
+        // TODO: assertions; but we must first anonymize the data
       }
 
     private static void dump (final @Nonnull List<? extends JobEvent> events, final @Nonnull String prefix)

@@ -27,9 +27,6 @@
  */
 package it.tidalwave.accounting.impl;
 
-import static it.tidalwave.accounting.impl.test.TestUtils.parseDate;
-import it.tidalwave.accounting.model.Address;
-import it.tidalwave.accounting.model.Customer;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
@@ -42,17 +39,19 @@ import java.nio.file.Paths;
 import org.joda.time.DateTime;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
-import javax.annotation.CheckForNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
 import static lombok.AccessLevel.PRIVATE;
-import org.apache.commons.configuration.Configuration;
 
 /***********************************************************************************************************************
  *
@@ -74,6 +73,8 @@ public class IBizProjectImporter
       {
         private final Path path;
 
+        private final CustomerRegistry customerRegistry;
+
         @Nonnull
         public Builder withPath2 (final @Nonnull String path) // FIXME: rename
           {
@@ -90,6 +91,9 @@ public class IBizProjectImporter
     @Nonnull
     private final Path path;
 
+    @Nonnull
+    private final CustomerRegistry customerRegistry;
+
     private Project project;
 
     /*******************************************************************************************************************
@@ -100,7 +104,7 @@ public class IBizProjectImporter
     @Nonnull
     public static IBizProjectImporter.Builder builder()
       {
-        return new IBizProjectImporter.Builder(null); // FIXME: null
+        return new IBizProjectImporter.Builder(null, null); // FIXME: null
       }
 
     /*******************************************************************************************************************
@@ -111,6 +115,7 @@ public class IBizProjectImporter
     protected IBizProjectImporter (final @Nonnull Builder builder)
       {
         this.path = builder.getPath();
+        this.customerRegistry = builder.getCustomerRegistry();
       }
 
     /*******************************************************************************************************************
@@ -131,7 +136,7 @@ public class IBizProjectImporter
             project = importProject(c);
             return project.withEvents(importJobEvents(c.getList("jobEvents")));
           }
-        catch (ConfigurationException e)
+        catch (ConfigurationException | NotFoundException e)
           {
             throw new IOException(e);
           }
@@ -139,20 +144,12 @@ public class IBizProjectImporter
 
     @Nonnull
     private Project importProject (final @Nonnull ConfigurationDecorator c)
+      throws NotFoundException
       {
-        final String clientId = c.getString("clientIdentifier");
-        final Address a1 = Address.builder().withStreet("Foo Bar rd 20") // FIXME
-                                            .withCity("San Francisco")
-                                            .withZip("12345")
-                                            .withState("CA")
-                                            .withCountry("USA")
-                                            .create();
-        final Customer c1 = Customer.builder().withName("Acme Corp.") // FIXME
-                                              .withVatNumber("1233455345")
-                                              .withBillingAddress(a1)
-                                              .create();
+        final Id customerId = new Id(c.getString("clientIdentifier"));
+        final Customer customer = customerRegistry.findCustomer().withId(customerId).result();
         final Project p = Project.builder().withAmount(c.getMoney("projectEstimate"))
-                                            .withCustomer(c1)
+                                            .withCustomer(customer)
                                             .withName(c.getString("projectName"))
                                             .withDescription("description of project 1")
                                             .withStartDate(c.getDate("projectStartDate"))
@@ -247,7 +244,7 @@ public class IBizProjectImporter
     @Nonnull
     private static <T> List<T> toList (final @Nonnull Iterator<T> i)
       {
-        final List<T> list = new ArrayList<T>();
+        final List<T> list = new ArrayList<>();
 
         while (i.hasNext())
           {
