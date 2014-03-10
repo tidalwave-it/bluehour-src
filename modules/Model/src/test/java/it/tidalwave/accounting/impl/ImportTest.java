@@ -44,6 +44,7 @@ import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
+import java.io.IOException;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -125,79 +126,13 @@ public class ImportTest
       }
 
     @Test
-    public void importProjects()
-      throws ConfigurationException
+    public void importProject()
+      throws IOException
       {
-        final File file = new File("/Users/fritz/Settings/iBiz/Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"); // FIXME
-        final XMLPropertyListConfiguration x = new XMLPropertyListConfiguration(file);
-
-//        final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
-
-        final List<Object> jobEvents = x.getList("jobEvents");
-
-        for (final Object j : jobEvents)
-          {
-            final XMLPropertyListConfiguration jobEvent = (XMLPropertyListConfiguration)j;
-            importJobEvent(jobEvent);
-          }
-      }
-
-    private void importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent2)
-      throws ConfigurationException
-      {
-        final ConfigurationDecorator jobEvent = new ConfigurationDecorator(jobEvent2);
-
-        final List<Object> childEvents = jobEvent.getList("children");
-
-        for (final Object c : childEvents)
-          {
-            final XMLPropertyListConfiguration childEvent = (XMLPropertyListConfiguration)c;
-            importJobEvent(childEvent);
-          }
-
-//        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
-
-//        final boolean checkedOut = jobEvent.getBoolean("checkedout");
-//        final boolean isExpense = jobEvent.getBoolean("isExpense");
-//        final boolean nonBillable = jobEvent.getBoolean("nonBillable");
-//        final int taxable = jobEvent.getInt("taxable");
-        final Money earnings = jobEvent.getMoney("jobEventEarnings");
-        final DateTime startDate = jobEvent.getDateTime("jobEventStartDate");
-        final DateTime endDate = jobEvent.getDateTime("jobEventEndDate");
-//        final DateTime lastModifiedDate = jobEvent.getDateTime("lastModifiedDate");
-        final String name =jobEvent.getString("jobEventName");
-        final String notes = jobEvent.getString("jobEventNotes");
-//        final int paid = jobEvent.getInt("jobEventPaid");
-        final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
-        final Money rate = jobEvent.getMoney("jobEventRate");
-
-        final JobEvent event = JobEvent.builder().withStartDateTime(startDate)
-                                                 .withEndDateTime(endDate)
-                                                 .withName(name)
-                                                 .withDescription(notes)
-                                                 .withRate(rate)
-                                                 .withEarnings(earnings)
-                                                 .create();
-        log.info("TYPE {}: {}", type, event);
-        /*
-                                        <key>tax1</key>
-                                        <real>22</real>
-                                        <key>uniqueIdentifier</key>
-                                        <string>E4EA6321-75FE-45A9-AB1F-CB456E918293</string>
-
-         */
-      }
-
-    @Nonnull
-    private static <T> List<T> toList (final @Nonnull Iterator<T> i)
-      {
-        final List<T> list = new ArrayList<T>();
-
-        while (i.hasNext())
-          {
-            list.add(i.next());
-          }
-
-        return list;
+        final String path = "/Users/fritz/Settings/iBiz/Projects/4D2263D4-9043-40B9-B162-2C8951F86503.ibiz"; // FIXME
+        final IBizProjectImporter importer = IBizProjectImporter.builder()
+                                                                .withPath2(path)
+                                                                .create();
+        importer.run();
       }
   }
