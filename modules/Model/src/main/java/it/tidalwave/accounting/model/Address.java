@@ -55,8 +55,9 @@ public class Address
       {
         private final String street;
         private final String city;
-        private final String state;
         private final String zip;
+        private final String state;
+        private final String country;
 
         @Nonnull
         public Address create()
@@ -75,19 +76,23 @@ public class Address
     private final String state;
 
     @Nonnull
+    private final String country;
+
+    @Nonnull
     private final String zip;
 
     @Nonnull
     public static Builder builder()
       {
-        return new Builder("", "", "", "");
+        return new Builder("", "", "", "", "");
       }
 
     public Address (final @Nonnull Builder builder)
       {
         this.street = builder.getStreet();
         this.city = builder.getCity();
-        this.state = builder.getState();
         this.zip = builder.getZip();
+        this.state = builder.getState();
+        this.country = builder.getCountry();
       }
   }
