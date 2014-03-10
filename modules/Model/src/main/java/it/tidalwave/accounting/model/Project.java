@@ -39,6 +39,8 @@ import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
+ * This class models a project.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -97,10 +99,10 @@ public class Project
     @Nonnull
     public static Project.Builder builder()
       {
-        return new Project.Builder(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null);
+        return new Project.Builder(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null); // FIXME: avoid null
       }
 
-    public Project (final @Nonnull Builder builder)
+    protected Project (final @Nonnull Builder builder)
       {
         this.customer = builder.getCustomer();
         this.name = builder.getName();
