@@ -27,16 +27,16 @@
  */
 package it.tidalwave.accounting.importer.ibiz;
 
-import it.tidalwave.accounting.model.Money;
-import it.tidalwave.util.Id;
-import java.math.MathContext;
-import java.util.Date;
 import javax.annotation.Nonnull;
-import lombok.Delegate;
-import lombok.RequiredArgsConstructor;
+import java.util.Date;
+import java.math.MathContext;
 import org.apache.commons.configuration.Configuration;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
+import it.tidalwave.accounting.model.Money;
+import it.tidalwave.util.Id;
+import lombok.Delegate;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
