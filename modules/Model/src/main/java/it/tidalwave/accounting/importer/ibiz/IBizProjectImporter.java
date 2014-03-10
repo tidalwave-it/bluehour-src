@@ -73,8 +73,6 @@ public class IBizProjectImporter
     @Nonnull
     private final CustomerRegistry customerRegistry;
 
-    private Project project;
-
     /*******************************************************************************************************************
      *
      *
