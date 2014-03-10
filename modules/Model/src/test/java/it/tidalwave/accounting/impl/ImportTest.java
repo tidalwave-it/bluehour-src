@@ -27,22 +27,15 @@
  */
 package it.tidalwave.accounting.impl;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.io.File;
-import org.joda.time.DateTime;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
 import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
-import org.apache.commons.configuration.ConfigurationException;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import java.io.IOException;
 import org.testng.annotations.Test;

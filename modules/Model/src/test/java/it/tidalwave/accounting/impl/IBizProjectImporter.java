@@ -120,13 +120,7 @@ public class IBizProjectImporter
 
     //        final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
 
-            final List<Object> jobEvents = x.getList("jobEvents");
-
-            for (final Object j : jobEvents)
-              {
-                final XMLPropertyListConfiguration jobEvent = (XMLPropertyListConfiguration)j;
-                importJobEvent(jobEvent);
-              }
+            importJobEvents(x.getList("jobEvents"));
           }
         catch (ConfigurationException e)
           {
@@ -139,18 +133,32 @@ public class IBizProjectImporter
      *
      *
      ******************************************************************************************************************/
-    private void importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent2)
+    @Nonnull
+    private List<JobEvent> importJobEvents (final @Nonnull List<Object> jobEvents)
+      throws ConfigurationException
+      {
+        final List<JobEvent> result = new ArrayList<>();
+
+        for (final Object j : jobEvents)
+          {
+            final XMLPropertyListConfiguration jobEvent = (XMLPropertyListConfiguration)j;
+            result.add(importJobEvent(jobEvent));
+          }
+
+        return result;
+      }
+
+    /*******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private JobEvent importJobEvent (final @Nonnull XMLPropertyListConfiguration jobEvent2)
       throws ConfigurationException
       {
         final ConfigurationDecorator jobEvent = new ConfigurationDecorator(jobEvent2);
-
-        final List<Object> childEvents = jobEvent.getList("children");
-
-        for (final Object c : childEvents)
-          {
-            final XMLPropertyListConfiguration childEvent = (XMLPropertyListConfiguration)c;
-            importJobEvent(childEvent);
-          }
+        importJobEvents(jobEvent.getList("children"));
 
 //        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
 
@@ -176,6 +184,7 @@ public class IBizProjectImporter
                                                  .withEarnings(earnings)
                                                  .create();
         log.info("TYPE {}: {}", type, event);
+        return event;
         /*
                                         <key>tax1</key>
                                         <real>22</real>
