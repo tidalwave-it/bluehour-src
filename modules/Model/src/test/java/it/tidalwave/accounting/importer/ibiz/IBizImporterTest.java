@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz;
 
+import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -60,9 +61,9 @@ public class IBizImporterTest
       throws Exception
       {
         final Path path = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
-        final IBizImporter importer = IBizImporter.builder()
-                                                  .withPath(path)
-                                                  .create();
+        final IBizImporter importer = DefaultIBizImporter.builder()
+                                                         .withPath(path)
+                                                         .create();
 
         importer.run();
 

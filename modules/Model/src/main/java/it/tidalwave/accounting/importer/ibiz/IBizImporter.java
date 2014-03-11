@@ -27,24 +27,17 @@
  */
 package it.tidalwave.accounting.importer.ibiz;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
+import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
-import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
-import java.util.concurrent.atomic.AtomicReference;
+import java.io.IOException;
+import java.nio.file.Path;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
@@ -52,20 +45,14 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class IBizImporter
+public interface IBizImporter 
   {
-    @Getter
-    private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry();
-
-    @Getter
-    private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
-
     /*******************************************************************************************************************
      *
      *
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor(access = PRIVATE)
+    @AllArgsConstructor // FIXME (access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
@@ -74,32 +61,8 @@ public class IBizImporter
         @Nonnull
         public IBizImporter create()
           {
-            return new IBizImporter(this);
+            return new DefaultIBizImporter(this);
           }
-      }
-
-    @Nonnull
-    private final Path path;
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public static IBizImporter.Builder builder()
-      {
-        return new IBizImporter.Builder(null); // FIXME: null
-      }
-
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    protected IBizImporter (final @Nonnull IBizImporter.Builder builder)
-      {
-        this.path = builder.getPath();
       }
 
     /*******************************************************************************************************************
@@ -109,56 +72,21 @@ public class IBizImporter
      ******************************************************************************************************************/
     @Nonnull
     public void run()
-      throws IOException
-      {
-        importCustomers();
-        importProjects();
-      }
-
+      throws IOException;
+    
     /*******************************************************************************************************************
      *
      *
      *
      ******************************************************************************************************************/
-    private void importCustomers()
-      throws IOException
-      {
-        final Path customersPath = path.resolve("clients");
-        new IBizCustomerImporter(customerRegistry, customersPath).run();
-      }
-
+    @Nonnull
+    public CustomerRegistry getCustomerRegistry();
+    
     /*******************************************************************************************************************
      *
      *
      *
      ******************************************************************************************************************/
-    private void importProjects()
-      throws IOException
-      {
-        final Path projectsPath = path.resolve("Projects");
-        final AtomicReference<IOException> exception = new AtomicReference<>();
-
-        Files.walkFileTree(projectsPath, new SimpleFileVisitor<Path>()
-          {
-            @Override
-            public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
-              throws IOException
-              {
-                new IBizProjectImporter(customerRegistry, projectRegistry, file).run();
-                return FileVisitResult.CONTINUE;
-              }
-
-            @Override
-            public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
-              {
-                exception.set(new IOException("Fatal error visiting " + file));
-                return FileVisitResult.TERMINATE;
-              }
-          });
-
-        if (exception.get() != null)
-          {
-            throw exception.get();
-          }
-      }
+    @Nonnull
+    public ProjectRegistry getProjectRegistry();
   }

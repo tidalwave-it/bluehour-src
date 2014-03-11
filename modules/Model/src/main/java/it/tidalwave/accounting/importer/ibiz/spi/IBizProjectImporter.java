@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz;
+package it.tidalwave.accounting.importer.ibiz.spi;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -43,6 +43,8 @@ import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.importer.ibiz.impl.ConfigurationDecorator;
+import it.tidalwave.accounting.importer.ibiz.impl.IBizUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz;
+package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -35,6 +35,7 @@ import org.apache.commons.configuration.Configuration;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
+import it.tidalwave.accounting.importer.ibiz.spi.IBizCustomerImporter;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.CustomerRegistry;
@@ -47,8 +48,15 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
+
+/***********************************************************************************************************************
+ *
+ * @author  Fabrizio Giudici
+ * @version $Id$
+ *
+ **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
-public class IBizCustomerImporter
+public class DefaultIBizCustomerImporter implements IBizCustomerImporter
   {
     @Nonnull
     private final CustomerRegistry customerRegistry;
@@ -56,6 +64,7 @@ public class IBizCustomerImporter
     @Nonnull
     private final Path path;
 
+    @Override
     public void run()
       throws IOException
       {

@@ -25,16 +25,18 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz;
+package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.io.IOException;
-import java.nio.file.Path;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
+import java.util.Date;
+import java.math.MathContext;
+import org.apache.commons.configuration.Configuration;
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import it.tidalwave.util.Id;
+import it.tidalwave.accounting.model.Money;
+import lombok.Delegate;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -42,42 +44,35 @@ import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public final class IBizUtils
+@RequiredArgsConstructor
+public class ConfigurationDecorator implements Configuration
   {
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
+    private static final MathContext ROUNDING = new MathContext(6);
+
+    @Nonnull @Delegate
+    private final Configuration delegate;
+
     @Nonnull
-    public static <T> List<T> toList (final @Nonnull Iterator<T> i)
+    public Id getId (final @Nonnull String key)
       {
-        final List<T> list = new ArrayList<>();
-
-        while (i.hasNext())
-          {
-            list.add(i.next());
-          }
-
-        return list;
+        return new Id(delegate.getString(key));
       }
 
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
     @Nonnull
-    public static ConfigurationDecorator loadConfiguration (final @Nonnull Path path)
-      throws IOException
+    public Money getMoney (final @Nonnull String key)
       {
-        try
-          {
-            return new ConfigurationDecorator(new XMLPropertyListConfiguration(path.toFile()));
-          }
-        catch (ConfigurationException e)
-          {
-            throw new IOException(e);
-          }
+        return new Money(delegate.getBigDecimal(key).round(ROUNDING), "EUR");
+      }
+
+    @Nonnull
+    public DateTime getDateTime (final @Nonnull String key)
+      {
+        return new DateTime((Date)delegate.getProperty(key));
+      }
+
+    @Nonnull
+    public DateMidnight getDate (final @Nonnull String key)
+      {
+        return new DateTime((Date)delegate.getProperty(key)).toDateMidnight();
       }
   }
