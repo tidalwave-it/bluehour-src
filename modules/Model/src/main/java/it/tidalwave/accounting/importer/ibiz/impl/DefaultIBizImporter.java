@@ -124,7 +124,7 @@ public class DefaultIBizImporter implements IBizImporter
             public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
               throws IOException
               {
-                new IBizProjectImporter(customerRegistry, projectRegistry, file).run();
+                new DefaultIBizProjectImporter(customerRegistry, projectRegistry, file).run();
                 return FileVisitResult.CONTINUE;
               }
 
