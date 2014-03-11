@@ -25,8 +25,9 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz;
+package it.tidalwave.accounting.importer.ibiz.impl;
 
+import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
@@ -52,7 +53,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class IBizImporterTest
+public class DefaultIBizImporterTest
   {
     private static final String INDENT = "    ";
 
