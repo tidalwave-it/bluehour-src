@@ -39,6 +39,7 @@ import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -135,6 +136,7 @@ public class IBizImporter
       throws IOException
       {
         final Path projectsPath = path.resolve("Projects");
+        final AtomicReference<IOException> exception = new AtomicReference<>();
 
         Files.walkFileTree(projectsPath, new SimpleFileVisitor<Path>()
           {
@@ -148,11 +150,15 @@ public class IBizImporter
 
             @Override
             public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
-              throws IOException
               {
-                System.err.println("FATAL ERROR VISITING " + file);
+                exception.set(new IOException("Fatal error visiting " + file));
                 return FileVisitResult.TERMINATE;
               }
           });
+
+        if (exception.get() != null)
+          {
+            throw exception.get();
+          }
       }
   }
