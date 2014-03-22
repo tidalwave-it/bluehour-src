@@ -62,12 +62,8 @@ public class Project implements SimpleComposite<AbstractJobEvent>
           {
             public void register (final @Nonnull Project project);
 
-            public static final Callback DEFAULT = new Callback()
+            public static final Callback DEFAULT = (final @Nonnull Project project) ->
               {
-                @Override
-                public void register (final @Nonnull Project project)
-                  {
-                  }
               };
           }
 

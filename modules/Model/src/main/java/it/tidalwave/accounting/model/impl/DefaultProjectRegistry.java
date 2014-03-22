@@ -63,14 +63,10 @@ public class DefaultProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public Project.Builder addProject()
       {
-        return new Project.Builder(new Project.Builder.Callback()
+        return new Project.Builder((final @Nonnull Project project) -> 
           {
-            @Override
-            public void register (final @Nonnull Project project)
-              {
-                log.info("{}: {}", project);
-                projects.add(project);
-              }
+            log.info("{}: {}", project);
+            projects.add(project);
           });
       }
   }

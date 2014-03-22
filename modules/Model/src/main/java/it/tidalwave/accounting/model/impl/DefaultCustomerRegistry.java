@@ -93,15 +93,10 @@ public class DefaultCustomerRegistry implements CustomerRegistry
     @Override @Nonnull
     public Customer.Builder addCustomer()
       {
-//        return Customer.builder();
-        return new Customer.Builder(new Customer.Builder.Callback()
+        return new Customer.Builder((final @Nonnull Customer customer) -> 
           {
-            @Override
-            public void register (final @Nonnull Customer customer)
-              {
-                log.info("{}: {}", customer.getId(), customer);
-                customerMapById.put(customer.getId(), customer);
-              }
+            log.info("{}: {}", customer.getId(), customer);
+            customerMapById.put(customer.getId(), customer);
           });
       }
   }
