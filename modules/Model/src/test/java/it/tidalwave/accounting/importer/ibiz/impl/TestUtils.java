@@ -28,10 +28,9 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /***********************************************************************************************************************
  *
@@ -41,33 +40,15 @@ import org.joda.time.format.DateTimeFormatterBuilder;
  **********************************************************************************************************************/
 public class TestUtils
   {
-    private static final DateTimeFormatter DATETIME_FORMATTER =
-            new DateTimeFormatterBuilder().appendYear(4, 4)
-                                          .appendLiteral("-")
-                                          .appendMonthOfYear(2)
-                                          .appendLiteral("-")
-                                          .appendDayOfMonth(2)
-                                          .appendLiteral("T")
-                                          .appendHourOfDay(2)
-                                          .appendLiteral(":")
-                                          .appendMinuteOfHour(2)
-                                          .appendLiteral(":")
-                                          .appendSecondOfMinute(2)
-                                          .appendLiteral(".")
-                                          .appendMillisOfSecond(3)
-                                          .appendTimeZoneOffset("", true, 2, 2)
-                                          .toFormatter();
-
     @Nonnull
-    public static DateTime parseDateTime (final @Nonnull String text)
+    public static LocalDateTime parseDateTime (final @Nonnull String text)
       {
-        return DATETIME_FORMATTER.parseDateTime(text);
+        return LocalDateTime.parse(text, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
       }
 
     @Nonnull
-    public static DateMidnight parseDate (final @Nonnull String text)
+    public static LocalDate parseDate (final @Nonnull String text)
       {
-        return DATETIME_FORMATTER.parseDateTime(text + "T00:00:00.0").toDateMidnight();
+        return LocalDate.parse(text, DateTimeFormatter.ISO_LOCAL_DATE);
       }
-
   }

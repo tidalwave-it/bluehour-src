@@ -29,7 +29,7 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import org.joda.time.DateMidnight;
+import java.time.LocalDate;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -43,7 +43,7 @@ import lombok.ToString;
 public class FlatJobEvent extends AbstractJobEvent
   {
     @Nonnull
-    private final DateMidnight date;
+    private final LocalDate date;
 
     @Nonnull
     private final Money earnings;
@@ -56,7 +56,7 @@ public class FlatJobEvent extends AbstractJobEvent
     protected FlatJobEvent (final @Nonnull Builder builder)
       {
         super(builder);
-        this.date = builder.getStartDateTime().toDateMidnight();
+        this.date = builder.getStartDateTime().toLocalDate();
         this.earnings = builder.getEarnings();
       }
   }

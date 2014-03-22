@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.util.List;
-import org.joda.time.DateMidnight;
+import java.time.LocalDate;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.spi.SimpleFinderSupport;
 import it.tidalwave.role.SimpleComposite;
@@ -79,8 +79,8 @@ public class Project implements SimpleComposite<AbstractJobEvent>
         private final String notes;
         private final Money hourlyRate;
         private final Money amount;
-        private final DateMidnight startDate;
-        private final DateMidnight endDate;
+        private final LocalDate startDate;
+        private final LocalDate endDate;
         private final List<AbstractJobEvent> events; // FIXME: immutable
         private final Callback callback;
 
@@ -126,10 +126,10 @@ public class Project implements SimpleComposite<AbstractJobEvent>
     private final Money amount;
 
     @Nonnull
-    private final DateMidnight startDate;
+    private final LocalDate startDate;
 
     @Nonnull
-    private final DateMidnight endDate;
+    private final LocalDate endDate;
 
     @Nonnull
     private final List<AbstractJobEvent> events; // FIXME: immutable

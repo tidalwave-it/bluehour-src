@@ -29,7 +29,7 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -43,10 +43,10 @@ import lombok.ToString;
 public class TimedJobEvent extends AbstractJobEvent
   {
     @Nonnull
-    private final DateTime startDateTime;
+    private final LocalDateTime startDateTime;
 
     @Nonnull
-    private final DateTime endDateTime;
+    private final LocalDateTime endDateTime;
 
     @Nonnull
     private final Money earnings;

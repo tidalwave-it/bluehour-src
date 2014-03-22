@@ -68,6 +68,6 @@ public class ProjectTest
                                   + "vatNumber=1233455345), name=Project 1, number=1, "
                                   + "description=description of project 1, notes=Notes for project 1, hourlyRate=43 EUR, "
                                   + "amount=10500 EUR, "
-                                  + "startDate=2014-01-03T00:00:00.000+01:00, endDate=2014-02-12T00:00:00.000+01:00)"));
+                                  + "startDate=2014-01-03, endDate=2014-02-12)"));
       }
   }

@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import java.nio.file.Path;
-import org.joda.time.DateTime;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import it.tidalwave.util.Id;
@@ -44,6 +43,7 @@ import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
+import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
@@ -154,8 +154,8 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 //        final boolean nonBillable = jobEvent.getBoolean("nonBillable");
 //        final int taxable = jobEvent.getInt("taxable");
         final Money earnings = jobEvent.getMoney("jobEventEarnings");
-        final DateTime startDate = jobEvent.getDateTime("jobEventStartDate");
-        final DateTime endDate = jobEvent.getDateTime("jobEventEndDate");
+        final LocalDateTime startDate = jobEvent.getDateTime("jobEventStartDate");
+        final LocalDateTime endDate = jobEvent.getDateTime("jobEventEndDate");
 //        final DateTime lastModifiedDate = jobEvent.getDateTime("lastModifiedDate");
         final String name =jobEvent.getString("jobEventName");
         final String notes = jobEvent.getString("jobEventNotes");

@@ -30,9 +30,10 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.util.Date;
 import java.math.MathContext;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import org.apache.commons.configuration.Configuration;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Money;
 import lombok.Delegate;
@@ -65,14 +66,14 @@ public class ConfigurationDecorator implements Configuration
       }
 
     @Nonnull
-    public DateTime getDateTime (final @Nonnull String key)
+    public LocalDateTime getDateTime (final @Nonnull String key)
       {
-        return new DateTime((Date)delegate.getProperty(key));
+        return LocalDateTime.ofInstant(((Date)delegate.getProperty(key)).toInstant(), ZoneId.systemDefault());
       }
 
     @Nonnull
-    public DateMidnight getDate (final @Nonnull String key)
+    public LocalDate getDate (final @Nonnull String key)
       {
-        return new DateTime((Date)delegate.getProperty(key)).toDateMidnight();
+        return getDateTime(key).toLocalDate();
       }
   }

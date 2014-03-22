@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.util.List;
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -62,8 +62,8 @@ public abstract class AbstractJobEvent
         public enum Type { TIMED, FLAT };
 
         private final Type type;
-        private final DateTime startDateTime;
-        private final DateTime endDateTime;
+        private final LocalDateTime startDateTime;
+        private final LocalDateTime endDateTime;
         private final String name;
         private final String description;
         private final Money earnings;
