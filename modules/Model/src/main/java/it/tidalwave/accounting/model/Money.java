@@ -52,7 +52,7 @@ public class Money
     @Nonnull
     private final String currency;
 
-    public Money(final long amount, final @Nonnull String currency)
+    public Money (final long amount, final @Nonnull String currency)
       {
         this(BigDecimal.valueOf(amount), currency);
       }

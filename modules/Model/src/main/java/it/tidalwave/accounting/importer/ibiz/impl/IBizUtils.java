@@ -46,8 +46,10 @@ public final class IBizUtils
   {
     /*******************************************************************************************************************
      *
-     *
-     *
+     * @param <T>  the type of elements
+     * @param i    the iterator
+     * @return     the list
+     * 
      ******************************************************************************************************************/
     @Nonnull
     public static <T> List<T> toList (final @Nonnull Iterator<T> i)
@@ -64,8 +66,10 @@ public final class IBizUtils
 
     /*******************************************************************************************************************
      *
-     *
-     *
+     * @param   path         the path of the configuration file
+     * @return               the configuration object
+     * @throws  IOException  in case of error
+     * 
      ******************************************************************************************************************/
     @Nonnull
     public static ConfigurationDecorator loadConfiguration (final @Nonnull Path path)
