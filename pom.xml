@@ -116,33 +116,12 @@
             </dependency>
             <dependency>
                 <groupId>it-tidalwave-accounting</groupId>
-                <artifactId>bluehour-branding</artifactId>
-                <version>1.0-ALPHA-1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>it-tidalwave-accounting</groupId>
-                <artifactId>bluehour-application</artifactId>
-                <version>1.0-ALPHA-1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>it-tidalwave-accounting</groupId>
-                <artifactId>bluehour-application</artifactId>
-                <version>1.0-ALPHA-1-SNAPSHOT</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>it-tidalwave-accounting</groupId>
-                <artifactId>it-tidalwave-bluehour-boot</artifactId>
-                <version>1.0-ALPHA-1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>it-tidalwave-accounting</groupId>
                 <artifactId>bluehour-macosx</artifactId>
                 <version>1.0-ALPHA-1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it-tidalwave-accounting</groupId>
-                <artifactId>bluehour-embedded-jre</artifactId>
+                <artifactId>bluehour-macosx-embedded-jre</artifactId>
                 <version>1.0-ALPHA-1-SNAPSHOT</version>
             </dependency>
 

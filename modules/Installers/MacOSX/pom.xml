@@ -50,17 +50,19 @@
     <groupId>it-tidalwave-accounting</groupId>
     <artifactId>it-tidalwave-bluehour-macosx</artifactId>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>blueHour - Installer, Mac OS X</name>
     <description>This module creates a Mac OS X application bundle.</description>
 
-    <dependencies>
+    <properties>
+        <tft.mainClass></tft.mainClass> <!-- FIXME: DRY -->
+    </properties>
+
+<!--    <dependencies>
         <dependency>
-            <groupId>it-tidalwave-accounting</groupId>
-            <artifactId>bluehour-application</artifactId>
-            <type>zip</type>
+            <groupId>it.tidalwave.northernwind.rca</groupId>
+            <artifactId>it-tidalwave-northernwind-rca-application-javafx</artifactId>
         </dependency>
-    </dependencies>
+    </dependencies>-->
 
 </project>
-

@@ -230,10 +230,6 @@
 
     ================================================================================================================ -->
     <modules>
-        <module>Application</module>
-        <module>ApplicationCustomization</module>
-        <module>Branding</module>
-        <module>Installers/Boot</module>
         <module>Installers/MacOSX</module>
         <module>Installers/MacOSXEmbeddedJRE</module>
 
