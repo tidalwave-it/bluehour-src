@@ -43,15 +43,11 @@
         <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
     </properties>
 
-    <!-- ===============================================================================================================
-
-        This is an example module of your project. Here you write code and expose services.
-
-    ================================================================================================================ -->
     <groupId>it-tidalwave-accounting</groupId>
     <artifactId>it-tidalwave-accounting-model</artifactId>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
     <name>blueHour - Model</name>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -71,6 +67,10 @@
                 <exclusion>
                     <artifactId>org-slf4j-jdk14</artifactId>
                     <groupId>com.kenai.nbpwr</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org-openide-util</artifactId>
+                    <groupId>org.netbeans.api</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
