@@ -32,15 +32,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.role.Composite;
 import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.accounting.model.AbstractJobEvent;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
-import java.util.concurrent.atomic.AtomicReference;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,7 +75,7 @@ public class DefaultIBizImporterTest
 
     private static void dump (final @Nonnull List<? extends AbstractJobEvent> events, final @Nonnull String prefix)
       {
-        events.stream().forEach((event) -> 
+        events.stream().forEach((event) ->
           {
             dump(event, prefix);
           });
@@ -100,27 +99,29 @@ public class DefaultIBizImporterTest
 
         final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
         fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
-        Collections.sort(fields, (Field f1, Field f2) -> f1.getName().compareTo(f2.getName()));
 
         final AtomicReference<String> separator = new AtomicReference<>("");
 
-        fields.stream().forEach((field) ->
-          {
-            if (!Collection.class.isAssignableFrom(field.getType()))
-              {
-                try
-                  {
-                    field.setAccessible(true);
-                    builder.append(separator.getAndSet(", "));
-                    builder.append(String.format("%s=%s", field.getName(), field.get(event)));
-                  }
-                catch (IllegalArgumentException | IllegalAccessException e)
-                  {
-                    throw new RuntimeException(e);
-                  }
-              }
-          });
+        fields.stream().sorted((field1, field2) -> field1.getName().compareTo(field2.getName()))
+                       .filter((field)          -> !Collection.class.isAssignableFrom(field.getType()))
+                       .peek((field)            -> field.setAccessible(true))
+                       .forEach((field)         -> builder.append(separator.getAndSet(", "))
+                                                          .append(field.getName())
+                                                          .append("=")
+                                                          .append(safeGet(field, event)));
 
         return builder.append(")").toString();
+      }
+    
+    private static Object safeGet (final @Nonnull Field field, final @Nonnull Object object)
+      {
+        try
+          {
+            return field.get(object);
+          }
+        catch (IllegalArgumentException | IllegalAccessException e)
+          {
+            throw new RuntimeException(e);
+          }
       }
   }
