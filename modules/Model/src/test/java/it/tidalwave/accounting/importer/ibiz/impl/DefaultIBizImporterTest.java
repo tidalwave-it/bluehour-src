@@ -33,15 +33,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.role.Composite;
 import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.accounting.model.AbstractJobEvent;
-import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
+import java.util.concurrent.atomic.AtomicReference;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -64,24 +63,23 @@ public class DefaultIBizImporterTest
         final IBizImporter importer = DefaultIBizImporter.builder()
                                                          .withPath(path)
                                                          .create();
-
         importer.run();
 
-        for (final Project project : importer.getProjectRegistry().findProjects().results())
+        importer.getProjectRegistry().findProjects().results().stream().forEach((project) ->
           {
             log.info("{}", project);
             dump(project.findChildren().results(), INDENT);
-          }
+          });
 
         // TODO: assertions; but we must first anonymize the data
       }
 
     private static void dump (final @Nonnull List<? extends AbstractJobEvent> events, final @Nonnull String prefix)
       {
-        for (final AbstractJobEvent event : events)
+        events.stream().forEach((event) -> 
           {
             dump(event, prefix);
-          }
+          });
       }
 
     private static void dump (final @Nonnull AbstractJobEvent event, final @Nonnull String prefix)
@@ -102,34 +100,26 @@ public class DefaultIBizImporterTest
 
         final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
         fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
-        Collections.sort(fields, new Comparator<Field>()
-          {
-            @Override
-            public int compare (final @Nonnull Field f1, final @Nonnull Field f2)
-              {
-                return f1.getName().compareTo(f2.getName());
-              }
-          });
+        Collections.sort(fields, (Field f1, Field f2) -> f1.getName().compareTo(f2.getName()));
 
-        String separator = "";
+        final AtomicReference<String> separator = new AtomicReference<>("");
 
-        for (final Field field : fields)
+        fields.stream().forEach((field) ->
           {
             if (!Collection.class.isAssignableFrom(field.getType()))
               {
                 try
                   {
                     field.setAccessible(true);
-                    builder.append(separator);
+                    builder.append(separator.getAndSet(", "));
                     builder.append(String.format("%s=%s", field.getName(), field.get(event)));
-                    separator = ", ";
                   }
                 catch (IllegalArgumentException | IllegalAccessException e)
                   {
                     throw new RuntimeException(e);
                   }
               }
-          }
+          });
 
         return builder.append(")").toString();
       }
