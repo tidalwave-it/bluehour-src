@@ -49,6 +49,11 @@ import static lombok.AccessLevel.PRIVATE;
 @Immutable @Getter @EqualsAndHashCode @ToString
 public class Customer implements Identifiable
   {
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
@@ -99,12 +104,22 @@ public class Customer implements Identifiable
     @Nonnull
     private final String vatNumber;
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public static Builder builder()
       {
         return new Builder();
       }
 
+    /*******************************************************************************************************************
+     *
+     *
+     * 
+     ******************************************************************************************************************/
     protected Customer (final @Nonnull Builder builder)
       {
         this.id = builder.getId();

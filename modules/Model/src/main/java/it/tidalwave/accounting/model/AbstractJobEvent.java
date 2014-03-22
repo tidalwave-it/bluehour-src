@@ -50,6 +50,11 @@ import static lombok.AccessLevel.PRIVATE;
 @Immutable @EqualsAndHashCode @ToString
 public abstract class AbstractJobEvent
   {
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
@@ -94,12 +99,22 @@ public abstract class AbstractJobEvent
     @Nonnull
     protected final String description;
 
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
     @Nonnull
     public static AbstractJobEvent.Builder builder()
       {
         return new AbstractJobEvent.Builder(); // FIXME: avoid nulls
       }
 
+    /*******************************************************************************************************************
+     *
+     * @param builder
+     * 
+     ******************************************************************************************************************/
     protected AbstractJobEvent (final @Nonnull Builder builder)
       {
         this.name = builder.getName();

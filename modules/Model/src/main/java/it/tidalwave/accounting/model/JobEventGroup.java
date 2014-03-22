@@ -28,12 +28,22 @@ public class JobEventGroup extends AbstractJobEvent implements SimpleComposite<A
     @Nonnull
     private final List<AbstractJobEvent> events; // FIXME: immutable
 
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
     protected JobEventGroup (final @Nonnull Builder builder)
       {
         super(builder);
         this.events = builder.getEvents();
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     * 
+     ******************************************************************************************************************/
     @Override @Nonnull
     public Finder<AbstractJobEvent> findChildren()
       {

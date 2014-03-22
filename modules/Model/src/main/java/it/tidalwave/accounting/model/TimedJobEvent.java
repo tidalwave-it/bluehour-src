@@ -54,6 +54,11 @@ public class TimedJobEvent extends AbstractJobEvent
     @Nonnull
     private final Money rate;
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     protected TimedJobEvent (final @Nonnull Builder builder)
       {
         super(builder);

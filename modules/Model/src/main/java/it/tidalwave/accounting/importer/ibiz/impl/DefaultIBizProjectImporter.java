@@ -87,7 +87,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 
     /*******************************************************************************************************************
      *
-     *
+     * Imports a project from the given configuration object.
+     * 
+     * @param  projectConfig  the configuration object
      *
      ******************************************************************************************************************/
     @Nonnull
@@ -116,7 +118,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 
     /*******************************************************************************************************************
      *
-     *
+     * Imports the job events.
      *
      ******************************************************************************************************************/
     @Nonnull
@@ -136,7 +138,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 
     /*******************************************************************************************************************
      *
-     *
+     * Imports a single job event.
      *
      ******************************************************************************************************************/
     @Nonnull

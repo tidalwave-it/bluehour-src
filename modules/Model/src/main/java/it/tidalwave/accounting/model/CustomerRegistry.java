@@ -38,17 +38,36 @@ import it.tidalwave.util.Id;
  **********************************************************************************************************************/
 public interface CustomerRegistry
   {
+    public static final Class<CustomerRegistry> CustomerRegistry = CustomerRegistry.class;
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     public static interface Finder extends it.tidalwave.util.Finder<Customer>
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);
       }
 
-    public static final Class<CustomerRegistry> CustomerRegistry = CustomerRegistry.class;
-
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Finder} for finding {@link Customer}s.
+     * 
+     * @return  the finder
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Finder findCustomers();
 
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Builder} for adding a {@link Customer} to the registry.
+     * 
+     * @return  the builder
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Customer.Builder addCustomer();
   }

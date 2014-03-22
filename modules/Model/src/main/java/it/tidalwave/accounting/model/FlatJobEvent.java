@@ -48,6 +48,11 @@ public class FlatJobEvent extends AbstractJobEvent
     @Nonnull
     private final Money earnings;
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     protected FlatJobEvent (final @Nonnull Builder builder)
       {
         super(builder);

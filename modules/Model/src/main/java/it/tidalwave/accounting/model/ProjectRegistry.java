@@ -40,9 +40,23 @@ public interface ProjectRegistry
   {
     public static final Class<ProjectRegistry> CustomerRegistry = ProjectRegistry.class;
 
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Finder} for finding {@link Project}s.
+     * 
+     * @return  the finder
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Finder<Project> findProjects();
 
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Builder} for adding a {@link Project} to the registry.
+     * 
+     * @return  the builder
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Project.Builder addProject();
   }

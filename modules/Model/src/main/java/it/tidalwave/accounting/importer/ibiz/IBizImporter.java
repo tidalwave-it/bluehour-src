@@ -27,13 +27,13 @@
  */
 package it.tidalwave.accounting.importer.ibiz;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import java.io.IOException;
+import java.nio.file.Path;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import java.io.IOException;
-import java.nio.file.Path;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -67,7 +67,6 @@ public interface IBizImporter
 
     /*******************************************************************************************************************
      *
-     *
      * @throws  IOException in case of error
      * 
      ******************************************************************************************************************/
@@ -77,7 +76,6 @@ public interface IBizImporter
     
     /*******************************************************************************************************************
      *
-     *
      * @return  the {@link CustomerRegistry} containing the imported data
      *
      ******************************************************************************************************************/
@@ -85,7 +83,6 @@ public interface IBizImporter
     public CustomerRegistry getCustomerRegistry();
     
     /*******************************************************************************************************************
-     *
      *
      * @return  the {@link ProjectRegistry} containing the imported data
      *

@@ -27,14 +27,14 @@
  */
 package it.tidalwave.accounting.model;
 
-import java.util.Collections;
-import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.Collections;
+import java.util.List;
 import org.joda.time.DateMidnight;
-import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.spi.SimpleFinderSupport;
+import it.tidalwave.role.SimpleComposite;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -54,6 +54,11 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events"})
 public class Project implements SimpleComposite<AbstractJobEvent>
   {
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
@@ -129,12 +134,22 @@ public class Project implements SimpleComposite<AbstractJobEvent>
     @Nonnull
     private final List<AbstractJobEvent> events; // FIXME: immutable
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public static Project.Builder builder()
       {
         return new Project.Builder();
       }
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     protected Project (final @Nonnull Builder builder)
       {
         this.customer = builder.getCustomer();
@@ -149,6 +164,11 @@ public class Project implements SimpleComposite<AbstractJobEvent>
         this.events = builder.getEvents();
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override @Nonnull
     public Finder<AbstractJobEvent> findChildren()
       {

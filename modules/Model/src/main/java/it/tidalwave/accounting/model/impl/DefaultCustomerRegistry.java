@@ -54,6 +54,11 @@ public class DefaultCustomerRegistry implements CustomerRegistry
   {
     private final Map<Id, Customer> customerMapById = new HashMap<>();
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @NoArgsConstructor @AllArgsConstructor
     class DefaultCustomerFinder extends FinderSupport<Customer, CustomerRegistry.Finder>
                                 implements CustomerRegistry.Finder, ExtendedFinderSupport<Customer, CustomerRegistry.Finder>
@@ -84,12 +89,22 @@ public class DefaultCustomerRegistry implements CustomerRegistry
           }
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override @Nonnull
     public CustomerRegistry.Finder findCustomers()
       {
         return new DefaultCustomerFinder();
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override @Nonnull
     public Customer.Builder addCustomer()
       {

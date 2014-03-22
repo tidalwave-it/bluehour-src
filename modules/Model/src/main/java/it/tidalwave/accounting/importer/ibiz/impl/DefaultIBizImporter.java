@@ -61,9 +61,8 @@ public class DefaultIBizImporter implements IBizImporter
 
     /*******************************************************************************************************************
      *
-     *
-     *
      * @return 
+     * 
      ******************************************************************************************************************/
     @Nonnull
     public static IBizImporter.Builder builder()
@@ -73,8 +72,7 @@ public class DefaultIBizImporter implements IBizImporter
 
     /*******************************************************************************************************************
      *
-     *
-     * @param builder
+     * @param   builder
      *
      ******************************************************************************************************************/
     public DefaultIBizImporter (final @Nonnull IBizImporter.Builder builder) // FIXME: protected
@@ -97,7 +95,7 @@ public class DefaultIBizImporter implements IBizImporter
 
     /*******************************************************************************************************************
      *
-     *
+     * Imports the customers.
      *
      ******************************************************************************************************************/
     private void importCustomers()
@@ -109,7 +107,7 @@ public class DefaultIBizImporter implements IBizImporter
 
     /*******************************************************************************************************************
      *
-     *
+     * Imports the projects.
      *
      ******************************************************************************************************************/
     private void importProjects()

@@ -40,9 +40,23 @@ public interface InvoiceRegistry
   {
     public static final Class<InvoiceRegistry> InvoiceRegistry = InvoiceRegistry.class;
 
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Finder} for finding {@link Invoice}s.
+     * 
+     * @return  the finder
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Finder<Invoice> findInvoice();
 
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Builder} for adding a {@link Invoice} to the registry.
+     * 
+     * @return  the builder
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Invoice.Builder addInvoice();
   }

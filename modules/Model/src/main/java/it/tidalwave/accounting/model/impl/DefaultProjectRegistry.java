@@ -47,6 +47,11 @@ public class DefaultProjectRegistry implements ProjectRegistry
   {
     private final List<Project> projects = new ArrayList<>();
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override @Nonnull
     public Finder<Project> findProjects()
       {
@@ -60,6 +65,11 @@ public class DefaultProjectRegistry implements ProjectRegistry
           };
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override @Nonnull
     public Project.Builder addProject()
       {
