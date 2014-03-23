@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.util.FinderStream;
@@ -43,6 +42,8 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.joining;
 
 /***********************************************************************************************************************
  *
@@ -93,23 +94,16 @@ public class DefaultIBizImporterTest
     @Nonnull
     private static String toString (final @Nonnull JobEvent event)
       {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(event.getClass().getSimpleName()).append("(");
-
         final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
         fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
 
-        final AtomicReference<String> separator = new AtomicReference<>("");
+        final String s = fields.stream().sorted(comparing(Field::getName))
+                                        .filter((field)  -> !Collection.class.isAssignableFrom(field.getType()))
+                                        .peek((field)    -> field.setAccessible(true))
+                                        .map(field       -> String.format("%s=%s", field.getName(), safeGet(field, event)))
+                                        .collect(joining(", "));
 
-        fields.stream().sorted((field1, field2) -> field1.getName().compareTo(field2.getName()))
-                       .filter((field)          -> !Collection.class.isAssignableFrom(field.getType()))
-                       .peek((field)            -> field.setAccessible(true))
-                       .forEach((field)         -> builder.append(separator.getAndSet(", "))
-                                                          .append(field.getName())
-                                                          .append("=")
-                                                          .append(safeGet(field, event)));
-
-        return builder.append(")").toString();
+        return String.format("%s(%s)", event.getClass().getSimpleName(), s);
       }
     
     private static Object safeGet (final @Nonnull Field field, final @Nonnull Object object)
