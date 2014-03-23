@@ -8,11 +8,13 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import java.util.Collections;
 import java.util.List;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.spi.SimpleFinderSupport;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
-import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -45,14 +47,14 @@ public class JobEventGroup extends AbstractJobEvent implements SimpleComposite<A
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Finder<AbstractJobEvent> findChildren()
+    public FinderStream<AbstractJobEvent> findChildren()
       {
-        return new SimpleFinderSupport<AbstractJobEvent>()
+        return new FinderStreamSupport<AbstractJobEvent, Finder<AbstractJobEvent>>()
           {
-            @Override
+            @Override @Nonnull
             protected List<? extends AbstractJobEvent> computeResults()
               {
-                return events;
+                return Collections.unmodifiableList(events);
               }
           };
       }

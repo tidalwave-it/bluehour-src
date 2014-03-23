@@ -34,9 +34,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
-import it.tidalwave.util.spi.FinderSupport;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import lombok.AllArgsConstructor;
@@ -60,8 +59,8 @@ public class DefaultCustomerRegistry implements CustomerRegistry
      *
      ******************************************************************************************************************/
     @NoArgsConstructor @AllArgsConstructor
-    class DefaultCustomerFinder extends FinderSupport<Customer, CustomerRegistry.Finder>
-                                implements CustomerRegistry.Finder, ExtendedFinderSupport<Customer, CustomerRegistry.Finder>
+    class DefaultCustomerFinder extends FinderStreamSupport<Customer, CustomerRegistry.Finder>
+                                implements CustomerRegistry.Finder
       {
         @CheckForNull
         private Id id;
@@ -108,10 +107,6 @@ public class DefaultCustomerRegistry implements CustomerRegistry
     @Override @Nonnull
     public Customer.Builder addCustomer()
       {
-        return new Customer.Builder((final @Nonnull Customer customer) -> 
-          {
-            log.info("{}: {}", customer.getId(), customer);
-            customerMapById.put(customer.getId(), customer);
-          });
+        return new Customer.Builder((customer) -> customerMapById.put(customer.getId(), customer));
       }
   }

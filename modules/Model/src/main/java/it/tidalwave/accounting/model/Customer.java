@@ -62,9 +62,7 @@ public class Customer implements Identifiable
           {
             public void register (final @Nonnull Customer customer);
 
-            public static final Callback DEFAULT = (final @Nonnull Customer customer) -> 
-              {
-              };
+            public static final Callback DEFAULT = (customer) -> {};
           }
 
         private final Id id;

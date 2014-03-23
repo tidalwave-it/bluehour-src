@@ -28,7 +28,9 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
+import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.Id;
+import it.tidalwave.accounting.model.Project.Builder;
 
 /***********************************************************************************************************************
  *
@@ -45,7 +47,7 @@ public interface CustomerRegistry
      * 
      *
      ******************************************************************************************************************/
-    public static interface Finder extends it.tidalwave.util.Finder<Customer>
+    public static interface Finder extends FinderStream<Customer>
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);

@@ -25,48 +25,14 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
-
-import javax.annotation.Nonnull;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.accounting.model.Project.Builder;
+package it.tidalwave.util;
 
 /***********************************************************************************************************************
  *
- * @author  Fabrizio Giudici
+ * @author  fritz
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface ProjectRegistry
+public interface FinderStream<Type> extends Finder<Type>, PartialStream<Type>
   {
-    public static final Class<ProjectRegistry> CustomerRegistry = ProjectRegistry.class;
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    public static interface Finder extends FinderStream<Project>
-      {
-      }
-
-    /*******************************************************************************************************************
-     *
-     * Returns a {@link Finder} for finding {@link Project}s.
-     * 
-     * @return  the finder
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public FinderStream<Project> findProjects();
-
-    /*******************************************************************************************************************
-     *
-     * Returns a {@link Builder} for adding a {@link Project} to the registry.
-     * 
-     * @return  the builder
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public Project.Builder addProject();
   }

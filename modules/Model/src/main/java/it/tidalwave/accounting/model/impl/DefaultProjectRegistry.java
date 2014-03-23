@@ -30,10 +30,10 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.util.spi.SimpleFinderSupport;
+import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -46,6 +46,21 @@ import lombok.extern.slf4j.Slf4j;
 public class DefaultProjectRegistry implements ProjectRegistry
   {
     private final List<Project> projects = new ArrayList<>();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    class DefaultProjectFinder extends FinderStreamSupport<Project, ProjectRegistry.Finder>
+                               implements ProjectRegistry.Finder
+      {
+        @Override @Nonnull
+        protected List<? extends Project> computeResults()
+          {
+            return Collections.unmodifiableList(projects);
+          }
+      }
 
     /*******************************************************************************************************************
      *
@@ -53,16 +68,9 @@ public class DefaultProjectRegistry implements ProjectRegistry
      *
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Finder<Project> findProjects()
+    public ProjectRegistry.Finder findProjects()
       {
-        return new SimpleFinderSupport<Project>()
-          {
-            @Override @Nonnull
-            protected List<? extends Project> computeResults()
-              {
-                return projects;
-              }
-          };
+        return new DefaultProjectFinder();
       }
 
     /*******************************************************************************************************************
@@ -73,10 +81,6 @@ public class DefaultProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public Project.Builder addProject()
       {
-        return new Project.Builder((final @Nonnull Project project) -> 
-          {
-            log.info("{}: {}", project);
-            projects.add(project);
-          });
+        return new Project.Builder((project) -> projects.add(project));
       }
   }

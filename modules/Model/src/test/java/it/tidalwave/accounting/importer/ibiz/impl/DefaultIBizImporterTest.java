@@ -36,9 +36,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import it.tidalwave.role.Composite;
-import it.tidalwave.role.SimpleComposite;
+import it.tidalwave.util.FinderStream;
 import it.tidalwave.accounting.model.AbstractJobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
@@ -63,31 +64,29 @@ public class DefaultIBizImporterTest
                                                          .withPath(path)
                                                          .create();
         importer.run();
-
-        importer.getProjectRegistry().findProjects().results().stream().forEach((project) ->
-          {
-            log.info("{}", project);
-            dump(project.findChildren().results(), INDENT);
-          });
+        importer.getProjectRegistry().findProjects().forEach((project) -> dump(project));
 
         // TODO: assertions; but we must first anonymize the data
       }
 
-    private static void dump (final @Nonnull List<? extends AbstractJobEvent> events, final @Nonnull String prefix)
+    private static void dump (final @Nonnull Project project)
       {
-        events.stream().forEach((event) ->
-          {
-            dump(event, prefix);
-          });
+        log.info("{}", project);
+        dump(project.findChildren(), INDENT);
+      }
+
+    private static void dump (final @Nonnull FinderStream<AbstractJobEvent> events, final @Nonnull String prefix)
+      {
+        events.forEach((event) -> dump(event, prefix));
       }
 
     private static void dump (final @Nonnull AbstractJobEvent event, final @Nonnull String prefix)
       {
         log.info("{}{}", prefix, toString(event));
 
-        if (event instanceof Composite)
+        if (event instanceof JobEventGroup)
           {
-            dump(((SimpleComposite<AbstractJobEvent>)event).findChildren().results(), prefix + INDENT);
+            dump(((JobEventGroup)event).findChildren(), prefix + INDENT);
           }
       }
 

@@ -33,7 +33,8 @@ import java.util.Collections;
 import java.util.List;
 import java.time.LocalDate;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.spi.SimpleFinderSupport;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -67,9 +68,7 @@ public class Project implements SimpleComposite<AbstractJobEvent>
           {
             public void register (final @Nonnull Project project);
 
-            public static final Callback DEFAULT = (final @Nonnull Project project) ->
-              {
-              };
+            public static final Callback DEFAULT = (project) -> {};
           }
 
         private final Customer customer;
@@ -170,14 +169,14 @@ public class Project implements SimpleComposite<AbstractJobEvent>
      *
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Finder<AbstractJobEvent> findChildren()
+    public FinderStream<AbstractJobEvent> findChildren()
       {
-        return new SimpleFinderSupport<AbstractJobEvent>()
+        return new FinderStreamSupport<AbstractJobEvent, Finder<AbstractJobEvent>>()
           {
-            @Override
+            @Override @Nonnull
             protected List<? extends AbstractJobEvent> computeResults()
               {
-                return events;
+                return Collections.unmodifiableList(events);
               }
           };
       }
