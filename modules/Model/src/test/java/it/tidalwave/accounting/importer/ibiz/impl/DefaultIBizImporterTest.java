@@ -100,7 +100,7 @@ public class DefaultIBizImporterTest
         final String s = fields.stream().sorted(comparing(Field::getName))
                                         .filter((field)  -> !Collection.class.isAssignableFrom(field.getType()))
                                         .peek((field)    -> field.setAccessible(true))
-                                        .map(field       -> String.format("%s=%s", field.getName(), safeGet(field, event)))
+                                        .map(field       -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
 
         return String.format("%s(%s)", event.getClass().getSimpleName(), s);
