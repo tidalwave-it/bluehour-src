@@ -40,7 +40,7 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
-public class FlatJobEvent extends AbstractJobEvent
+public class FlatJobEvent extends JobEvent
   {
     @Nonnull
     private final LocalDate date;

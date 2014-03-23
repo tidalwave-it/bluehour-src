@@ -53,7 +53,7 @@ public class Invoice
     public static class Builder
       {
         private final Project project;
-        private final List<AbstractJobEvent> jobEvents; // FIXME: immutablelist
+        private final List<JobEvent> jobEvents; // FIXME: immutablelist
         private final LocalDate date;
         private final int daysUntilDue;
         private final LocalDate dueDate;
@@ -71,7 +71,7 @@ public class Invoice
     private final Project project;
 
     @Nonnull
-    private final List<AbstractJobEvent> jobEvents; // FIXME: immutablelist
+    private final List<JobEvent> jobEvents; // FIXME: immutablelist
 
     @Nonnull
     private final LocalDate date;

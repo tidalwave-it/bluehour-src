@@ -29,7 +29,7 @@ package it.tidalwave.accounting.importer.ibiz.spi;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
-import it.tidalwave.accounting.model.AbstractJobEvent;
+import it.tidalwave.accounting.model.JobEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -44,15 +44,15 @@ public interface IBizProjectImporter
     @AllArgsConstructor
     enum IBizJobEventType
       {
-        EVENT(AbstractJobEvent.Builder.Type.TIMED),
-        FIXED(AbstractJobEvent.Builder.Type.FLAT),
-        UNKNOWN2(AbstractJobEvent.Builder.Type.TIMED),
-        UNKNOWN3(AbstractJobEvent.Builder.Type.TIMED),
-        UNKNOWN4(AbstractJobEvent.Builder.Type.TIMED),
-        GROUP(AbstractJobEvent.Builder.Type.FLAT);
+        EVENT(JobEvent.Builder.Type.TIMED),
+        FIXED(JobEvent.Builder.Type.FLAT),
+        UNKNOWN2(JobEvent.Builder.Type.TIMED),
+        UNKNOWN3(JobEvent.Builder.Type.TIMED),
+        UNKNOWN4(JobEvent.Builder.Type.TIMED),
+        GROUP(JobEvent.Builder.Type.FLAT);
 
         @Getter @Nonnull
-        private final AbstractJobEvent.Builder.Type mappedType;
+        private final JobEvent.Builder.Type mappedType;
       }
 
     /*******************************************************************************************************************

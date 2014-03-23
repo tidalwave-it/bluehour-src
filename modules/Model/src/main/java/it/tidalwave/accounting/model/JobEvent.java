@@ -48,7 +48,7 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode @ToString
-public abstract class AbstractJobEvent
+public abstract class JobEvent
   {
     /*******************************************************************************************************************
      *
@@ -68,15 +68,15 @@ public abstract class AbstractJobEvent
         private final String description;
         private final Money earnings;
         private final Money rate;
-        private final List<AbstractJobEvent> events; // FIXME: immutable
+        private final List<JobEvent> events; // FIXME: immutable
 
         public Builder()
           {
-            this(Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<AbstractJobEvent>emptyList());
+            this(Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList());
           }
 
         @Nonnull
-        public AbstractJobEvent create()
+        public JobEvent create()
           {
             if ((events != null) && !events.isEmpty())
               {
@@ -105,9 +105,9 @@ public abstract class AbstractJobEvent
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public static AbstractJobEvent.Builder builder()
+    public static JobEvent.Builder builder()
       {
-        return new AbstractJobEvent.Builder(); // FIXME: avoid nulls
+        return new JobEvent.Builder(); // FIXME: avoid nulls
       }
 
     /*******************************************************************************************************************
@@ -115,7 +115,7 @@ public abstract class AbstractJobEvent
      * @param builder
      * 
      ******************************************************************************************************************/
-    protected AbstractJobEvent (final @Nonnull Builder builder)
+    protected JobEvent (final @Nonnull Builder builder)
       {
         this.name = builder.getName();
         this.description = builder.getDescription();

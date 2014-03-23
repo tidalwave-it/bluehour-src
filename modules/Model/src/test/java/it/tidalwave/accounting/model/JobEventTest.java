@@ -63,7 +63,7 @@ public class JobEventTest
 //                                            .withNumber("1")
 //                                            .withHourlyRate(new Money(43, "EUR"))
 //                                            .create();
-        final AbstractJobEvent j1 = AbstractJobEvent.builder().withName("Consultancy")
+        final JobEvent j1 = JobEvent.builder().withName("Consultancy")
                                               .withDescription("Consultancy description")
                                               .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
                                               .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))

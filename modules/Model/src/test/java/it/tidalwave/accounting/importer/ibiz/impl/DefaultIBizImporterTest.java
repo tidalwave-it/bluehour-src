@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.util.FinderStream;
-import it.tidalwave.accounting.model.AbstractJobEvent;
+import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
@@ -75,12 +75,12 @@ public class DefaultIBizImporterTest
         dump(project.findChildren(), INDENT);
       }
 
-    private static void dump (final @Nonnull FinderStream<AbstractJobEvent> events, final @Nonnull String prefix)
+    private static void dump (final @Nonnull FinderStream<JobEvent> events, final @Nonnull String prefix)
       {
         events.forEach((event) -> dump(event, prefix));
       }
 
-    private static void dump (final @Nonnull AbstractJobEvent event, final @Nonnull String prefix)
+    private static void dump (final @Nonnull JobEvent event, final @Nonnull String prefix)
       {
         log.info("{}{}", prefix, toString(event));
 
@@ -91,7 +91,7 @@ public class DefaultIBizImporterTest
       }
 
     @Nonnull
-    private static String toString (final @Nonnull AbstractJobEvent event)
+    private static String toString (final @Nonnull JobEvent event)
       {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getClass().getSimpleName()).append("(");

@@ -53,7 +53,7 @@ import static lombok.AccessLevel.PRIVATE;
  **********************************************************************************************************************/
 @Immutable @Wither
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events"})
-public class Project implements SimpleComposite<AbstractJobEvent>
+public class Project implements SimpleComposite<JobEvent>
   {
     /*******************************************************************************************************************
      *
@@ -80,7 +80,7 @@ public class Project implements SimpleComposite<AbstractJobEvent>
         private final Money amount;
         private final LocalDate startDate;
         private final LocalDate endDate;
-        private final List<AbstractJobEvent> events; // FIXME: immutable
+        private final List<JobEvent> events; // FIXME: immutable
         private final Callback callback;
 
         public Builder()
@@ -91,7 +91,7 @@ public class Project implements SimpleComposite<AbstractJobEvent>
         public Builder (final @Nonnull Callback callback)
           {
              // FIXME: avoid null
-            this(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<AbstractJobEvent>emptyList(), callback);
+            this(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList(), callback);
           }
 
         @Nonnull
@@ -131,7 +131,7 @@ public class Project implements SimpleComposite<AbstractJobEvent>
     private final LocalDate endDate;
 
     @Nonnull
-    private final List<AbstractJobEvent> events; // FIXME: immutable
+    private final List<JobEvent> events; // FIXME: immutable
 
     /*******************************************************************************************************************
      *
@@ -169,12 +169,12 @@ public class Project implements SimpleComposite<AbstractJobEvent>
      *
      ******************************************************************************************************************/
     @Override @Nonnull
-    public FinderStream<AbstractJobEvent> findChildren()
+    public FinderStream<JobEvent> findChildren()
       {
-        return new FinderStreamSupport<AbstractJobEvent, Finder<AbstractJobEvent>>()
+        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
           {
             @Override @Nonnull
-            protected List<? extends AbstractJobEvent> computeResults()
+            protected List<? extends JobEvent> computeResults()
               {
                 return Collections.unmodifiableList(events);
               }

@@ -25,10 +25,10 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(exclude = { "events" }, callSuper = true)
-public class JobEventGroup extends AbstractJobEvent implements SimpleComposite<AbstractJobEvent>
+public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
   {
     @Nonnull
-    private final List<AbstractJobEvent> events; // FIXME: immutable
+    private final List<JobEvent> events; // FIXME: immutable
 
     /*******************************************************************************************************************
      *
@@ -47,12 +47,12 @@ public class JobEventGroup extends AbstractJobEvent implements SimpleComposite<A
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public FinderStream<AbstractJobEvent> findChildren()
+    public FinderStream<JobEvent> findChildren()
       {
-        return new FinderStreamSupport<AbstractJobEvent, Finder<AbstractJobEvent>>()
+        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
           {
             @Override @Nonnull
-            protected List<? extends AbstractJobEvent> computeResults()
+            protected List<? extends JobEvent> computeResults()
               {
                 return Collections.unmodifiableList(events);
               }

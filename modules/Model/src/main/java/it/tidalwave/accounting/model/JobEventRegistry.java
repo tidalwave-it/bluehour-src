@@ -42,21 +42,21 @@ public interface JobEventRegistry
 
     /*******************************************************************************************************************
      *
-     * Returns a {@link Finder} for finding {@link AbstractJobEvent}s.
+     * Returns a {@link Finder} for finding {@link JobEvent}s.
      * 
      * @return  the finder
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Finder<AbstractJobEvent> findJobEvent();
+    public Finder<JobEvent> findJobEvent();
 
     /*******************************************************************************************************************
      *
-     * Returns a {@link Builder} for adding an {@link AbstractJobEvent} to the registry.
+     * Returns a {@link Builder} for adding an {@link JobEvent} to the registry.
      * 
      * @return  the builder
      *
      ******************************************************************************************************************/
     @Nonnull
-    public AbstractJobEvent addJobEvent();
+    public JobEvent addJobEvent();
   }
