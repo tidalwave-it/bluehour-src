@@ -34,7 +34,7 @@
 
     <!-- Don't use the modules pom or it will unpack also common dependencies -->
     <parent>
-        <groupId>it-tidalwave-accounting</groupId>
+        <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour</artifactId>
         <version>1.0-ALPHA-1-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
@@ -47,7 +47,7 @@
 
     ================================================================================================================ -->
 
-    <groupId>it-tidalwave-accounting</groupId>
+    <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-macosx-embedded-jre</artifactId>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -56,7 +56,7 @@
     
 <!--    <dependencies>
         <dependency>
-            <groupId>it-tidalwave-accounting</groupId>
+            <groupId>it.tidalwave.accounting</groupId>
             <artifactId>bluehour-application</artifactId>
             <type>zip</type>
         </dependency>

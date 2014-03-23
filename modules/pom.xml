@@ -31,7 +31,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it-tidalwave-accounting</groupId>
+        <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour</artifactId>
         <version>1.0-ALPHA-1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -45,7 +45,7 @@
 
     ================================================================================================================ -->
 
-    <groupId>it-tidalwave-accounting</groupId>
+    <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-modules</artifactId>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
     <packaging>pom</packaging>

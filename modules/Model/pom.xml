@@ -33,7 +33,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it-tidalwave-accounting</groupId>
+        <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
         <version>1.0-ALPHA-1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -43,7 +43,7 @@
         <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
     </properties>
 
-    <groupId>it-tidalwave-accounting</groupId>
+    <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-model</artifactId>
     <version>1.0-ALPHA-1-SNAPSHOT</version>
     <name>blueHour - Model</name>
