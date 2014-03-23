@@ -196,8 +196,8 @@
     ================================================================================================================ -->
     <modules>
         <module>Model</module>
-        <module>Installers/MacOSX</module>
-        <module>Installers/MacOSXEmbeddedJRE</module>
+        <!-- module>Installers/MacOSX</module>
+        <module>Installers/MacOSXEmbeddedJRE</module -->
     </modules>
 
 </project>
