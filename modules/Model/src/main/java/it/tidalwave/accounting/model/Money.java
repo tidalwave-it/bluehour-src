@@ -57,6 +57,11 @@ public class Money
         this(BigDecimal.valueOf(amount), currency);
       }
 
+    public Money (final Number amount, final @Nonnull String currency)
+      {
+        this(BigDecimal.valueOf(amount.doubleValue()), currency);
+      }
+
     @Override @Nonnull
     public String toString()
       {
