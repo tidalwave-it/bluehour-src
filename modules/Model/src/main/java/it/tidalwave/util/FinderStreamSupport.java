@@ -63,7 +63,7 @@ public class FinderStreamSupport<TYPE, EXTENDED_FINDER extends Finder<TYPE>>
                                 implements ExtendedFinderSupport<TYPE, EXTENDED_FINDER>, 
                                            FinderStream<TYPE>
   {
-    @Nonnull
+    @Override @Nonnull
     public Optional<TYPE> optionalResult()
       {
         try 
