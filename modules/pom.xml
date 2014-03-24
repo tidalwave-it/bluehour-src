@@ -198,6 +198,7 @@
         <module>Model</module>
         <!-- module>Installers/MacOSX</module>
         <module>Installers/MacOSXEmbeddedJRE</module -->
+        <module>iBizImporter</module>
     </modules>
 
 </project>

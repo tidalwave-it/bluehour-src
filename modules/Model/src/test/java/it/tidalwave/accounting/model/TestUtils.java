@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz.impl;
+package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import java.time.LocalDate;

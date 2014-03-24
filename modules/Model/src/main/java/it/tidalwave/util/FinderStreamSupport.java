@@ -27,6 +27,7 @@
  */
 package it.tidalwave.util;
 
+import javax.annotation.Nonnull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -65,79 +66,79 @@ public class FinderStreamSupport<Type, ExtendedFinder extends Finder<Type>>
     @Override
     public Stream<Type> filter(Predicate<? super Type> predicate) 
       {
-        return ((List<Type>)results()).stream().filter(predicate);
+        return getResultsAsList().stream().filter(predicate);
       }
 
     @Override
     public <R> Stream<R> map(Function<? super Type, ? extends R> mapper)
       {
-        return ((List<Type>)results()).stream().map(mapper);
+        return getResultsAsList().stream().map(mapper);
       }
 
     @Override
     public IntStream mapToInt(ToIntFunction<? super Type> mapper)
       {
-        return ((List<Type>)results()).stream().mapToInt(mapper);
+        return getResultsAsList().stream().mapToInt(mapper);
       }
 
     @Override
     public LongStream mapToLong(ToLongFunction<? super Type> mapper) 
       {
-        return ((List<Type>)results()).stream().mapToLong(mapper);
+        return getResultsAsList().stream().mapToLong(mapper);
       }
 
     @Override
     public DoubleStream mapToDouble(ToDoubleFunction<? super Type> mapper) 
       {
-        return ((List<Type>)results()).stream().mapToDouble(mapper);
+        return getResultsAsList().stream().mapToDouble(mapper);
       }
 
     @Override
     public <R> Stream<R> flatMap(Function<? super Type, ? extends Stream<? extends R>> mapper) 
       {
-        return ((List<Type>)results()).stream().flatMap(mapper);
+        return getResultsAsList().stream().flatMap(mapper);
       }
  
     @Override
     public IntStream flatMapToInt(Function<? super Type, ? extends IntStream> mapper) 
       {
-        return ((List<Type>)results()).stream().flatMapToInt(mapper);
+        return getResultsAsList().stream().flatMapToInt(mapper);
       }
 
     @Override
     public LongStream flatMapToLong(Function<? super Type, ? extends LongStream> mapper) 
       {
-        return ((List<Type>)results()).stream().flatMapToLong(mapper);
+        return getResultsAsList().stream().flatMapToLong(mapper);
       }  
 
     @Override
     public DoubleStream flatMapToDouble(Function<? super Type, ? extends DoubleStream> mapper) 
       { 
-        return ((List<Type>)results()).stream().flatMapToDouble(mapper);
+        return getResultsAsList().stream().flatMapToDouble(mapper);
       }
 
     @Override
     public Stream<Type> distinct() 
       {
-        return ((List<Type>)results()).stream().distinct();
+        return getResultsAsList().stream().distinct();
       }
 
     @Override
     public Stream<Type> sorted()  
       {
-        return ((List<Type>)results()).stream().sorted();
+        return getResultsAsList().stream().sorted();
       }
 
     @Override
     public Stream<Type> sorted(Comparator<? super Type> comparator) 
       {
-        return ((List<Type>)results()).stream().sorted(comparator);
+        return getResultsAsList().stream().sorted(comparator);
       }
 
     @Override
     public Stream<Type> peek(Consumer<? super Type> action) 
       {
-        return ((List<Type>)results()).stream().peek(action);
+        return getResultsAsList().stream().peek(action);
       }  
 
 //    @Override
@@ -155,67 +156,67 @@ public class FinderStreamSupport<Type, ExtendedFinder extends Finder<Type>>
     @Override
     public void forEach(Consumer<? super Type> action) 
       {
-        ((List<Type>)results()).stream().forEach(action);
+        getResultsAsList().stream().forEach(action);
       }
 
     @Override
     public void forEachOrdered(Consumer<? super Type> action) 
       {
-        ((List<Type>)results()).stream().forEachOrdered(action);
+        getResultsAsList().stream().forEachOrdered(action);
       } 
 
     @Override
     public Object[] toArray() 
       {
-        return ((List<Type>)results()).stream().toArray();
+        return getResultsAsList().stream().toArray();
       } 
 
     @Override
     public <A> A[] toArray(IntFunction<A[]> generator) 
       {
-        return ((List<Type>)results()).stream().toArray(generator);
+        return getResultsAsList().stream().toArray(generator);
       }
 
     @Override
     public Type reduce(Type identity, BinaryOperator<Type> accumulator) 
       {
-        return ((List<Type>)results()).stream().reduce(identity, accumulator);
+        return getResultsAsList().stream().reduce(identity, accumulator);
       }
 
     @Override
     public Optional<Type> reduce(BinaryOperator<Type> accumulator) 
       {
-        return ((List<Type>)results()).stream().reduce(accumulator);
+        return getResultsAsList().stream().reduce(accumulator);
       }
 
     @Override
     public <U> U reduce(U identity, BiFunction<U, ? super Type, U> accumulator, BinaryOperator<U> combiner) 
       {
-        return ((List<Type>)results()).stream().reduce(identity, accumulator, combiner);
+        return getResultsAsList().stream().reduce(identity, accumulator, combiner);
       }
 
     @Override
     public <R> R collect(Supplier<R> supplier, BiConsumer<R, ? super Type> accumulator, BiConsumer<R, R> combiner) 
       {
-        return ((List<Type>)results()).stream().collect(supplier, accumulator, combiner);
+        return getResultsAsList().stream().collect(supplier, accumulator, combiner);
       }
 
     @Override
     public <R, A> R collect(Collector<? super Type, A, R> collector)  
       {
-        return ((List<Type>)results()).stream().collect(collector);
+        return getResultsAsList().stream().collect(collector);
       }
 
     @Override
     public Optional<Type> min(Comparator<? super Type> comparator) 
       {
-        return ((List<Type>)results()).stream().min(comparator);
+        return getResultsAsList().stream().min(comparator);
       }
 
     @Override
     public Optional<Type> max(Comparator<? super Type> comparator) 
       {
-        return ((List<Type>)results()).stream().max(comparator);
+        return getResultsAsList().stream().max(comparator);
       } 
 
 //    @Override
@@ -227,78 +228,84 @@ public class FinderStreamSupport<Type, ExtendedFinder extends Finder<Type>>
     @Override
     public boolean anyMatch(Predicate<? super Type> predicate) 
       {
-        return ((List<Type>)results()).stream().anyMatch(predicate);
+        return getResultsAsList().stream().anyMatch(predicate);
       }
 
     @Override
     public boolean allMatch(Predicate<? super Type> predicate) 
       {
-        return ((List<Type>)results()).stream().allMatch(predicate);
+        return getResultsAsList().stream().allMatch(predicate);
       }
 
     @Override
     public boolean noneMatch(Predicate<? super Type> predicate) 
       {
-        return ((List<Type>)results()).stream().noneMatch(predicate);
+        return getResultsAsList().stream().noneMatch(predicate);
       }
 
     @Override
     public Optional<Type> findFirst() 
       {
-        return ((List<Type>)results()).stream().findFirst();
+        return getResultsAsList().stream().findFirst();
       }
 
     @Override
     public Optional<Type> findAny() 
       {
-        return ((List<Type>)results()).stream().findAny();
+        return getResultsAsList().stream().findAny();
       }  
 
     @Override
     public Iterator<Type> iterator() 
       {
-        return ((List<Type>)results()).stream().iterator();
+        return getResultsAsList().stream().iterator();
       }
 
     @Override
     public Spliterator<Type> spliterator() 
       {
-        return ((List<Type>)results()).stream().spliterator();
+        return getResultsAsList().stream().spliterator();
       }
 
     @Override
     public boolean isParallel() 
       {
-        return ((List<Type>)results()).stream().isParallel();
+        return getResultsAsList().stream().isParallel();
       }
 
     @Override
     public Stream<Type> sequential() 
       {
-        return ((List<Type>)results()).stream().sequential();
+        return getResultsAsList().stream().sequential();
       }
 
     @Override
     public Stream<Type> parallel() 
       {
-        return ((List<Type>)results()).stream().parallel();
+        return getResultsAsList().stream().parallel();
       }
 
     @Override
     public Stream<Type> unordered() 
       {
-        return ((List<Type>)results()).stream().unordered();
+        return getResultsAsList().stream().unordered();
       }
 
     @Override
     public Stream<Type> onClose(Runnable closeHandler) 
       {
-        return ((List<Type>)results()).stream().onClose(closeHandler);
+        return getResultsAsList().stream().onClose(closeHandler);
       }
 
     @Override
     public void close() 
       {
-        ((List<Type>)results()).stream().close();
+        getResultsAsList().stream().close();
+      }
+    
+    @Nonnull
+    private List<Type> getResultsAsList()
+      {
+        return (List<Type>)results();
       }
   }
