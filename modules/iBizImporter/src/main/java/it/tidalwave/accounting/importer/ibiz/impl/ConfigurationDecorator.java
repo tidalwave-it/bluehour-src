@@ -81,6 +81,6 @@ public class ConfigurationDecorator implements Configuration
     @Nonnull
     public Stream<ConfigurationDecorator> getStream (final @Nonnull String name)
       {
-        return delegate.getList(name).stream().map((o) -> new ConfigurationDecorator((Configuration)o));
+        return delegate.getList(name).stream().map(o -> new ConfigurationDecorator((Configuration)o));
       }
   }
