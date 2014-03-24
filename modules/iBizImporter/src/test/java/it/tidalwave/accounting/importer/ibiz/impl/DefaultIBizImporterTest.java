@@ -28,11 +28,11 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
-import java.nio.file.Files;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DefaultIBizImporterTest
   {
     @Test
-    public void testImport()
+    public void must_properly_import_projects()
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
