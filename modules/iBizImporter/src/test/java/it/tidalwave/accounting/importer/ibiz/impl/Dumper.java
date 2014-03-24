@@ -27,27 +27,25 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.Invoice;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.util.FinderStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
-import static java.util.Comparator.comparing;
-import static java.util.Comparator.comparing;
 import java.util.List;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.joining;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.io.PrintWriter;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.joining;
 
 /***********************************************************************************************************************
  *
@@ -78,13 +76,13 @@ public class Dumper
     public void dumpCustomers (final @Nonnull FinderStream<Customer> customers)
       throws IOException
       {
-        customers.sorted(comparing(Customer::getName)).forEach(customer -> pw.printf("%s\n", customer));
+        customers.sorted(comparing(Customer::getName)).forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
     
     public void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
       throws IOException
       {
-        invoices.sorted(comparing(Invoice::getId)).forEach(invoice -> pw.printf("%s\n", invoice));
+        invoices.sorted(comparing(Invoice::getId)).forEach(invoice -> pw.printf("%s\n", toString(invoice)));
       }
     
     public void dumpProjects (final @Nonnull FinderStream<Project> projects)
@@ -95,7 +93,7 @@ public class Dumper
     
     private void dump (final @Nonnull Project project)
       {
-        pw.printf("%s\n", project);
+        pw.printf("%s\n", toString(project));
         dump(project.findChildren(), INDENT);
       }
 
@@ -134,7 +132,18 @@ public class Dumper
       {
         try
           {
-            return field.get(object);
+            Object value = field.get(object);
+            
+            if (value instanceof Customer)
+              {
+                value = ((Customer)value).getName();
+              }
+            else if (value instanceof Project)
+              {
+                value = ((Project)value).getName();
+              }
+            
+            return value;
           }
         catch (IllegalArgumentException | IllegalAccessException e)
           {
