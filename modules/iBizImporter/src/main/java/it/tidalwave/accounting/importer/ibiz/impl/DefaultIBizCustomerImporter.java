@@ -70,9 +70,9 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
         final Configuration config = IBizUtils.loadConfiguration(path);
         final List<Object> customersConfig = config.getList("clients");
 
-        for (final Object c : customersConfig)
+        customersConfig.stream().map((c) -> new ConfigurationDecorator((Configuration)c))
+                                .forEach((customerConfig) -> 
           {
-            final ConfigurationDecorator customerConfig = new ConfigurationDecorator((Configuration)c);
             final String clientCompany = customerConfig.getString("clientCompany");
             final String firstName = customerConfig.getString("firstName").trim();
             final Id addressBookId = customerConfig.getId("addressBookId");
@@ -116,6 +116,6 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
                                           .withBillingAddress(addressBuilder.create())
                                           .withVatNumber(vat)
                                           .create();
-          }
+          });
       }
   }
