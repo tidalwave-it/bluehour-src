@@ -69,13 +69,11 @@ public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSup
         if (id != null)
           {
             final TYPE item = findById(id);
-//            final TYPE item = mapById.get(id);
             return (item != null) ? Collections.singletonList(item) : Collections.<TYPE>emptyList();
           }
         else
           {
             return new ArrayList<>(findAll());
-//            return new ArrayList<>(mapById.values());
           }
       }
     
