@@ -29,6 +29,7 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Date;
+import java.util.stream.Stream;
 import java.math.MathContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,8 +37,6 @@ import java.time.ZoneId;
 import org.apache.commons.configuration.Configuration;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Money;
-import java.util.List;
-import java.util.stream.Stream;
 import lombok.Delegate;
 import lombok.RequiredArgsConstructor;
 
