@@ -118,9 +118,9 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
           {
             final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
             addressBuilder = addressBuilder.withCity(addr.getCity())
-                    .withState(addr.getCountry())
-                    .withStreet(addr.getStreet())
-                    .withZip("" + addr.getZip());
+                                           .withState(addr.getCountry())
+                                           .withStreet(addr.getStreet())
+                                           .withZip("" + addr.getZip());
           }
         
         return addressBuilder.create();
