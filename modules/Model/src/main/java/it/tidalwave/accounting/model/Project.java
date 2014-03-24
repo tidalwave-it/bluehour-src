@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.role.Identifiable;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
@@ -36,6 +37,7 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
+import it.tidalwave.util.Id;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -53,7 +55,7 @@ import static lombok.AccessLevel.PRIVATE;
  **********************************************************************************************************************/
 @Immutable @Wither
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events"})
-public class Project implements SimpleComposite<JobEvent>
+public class Project implements SimpleComposite<JobEvent>, Identifiable
   {
     /*******************************************************************************************************************
      *
@@ -71,6 +73,7 @@ public class Project implements SimpleComposite<JobEvent>
             public static final Callback DEFAULT = (project) -> {};
           }
 
+        private final Id id;
         private final Customer customer;
         private final String name;
         private final String number;
@@ -91,7 +94,7 @@ public class Project implements SimpleComposite<JobEvent>
         public Builder (final @Nonnull Callback callback)
           {
              // FIXME: avoid null
-            this(null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList(), callback);
+            this(new Id(""), null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList(), callback);
           }
 
         @Nonnull
@@ -103,6 +106,9 @@ public class Project implements SimpleComposite<JobEvent>
           }
       }
 
+    @Getter @Nonnull
+    private final Id id;
+    
     @Nonnull
     private final Customer customer;
 
@@ -151,6 +157,7 @@ public class Project implements SimpleComposite<JobEvent>
      ******************************************************************************************************************/
     protected Project (final @Nonnull Builder builder)
       {
+        this.id = builder.getId();
         this.customer = builder.getCustomer();
         this.name = builder.getName();
         this.number = builder.getNumber();
