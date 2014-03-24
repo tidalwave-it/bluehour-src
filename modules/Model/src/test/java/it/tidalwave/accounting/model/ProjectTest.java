@@ -27,10 +27,11 @@
  */
 package it.tidalwave.accounting.model;
 
-import org.testng.annotations.Test;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
 import static it.tidalwave.accounting.model.TestUtils.parseDate;
+import it.tidalwave.util.Id;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  *
@@ -49,21 +50,23 @@ public class ProjectTest
                                             .withState("CA")
                                             .withCountry("USA")
                                             .create();
-        final Customer c1 = Customer.builder().withName("Acme Corp.")
+        final Customer c1 = Customer.builder().withId(new Id("1"))
+                                              .withName("Acme Corp.")
                                               .withVatNumber("1233455345")
                                               .withBillingAddress(a1)
                                               .create();
-        final Project p = Project.builder().withAmount(new Money(10500, "EUR"))
-                                            .withCustomer(c1)
-                                            .withName("Project 1")
-                                            .withDescription("description of project 1")
-                                            .withStartDate(parseDate("2014-01-03"))
-                                            .withEndDate(parseDate("2014-02-12"))
-                                            .withNotes("Notes for project 1")
-                                            .withNumber("1")
-                                            .withHourlyRate(new Money(43, "EUR"))
-                                            .create();
-        assertThat(p.toString(), is("Project(customer=Customer(id=, name=Acme Corp., billingAddress="
+        final Project p = Project.builder().withId(new Id("2"))
+                                           .withAmount(new Money(10500, "EUR"))
+                                           .withCustomer(c1)
+                                           .withName("Project 1")
+                                           .withDescription("description of project 1")
+                                           .withStartDate(parseDate("2014-01-03"))
+                                           .withEndDate(parseDate("2014-02-12"))
+                                           .withNotes("Notes for project 1")
+                                           .withNumber("1")
+                                           .withHourlyRate(new Money(43, "EUR"))
+                                           .create();
+        assertThat(p.toString(), is("Project(id=2, customer=Customer(id=1, name=Acme Corp., billingAddress="
                                   + "Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345), "
                                   + "vatNumber=1233455345), name=Project 1, number=1, "
                                   + "description=description of project 1, notes=Notes for project 1, hourlyRate=43 EUR, "
