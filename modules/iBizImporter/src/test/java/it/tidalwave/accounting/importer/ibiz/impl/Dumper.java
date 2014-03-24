@@ -30,11 +30,10 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
+import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import it.tidalwave.util.FinderStream;
@@ -121,10 +120,9 @@ public class Dumper
     @Nonnull
     public static String toString (final @Nonnull Object event)
       {
-        final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
-        fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
-
-        final String s = fields.stream().sorted(comparing(Field::getName))
+        final String s = Stream.concat(Arrays.asList(event.getClass().getDeclaredFields()).stream(),
+                                       Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()).stream())
+                                        .sorted(comparing(Field::getName))
                                         .filter(field -> !Collection.class.isAssignableFrom(field.getType()))
                                         .peek(field -> field.setAccessible(true))
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
