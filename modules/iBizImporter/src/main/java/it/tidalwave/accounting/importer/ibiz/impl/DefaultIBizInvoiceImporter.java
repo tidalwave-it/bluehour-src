@@ -43,6 +43,7 @@ import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,6 +59,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter 
   {
+    private static final Set<FileVisitOption> NO_OPTIONS = Collections.<FileVisitOption>emptySet();
+    
     @Nonnull
     private final InvoiceRegistry invoiceRegistry;
 
@@ -78,7 +81,7 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
         final Path invoicePaths = path.resolve("Invoices");
         final AtomicReference<IOException> exception = new AtomicReference<>();
 
-        Files.walkFileTree(invoicePaths, Collections.<FileVisitOption>emptySet(), 1, new SimpleFileVisitor<Path>()
+        Files.walkFileTree(invoicePaths, NO_OPTIONS, 1, new SimpleFileVisitor<Path>()
           {
             @Override
             public FileVisitResult visitFile (final @Nonnull Path path, final @Nonnull BasicFileAttributes attrs)
