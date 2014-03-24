@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -89,4 +90,12 @@ public interface IBizImporter
      ******************************************************************************************************************/
     @Nonnull
     public ProjectRegistry getProjectRegistry();
+    
+    /*******************************************************************************************************************
+     *
+     * @return  the {@link InvoiceRegistry} containing the imported data
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public InvoiceRegistry getInvoiceRegistry();
   }

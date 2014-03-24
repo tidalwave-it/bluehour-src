@@ -66,6 +66,7 @@ public class DefaultIBizImporterTest
             final Dumper dumper = new Dumper(pw);
             dumper.dumpCustomers(importer.getCustomerRegistry().findCustomers());
             dumper.dumpProjects(importer.getProjectRegistry().findProjects());
+            dumper.dumpInvoices(importer.getInvoiceRegistry().findInvoices());
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());

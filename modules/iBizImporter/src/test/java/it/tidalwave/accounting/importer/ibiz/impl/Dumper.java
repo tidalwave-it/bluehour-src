@@ -28,23 +28,26 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import it.tidalwave.accounting.model.Customer;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.util.FinderStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
-import java.io.IOException;
-import java.io.PrintWriter;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
 import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparing;
+import java.util.List;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.joining;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -76,6 +79,12 @@ public class Dumper
       throws IOException
       {
         customers.sorted(comparing(Customer::getName)).forEach(customer -> pw.printf("%s\n", customer));
+      }
+    
+    public void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
+      throws IOException
+      {
+        invoices.sorted(comparing(Invoice::getId)).forEach(invoice -> pw.printf("%s\n", invoice));
       }
     
     public void dumpProjects (final @Nonnull FinderStream<Project> projects)

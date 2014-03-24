@@ -28,16 +28,20 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import java.io.IOException;
+import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
+import it.tidalwave.accounting.model.impl.DefaultInvoiceRegistry;
 import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import lombok.Getter;
@@ -55,6 +59,9 @@ public class DefaultIBizImporter implements IBizImporter
 
     @Getter
     private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
+    
+    @Getter
+    private final InvoiceRegistry invoiceRegistry = new DefaultInvoiceRegistry();
 
     @Nonnull
     private final Path path;
@@ -91,6 +98,7 @@ public class DefaultIBizImporter implements IBizImporter
       {
         importCustomers();
         importProjects();
+        importInvoices();
       }
 
     /*******************************************************************************************************************
@@ -123,6 +131,46 @@ public class DefaultIBizImporter implements IBizImporter
               throws IOException
               {
                 new DefaultIBizProjectImporter(customerRegistry, projectRegistry, file).run();
+                return FileVisitResult.CONTINUE;
+              }
+
+            @Override
+            public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
+              {
+                exception.set(new IOException("Fatal error visiting " + file));
+                return FileVisitResult.TERMINATE;
+              }
+          });
+
+        if (exception.get() != null)
+          {
+            throw exception.get();
+          }
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * Imports the projects.
+     *
+     ******************************************************************************************************************/
+    private void importInvoices()
+      throws IOException
+      {
+        final Path invoicePaths = path.resolve("Invoices");
+        ///0E052488-8A7C-4C87-925A-95D5575C6FBC.invoice/Invoice.xml
+        final AtomicReference<IOException> exception = new AtomicReference<>();
+
+        Files.walkFileTree(invoicePaths, Collections.<FileVisitOption>emptySet(), 1, new SimpleFileVisitor<Path>()
+          {
+            @Override
+            public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
+              throws IOException
+              {
+                if (file.getFileName().toString().endsWith(".invoice"))
+                  {
+                    new DefaultIBizInvoiceImporter(invoiceRegistry, projectRegistry).run(file);
+                  }
+                
                 return FileVisitResult.CONTINUE;
               }
 
