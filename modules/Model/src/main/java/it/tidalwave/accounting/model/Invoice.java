@@ -62,6 +62,7 @@ public class Invoice implements Identifiable
           }
 
         private final Id id;
+        private final String number;
         private final Project project;
         private final List<JobEvent> jobEvents; // FIXME: immutablelist
         private final LocalDate date;
@@ -78,7 +79,7 @@ public class Invoice implements Identifiable
 
         public Builder (final @Nonnull Callback callback)
           {
-            this(new Id(""), null, null, null, 0, null, Money.ZERO, Money.ZERO, callback);
+            this(new Id(""), "", null, null, null, 0, null, Money.ZERO, Money.ZERO, callback);
           }
 
         @Nonnull
@@ -92,6 +93,9 @@ public class Invoice implements Identifiable
 
     @Getter @Nonnull
     private final Id id;
+    
+    @Getter
+    private final String number;
     
     @Nonnull
     private final Project project;
@@ -122,6 +126,7 @@ public class Invoice implements Identifiable
     private Invoice (final @Nonnull Builder builder)
       {
         this.id = builder.getId();
+        this.number = builder.getNumber();
         this.project = builder.getProject();
         this.jobEvents = builder.getJobEvents();
         this.date = builder.getDate();

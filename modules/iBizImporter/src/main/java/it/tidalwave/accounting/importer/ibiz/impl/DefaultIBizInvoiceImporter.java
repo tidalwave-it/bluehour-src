@@ -72,7 +72,8 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
             final Id projectId = new Id((String)configuration.getList("projectIDs").get(0));
             final Project project = projectRegistry.findProjects().withId(projectId).result();
 
-            invoiceRegistry.addInvoice().withId(configuration.getId("invoiceNumber"))
+            invoiceRegistry.addInvoice().withId(configuration.getId("uniqueIdentifier"))
+                                        .withNumber(configuration.getString("invoiceNumber"))
                                         .withProject(project)
                                         .withDate(configuration.getDate("date"))
                                         .withDueDate(configuration.getDate("dueDate"))
