@@ -116,13 +116,13 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
 
             invoiceRegistry.addInvoice().withId(configuration.getId("uniqueIdentifier"))
                                         .withNumber(configuration.getString("invoiceNumber"))
-                                        .withProject(project)
-                                        .withJobEvents(events)
                                         .withDate(configuration.getDate("date"))
                                         .withDueDate(configuration.getDate("dueDate"))
     //                                            .withDaysUntilDue(configuration.getInt(""))
                                         .withEarnings(configuration.getMoney("invoiceAmount"))
                                         .withTax(configuration.getMoney("taxes1"))
+                                        .withProject(project)
+                                        .withJobEvents(events)
                                         .create();
           }
         catch (NotFoundException e)
