@@ -51,7 +51,7 @@ public class DefaultProjectRegistry implements ProjectRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultProjectFinder extends FinderWithIdSupport<Project, ProjectRegistry.Finder>
+    class DefaultProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.Finder>
                                implements ProjectRegistry.Finder
       {
         DefaultProjectFinder()

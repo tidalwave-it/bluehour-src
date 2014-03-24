@@ -51,7 +51,7 @@ public class DefaultInvoiceRegistry implements InvoiceRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultInvoiceFinder extends FinderWithIdSupport<Invoice, InvoiceRegistry.Finder>
+    class DefaultInvoiceFinder extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
                                implements InvoiceRegistry.Finder
       {
         DefaultInvoiceFinder()

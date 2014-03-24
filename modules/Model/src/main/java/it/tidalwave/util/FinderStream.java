@@ -27,6 +27,9 @@
  */
 package it.tidalwave.util;
 
+import javax.annotation.Nonnull;
+import java.util.Optional;
+
 /***********************************************************************************************************************
  *
  * @author  fritz
@@ -35,4 +38,6 @@ package it.tidalwave.util;
  **********************************************************************************************************************/
 public interface FinderStream<Type> extends Finder<Type>, PartialStream<Type>
   {
+    @Nonnull
+    public Optional<Type> optionalResult();
   }

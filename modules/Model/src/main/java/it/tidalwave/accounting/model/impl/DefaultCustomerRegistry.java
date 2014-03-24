@@ -51,7 +51,7 @@ public class DefaultCustomerRegistry implements CustomerRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultCustomerFinder extends FinderWithIdSupport<Customer, CustomerRegistry.Finder>
+    class DefaultCustomerFinder extends FinderWithIdMapSupport<Customer, CustomerRegistry.Finder>
                                 implements CustomerRegistry.Finder
       {
         DefaultCustomerFinder()

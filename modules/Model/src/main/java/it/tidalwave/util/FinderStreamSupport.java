@@ -63,6 +63,19 @@ public class FinderStreamSupport<Type, ExtendedFinder extends Finder<Type>>
                                 implements ExtendedFinderSupport<Type, ExtendedFinder>, 
                                            FinderStream<Type>
   {
+    @Nonnull
+    public Optional<Type> optionalResult()
+      {
+        try 
+          {
+            return Optional.of(result());
+          } 
+        catch (NotFoundException e) 
+          {
+            return Optional.empty();
+          }
+      }
+    
     @Override
     public Stream<Type> filter(Predicate<? super Type> predicate) 
       {
