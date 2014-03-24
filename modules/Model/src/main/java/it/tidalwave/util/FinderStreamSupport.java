@@ -79,252 +79,246 @@ public class FinderStreamSupport<TYPE, EXTENDED_FINDER extends Finder<TYPE>>
     @Override @Nonnull
     public Stream<TYPE> stream() 
       {
-        return getResultsAsList().stream();
+        return ((List<TYPE>)results()).stream();
       }
     
     @Override
     public Stream<TYPE> filter(Predicate<? super TYPE> predicate) 
       {
-        return getResultsAsList().stream().filter(predicate);
+        return stream().filter(predicate);
       }
 
     @Override
     public <R> Stream<R> map(Function<? super TYPE, ? extends R> mapper)
       {
-        return getResultsAsList().stream().map(mapper);
+        return stream().map(mapper);
       }
 
     @Override
     public IntStream mapToInt(ToIntFunction<? super TYPE> mapper)
       {
-        return getResultsAsList().stream().mapToInt(mapper);
+        return stream().mapToInt(mapper);
       }
 
     @Override
     public LongStream mapToLong(ToLongFunction<? super TYPE> mapper) 
       {
-        return getResultsAsList().stream().mapToLong(mapper);
+        return stream().mapToLong(mapper);
       }
 
     @Override
     public DoubleStream mapToDouble(ToDoubleFunction<? super TYPE> mapper) 
       {
-        return getResultsAsList().stream().mapToDouble(mapper);
+        return stream().mapToDouble(mapper);
       }
 
     @Override
     public <R> Stream<R> flatMap(Function<? super TYPE, ? extends Stream<? extends R>> mapper) 
       {
-        return getResultsAsList().stream().flatMap(mapper);
+        return stream().flatMap(mapper);
       }
  
     @Override
     public IntStream flatMapToInt(Function<? super TYPE, ? extends IntStream> mapper) 
       {
-        return getResultsAsList().stream().flatMapToInt(mapper);
+        return stream().flatMapToInt(mapper);
       }
 
     @Override
     public LongStream flatMapToLong(Function<? super TYPE, ? extends LongStream> mapper) 
       {
-        return getResultsAsList().stream().flatMapToLong(mapper);
+        return stream().flatMapToLong(mapper);
       }  
 
     @Override
     public DoubleStream flatMapToDouble(Function<? super TYPE, ? extends DoubleStream> mapper) 
       { 
-        return getResultsAsList().stream().flatMapToDouble(mapper);
+        return stream().flatMapToDouble(mapper);
       }
 
     @Override
     public Stream<TYPE> distinct() 
       {
-        return getResultsAsList().stream().distinct();
+        return stream().distinct();
       }
 
     @Override
     public Stream<TYPE> sorted()  
       {
-        return getResultsAsList().stream().sorted();
+        return stream().sorted();
       }
 
     @Override
     public Stream<TYPE> sorted(Comparator<? super TYPE> comparator) 
       {
-        return getResultsAsList().stream().sorted(comparator);
+        return stream().sorted(comparator);
       }
 
     @Override
     public Stream<TYPE> peek(Consumer<? super TYPE> action) 
       {
-        return getResultsAsList().stream().peek(action);
+        return stream().peek(action);
       }  
 
 //    @Override
 //    public Stream<Type> limit(long maxSize) 
 //      {
-//        return ((List<Type>)results()).stream().limit(maxSize);
+//        return stream().limit(maxSize);
 //      }
 //
 //    @Override
 //    public Stream<Type> skip(long n) 
 //      {
-//        return ((List<Type>)results()).stream().skip(n);
+//        return stream().skip(n);
 //      } 
 
     @Override
     public void forEach(Consumer<? super TYPE> action) 
       {
-        getResultsAsList().stream().forEach(action);
+        stream().forEach(action);
       }
 
     @Override
     public void forEachOrdered(Consumer<? super TYPE> action) 
       {
-        getResultsAsList().stream().forEachOrdered(action);
+        stream().forEachOrdered(action);
       } 
 
     @Override
     public Object[] toArray() 
       {
-        return getResultsAsList().stream().toArray();
+        return stream().toArray();
       } 
 
     @Override
     public <A> A[] toArray(IntFunction<A[]> generator) 
       {
-        return getResultsAsList().stream().toArray(generator);
+        return stream().toArray(generator);
       }
 
     @Override
     public TYPE reduce(TYPE identity, BinaryOperator<TYPE> accumulator) 
       {
-        return getResultsAsList().stream().reduce(identity, accumulator);
+        return stream().reduce(identity, accumulator);
       }
 
     @Override
     public Optional<TYPE> reduce(BinaryOperator<TYPE> accumulator) 
       {
-        return getResultsAsList().stream().reduce(accumulator);
+        return stream().reduce(accumulator);
       }
 
     @Override
     public <U> U reduce(U identity, BiFunction<U, ? super TYPE, U> accumulator, BinaryOperator<U> combiner) 
       {
-        return getResultsAsList().stream().reduce(identity, accumulator, combiner);
+        return stream().reduce(identity, accumulator, combiner);
       }
 
     @Override
     public <R> R collect(Supplier<R> supplier, BiConsumer<R, ? super TYPE> accumulator, BiConsumer<R, R> combiner) 
       {
-        return getResultsAsList().stream().collect(supplier, accumulator, combiner);
+        return stream().collect(supplier, accumulator, combiner);
       }
 
     @Override
     public <R, A> R collect(Collector<? super TYPE, A, R> collector)  
       {
-        return getResultsAsList().stream().collect(collector);
+        return stream().collect(collector);
       }
 
     @Override
     public Optional<TYPE> min(Comparator<? super TYPE> comparator) 
       {
-        return getResultsAsList().stream().min(comparator);
+        return stream().min(comparator);
       }
 
     @Override
     public Optional<TYPE> max(Comparator<? super TYPE> comparator) 
       {
-        return getResultsAsList().stream().max(comparator);
+        return stream().max(comparator);
       } 
 
 //    @Override
 //    public long count() 
 //      {
-//        return ((List<Type>)results()).stream().count();
+//        return stream().count();
 //      }
 
     @Override
     public boolean anyMatch(Predicate<? super TYPE> predicate) 
       {
-        return getResultsAsList().stream().anyMatch(predicate);
+        return stream().anyMatch(predicate);
       }
 
     @Override
     public boolean allMatch(Predicate<? super TYPE> predicate) 
       {
-        return getResultsAsList().stream().allMatch(predicate);
+        return stream().allMatch(predicate);
       }
 
     @Override
     public boolean noneMatch(Predicate<? super TYPE> predicate) 
       {
-        return getResultsAsList().stream().noneMatch(predicate);
+        return stream().noneMatch(predicate);
       }
 
     @Override
     public Optional<TYPE> findFirst() 
       {
-        return getResultsAsList().stream().findFirst();
+        return stream().findFirst();
       }
 
     @Override
     public Optional<TYPE> findAny() 
       {
-        return getResultsAsList().stream().findAny();
+        return stream().findAny();
       }  
 
     @Override
     public Iterator<TYPE> iterator() 
       {
-        return getResultsAsList().stream().iterator();
+        return stream().iterator();
       }
 
     @Override
     public Spliterator<TYPE> spliterator() 
       {
-        return getResultsAsList().stream().spliterator();
+        return stream().spliterator();
       }
 
     @Override
     public boolean isParallel() 
       {
-        return getResultsAsList().stream().isParallel();
+        return stream().isParallel();
       }
 
     @Override
     public Stream<TYPE> sequential() 
       {
-        return getResultsAsList().stream().sequential();
+        return stream().sequential();
       }
 
     @Override
     public Stream<TYPE> parallel() 
       {
-        return getResultsAsList().stream().parallel();
+        return stream().parallel();
       }
 
     @Override
     public Stream<TYPE> unordered() 
       {
-        return getResultsAsList().stream().unordered();
+        return stream().unordered();
       }
 
     @Override
     public Stream<TYPE> onClose(Runnable closeHandler) 
       {
-        return getResultsAsList().stream().onClose(closeHandler);
+        return stream().onClose(closeHandler);
       }
 
     @Override
     public void close() 
       {
-        getResultsAsList().stream().close();
-      }
-    
-    @Nonnull
-    private List<TYPE> getResultsAsList()
-      {
-        return (List<TYPE>)results();
+        stream().close();
       }
   }
