@@ -27,17 +27,19 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import it.tidalwave.role.Identifiable;
+import it.tidalwave.util.Id;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.time.LocalDateTime;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import static lombok.AccessLevel.PRIVATE;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
@@ -48,7 +50,7 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode @ToString
-public abstract class JobEvent
+public abstract class JobEvent implements Identifiable
   {
     /*******************************************************************************************************************
      *
@@ -61,6 +63,7 @@ public abstract class JobEvent
       {
         public enum Type { TIMED, FLAT };
 
+        private final Id id;
         private final Type type;
         private final LocalDateTime startDateTime;
         private final LocalDateTime endDateTime;
@@ -72,7 +75,7 @@ public abstract class JobEvent
 
         public Builder()
           {
-            this(Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList());
+            this(new Id(""), Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList());
           }
 
         @Nonnull
@@ -93,6 +96,9 @@ public abstract class JobEvent
           }
       }
 
+    @Getter @Nonnull
+    protected final Id id;
+    
     @Nonnull
     protected final String name;
 
@@ -117,6 +123,7 @@ public abstract class JobEvent
      ******************************************************************************************************************/
     protected JobEvent (final @Nonnull Builder builder)
       {
+        this.id = builder.getId();
         this.name = builder.getName();
         this.description = builder.getDescription();
       }

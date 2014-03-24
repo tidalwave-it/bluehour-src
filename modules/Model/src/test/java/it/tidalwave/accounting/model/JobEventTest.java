@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.util.Id;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -63,7 +64,8 @@ public class JobEventTest
 //                                            .withNumber("1")
 //                                            .withHourlyRate(new Money(43, "EUR"))
 //                                            .create();
-        final JobEvent j1 = JobEvent.builder().withName("Consultancy")
+        final JobEvent j1 = JobEvent.builder().withId(new Id("1"))
+                                              .withName("Consultancy")
                                               .withDescription("Consultancy description")
                                               .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
                                               .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))
@@ -72,7 +74,7 @@ public class JobEventTest
                                               .create();
 
         assertThat(j1.toString(), is("TimedJobEvent("
-                                   + "super=JobEvent(name=Consultancy, description=Consultancy description), "
+                                   + "super=JobEvent(id=1, name=Consultancy, description=Consultancy description), "
                                    + "startDateTime=2014-01-05T12:34:56, "
                                    + "endDateTime=2014-01-05T13:45:34, "
                                    + "earnings=430 EUR, rate=48 EUR)"));
