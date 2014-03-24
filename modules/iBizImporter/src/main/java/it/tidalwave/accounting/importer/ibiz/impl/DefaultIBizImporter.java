@@ -157,7 +157,6 @@ public class DefaultIBizImporter implements IBizImporter
       throws IOException
       {
         final Path invoicePaths = path.resolve("Invoices");
-        ///0E052488-8A7C-4C87-925A-95D5575C6FBC.invoice/Invoice.xml
         final AtomicReference<IOException> exception = new AtomicReference<>();
 
         Files.walkFileTree(invoicePaths, Collections.<FileVisitOption>emptySet(), 1, new SimpleFileVisitor<Path>()
