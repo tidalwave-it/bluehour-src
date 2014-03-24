@@ -160,7 +160,8 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 //        final int paid = jobEvent.getInt("jobEventPaid");
         final IBizJobEventType type = IBizJobEventType.values()[jobEventConfig.getInt("jobEventType")];
 
-        return JobEvent.builder().withType(type.getMappedType())
+        return JobEvent.builder().withId(jobEventConfig.getId("uniqueIdentifier"))
+                                 .withType(type.getMappedType())
                                  .withStartDateTime(jobEventConfig.getDateTime("jobEventStartDate"))
                                  .withEndDateTime(jobEventConfig.getDateTime("jobEventEndDate"))
                                  .withName(jobEventConfig.getString("jobEventName"))
@@ -172,8 +173,6 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
         /*
                                         <key>tax1</key>
                                         <real>22</real>
-                                        <key>uniqueIdentifier</key>
-                                        <string>E4EA6321-75FE-45A9-AB1F-CB456E918293</string>
 
          */
       }
