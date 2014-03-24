@@ -30,8 +30,14 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+import java.time.LocalDateTime;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import it.tidalwave.util.Id;
@@ -43,7 +49,6 @@ import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
-import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 
@@ -67,16 +72,53 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 
     /*******************************************************************************************************************
      *
+     * Imports the projects.
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void importProjects()
+      throws IOException
+      {
+        final Path projectsPath = path.resolve("Projects");
+        final AtomicReference<IOException> exception = new AtomicReference<>();
+
+        Files.walkFileTree(projectsPath, new SimpleFileVisitor<Path>()
+          {
+            @Override
+            public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
+              throws IOException
+              {
+                importProject(file);
+                return FileVisitResult.CONTINUE;
+              }
+
+            @Override
+            public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
+              {
+                exception.set(new IOException("Fatal error visiting " + file));
+                return FileVisitResult.TERMINATE;
+              }
+          });
+        
+        final IOException e = exception.get();
+
+        if (e != null)
+          {
+            throw e;
+          }
+      }
+    
+    /*******************************************************************************************************************
+     *
      * @throws  IOException  in case of error
      * 
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public void run()
+    private void importProject (final @Nonnull Path file)
       throws IOException
       {
         try
           {
-            final ConfigurationDecorator config = IBizUtils.loadConfiguration(path);
+            final ConfigurationDecorator config = IBizUtils.loadConfiguration(file);
             importProject(config).withEvents(importJobEvents(config.getList("jobEvents"))).create();
           }
         catch (ConfigurationException | NotFoundException e)

@@ -59,7 +59,7 @@ public class DefaultIBizImporterTest
         final IBizImporter importer = DefaultIBizImporter.builder()
                                                          .withPath(iBizFolder)
                                                          .create();
-        importer.run();
+        importer.importAll();
         
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
           {

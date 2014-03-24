@@ -62,11 +62,11 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
      *
      ******************************************************************************************************************/
     @Override
-    public void run()
+    public void importCustomers()
       throws IOException
       {
         final NativeAddressBook addressBook = NativeAddressBook.instance();
-        IBizUtils.loadConfiguration(path).getStream("clients").forEach((customerConfig) -> 
+        IBizUtils.loadConfiguration(path.resolve("clients")).getStream("clients").forEach((customerConfig) -> 
           {
             final String clientCompany = customerConfig.getString("clientCompany");
             final String firstName = customerConfig.getString("firstName").trim();

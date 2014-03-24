@@ -61,6 +61,6 @@ public interface IBizProjectImporter
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public void run()
+    public void importProjects()
       throws IOException;
   }

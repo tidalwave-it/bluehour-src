@@ -28,8 +28,6 @@
 package it.tidalwave.accounting.importer.ibiz.spi;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import javax.annotation.Nonnull;
 
 /***********************************************************************************************************************
  *
@@ -44,6 +42,6 @@ public interface IBizInvoiceImporter
      * @throws  IOException     in case of error
      *
      ******************************************************************************************************************/
-    public void run (@Nonnull Path documentPath)
+    public void importInvoices()
       throws IOException;
   }

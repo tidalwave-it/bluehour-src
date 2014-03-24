@@ -36,6 +36,13 @@ import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import java.nio.file.FileVisitOption;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,18 +64,62 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
     @Nonnull
     private final ProjectRegistry projectRegistry;
     
+    @Nonnull
+    private final Path path;
+
     /*******************************************************************************************************************
      *
      * {@inheritDoc}
      *
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public void run (final @Nonnull Path documentPath)
+    public void importInvoices()
+      throws IOException
+      {
+        final Path invoicePaths = path.resolve("Invoices");
+        final AtomicReference<IOException> exception = new AtomicReference<>();
+
+        Files.walkFileTree(invoicePaths, Collections.<FileVisitOption>emptySet(), 1, new SimpleFileVisitor<Path>()
+          {
+            @Override
+            public FileVisitResult visitFile (final @Nonnull Path path, final @Nonnull BasicFileAttributes attrs)
+              throws IOException
+              {
+                if (path.getFileName().toString().endsWith(".invoice"))
+                  {
+                    importInvoice(path.resolve("Attributes"));
+                  }
+                
+                return FileVisitResult.CONTINUE;
+              }
+
+            @Override
+            public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
+              {
+                exception.set(new IOException("Fatal error visiting " + file));
+                return FileVisitResult.TERMINATE;
+              }
+          });
+
+        
+        final IOException e = exception.get();
+
+        if (e != null)
+          {
+            throw e;
+          }
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    private void importInvoice (final @Nonnull Path documentFile)
       throws IOException 
       {
         try
           {
-            final ConfigurationDecorator configuration = IBizUtils.loadConfiguration(documentPath.resolve("Attributes"));
+            final ConfigurationDecorator configuration = IBizUtils.loadConfiguration(documentFile);
             final Id projectId = new Id((String)configuration.getList("projectIDs").get(0));
             final Project project = projectRegistry.findProjects().withId(projectId).result();
 

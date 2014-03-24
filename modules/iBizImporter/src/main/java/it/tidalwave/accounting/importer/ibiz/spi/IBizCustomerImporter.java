@@ -42,6 +42,6 @@ public interface IBizCustomerImporter
      * @throws  IOException     in case of error
      *
      ******************************************************************************************************************/
-    public void run()
+    public void importCustomers()
       throws IOException;
   }
