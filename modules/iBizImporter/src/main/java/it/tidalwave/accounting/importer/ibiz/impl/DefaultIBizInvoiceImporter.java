@@ -32,7 +32,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
@@ -49,6 +48,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
@@ -76,6 +76,7 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
      * {@inheritDoc}
      *
      ******************************************************************************************************************/
+    @Override
     public void importInvoices()
       throws IOException
       {
@@ -109,15 +110,15 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
             final Id projectId = configuration.getIds("projectIDs").get(0);
             final Project project = projectRegistry.findProjects().withId(projectId).result();
             final List<Id> eventIds = configuration.getIds("jobEventIDs");
-            final List<JobEvent> events = eventIds.stream()
-                    .map(id -> safeCall(() -> projectRegistry.findJobEvents().withId(id).result()))
-                    .collect(Collectors.toList());
+            final ProjectRegistry.JobEventFinder finder = projectRegistry.findJobEvents();
+            final List<JobEvent> events = eventIds.stream().map(id -> safeCall(() -> finder.withId(id).result()))
+                                                           .collect(toList());
             // FIXME: iBiz duplicates events that are already inside a group - filter them away
 
             invoiceRegistry.addInvoice().withId(configuration.getId("uniqueIdentifier"))
                                         .withNumber(configuration.getString("invoiceNumber"))
-                                        .withJobEvents(events)
                                         .withProject(project)
+                                        .withJobEvents(events)
                                         .withDate(configuration.getDate("date"))
                                         .withDueDate(configuration.getDate("dueDate"))
     //                                            .withDaysUntilDue(configuration.getInt(""))
