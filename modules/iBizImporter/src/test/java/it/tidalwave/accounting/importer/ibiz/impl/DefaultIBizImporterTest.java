@@ -63,7 +63,7 @@ public class DefaultIBizImporterTest
         
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
           {
-            new ProjectDumper(pw).dump(importer.getProjectRegistry().findProjects());
+            new Dumper(pw).dump(importer.getProjectRegistry().findProjects());
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
