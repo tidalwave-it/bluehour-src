@@ -110,6 +110,7 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
             final Project project = projectRegistry.findProjects().withId(projectId).result();
             final List<Id> eventIds = configuration.getIds("jobEventIDs");
             final ProjectRegistry.JobEventFinder finder = projectRegistry.findJobEvents();
+            // FIXME: could just search events in project (but needs recursive operations in project.findJobEvents())
             final List<JobEvent> events = eventIds.stream().flatMap(id -> finder.withId(id).stream())
                                                            .collect(toList());
             // FIXME: iBiz duplicates events that are already inside a group - filter them away
