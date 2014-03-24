@@ -28,7 +28,8 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.Id;
 
 /***********************************************************************************************************************
  *
@@ -42,13 +43,24 @@ public interface InvoiceRegistry
 
     /*******************************************************************************************************************
      *
+     * 
+     *
+     ******************************************************************************************************************/
+    public static interface Finder extends FinderStream<Invoice>
+      {
+        @Nonnull
+        public Finder withId (@Nonnull Id id);
+      }
+
+    /*******************************************************************************************************************
+     *
      * Returns a {@link Finder} for finding {@link Invoice}s.
      * 
      * @return  the finder
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Finder<Invoice> findInvoice();
+    public Finder findInvoices();
 
     /*******************************************************************************************************************
      *
