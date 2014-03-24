@@ -155,9 +155,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private List<JobEvent> importJobEvents (final @Nonnull Stream<ConfigurationDecorator> jobEvents)
+    private List<JobEvent> importJobEvents (final @Nonnull Stream<ConfigurationDecorator> jobEventsConfig)
       {
-        return jobEvents.map(jobEvent -> importJobEvent(jobEvent)).collect(toList());
+        return jobEventsConfig.map(jobEventConfig -> importJobEvent(jobEventConfig)).collect(toList());
       }
 
     /*******************************************************************************************************************
@@ -166,7 +166,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private JobEvent importJobEvent (final @Nonnull ConfigurationDecorator jobEvent)
+    private JobEvent importJobEvent (final @Nonnull ConfigurationDecorator jobEventConfig)
       {
 //        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
 
@@ -176,16 +176,16 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 //        final int taxable = jobEvent.getInt("taxable");
 //        final DateTime lastModifiedDate = jobEvent.getDateTime("lastModifiedDate");
 //        final int paid = jobEvent.getInt("jobEventPaid");
-        final IBizJobEventType type = IBizJobEventType.values()[jobEvent.getInt("jobEventType")];
+        final IBizJobEventType type = IBizJobEventType.values()[jobEventConfig.getInt("jobEventType")];
 
         return JobEvent.builder().withType(type.getMappedType())
-                                          .withStartDateTime(jobEvent.getDateTime("jobEventStartDate"))
-                                          .withEndDateTime(jobEvent.getDateTime("jobEventEndDate"))
-                                          .withName(jobEvent.getString("jobEventName"))
-                                          .withDescription(jobEvent.getString("jobEventNotes"))
-                                          .withRate(jobEvent.getMoney("jobEventRate"))
-                                          .withEarnings(jobEvent.getMoney("jobEventEarnings"))
-                                          .withEvents(importJobEvents(jobEvent.getStream("children")))
+                                          .withStartDateTime(jobEventConfig.getDateTime("jobEventStartDate"))
+                                          .withEndDateTime(jobEventConfig.getDateTime("jobEventEndDate"))
+                                          .withName(jobEventConfig.getString("jobEventName"))
+                                          .withDescription(jobEventConfig.getString("jobEventNotes"))
+                                          .withRate(jobEventConfig.getMoney("jobEventRate"))
+                                          .withEarnings(jobEventConfig.getMoney("jobEventEarnings"))
+                                          .withEvents(importJobEvents(jobEventConfig.getStream("children")))
                                           .create();
         /*
                                         <key>tax1</key>
