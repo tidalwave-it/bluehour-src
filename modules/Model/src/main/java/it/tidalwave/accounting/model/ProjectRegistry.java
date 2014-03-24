@@ -48,6 +48,8 @@ public interface ProjectRegistry
      ******************************************************************************************************************/
     public static interface Finder extends FinderStream<Project>
       {
+        @Nonnull
+        public Finder withNumber (@Nonnull String name);
       }
 
     /*******************************************************************************************************************
@@ -58,7 +60,7 @@ public interface ProjectRegistry
      *
      ******************************************************************************************************************/
     @Nonnull
-    public FinderStream<Project> findProjects();
+    public Finder findProjects();
 
     /*******************************************************************************************************************
      *

@@ -27,13 +27,18 @@
  */
 package it.tidalwave.accounting.model.impl;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import java.util.Collections;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -45,20 +50,40 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DefaultProjectRegistry implements ProjectRegistry
   {
-    private final List<Project> projects = new ArrayList<>();
+    private final Map<String, Project> projectMapByNumber = new HashMap<>();
     
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
+    @NoArgsConstructor @AllArgsConstructor
     class DefaultProjectFinder extends FinderStreamSupport<Project, ProjectRegistry.Finder>
                                implements ProjectRegistry.Finder
       {
+        @CheckForNull
+        private String number;
+
         @Override @Nonnull
+        public Finder withNumber (final @Nonnull String number)
+          {
+            final DefaultProjectFinder clone = (DefaultProjectFinder)super.clone();
+            clone.number = number;
+            return clone;
+          }
+
+        @Override
         protected List<? extends Project> computeResults()
           {
-            return Collections.unmodifiableList(projects);
+            if (number != null)
+              {
+                final Project project = projectMapByNumber.get(number);
+                return (project != null) ? Collections.singletonList(project) : Collections.<Project>emptyList();
+              }
+            else
+              {
+                return new ArrayList<>(projectMapByNumber.values());
+              }
           }
       }
 
@@ -81,6 +106,6 @@ public class DefaultProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public Project.Builder addProject()
       {
-        return new Project.Builder((project) -> projects.add(project));
+        return new Project.Builder((project) -> projectMapByNumber.put(project.getNumber(), project));
       }
   }
