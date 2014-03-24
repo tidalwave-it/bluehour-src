@@ -71,46 +71,82 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
             final String clientCompany = customerConfig.getString("clientCompany");
             final String firstName = customerConfig.getString("firstName").trim();
             final Id addressBookId = customerConfig.getId("addressBookId");
-
-            List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
-
-            if (contacts.isEmpty())
-              {
-                contacts = addressBook.getContactsWithSomeAttribute(clientCompany);
-              }
-
-            final Contact contact = contacts.get(0);
-            final MultiValue<String> phone = contact.getPhone();
-            final MultiValue<String> email = contact.getEmail();
-
-            Address.Builder addressBuilder = Address.builder();
-
-            if (contact.getAddress() != null)
-              {
-                final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
-                addressBuilder = addressBuilder.withCity(addr.getCity())
-                                               .withState(addr.getCountry())
-                                               .withStreet(addr.getStreet())
-                                               .withZip("" + addr.getZip());
-              }
-
-            String vat = "";
-
-            if (email != null)
-              {
-                vat = email.getFirstHomeValue(); // VAT is also there in my address book...
-              }
-
-            if (vat.equals("") && (phone != null))
-              {
-                vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
-              }
+            final Contact contact = getContact(addressBook, firstName, clientCompany);
+            final Address address = getAddress(contact);        
+            final String vatNumber = getVatNumber(contact);
 
             customerRegistry.addCustomer().withId(addressBookId)
                                           .withName(firstName)
-                                          .withBillingAddress(addressBuilder.create())
-                                          .withVatNumber(vat)
+                                          .withBillingAddress(address)
+                                          .withVatNumber(vatNumber)
                                           .create();
           });
+      }
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private String getVatNumber (final @Nonnull Contact contact)
+      {
+        final MultiValue<String> phone = contact.getPhone();
+        final MultiValue<String> email = contact.getEmail();
+        String vat = "";
+        
+        if (email != null)
+          {
+            vat = email.getFirstHomeValue(); // VAT is also there in my address book...
+          }
+        
+        if (vat.equals("") && (phone != null))
+          {
+            vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
+          }
+        
+        return vat;
+      }
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private Address getAddress (final @Nonnull Contact contact)   
+      {
+        Address.Builder addressBuilder = Address.builder();
+        
+        if (contact.getAddress() != null)
+          {
+            final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
+            addressBuilder = addressBuilder.withCity(addr.getCity())
+                    .withState(addr.getCountry())
+                    .withStreet(addr.getStreet())
+                    .withZip("" + addr.getZip());
+          }
+        
+        return addressBuilder.create();
+    }
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private Contact getContact (final @Nonnull NativeAddressBook addressBook, 
+                                final @Nonnull String firstName, 
+                                final @Nonnull String clientCompany) 
+      {
+        List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
+      
+        if (contacts.isEmpty())
+          {
+            contacts = addressBook.getContactsWithSomeAttribute(clientCompany);
+          }
+        
+        return contacts.get(0);
       }
   }
