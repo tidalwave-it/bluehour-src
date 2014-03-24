@@ -28,29 +28,26 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import java.time.LocalDateTime;
+import java.util.stream.Stream;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
+import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
-import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
@@ -119,9 +116,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
         try
           {
             final ConfigurationDecorator config = IBizUtils.loadConfiguration(file);
-            importProject(config).withEvents(importJobEvents(config.getList("jobEvents"))).create();
+            importProject(config).withEvents(importJobEvents(config.getStream("jobEvents"))).create();
           }
-        catch (ConfigurationException | NotFoundException e)
+        catch (NotFoundException e)
           {
             throw new IOException(e);
           }
@@ -158,18 +155,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private List<JobEvent> importJobEvents (final @Nonnull List<Object> jobEvents)
-      throws ConfigurationException
+    private List<JobEvent> importJobEvents (final @Nonnull Stream<ConfigurationDecorator> jobEvents)
       {
-        final List<JobEvent> result = new ArrayList<>();
-
-        for (final Object j : jobEvents)
-          {
-            final Configuration jobEvent = (Configuration)j;
-            result.add(importJobEvent(new ConfigurationDecorator(jobEvent)));
-          }
-
-        return result;
+        return jobEvents.map(jobEvent -> importJobEvent(jobEvent)).collect(toList());
       }
 
     /*******************************************************************************************************************
@@ -179,7 +167,6 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      ******************************************************************************************************************/
     @Nonnull
     private JobEvent importJobEvent (final @Nonnull ConfigurationDecorator jobEvent)
-      throws ConfigurationException
       {
 //        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
 
@@ -198,7 +185,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                                           .withDescription(jobEvent.getString("jobEventNotes"))
                                           .withRate(jobEvent.getMoney("jobEventRate"))
                                           .withEarnings(jobEvent.getMoney("jobEventEarnings"))
-                                          .withEvents(importJobEvents(jobEvent.getList("children")))
+                                          .withEvents(importJobEvents(jobEvent.getStream("children")))
                                           .create();
         /*
                                         <key>tax1</key>
