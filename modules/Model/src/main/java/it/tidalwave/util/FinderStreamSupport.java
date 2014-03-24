@@ -76,6 +76,12 @@ public class FinderStreamSupport<Type, ExtendedFinder extends Finder<Type>>
           }
       }
     
+    @Override @Nonnull
+    public Stream<Type> stream() 
+      {
+        return getResultsAsList().stream();
+      }
+    
     @Override
     public Stream<Type> filter(Predicate<? super Type> predicate) 
       {

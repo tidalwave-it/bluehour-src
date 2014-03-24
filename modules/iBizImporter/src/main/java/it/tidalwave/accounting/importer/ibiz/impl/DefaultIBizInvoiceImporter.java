@@ -31,7 +31,6 @@ import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
@@ -111,7 +110,7 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
             final Project project = projectRegistry.findProjects().withId(projectId).result();
             final List<Id> eventIds = configuration.getIds("jobEventIDs");
             final ProjectRegistry.JobEventFinder finder = projectRegistry.findJobEvents();
-            final List<JobEvent> events = eventIds.stream().map(id -> safeCall(() -> finder.withId(id).result()))
+            final List<JobEvent> events = eventIds.stream().flatMap(id -> finder.withId(id).stream())
                                                            .collect(toList());
             // FIXME: iBiz duplicates events that are already inside a group - filter them away
 
@@ -127,18 +126,6 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
                                         .create();
           }
         catch (NotFoundException e)
-          {
-            throw new RuntimeException(e);
-          }
-      }
-    
-    private static <T> T safeCall (final @Nonnull Callable<T> callable)
-      {
-        try 
-          {
-            return callable.call();
-          } 
-        catch (Exception e)
           {
             throw new RuntimeException(e);
           }
