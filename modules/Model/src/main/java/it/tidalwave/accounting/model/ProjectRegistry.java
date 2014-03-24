@@ -57,6 +57,18 @@ public interface ProjectRegistry
 
     /*******************************************************************************************************************
      *
+     * 
+     *
+     ******************************************************************************************************************/
+    public static interface JobEventFinder extends FinderStream<JobEvent>,
+                                                   ExtendedFinderSupport<JobEvent, ProjectRegistry.JobEventFinder>
+      {
+        @Nonnull
+        public JobEventFinder withId (@Nonnull Id id);
+      }
+    
+    /*******************************************************************************************************************
+     *
      * Returns a {@link Finder} for finding {@link Project}s.
      * 
      * @return  the finder
@@ -65,6 +77,16 @@ public interface ProjectRegistry
     @Nonnull
     public Finder findProjects();
 
+    /*******************************************************************************************************************
+     *
+     * Returns a {@link Finder} for finding {@link JobEvent}s.
+     * 
+     * @return  the finder
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public JobEventFinder findJobEvents();
+    
     /*******************************************************************************************************************
      *
      * Returns a {@link Builder} for adding a {@link Project} to the registry.

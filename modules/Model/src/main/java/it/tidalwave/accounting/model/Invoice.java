@@ -30,9 +30,14 @@ package it.tidalwave.accounting.model;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 import it.tidalwave.role.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -50,6 +55,11 @@ import static lombok.AccessLevel.PRIVATE;
 @Immutable @EqualsAndHashCode @ToString
 public class Invoice implements Identifiable
   {
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
@@ -91,6 +101,23 @@ public class Invoice implements Identifiable
           }        
       }
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    class JobEventFinder extends FinderStreamSupport<JobEvent, JobEventFinder>
+                         implements ExtendedFinderSupport<JobEvent, JobEventFinder>, 
+                                    FinderStream<JobEvent>, 
+                                    Finder<JobEvent>
+      {
+        @Override @Nonnull
+        protected List<? extends JobEvent> computeResults() 
+          {
+            return new ArrayList<>(jobEvents);
+          }
+      }
+    
     @Getter @Nonnull
     private final Id id;
     
@@ -99,7 +126,7 @@ public class Invoice implements Identifiable
     
     @Nonnull
     private final Project project;
-
+   
     @Nonnull
     private final List<JobEvent> jobEvents; // FIXME: immutablelist
 
@@ -134,5 +161,16 @@ public class Invoice implements Identifiable
         this.dueDate = builder.getDate(); // FIXME: round to the end of the month
         this.earnings = builder.getEarnings();
         this.tax = builder.getTax();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public FinderStream<JobEvent> findJobEvents()
+      {
+        return new JobEventFinder();
       }
   }

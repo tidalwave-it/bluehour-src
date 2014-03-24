@@ -29,16 +29,18 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Stream;
 import java.math.MathContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import org.apache.commons.configuration.Configuration;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Money;
 import lombok.Delegate;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.configuration.Configuration;
+import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
@@ -82,5 +84,11 @@ public class ConfigurationDecorator implements Configuration
     public Stream<ConfigurationDecorator> getStream (final @Nonnull String name)
       {
         return delegate.getList(name).stream().map(o -> new ConfigurationDecorator((Configuration)o));
+      }
+
+    @Nonnull
+    public List<Id> getIds (final @Nonnull String key) 
+      {
+        return delegate.getList(key).stream().map(id -> new Id(id)).collect(toList());
       }
   }

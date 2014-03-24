@@ -82,7 +82,7 @@ public class Dumper
     public void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
       throws IOException
       {
-        invoices.sorted(comparing(Invoice::getNumber)).forEach(invoice -> pw.printf("%s\n", toString(invoice)));
+        invoices.sorted(comparing(Invoice::getNumber)).forEach(invoice -> dump(invoice));
       }
     
     public void dumpProjects (final @Nonnull FinderStream<Project> projects)
@@ -95,6 +95,12 @@ public class Dumper
       {
         pw.printf("%s\n", toString(project));
         dump(project.findChildren(), INDENT);
+      }
+    
+    private void dump (final @Nonnull Invoice invoice)
+      {
+        pw.printf("%s\n", toString(invoice));
+        dump(invoice.findJobEvents(), INDENT); 
       }
 
     private void dump (final @Nonnull FinderStream<JobEvent> events, final @Nonnull String prefix)

@@ -27,22 +27,27 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
-import java.util.Collections;
+import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
+import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.NotFoundException;
-import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.ProjectRegistry;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import javax.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -102,11 +107,17 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
         try
           {
             final ConfigurationDecorator configuration = IBizUtils.loadConfiguration(documentFile);
-            final Id projectId = new Id((String)configuration.getList("projectIDs").get(0));
+            final Id projectId = configuration.getIds("projectIDs").get(0);
             final Project project = projectRegistry.findProjects().withId(projectId).result();
+            final List<Id> eventIds = configuration.getIds("jobEventIDs");
+            final List<JobEvent> events = eventIds.stream()
+                    .map(id -> safeCall(() -> projectRegistry.findJobEvents().withId(id).result()))
+                    .collect(Collectors.toList());
+            // FIXME: iBiz duplicates events that are already inside a group - filter them away
 
             invoiceRegistry.addInvoice().withId(configuration.getId("uniqueIdentifier"))
                                         .withNumber(configuration.getString("invoiceNumber"))
+                                        .withJobEvents(events)
                                         .withProject(project)
                                         .withDate(configuration.getDate("date"))
                                         .withDueDate(configuration.getDate("dueDate"))
@@ -117,7 +128,19 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
           }
         catch (NotFoundException e)
           {
-            throw new IOException(e);
+            throw new RuntimeException(e);
+          }
+      }
+    
+    private static <T> T safeCall (final @Nonnull Callable<T> callable)
+      {
+        try 
+          {
+            return callable.call();
+          } 
+        catch (Exception e)
+          {
+            throw new RuntimeException(e);
           }
       }
   }
