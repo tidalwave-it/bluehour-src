@@ -35,7 +35,6 @@ import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizCustomerImporter;
-import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import lombok.RequiredArgsConstructor;
@@ -66,19 +65,16 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
       throws IOException
       {
         final NativeAddressBook addressBook = NativeAddressBook.instance();
-        IBizUtils.loadConfiguration(path.resolve("clients")).getStream("clients").forEach((customerConfig) -> 
+        IBizUtils.loadConfiguration(path.resolve("clients")).getStream("clients").forEach(customerConfig -> 
           {
-            final String clientCompany = customerConfig.getString("clientCompany");
             final String firstName = customerConfig.getString("firstName").trim();
-            final Id addressBookId = customerConfig.getId("addressBookId");
+            final String clientCompany = customerConfig.getString("clientCompany");
             final Contact contact = getContact(addressBook, firstName, clientCompany);
-            final Address address = getAddress(contact);        
-            final String vatNumber = getVatNumber(contact);
 
-            customerRegistry.addCustomer().withId(addressBookId)
+            customerRegistry.addCustomer().withId(customerConfig.getId("addressBookId"))
                                           .withName(firstName)
-                                          .withBillingAddress(address)
-                                          .withVatNumber(vatNumber)
+                                          .withBillingAddress(getAddress(contact))
+                                          .withVatNumber(getVatNumber(contact))
                                           .create();
           });
       }
