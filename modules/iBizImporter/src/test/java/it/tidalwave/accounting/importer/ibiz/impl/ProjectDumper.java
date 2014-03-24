@@ -33,6 +33,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,6 +54,18 @@ import static java.util.stream.Collectors.joining;
 @RequiredArgsConstructor
 public class ProjectDumper 
   {
+    private final static Comparator<? super Project> DEFAULT_COMPARATOR = (Project p1, Project p2) -> 
+      {
+        int n = p1.getName().compareTo(p2.getName());
+        
+        if (n == 0)
+          {
+            n = p1.getStartDate().compareTo(p2.getStartDate());
+          }
+        
+        return n;
+      };
+    
     private static final String INDENT = "    ";
 
     @Nonnull
@@ -61,7 +74,7 @@ public class ProjectDumper
     public void dump (final @Nonnull FinderStream<Project> projects)
       throws IOException
       {
-        projects.forEach((project) -> dump(project));
+        projects.sorted(DEFAULT_COMPARATOR).forEach(project -> dump(project));
       }
     
     private void dump (final @Nonnull Project project)
@@ -84,11 +97,11 @@ public class ProjectDumper
             dump(((JobEventGroup)event).findChildren(), prefix + INDENT);
           }
       }
-
+    
     @Nonnull
-    private String toString (final @Nonnull JobEvent event)
+    public static String toString (final @Nonnull JobEvent event)
       {
-        final List<Field> fields = new ArrayList<>(Arrays.asList());
+        final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
         fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
 
         final String s = fields.stream().sorted(comparing(Field::getName))
@@ -113,4 +126,3 @@ public class ProjectDumper
           }
       }
   }
-
