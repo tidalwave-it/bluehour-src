@@ -98,7 +98,8 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
       {
         final Id customerId = projectConfig.getId("clientIdentifier");
         final Customer customer = customerRegistry.findCustomers().withId(customerId).result();
-        return projectRegistry.addProject().withAmount(projectConfig.getMoney("projectEstimate"))
+        return projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
+                                           .withAmount(projectConfig.getMoney("projectEstimate"))
                                            .withCustomer(customer)
                                            .withName(projectConfig.getString("projectName"))
 //                                           .withDescription("description of project 1")
@@ -107,13 +108,6 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                                            .withNotes(projectConfig.getString("projectNotes"))
                                            .withNumber(projectConfig.getString("projectNumber"))
                                            .withHourlyRate(projectConfig.getMoney("projectRate"));
-/*       <key>lastModifiedDate</key>
-        <date>2014-03-10T11:45:22Z</date>
-        <key>projectEarnings</key>
-        <real>8560</real>
-        <key>projectStatus</key>
-        <integer>1</integer>
- */
       }
 
     /*******************************************************************************************************************
