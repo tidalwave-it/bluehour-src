@@ -32,6 +32,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.List;
 import java.time.LocalDate;
+import it.tidalwave.util.Id;
+import it.tidalwave.role.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -46,12 +48,20 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode @ToString
-public class Invoice
+public class Invoice implements Identifiable
   {
     @AllArgsConstructor(access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
+        public static interface Callback // Lombok @Wither doesn't support builder subclasses
+          {
+            public void register (final @Nonnull Invoice invoice);
+
+            public static final Callback DEFAULT = (invoice) -> {};
+          }
+
+        private final Id id;
         private final Project project;
         private final List<JobEvent> jobEvents; // FIXME: immutablelist
         private final LocalDate date;
@@ -59,14 +69,30 @@ public class Invoice
         private final LocalDate dueDate;
         private final Money earnings;
         private final Money tax;
+        private final Callback callback;
+
+        public Builder()
+          {
+            this(Callback.DEFAULT);
+          }
+
+        public Builder (final @Nonnull Callback callback)
+          {
+            this(new Id(""), null, null, null, 0, null, Money.ZERO, Money.ZERO, callback);
+          }
 
         @Nonnull
         public Invoice create()
           {
-            return new Invoice(this);
-          }
+            final Invoice invoice = new Invoice(this);
+            callback.register(invoice);
+            return invoice;
+          }        
       }
 
+    @Getter @Nonnull
+    private final Id id;
+    
     @Nonnull
     private final Project project;
 
@@ -95,6 +121,7 @@ public class Invoice
      ******************************************************************************************************************/
     private Invoice (final @Nonnull Builder builder)
       {
+        this.id = builder.getId();
         this.project = builder.getProject();
         this.jobEvents = builder.getJobEvents();
         this.date = builder.getDate();
