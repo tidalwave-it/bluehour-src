@@ -27,23 +27,14 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Project;
+import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
+import java.nio.file.Files;
 import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.joining;
 
 /***********************************************************************************************************************
  *
@@ -54,67 +45,27 @@ import static java.util.stream.Collectors.joining;
 @Slf4j
 public class DefaultIBizImporterTest
   {
-    private static final String INDENT = "    ";
-
     @Test
     public void testImport()
       throws Exception
       {
-        final Path path = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
+        final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
+        final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
+        final Path testFolder = Paths.get("target/test-results");
+        Files.createDirectories(testFolder);
+        final Path actualResult = testFolder.resolve("projects.txt");
+        final Path expectedResult = expectedResultsFolder.resolve("projects.txt");
+
         final IBizImporter importer = DefaultIBizImporter.builder()
-                                                         .withPath(path)
+                                                         .withPath(iBizFolder)
                                                          .create();
         importer.run();
-        importer.getProjectRegistry().findProjects().forEach((project) -> dump(project));
-
-        // TODO: assertions; but we must first anonymize the data
-      }
-
-    private static void dump (final @Nonnull Project project)
-      {
-        log.info("{}", project);
-        dump(project.findChildren(), INDENT);
-      }
-
-    private static void dump (final @Nonnull FinderStream<JobEvent> events, final @Nonnull String prefix)
-      {
-        events.forEach((event) -> dump(event, prefix));
-      }
-
-    private static void dump (final @Nonnull JobEvent event, final @Nonnull String prefix)
-      {
-        log.info("{}{}", prefix, toString(event));
-
-        if (event instanceof JobEventGroup)
+        
+        try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
           {
-            dump(((JobEventGroup)event).findChildren(), prefix + INDENT);
+            new ProjectDumper(pw).dump(importer.getProjectRegistry().findProjects());
           }
-      }
-
-    @Nonnull
-    private static String toString (final @Nonnull JobEvent event)
-      {
-        final List<Field> fields = new ArrayList<>(Arrays.asList(event.getClass().getDeclaredFields()));
-        fields.addAll(Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()));
-
-        final String s = fields.stream().sorted(comparing(Field::getName))
-                                        .filter((field)  -> !Collection.class.isAssignableFrom(field.getType()))
-                                        .peek((field)    -> field.setAccessible(true))
-                                        .map(field       -> field.getName() + "=" + safeGet(field, event))
-                                        .collect(joining(", "));
-
-        return String.format("%s(%s)", event.getClass().getSimpleName(), s);
-      }
-    
-    private static Object safeGet (final @Nonnull Field field, final @Nonnull Object object)
-      {
-        try
-          {
-            return field.get(object);
-          }
-        catch (IllegalArgumentException | IllegalAccessException e)
-          {
-            throw new RuntimeException(e);
-          }
+        
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
   }
