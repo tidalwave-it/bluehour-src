@@ -25,52 +25,60 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
- * @author  Fabrizio Giudici
+ * @param <TYPE>
+ * @param <FINDER>
+ * 
+ * @author  fritz
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface InvoiceRegistry
+@RequiredArgsConstructor
+public class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
+                                extends FinderStreamSupport<TYPE, FINDER>
+                                implements ExtendedFinderSupport<TYPE, FINDER>, FinderStream<TYPE>, Finder<TYPE>
   {
-    public static final Class<InvoiceRegistry> InvoiceRegistry = InvoiceRegistry.class;
+    @CheckForNull
+    /* package */ Id id;
+    
+    private final Map<Id, TYPE> mapById;
 
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    public static interface Finder extends FinderStream<Invoice>, 
-                                           ExtendedFinderSupport<Invoice, InvoiceRegistry.Finder>
+    @Nonnull
+    public FINDER withId (final @Nonnull Id id)
       {
-        @Nonnull
-        public Finder withId (@Nonnull Id id);
+        final FinderWithIdSupport clone = (FinderWithIdSupport)super.clone();
+        clone.id = id;
+        return (FINDER)clone;
       }
 
-    /*******************************************************************************************************************
-     *
-     * Returns a {@link Finder} for finding {@link Invoice}s.
-     * 
-     * @return  the finder
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public Finder findInvoices();
-
-    /*******************************************************************************************************************
-     *
-     * Returns a {@link Builder} for adding a {@link Invoice} to the registry.
-     * 
-     * @return  the builder
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public Invoice.Builder addInvoice();
+    @Override
+    protected List<? extends TYPE> computeResults()
+      {
+        if (id != null)
+          {
+            final TYPE item = mapById.get(id);
+            return (item != null) ? Collections.singletonList(item) : Collections.<TYPE>emptyList();
+          }
+        else
+          {
+            return new ArrayList<>(mapById.values());
+          }
+      }
   }
+

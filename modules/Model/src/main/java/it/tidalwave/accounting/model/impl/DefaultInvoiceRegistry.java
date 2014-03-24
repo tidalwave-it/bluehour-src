@@ -27,19 +27,12 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -58,33 +51,12 @@ public class DefaultInvoiceRegistry implements InvoiceRegistry
      * 
      *
      ******************************************************************************************************************/
-    @NoArgsConstructor @AllArgsConstructor
-    class DefaultInvoiceFinder extends FinderStreamSupport<Invoice, InvoiceRegistry.Finder>
-                              implements InvoiceRegistry.Finder
+    class DefaultInvoiceFinder extends FinderWithIdSupport<Invoice, InvoiceRegistry.Finder>
+                               implements InvoiceRegistry.Finder
       {
-        @CheckForNull
-        private Id id;
-
-        @Override @Nonnull
-        public InvoiceRegistry.Finder withId (final @Nonnull Id id)
+        DefaultInvoiceFinder()
           {
-            final DefaultInvoiceFinder clone = (DefaultInvoiceFinder)super.clone();
-            clone.id = id;
-            return clone;
-          }
-
-        @Override
-        protected List<? extends Invoice> computeResults()
-          {
-            if (id != null)
-              {
-                final Invoice invoice = invoiceMapById.get(id);
-                return (invoice != null) ? Collections.singletonList(invoice) : Collections.<Invoice>emptyList();
-              }
-            else
-              {
-                return new ArrayList<>(invoiceMapById.values());
-              }
+            super(invoiceMapById);  
           }
       }
 

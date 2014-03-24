@@ -27,19 +27,12 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -58,33 +51,12 @@ public class DefaultCustomerRegistry implements CustomerRegistry
      * 
      *
      ******************************************************************************************************************/
-    @NoArgsConstructor @AllArgsConstructor
-    class DefaultCustomerFinder extends FinderStreamSupport<Customer, CustomerRegistry.Finder>
+    class DefaultCustomerFinder extends FinderWithIdSupport<Customer, CustomerRegistry.Finder>
                                 implements CustomerRegistry.Finder
       {
-        @CheckForNull
-        private Id id;
-
-        @Override @Nonnull
-        public CustomerRegistry.Finder withId (final @Nonnull Id id)
+        DefaultCustomerFinder()
           {
-            final DefaultCustomerFinder clone = (DefaultCustomerFinder)super.clone();
-            clone.id = id;
-            return clone;
-          }
-
-        @Override
-        protected List<? extends Customer> computeResults()
-          {
-            if (id != null)
-              {
-                final Customer customer = customerMapById.get(id);
-                return (customer != null) ? Collections.singletonList(customer) : Collections.<Customer>emptyList();
-              }
-            else
-              {
-                return new ArrayList<>(customerMapById.values());
-              }
+            super(customerMapById);  
           }
       }
 

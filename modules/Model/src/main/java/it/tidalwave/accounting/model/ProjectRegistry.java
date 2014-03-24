@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
  *
@@ -47,7 +48,8 @@ public interface ProjectRegistry
      * 
      *
      ******************************************************************************************************************/
-    public static interface Finder extends FinderStream<Project>
+    public static interface Finder extends FinderStream<Project>,
+                                           ExtendedFinderSupport<Project, ProjectRegistry.Finder>
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);
