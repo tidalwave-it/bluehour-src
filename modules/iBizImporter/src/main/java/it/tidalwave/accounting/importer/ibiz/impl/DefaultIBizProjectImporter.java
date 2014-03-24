@@ -161,14 +161,14 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
         final IBizJobEventType type = IBizJobEventType.values()[jobEventConfig.getInt("jobEventType")];
 
         return JobEvent.builder().withType(type.getMappedType())
-                                          .withStartDateTime(jobEventConfig.getDateTime("jobEventStartDate"))
-                                          .withEndDateTime(jobEventConfig.getDateTime("jobEventEndDate"))
-                                          .withName(jobEventConfig.getString("jobEventName"))
-                                          .withDescription(jobEventConfig.getString("jobEventNotes"))
-                                          .withRate(jobEventConfig.getMoney("jobEventRate"))
-                                          .withEarnings(jobEventConfig.getMoney("jobEventEarnings"))
-                                          .withEvents(importJobEvents(jobEventConfig.getStream("children")))
-                                          .create();
+                                 .withStartDateTime(jobEventConfig.getDateTime("jobEventStartDate"))
+                                 .withEndDateTime(jobEventConfig.getDateTime("jobEventEndDate"))
+                                 .withName(jobEventConfig.getString("jobEventName"))
+                                 .withDescription(jobEventConfig.getString("jobEventNotes"))
+                                 .withRate(jobEventConfig.getMoney("jobEventRate"))
+                                 .withEarnings(jobEventConfig.getMoney("jobEventEarnings"))
+                                 .withEvents(importJobEvents(jobEventConfig.getStream("children")))
+                                 .create();
         /*
                                         <key>tax1</key>
                                         <real>22</real>
