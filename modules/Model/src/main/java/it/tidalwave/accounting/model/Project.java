@@ -106,10 +106,10 @@ public class Project implements SimpleComposite<JobEvent>
     @Nonnull
     private final Customer customer;
 
-    @Nonnull
+    @Getter @Nonnull
     private final String name;
 
-    @Nonnull
+    @Getter @Nonnull
     private final String number;
 
     @Nonnull
@@ -124,7 +124,7 @@ public class Project implements SimpleComposite<JobEvent>
     @Nonnull
     private final Money amount;
 
-    @Nonnull
+    @Getter @Nonnull
     private final LocalDate startDate;
 
     @Nonnull
