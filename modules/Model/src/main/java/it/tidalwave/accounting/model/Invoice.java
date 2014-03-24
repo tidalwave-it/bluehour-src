@@ -95,6 +95,13 @@ public class Invoice implements Identifiable
         @Nonnull
         public Invoice create()
           {
+              // TODO
+//            if (!jobEvents.stream().allMatch(jobEvent -> jobEvent.getProject() == project))
+//              {
+//                // FIXME: better diagnostics
+//                throw new IllegalArgumentException("Illegal project for jobEvent");
+//              }
+            
             final Invoice invoice = new Invoice(this);
             callback.register(invoice);
             return invoice;
