@@ -36,6 +36,8 @@ import java.time.ZoneId;
 import org.apache.commons.configuration.Configuration;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Money;
+import java.util.List;
+import java.util.stream.Stream;
 import lombok.Delegate;
 import lombok.RequiredArgsConstructor;
 
@@ -75,5 +77,11 @@ public class ConfigurationDecorator implements Configuration
     public LocalDate getDate (final @Nonnull String key)
       {
         return getDateTime(key).toLocalDate();
+      }
+
+    @Nonnull
+    public Stream<ConfigurationDecorator> getStream (final @Nonnull String name)
+      {
+        return delegate.getList(name).stream().map((o) -> new ConfigurationDecorator((Configuration)o));
       }
   }

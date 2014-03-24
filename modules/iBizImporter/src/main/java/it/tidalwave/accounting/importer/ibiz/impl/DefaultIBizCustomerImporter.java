@@ -31,7 +31,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.io.IOException;
 import java.nio.file.Path;
-import org.apache.commons.configuration.Configuration;
 import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
@@ -67,11 +66,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
       throws IOException
       {
         final NativeAddressBook addressBook = NativeAddressBook.instance();
-        final Configuration config = IBizUtils.loadConfiguration(path);
-        final List<Object> customersConfig = config.getList("clients");
-
-        customersConfig.stream().map((c) -> new ConfigurationDecorator((Configuration)c))
-                                .forEach((customerConfig) -> 
+        IBizUtils.loadConfiguration(path).getStream("clients").forEach((customerConfig) -> 
           {
             final String clientCompany = customerConfig.getString("clientCompany");
             final String firstName = customerConfig.getString("firstName").trim();
