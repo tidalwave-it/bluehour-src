@@ -29,7 +29,6 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -76,10 +75,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
     public void importProjects()
       throws IOException
       {
-        final Path projectsPath = path.resolve("Projects");
-        final AtomicReference<IOException> exception = new AtomicReference<>();
-
-        Files.walkFileTree(projectsPath, new SimpleFileVisitor<Path>()
+        Files.walkFileTree(path.resolve("Projects"), new SimpleFileVisitor<Path>()
           {
             @Override
             public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
@@ -88,21 +84,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                 importProject(file);
                 return FileVisitResult.CONTINUE;
               }
-
-            @Override
-            public FileVisitResult visitFileFailed (final @Nonnull Path file, final @Nonnull IOException e)
-              {
-                exception.set(new IOException("Fatal error visiting " + file));
-                return FileVisitResult.TERMINATE;
-              }
           });
-        
-        final IOException e = exception.get();
-
-        if (e != null)
-          {
-            throw e;
-          }
       }
     
     /*******************************************************************************************************************
