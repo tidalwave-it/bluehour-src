@@ -58,7 +58,7 @@ public class ConfigurationDecorator implements Configuration
     @Nonnull
     public Id getId (final @Nonnull String key)
       {
-        return new Id(delegate.getString(key));
+        return new Id(delegate.getString(key).replace(":ABPerson", ""));
       }
 
     @Nonnull
