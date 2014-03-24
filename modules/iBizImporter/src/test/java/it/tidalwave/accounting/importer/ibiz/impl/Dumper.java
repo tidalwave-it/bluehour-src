@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
+import it.tidalwave.accounting.model.Customer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
@@ -71,7 +72,13 @@ public class Dumper
     @Nonnull
     private final PrintWriter pw;
     
-    public void dump (final @Nonnull FinderStream<Project> projects)
+    public void dumpCustomers (final @Nonnull FinderStream<Customer> customers)
+      throws IOException
+      {
+        customers.sorted(comparing(Customer::getName)).forEach(customer -> pw.printf("%s\n", customer));
+      }
+    
+    public void dumpProjects (final @Nonnull FinderStream<Project> projects)
       throws IOException
       {
         projects.sorted(PROJECT_COMPARATOR).forEach(project -> dump(project));

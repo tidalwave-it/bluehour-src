@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DefaultIBizImporterTest
   {
     @Test
-    public void must_properly_import_projects()
+    public void must_properly_import()
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
@@ -63,7 +63,9 @@ public class DefaultIBizImporterTest
         
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
           {
-            new Dumper(pw).dump(importer.getProjectRegistry().findProjects());
+            final Dumper dumper = new Dumper(pw);
+            dumper.dumpCustomers(importer.getCustomerRegistry().findCustomers());
+            dumper.dumpProjects(importer.getProjectRegistry().findProjects());
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
