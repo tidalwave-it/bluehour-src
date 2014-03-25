@@ -49,7 +49,7 @@ public interface ProjectRegistry
      *
      ******************************************************************************************************************/
     public static interface ProjectFinder extends FinderStream<Project>,
-                                                  ExtendedFinderSupport<Project, ProjectRegistry.ProjectFinder>
+                                                  ExtendedFinderSupport<Project, ProjectFinder>
       {
         @Nonnull
         public ProjectFinder withId (@Nonnull Id id);
@@ -61,7 +61,7 @@ public interface ProjectRegistry
      *
      ******************************************************************************************************************/
     public static interface JobEventFinder extends FinderStream<JobEvent>,
-                                                   ExtendedFinderSupport<JobEvent, ProjectRegistry.JobEventFinder>
+                                                   ExtendedFinderSupport<JobEvent, JobEventFinder>
       {
         @Nonnull
         public JobEventFinder withId (@Nonnull Id id);
