@@ -53,8 +53,8 @@ public class AccountingXmlMarshallableTest
         final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
         final Path testFolder = Paths.get("target/test-results");
         Files.createDirectories(testFolder);
-        final Path actualResult = testFolder.resolve("accouting.xml");
-        final Path expectedResult = expectedResultsFolder.resolve("accouting.xml");
+        final Path actualResult = testFolder.resolve("iBizImportMarshalled.xml");
+        final Path expectedResult = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
 
         final IBizImporter importer = DefaultIBizImporter.builder()
                                                          .withPath(iBizFolder)

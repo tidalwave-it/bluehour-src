@@ -54,9 +54,9 @@ public class AccountingXmlUnmarshallableTest
         final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
         final Path testFolder = Paths.get("target/test-results");
         Files.createDirectories(testFolder);
-        final Path actualResult = testFolder.resolve("marshalled.txt");
-        final Path expectedResult = expectedResultsFolder.resolve("projects.txt");
-        final Path importFile = expectedResultsFolder.resolve("accouting.xml");
+        final Path actualResult = testFolder.resolve("unmarshalledDump.txt");
+        final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
+        final Path importFile = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
         
         final Accounting accounting = new DefaultAccounting();
         
