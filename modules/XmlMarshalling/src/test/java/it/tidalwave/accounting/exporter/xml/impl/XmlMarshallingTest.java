@@ -37,6 +37,8 @@ import java.nio.file.Paths;
 import org.testng.annotations.Test;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
+import it.tidalwave.util.test.FileComparisonUtils;
+import java.io.PrintWriter;
 
 /***********************************************************************************************************************
  *
@@ -51,8 +53,11 @@ public class XmlMarshallingTest
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
+        final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
         final Path testFolder = Paths.get("target/test-results");
         Files.createDirectories(testFolder);
+        final Path actualResult = testFolder.resolve("accouting.xml");
+        final Path expectedResult = expectedResultsFolder.resolve("accouting.xml");
 
         final IBizImporter importer = DefaultIBizImporter.builder()
                                                          .withPath(iBizFolder)
@@ -69,10 +74,17 @@ public class XmlMarshallingTest
         final List<InvoiceXml> invoices = importer.getInvoiceRegistry().findInvoices()
                                                                        .map(invoice -> new InvoiceXml(invoice))
                                                                        .collect(Collectors.toList());
-        final AccountingXml accountingXml = new AccountingXml(customers, projects, invoices);
-        final Marshaller marshaller = jaxbc.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        marshaller.marshal(accountingXml, System.err);
+        
+        
+        try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+          {
+            final AccountingXml accountingXml = new AccountingXml(customers, projects, invoices);
+            final Marshaller marshaller = jaxbc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+            marshaller.marshal(accountingXml, pw);
+          }
+        
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
   }
