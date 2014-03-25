@@ -40,7 +40,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.Money;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
@@ -52,7 +51,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  *
  **********************************************************************************************************************/
 //@Mutable
-@NoArgsConstructor @EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 @XmlRootElement(name = "invoice") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class InvoiceXml 
   {

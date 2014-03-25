@@ -38,7 +38,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Customer;
 import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
 import static javax.xml.bind.annotation.XmlAccessOrder.*;
 import static javax.xml.bind.annotation.XmlAccessType.*;
 
@@ -49,7 +48,7 @@ import static javax.xml.bind.annotation.XmlAccessType.*;
  *
  **********************************************************************************************************************/
 //@Mutable
-@NoArgsConstructor @EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 @XmlRootElement(name = "customer") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class CustomerXml 
   {

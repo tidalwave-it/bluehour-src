@@ -42,7 +42,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
@@ -55,7 +54,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  *
  **********************************************************************************************************************/
 //@Mutable
-@NoArgsConstructor @EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 @XmlRootElement(name = "project") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class ProjectXml 
   {
