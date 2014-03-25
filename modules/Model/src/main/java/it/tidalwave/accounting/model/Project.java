@@ -98,6 +98,12 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable
           }
 
         @Nonnull
+        public Builder with (final @Nonnull Builder builder)
+          {
+            return builder.withCallback(callback);
+          }
+
+        @Nonnull
         public Project create()
           {
             final Project project = new Project(this);

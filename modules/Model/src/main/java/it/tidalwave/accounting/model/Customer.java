@@ -80,6 +80,12 @@ public class Customer implements Identifiable
           {
             this(new Id(""), "", Address.EMPTY, "", callback);
           }
+        
+        @Nonnull
+        public Builder with (final @Nonnull Builder builder)
+          {
+            return builder.withCallback(callback);
+          }
 
         @Nonnull
         public Customer create()

@@ -93,6 +93,12 @@ public class Invoice implements Identifiable
           }
 
         @Nonnull
+        public Builder with (final @Nonnull Builder builder)
+          {
+            return builder.withCallback(callback);
+          }
+
+        @Nonnull
         public Invoice create()
           {
               // TODO
