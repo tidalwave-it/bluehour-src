@@ -27,19 +27,19 @@
  */
 package it.tidalwave.accounting.model;
 
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.util.Id;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import static lombok.AccessLevel.PRIVATE;
+import java.util.Collections;
+import java.util.List;
+import java.time.LocalDateTime;
+import it.tidalwave.util.Id;
+import it.tidalwave.role.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
+import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
