@@ -27,20 +27,19 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import java.util.List;
 import javax.annotation.Nonnull;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import lombok.AllArgsConstructor;
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.NoArgsConstructor;
+import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
@@ -51,7 +50,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  *
  **********************************************************************************************************************/
 //@Mutable
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 @XmlRootElement(name = "accounting") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class AccountingXml 
   {
@@ -66,6 +65,16 @@ public class AccountingXml
     @XmlElementWrapper(name = "invoices")
     @XmlElement(name = "invoice")
     private List<InvoiceXml> invoices;
+    
+    public AccountingXml (final @Nonnull Accounting accounting)
+      {
+        customers = accounting.getCustomerRegistry().findCustomers().map(customer -> new CustomerXml(customer))
+                                                                    .collect(toList());
+        projects = accounting.getProjectRegistry().findProjects().map(project -> new ProjectXml(project))
+                                                                 .collect(toList());
+        invoices = accounting.getInvoiceRegistry().findInvoices().map(invoice -> new InvoiceXml(invoice))
+                                                                 .collect(toList());
+      }
 
     public void fill (final @Nonnull Accounting accounting) 
       {

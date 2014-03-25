@@ -48,7 +48,7 @@ import org.testng.annotations.Test;
 public class AccountingXmlUnmarshallableTest
   {
     @Test
-    public void must_properly_marshall()
+    public void must_properly_unmarshall()
       throws Exception
       {
         final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");

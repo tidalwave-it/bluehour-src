@@ -27,7 +27,6 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import java.util.List;
 import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -37,7 +36,6 @@ import java.io.OutputStream;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.role.Marshallable;
 import lombok.RequiredArgsConstructor;
-import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
@@ -57,17 +55,7 @@ public class AccountingXmlMarshallable implements Marshallable
       {
         try 
           {
-            final List<CustomerXml> customers = accounting.getCustomerRegistry().findCustomers()
-                    .map(customer -> new CustomerXml(customer))
-                    .collect(toList());
-            final List<ProjectXml> projects = accounting.getProjectRegistry().findProjects()
-                    .map(project -> new ProjectXml(project))
-                    .collect(toList());
-            final List<InvoiceXml> invoices = accounting.getInvoiceRegistry().findInvoices()
-                    .map(invoice -> new InvoiceXml(invoice))
-                    .collect(toList());
-            final AccountingXml accountingXml = new AccountingXml(customers, projects, invoices);
-            
+            final AccountingXml accountingXml = new AccountingXml(accounting);            
             final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
             final Marshaller marshaller = jaxbc.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
