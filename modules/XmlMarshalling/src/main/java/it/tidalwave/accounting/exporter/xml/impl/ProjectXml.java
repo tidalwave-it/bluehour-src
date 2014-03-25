@@ -40,11 +40,14 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import it.tidalwave.accounting.model.Accounting;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
@@ -61,6 +64,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @XmlRootElement(name = "project") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class ProjectXml 
   {
+    @Getter // FIXME   
     @XmlAttribute(name = "id")
     @XmlID
     @XmlJavaTypeAdapter(IdAdapter.class)
@@ -116,5 +120,28 @@ public class ProjectXml
         this.startDate = b.getStartDate();
         this.endDate = b.getEndDate();
         this.events = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent.asBuilder())).collect(toList());
+      }
+    
+    @Nonnull
+    public Project.Builder toBuilder (final @Nonnull Accounting accounting)
+      {
+        try 
+          {
+            return new Project.Builder().withId(id)
+                    .withCustomer(accounting.getCustomerRegistry().findCustomers().withId(customer.getId()).result()) 
+                    .withName(name)
+                    .withNumber(number)
+                    .withDescription(description)
+                    .withNotes(notes)
+                    .withHourlyRate(hourlyRate)
+                    .withAmount(amount)
+                    .withStartDate(startDate)
+                    .withEndDate(endDate)
+                    .withEvents(JobEventXml.toJobEvents(events));
+          } 
+        catch (NotFoundException e) 
+          {
+            throw new RuntimeException(e);
+          }
       }
   }

@@ -27,15 +27,14 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import it.tidalwave.accounting.model.Address;
-import lombok.NoArgsConstructor;
-import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import it.tidalwave.role.Unmarshallable;
+import it.tidalwave.accounting.model.Accounting;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -43,42 +42,27 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@NoArgsConstructor
-@XmlRootElement(name = "address") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
-public class AddressXml 
+@RequiredArgsConstructor
+public class AccountingXmlUnmarshallable implements Unmarshallable
   {
-    @XmlElement(name = "street")
-    private String street;
+    private final Accounting accounting;
     
-    @XmlElement(name = "city")
-    private String city;
-    
-    @XmlElement(name = "zip")
-    private String zip;
-    
-    @XmlElement(name = "state")
-    private String state;
-    
-    @XmlElement(name = "country")
-    private String country;
-    
-    public AddressXml (final @Nonnull Address address)
+    @Override
+    public <TYPE> TYPE unmarshal(InputStream is) 
+      throws IOException 
       {
-        this.street = address.getStreet();
-        this.city = address.getCity();
-        this.zip = address.getZip();
-        this.state = address.getState();
-        this.country = address.getCountry();
-      }
-    
-    @Nonnull
-    public Address toAddress()
-      {
-        return Address.builder().withStreet(street)
-                                .withCity(city)
-                                .withZip(zip)
-                                .withState(state)
-                                .withCountry(country)
-                                .create();
+        try 
+          {
+            final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
+            final Unmarshaller unmarshaller = jaxbc.createUnmarshaller();
+            final AccountingXml accountingXml = (AccountingXml)unmarshaller.unmarshal(is);
+
+            accountingXml.fill(accounting);
+            return (TYPE)accounting; 
+          } 
+        catch (JAXBException e) 
+          {
+            throw new IOException(e);
+          }
       }
   }

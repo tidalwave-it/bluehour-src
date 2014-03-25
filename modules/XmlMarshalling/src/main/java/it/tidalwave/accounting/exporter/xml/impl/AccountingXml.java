@@ -27,7 +27,13 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.accounting.model.ProjectRegistry;
 import java.util.List;
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -60,4 +66,14 @@ public class AccountingXml
     @XmlElementWrapper(name = "invoices")
     @XmlElement(name = "invoice")
     private List<InvoiceXml> invoices;
+
+    public void fill (final @Nonnull Accounting accounting) 
+      {
+        final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
+        final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
+        final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();
+        customers.forEach(customer -> customerRegistry.addCustomer().with(customer.toBuilder()).create());
+        projects.forEach(project -> projectRegistry.addProject().with(project.toBuilder(accounting)).create());
+        invoices.forEach(invoice -> invoiceRegistry.addInvoice().with(invoice.toBuilder(accounting)).create());
+      }
   }

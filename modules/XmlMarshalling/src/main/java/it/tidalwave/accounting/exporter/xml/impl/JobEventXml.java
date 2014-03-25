@@ -28,6 +28,8 @@
 package it.tidalwave.accounting.exporter.xml.impl;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.time.LocalDateTime;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -111,4 +113,29 @@ public class JobEventXml
                             : builder.getEvents().stream().map(jobEvent -> new JobEventXml(jobEvent.asBuilder()))
                                                           .collect(toList());
       }
+    
+    @Nonnull
+    public JobEvent.Builder toBuilder()
+      {
+        return JobEvent.builder().withId(id)
+                                 .withType(type)
+                                 .withStartDateTime(startDateTime)
+                                 .withEndDateTime(endDateTime)
+                                 .withName(name)
+                                 .withDescription(description)
+                                 .withEarnings(earnings)
+                                 .withRate(rate)
+                                 .withEvents(toJobEvents(events));
+      }
+    
+    @Nonnull
+    public static List<JobEvent> toJobEvents (final @Nullable List<JobEventXml> jobEventsXml)
+      {
+        if (jobEventsXml == null)
+          {
+            return Collections.emptyList();
+          }
+        
+        return jobEventsXml.stream().map(jobEventXml ->  jobEventXml.toBuilder().create()).collect(toList());
+      }    
   }

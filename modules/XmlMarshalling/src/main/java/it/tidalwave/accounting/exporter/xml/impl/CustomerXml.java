@@ -41,6 +41,7 @@ import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
 import lombok.NoArgsConstructor;
 import static javax.xml.bind.annotation.XmlAccessOrder.*;
 import static javax.xml.bind.annotation.XmlAccessType.*;
+import lombok.Getter;
 
 /***********************************************************************************************************************
  *
@@ -53,6 +54,8 @@ import static javax.xml.bind.annotation.XmlAccessType.*;
 @XmlRootElement(name = "customer") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class CustomerXml 
   {
+    @Getter // FIXME
+    
     @XmlAttribute(name = "id") 
     @XmlID
     @XmlJavaTypeAdapter(IdAdapter.class)
@@ -74,5 +77,14 @@ public class CustomerXml
         this.name = b.getName();
         this.billingAddress = new AddressXml(b.getBillingAddress());
         this.vatNumber = b.getVatNumber();
+      }
+    
+    @Nonnull
+    public Customer.Builder toBuilder()
+      {
+        return new Customer.Builder().withId(id)
+                                     .withName(name)
+                                     .withBillingAddress(billingAddress.toAddress())
+                                     .withVatNumber(vatNumber);
       }
   }

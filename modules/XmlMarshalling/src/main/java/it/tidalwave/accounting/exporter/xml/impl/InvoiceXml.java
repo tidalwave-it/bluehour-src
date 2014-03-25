@@ -27,28 +27,33 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import javax.annotation.Nonnull;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.Money;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static java.util.stream.Collectors.toList;
+import javax.annotation.Nonnull;
+import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Invoice;
-import it.tidalwave.accounting.model.Money;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
-import java.util.List;
-import static java.util.stream.Collectors.toList;
 import lombok.NoArgsConstructor;
-import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
-import javax.xml.bind.annotation.XmlElementWrapper;
 
 /***********************************************************************************************************************
  *
@@ -112,5 +117,26 @@ public class InvoiceXml
                             ? null
                             : b.getJobEvents().stream().map(jobEvent -> new JobEventXml(jobEvent.asBuilder()))
                                                           .collect(toList());
+      }
+
+    @Nonnull
+    public Invoice.Builder toBuilder (final @Nonnull Accounting accounting) 
+      {
+        try 
+          {
+            return new Invoice.Builder().withId(id)
+                    .withNumber(number)
+                    .withProject(accounting.getProjectRegistry().findProjects().withId(project.getId()).result())
+                    .withDate(date)
+                    .withDaysUntilDue(daysUntilDue)
+                    .withDueDate(dueDate)
+                    .withEarnings(earnings)
+                    .withTax(tax)
+                    .withJobEvents(JobEventXml.toJobEvents(events));
+          } 
+        catch (NotFoundException e) 
+          {
+            throw new RuntimeException(e);
+          }
       }
   }
