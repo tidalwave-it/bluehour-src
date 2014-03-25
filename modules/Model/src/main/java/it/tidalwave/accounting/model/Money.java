@@ -33,6 +33,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -49,7 +50,7 @@ public class Money
   {
     public static final Money ZERO = new Money(BigDecimal.ZERO, "EUR");
 
-    @Nonnull
+    @Getter @Nonnull
     private final BigDecimal amount;
 
     @Nonnull
