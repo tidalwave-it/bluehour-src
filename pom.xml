@@ -122,6 +122,12 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
+                <version>1.0-ALPHA-1-SNAPSHOT</version>
+                <classifier>tests</classifier>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-application-customization</artifactId>
                 <version>1.0-ALPHA-1-SNAPSHOT</version>
             </dependency>
