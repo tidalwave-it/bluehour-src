@@ -49,31 +49,35 @@ import org.testng.annotations.Test;
  **********************************************************************************************************************/
 public class AccountingXmlUnmarshallableTest
   {
-    @Test(enabled = false)
+    @Test
     public void must_properly_unmarshall_iBiz()
       throws Exception
       {
         final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
-        final Path testFolder = Paths.get("target/test-results");
-        Files.createDirectories(testFolder);
-        final Path actualResult = testFolder.resolve("unmarshalledDump.txt");
-        final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
-        final Path importFile = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
         
-        final Accounting accounting = new DefaultAccounting();
-        final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
+        if (Files.exists(expectedResultsFolder))
+          {
+            final Path testFolder = Paths.get("target/test-results");
+            Files.createDirectories(testFolder);
+            final Path actualResult = testFolder.resolve("unmarshalledDump.txt");
+            final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
+            final Path importFile = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
 
-        try (final InputStream is = new FileInputStream(importFile.toFile())) 
-          {
-            fixture.unmarshal(is);
+            final Accounting accounting = new DefaultAccounting();
+            final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
+
+            try (final InputStream is = new FileInputStream(importFile.toFile())) 
+              {
+                fixture.unmarshal(is);
+              }
+
+            try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+              {
+                new Dumper(accounting, pw).dumpAll();
+              }
+
+            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
           }
-        
-        try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
-          {
-            new Dumper(accounting, pw).dumpAll();
-          }
-        
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
     
     @Test(dataProvider = "scenarios")

@@ -49,30 +49,34 @@ import it.tidalwave.accounting.test.util.ScenarioFactory;
  **********************************************************************************************************************/
 public class AccountingXmlMarshallableTest
   {
-    @Test(enabled = false)
+    @Test
     public void must_properly_marshall_iBiz()
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
-        final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
-        final Path testFolder = Paths.get("target/test-results");
-        Files.createDirectories(testFolder);
-        final Path actualResult = testFolder.resolve("iBizImportMarshalled.xml");
-        final Path expectedResult = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
-
-        final IBizImporter importer = DefaultIBizImporter.builder()
-                                                         .withPath(iBizFolder)
-                                                         .create();
-        importer.importAll();
         
-        final AccountingXmlMarshallable fixture = new AccountingXmlMarshallable(importer);
-
-        try (final OutputStream os = new FileOutputStream(actualResult.toFile())) 
+        if (Files.exists(iBizFolder))
           {
-            fixture.marshal(os);
+            final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
+            final Path testFolder = Paths.get("target/test-results");
+            Files.createDirectories(testFolder);
+            final Path actualResult = testFolder.resolve("iBizImportMarshalled.xml");
+            final Path expectedResult = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
+
+            final IBizImporter importer = DefaultIBizImporter.builder()
+                                                             .withPath(iBizFolder)
+                                                             .create();
+            importer.importAll();
+
+            final AccountingXmlMarshallable fixture = new AccountingXmlMarshallable(importer);
+
+            try (final OutputStream os = new FileOutputStream(actualResult.toFile())) 
+              {
+                fixture.marshal(os);
+              }
+
+            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
           }
-        
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
     
     @Test(dataProvider = "scenarios")
