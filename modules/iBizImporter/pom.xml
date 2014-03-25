@@ -39,10 +39,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <properties>
-        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
-    </properties>
-
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
     <version>1.0-ALPHA-1-SNAPSHOT</version>

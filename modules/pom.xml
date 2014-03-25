@@ -59,6 +59,8 @@
 
     ================================================================================================================ -->
     <properties>
+        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
+
         <commons-codec.version>1.9</commons-codec.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <jabaddressbook.version>0.3.1</jabaddressbook.version>

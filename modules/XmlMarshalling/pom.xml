@@ -81,10 +81,6 @@
     </dependencies>
     
     <!-- FIXME: temporary stuff to import data -->
-    <properties>
-        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
-    </properties>
-
     <build>
         <plugins>
             <plugin>
