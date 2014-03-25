@@ -80,8 +80,6 @@ public class InvoiceXml
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate date;
     
-    private int daysUntilDue; // FIXME
-    
     @XmlElement(name = "dueDate")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dueDate;
@@ -106,7 +104,6 @@ public class InvoiceXml
         this.number = builder.getNumber();
         this.projectXml = new ProjectXml(builder.getProject());
         this.date = builder.getDate();
-        this.daysUntilDue = builder.getDaysUntilDue();
         this.dueDate = builder.getDueDate();
         this.earnings = builder.getEarnings();
         this.tax = builder.getTax();
@@ -125,7 +122,6 @@ public class InvoiceXml
                                         .withNumber(number)
                                         .withProject(customer)
                                         .withDate(date)
-                                        .withDaysUntilDue(daysUntilDue)
                                         .withDueDate(dueDate)
                                         .withEarnings(earnings)
                                         .withTax(tax)

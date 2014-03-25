@@ -119,7 +119,6 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
                                         .withNumber(configuration.getString("invoiceNumber"))
                                         .withDate(configuration.getDate("date"))
                                         .withDueDate(configuration.getDate("dueDate"))
-    //                                            .withDaysUntilDue(configuration.getInt(""))
                                         .withEarnings(configuration.getMoney("invoiceAmount"))
                                         .withTax(configuration.getMoney("taxes1"))
                                         .withProject(project)

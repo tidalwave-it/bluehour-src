@@ -76,7 +76,6 @@ public class Invoice implements Identifiable
         private final Project project;
         private final List<JobEvent> jobEvents; // FIXME: immutablelist
         private final LocalDate date;
-        private final int daysUntilDue;
         private final LocalDate dueDate;
         private final Money earnings;
         private final Money tax;
@@ -89,7 +88,7 @@ public class Invoice implements Identifiable
 
         public Builder (final @Nonnull Callback callback)
           {
-            this(new Id(""), "", null, null, null, 0, null, Money.ZERO, Money.ZERO, callback);
+            this(new Id(""), "", null, null, null, null, Money.ZERO, Money.ZERO, callback);
           }
 
         @Nonnull
@@ -146,10 +145,7 @@ public class Invoice implements Identifiable
     @Nonnull
     private final LocalDate date;
 
-    @Nonnegative
-    private final int daysUntilDue;
-
-    @Nonnull // not necessarily date + daysUntilDue because of rounding
+    @Nonnull
     private final LocalDate dueDate;
 
     @Nonnull
@@ -170,8 +166,7 @@ public class Invoice implements Identifiable
         this.project = builder.getProject();
         this.jobEvents = builder.getJobEvents();
         this.date = builder.getDate();
-        this.daysUntilDue = builder.getDaysUntilDue();
-        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month
+        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
         this.earnings = builder.getEarnings();
         this.tax = builder.getTax();
       }
@@ -195,7 +190,7 @@ public class Invoice implements Identifiable
     @Nonnull
     public Builder asBuilder()
       {
-        return new Builder(id, number, project, jobEvents, date, daysUntilDue, dueDate, 
+        return new Builder(id, number, project, jobEvents, date, dueDate, 
                            earnings, tax, Builder.Callback.DEFAULT);
       }
   }
