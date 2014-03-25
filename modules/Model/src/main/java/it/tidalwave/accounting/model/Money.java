@@ -30,6 +30,9 @@ package it.tidalwave.accounting.model;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -62,6 +65,14 @@ public class Money
         this(BigDecimal.valueOf(amount.doubleValue()), currency);
       }
 
+    @Nonnull
+    public static Money parse(String v) throws ParseException 
+      {
+        final String[] parts = v.split(" ");
+        final NumberFormat format = NumberFormat.getInstance(Locale.ENGLISH);
+        return new Money(format.parse(parts[0]), parts[1]);
+      }
+    
     @Override @Nonnull
     public String toString()
       {

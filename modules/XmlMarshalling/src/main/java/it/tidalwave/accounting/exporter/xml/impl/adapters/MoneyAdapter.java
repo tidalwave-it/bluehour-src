@@ -27,9 +27,8 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import java.util.Locale;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import it.tidalwave.accounting.model.Money;
 
@@ -41,18 +40,16 @@ import it.tidalwave.accounting.model.Money;
  **********************************************************************************************************************/
 public class MoneyAdapter extends XmlAdapter<String, Money>
   {
-    @Override
-    public Money unmarshal (String v) 
+    @Override @Nonnull
+    public Money unmarshal (final @Nonnull String string) 
       throws ParseException 
       {
-        final String[] parts = v.split(" ");
-        final NumberFormat format = NumberFormat.getInstance(Locale.ENGLISH);
-        return new Money(format.parse(parts[0]), parts[1]);
+        return Money.parse(string);
       }
 
-    @Override
-    public String marshal(Money v) 
+    @Override @Nonnull
+    public String marshal (final @Nonnull Money money) 
       {
-        return v.toString();
+        return money.toString();
       }
   }
