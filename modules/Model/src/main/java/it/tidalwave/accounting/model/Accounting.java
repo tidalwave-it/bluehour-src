@@ -25,18 +25,9 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz;
+package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import java.io.IOException;
-import java.nio.file.Path;
-import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.experimental.Wither;
 
 /***********************************************************************************************************************
  *
@@ -44,32 +35,29 @@ import lombok.experimental.Wither;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface IBizImporter extends Accounting
+public interface Accounting 
   {
     /*******************************************************************************************************************
      *
+     * @return  the {@link CustomerRegistry}
      *
-     *
-     ******************************************************************************************************************/
-    @AllArgsConstructor // FIXME (access = PRIVATE)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
-      {
-        private final Path path;
-
-        @Nonnull
-        public IBizImporter create()
-          {
-            return new DefaultIBizImporter(this);
-          }
-      }
-
-    /*******************************************************************************************************************
-     *
-     * @throws  IOException in case of error
-     * 
      ******************************************************************************************************************/
     @Nonnull
-    public void importAll()
-      throws IOException;
-      }
+    public CustomerRegistry getCustomerRegistry();
+    
+    /*******************************************************************************************************************
+     *
+     * @return  the {@link ProjectRegistry}
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public ProjectRegistry getProjectRegistry();
+    
+    /*******************************************************************************************************************
+     *
+     * @return  the {@link InvoiceRegistry}
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public InvoiceRegistry getInvoiceRegistry();
+  }

@@ -27,10 +27,8 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,7 +36,6 @@ import org.testng.annotations.Test;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import it.tidalwave.util.test.FileComparisonUtils;
-import java.io.PrintWriter;
 
 /***********************************************************************************************************************
  *
@@ -46,10 +43,10 @@ import java.io.PrintWriter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class XmlMarshallingTest
+public class AccountingXmlMarshallableTest
   {
     @Test
-    public void testExport()
+    public void must_properly_marshall()
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
@@ -64,25 +61,11 @@ public class XmlMarshallingTest
                                                          .create();
         importer.importAll();
         
-        final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
-        final List<CustomerXml> customers = importer.getCustomerRegistry().findCustomers()
-                                                                          .map(customer -> new CustomerXml(customer))
-                                                                          .collect(Collectors.toList());
-        final List<ProjectXml> projects = importer.getProjectRegistry().findProjects()
-                                                                       .map(project -> new ProjectXml(project))
-                                                                       .collect(Collectors.toList());
-        final List<InvoiceXml> invoices = importer.getInvoiceRegistry().findInvoices()
-                                                                       .map(invoice -> new InvoiceXml(invoice))
-                                                                       .collect(Collectors.toList());
-        
-        
-        try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+        final AccountingXmlMarshallable fixture = new AccountingXmlMarshallable(importer);
+
+        try (final OutputStream os = new FileOutputStream(actualResult.toFile())) 
           {
-            final AccountingXml accountingXml = new AccountingXml(customers, projects, invoices);
-            final Marshaller marshaller = jaxbc.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            marshaller.marshal(accountingXml, pw);
+            fixture.marshal(os);
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
