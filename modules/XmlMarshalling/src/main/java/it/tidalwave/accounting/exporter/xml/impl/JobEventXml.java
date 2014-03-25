@@ -89,7 +89,8 @@ public class JobEventXml
     private Money rate;
     
     @XmlElementWrapper(name = "events")
-    private List<JobEventXml> event; 
+    @XmlElement(name = "event")
+    private List<JobEventXml> events; 
     
     public JobEventXml (final @Nonnull JobEvent.Builder builder)
       {
@@ -101,7 +102,7 @@ public class JobEventXml
         this.description = builder.getDescription();
         this.earnings = builder.getEarnings();
         this.rate = builder.getRate();
-        this.event = builder.getEvents().isEmpty() 
+        this.events = builder.getEvents().isEmpty() 
                             ? null
                             : builder.getEvents().stream().map(jobEvent -> new JobEventXml(jobEvent.asBuilder()))
                                                           .collect(toList());

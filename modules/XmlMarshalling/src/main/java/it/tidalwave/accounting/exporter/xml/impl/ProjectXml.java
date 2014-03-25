@@ -97,7 +97,8 @@ public class ProjectXml
     private LocalDate endDate;
     
     @XmlElementWrapper(name = "events")
-    private List<JobEventXml> event; 
+    @XmlElement(name = "event")
+    private List<JobEventXml> events; 
     
     public ProjectXml (final @Nonnull Project project)
       {
@@ -112,6 +113,6 @@ public class ProjectXml
         this.amount = b.getAmount();
         this.startDate = b.getStartDate();
         this.endDate = b.getEndDate();
-        this.event = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent.asBuilder())).collect(toList());
+        this.events = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent.asBuilder())).collect(toList());
       }
   }

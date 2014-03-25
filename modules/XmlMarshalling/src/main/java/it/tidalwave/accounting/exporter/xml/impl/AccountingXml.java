@@ -30,6 +30,7 @@ package it.tidalwave.accounting.exporter.xml.impl;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
@@ -49,11 +50,14 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 public class AccountingXml 
   {
     @XmlElementWrapper(name = "customers")
-    private List<CustomerXml> customer;
+    @XmlElement(name = "customer")
+    private List<CustomerXml> customers;
     
     @XmlElementWrapper(name = "projects")
-    private List<ProjectXml> project;
+    @XmlElement(name = "project")
+    private List<ProjectXml> projects;
     
     @XmlElementWrapper(name = "invoices")
-    private List<InvoiceXml> invoice;
+    @XmlElement(name = "invoice")
+    private List<InvoiceXml> invoices;
   }
