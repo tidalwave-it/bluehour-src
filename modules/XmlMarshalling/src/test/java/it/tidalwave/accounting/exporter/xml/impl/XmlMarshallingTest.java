@@ -44,7 +44,7 @@ import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class TestExporter
+public class XmlMarshallingTest
   {
     @Test
     public void testExport()
