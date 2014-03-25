@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import it.tidalwave.accounting.model.Money;

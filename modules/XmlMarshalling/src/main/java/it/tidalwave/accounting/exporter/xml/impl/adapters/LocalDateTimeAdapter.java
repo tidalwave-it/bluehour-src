@@ -25,11 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import it.tidalwave.accounting.model.JobEvent;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /***********************************************************************************************************************
  *
@@ -37,17 +38,19 @@ import it.tidalwave.accounting.model.JobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class EventTypeAdapter extends XmlAdapter<String, JobEvent.Builder.Type>
+public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime>
   {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    
     @Override @Nonnull
-    public JobEvent.Builder.Type unmarshal(String v) 
+    public LocalDateTime unmarshal (final @Nonnull String v) 
       {
-        return JobEvent.Builder.Type.valueOf(v.toUpperCase());
+        return LocalDateTime.parse(v, FORMATTER);
       }
 
     @Override @Nonnull
-    public String marshal(JobEvent.Builder.Type v)
+    public String marshal (final @Nonnull LocalDateTime v) 
       {
-        return v.name().toLowerCase();
+        return FORMATTER.format(v);
       }
   }

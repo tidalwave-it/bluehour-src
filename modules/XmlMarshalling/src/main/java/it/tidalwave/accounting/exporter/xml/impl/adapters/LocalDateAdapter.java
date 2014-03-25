@@ -25,10 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import it.tidalwave.util.Id;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /***********************************************************************************************************************
  *
@@ -36,17 +38,19 @@ import it.tidalwave.util.Id;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class IdAdapter extends XmlAdapter<String, Id> 
+public class LocalDateAdapter extends XmlAdapter<String, LocalDate>
   {
-    @Override
-    public Id unmarshal(String v)
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+    
+    @Override @Nonnull
+    public LocalDate unmarshal (final @Nonnull String v) 
       {
-        return new Id(v);
+        return LocalDate.parse(v, FORMATTER);
       }
 
-    @Override
-    public String marshal(Id v) 
+    @Override @Nonnull
+    public String marshal (final @Nonnull LocalDate v) 
       {
-        return v.stringValue();
+        return FORMATTER.format(v);
       }
   }
