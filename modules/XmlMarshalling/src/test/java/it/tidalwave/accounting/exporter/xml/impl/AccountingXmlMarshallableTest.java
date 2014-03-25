@@ -27,15 +27,19 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
+import javax.annotation.Nonnull;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.testng.annotations.Test;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import it.tidalwave.util.test.FileComparisonUtils;
+import it.tidalwave.accounting.test.util.ScenarioFactory;
 
 /***********************************************************************************************************************
  *
@@ -45,8 +49,8 @@ import it.tidalwave.util.test.FileComparisonUtils;
  **********************************************************************************************************************/
 public class AccountingXmlMarshallableTest
   {
-    @Test
-    public void must_properly_marshall()
+    @Test(enabled = false)
+    public void must_properly_marshall_iBiz()
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
@@ -69,5 +73,35 @@ public class AccountingXmlMarshallableTest
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+      }
+    
+    @Test(dataProvider = "scenarios")
+    public void must_properly_marshall (final @Nonnull String scenarioName, final @Nonnull Accounting scenario)
+      throws Exception
+      {
+        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
+        final Path testFolder = Paths.get("target/test-results");
+        Files.createDirectories(testFolder);
+        final Path actualResult = testFolder.resolve(scenarioName + ".xml");
+        final Path expectedResult = expectedResultsFolder.resolve(scenarioName + ".xml");
+
+        final AccountingXmlMarshallable fixture = new AccountingXmlMarshallable(scenario);
+
+        try (final OutputStream os = new FileOutputStream(actualResult.toFile())) 
+          {
+            fixture.marshal(os);
+          }
+        
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+      }
+    
+    @DataProvider(name = "scenarios")
+    private Object[][] scenarios()
+      {
+        return new Object[][]
+          {
+            { "Empty",      ScenarioFactory.createEmptyAccounting() },
+            { "Scenario1",  ScenarioFactory.createScenario1()       }
+          };
       }
   }
