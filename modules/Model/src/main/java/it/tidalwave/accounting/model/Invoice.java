@@ -171,7 +171,7 @@ public class Invoice implements Identifiable
         this.jobEvents = builder.getJobEvents();
         this.date = builder.getDate();
         this.daysUntilDue = builder.getDaysUntilDue();
-        this.dueDate = builder.getDate(); // FIXME: round to the end of the month
+        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month
         this.earnings = builder.getEarnings();
         this.tax = builder.getTax();
       }
