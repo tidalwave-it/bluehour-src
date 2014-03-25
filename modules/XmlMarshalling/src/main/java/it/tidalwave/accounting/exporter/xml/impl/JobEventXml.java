@@ -29,21 +29,20 @@ package it.tidalwave.accounting.exporter.xml.impl;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.time.LocalDate;
-import javax.xml.bind.annotation.XmlAccessorOrder;
-import javax.xml.bind.annotation.XmlAccessorType;
+import java.time.LocalDateTime;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
+import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
-import it.tidalwave.accounting.model.Project;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
@@ -54,64 +53,57 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  * @version $Id$
  *
  **********************************************************************************************************************/
-//@Mutable
-@NoArgsConstructor @EqualsAndHashCode(of = "id")
-@XmlRootElement(name = "project") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
-public class ProjectXml 
+@NoArgsConstructor @ToString
+@XmlRootElement(name = "event") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
+public class JobEventXml 
   {
-    @XmlAttribute(name = "id")
+    @XmlAttribute(name = "id") 
     @XmlID
     @XmlJavaTypeAdapter(IdAdapter.class)
     private Id id;
     
-    @XmlElement(name = "customer")
-    @XmlIDREF
-    private CustomerXml customer;
+    @XmlElement(name = "type")
+    @XmlJavaTypeAdapter(EventTypeAdapter.class)
+    private JobEvent.Builder.Type type;
+    
+    @XmlElement(name = "startDateTime")
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    private LocalDateTime startDateTime;
+    
+    @XmlElement(name = "endDateTime")
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    private LocalDateTime endDateTime;
     
     @XmlElement(name = "name")
     private String name;
     
-    @XmlElement(name = "number")
-    private String number;
-    
     @XmlElement(name = "description")
     private String description;
     
-    @XmlElement(name = "notes")
-    private String notes;
-    
-    @XmlElement(name = "hourlyRate")
+    @XmlElement(name = "earnings")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money hourlyRate;
+    private Money earnings;
     
-    @XmlElement(name = "amount")
+    @XmlElement(name = "rate")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money amount;
-    
-    @XmlElement(name = "startDate")
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate startDate;
-    
-    @XmlElement(name = "endDate")
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate endDate;
+    private Money rate;
     
     @XmlElementWrapper(name = "events")
     private List<JobEventXml> event; 
     
-    public ProjectXml (final @Nonnull Project project)
+    public JobEventXml (final @Nonnull JobEvent.Builder builder)
       {
-        final Project.Builder b = project.asBuilder();
-        this.id = b.getId();
-        this.customer = new CustomerXml(b.getCustomer());
-        this.name = b.getName();
-        this.number = b.getNumber();
-        this.description = b.getDescription();
-        this.notes = b.getNotes();
-        this.hourlyRate = b.getHourlyRate();
-        this.amount = b.getAmount();
-        this.startDate = b.getStartDate();
-        this.endDate = b.getEndDate();
-        this.event = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent.asBuilder())).collect(toList());
+        this.id = builder.getId();
+        this.type = builder.getType();
+        this.startDateTime = builder.getStartDateTime();
+        this.endDateTime = builder.getEndDateTime();
+        this.name = builder.getName();
+        this.description = builder.getDescription();
+        this.earnings = builder.getEarnings();
+        this.rate = builder.getRate();
+        this.event = builder.getEvents().isEmpty() 
+                            ? null
+                            : builder.getEvents().stream().map(jobEvent -> new JobEventXml(jobEvent.asBuilder()))
+                                                          .collect(toList());
       }
   }
