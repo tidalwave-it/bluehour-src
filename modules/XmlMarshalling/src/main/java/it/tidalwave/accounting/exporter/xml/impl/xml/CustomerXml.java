@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessorOrder;
@@ -65,18 +65,18 @@ public class CustomerXml
     private String name;
 
     @XmlElement(name = "billingAddress")
-    private AddressXml billingAddress;
+    private AddressXml billingAddressXml;
 
     @XmlElement(name = "vatNumber")
     private String vatNumber;
     
     public CustomerXml (final @Nonnull Customer customer)
       {
-        final Customer.Builder b = customer.asBuilder();
-        this.id = b.getId();
-        this.name = b.getName();
-        this.billingAddress = new AddressXml(b.getBillingAddress());
-        this.vatNumber = b.getVatNumber();
+        final Customer.Builder builder = customer.asBuilder();
+        this.id = builder.getId();
+        this.name = builder.getName();
+        this.billingAddressXml = new AddressXml(builder.getBillingAddress());
+        this.vatNumber = builder.getVatNumber();
       }
     
     @Nonnull
@@ -84,7 +84,7 @@ public class CustomerXml
       {
         return new Customer.Builder().withId(id)
                                      .withName(name)
-                                     .withBillingAddress(billingAddress.toAddress())
+                                     .withBillingAddress(billingAddressXml.toAddress())
                                      .withVatNumber(vatNumber);
       }
   }

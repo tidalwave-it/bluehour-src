@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.bind.JAXBContext;
@@ -34,6 +35,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import it.tidalwave.role.Unmarshallable;
 import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -45,10 +47,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountingXmlUnmarshallable implements Unmarshallable
   {
+    @Nonnull
     private final Accounting accounting;
     
-    @Override
-    public <TYPE> TYPE unmarshal(InputStream is) 
+    @Override @Nonnull
+    public <TYPE> TYPE unmarshal (final @Nonnull InputStream is) 
       throws IOException 
       {
         try 
@@ -56,7 +59,6 @@ public class AccountingXmlUnmarshallable implements Unmarshallable
             final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
             final Unmarshaller unmarshaller = jaxbc.createUnmarshaller();
             final AccountingXml accountingXml = (AccountingXml)unmarshaller.unmarshal(is);
-
             accountingXml.fill(accounting);
             return (TYPE)accounting; 
           } 

@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -41,13 +41,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
-import it.tidalwave.accounting.model.Accounting;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
@@ -61,83 +61,75 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  **********************************************************************************************************************/
 //@Mutable
 @NoArgsConstructor
-@XmlRootElement(name = "project") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
-public class ProjectXml 
+@XmlRootElement(name = "invoice") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
+public class InvoiceXml 
   {
-    @Getter // FIXME   
     @XmlAttribute(name = "id")
     @XmlID
     @XmlJavaTypeAdapter(IdAdapter.class)
     private Id id;
     
-    @XmlElement(name = "customer")
-    @XmlIDREF
-    private CustomerXml customer;
-    
-    @XmlElement(name = "name")
-    private String name;
-    
     @XmlElement(name = "number")
     private String number;
     
-    @XmlElement(name = "description")
-    private String description;
+    @XmlElement(name = "project")
+    @XmlIDREF
+    private ProjectXml projectXml;
     
-    @XmlElement(name = "notes")
-    private String notes;
-    
-    @XmlElement(name = "hourlyRate")
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money hourlyRate;
-    
-    @XmlElement(name = "amount")
-    @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money amount;
-    
-    @XmlElement(name = "startDate")
+    @XmlElement(name = "date")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate startDate;
+    private LocalDate date;
     
-    @XmlElement(name = "endDate")
+    private int daysUntilDue; // FIXME
+    
+    @XmlElement(name = "dueDate")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate endDate;
+    private LocalDate dueDate;
+    
+    @XmlElement(name = "earnings")
+    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    private Money earnings;
+    
+    @XmlElement(name = "tax")
+    @XmlJavaTypeAdapter(MoneyAdapter.class)
+    private Money tax;
     
     @XmlElementWrapper(name = "events")
     @XmlElement(name = "event")
-    private List<JobEventXml> events; 
+    @XmlIDREF
+    private List<JobEventXml> jobEventsXml; 
     
-    public ProjectXml (final @Nonnull Project project)
+    public InvoiceXml (final @Nonnull Invoice invoice)
       {
-        final Project.Builder b = project.asBuilder();
-        this.id = b.getId();
-        this.customer = new CustomerXml(b.getCustomer());
-        this.name = b.getName();
-        this.number = b.getNumber();
-        this.description = b.getDescription();
-        this.notes = b.getNotes();
-        this.hourlyRate = b.getHourlyRate();
-        this.amount = b.getAmount();
-        this.startDate = b.getStartDate();
-        this.endDate = b.getEndDate();
-        this.events = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent.asBuilder())).collect(toList());
+        final Invoice.Builder builder = invoice.asBuilder();
+        this.id = builder.getId();
+        this.number = builder.getNumber();
+        this.projectXml = new ProjectXml(builder.getProject());
+        this.date = builder.getDate();
+        this.daysUntilDue = builder.getDaysUntilDue();
+        this.dueDate = builder.getDueDate();
+        this.earnings = builder.getEarnings();
+        this.tax = builder.getTax();
+        this.jobEventsXml = builder.getJobEvents().isEmpty() 
+                    ? null
+                    : builder.getJobEvents().stream().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
       }
-    
+
     @Nonnull
-    public Project.Builder toBuilder (final @Nonnull Accounting accounting)
+    public Invoice.Builder toBuilder (final @Nonnull Accounting accounting) 
       {
         try 
           {
-            return new Project.Builder().withId(id)
-                    .withCustomer(accounting.getCustomerRegistry().findCustomers().withId(customer.getId()).result()) 
-                    .withName(name)
-                    .withNumber(number)
-                    .withDescription(description)
-                    .withNotes(notes)
-                    .withHourlyRate(hourlyRate)
-                    .withAmount(amount)
-                    .withStartDate(startDate)
-                    .withEndDate(endDate)
-                    .withEvents(JobEventXml.toJobEvents(events));
+            final Project customer = accounting.getProjectRegistry().findProjects().withId(projectXml.getId()).result();
+            return new Invoice.Builder().withId(id)
+                                        .withNumber(number)
+                                        .withProject(customer)
+                                        .withDate(date)
+                                        .withDaysUntilDue(daysUntilDue)
+                                        .withDueDate(dueDate)
+                                        .withEarnings(earnings)
+                                        .withTax(tax)
+                                        .withJobEvents(JobEventXml.toJobEvents(jobEventsXml));
           } 
         catch (NotFoundException e) 
           {

@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -96,10 +96,11 @@ public class JobEventXml
     
     @XmlElementWrapper(name = "events")
     @XmlElement(name = "event")
-    private List<JobEventXml> events; 
+    private List<JobEventXml> jobEventsXml; 
     
-    public JobEventXml (final @Nonnull JobEvent.Builder builder)
+    public JobEventXml (final @Nonnull JobEvent jobEvent)
       {
+        final JobEvent.Builder builder = jobEvent.asBuilder();
         this.id = builder.getId();
         this.type = builder.getType();
         this.startDateTime = builder.getStartDateTime();
@@ -108,10 +109,9 @@ public class JobEventXml
         this.description = builder.getDescription();
         this.earnings = builder.getEarnings();
         this.rate = builder.getRate();
-        this.events = builder.getEvents().isEmpty() 
-                            ? null
-                            : builder.getEvents().stream().map(jobEvent -> new JobEventXml(jobEvent.asBuilder()))
-                                                          .collect(toList());
+        this.jobEventsXml = builder.getEvents().isEmpty() 
+                    ? null
+                    : builder.getEvents().stream().map(event -> new JobEventXml(event)).collect(toList());
       }
     
     @Nonnull
@@ -125,17 +125,14 @@ public class JobEventXml
                                  .withDescription(description)
                                  .withEarnings(earnings)
                                  .withRate(rate)
-                                 .withEvents(toJobEvents(events));
+                                 .withEvents(toJobEvents(jobEventsXml));
       }
     
     @Nonnull
     public static List<JobEvent> toJobEvents (final @Nullable List<JobEventXml> jobEventsXml)
       {
-        if (jobEventsXml == null)
-          {
-            return Collections.emptyList();
-          }
-        
-        return jobEventsXml.stream().map(jobEventXml ->  jobEventXml.toBuilder().create()).collect(toList());
+        return (jobEventsXml == null) 
+                ? Collections.emptyList()
+                : jobEventsXml.stream().map(jobEventXml ->  jobEventXml.toBuilder().create()).collect(toList());
       }    
   }

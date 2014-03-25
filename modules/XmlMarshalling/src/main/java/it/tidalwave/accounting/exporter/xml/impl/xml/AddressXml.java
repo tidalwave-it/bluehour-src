@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessorOrder;

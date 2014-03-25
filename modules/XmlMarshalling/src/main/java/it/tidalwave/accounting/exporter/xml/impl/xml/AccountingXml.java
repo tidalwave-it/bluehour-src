@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.exporter.xml.impl;
+package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -56,24 +56,24 @@ public class AccountingXml
   {
     @XmlElementWrapper(name = "customers")
     @XmlElement(name = "customer")
-    private List<CustomerXml> customers;
+    private List<CustomerXml> customersXml;
     
     @XmlElementWrapper(name = "projects")
     @XmlElement(name = "project")
-    private List<ProjectXml> projects;
+    private List<ProjectXml> projectsXml;
     
     @XmlElementWrapper(name = "invoices")
     @XmlElement(name = "invoice")
-    private List<InvoiceXml> invoices;
+    private List<InvoiceXml> invoicesxml;
     
     public AccountingXml (final @Nonnull Accounting accounting)
       {
-        customers = accounting.getCustomerRegistry().findCustomers().map(customer -> new CustomerXml(customer))
+        customersXml = accounting.getCustomerRegistry().findCustomers().map(customer -> new CustomerXml(customer))
+                                                                       .collect(toList());
+        projectsXml = accounting.getProjectRegistry().findProjects().map(project -> new ProjectXml(project))
                                                                     .collect(toList());
-        projects = accounting.getProjectRegistry().findProjects().map(project -> new ProjectXml(project))
-                                                                 .collect(toList());
-        invoices = accounting.getInvoiceRegistry().findInvoices().map(invoice -> new InvoiceXml(invoice))
-                                                                 .collect(toList());
+        invoicesxml = accounting.getInvoiceRegistry().findInvoices().map(invoice -> new InvoiceXml(invoice))
+                                                                    .collect(toList());
       }
 
     public void fill (final @Nonnull Accounting accounting) 
@@ -81,8 +81,8 @@ public class AccountingXml
         final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
         final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
         final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();
-        customers.forEach(customer -> customerRegistry.addCustomer().with(customer.toBuilder()).create());
-        projects.forEach(project -> projectRegistry.addProject().with(project.toBuilder(accounting)).create());
-        invoices.forEach(invoice -> invoiceRegistry.addInvoice().with(invoice.toBuilder(accounting)).create());
+        customersXml.forEach(customer -> customerRegistry.addCustomer().with(customer.toBuilder()).create());
+        projectsXml.forEach(project -> projectRegistry.addProject().with(project.toBuilder(accounting)).create());
+        invoicesxml.forEach(invoice -> invoiceRegistry.addInvoice().with(invoice.toBuilder(accounting)).create());
       }
   }
