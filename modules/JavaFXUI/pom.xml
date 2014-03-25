@@ -42,11 +42,11 @@
     <version>1.0-ALPHA-2-SNAPSHOT</version>
     <name>blueHour - UI - JavaFX</name>
     <packaging>jar</packaging>
+    
     <dependencies>
         <dependency>
             <groupId>com.aquafx-project</groupId>
             <artifactId>aquafx</artifactId>
-            <version>0.1</version>
         </dependency>
     </dependencies>
 </project>
