@@ -30,9 +30,9 @@ package it.tidalwave.accounting.model;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
-import java.util.Locale;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -60,22 +60,29 @@ public class Money
         this(BigDecimal.valueOf(amount), currency);
       }
 
-    public Money (final Number amount, final @Nonnull String currency)
-      {
-        this(BigDecimal.valueOf(amount.doubleValue()), currency);
-      }
-
     @Nonnull
-    public static Money parse(String v) throws ParseException 
+    public static Money parse (final @Nonnull String string) 
+      throws ParseException 
       {
-        final String[] parts = v.split(" ");
-        final NumberFormat format = NumberFormat.getInstance(Locale.ENGLISH);
-        return new Money(format.parse(parts[0]), parts[1]);
+        final String[] parts = string.split(" ");
+        return new Money((BigDecimal)getFormat().parse(parts[0]), parts[1]);
       }
     
     @Override @Nonnull
     public String toString()
       {
-        return String.format("%s %s", amount, currency);
+        return String.format("%s %s", getFormat().format(amount), currency);
+      }
+    
+    @Nonnull
+    private static DecimalFormat getFormat()
+      {
+        final DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        final String pattern = "###0.00";
+        final DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+        decimalFormat.setParseBigDecimal(true);
+        
+        return decimalFormat;
       }
   }
