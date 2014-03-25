@@ -40,7 +40,7 @@ import lombok.RequiredArgsConstructor;
  * @param <TYPE>
  * @param <FINDER>
  * 
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/

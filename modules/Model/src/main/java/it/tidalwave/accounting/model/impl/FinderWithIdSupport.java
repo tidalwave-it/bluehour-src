@@ -44,7 +44,7 @@ import it.tidalwave.util.spi.ExtendedFinderSupport;
  * @param <TYPE>
  * @param <FINDER>
  * 
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
