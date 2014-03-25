@@ -105,6 +105,12 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-model</artifactId>
+                <version>1.0-ALPHA-2-SNAPSHOT</version>
+                <classifier>tests</classifier>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
                 <version>1.0-ALPHA-2-SNAPSHOT</version>
             </dependency>

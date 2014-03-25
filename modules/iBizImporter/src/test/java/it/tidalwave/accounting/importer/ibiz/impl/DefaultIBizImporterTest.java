@@ -34,6 +34,7 @@ import java.nio.file.Paths;
 import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import org.testng.annotations.Test;
+import it.tidalwave.accounting.test.util.Dumper;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************

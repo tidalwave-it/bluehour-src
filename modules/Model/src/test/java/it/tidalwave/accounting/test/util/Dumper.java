@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz.impl;
+package it.tidalwave.accounting.test.util;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;

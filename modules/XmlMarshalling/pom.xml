@@ -51,15 +51,13 @@
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
+            <artifactId>it-tidalwave-accounting-model</artifactId>
+            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
-
-        <!-- FIXME: for the Dumper - move to the test of Model -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
                 

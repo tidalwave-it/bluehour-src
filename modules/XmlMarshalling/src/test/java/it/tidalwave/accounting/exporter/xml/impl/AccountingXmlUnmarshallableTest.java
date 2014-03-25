@@ -33,10 +33,10 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import it.tidalwave.accounting.importer.ibiz.impl.Dumper;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.impl.DefaultAccounting;
 import it.tidalwave.util.test.FileComparisonUtils;
+import it.tidalwave.accounting.test.util.Dumper;
 import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
