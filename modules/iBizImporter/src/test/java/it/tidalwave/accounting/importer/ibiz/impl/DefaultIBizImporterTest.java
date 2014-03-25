@@ -63,10 +63,7 @@ public class DefaultIBizImporterTest
         
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
           {
-            final Dumper dumper = new Dumper(pw);
-            dumper.dumpCustomers(importer.getCustomerRegistry().findCustomers());
-            dumper.dumpProjects(importer.getProjectRegistry().findProjects());
-            dumper.dumpInvoices(importer.getInvoiceRegistry().findInvoices());
+            new Dumper(importer, pw).dumpAll();
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());

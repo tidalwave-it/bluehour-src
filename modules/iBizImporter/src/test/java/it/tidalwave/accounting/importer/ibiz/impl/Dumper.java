@@ -37,6 +37,7 @@ import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import it.tidalwave.util.FinderStream;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
@@ -68,23 +69,33 @@ public class Dumper
       };
     
     private static final String INDENT = "    ";
+    
+    @Nonnull
+    private final Accounting accounting;
 
     @Nonnull
     private final PrintWriter pw;
     
-    public void dumpCustomers (final @Nonnull FinderStream<Customer> customers)
+    public void dumpAll()
       throws IOException
+      {
+        dumpCustomers(accounting.getCustomerRegistry().findCustomers());
+        dumpProjects(accounting.getProjectRegistry().findProjects());
+        dumpInvoices(accounting.getInvoiceRegistry().findInvoices());
+      }
+    
+    private void dumpCustomers (final @Nonnull FinderStream<Customer> customers)
       {
         customers.sorted(comparing(Customer::getName)).forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
     
-    public void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
+    private void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
       throws IOException
       {
         invoices.sorted(comparing(Invoice::getNumber)).forEach(invoice -> dump(invoice));
       }
     
-    public void dumpProjects (final @Nonnull FinderStream<Project> projects)
+    private void dumpProjects (final @Nonnull FinderStream<Project> projects)
       throws IOException
       {
         projects.sorted(PROJECT_COMPARATOR).forEach(project -> dump(project));

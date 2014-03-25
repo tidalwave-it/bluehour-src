@@ -69,10 +69,7 @@ public class AccountingXmlUnmarshallableTest
         
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
           {
-            final Dumper dumper = new Dumper(pw);
-            dumper.dumpCustomers(accounting.getCustomerRegistry().findCustomers());
-            dumper.dumpProjects(accounting.getProjectRegistry().findProjects());
-            dumper.dumpInvoices(accounting.getInvoiceRegistry().findInvoices());
+            new Dumper(accounting, pw).dumpAll();
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
