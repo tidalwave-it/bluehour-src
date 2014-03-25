@@ -34,7 +34,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.role.Marshallable;
 import lombok.RequiredArgsConstructor;
@@ -73,9 +72,7 @@ public class AccountingXmlMarshallable implements Marshallable
             final Marshaller marshaller = jaxbc.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            final PrintWriter pw = new PrintWriter(os);
-            marshaller.marshal(accountingXml, pw);
-            pw.flush();
+            marshaller.marshal(accountingXml, os);
           } 
         catch (JAXBException e) 
           {
