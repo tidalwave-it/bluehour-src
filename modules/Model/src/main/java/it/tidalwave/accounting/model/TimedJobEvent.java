@@ -32,6 +32,7 @@ import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /***********************************************************************************************************************
@@ -43,13 +44,13 @@ import lombok.ToString;
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 public class TimedJobEvent extends JobEvent
   {
-    @Nonnull
+    @Getter @Nonnull
     private final LocalDateTime startDateTime;
 
-    @Nonnull
+    @Getter @Nonnull
     private final LocalDateTime endDateTime;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money earnings;
 
     @Nonnull
