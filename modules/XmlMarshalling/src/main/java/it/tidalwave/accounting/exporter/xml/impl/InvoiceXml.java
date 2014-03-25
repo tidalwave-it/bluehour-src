@@ -43,9 +43,12 @@ import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import java.util.List;
+import static java.util.stream.Collectors.toList;
 import lombok.NoArgsConstructor;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 /***********************************************************************************************************************
  *
@@ -70,7 +73,6 @@ public class InvoiceXml
     @XmlIDREF
     private ProjectXml project;
     
-//    private List<JobEvent> jobEvents; // FIXME: immutablelist
     @XmlElement(name = "date")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate date;
@@ -89,6 +91,11 @@ public class InvoiceXml
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     private Money tax;
     
+    @XmlElementWrapper(name = "events")
+    @XmlElement(name = "event")
+    @XmlIDREF
+    private List<JobEventXml> events; 
+    
     public InvoiceXml (final @Nonnull Invoice invoice)
       {
         final Invoice.Builder b = invoice.asBuilder();
@@ -100,5 +107,10 @@ public class InvoiceXml
         this.dueDate = b.getDueDate();
         this.earnings = b.getEarnings();
         this.tax = b.getTax();
+        
+        this.events = b.getJobEvents().isEmpty() 
+                            ? null
+                            : b.getJobEvents().stream().map(jobEvent -> new JobEventXml(jobEvent.asBuilder()))
+                                                          .collect(toList());
       }
   }
