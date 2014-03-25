@@ -35,6 +35,8 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -77,5 +79,17 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
                 return Collections.unmodifiableList(events);
               }
           };
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, null, null, null, name, 
+                           description, null, null, new ArrayList<>(findChildren().results()));
       }
   }

@@ -30,6 +30,7 @@ package it.tidalwave.accounting.model;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.time.LocalDate;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -58,5 +59,17 @@ public class FlatJobEvent extends JobEvent
         super(builder);
         this.date = builder.getStartDateTime().toLocalDate();
         this.earnings = builder.getEarnings();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, Builder.Type.FLAT, date.atStartOfDay(), null,
+                           name, description, earnings, null, Collections.<JobEvent>emptyList());
       }
   }

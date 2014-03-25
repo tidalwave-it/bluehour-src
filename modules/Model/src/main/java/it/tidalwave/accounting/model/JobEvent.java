@@ -39,7 +39,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  *
@@ -57,7 +57,7 @@ public abstract class JobEvent implements Identifiable
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor(access = PRIVATE)
+    @AllArgsConstructor(access = PROTECTED)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
@@ -127,4 +127,12 @@ public abstract class JobEvent implements Identifiable
         this.name = builder.getName();
         this.description = builder.getDescription();
       }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public abstract JobEvent.Builder asBuilder();
   }

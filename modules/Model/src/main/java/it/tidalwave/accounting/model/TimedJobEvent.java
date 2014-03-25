@@ -29,6 +29,7 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.Collections;
 import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -66,5 +67,17 @@ public class TimedJobEvent extends JobEvent
         this.endDateTime = builder.getEndDateTime();
         this.earnings = builder.getEarnings();
         this.rate = builder.getRate();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, Builder.Type.TIMED, startDateTime, endDateTime, name, description, 
+                           earnings, rate, Collections.<JobEvent>emptyList());
       }
   }
