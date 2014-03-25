@@ -180,4 +180,16 @@ public class Invoice implements Identifiable
       {
         return new JobEventFinder();
       }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Builder asBuilder()
+      {
+        return new Builder(id, number, project, jobEvents, date, daysUntilDue, dueDate, 
+                           earnings, tax, Builder.Callback.DEFAULT);
+      }
   }

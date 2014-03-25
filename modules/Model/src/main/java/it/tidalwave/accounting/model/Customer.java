@@ -46,7 +46,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString
+@Immutable @Getter @EqualsAndHashCode @ToString // FIXME: remove the @Getter
 public class Customer implements Identifiable
   {
     /*******************************************************************************************************************
@@ -90,7 +90,7 @@ public class Customer implements Identifiable
           }
       }
 
-    @Nonnull
+    @Getter @Nonnull
     private final Id id;
 
     @Nonnull
@@ -124,5 +124,16 @@ public class Customer implements Identifiable
         this.name = builder.getName();
         this.billingAddress = builder.getBillingAddress();
         this.vatNumber = builder.getVatNumber();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Builder asBuilder()
+      {
+        return new Builder(id, name, billingAddress, vatNumber, Customer.Builder.Callback.DEFAULT);                
       }
   }

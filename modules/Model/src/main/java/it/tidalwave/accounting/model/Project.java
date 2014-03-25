@@ -187,4 +187,16 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable
               }
           };
       }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Builder asBuilder()
+      {
+        return new Builder(id, customer, name, number, description, notes, hourlyRate, amount, 
+                           startDate, endDate, events, Project.Builder.Callback.DEFAULT);
+      }
   }
