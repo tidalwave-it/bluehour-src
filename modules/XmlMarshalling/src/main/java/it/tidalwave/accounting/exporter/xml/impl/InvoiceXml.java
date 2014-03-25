@@ -73,7 +73,7 @@ public class InvoiceXml
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate date;
     
-    private int daysUntilDue;
+    private int daysUntilDue; // FIXME
     
     @XmlElement(name = "dueDate")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
