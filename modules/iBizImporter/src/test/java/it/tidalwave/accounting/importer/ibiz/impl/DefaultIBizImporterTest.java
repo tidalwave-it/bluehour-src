@@ -51,22 +51,26 @@ public class DefaultIBizImporterTest
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
-        final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
-        final Path testFolder = Paths.get("target/test-results");
-        Files.createDirectories(testFolder);
-        final Path actualResult = testFolder.resolve("iBizImportDump.txt");
-        final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
-
-        final IBizImporter importer = DefaultIBizImporter.builder()
-                                                         .withPath(iBizFolder)
-                                                         .create();
-        importer.importAll();
         
-        try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+        if (Files.exists(iBizFolder))
           {
-            new Dumper(importer, pw).dumpAll();
+            final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
+            final Path testFolder = Paths.get("target/test-results");
+            Files.createDirectories(testFolder);
+            final Path actualResult = testFolder.resolve("iBizImportDump.txt");
+            final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
+
+            final IBizImporter importer = DefaultIBizImporter.builder()
+                                                             .withPath(iBizFolder)
+                                                             .create();
+            importer.importAll();
+
+            try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+              {
+                new Dumper(importer, pw).dumpAll();
+              }
+
+            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
           }
-        
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
   }
