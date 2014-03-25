@@ -37,6 +37,9 @@ import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.impl.DefaultAccounting;
 import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.test.util.Dumper;
+import it.tidalwave.accounting.test.util.ScenarioFactory;
+import javax.annotation.Nonnull;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
@@ -47,8 +50,8 @@ import org.testng.annotations.Test;
  **********************************************************************************************************************/
 public class AccountingXmlUnmarshallableTest
   {
-    @Test
-    public void must_properly_unmarshall()
+    @Test(enabled = false)
+    public void must_properly_unmarshall_iBiz()
       throws Exception
       {
         final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
@@ -59,7 +62,6 @@ public class AccountingXmlUnmarshallableTest
         final Path importFile = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
         
         final Accounting accounting = new DefaultAccounting();
-        
         final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
 
         try (final InputStream is = new FileInputStream(importFile.toFile())) 
@@ -73,5 +75,42 @@ public class AccountingXmlUnmarshallableTest
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+      }
+    
+    @Test(dataProvider = "scenarios")
+    public void must_properly_unmarshall (final @Nonnull String scenarioName)
+      throws Exception
+      {
+        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
+        final Path testFolder = Paths.get("target/test-results");
+        Files.createDirectories(testFolder);
+        final Path importFile = Paths.get("src/test/resources/scenarios").resolve(scenarioName + ".xml");
+        final Path actualResult = testFolder.resolve(scenarioName + ".txt");
+        final Path expectedResult = expectedResultsFolder.resolve(scenarioName + ".txt");
+
+        final Accounting accounting = new DefaultAccounting();
+        final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
+
+        try (final InputStream is = new FileInputStream(importFile.toFile())) 
+          {
+            fixture.unmarshal(is);
+          }
+        
+        try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+          {
+            new Dumper(accounting, pw).dumpAll();
+          }
+        
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+      }
+    
+    @DataProvider(name = "scenarios")
+    private Object[][] scenarios()
+      {
+        return new Object[][]
+          {
+            { "XmlEmpty"     },
+            { "XmlScenario1" }
+          };
       }
   }
