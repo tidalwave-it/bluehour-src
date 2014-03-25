@@ -1,9 +1,13 @@
 /*
+ * #%L
+ * *********************************************************************************************************************
  *
- * PROJECT NAME
- * PROJECT COPYRIGHT
- *
- ***********************************************************************************************************************
+ * blueHour
+ * http://bluehour.tidalwave.it - hg clone https://bitbucket.org/tidalwave/bluehour-src
+ * %%
+ * Copyright (C) 2013 - 2014 Tidalwave s.a.s. (http://tidalwave.it)
+ * %%
+ * *********************************************************************************************************************
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,32 +18,30 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations under the License.
  *
- ***********************************************************************************************************************
+ * *********************************************************************************************************************
  *
- * WWW: PROJECT URL
- * SCM: PROJECT SCM
+ * $Id$
  *
+ * *********************************************************************************************************************
+ * #L%
  */
-
 package it.tidalwave.accounting.ui.javafx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
+/***********************************************************************************************************************
  *
- * @author fritz
- */
-public class FXMLDelegate implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+ * @author  Fabrizio Giudici
+ * @version $Id$
+ *
+ **********************************************************************************************************************/
+public class FXMLDelegate implements Initializable
+  {
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+      {
         // TODO
-    }    
-    
+      }      
 }
