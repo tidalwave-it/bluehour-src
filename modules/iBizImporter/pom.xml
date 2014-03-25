@@ -51,6 +51,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-model</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-role</artifactId>
             <exclusions>
@@ -97,20 +102,6 @@
         </dependency>
 
         <!-- TEST DEPENDENCIES -->
-        <dependency>
-            <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-util-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-model</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
