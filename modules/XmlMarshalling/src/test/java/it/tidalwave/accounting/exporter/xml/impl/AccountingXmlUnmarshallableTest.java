@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
+import javax.annotation.Nonnull;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -37,8 +38,6 @@ import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.impl.DefaultAccounting;
 import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.test.util.Dumper;
-import it.tidalwave.accounting.test.util.ScenarioFactory;
-import javax.annotation.Nonnull;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
