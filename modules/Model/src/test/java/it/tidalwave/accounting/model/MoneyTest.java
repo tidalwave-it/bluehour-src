@@ -43,12 +43,12 @@ public class MoneyTest
     public void toString_must_be_properly_computed()
       {
         final Money m1 = new Money(4053, "EUR");
-        assertThat(m1.toString(), is("4053 EUR"));
+        assertThat(m1.toString(), is("4053.00 EUR"));
 
       }
     @Test
     public void toString_for_ZERO_must_be_properly_computed()
       {
-        assertThat(Money.ZERO.toString(), is("0 EUR"));
+        assertThat(Money.ZERO.toString(), is("0.00 EUR"));
       }
   }

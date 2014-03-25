@@ -77,6 +77,6 @@ public class JobEventTest
                                    + "super=JobEvent(id=1, name=Consultancy, description=Consultancy description), "
                                    + "startDateTime=2014-01-05T12:34:56, "
                                    + "endDateTime=2014-01-05T13:45:34, "
-                                   + "earnings=430 EUR, rate=48 EUR)"));
+                                   + "earnings=430.00 EUR, rate=48.00 EUR)"));
       }
   }
