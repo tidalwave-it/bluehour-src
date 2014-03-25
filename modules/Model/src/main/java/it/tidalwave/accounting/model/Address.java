@@ -44,7 +44,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
+@Immutable @Getter @EqualsAndHashCode @ToString
 public class Address
   {
     public static final Address EMPTY = builder().create();
