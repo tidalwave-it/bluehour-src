@@ -48,11 +48,11 @@ public interface ProjectRegistry
      * 
      *
      ******************************************************************************************************************/
-    public static interface Finder extends FinderStream<Project>,
-                                           ExtendedFinderSupport<Project, ProjectRegistry.Finder>
+    public static interface ProjectFinder extends FinderStream<Project>,
+                                                  ExtendedFinderSupport<Project, ProjectRegistry.ProjectFinder>
       {
         @Nonnull
-        public Finder withId (@Nonnull Id id);
+        public ProjectFinder withId (@Nonnull Id id);
       }
 
     /*******************************************************************************************************************
@@ -69,17 +69,17 @@ public interface ProjectRegistry
     
     /*******************************************************************************************************************
      *
-     * Returns a {@link Finder} for finding {@link Project}s.
+     * Returns a {@link ProjectFinder} for finding {@link Project}s.
      * 
      * @return  the finder
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Finder findProjects();
+    public ProjectFinder findProjects();
 
     /*******************************************************************************************************************
      *
-     * Returns a {@link Finder} for finding {@link JobEvent}s.
+     * Returns a {@link ProjectFinder} for finding {@link JobEvent}s.
      * 
      * @return  the finder
      *

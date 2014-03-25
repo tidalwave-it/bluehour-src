@@ -57,8 +57,8 @@ public class DefaultProjectRegistry implements ProjectRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.Finder>
-                               implements ProjectRegistry.Finder
+    class DefaultProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
+                               implements ProjectRegistry.ProjectFinder
       {
         DefaultProjectFinder()
           {
@@ -119,7 +119,7 @@ public class DefaultProjectRegistry implements ProjectRegistry
      *
      ******************************************************************************************************************/
     @Override @Nonnull
-    public ProjectRegistry.Finder findProjects()
+    public ProjectRegistry.ProjectFinder findProjects()
       {
         return new DefaultProjectFinder();
       }
