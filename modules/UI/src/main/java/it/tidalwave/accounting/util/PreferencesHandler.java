@@ -25,14 +25,10 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.impl.javafx;
+package it.tidalwave.accounting.util;
 
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
-import javafx.application.Platform;
-import it.tidalwave.accounting.util.DefaultPreferencesHandler;
-import it.tidalwave.accounting.util.PreferencesHandler;
-import it.tidalwave.ui.javafx.JavaFXSpringApplication;
 
 /***********************************************************************************************************************
  *
@@ -40,23 +36,11 @@ import it.tidalwave.ui.javafx.JavaFXSpringApplication;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Main extends JavaFXSpringApplication
+public interface PreferencesHandler 
   {
-    public static void main (final @Nonnull String ... args)
-      {
-        try
-          {
-            final PreferencesHandler preferenceHandler = new DefaultPreferencesHandler();
-            final Path logfolder = preferenceHandler.getLogFolder();
-            System.setProperty("it.tidalwave.northernwind.bluehour.logFolder", logfolder.toFile().getAbsolutePath());
-            Platform.setImplicitExit(true);
-            launch(args);
-          }
-        catch (Throwable t)
-          {
-            // Don't use logging facilities here, they could be not initialized
-            t.printStackTrace();
-            System.exit(-1);
-          }
-      }
+    @Nonnull
+    public Path getAppFolder();
+    
+    @Nonnull
+    public Path getLogFolder();
   }

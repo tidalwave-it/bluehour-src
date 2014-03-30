@@ -25,14 +25,13 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.impl.javafx;
+package it.tidalwave.accounting.util;
 
-import javax.annotation.Nonnull;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import javafx.application.Platform;
-import it.tidalwave.accounting.util.DefaultPreferencesHandler;
-import it.tidalwave.accounting.util.PreferencesHandler;
-import it.tidalwave.ui.javafx.JavaFXSpringApplication;
+import lombok.Getter;
 
 /***********************************************************************************************************************
  *
@@ -40,23 +39,28 @@ import it.tidalwave.ui.javafx.JavaFXSpringApplication;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Main extends JavaFXSpringApplication
+public class DefaultPreferencesHandler implements PreferencesHandler
   {
-    public static void main (final @Nonnull String ... args)
+    @Getter
+    private final Path appFolder;
+    
+    @Getter
+    private final Path logFolder;
+    
+    public DefaultPreferencesHandler()
       {
-        try
+        try 
           {
-            final PreferencesHandler preferenceHandler = new DefaultPreferencesHandler();
-            final Path logfolder = preferenceHandler.getLogFolder();
-            System.setProperty("it.tidalwave.northernwind.bluehour.logFolder", logfolder.toFile().getAbsolutePath());
-            Platform.setImplicitExit(true);
-            launch(args);
-          }
-        catch (Throwable t)
+            // FIXME: Mac OS X only
+            appFolder = new File(System.getProperty("user.home") + "/Library/Application Support/blueHour/").toPath();
+            logFolder = appFolder.resolve("logs");
+            Files.createDirectories(logFolder);
+            final String logFolderPath = logFolder.toFile().getAbsolutePath();
+            System.err.println("Logging folder: " + logFolderPath);
+          } 
+        catch (IOException e) 
           {
-            // Don't use logging facilities here, they could be not initialized
-            t.printStackTrace();
-            System.exit(-1);
+            throw new RuntimeException(e);
           }
       }
   }
