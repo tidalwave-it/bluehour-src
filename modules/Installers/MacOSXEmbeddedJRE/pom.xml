@@ -32,12 +32,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Don't use the modules pom or it will unpack also common dependencies -->
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
-        <artifactId>bluehour</artifactId>
-        <version>1.0-ALPHA-1-SNAPSHOT</version>
-        <relativePath>../../../pom.xml</relativePath>
+        <artifactId>bluehour-modules</artifactId>
+        <version>1.0-ALPHA-2-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <!-- ===============================================================================================================
@@ -54,12 +53,15 @@
     <name>blueHour - Installer, Mac OS X with embedded JRE</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
     
-<!--    <dependencies>
+    <properties>
+        <tft.javafx.vmargs>it.tidalwave.accounting.ui.impl.javafx.Main</tft.javafx.vmargs> <!-- FIXME: DRY -->
+    </properties>
+
+    <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>bluehour-application</artifactId>
-            <type>zip</type>
+            <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
         </dependency>
-    </dependencies>-->
-            
+    </dependencies>
+
 </project>

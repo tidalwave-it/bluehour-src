@@ -309,12 +309,12 @@
     ================================================================================================================ -->
     <modules>
         <module>Model</module>
-        <!-- module>Installers/MacOSX</module>
-        <module>Installers/MacOSXEmbeddedJRE</module -->
         <module>iBizImporter</module>
         <module>XmlMarshalling</module>
         <module>JavaFXUI</module>
         <module>JavaFXApplication</module>
+        <module>Installers/MacOSX</module>
+        <module>Installers/MacOSXEmbeddedJRE</module>
     </modules>
 
 </project>

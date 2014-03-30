@@ -133,18 +133,18 @@
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
-                <version>1.0-ALPHA-2-SNAPSHOT</version> <!-- FIXME -->
+                <version>1.0-ALPHA-2-SNAPSHOT</version>
             </dependency>
-<!--            <dependency>
+            <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx</artifactId>
-                <version>1.0-ALPHA-1-SNAPSHOT</version>
+                <version>1.0-ALPHA-2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx-embedded-jre</artifactId>
-                <version>1.0-ALPHA-1-SNAPSHOT</version>
-            </dependency>-->
+                <version>1.0-ALPHA-2-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
