@@ -130,6 +130,11 @@
                 <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
                 <version>1.0-ALPHA-2-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
+                <version>1.0-ALPHA-2-SNAPSHOT</version> <!-- FIXME -->
+            </dependency>
 <!--            <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx</artifactId>
