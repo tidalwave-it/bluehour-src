@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -78,4 +79,7 @@
         </SplitPane>
         <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
     </children>
+    <stylesheets>
+        <URL value="@Application.css" />
+    </stylesheets>
 </VBox>
