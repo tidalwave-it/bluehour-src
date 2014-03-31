@@ -50,7 +50,8 @@ public class TimedJobEventPresentable extends JobEventPresentable
             @Override
             public String getDisplayName() 
               {
-                return "" + Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime()).toMinutes();
+                return "" + Duration.between(timedJobEvent.getStartDateTime(), 
+                                             timedJobEvent.getEndDateTime()).toMinutes();
               }
           }));
         map.put("Rate", new DefaultPresentationModel(new Displayable() 
@@ -58,7 +59,7 @@ public class TimedJobEventPresentable extends JobEventPresentable
             @Override
             public String getDisplayName() 
               {
-                return "rate?";
+                return timedJobEvent.getRate().toString();
               }
           }));
         map.put("Amount", new DefaultPresentationModel(new Displayable() 
