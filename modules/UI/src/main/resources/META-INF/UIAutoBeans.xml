@@ -67,5 +67,8 @@
 
     <bean id="customerExplorerPresentationControl"
           class="it.tidalwave.accounting.ui.customerexplorer.impl.DefaultCustomerExplorerPresentationControl" />
+    
+    <bean id="projectExplorerPresentationControl"
+          class="it.tidalwave.accounting.ui.projectexplorer.impl.DefaultProjectExplorerPresentationControl" />
 
 </beans>

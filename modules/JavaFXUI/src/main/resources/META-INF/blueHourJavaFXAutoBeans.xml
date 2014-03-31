@@ -61,4 +61,6 @@
 
     <bean class="it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation" />
 
+    <bean class="it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation" />
+
 </beans>

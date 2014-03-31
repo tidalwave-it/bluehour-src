@@ -32,10 +32,13 @@ import javax.inject.Inject;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Configurable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
+import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
+import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
 import lombok.extern.slf4j.Slf4j;
 //import static it.tidalwave.role.ui.javafx.impl.JavaFXSafeComponentBuilder.*;
 
@@ -54,8 +57,17 @@ public class JavaFXApplicationPresentationDelegate
     @Inject @Nonnull
     private JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
             
+    @Inject @Nonnull
+    private ProjectExplorerPresentationControl projectExplorerPresentationControl;
+
+    @Inject @Nonnull
+    private JavaFxProjectExplorerPresentation javaFxProjectExplorerPresentation;
+            
     @FXML
     private ListView<PresentationModel> lvCustomerExplorer;
+    
+    @FXML
+    private TableView<PresentationModel> tvProjectExplorer;
     
     public void initialize()
       throws IOException
@@ -63,6 +75,8 @@ public class JavaFXApplicationPresentationDelegate
         // FIXME: controllers can't initialize in postconstruct
         // Too bad because with PAC+EventBus we'd get rid of the control interfaces
         customerExplorerPresentationControl.initialize();
+        projectExplorerPresentationControl.initialize();
         javaFxCustomerExplorerPresentation.bind(lvCustomerExplorer);
+        javaFxProjectExplorerPresentation.bind(tvProjectExplorer);
       }
   }
