@@ -38,7 +38,6 @@ import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.model.JobEvent;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang.time.DurationFormatUtils;
 
 /***********************************************************************************************************************
  *
