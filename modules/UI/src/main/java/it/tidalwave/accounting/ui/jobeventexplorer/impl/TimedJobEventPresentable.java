@@ -9,10 +9,7 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
-import java.util.Map;
 import it.tidalwave.role.Displayable;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.model.TimedJobEvent;
 
 /***********************************************************************************************************************
@@ -33,17 +30,17 @@ public class TimedJobEventPresentable extends JobEventPresentable
       }
     
     @Override @Nonnull
-    protected Map<String, PresentationModel> createMap() 
+    protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
-        final Map<String, PresentationModel> map = super.createMap();
+        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        map.put("Date", new DefaultPresentationModel((Displayable) () -> timedJobEvent.getStartDateTime().toLocalDate().toString()));
-        map.put("Time", new DefaultPresentationModel((Displayable) () -> 
+        builder.add("Date",   (Displayable) () -> timedJobEvent.getStartDateTime().toLocalDate().toString());
+        builder.add("Time",   (Displayable) () -> 
                 "" + Duration.between(timedJobEvent.getStartDateTime(), 
-                timedJobEvent.getEndDateTime()).toMinutes()));
-        map.put("Rate", new DefaultPresentationModel((Displayable) () -> timedJobEvent.getRate().toString()));
-        map.put("Amount", new DefaultPresentationModel((Displayable) () -> timedJobEvent.getEarnings().toString()));
+                timedJobEvent.getEndDateTime()).toMinutes());
+        builder.add("Rate",   (Displayable) () -> timedJobEvent.getRate().toString());
+        builder.add("Amount", (Displayable) () -> timedJobEvent.getEarnings().toString());
         
-        return map;
+        return builder;
       }
   }

@@ -8,8 +8,6 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.spi.MapAggregate;
 import it.tidalwave.role.ui.Presentable;
@@ -33,13 +31,13 @@ public class JobEventPresentable implements Presentable
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
-        return new DefaultPresentationModel("", new MapAggregate<>(createMap()));
+        return new DefaultPresentationModel("", aggregateBuilder().create());
       }
     
     @Nonnull
-    protected Map<String, PresentationModel> createMap ()
+    protected AggregatePresentationModelBuilder aggregateBuilder()
       {
-        final Map<String, PresentationModel> map = new HashMap<>();
+        final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
 //        final Selectable selectable = new Selectable() 
 //          {
 //            @Override
@@ -50,9 +48,9 @@ public class JobEventPresentable implements Presentable
 //          };
         
         // FIXME: uses the column header names, should be an internal id instead
-        map.put("Job Event", new DefaultPresentationModel((Displayable) () -> jobEvent.getName()));
-        map.put("Notes",     new DefaultPresentationModel((Displayable) () -> jobEvent.getDescription()));
+        builder.add("Job Event", (Displayable) () -> jobEvent.getName());
+        builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
 
-        return map;
+        return builder;
       }
   }
