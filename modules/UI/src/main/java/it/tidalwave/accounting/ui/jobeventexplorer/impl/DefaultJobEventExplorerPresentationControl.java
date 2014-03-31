@@ -30,25 +30,12 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.common.annotations.VisibleForTesting;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.role.SimpleComposite;
-import it.tidalwave.role.spi.ArrayListSimpleComposite;
-import it.tidalwave.role.spi.MapAggregate;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.Selectable;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
-import it.tidalwave.role.ui.spi.PresentationModelCollectors;
-import it.tidalwave.role.ui.spi.SimpleCompositePresentable;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
@@ -90,88 +77,7 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
         log.info("onProjectSelectedEvent({})", event);
         presentation.populate(event.getProject().findChildren()
 //                .sorted(comparing(JobEvent::getDate))
-                .map(jobEvent -> createPresentationModelFor(jobEvent))
+                .map(jobEvent -> PMFactory.createPresentationModelFor(jobEvent))
                 .collect(toContainerPresentationModel()));
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull JobEvent jobEvent)
-      {
-        final Map<String, PresentationModel> map = new HashMap<>();
-        final Selectable selectable = new Selectable() 
-          {
-            @Override
-            public void select() 
-              {
-//                messageBus.publish(new ProjectSelectedEvent(jobEvent));
-              }
-          };
-        
-        // FIXME: uses the column header names, should be an internal id instead
-//        map.put("Date", new DefaultPresentationModel(new Displayable() 
-//          {
-//            @Override
-//            public String getDisplayName() 
-//              {
-//                return jobEvent.get;
-//              }
-//          }));
-        map.put("Job Event", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return jobEvent.getName();
-              }
-          }));
-//        map.put("Time", new DefaultPresentationModel(new Displayable() 
-//          {
-//            @Override
-//            public String getDisplayName() 
-//              {
-//                return jobEvent.getNumber();
-//              }
-//          }));
-//        map.put("Rate", new DefaultPresentationModel(new Displayable() 
-//          {
-//            @Override
-//            public String getDisplayName() 
-//              {
-//                return jobEvent.getName();
-//              }
-//          }));
-//        map.put("Amount", new DefaultPresentationModel(new Displayable() 
-//          {
-//            @Override
-//            public String getDisplayName() 
-//              {
-//                return jobEvent.getStartDate().toString();
-//              }
-//          }));
-        map.put("Notes", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return jobEvent.getDescription();
-              }
-          }));
-        
-//        if (jobEvent instanceof JobEventGroup) // FIXME
-//          {
-//            return ((JobEventGroup)jobEvent).findChildren()
-//                    .map(e -> createPresentationModelFor(e))
-//                    .collect(PresentationModelCollectors.toContainerPresentationModel(selectable, new MapAggregate<>(map)));
-//            // FIXME: use SimpleCompositePresentable?
-//          }
-        
-//        map.put("name", new DefaultPresentationModel((Displayable)() -> project.getName()));
-//        map.put("customer", new DefaultPresentationModel((Displayable)() -> project.getCustomer().getName()));
-        // FIXME: passing null as the owner fails in RoleManagerSupport:341
-        return new DefaultPresentationModel("", selectable, new MapAggregate<>(map));
       }
   }
