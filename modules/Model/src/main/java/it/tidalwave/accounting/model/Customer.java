@@ -29,11 +29,17 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
+import it.tidalwave.accounting.model.impl.FinderWithIdMapSupport;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Wither;
 import static lombok.AccessLevel.PRIVATE;
@@ -46,7 +52,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString // FIXME: remove the @Getter
+@Immutable @Getter @EqualsAndHashCode @ToString(exclude = "accounting") // FIXME: remove the @Getter
 public class Customer implements Identifiable
   {
     /*******************************************************************************************************************
@@ -107,6 +113,9 @@ public class Customer implements Identifiable
 
     @Nonnull
     private final String vatNumber;
+    
+    @Setter @Nonnull // FIXME: drop the setter!
+    private Accounting accounting;
 
     /*******************************************************************************************************************
      *
@@ -141,5 +150,37 @@ public class Customer implements Identifiable
     public Builder asBuilder()
       {
         return new Builder(id, name, billingAddress, vatNumber, Customer.Builder.Callback.DEFAULT);                
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    class DefaultProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
+                               implements ProjectRegistry.ProjectFinder
+      {
+        DefaultProjectFinder (final Map<Id, Project> projectMapById)
+          {
+            super(projectMapById);  
+          }
+      }
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public ProjectRegistry.ProjectFinder findProjects()
+      {
+        final Map<Id, List<Project>> temp = accounting.getProjectRegistry().findProjects()
+                .filter(project -> project.getCustomer().getId().equals(getId()))
+                .collect(Collectors.groupingBy(Project::getId));
+        // FIXME: try to merge into a single pipeline
+        final Map<Id, Project> map = new HashMap<>();
+        temp.forEach((id, projects) -> map.put(id, projects.get(0)));
+        
+        return new DefaultProjectFinder(map);
       }
   }

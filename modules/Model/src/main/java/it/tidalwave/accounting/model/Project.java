@@ -27,7 +27,6 @@
  */
 package it.tidalwave.accounting.model;
 
-import it.tidalwave.role.Identifiable;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
@@ -36,8 +35,9 @@ import java.time.LocalDate;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
-import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.util.Id;
+import it.tidalwave.role.Identifiable;
+import it.tidalwave.role.SimpleComposite;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -115,7 +115,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable
     @Getter @Nonnull
     private final Id id;
     
-    @Nonnull
+    @Getter @Nonnull
     private final Customer customer;
 
     @Getter @Nonnull
@@ -124,22 +124,22 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable
     @Getter @Nonnull
     private final String number;
 
-    @Nonnull
+    @Getter @Nonnull
     private final String description;
 
-    @Nonnull
+    @Getter @Nonnull
     private final String notes;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money hourlyRate;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money amount;
 
     @Getter @Nonnull
     private final LocalDate startDate;
 
-    @Nonnull
+    @Getter @Nonnull
     private final LocalDate endDate;
 
     @Nonnull
