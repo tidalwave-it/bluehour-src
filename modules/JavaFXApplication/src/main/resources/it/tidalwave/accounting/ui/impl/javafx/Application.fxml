@@ -69,6 +69,9 @@
                                                         <TreeTableColumn prefWidth="75.0" text="Amount" />
                                                         <TreeTableColumn prefWidth="75.0" text="Notes" />
                                                     </columns>
+<columnResizePolicy>
+<TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+</columnResizePolicy>
                                                 </TreeTableView>
                                                 <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
                                             </children>
