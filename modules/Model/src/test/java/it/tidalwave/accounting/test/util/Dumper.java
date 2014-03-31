@@ -135,6 +135,7 @@ public class Dumper
                                        Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()).stream())
                                         .sorted(comparing(Field::getName))
                                         .filter(field -> !Collection.class.isAssignableFrom(field.getType()))
+                                        .filter(field -> !Accounting.class.isAssignableFrom(field.getType()))
                                         .peek(field -> field.setAccessible(true))
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
