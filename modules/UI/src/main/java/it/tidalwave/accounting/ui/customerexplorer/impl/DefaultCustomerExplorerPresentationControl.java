@@ -95,9 +95,8 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
      * 
      *
      ******************************************************************************************************************/
-//    @Nonnull
-//    @VisibleForTesting 
-    PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
+    @Nonnull
+    @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
       {
         final Displayable displayable = () -> customer.getName();
         final Selectable selectable = () -> messageBus.publish(new CustomerSelectedEvent(customer));
