@@ -42,7 +42,7 @@ import lombok.Getter;
 public class DefaultAccounting implements Accounting
   {
     @Getter
-    private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry();
+    private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry(this);
 
     @Getter
     private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();

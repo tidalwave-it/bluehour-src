@@ -31,8 +31,10 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import it.tidalwave.util.Id;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -41,9 +43,12 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
+@RequiredArgsConstructor @Slf4j
 public class DefaultCustomerRegistry implements CustomerRegistry
   {
+    @Nonnull
+    private final Accounting accounting;
+    
     private final Map<Id, Customer> customerMapById = new HashMap<>();
 
     /*******************************************************************************************************************
@@ -79,6 +84,10 @@ public class DefaultCustomerRegistry implements CustomerRegistry
     @Override @Nonnull
     public Customer.Builder addCustomer()
       {
-        return new Customer.Builder(customer -> customerMapById.put(customer.getId(), customer));
+        return new Customer.Builder(customer -> 
+          {
+            customer.setAccounting(accounting);
+            customerMapById.put(customer.getId(), customer);
+          });
       }
   }

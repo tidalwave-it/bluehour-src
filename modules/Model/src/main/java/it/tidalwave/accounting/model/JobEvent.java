@@ -99,10 +99,10 @@ public abstract class JobEvent implements Identifiable
     @Getter @Nonnull
     protected final Id id;
     
-    @Nonnull
+    @Getter @Nonnull
     protected final String name;
 
-    @Nonnull
+    @Getter @Nonnull
     protected final String description;
 
     /*******************************************************************************************************************
