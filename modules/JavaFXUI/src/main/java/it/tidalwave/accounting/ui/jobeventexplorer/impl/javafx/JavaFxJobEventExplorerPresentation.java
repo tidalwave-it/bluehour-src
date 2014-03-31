@@ -33,7 +33,7 @@ import javafx.application.Platform;
 import javafx.scene.control.TreeTableView;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import it.tidalwave.accounting.ui.jobeventexplorer.JobEventPresentation;
+import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import org.springframework.beans.factory.annotation.Configurable;
 
 /***********************************************************************************************************************
@@ -43,7 +43,7 @@ import org.springframework.beans.factory.annotation.Configurable;
  *
  **********************************************************************************************************************/
 @Configurable
-public class JavaFxJobEventExplorerPresentation implements JobEventPresentation
+public class JavaFxJobEventExplorerPresentation implements JobEventExplorerPresentation
   {
     @Inject @Nonnull
     private JavaFXBinder binder;

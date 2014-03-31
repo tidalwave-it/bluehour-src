@@ -49,8 +49,8 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.ui.jobeventexplorer.JobEventPresentation;
-import it.tidalwave.accounting.ui.jobeventexplorer.JobEventPresentationControl;
+import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
+import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
 
@@ -61,13 +61,13 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPr
  *
  **********************************************************************************************************************/
 @DciContext @SimpleMessageSubscriber @Slf4j
-public class DefaultJobEventPresentationControl implements JobEventPresentationControl
+public class DefaultJobEventExplorerPresentationControl implements JobEventExplorerPresentationControl
   {
     @Inject @Named("applicationMessageBus") @Nonnull
     private MessageBus messageBus;
 
     @Inject @Nonnull
-    private JobEventPresentation presentation;
+    private JobEventExplorerPresentation presentation;
 
     /*******************************************************************************************************************
      *

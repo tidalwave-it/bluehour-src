@@ -27,13 +27,16 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer;
 
+import javax.annotation.Nonnull;
+import it.tidalwave.role.ui.PresentationModel;
+
 /***********************************************************************************************************************
  *
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface JobEventPresentationControl 
+public interface JobEventExplorerPresentation 
   {
-    public void initialize();
+    public void populate (@Nonnull PresentationModel pm);
   }
