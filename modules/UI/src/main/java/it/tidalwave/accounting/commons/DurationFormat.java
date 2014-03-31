@@ -25,12 +25,10 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.jobeventexplorer.impl;
+package it.tidalwave.accounting.commons;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.accounting.model.TimedJobEvent;
 
 /***********************************************************************************************************************
  *
@@ -38,33 +36,13 @@ import it.tidalwave.accounting.model.TimedJobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class TimedJobEventPresentable extends JobEventPresentable
+public class DurationFormat 
   {
     @Nonnull
-    private final TimedJobEvent timedJobEvent;
-    
-    public TimedJobEventPresentable (final @Nonnull TimedJobEvent timedJobEvent)
+    public String format (final @Nonnull Duration duration)
       {
-        super(timedJobEvent);
-        this.timedJobEvent = timedJobEvent;
-      }
-    
-    @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder() 
-      {
-        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        
-        builder.add("Date",   (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime().toLocalDate()));
-        builder.add("Time",   (Displayable) () -> DF.format(computeDuration()));
-        builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()));
-        builder.add("Amount", (Displayable) () -> MF.format(timedJobEvent.getEarnings()));
-        
-        return builder;
-      }
-
-    @Nonnull
-    private Duration computeDuration() 
-      {
-        return Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
-      }
+        final long hours = duration.toHours(); 
+        final long minutes = duration.minusHours(hours).toMinutes();
+        return String.format("%d:%02d", hours, minutes);     
+      }  
   }

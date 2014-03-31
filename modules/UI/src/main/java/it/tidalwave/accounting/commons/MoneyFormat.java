@@ -25,12 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.jobeventexplorer.impl;
+package it.tidalwave.accounting.commons;
 
 import javax.annotation.Nonnull;
-import java.time.Duration;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.accounting.model.TimedJobEvent;
+import java.util.HashMap;
+import java.util.Map;
+import it.tidalwave.accounting.model.Money;
 
 /***********************************************************************************************************************
  *
@@ -38,33 +38,21 @@ import it.tidalwave.accounting.model.TimedJobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class TimedJobEventPresentable extends JobEventPresentable
+public class MoneyFormat 
   {
-    @Nonnull
-    private final TimedJobEvent timedJobEvent;
+    private final static Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
     
-    public TimedJobEventPresentable (final @Nonnull TimedJobEvent timedJobEvent)
+    static
       {
-        super(timedJobEvent);
-        this.timedJobEvent = timedJobEvent;
+        CURRENCY_SYMBOL_MAP.put("EUR", "€");
+        CURRENCY_SYMBOL_MAP.put("USD", "$");
       }
     
-    @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder() 
-      {
-        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        
-        builder.add("Date",   (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime().toLocalDate()));
-        builder.add("Time",   (Displayable) () -> DF.format(computeDuration()));
-        builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()));
-        builder.add("Amount", (Displayable) () -> MF.format(timedJobEvent.getEarnings()));
-        
-        return builder;
-      }
-
     @Nonnull
-    private Duration computeDuration() 
+    public String format (final @Nonnull Money amount)
       {
-        return Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
+        final String currency = amount.getCurrency();
+        return String.format("%s %s", Money.getFormat().format(amount.getAmount()), 
+                                      CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
       }
   }
