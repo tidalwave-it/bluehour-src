@@ -34,6 +34,7 @@ import javax.xml.bind.Marshaller;
 import java.io.IOException;
 import java.io.OutputStream;
 import it.tidalwave.role.Marshallable;
+import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,7 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@DciRole(datumType = Accounting.class)
 @RequiredArgsConstructor
 public class AccountingXmlMarshallable implements Marshallable
   {

@@ -36,6 +36,7 @@ import javax.xml.bind.Unmarshaller;
 import it.tidalwave.role.Unmarshallable;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
+import it.tidalwave.dci.annotation.DciRole;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -44,6 +45,7 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@DciRole(datumType = Accounting.class)
 @RequiredArgsConstructor
 public class AccountingXmlUnmarshallable implements Unmarshallable
   {
