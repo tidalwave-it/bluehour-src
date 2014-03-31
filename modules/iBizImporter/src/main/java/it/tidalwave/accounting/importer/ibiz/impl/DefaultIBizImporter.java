@@ -30,6 +30,8 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
+import it.tidalwave.util.As;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
@@ -37,6 +39,7 @@ import it.tidalwave.accounting.model.impl.DefaultCustomerRegistry;
 import it.tidalwave.accounting.model.impl.DefaultInvoiceRegistry;
 import it.tidalwave.accounting.model.impl.DefaultProjectRegistry;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
+import lombok.Delegate;
 import lombok.Getter;
 
 /***********************************************************************************************************************
@@ -47,6 +50,9 @@ import lombok.Getter;
  **********************************************************************************************************************/
 public class DefaultIBizImporter implements IBizImporter
   {
+    @Delegate
+    private final As asSupport = new AsSupport(this);
+
     @Getter
     private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry(this);
 

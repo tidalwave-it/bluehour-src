@@ -27,10 +27,13 @@
  */
 package it.tidalwave.accounting.model.impl;
 
+import it.tidalwave.util.As;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import lombok.Delegate;
 import lombok.Getter;
 
 /***********************************************************************************************************************
@@ -41,6 +44,9 @@ import lombok.Getter;
  **********************************************************************************************************************/
 public class DefaultAccounting implements Accounting
   {
+    @Delegate
+    private final As asSupport = new AsSupport(this);
+
     @Getter
     private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry(this);
 

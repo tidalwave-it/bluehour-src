@@ -28,6 +28,7 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
+import it.tidalwave.util.As;
 
 /***********************************************************************************************************************
  *
@@ -35,7 +36,7 @@ import javax.annotation.Nonnull;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Accounting 
+public interface Accounting extends As
   {
     /*******************************************************************************************************************
      *
