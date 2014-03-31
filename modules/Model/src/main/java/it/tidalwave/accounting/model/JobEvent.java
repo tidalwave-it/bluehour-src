@@ -32,9 +32,12 @@ import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.util.List;
 import java.time.LocalDateTime;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
 import lombok.AllArgsConstructor;
+import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -49,9 +52,12 @@ import static lombok.AccessLevel.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
-public abstract class JobEvent implements Identifiable
+@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+public abstract class JobEvent implements Identifiable, As
   {
+    @Delegate
+    private final As asSupport = new AsSupport(this);
+
     /*******************************************************************************************************************
      *
      * 

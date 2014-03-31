@@ -27,7 +27,6 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
@@ -36,10 +35,13 @@ import java.time.LocalDate;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import it.tidalwave.role.Identifiable;
 import lombok.AllArgsConstructor;
+import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -52,9 +54,12 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString
-public class Invoice implements Identifiable
+@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+public class Invoice implements Identifiable, As
   {
+    @Delegate
+    private final As asSupport = new AsSupport(this);
+
     /*******************************************************************************************************************
      *
      * 

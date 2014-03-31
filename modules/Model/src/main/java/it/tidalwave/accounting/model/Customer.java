@@ -33,10 +33,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.accounting.model.impl.FinderWithIdMapSupport;
 import lombok.AllArgsConstructor;
+import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,9 +55,12 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString(exclude = "accounting") // FIXME: remove the @Getter
-public class Customer implements Identifiable
+@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
+public class Customer implements Identifiable, As
   {
+    @Delegate
+    private final As asSupport = new AsSupport(this);
+
     /*******************************************************************************************************************
      *
      * 

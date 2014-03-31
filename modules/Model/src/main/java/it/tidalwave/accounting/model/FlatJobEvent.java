@@ -32,6 +32,7 @@ import javax.annotation.concurrent.Immutable;
 import java.time.LocalDate;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /***********************************************************************************************************************
@@ -43,10 +44,10 @@ import lombok.ToString;
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 public class FlatJobEvent extends JobEvent
   {
-    @Nonnull
+    @Getter @Nonnull
     private final LocalDate date;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money earnings;
 
     /*******************************************************************************************************************
