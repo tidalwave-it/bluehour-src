@@ -49,12 +49,6 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
     private final List<Object> roles = new ArrayList<>();
     
     @Nonnull
-    public static PresentationModelCollectors toContainerPresentationModel()
-      {
-        return new PresentationModelCollectors(Collections.emptyList());
-      }
-
-    @Nonnull
     public static PresentationModelCollectors toContainerPresentationModel (final @Nonnull Object ... roles)
       {
         return new PresentationModelCollectors(Arrays.asList(roles));
