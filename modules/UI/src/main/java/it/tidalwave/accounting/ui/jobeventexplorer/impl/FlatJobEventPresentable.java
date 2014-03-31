@@ -28,11 +28,10 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import com.google.common.annotations.VisibleForTesting;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.TimedJobEvent;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.model.FlatJobEvent;
 
 /***********************************************************************************************************************
  *
@@ -40,21 +39,28 @@ import it.tidalwave.accounting.model.TimedJobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
-// FIXME: replace with as()
-public class PMFactory 
+@DciRole(datumType = FlatJobEvent.class)
+public class FlatJobEventPresentable extends JobEventPresentable
   {
-    @VisibleForTesting static PresentationModel createPresentationModelFor (final @Nonnull JobEvent jobEvent)
+    @Nonnull
+    private final FlatJobEvent flatJobEvent;
+    
+    public FlatJobEventPresentable (final @Nonnull FlatJobEvent flatJobEvent)
       {
-        if (jobEvent instanceof JobEventGroup)
-          {
-            return new JobEventGroupPresentable((JobEventGroup)jobEvent).createPresentationModel();
-          }
+        super(flatJobEvent);
+        this.flatJobEvent = flatJobEvent;
+      }
+    
+    @Override @Nonnull
+    protected AggregatePresentationModelBuilder aggregateBuilder() 
+      {
+        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        if (jobEvent instanceof TimedJobEvent)
-          {
-            return new TimedJobEventPresentable((TimedJobEvent)jobEvent).createPresentationModel();
-          }
+        builder.add("Date",   (Displayable) () -> DTF.format(flatJobEvent.getDate()));
+        builder.add("Time",   new DefaultDisplayable(""));
+        builder.add("Rate",   new DefaultDisplayable(""));
+        builder.add("Amount", (Displayable) () -> MF.format(flatJobEvent.getEarnings()));
         
-        return new JobEventPresentable(jobEvent).createPresentationModel();
+        return builder;
       }
   }

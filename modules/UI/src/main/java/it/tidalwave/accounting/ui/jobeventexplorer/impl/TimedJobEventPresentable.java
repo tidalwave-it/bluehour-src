@@ -30,6 +30,7 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import it.tidalwave.role.Displayable;
+import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.TimedJobEvent;
 
 /***********************************************************************************************************************
@@ -38,6 +39,7 @@ import it.tidalwave.accounting.model.TimedJobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@DciRole(datumType = TimedJobEvent.class)
 public class TimedJobEventPresentable extends JobEventPresentable
   {
     @Nonnull

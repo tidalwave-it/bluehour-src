@@ -29,9 +29,11 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.spi.PresentationModelCollectors;
 import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.JobEventGroup;
+import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
 
 /***********************************************************************************************************************
  *
@@ -39,6 +41,7 @@ import it.tidalwave.accounting.model.JobEventGroup;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@DciRole(datumType = JobEventGroup.class)
 public class JobEventGroupPresentable extends JobEventPresentable
   {
     @Nonnull
@@ -54,8 +57,8 @@ public class JobEventGroupPresentable extends JobEventPresentable
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
         return jobEventGroup.findChildren()
-                .map(e -> PMFactory.createPresentationModelFor(e))
-                .collect(PresentationModelCollectors.toContainerPresentationModel(aggregateBuilder().create()));
+                .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
+                .collect(toContainerPresentationModel(aggregateBuilder().create()));
         // FIXME: use SimpleCompositePresentable?
       }
 
