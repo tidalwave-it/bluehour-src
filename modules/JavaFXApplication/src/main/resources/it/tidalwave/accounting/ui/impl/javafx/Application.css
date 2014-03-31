@@ -1,0 +1,11 @@
+
+.mainFxmlClass 
+  {
+
+  }
+  
+.table-view .column-header 
+  {
+    -fx-font-size: 10px;
+    /* TODO: bold */
+  }
