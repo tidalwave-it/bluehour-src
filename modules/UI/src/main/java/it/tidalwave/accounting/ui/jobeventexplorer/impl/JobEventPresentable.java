@@ -7,16 +7,15 @@
 
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import it.tidalwave.accounting.model.JobEvent;
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.spi.MapAggregate;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.Selectable;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.JobEvent;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -51,22 +50,8 @@ public class JobEventPresentable implements Presentable
 //          };
         
         // FIXME: uses the column header names, should be an internal id instead
-        map.put("Job Event", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return jobEvent.getName();
-              }
-          }));
-        map.put("Notes", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return jobEvent.getDescription();
-              }
-          }));
+        map.put("Job Event", new DefaultPresentationModel((Displayable) () -> jobEvent.getName()));
+        map.put("Notes",     new DefaultPresentationModel((Displayable) () -> jobEvent.getDescription()));
 
         return map;
       }
