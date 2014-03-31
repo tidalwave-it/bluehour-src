@@ -44,5 +44,9 @@
     <packaging>jar</packaging>
     
     <dependencies>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-model</artifactId>
+        </dependency>
     </dependencies>
 </project>
