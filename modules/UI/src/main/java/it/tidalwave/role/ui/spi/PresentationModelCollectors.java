@@ -31,7 +31,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.function.Function;
 import it.tidalwave.util.ArrayListCollectorSupport;
 import it.tidalwave.role.ui.PresentationModel;
