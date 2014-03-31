@@ -53,7 +53,7 @@ public class Money
     @Getter @Nonnull
     private final BigDecimal amount;
 
-    @Nonnull
+    @Getter @Nonnull
     private final String currency;
 
     public Money (final long amount, final @Nonnull String currency)
@@ -76,7 +76,7 @@ public class Money
       }
     
     @Nonnull
-    private static DecimalFormat getFormat()
+    public static DecimalFormat getFormat()
       {
         final DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
