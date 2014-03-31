@@ -38,6 +38,7 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
+import it.tidalwave.role.ui.Selectable;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
 
@@ -75,6 +76,15 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
     @VisibleForTesting void onProjectSelectedEvent (final @Nonnull @ListensTo ProjectSelectedEvent event)
       {
         log.info("onProjectSelectedEvent({})", event);
+//        final Selectable selectable = new Selectable() 
+//          {
+//            @Override
+//            public void select() 
+//              {
+//                log.info("selected {}", event);
+////                messageBus.publish(new ProjectSelectedEvent(jobEvent));
+//              }
+//          };
         presentation.populate(event.getProject().findChildren()
 //                .sorted(comparing(JobEvent::getDate))
                 .map(jobEvent -> PMFactory.createPresentationModelFor(jobEvent))

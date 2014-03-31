@@ -66,14 +66,6 @@ public class JobEventPresentable implements Presentable
     protected AggregatePresentationModelBuilder aggregateBuilder()
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
-//        final Selectable selectable = new Selectable() 
-//          {
-//            @Override
-//            public void select() 
-//              {
-////                messageBus.publish(new ProjectSelectedEvent(jobEvent));
-//              }
-//          };
         
         // FIXME: uses the column header names, should be an internal id instead
         builder.add("Job Event", (Displayable) () -> jobEvent.getName());
