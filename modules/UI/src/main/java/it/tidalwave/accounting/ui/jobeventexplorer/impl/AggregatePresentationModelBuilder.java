@@ -46,10 +46,9 @@ public class AggregatePresentationModelBuilder
     private final Map<String, PresentationModel> map = new HashMap<>();
     
     @Nonnull
-    public AggregatePresentationModelBuilder add (final @Nonnull String name, final @Nonnull Object ... roles)
+    public void add (final @Nonnull String name, final @Nonnull Object ... roles)
       {
         map.put(name, new DefaultPresentationModel("", roles));
-        return this; // FIXME: make immutable   
       }
     
     @Nonnull
