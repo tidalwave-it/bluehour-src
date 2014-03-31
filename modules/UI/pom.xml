@@ -44,5 +44,67 @@
     <packaging>jar</packaging>
     
     <dependencies>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-role</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org-slf4j-jdk14</artifactId>
+                    <groupId>com.kenai.nbpwr</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-messagebus-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-messagebus</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org-slf4j-jdk14</artifactId>
+                    <groupId>com.kenai.nbpwr</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.northernwind.rca</groupId>
+            <artifactId>it-tidalwave-util-supplement</artifactId>
+        </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <configuration>
+                    <aspectLibraries combine.children="append">
+                        <dependency>
+                            <groupId>it.tidalwave.thesefoolishthings</groupId>
+                            <artifactId>it-tidalwave-messagebus-spring</artifactId>
+                        </dependency>
+                    </aspectLibraries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>
