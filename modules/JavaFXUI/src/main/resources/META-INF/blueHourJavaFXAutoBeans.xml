@@ -63,4 +63,6 @@
 
     <bean class="it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation" />
 
+    <bean class="it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation" />
+
 </beans>

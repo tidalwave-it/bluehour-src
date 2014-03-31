@@ -71,4 +71,7 @@
     <bean id="projectExplorerPresentationControl"
           class="it.tidalwave.accounting.ui.projectexplorer.impl.DefaultProjectExplorerPresentationControl" />
 
+    <bean id="jobEventExplorerPresentationControl"
+          class="it.tidalwave.accounting.ui.jobeventexplorer.impl.DefaultJobEventPresentationControl" />
+
 </beans>

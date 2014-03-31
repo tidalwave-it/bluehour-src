@@ -37,8 +37,10 @@ import org.springframework.beans.factory.annotation.Configurable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
+import it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
+import javafx.scene.control.TreeTableView;
 import lombok.extern.slf4j.Slf4j;
 //import static it.tidalwave.role.ui.javafx.impl.JavaFXSafeComponentBuilder.*;
 
@@ -63,12 +65,21 @@ public class JavaFXApplicationPresentationDelegate
     @Inject @Nonnull
     private JavaFxProjectExplorerPresentation javaFxProjectExplorerPresentation;
             
+    @Inject @Nonnull
+    private ProjectExplorerPresentationControl jobEventExplorerPresentationControl;
+
+    @Inject @Nonnull
+    private JavaFxJobEventExplorerPresentation javaFxJobEventExplorerPresentation;
+    
     @FXML
     private ListView<PresentationModel> lvCustomerExplorer;
     
     @FXML
     private TableView<PresentationModel> tvProjectExplorer;
     
+    @FXML
+    private TreeTableView<PresentationModel> ttvJobEventExplorer;
+
     public void initialize()
       throws IOException
       {
@@ -76,7 +87,9 @@ public class JavaFXApplicationPresentationDelegate
         // Too bad because with PAC+EventBus we'd get rid of the control interfaces
         customerExplorerPresentationControl.initialize();
         projectExplorerPresentationControl.initialize();
+        jobEventExplorerPresentationControl.initialize();
         javaFxCustomerExplorerPresentation.bind(lvCustomerExplorer);
         javaFxProjectExplorerPresentation.bind(tvProjectExplorer);
+        javaFxJobEventExplorerPresentation.bind(ttvJobEventExplorer);
       }
   }

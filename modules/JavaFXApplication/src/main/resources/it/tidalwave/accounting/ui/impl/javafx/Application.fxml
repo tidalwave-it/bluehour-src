@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -45,6 +46,9 @@
                                                         <TableColumn prefWidth="60.0" resizable="false" text="Estimate" />
                                                         <TableColumn prefWidth="200.0" text="Notes" />
                                                     </columns>
+<columnResizePolicy>
+<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+</columnResizePolicy>
                                                 </TableView>
                                                 <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
                                             </children>
@@ -55,21 +59,17 @@
                                     <children>
                                         <VBox layoutX="22.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-                                                <TableView fx:id="tvJobEvents" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                    <columns>
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Date" />
-                                                        <TableColumn prefWidth="200.0" text="Job Event" />
-                                                        <TableColumn prefWidth="40.0" resizable="false" text="Time" />
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Rate" />
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Amount" />
-                                                        <TableColumn prefWidth="200.0" text="Notes" />
-                                                    </columns>
-                                                </TableView>
+                                                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" /><TreeTableView fx:id="ttvJobEventExplorer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+<columns><TreeTableColumn prefWidth="75.0" text="Date" /><TreeTableColumn prefWidth="75.0" text="Job Event" /><TreeTableColumn prefWidth="75.0" text="Time" /><TreeTableColumn prefWidth="75.0" text="Rate" /><TreeTableColumn prefWidth="75.0" text="Amount" /><TreeTableColumn prefWidth="75.0" text="Notes" />
+</columns>
+</TreeTableView>
                                                 <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
                                             </children>
                                         </VBox>
                                     </children>
+<opaqueInsets>
+<Insets />
+</opaqueInsets>
                                 </AnchorPane>
                             </items>
                         </SplitPane>

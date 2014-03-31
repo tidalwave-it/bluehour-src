@@ -3,7 +3,8 @@
   {
 
   }
-  
+
+.table-tree-view .column-header,
 .table-view .column-header 
   {
     -fx-font-size: 10px;
