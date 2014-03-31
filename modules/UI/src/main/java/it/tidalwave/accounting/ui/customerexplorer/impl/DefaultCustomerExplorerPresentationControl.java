@@ -31,10 +31,8 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.google.common.annotations.VisibleForTesting;
-import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
@@ -47,6 +45,7 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
+import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
 
 /***********************************************************************************************************************
@@ -98,8 +97,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     @Nonnull
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
       {
-        final Displayable displayable = () -> customer.getName();
         final Selectable selectable = () -> messageBus.publish(new CustomerSelectedEvent(customer));
-        return new DefaultPresentationModel(customer, displayable, selectable);
+        return customer.as(Presentable).createPresentationModel(selectable);
       }
   }
