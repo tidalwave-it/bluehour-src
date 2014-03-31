@@ -84,7 +84,7 @@
 
         <netbeans.hint.jdkPlatform>JDK_1.8.0</netbeans.hint.jdkPlatform>
         <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
-        <netbeans.compile.on.save>all</netbeans.compile.on.save>
+        <netbeans.compile.on.save>none</netbeans.compile.on.save>
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
