@@ -42,11 +42,11 @@ import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
-import it.tidalwave.accounting.exporter.xml.impl.AccountingXmlUnmarshallable;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.impl.DefaultAccounting;
 import it.tidalwave.accounting.util.PreferencesHandler;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.role.Unmarshallable.Unmarshallable;
 
 /***********************************************************************************************************************
  *
@@ -112,8 +112,7 @@ public class DefaultAccountingController
 
         try (final InputStream is = new FileInputStream(dataFile.toFile()))
           {
-            // FIXME: use as()
-            accounting = new AccountingXmlUnmarshallable(accounting).unmarshal(is);
+            accounting = accounting.as(Unmarshallable).unmarshal(is);
           }
       }
   }
