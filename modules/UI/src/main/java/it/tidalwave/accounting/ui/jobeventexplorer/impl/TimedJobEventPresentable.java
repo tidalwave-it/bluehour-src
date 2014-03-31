@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.accounting.model.TimedJobEvent;
+import java.time.LocalTime;
 
 /***********************************************************************************************************************
  *
@@ -55,12 +56,17 @@ public class TimedJobEventPresentable extends JobEventPresentable
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
         builder.add("Date",   (Displayable) () -> timedJobEvent.getStartDateTime().toLocalDate().toString());
-        builder.add("Time",   (Displayable) () -> 
-                "" + Duration.between(timedJobEvent.getStartDateTime(), 
-                timedJobEvent.getEndDateTime()).toMinutes());
+        builder.add("Time",   (Displayable) () -> computeDuration());
         builder.add("Rate",   (Displayable) () -> timedJobEvent.getRate().toString());
         builder.add("Amount", (Displayable) () -> timedJobEvent.getEarnings().toString());
         
         return builder;
+      }
+
+    @Nonnull
+    private String computeDuration() 
+      {
+        final Duration duration = Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
+        return "" + duration;
       }
   }
