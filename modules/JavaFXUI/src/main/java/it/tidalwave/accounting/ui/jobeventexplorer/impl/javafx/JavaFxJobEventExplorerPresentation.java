@@ -53,12 +53,17 @@ public class JavaFxJobEventExplorerPresentation implements JobEventExplorerPrese
     public void bind (final @Nonnull TreeTableView<PresentationModel> ttvJobEventExplorer) 
       {
         this.ttvJobEventExplorer = ttvJobEventExplorer;
+        ttvJobEventExplorer.setShowRoot(false);
       }
     
     @Override
     public void populate (final @Nonnull PresentationModel pm) 
       {
         // FIXME: runLater should be provided by the infrastructure
-        Platform.runLater(() -> binder.bind(ttvJobEventExplorer, pm));
+        Platform.runLater(() ->
+          {
+            binder.bind(ttvJobEventExplorer, pm);
+            ttvJobEventExplorer.getRoot().setExpanded(true);
+          });
       }
   }
