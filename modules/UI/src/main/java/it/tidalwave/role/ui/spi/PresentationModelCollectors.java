@@ -25,44 +25,55 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.impl.javafx;
+package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import org.springframework.beans.factory.annotation.Configurable;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.function.Function;
+import it.tidalwave.util.ArrayListCollectorSupport;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
-import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
-import lombok.extern.slf4j.Slf4j;
-//import static it.tidalwave.role.ui.javafx.impl.JavaFXSafeComponentBuilder.*;
+import it.tidalwave.role.spi.ArrayListSimpleComposite;
 
 /***********************************************************************************************************************
  *
- * @author Fabrizio Giudici
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Configurable @Slf4j
-public class JavaFXApplicationPresentationDelegate
+public class PresentationModelCollectors extends ArrayListCollectorSupport<PresentationModel, PresentationModel>
   {
-    @Inject @Nonnull
-    private CustomerExplorerPresentationControl customerExplorerPresentationControl;
-
-    @Inject @Nonnull
-    private JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
-            
-    @FXML
-    private ListView<PresentationModel> lvCustomerExplorer;
+    @Nonnull
+    private final List<Object> roles = new ArrayList<>();
     
-    public void initialize()
-      throws IOException
+    @Nonnull
+    public static PresentationModelCollectors toContainerPresentationModel()
       {
-        // FIXME: controllers can't initialize in postconstruct
-        // Too bad because with PAC+EventBus we'd get rid of the control interfaces
-        customerExplorerPresentationControl.initialize();
-        javaFxCustomerExplorerPresentation.bind(lvCustomerExplorer);
+        return new PresentationModelCollectors(Collections.emptyList());
+      }
+
+    @Nonnull
+    public static PresentationModelCollectors toContainerPresentationModel (final @Nonnull Object ... roles)
+      {
+        return new PresentationModelCollectors(Arrays.asList(roles));
+      }
+
+    private PresentationModelCollectors (final @Nonnull List<Object> roles) 
+      {
+        this.roles.addAll(roles);
+      }
+    
+    @Override @Nonnull 
+    public Function<List<PresentationModel>, PresentationModel> finisher() 
+      {
+        return childPms ->
+          {
+            final List<Object> temp = new ArrayList<>(roles);
+            temp.add(new ArrayListSimpleComposite<>(childPms));
+            // FIXME: "" triggers a NPE in RoleManagerSupport.java:341
+            return new DefaultPresentationModel("", temp.toArray());
+          };
       }
   }

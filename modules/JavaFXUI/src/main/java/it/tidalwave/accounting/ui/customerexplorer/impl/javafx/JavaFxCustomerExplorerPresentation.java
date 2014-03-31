@@ -2,8 +2,8 @@
  * #%L
  * *********************************************************************************************************************
  *
- * NorthernWind - lightweight CMS
- * http://northernwind.tidalwave.it - hg clone https://bitbucket.org/tidalwave/northernwind-src
+ * blueHour
+ * http://bluehour.tidalwave.it - hg clone https://bitbucket.org/tidalwave/bluehour-src
  * %%
  * Copyright (C) 2013 - 2014 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
@@ -25,44 +25,38 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.impl.javafx;
+package it.tidalwave.accounting.ui.customerexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import java.io.IOException;
-import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import org.springframework.beans.factory.annotation.Configurable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
-import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
-import lombok.extern.slf4j.Slf4j;
-//import static it.tidalwave.role.ui.javafx.impl.JavaFXSafeComponentBuilder.*;
+import it.tidalwave.role.ui.javafx.JavaFXBinder;
+import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 
 /***********************************************************************************************************************
  *
- * @author Fabrizio Giudici
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Configurable @Slf4j
-public class JavaFXApplicationPresentationDelegate
+@Configurable
+public class JavaFxCustomerExplorerPresentation implements CustomerExplorerPresentation
   {
     @Inject @Nonnull
-    private CustomerExplorerPresentationControl customerExplorerPresentationControl;
-
-    @Inject @Nonnull
-    private JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
-            
-    @FXML
+    private JavaFXBinder binder;
+    
     private ListView<PresentationModel> lvCustomerExplorer;
     
-    public void initialize()
-      throws IOException
+    public void bind (final @Nonnull ListView<PresentationModel> lvCustomers)
       {
-        // FIXME: controllers can't initialize in postconstruct
-        // Too bad because with PAC+EventBus we'd get rid of the control interfaces
-        customerExplorerPresentationControl.initialize();
-        javaFxCustomerExplorerPresentation.bind(lvCustomerExplorer);
+        this.lvCustomerExplorer = lvCustomers;
+      }
+    
+    @Override
+    public void populate (final @Nonnull PresentationModel pm)
+      {
+          binder.bind(lvCustomerExplorer, pm);
       }
   }

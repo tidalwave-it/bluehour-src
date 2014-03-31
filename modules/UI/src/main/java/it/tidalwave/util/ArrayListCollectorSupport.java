@@ -25,44 +25,54 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.impl.javafx;
+package it.tidalwave.util;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import org.springframework.beans.factory.annotation.Configurable;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
-import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
-import lombok.extern.slf4j.Slf4j;
-//import static it.tidalwave.role.ui.javafx.impl.JavaFXSafeComponentBuilder.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 /***********************************************************************************************************************
  *
- * @author Fabrizio Giudici
+ * A support {@link Collector} which uses an {@link ArrayList} as the accumulator.
+ * 
+ * @param  <COLLECTED_TYPE>     the type of collected items
+ * @param  <COLLECTING_TYPE>    the type of collecting item
+ * 
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Configurable @Slf4j
-public class JavaFXApplicationPresentationDelegate
+public abstract class ArrayListCollectorSupport<COLLECTED_TYPE, COLLECTING_TYPE> 
+        implements Collector<COLLECTED_TYPE, List<COLLECTED_TYPE>, COLLECTING_TYPE>
   {
-    @Inject @Nonnull
-    private CustomerExplorerPresentationControl customerExplorerPresentationControl;
-
-    @Inject @Nonnull
-    private JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
-            
-    @FXML
-    private ListView<PresentationModel> lvCustomerExplorer;
-    
-    public void initialize()
-      throws IOException
+    @Override @Nonnull 
+    public Supplier<List<COLLECTED_TYPE>> supplier() 
       {
-        // FIXME: controllers can't initialize in postconstruct
-        // Too bad because with PAC+EventBus we'd get rid of the control interfaces
-        customerExplorerPresentationControl.initialize();
-        javaFxCustomerExplorerPresentation.bind(lvCustomerExplorer);
+        return ArrayList::new;
+      } 
+
+    @Override @Nonnull 
+    public BiConsumer<List<COLLECTED_TYPE>, COLLECTED_TYPE> accumulator() 
+      {
+        return List::add;
+      }
+
+    @Override @Nonnull 
+    public BinaryOperator<List<COLLECTED_TYPE>> combiner() 
+      {
+        return (left, right) -> { left.addAll(right); return left; };
+      }
+
+    @Override @Nonnull 
+    public Set<Characteristics> characteristics() 
+      {
+        // Not CONCURRENT since ArrayList is not thread-safe
+        return Collections.emptySet();
       }
   }

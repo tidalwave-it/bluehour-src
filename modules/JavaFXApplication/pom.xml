@@ -31,8 +31,18 @@
             <artifactId>it-tidalwave-accounting-ui</artifactId>
         </dependency>
         <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
+        </dependency>
+        <dependency>
             <groupId>it.tidalwave.northernwind.rca</groupId>
             <artifactId>it-tidalwave-role-ui-javafx</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>it-tidalwave-northernwind-rca-ui-commons</artifactId>
+                    <groupId>it.tidalwave.northernwind.rca</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

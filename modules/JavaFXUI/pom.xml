@@ -60,5 +60,8 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
+        
+        <!-- FIXME: bogus dependencies on Zephyr -->
     </dependencies>
+    
 </project>
