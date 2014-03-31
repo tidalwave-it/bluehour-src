@@ -30,18 +30,13 @@ package it.tidalwave.accounting.ui.projectexplorer.impl;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.common.annotations.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
+import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.Selectable;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.role.spi.MapAggregate;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.Selectable;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.Project;
@@ -49,6 +44,7 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
+import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
 
 /***********************************************************************************************************************
@@ -77,28 +73,14 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
         presentation.populate(event.getCustomer().findProjects()
                 .sorted(comparing(Project::getName))
                 .map(project -> createPresentationModelFor(project))
+//                .map(project -> project.as(Presentable).createPresentationModel())
                 .collect(toContainerPresentationModel()));
       }
     
+    @Nonnull
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Project project)
       {
-        final Map<String, PresentationModel> map = new HashMap<>();
         final Selectable selectable = () -> messageBus.publish(new ProjectSelectedEvent(project));
-        
-        // FIXME: uses the column header names, should be an internal id instead
-        map.put("Client",     new DefaultPresentationModel((Displayable) () -> project.getCustomer().getName()));
-        map.put("Status",     new DefaultPresentationModel((Displayable) () -> "?Status?"));
-        map.put("#",          new DefaultPresentationModel((Displayable) () -> project.getNumber()));
-        map.put("Name",       new DefaultPresentationModel((Displayable) () -> project.getName()));
-        map.put("Start Date", new DefaultPresentationModel((Displayable) () -> project.getStartDate().toString()));
-        map.put("Due Date",   new DefaultPresentationModel((Displayable) () -> project.getEndDate().toString()));
-        map.put("Time",       new DefaultPresentationModel((Displayable) () -> "?Time?"));
-        map.put("Earnings",   new DefaultPresentationModel((Displayable) () -> "?Earnings?"));
-        map.put("Estimate",   new DefaultPresentationModel((Displayable) () -> project.getAmount().toString()));
-        map.put("Notes",      new DefaultPresentationModel((Displayable) () -> project.getNotes()));
-        
-//        map.put("name", new DefaultPresentationModel((Displayable)() -> project.getName()));
-//        map.put("customer", new DefaultPresentationModel((Displayable)() -> project.getCustomer().getName()));
-        return new DefaultPresentationModel(project, selectable, new MapAggregate<>(map));
+        return project.as(Presentable).createPresentationModel(selectable);
       }
   }
