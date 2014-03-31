@@ -40,13 +40,13 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.spi.MapAggregate;
 import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.Selectable;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
-import it.tidalwave.role.ui.Selectable;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
@@ -83,96 +83,19 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Project project)
       {
         final Map<String, PresentationModel> map = new HashMap<>();
-        final Selectable selectable = new Selectable() 
-          {
-            @Override
-            public void select() 
-              {
-                messageBus.publish(new ProjectSelectedEvent(project));
-              }
-          };
+        final Selectable selectable = () -> messageBus.publish(new ProjectSelectedEvent(project));
         
         // FIXME: uses the column header names, should be an internal id instead
-        map.put("Client", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getCustomer().getName();
-              }
-          }));
-        map.put("Status", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return "?Status?";
-              }
-          }));
-        map.put("#", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getNumber();
-              }
-          }));
-        map.put("Name", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getName();
-              }
-          }));
-        map.put("Start Date", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getStartDate().toString();
-              }
-          }));
-        map.put("Due Date", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getEndDate().toString();
-              }
-          }));
-        map.put("Time", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return "?Time?";
-              }
-          }));
-        map.put("Earnings", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return "?Earnings?";
-              }
-          }));
-        map.put("Estimate", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getAmount().toString();
-              }
-          }));
-        map.put("Notes", new DefaultPresentationModel(new Displayable() 
-          {
-            @Override
-            public String getDisplayName() 
-              {
-                return project.getNotes();
-              }
-          }));
+        map.put("Client",     new DefaultPresentationModel((Displayable) () -> project.getCustomer().getName()));
+        map.put("Status",     new DefaultPresentationModel((Displayable) () -> "?Status?"));
+        map.put("#",          new DefaultPresentationModel((Displayable) () -> project.getNumber()));
+        map.put("Name",       new DefaultPresentationModel((Displayable) () -> project.getName()));
+        map.put("Start Date", new DefaultPresentationModel((Displayable) () -> project.getStartDate().toString()));
+        map.put("Due Date",   new DefaultPresentationModel((Displayable) () -> project.getEndDate().toString()));
+        map.put("Time",       new DefaultPresentationModel((Displayable) () -> "?Time?"));
+        map.put("Earnings",   new DefaultPresentationModel((Displayable) () -> "?Earnings?"));
+        map.put("Estimate",   new DefaultPresentationModel((Displayable) () -> project.getAmount().toString()));
+        map.put("Notes",      new DefaultPresentationModel((Displayable) () -> project.getNotes()));
         
 //        map.put("name", new DefaultPresentationModel((Displayable)() -> project.getName()));
 //        map.put("customer", new DefaultPresentationModel((Displayable)() -> project.getCustomer().getName()));
