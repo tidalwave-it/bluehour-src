@@ -53,7 +53,7 @@ public class TimedJobEvent extends JobEvent
     @Getter @Nonnull
     private final Money earnings;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money rate;
 
     /*******************************************************************************************************************
