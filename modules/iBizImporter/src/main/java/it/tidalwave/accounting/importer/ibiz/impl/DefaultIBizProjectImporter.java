@@ -42,7 +42,6 @@ import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -97,8 +96,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
       {
         try
           {
-            final ConfigurationDecorator config = IBizUtils.loadConfiguration(file);
-            importProject(config).withEvents(importJobEvents(config.getStream("jobEvents"))).create();
+            importProject(IBizUtils.loadConfiguration(file));
           }
         catch (NotFoundException e)
           {
@@ -114,21 +112,33 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private Project.Builder importProject (final @Nonnull ConfigurationDecorator projectConfig)
+    private void importProject (final @Nonnull ConfigurationDecorator projectConfig)
       throws NotFoundException
       {
         final Id customerId = projectConfig.getId("clientIdentifier");
         final Customer customer = customerRegistry.findCustomers().withId(customerId).result();
-        return projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
-                                           .withAmount(projectConfig.getMoney("projectEstimate"))
-                                           .withCustomer(customer)
-                                           .withName(projectConfig.getString("projectName"))
-//                                           .withDescription("description of project 1")
-                                           .withStartDate(projectConfig.getDate("projectStartDate"))
-                                           .withEndDate(projectConfig.getDate("projectDueDate"))
-                                           .withNotes(projectConfig.getString("projectNotes"))
-                                           .withNumber(projectConfig.getString("projectNumber"))
-                                           .withHourlyRate(projectConfig.getMoney("projectRate"));
+        final IBizProjectStatus status = IBizProjectStatus.values()[projectConfig.getInt("projectStatus")];
+
+        if (status.getMappedStatus() == null)
+          {
+            log.warn("IGNORING PROJECT {} with status {}", projectConfig.getString("projectName"), status);  
+          }
+        else
+          {
+            projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
+                                        .withAmount(projectConfig.getMoney("projectEstimate"))
+                                        .withCustomer(customer)
+                                        .withName(projectConfig.getString("projectName"))
+    //                                           .withDescription("description of project 1")
+                                        .withStartDate(projectConfig.getDate("projectStartDate"))
+                                        .withEndDate(projectConfig.getDate("projectDueDate"))
+                                        .withNotes(projectConfig.getString("projectNotes"))
+                                        .withNumber(projectConfig.getString("projectNumber"))
+                                        .withStatus(status.getMappedStatus())
+                                        .withHourlyRate(projectConfig.getMoney("projectRate"))
+                                        .withEvents(importJobEvents(projectConfig.getStream("jobEvents")))
+                                        .create();
+          }
       }
 
     /*******************************************************************************************************************
