@@ -36,10 +36,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.impl.DefaultAccounting;
-import it.tidalwave.util.test.FileComparisonUtils;
-import it.tidalwave.accounting.test.util.Dumper;
+import it.tidalwave.util.spi.AsDelegateProvider;
+import it.tidalwave.util.spi.EmptyAsDelegateProvider;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import it.tidalwave.util.test.FileComparisonUtils;
+import it.tidalwave.accounting.test.util.Dumper;
 
 /***********************************************************************************************************************
  *
@@ -49,6 +52,12 @@ import org.testng.annotations.Test;
  **********************************************************************************************************************/
 public class AccountingXmlUnmarshallableTest
   {
+    @BeforeMethod
+    public void installEmptyAsSupport()
+      {
+        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+      }
+    
     @Test
     public void must_properly_unmarshall_iBiz()
       throws Exception
