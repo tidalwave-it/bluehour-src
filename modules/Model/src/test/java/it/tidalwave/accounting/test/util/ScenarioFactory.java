@@ -65,6 +65,7 @@ public final class ScenarioFactory
   {
     private static int nextId = 1;
     
+    // Used to check that there are no problems - TestNG just silently skips tests with a broken provider
     public static void main (String ... args) 
       {
         createEmptyAccounting();
