@@ -27,16 +27,19 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import it.tidalwave.accounting.commons.DurationFormat;
-import it.tidalwave.accounting.commons.MoneyFormat;
 import javax.annotation.Nonnull;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.commons.DurationFormat;
+import it.tidalwave.accounting.commons.MoneyFormat;
+import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -46,7 +49,7 @@ import lombok.RequiredArgsConstructor;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class JobEventPresentable implements Presentable
+public abstract class JobEventPresentable implements Presentable
   {
     protected static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     protected static final DateTimeFormatter DTTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
@@ -59,7 +62,8 @@ public class JobEventPresentable implements Presentable
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
-        return new DefaultPresentationModel("", aggregateBuilder().create());
+        final Styleable styleable = new DefaultStyleable(getStyles());
+        return new DefaultPresentationModel("", aggregateBuilder().create(), styleable);
       }
     
     @Nonnull
@@ -71,8 +75,12 @@ public class JobEventPresentable implements Presentable
         builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.add("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()));
+        builder.add("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()),
+                                 new DefaultStyleable("right-aligned"));
 
         return builder;
       }
+    
+    @Nonnull
+    protected abstract Collection<String> getStyles();
   }

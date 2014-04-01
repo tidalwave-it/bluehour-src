@@ -38,6 +38,11 @@ import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
 import static it.tidalwave.accounting.ui.jobeventexplorer.impl.JobEventPresentable.DTF;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.role.ui.spi.DefaultPresentationModel;
+import java.util.Arrays;
+import java.util.Collection;
 
 /***********************************************************************************************************************
  *
@@ -60,10 +65,11 @@ public class JobEventGroupPresentable extends JobEventPresentable
     @Override @Nonnull
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
+        final Styleable styleable = new DefaultStyleable(getStyles());
         return jobEventGroup.findChildren()
                             .sorted(comparing(JobEvent::getDateTime))
                             .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                            .collect(toContainerPresentationModel(aggregateBuilder().create()));
+                            .collect(toContainerPresentationModel(aggregateBuilder().create(), styleable));
         // FIXME: use SimpleCompositePresentable?
       }
 
@@ -73,8 +79,15 @@ public class JobEventGroupPresentable extends JobEventPresentable
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         builder.add("Date",   (Displayable) () -> DTF.format(jobEventGroup.getDateTime().toLocalDate()));
         builder.add("Rate",   new DefaultDisplayable(""));
-        builder.add("Time",   (Displayable) () -> DF.format(jobEventGroup.getDuration()));
+        builder.add("Time",   (Displayable) () -> DF.format(jobEventGroup.getDuration()),
+                              new DefaultStyleable("right-aligned"));
         
         return builder;
+      }
+
+    @Override @Nonnull
+    protected Collection<String> getStyles() 
+      {
+        return Arrays.asList("job-event-group");
       }
   }

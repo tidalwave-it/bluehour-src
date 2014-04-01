@@ -32,6 +32,11 @@ import it.tidalwave.role.Displayable;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.FlatJobEvent;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collection;
 
 /***********************************************************************************************************************
  *
@@ -59,8 +64,17 @@ public class FlatJobEventPresentable extends JobEventPresentable
         builder.add("Date",   (Displayable) () -> DTF.format(flatJobEvent.getDate()));
         builder.add("Time",   new DefaultDisplayable(""));
         builder.add("Rate",   new DefaultDisplayable(""));
-        builder.add("Amount", (Displayable) () -> MF.format(flatJobEvent.getEarnings()));
+        builder.add("Amount", (Displayable) () -> MF.format(flatJobEvent.getEarnings()),
+                              new DefaultStyleable("right-aligned"),
+                              (Styleable) ()   -> 
+                                      Arrays.asList(flatJobEvent.getEarnings().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red"));
         
         return builder;
+      }
+
+    @Override @Nonnull
+    protected Collection<String> getStyles() 
+      {
+        return Arrays.asList("flat-job-event");
       }
   }

@@ -32,6 +32,9 @@ import java.time.Duration;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.TimedJobEvent;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import java.util.Arrays;
+import java.util.Collection;
 
 /***********************************************************************************************************************
  *
@@ -57,8 +60,10 @@ public class TimedJobEventPresentable extends JobEventPresentable
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
         builder.add("Date",   (Displayable) () -> DTTF.format(timedJobEvent.getStartDateTime()));
-        builder.add("Time",   (Displayable) () -> DF.format(computeDuration()));
-        builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()));
+        builder.add("Time",   (Displayable) () -> DF.format(computeDuration()),
+                              new DefaultStyleable("right-aligned"));
+        builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()),
+                              new DefaultStyleable("right-aligned"));
         
         return builder;
       }
@@ -67,5 +72,11 @@ public class TimedJobEventPresentable extends JobEventPresentable
     private Duration computeDuration() 
       {
         return Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
+      }
+
+    @Override @Nonnull
+    protected Collection<String> getStyles() 
+      {
+        return Arrays.asList("timed-job-event");
       }
   }
