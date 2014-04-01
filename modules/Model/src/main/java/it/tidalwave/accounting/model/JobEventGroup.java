@@ -33,7 +33,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
@@ -41,6 +40,7 @@ import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import static java.util.Comparator.*;
 
 /***********************************************************************************************************************
  *
@@ -103,8 +103,7 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
     @Override @Nonnull
     public LocalDateTime getDateTime()
       {
-        return findChildren().sorted(Comparator.comparing(JobEvent::getDateTime))
-                             .findFirst().get().getDateTime();  
+        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
       }
     
     /*******************************************************************************************************************
