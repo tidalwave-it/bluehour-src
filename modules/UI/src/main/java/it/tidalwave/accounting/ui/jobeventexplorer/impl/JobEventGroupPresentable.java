@@ -31,8 +31,10 @@ import javax.annotation.Nonnull;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.role.Displayable;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
 import static it.tidalwave.accounting.ui.jobeventexplorer.impl.JobEventPresentable.DTF;
@@ -59,8 +61,9 @@ public class JobEventGroupPresentable extends JobEventPresentable
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
         return jobEventGroup.findChildren()
-                .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                .collect(toContainerPresentationModel(aggregateBuilder().create()));
+                            .sorted(comparing(JobEvent::getDateTime))
+                            .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
+                            .collect(toContainerPresentationModel(aggregateBuilder().create()));
         // FIXME: use SimpleCompositePresentable?
       }
 
@@ -70,7 +73,7 @@ public class JobEventGroupPresentable extends JobEventPresentable
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         builder.add("Date",   (Displayable) () -> DTF.format(jobEventGroup.getDateTime().toLocalDate()));
         builder.add("Rate",   new DefaultDisplayable(""));
-        builder.add("Time",   new DefaultDisplayable("")); // FIXME: compute sum
+        builder.add("Time",   (Displayable) () -> DF.format(jobEventGroup.getDuration()));
         
         return builder;
       }
