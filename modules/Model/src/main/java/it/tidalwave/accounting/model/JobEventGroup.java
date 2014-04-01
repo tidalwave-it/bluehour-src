@@ -27,16 +27,18 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.accounting.model.impl.util.MoneyCollector;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.time.LocalDateTime;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -91,5 +93,16 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
       {
         return new Builder(id, null, null, null, name, 
                            description, null, null, new ArrayList<>(findChildren().results()));
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Money getEarnings()
+      {
+        return findChildren().map(jobEvent -> jobEvent.getEarnings()).collect(new MoneyCollector());  
       }
   }

@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.accounting.model.impl.util.MoneyCollector;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
@@ -206,6 +207,17 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
                 return Collections.unmodifiableList(events);
               }
           };
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getEarnings()
+      {
+        return findChildren().map(jobEvent -> jobEvent.getEarnings()).collect(new MoneyCollector());  
       }
     
     /*******************************************************************************************************************

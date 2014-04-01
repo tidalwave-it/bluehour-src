@@ -76,6 +76,18 @@ public class Money
       }
     
     @Nonnull
+    public Money add (final @Nonnull Money other)
+      {
+        if (!this.currency.equals(other.currency))
+          {
+            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s", 
+                                                             this.currency, other.currency));
+          }
+        
+        return new Money(amount.add(other.amount), currency);
+      }
+    
+    @Nonnull
     public static DecimalFormat getFormat()
       {
         final DecimalFormatSymbols symbols = new DecimalFormatSymbols();
