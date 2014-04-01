@@ -37,6 +37,8 @@ import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.role.spi.DefaultStyleable;
+import it.tidalwave.role.ui.Styleable;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -66,13 +68,12 @@ public class JobEventPresentable implements Presentable
     protected AggregatePresentationModelBuilder aggregateBuilder()
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
-        
         // FIXME: uses the column header names, should be an internal id instead
         builder.add("Job Event", (Displayable) () -> jobEvent.getName());
         builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.add("Amount", (Displayable) () -> MF.format(jobEvent.getEarnings()));
+        builder.add("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()));
 
         return builder;
       }
