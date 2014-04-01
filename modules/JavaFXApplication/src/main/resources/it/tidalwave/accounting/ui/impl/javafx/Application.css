@@ -4,9 +4,23 @@
 
   }
 
-.table-tree-view .column-header,
+.table-tree-view .table-column .column-header,
 .table-view .column-header 
   {
     -fx-font-size: 10px;
     /* TODO: bold */
   }
+  
+.table-tree-view,
+.table-view
+  {
+    -fx-font-size: 10px;
+    /* TODO: bold */
+  }
+  
+.right-aligned-column /* .table-cell */
+  { 
+    -fx-alignment: center-right; 
+    /*-fx-font-size: 20px;*/
+  }
+  
