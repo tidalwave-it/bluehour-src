@@ -41,7 +41,12 @@
     <version>1.0-ALPHA-2-SNAPSHOT</version>
     <name>blueHour - Marshalling - XML</name>
     <packaging>jar</packaging>
-    
+   
+    <properties>
+        <!-- Otherwise can't be released because of missing javadocs -->
+        <tft.javadoc.excludePackageNames />
+    </properties>
+ 
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
