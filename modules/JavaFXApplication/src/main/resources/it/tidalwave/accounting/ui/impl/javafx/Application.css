@@ -18,30 +18,31 @@
     -fx-font-size: 10px;
   }
 
-.red
+  /** Role-based Styles */
+  
+.-rs-red
   {
     -fx-text-fill: red;
   }
 
-.right-aligned
+.-rs-right-aligned
   {
     -fx-alignment: center-right;
   }
 
-/*.job-event
+/*.-rs-job-event
   {
-    -fx-font-size: 20px;
   }*/
 
-.job-event-group
+.-rs-job-event-group
   {
     -fx-font-weight: bold;
   }
 
-.timed-job-event
+.-rs-timed-job-event
   {
   }
 
-.flat-job-event
+.-rs-flat-job-event
   {
   }
