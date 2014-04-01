@@ -1331,6 +1331,7 @@
             <notes></notes>
             <number>PRJ ACME-1</number>
             <startDate>2013-04-02</startDate>
+            <status>open</status>
         </project>
         <project id="399">
             <amount>0.00 EUR</amount>
@@ -2523,6 +2524,7 @@
             <notes></notes>
             <number>PRJ ACME-2</number>
             <startDate>2013-05-03</startDate>
+            <status>open</status>
         </project>
         <project id="400">
             <amount>0.00 EUR</amount>
@@ -2959,6 +2961,7 @@
             <notes></notes>
             <number>PRJ ACME-3</number>
             <startDate>2014-01-22</startDate>
+            <status>open</status>
         </project>
         <project id="401">
             <amount>0.00 EUR</amount>
@@ -4088,6 +4091,7 @@
             <notes></notes>
             <number>PRJ ACME-4</number>
             <startDate>2014-02-17</startDate>
+            <status>open</status>
         </project>
     </projects>
 </accounting>
