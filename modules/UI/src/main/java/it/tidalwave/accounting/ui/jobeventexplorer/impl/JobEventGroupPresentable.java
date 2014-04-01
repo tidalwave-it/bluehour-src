@@ -32,8 +32,10 @@ import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.role.Displayable;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
+import static it.tidalwave.accounting.ui.jobeventexplorer.impl.JobEventPresentable.DTF;
 
 /***********************************************************************************************************************
  *
@@ -66,6 +68,7 @@ public class JobEventGroupPresentable extends JobEventPresentable
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
+        builder.add("Date",   (Displayable) () -> DTF.format(jobEventGroup.getDateTime().toLocalDate()));
         builder.add("Rate",   new DefaultDisplayable(""));
         builder.add("Time",   new DefaultDisplayable("")); // FIXME: compute sum
         
