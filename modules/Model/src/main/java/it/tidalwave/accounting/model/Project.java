@@ -27,11 +27,11 @@
  */
 package it.tidalwave.accounting.model;
 
-import it.tidalwave.accounting.model.impl.util.MoneyCollector;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.util.List;
+import java.time.Duration;
 import java.time.LocalDate;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Finder;
@@ -41,6 +41,8 @@ import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.role.SimpleComposite;
+import it.tidalwave.accounting.model.impl.util.DurationCollector;
+import it.tidalwave.accounting.model.impl.util.MoneyCollector;
 import lombok.AllArgsConstructor;
 import lombok.Delegate;
 import lombok.EqualsAndHashCode;
@@ -218,6 +220,17 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     public Money getEarnings()
       {
         return findChildren().map(jobEvent -> jobEvent.getEarnings()).collect(new MoneyCollector());  
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Duration getDuration()
+      {
+        return findChildren().map(jobEvent -> jobEvent.getDuration()).collect(new DurationCollector());
       }
     
     /*******************************************************************************************************************

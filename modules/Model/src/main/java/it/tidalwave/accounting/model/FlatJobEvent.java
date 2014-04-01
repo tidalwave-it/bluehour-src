@@ -29,6 +29,7 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -84,5 +85,16 @@ public class FlatJobEvent extends JobEvent
     public LocalDateTime getDateTime()
       {
         return date.atStartOfDay();
+      }
+
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return Duration.ZERO;
       }
   }

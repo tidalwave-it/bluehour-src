@@ -30,6 +30,7 @@ package it.tidalwave.accounting.model;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -90,5 +91,16 @@ public class TimedJobEvent extends JobEvent
     public LocalDateTime getDateTime()
       {
         return startDateTime;
+      }
+
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return Duration.between(startDateTime, endDateTime);
       }
   }

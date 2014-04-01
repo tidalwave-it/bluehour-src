@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.util.List;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
@@ -149,6 +150,14 @@ public abstract class JobEvent implements Identifiable, As
      ******************************************************************************************************************/
     @Nonnull
     public abstract LocalDateTime getDateTime(); 
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public abstract Duration getDuration(); 
     
     /*******************************************************************************************************************
      *
