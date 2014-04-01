@@ -19,6 +19,8 @@ import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.TimedJobEvent;
 import it.tidalwave.accounting.model.impl.DefaultAccounting;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsDelegateProvider;
+import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -54,6 +56,7 @@ public final class ScenarioFactory
     @Nonnull
     public static Accounting createEmptyAccounting()
       {
+        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
         final Accounting accounting = new DefaultAccounting();
         return accounting;
       }
@@ -61,6 +64,7 @@ public final class ScenarioFactory
     @Nonnull
     public static Accounting createScenario1()
       {
+        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
         nextId = 1;
         
         final Accounting accounting = new DefaultAccounting();
