@@ -38,9 +38,9 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
+import java.util.function.BinaryOperator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import static java.util.Comparator.*;
 
 /***********************************************************************************************************************
  *
@@ -103,7 +103,9 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
     @Override @Nonnull
     public LocalDateTime getDateTime()
       {
-        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
+//        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
+        final BinaryOperator<LocalDateTime> min = (a, b) -> (a.compareTo(b) > 0) ? b : a;
+        return findChildren().map(jobEvent -> jobEvent.getDateTime()).reduce(min).get();
       }
     
     /*******************************************************************************************************************
