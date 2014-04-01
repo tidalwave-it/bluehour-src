@@ -101,6 +101,18 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
+    public LocalDateTime getDateTime()
+      {
+        return findChildren().sorted(Comparator.comparing(JobEvent::getDateTime))
+                             .findFirst().get().getDateTime();  
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
     public Money getEarnings()
       {
         return findChildren().map(jobEvent -> jobEvent.getEarnings()).collect(new MoneyCollector());  

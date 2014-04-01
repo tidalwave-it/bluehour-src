@@ -81,4 +81,14 @@ public class TimedJobEvent extends JobEvent
         return new Builder(id, Builder.Type.TIMED, startDateTime, endDateTime, name, description, 
                            earnings, rate, Collections.<JobEvent>emptyList());
       }
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public LocalDateTime getDateTime()
+      {
+        return startDateTime;
+      }
   }
