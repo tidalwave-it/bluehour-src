@@ -37,8 +37,6 @@ import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.role.spi.DefaultStyleable;
-import it.tidalwave.role.ui.Styleable;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
