@@ -4,10 +4,11 @@
 
   }
 
-.table-tree-view .table-column .column-header,
+/*.table-tree-view .column-header,*/
 .table-view .column-header 
   {
     -fx-font-size: 10px;
+    -fx-alignment: center; 
     /* TODO: bold */
   }
   
@@ -15,7 +16,6 @@
 .table-view
   {
     -fx-font-size: 10px;
-    /* TODO: bold */
   }
   
 .right-aligned-column /* .table-cell */
