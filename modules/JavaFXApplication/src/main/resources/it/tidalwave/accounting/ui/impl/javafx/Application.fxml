@@ -41,21 +41,9 @@
                                                         <TableColumn fx:id="name" editable="false" prefWidth="75.0" sortable="false" text="Name" />
                                                         <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Start Date" />
                                                         <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Due Date" />
-                                                        <TableColumn editable="false" prefWidth="40.0" sortable="false" text="Time">
-                                                            <styleClass>
-                                                                <String fx:value="right-aligned-column" />
-                                                            </styleClass>
-                                                        </TableColumn>
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Earnings">
-                                                            <styleClass>
-                                                                <String fx:value="right-aligned-column" />
-                                                            </styleClass>
-                                                        </TableColumn>
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Estimate">
-                                                            <styleClass>
-                                                                <String fx:value="right-aligned-column" />
-                                                            </styleClass>
-                                                        </TableColumn>
+                                                        <TableColumn editable="false" prefWidth="40.0" sortable="false" text="Time"/>
+                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Earnings"/>
+                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Estimate"/>
                                                         <TableColumn editable="false" prefWidth="200.0" sortable="false" text="Notes" />
                                                     </columns>
                                                     <columnResizePolicy>
@@ -76,21 +64,9 @@
                                                     <columns>
                                                         <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Date" />
                                                         <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Job Event" />
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Time">
-                                                            <styleClass>
-                                                                <String fx:value="right-aligned-column" />
-                                                            </styleClass>
-                                                        </TreeTableColumn>
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Rate">
-                                                            <styleClass>
-                                                                <String fx:value="right-aligned-column" />
-                                                            </styleClass>
-                                                        </TreeTableColumn>
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Amount">
-                                                            <styleClass>
-                                                                <String fx:value="right-aligned-column" />
-                                                            </styleClass>
-                                                        </TreeTableColumn>
+                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Time"/>
+                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Rate"/>
+                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Amount"/>
                                                         <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Notes" />
                                                     </columns>
                                                     <columnResizePolicy>
