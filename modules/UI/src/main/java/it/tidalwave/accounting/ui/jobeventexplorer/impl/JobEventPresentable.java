@@ -69,6 +69,9 @@ public class JobEventPresentable implements Presentable
         // FIXME: uses the column header names, should be an internal id instead
         builder.add("Job Event", (Displayable) () -> jobEvent.getName());
         builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
+        
+        // FIXME: this is dynamically computed, can be slow - should be also cached
+        builder.add("Amount", (Displayable) () -> MF.format(jobEvent.getEarnings()));
 
         return builder;
       }

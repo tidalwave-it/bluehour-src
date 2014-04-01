@@ -68,7 +68,6 @@ public class JobEventGroupPresentable extends JobEventPresentable
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         builder.add("Rate",   new DefaultDisplayable(""));
         builder.add("Time",   new DefaultDisplayable("")); // FIXME: compute sum
-        builder.add("Amount", new DefaultDisplayable("")); // FIXME: compute sum
         
         return builder;
       }

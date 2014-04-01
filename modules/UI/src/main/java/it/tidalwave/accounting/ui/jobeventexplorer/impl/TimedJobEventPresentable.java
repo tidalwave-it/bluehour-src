@@ -59,7 +59,6 @@ public class TimedJobEventPresentable extends JobEventPresentable
         builder.add("Date",   (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime().toLocalDate()));
         builder.add("Time",   (Displayable) () -> DF.format(computeDuration()));
         builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()));
-        builder.add("Amount", (Displayable) () -> MF.format(timedJobEvent.getEarnings()));
         
         return builder;
       }
