@@ -147,7 +147,6 @@ public class Dumper
     private final static Predicate<? super Field> excludeUnwantedFields = field ->
       {
         final Class<?> type = field.getType();
-          System.err.println("TYPE " + type);
         return !Collection.class.isAssignableFrom(type)
                && !Accounting.class.isAssignableFrom(type) 
                && !AsSupport.class.isAssignableFrom(type);
