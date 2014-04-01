@@ -29,18 +29,16 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
-import it.tidalwave.accounting.model.impl.util.DurationCollector;
-import it.tidalwave.accounting.model.impl.util.MoneyCollector;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -117,7 +115,7 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
     @Override @Nonnull
     public Money getEarnings()
       {
-        return findChildren().map(jobEvent -> jobEvent.getEarnings()).collect(new MoneyCollector());  
+        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money::add).orElse(Money.ZERO);
       }
     
     /*******************************************************************************************************************
@@ -128,6 +126,6 @@ public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
     @Override @Nonnull
     public Duration getDuration() 
       {
-        return findChildren().map(jobEvent -> jobEvent.getDuration()).collect(new DurationCollector());
+        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration::plus).orElse(Duration.ZERO);
       }
   }
