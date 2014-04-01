@@ -49,6 +49,7 @@ import lombok.RequiredArgsConstructor;
 public class JobEventPresentable implements Presentable
   {
     protected static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    protected static final DateTimeFormatter DTTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
     protected static final MoneyFormat MF = new MoneyFormat();
     protected static final DurationFormat DF = new DurationFormat();
     
