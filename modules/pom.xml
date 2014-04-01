@@ -33,7 +33,7 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour</artifactId>
-        <version>1.0-ALPHA-2</version>
+        <version>1.0-ALPHA-3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -47,7 +47,7 @@
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-modules</artifactId>
-    <version>1.0-ALPHA-2</version>
+    <version>1.0-ALPHA-3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueHour (modules)</name>
     <description>The parent POM of all modules.</description>
