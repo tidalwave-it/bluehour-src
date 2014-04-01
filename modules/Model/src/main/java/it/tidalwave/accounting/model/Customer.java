@@ -59,7 +59,7 @@ import static lombok.AccessLevel.PRIVATE;
 public class Customer implements Identifiable, As
   {
     @Delegate
-    private final As asSupport = new AsSupport(this);
+    private final AsSupport asSupport = new AsSupport(this);
 
     /*******************************************************************************************************************
      *

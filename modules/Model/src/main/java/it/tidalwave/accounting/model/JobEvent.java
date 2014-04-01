@@ -56,7 +56,7 @@ import static lombok.AccessLevel.*;
 public abstract class JobEvent implements Identifiable, As
   {
     @Delegate
-    private final As asSupport = new AsSupport(this);
+    private final AsSupport asSupport = new AsSupport(this);
 
     /*******************************************************************************************************************
      *

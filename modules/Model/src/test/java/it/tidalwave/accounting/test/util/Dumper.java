@@ -43,8 +43,10 @@ import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.util.spi.AsSupport;
 import lombok.RequiredArgsConstructor;
 import static java.util.Comparator.comparing;
+import java.util.function.Predicate;
 import static java.util.stream.Collectors.joining;
 
 /***********************************************************************************************************************
@@ -134,14 +136,22 @@ public class Dumper
         final String s = Stream.concat(Arrays.asList(event.getClass().getDeclaredFields()).stream(),
                                        Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()).stream())
                                         .sorted(comparing(Field::getName))
-                                        .filter(field -> !Collection.class.isAssignableFrom(field.getType()))
-                                        .filter(field -> !Accounting.class.isAssignableFrom(field.getType()))
+                                        .filter(excludeUnwantedFields)
                                         .peek(field -> field.setAccessible(true))
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
 
         return String.format("%s(%s)", event.getClass().getSimpleName(), s);
       }
+    
+    private final static Predicate<? super Field> excludeUnwantedFields = field ->
+      {
+        final Class<?> type = field.getType();
+          System.err.println("TYPE " + type);
+        return !Collection.class.isAssignableFrom(type)
+               && !Accounting.class.isAssignableFrom(type) 
+               && !AsSupport.class.isAssignableFrom(type);
+      };
     
     @CheckForNull
     private static Object safeGet (final @Nonnull Field field, final @Nonnull Object object)

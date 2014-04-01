@@ -58,10 +58,10 @@ import static lombok.AccessLevel.PRIVATE;
  **********************************************************************************************************************/
 @Immutable @Wither
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport"})
-public class Project implements SimpleComposite<JobEvent>, Identifiable
+public class Project implements SimpleComposite<JobEvent>, Identifiable, As
   {
     @Delegate
-    private final As asSupport = new AsSupport(this);
+    private final AsSupport asSupport = new AsSupport(this);
 
     /*******************************************************************************************************************
      *
@@ -135,7 +135,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable
 
     @Getter @Nonnull
     private final String notes;
-
+    
     @Getter @Nonnull
     private final Money hourlyRate;
 
