@@ -1,26 +1,53 @@
 
-.mainFxmlClass 
+.mainFxmlClass
   {
 
   }
 
 /*.table-tree-view .column-header,*/
-.table-view .column-header 
+.table-view .column-header
   {
     -fx-font-size: 10px;
-    -fx-alignment: center; 
+    -fx-alignment: center;
     /* TODO: bold */
   }
-  
-.table-tree-view,
+
+.tree-table-view,
 .table-view
   {
     -fx-font-size: 10px;
   }
-  
-.right-aligned-column /* .table-cell */
-  { 
-    -fx-alignment: center-right; 
+
+.right-aligned-column /* FIXME: DROP THIS */
+  {
+    -fx-alignment: center-right;
     /*-fx-font-size: 20px;*/
   }
-  
+
+.red
+  {
+    -fx-text-fill: red;
+  }
+
+.right-aligned
+  {
+    -fx-alignment: center-right;
+  }
+
+/*.job-event
+  {
+    -fx-font-size: 20px;
+  }*/
+
+.job-event-group
+  {
+    -fx-font-weight: bold;
+  }
+
+.timed-job-event
+  {
+  }
+
+.flat-job-event
+  {
+  }
