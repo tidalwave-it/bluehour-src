@@ -77,7 +77,7 @@ public class ProjectPresentable implements Presentable
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         // FIXME: uses the column header names, should be an internal id instead
         builder.add("Client",     (Displayable) () -> project.getCustomer().getName());
-        builder.add("Status",     (Displayable) () -> "?Status?");
+        builder.add("Status",     (Displayable) () -> project.getStatus().name());
         builder.add("#",          (Displayable) () -> project.getNumber());
         builder.add("Name",       (Displayable) () -> project.getName());
         builder.add("Start Date", (Displayable) () -> DTF.format(project.getStartDate()));

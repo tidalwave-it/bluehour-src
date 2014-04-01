@@ -25,15 +25,11 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.importer.ibiz.spi;
+package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.IOException;
-import it.tidalwave.accounting.model.JobEvent;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import it.tidalwave.accounting.model.Project;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /***********************************************************************************************************************
  *
@@ -41,40 +37,17 @@ import lombok.Getter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface IBizProjectImporter
+public class ProjectStatusAdapter extends XmlAdapter<String, Project.Builder.Status>
   {
-    @AllArgsConstructor
-    enum IBizJobEventType
+    @Override @Nonnull
+    public Project.Builder.Status unmarshal(String v) 
       {
-        EVENT(JobEvent.Builder.Type.TIMED),    // 0
-        FIXED(JobEvent.Builder.Type.FLAT),     // 1
-        UNKNOWN2(JobEvent.Builder.Type.TIMED), // 2
-        UNKNOWN3(JobEvent.Builder.Type.TIMED), // 3
-        UNKNOWN4(JobEvent.Builder.Type.TIMED), // 4
-        GROUP(JobEvent.Builder.Type.FLAT);     // 5
-
-        @Getter @Nonnull
-        private final JobEvent.Builder.Type mappedType;
-      }
-    
-    @AllArgsConstructor
-    enum IBizProjectStatus
-      {
-        OPENED(Project.Builder.Status.OPEN),    // 0
-        CLOSED(Project.Builder.Status.CLOSED),  // 1
-        ON_HOLD(Project.Builder.Status.CLOSED), // 2  
-        DELETED(null);                          // 3
-        
-        @Getter @Nullable
-        private final Project.Builder.Status mappedStatus;
+        return Project.Builder.Status.valueOf(v.toUpperCase());
       }
 
-    /*******************************************************************************************************************
-     *
-     * @throws  IOException     in case of error
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public void importProjects()
-      throws IOException;
+    @Override @Nonnull
+    public String marshal(Project.Builder.Status v)
+      {
+        return v.name().toLowerCase();
+      }
   }

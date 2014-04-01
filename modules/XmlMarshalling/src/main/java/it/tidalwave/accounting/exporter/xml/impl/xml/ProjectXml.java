@@ -48,6 +48,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.ProjectStatusAdapter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import static java.util.stream.Collectors.toList;
@@ -87,6 +88,10 @@ public class ProjectXml
     @XmlElement(name = "notes")
     private String notes;
     
+    @XmlElement(name = "status")
+    @XmlJavaTypeAdapter(ProjectStatusAdapter.class)
+    private Project.Builder.Status status;
+    
     @XmlElement(name = "hourlyRate")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     private Money hourlyRate;
@@ -116,6 +121,7 @@ public class ProjectXml
         this.number = builder.getNumber();
         this.description = builder.getDescription();
         this.notes = builder.getNotes();
+        this.status = builder.getStatus();
         this.hourlyRate = builder.getHourlyRate();
         this.amount = builder.getAmount();
         this.startDate = builder.getStartDate();
@@ -135,6 +141,7 @@ public class ProjectXml
                                         .withNumber(number)
                                         .withDescription(description)
                                         .withNotes(notes)
+                                        .withStatus(status)
                                         .withHourlyRate(hourlyRate)
                                         .withAmount(amount)
                                         .withStartDate(startDate)

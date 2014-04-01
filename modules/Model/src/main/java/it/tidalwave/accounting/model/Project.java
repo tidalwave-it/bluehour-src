@@ -36,8 +36,8 @@ import it.tidalwave.util.As;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.role.SimpleComposite;
 import lombok.AllArgsConstructor;
@@ -72,6 +72,8 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
+        public enum Status { OPEN, CLOSED };
+
         public static interface Callback // Lombok @Wither doesn't support builder subclasses
           {
             public void register (final @Nonnull Project project);
@@ -85,6 +87,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
         private final String number;
         private final String description;
         private final String notes;
+        private final Status status;
         private final Money hourlyRate;
         private final Money amount;
         private final LocalDate startDate;
@@ -100,7 +103,8 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
         public Builder (final @Nonnull Callback callback)
           {
              // FIXME: avoid null
-            this(new Id(""), null, "", "", "", "", Money.ZERO, Money.ZERO, null, null, Collections.<JobEvent>emptyList(), callback);
+            this(new Id(""), null, "", "", "", "", Status.OPEN, Money.ZERO, Money.ZERO, null, null, 
+                 Collections.<JobEvent>emptyList(), callback);
           }
 
         @Nonnull
@@ -136,6 +140,9 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     @Getter @Nonnull
     private final String notes;
     
+    @Getter
+    private final Builder.Status status;
+
     @Getter @Nonnull
     private final Money hourlyRate;
 
@@ -175,6 +182,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
         this.number = builder.getNumber();
         this.description = builder.getDescription();
         this.notes = builder.getNotes();
+        this.status = builder.getStatus();
         this.hourlyRate = builder.getHourlyRate();
         this.amount = builder.getAmount();
         this.startDate = builder.getStartDate();
@@ -208,7 +216,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     @Nonnull
     public Builder asBuilder()
       {
-        return new Builder(id, customer, name, number, description, notes, hourlyRate, amount, 
+        return new Builder(id, customer, name, number, description, notes, status, hourlyRate, amount, 
                            startDate, endDate, events, Project.Builder.Callback.DEFAULT);
       }
   }
