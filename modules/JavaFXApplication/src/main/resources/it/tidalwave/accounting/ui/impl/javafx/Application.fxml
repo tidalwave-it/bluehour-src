@@ -36,14 +36,14 @@
                                                 <TableView fx:id="tvProjectExplorer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                                     <columns>
                                                         <TableColumn fx:id="customer" prefWidth="75.0" text="Client" />
-                                                        <TableColumn prefWidth="50.0" resizable="false" text="Status" />
+                                                        <TableColumn prefWidth="50.0" text="Status" />
                                                         <TableColumn prefWidth="75.0" text="#" />
                                                         <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Start Date" />
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Due Date" />
-                                                        <TableColumn prefWidth="40.0" resizable="false" text="Time" />
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Earnings" />
-                                                        <TableColumn prefWidth="60.0" resizable="false" text="Estimate" />
+                                                        <TableColumn prefWidth="60.0" text="Start Date" />
+                                                        <TableColumn prefWidth="60.0" text="Due Date" />
+                                                        <TableColumn prefWidth="40.0" text="Time" />
+                                                        <TableColumn prefWidth="60.0" text="Earnings" />
+                                                        <TableColumn prefWidth="60.0" text="Estimate" />
                                                         <TableColumn prefWidth="200.0" text="Notes" />
                                                     </columns>
                                                     <columnResizePolicy>
@@ -69,9 +69,9 @@
                                                         <TreeTableColumn prefWidth="75.0" text="Amount" />
                                                         <TreeTableColumn prefWidth="75.0" text="Notes" />
                                                     </columns>
-<columnResizePolicy>
-<TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-</columnResizePolicy>
+                                                    <columnResizePolicy>
+                                                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                    </columnResizePolicy>
                                                 </TreeTableView>
                                                 <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
                                             </children>
