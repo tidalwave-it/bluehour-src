@@ -28,9 +28,12 @@
 package it.tidalwave.accounting.model;
 
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsDelegateProvider;
+import it.tidalwave.util.spi.EmptyAsDelegateProvider;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  *
@@ -40,6 +43,12 @@ import org.testng.annotations.Test;
  **********************************************************************************************************************/
 public class CustomerTest
   {
+    @BeforeMethod
+    public void installEmptyAsSupport()
+      {
+        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+      }
+    
     @Test
     public void toString_must_return_all_the_fields()
       {
