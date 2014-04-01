@@ -42,6 +42,7 @@ import it.tidalwave.accounting.commons.DurationFormat;
 import it.tidalwave.accounting.commons.MoneyFormat;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.AggregatePresentationModelBuilder;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -80,14 +81,19 @@ public class ProjectPresentable implements Presentable
         builder.add("Status",     (Displayable) () -> project.getStatus().name());
         builder.add("#",          (Displayable) () -> project.getNumber());
         builder.add("Name",       (Displayable) () -> project.getName());
-        builder.add("Start Date", (Displayable) () -> DTF.format(project.getStartDate()));
-        builder.add("Due Date",   (Displayable) () -> DTF.format(project.getEndDate()));
-        builder.add("Estimate",   (Displayable) () -> MF.format(project.getAmount()));
+        builder.add("Start Date", (Displayable) () -> DTF.format(project.getStartDate()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("Due Date",   (Displayable) () -> DTF.format(project.getEndDate()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("Estimate",   (Displayable) () -> MF.format(project.getAmount()),
+                                  new DefaultStyleable("right-aligned"));
         builder.add("Notes",      (Displayable) () -> project.getNotes());
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.add("Earnings",   (Displayable) () -> MF.format(project.getEarnings()));
-        builder.add("Time",       (Displayable) () -> DF.format(project.getDuration()));
+        builder.add("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("Time",       (Displayable) () -> DF.format(project.getDuration()),
+                                  new DefaultStyleable("right-aligned"));
 
         return builder;
       }
