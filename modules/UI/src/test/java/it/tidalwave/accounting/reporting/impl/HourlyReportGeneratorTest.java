@@ -62,8 +62,8 @@ public class HourlyReportGeneratorTest
         try (final OutputStream os = new FileOutputStream(actualResult.toFile()))
           {
             new HourlyReportGenerator(project).makeReport(os);
-            os.close();
-            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
           }
+
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
   }
