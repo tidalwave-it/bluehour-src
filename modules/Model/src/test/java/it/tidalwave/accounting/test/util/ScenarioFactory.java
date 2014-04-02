@@ -49,7 +49,7 @@ import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.TimedJobEvent;
-import it.tidalwave.accounting.model.impl.DefaultAccounting;
+import it.tidalwave.accounting.model.impl.InMemoryAccounting;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +76,7 @@ public final class ScenarioFactory
     public static Accounting createEmptyAccounting()
       {
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
-        final Accounting accounting = new DefaultAccounting();
+        final Accounting accounting = new InMemoryAccounting();
         return accounting;
       }
     
@@ -86,7 +86,7 @@ public final class ScenarioFactory
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
         nextId = 1;
         
-        final Accounting accounting = new DefaultAccounting();
+        final Accounting accounting = new InMemoryAccounting();
         final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
         final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
         final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();

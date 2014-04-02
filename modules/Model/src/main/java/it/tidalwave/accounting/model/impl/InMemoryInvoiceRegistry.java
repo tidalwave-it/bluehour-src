@@ -42,7 +42,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class DefaultInvoiceRegistry implements InvoiceRegistry
+public class InMemoryInvoiceRegistry implements InvoiceRegistry
   {
     private final Map<Id, Invoice> invoiceMapById = new HashMap<>();
 
@@ -51,10 +51,10 @@ public class DefaultInvoiceRegistry implements InvoiceRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultInvoiceFinder extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
-                               implements InvoiceRegistry.Finder
+    class InMemoryInvoiceFinder extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
+                                implements InvoiceRegistry.Finder
       {
-        DefaultInvoiceFinder()
+        InMemoryInvoiceFinder()
           {
             super(invoiceMapById);  
           }
@@ -68,7 +68,7 @@ public class DefaultInvoiceRegistry implements InvoiceRegistry
     @Override @Nonnull
     public InvoiceRegistry.Finder findInvoices()
       {
-        return new DefaultInvoiceFinder();
+        return new InMemoryInvoiceFinder();
       }
 
     /*******************************************************************************************************************

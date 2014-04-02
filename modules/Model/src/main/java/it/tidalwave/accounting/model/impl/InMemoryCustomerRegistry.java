@@ -44,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
-public class DefaultCustomerRegistry implements CustomerRegistry
+public class InMemoryCustomerRegistry implements CustomerRegistry
   {
     @Nonnull
     private final Accounting accounting;
@@ -56,10 +56,10 @@ public class DefaultCustomerRegistry implements CustomerRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultCustomerFinder extends FinderWithIdMapSupport<Customer, CustomerRegistry.Finder>
-                                implements CustomerRegistry.Finder
+    class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, CustomerRegistry.Finder>
+                                 implements CustomerRegistry.Finder
       {
-        DefaultCustomerFinder()
+        InMemoryCustomerFinder()
           {
             super(customerMapById);  
           }
@@ -73,7 +73,7 @@ public class DefaultCustomerRegistry implements CustomerRegistry
     @Override @Nonnull
     public CustomerRegistry.Finder findCustomers()
       {
-        return new DefaultCustomerFinder();
+        return new InMemoryCustomerFinder();
       }
 
     /*******************************************************************************************************************

@@ -42,17 +42,17 @@ import lombok.Getter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class DefaultAccounting implements Accounting
+public class InMemoryAccounting implements Accounting
   {
     @Delegate
     private final As asSupport = new AsSupport(this);
 
     @Getter
-    private final CustomerRegistry customerRegistry = new DefaultCustomerRegistry(this);
+    private final CustomerRegistry customerRegistry = new InMemoryCustomerRegistry(this);
 
     @Getter
-    private final ProjectRegistry projectRegistry = new DefaultProjectRegistry();
+    private final ProjectRegistry projectRegistry = new InMemoryProjectRegistry();
     
     @Getter
-    private final InvoiceRegistry invoiceRegistry = new DefaultInvoiceRegistry();
+    private final InvoiceRegistry invoiceRegistry = new InMemoryInvoiceRegistry();
   }

@@ -48,7 +48,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class DefaultProjectRegistry implements ProjectRegistry
+public class InMemoryProjectRegistry implements ProjectRegistry
   {
     private final Map<Id, Project> projectMapById = new HashMap<>();
     
@@ -57,10 +57,10 @@ public class DefaultProjectRegistry implements ProjectRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
-                               implements ProjectRegistry.ProjectFinder
+    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
+                                implements ProjectRegistry.ProjectFinder
       {
-        DefaultProjectFinder()
+        InMemoryProjectFinder()
           {
             super(projectMapById);  
           }
@@ -71,8 +71,8 @@ public class DefaultProjectRegistry implements ProjectRegistry
      * 
      *
      ******************************************************************************************************************/
-    class DefaultJobEventFinder extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
-                                implements ProjectRegistry.JobEventFinder
+    class InMemoryJobEventFinder extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
+                                 implements ProjectRegistry.JobEventFinder
       {
         // FIXME: very inefficient
         @Override @Nonnull
@@ -121,7 +121,7 @@ public class DefaultProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public ProjectRegistry.ProjectFinder findProjects()
       {
-        return new DefaultProjectFinder();
+        return new InMemoryProjectFinder();
       }
 
     /*******************************************************************************************************************
@@ -132,7 +132,7 @@ public class DefaultProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public ProjectRegistry.JobEventFinder findJobEvents()
       {
-        return new DefaultJobEventFinder();
+        return new InMemoryJobEventFinder();
       }
     
     /*******************************************************************************************************************

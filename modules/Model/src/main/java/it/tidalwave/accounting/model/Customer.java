@@ -163,10 +163,10 @@ public class Customer implements Identifiable, As
      * 
      *
      ******************************************************************************************************************/
-    class DefaultProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
+    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
                                implements ProjectRegistry.ProjectFinder
       {
-        DefaultProjectFinder (final Map<Id, Project> projectMapById)
+        InMemoryProjectFinder (final Map<Id, Project> projectMapById)
           {
             super(projectMapById);  
           }
@@ -187,6 +187,6 @@ public class Customer implements Identifiable, As
         final Map<Id, Project> map = new HashMap<>();
         temp.forEach((id, projects) -> map.put(id, projects.get(0)));
         
-        return new DefaultProjectFinder(map);
+        return new InMemoryProjectFinder(map);
       }
   }
