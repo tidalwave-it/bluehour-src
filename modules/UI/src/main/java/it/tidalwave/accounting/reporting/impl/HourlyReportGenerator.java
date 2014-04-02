@@ -71,7 +71,7 @@ public class HourlyReportGenerator
                 );
         pw.printf("===============================================================\n");
         r.forEach(e -> 
-                System.err.printf("%14s %-30s %6s  %9s\n", 
+                pw.printf("%14s %-30s %6s  %9s\n", 
                         DF.format(e.getDateTime()),
                         e.getName(),
                         DUF.format(e.getDuration()),
@@ -83,6 +83,7 @@ public class HourlyReportGenerator
                 DUF.format(project.getDuration()),
                 MF.format(project.getEarnings())
                 );
+        pw.flush();
       }
 
     
