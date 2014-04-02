@@ -29,12 +29,13 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.TimedJobEvent;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
 import java.util.Arrays;
 import java.util.Collection;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.model.TimedJobEvent;
+import static it.tidalwave.accounting.commons.Formatters.*;
 
 /***********************************************************************************************************************
  *

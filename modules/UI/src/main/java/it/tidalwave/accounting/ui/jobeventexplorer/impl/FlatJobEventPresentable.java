@@ -28,15 +28,16 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.role.spi.DefaultDisplayable;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.FlatJobEvent;
-import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.model.FlatJobEvent;
+import static it.tidalwave.accounting.commons.Formatters.*;
 
 /***********************************************************************************************************************
  *

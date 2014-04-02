@@ -31,19 +31,16 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
-import it.tidalwave.accounting.commons.DurationFormat;
-import it.tidalwave.accounting.commons.MoneyFormat;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import lombok.RequiredArgsConstructor;
+import static it.tidalwave.accounting.commons.Formatters.*;
 
 /***********************************************************************************************************************
  *
@@ -55,10 +52,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProjectPresentable implements Presentable
   {
-    protected static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    protected static final MoneyFormat MF = new MoneyFormat();
-    protected static final DurationFormat DF = new DurationFormat();
-    
     @Nonnull
     private final Project project;
 

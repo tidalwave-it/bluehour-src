@@ -28,8 +28,7 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.Collection;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
@@ -37,10 +36,8 @@ import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.commons.DurationFormat;
-import it.tidalwave.accounting.commons.MoneyFormat;
-import java.util.Collection;
 import lombok.RequiredArgsConstructor;
+import static it.tidalwave.accounting.commons.Formatters.*;
 
 /***********************************************************************************************************************
  *
@@ -51,11 +48,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class JobEventPresentable implements Presentable
   {
-    protected static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    protected static final DateTimeFormatter DTTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-    protected static final MoneyFormat MF = new MoneyFormat();
-    protected static final DurationFormat DF = new DurationFormat();
-    
     @Nonnull
     private final JobEvent jobEvent;
 
