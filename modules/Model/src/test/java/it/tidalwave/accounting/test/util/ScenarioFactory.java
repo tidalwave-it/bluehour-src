@@ -32,6 +32,8 @@ import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,6 +55,7 @@ import it.tidalwave.accounting.model.impl.InMemoryAccounting;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.DataProvider;
 
 /***********************************************************************************************************************
  *
@@ -68,8 +71,26 @@ public final class ScenarioFactory
     // Used to check that there are no problems - TestNG just silently skips tests with a broken provider
     public static void main (String ... args) 
       {
-        createEmptyAccounting();
-        createScenario1();
+        createScenarios();
+      }
+    
+    @Nonnull
+    public static Map<String, Accounting> createScenarios()
+      {
+        final Map<String, Accounting> map = new HashMap<>();
+        map.put("Empty", createEmptyAccounting());
+        map.put("Scenario1", createScenario1());
+        return map;
+      }
+    
+    @DataProvider(name = "projects")
+    public static Object[][] projectProvider()
+      {
+        return ScenarioFactory.createScenarios().entrySet().stream()
+                .flatMap(entry -> entry.getValue().getProjectRegistry().findProjects()
+                        .map(project -> new Object[] { entry.getKey(), project }))
+                .collect(Collectors.toList())
+                .toArray(new Object[0][0]); 
       }
     
     @Nonnull
