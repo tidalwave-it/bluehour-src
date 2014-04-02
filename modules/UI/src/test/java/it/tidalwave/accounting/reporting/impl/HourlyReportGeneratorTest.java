@@ -28,7 +28,6 @@
 package it.tidalwave.accounting.reporting.impl;
 
 import javax.annotation.Nonnull;
-import java.util.stream.Collectors;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -36,10 +35,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.util.test.FileComparisonUtils;
-import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.test.util.ScenarioFactory;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
@@ -50,7 +47,7 @@ import org.testng.annotations.Test;
  **********************************************************************************************************************/
 public class HourlyReportGeneratorTest
   {
-    @Test(dataProvider = "projects")
+    @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
     public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull Project project) 
       throws IOException
       {
@@ -61,22 +58,12 @@ public class HourlyReportGeneratorTest
         final String name = scenarioName + "-" + project.getName() + ".txt";
         final Path actualResult = testFolder.resolve(name);
         final Path expectedResult = expectedResultsFolder.resolve(name);
+        
         try (final OutputStream os = new FileOutputStream(actualResult.toFile()))
           {
             new HourlyReportGenerator(project).makeReport(os);
             os.close();
             FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
           }
-      }
-    
-    @DataProvider(name = "projects")
-    private Object[][] projectProvider()
-      {
-        final Accounting accounting = ScenarioFactory.createScenario1();
-        
-        return accounting.getProjectRegistry().findProjects()
-                .map(project -> new Object[] { "Scenario1", project })
-                .collect(Collectors.toList())
-                .toArray(new Object[0][0]); 
       }
   }
