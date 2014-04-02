@@ -58,7 +58,6 @@ public class CustomerPresentable implements Presentable
         final List<Object> temp = new ArrayList<>();
         temp.addAll(Arrays.asList(instanceRoles));
         temp.add((Displayable) () -> customer.getName());
-//          System.err.printf("\n\n***** ROLES %s\n\n\n", temp);
-        return new DefaultPresentationModel("", temp.toArray());
+        return new DefaultPresentationModel(customer, temp.toArray());
       }
   }
