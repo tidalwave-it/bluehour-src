@@ -38,9 +38,9 @@
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
-    <artifactId>it-tidalwave-accounting-ui</artifactId>
+    <artifactId>it-tidalwave-accounting-ui-commons</artifactId>
     <version>1.0-ALPHA-3-SNAPSHOT</version>
-    <name>blueHour - UI</name>
+    <name>blueHour - UI Commons</name>
     <packaging>jar</packaging>
     
     <dependencies>
@@ -51,10 +51,6 @@
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-ui-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>

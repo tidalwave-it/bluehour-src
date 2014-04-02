@@ -329,6 +329,7 @@
         <module>Installers/MacOSX</module>
         <module>Installers/MacOSXEmbeddedJRE</module>
         <module>UI</module>
+        <module>UICommons</module>
     </modules>
 
 </project>
