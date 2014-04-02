@@ -68,8 +68,7 @@ public class ProjectPresentable implements Presentable
         final List<Object> temp = new ArrayList<>();
         temp.addAll(Arrays.asList(instanceRoles));
         temp.add(aggregateBuilder().create());
-//          System.err.printf("\n\n***** ROLES %s\n\n\n", temp);
-        return new DefaultPresentationModel("", temp.toArray());
+        return new DefaultPresentationModel(project, temp.toArray());
       }
     
     @Nonnull
