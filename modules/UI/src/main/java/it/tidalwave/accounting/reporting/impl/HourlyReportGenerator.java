@@ -51,9 +51,11 @@ import static it.tidalwave.accounting.commons.Formatters.MF;
 @RequiredArgsConstructor
 public class HourlyReportGenerator 
   {
-    private static final String SEPARATOR = "===============================================================";
+    private static final String SEPARATOR = "===========================================================================";
     
-    private static final String PATTERN = "%14s %-30s %6s  %9s\n";
+    private static final String PATTERN = "| %-12s | %-30s | %-8s | %-12s |\n";
+    private static final String PATTERN2 = "| %12s | %-30s | %8s | %12s |\n";
+    private static final String PATTERN3 = "  %12s   %-30s   %8s   %12s  \n";
     
     @Nonnull
     private final Project project;
@@ -72,12 +74,12 @@ public class HourlyReportGenerator
         pw.printf(SEPARATOR + "\n");
         pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
         pw.printf(SEPARATOR + "\n");
-        r.forEach(e -> pw.printf(PATTERN, DF.format(e.getDateTime()),
+        r.forEach(e -> pw.printf(PATTERN2, DF.format(e.getDateTime()),
                                           e.getName(),
                                           DUF.format(e.getDuration()),
                                           MF.format(e.getEarnings())));
         pw.printf(SEPARATOR + "\n");
-        pw.printf(PATTERN, "", "", 
+        pw.printf(PATTERN3, "", "", 
                            DUF.format(project.getDuration()),
                            MF.format(project.getEarnings()));
         pw.flush();
