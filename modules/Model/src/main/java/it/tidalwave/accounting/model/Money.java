@@ -33,6 +33,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import javax.annotation.Nonnegative;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -78,13 +79,24 @@ public class Money
     @Nonnull
     public Money add (final @Nonnull Money other)
       {
-        if (!this.currency.equals(other.currency))
-          {
-            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s", 
-                                                             this.currency, other.currency));
-          }
-        
+        checkCurrencies(other);
         return new Money(amount.add(other.amount), currency);
+      }
+    
+    @Nonnull
+    public Money subtract (final @Nonnull Money other)
+      {
+        checkCurrencies(other);
+        return new Money(amount.subtract(other.amount), currency);
+      }
+
+    @Nonnegative
+    public double divided (final @Nonnull Money other)
+      {
+        checkCurrencies(other);
+        // Can fail with ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
+//        return amount.divide(other.amount).doubleValue();
+        return amount.doubleValue() / other.amount.doubleValue();
       }
     
     @Nonnull
@@ -97,5 +109,14 @@ public class Money
         decimalFormat.setParseBigDecimal(true);
         
         return decimalFormat;
+      }
+    
+    private void checkCurrencies (final @Nonnull Money other)
+      {
+        if (!this.currency.equals(other.currency))
+          {
+            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s", 
+                                                             this.currency, other.currency));
+          }
       }
   }
