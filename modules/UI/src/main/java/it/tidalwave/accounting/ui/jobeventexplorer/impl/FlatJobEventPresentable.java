@@ -62,7 +62,7 @@ public class FlatJobEventPresentable extends JobEventPresentable
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        builder.add("Date",   (Displayable) () -> DTF.format(flatJobEvent.getDate()));
+        builder.add("Date",   (Displayable) () -> DF.format(flatJobEvent.getDate()));
         builder.add("Time",   new DefaultDisplayable(""));
         builder.add("Rate",   new DefaultDisplayable(""));
         builder.add("Amount", (Displayable) () -> MF.format(flatJobEvent.getEarnings()),

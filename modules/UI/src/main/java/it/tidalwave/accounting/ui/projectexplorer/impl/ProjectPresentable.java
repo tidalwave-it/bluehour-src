@@ -73,9 +73,9 @@ public class ProjectPresentable implements Presentable
         builder.add("Status",     (Displayable) () -> project.getStatus().name());
         builder.add("#",          (Displayable) () -> project.getNumber());
         builder.add("Name",       (Displayable) () -> project.getName());
-        builder.add("Start Date", (Displayable) () -> DTF.format(project.getStartDate()),
+        builder.add("Start Date", (Displayable) () -> DF.format(project.getStartDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Due Date",   (Displayable) () -> DTF.format(project.getEndDate()),
+        builder.add("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
                                   new DefaultStyleable("right-aligned"));
         builder.add("Estimate",   (Displayable) () -> MF.format(project.getAmount()),
                                   new DefaultStyleable("right-aligned"));
@@ -84,7 +84,7 @@ public class ProjectPresentable implements Presentable
         // FIXME: this is dynamically computed, can be slow - should be also cached
         builder.add("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Time",       (Displayable) () -> DF.format(project.getDuration()),
+        builder.add("Time",       (Displayable) () -> DUF.format(project.getDuration()),
                                   new DefaultStyleable("right-aligned"));
 
         return builder;

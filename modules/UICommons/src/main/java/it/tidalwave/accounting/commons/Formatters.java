@@ -38,8 +38,8 @@ import java.time.format.FormatStyle;
  **********************************************************************************************************************/
 public class Formatters 
   {
-    public static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    public static final DateTimeFormatter DTTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+    public static final DateTimeFormatter DF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    public static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
     public static final MoneyFormat MF = new MoneyFormat();
-    public static final DurationFormat DF = new DurationFormat();
+    public static final DurationFormat DUF = new DurationFormat();
   }
