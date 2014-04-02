@@ -51,6 +51,10 @@ import static it.tidalwave.accounting.commons.Formatters.MF;
 @RequiredArgsConstructor
 public class HourlyReportGenerator 
   {
+    private static final String SEPARATOR = "===============================================================";
+    
+    private static final String PATTERN = "%14s %-30s %6s  %9s\n";
+    
     @Nonnull
     private final Project project;
     
@@ -65,27 +69,19 @@ public class HourlyReportGenerator
         final List<JobEvent> r = jobEvents.stream().sorted(Comparator.comparing(JobEvent::getDateTime))
                                                    .collect(Collectors.toList());
         
-        pw.printf("===============================================================\n");
-        pw.printf("%14s %-30s %6s  %9s\n", 
-                "Date", "Description", "Time", "Cost"
-                );
-        pw.printf("===============================================================\n");
-        r.forEach(e -> 
-                pw.printf("%14s %-30s %6s  %9s\n", 
-                        DF.format(e.getDateTime()),
-                        e.getName(),
-                        DUF.format(e.getDuration()),
-                        MF.format(e.getEarnings())
-                       ));
-        pw.printf("===============================================================\n");
-        pw.printf("%14s %-30s %6s  %9s\n", 
-                "", "", 
-                DUF.format(project.getDuration()),
-                MF.format(project.getEarnings())
-                );
+        pw.printf(SEPARATOR + "\n");
+        pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
+        pw.printf(SEPARATOR + "\n");
+        r.forEach(e -> pw.printf(PATTERN, DF.format(e.getDateTime()),
+                                          e.getName(),
+                                          DUF.format(e.getDuration()),
+                                          MF.format(e.getEarnings())));
+        pw.printf(SEPARATOR + "\n");
+        pw.printf(PATTERN, "", "", 
+                           DUF.format(project.getDuration()),
+                           MF.format(project.getEarnings()));
         pw.flush();
       }
-
     
     private void addAll (final @Nonnull List<JobEvent> results,
                          final @Nonnull List<? extends JobEvent> jobEvents) 
