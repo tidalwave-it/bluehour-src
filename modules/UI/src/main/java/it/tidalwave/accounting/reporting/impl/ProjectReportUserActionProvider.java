@@ -27,23 +27,16 @@
  */
 package it.tidalwave.accounting.reporting.impl;
 
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.Collections;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider;
 import it.tidalwave.role.ui.spi.UserActionSupport;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.accounting.commons.Formatters.*;
 
 /***********************************************************************************************************************
  *
@@ -65,53 +58,8 @@ public class ProjectReportUserActionProvider extends DefaultUserActionProvider
             @Override
             public void actionPerformed() 
               {
-                makeReport();
+                new HourlyReportGenerator(project).makeReport(System.out);
               }
           });
-      }
-    
-    private void makeReport() 
-      {
-        System.err.println("CREATE REPORT " + project);
-        final List<JobEvent> jobEvents = new ArrayList<>();
-        addAll(jobEvents, project.findChildren().results());
-        
-        // TODO: quick and dirty - refactor with visitor, closures
-        final List<JobEvent> r = jobEvents.stream().sorted(Comparator.comparing(JobEvent::getDateTime)).collect(Collectors.toList());
-        
-        System.err.printf("===============================================================\n");
-        System.err.printf("%14s %-30s %6s  %9s\n", 
-                "Date", "Description", "Time", "Cost"
-                );
-        System.err.printf("===============================================================\n");
-        r.forEach(e -> 
-                System.err.printf("%14s %-30s %6s  %9s\n", 
-                        DF.format(e.getDateTime()),
-                        e.getName(),
-                        DUF.format(e.getDuration()),
-                        MF.format(e.getEarnings())
-                       ));
-        System.err.printf("===============================================================\n");
-        System.err.printf("%14s %-30s %6s  %9s\n", 
-                "", "", 
-                DUF.format(project.getDuration()),
-                MF.format(project.getEarnings())
-                );
-      }
-
-    private void addAll (final @Nonnull List<JobEvent> results,
-                         final @Nonnull List<? extends JobEvent> jobEvents) 
-      {
-        for (final JobEvent jobEvent : jobEvents)
-          {
-            if (jobEvent instanceof JobEventGroup)
-              {
-                addAll(results, ((JobEventGroup)jobEvent).findChildren().results());  
-              }
-            else
-              {
-                results.add(jobEvent);
-              }
-          }
       }
   }
