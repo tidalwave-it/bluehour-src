@@ -28,16 +28,14 @@
 package it.tidalwave.accounting.reporting.impl;
 
 import javax.annotation.Nonnull;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.test.util.ScenarioFactory;
-import java.io.PrintWriter;
 import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
