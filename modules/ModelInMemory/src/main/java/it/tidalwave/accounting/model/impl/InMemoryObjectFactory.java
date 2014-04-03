@@ -70,7 +70,7 @@ public class InMemoryObjectFactory implements ObjectFactory
           {
             return new InMemoryJobEventGroup(builder);
           }
-        else if (builder.getType() == JobEvent.Builder.Type.TIMED)
+        else if (builder.getType() == JobEvent.Type.TIMED)
           {
             return new InMemoryTimedJobEvent(builder);
           }

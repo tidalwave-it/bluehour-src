@@ -53,6 +53,8 @@ import lombok.experimental.Wither;
 @Immutable 
 public interface JobEvent extends Identifiable, As
   {
+    public enum Type { TIMED, FLAT };
+
     /*******************************************************************************************************************
      *
      * 
@@ -62,8 +64,6 @@ public interface JobEvent extends Identifiable, As
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
-        public enum Type { TIMED, FLAT };
-
         private final Id id;
         private final Type type;
         private final LocalDateTime startDateTime;

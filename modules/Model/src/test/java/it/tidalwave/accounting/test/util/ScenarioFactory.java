@@ -242,7 +242,7 @@ public final class ScenarioFactory
             result.add(JobEvent.builder().withId(new Id("" + nextId++))
                                          .withName("Event #" + i)
                                          .withDescription("Description of Event #" + i)
-                                         .withType(JobEvent.Builder.Type.TIMED)
+                                         .withType(JobEvent.Type.TIMED)
                                          .withEarnings(new Money(earnings, "EUR"))
                                          .withStartDateTime(s)
                                          .withEndDateTime(e)

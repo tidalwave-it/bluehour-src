@@ -70,7 +70,7 @@ public class JobEventXml
     
     @XmlElement(name = "type")
     @XmlJavaTypeAdapter(EventTypeAdapter.class)
-    private JobEvent.Builder.Type type;
+    private JobEvent.Type type;
     
     @XmlElement(name = "startDateTime")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)

@@ -55,6 +55,8 @@ import lombok.experimental.Wither;
 @Immutable 
 public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
   {
+    public enum Status { OPEN, CLOSED };
+
     /*******************************************************************************************************************
      *
      * 
@@ -64,8 +66,6 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
-        public enum Status { OPEN, CLOSED };
-
         public static interface Callback // Lombok @Wither doesn't support builder subclasses
           {
             public void register (final @Nonnull Project project);

@@ -90,7 +90,7 @@ public class ProjectXml
     
     @XmlElement(name = "status")
     @XmlJavaTypeAdapter(ProjectStatusAdapter.class)
-    private Project.Builder.Status status;
+    private Project.Status status;
     
     @XmlElement(name = "hourlyRate")
     @XmlJavaTypeAdapter(MoneyAdapter.class)

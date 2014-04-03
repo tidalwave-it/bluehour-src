@@ -87,7 +87,7 @@ public class InMemoryProject implements ProjectSpi
     private final String notes;
     
     @Getter
-    private final Builder.Status status;
+    private final Status status;
 
     @Getter @Nonnull
     private final Money hourlyRate;
