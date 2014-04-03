@@ -217,7 +217,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     @Nonnull
     public Money getEarnings()
       {
-        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money::add).orElse(Money.ZERO);
+        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
       }
     
     /*******************************************************************************************************************
@@ -228,7 +228,7 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     @Nonnull
     public Duration getDuration()
       {
-        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration::plus).orElse(Duration.ZERO);
+        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
       }
     
     /*******************************************************************************************************************
