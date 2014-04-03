@@ -50,7 +50,7 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.TimedJobEvent;
+import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
 import it.tidalwave.accounting.model.impl.InMemoryAccounting;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -261,8 +261,8 @@ public final class ScenarioFactory
             List<JobEvent> eventsSubList = new ArrayList<>(jobEvents.subList(i * x, i * x + x));
             // FIXME: hack!
             List temp = eventsSubList;
-            List<TimedJobEvent> timedEventsSubList = temp;
-            final TimedJobEvent lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
+            List<InMemoryTimedJobEvent> timedEventsSubList = temp;
+            final InMemoryTimedJobEvent lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
             final LocalDate lastDate = lastEvent.getStartDateTime().toLocalDate();
             final double earnings = timedEventsSubList.stream()
                     .collect(Collectors.summingDouble(ev -> ev.getEarnings().getAmount().doubleValue()));

@@ -38,10 +38,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import static javax.xml.bind.annotation.XmlAccessOrder.*;
 import static javax.xml.bind.annotation.XmlAccessType.*;
-import lombok.Getter;
 
 /***********************************************************************************************************************
  *

@@ -33,6 +33,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +47,6 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.util.spi.AsSupport;
 import lombok.RequiredArgsConstructor;
 import static java.util.Comparator.comparing;
-import java.util.function.Predicate;
 import static java.util.stream.Collectors.joining;
 
 /***********************************************************************************************************************
@@ -140,8 +140,21 @@ public class Dumper
                                         .peek(field -> field.setAccessible(true))
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
+        
+        String className = null;
+        
+        Class<?>[] interfaces = event.getClass().getInterfaces();
+        
+        if (interfaces.length > 0)
+          {
+            className = interfaces[0].getSimpleName();
+          }
+        else
+          {
+            className = event.getClass().getSimpleName().replaceFirst("^InMemory", "");
+          }
 
-        return String.format("%s(%s)", event.getClass().getSimpleName(), s);
+        return String.format("%s(%s)", className, s);
       }
     
     private final static Predicate<? super Field> excludeUnwantedFields = field ->

@@ -25,109 +25,80 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.As;
-import it.tidalwave.util.Id;
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
-import lombok.AllArgsConstructor;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import it.tidalwave.accounting.model.FlatJobEvent;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEvent.Builder;
+import it.tidalwave.accounting.model.Money;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- *
- * This class models a customer.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Customer extends Identifiable, As
+@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
+public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEvent
   {
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
-      {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
-          {
-            public void register (final @Nonnull Customer customer);
+    @Getter @Nonnull
+    private final LocalDate date;
 
-            public static final Callback DEFAULT = (customer) -> {};
-          }
-
-        private final Id id;
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-        private final Callback callback;
-
-        public Builder()
-          {
-            this(Callback.DEFAULT);
-          }
-
-        public Builder (final @Nonnull Callback callback)
-          {
-            this(new Id(""), "", Address.EMPTY, "", callback);
-          }
-        
-        @Nonnull
-        public Builder with (final @Nonnull Builder builder)
-          {
-            return builder.withCallback(callback);
-          }
-
-        @Nonnull
-        public Customer create()
-          {
-            final Customer customer = new InMemoryCustomer(this);
-            callback.register(customer);
-            return customer;
-          }
-      }
+    @Getter @Nonnull
+    private final Money earnings;
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @Nonnull
-    public static Builder builder()
+    public /* FIXME protected */ InMemoryFlatJobEvent (final @Nonnull Builder builder)
       {
-        return new Builder();
+        super(builder);
+        this.date = builder.getStartDateTime().toLocalDate();
+        this.earnings = builder.getEarnings();
       }
     
     /*******************************************************************************************************************
      *
+     * {@inheritDoc} 
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public String getName();
-    
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, Builder.Type.FLAT, date.atStartOfDay(), null,
+                           name, description, earnings, null, Collections.<JobEvent>emptyList());
+      }
+
     /*******************************************************************************************************************
      *
+     * {@inheritDoc} 
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects();
-    
+    @Override @Nonnull
+    public LocalDateTime getDateTime()
+      {
+        return date.atStartOfDay();
+      }
+
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc} 
      * 
      ******************************************************************************************************************/
-    @Nonnull
-    public Builder asBuilder();
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return Duration.ZERO;
+      }
   }

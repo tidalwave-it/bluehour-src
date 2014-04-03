@@ -87,7 +87,7 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
       {
         return new Customer.Builder(customer -> 
           {
-            customer.setAccounting(accounting);
+            ((InMemoryCustomer)customer).setAccounting(accounting); // FIXME
             customerMapById.put(customer.getId(), customer);
           });
       }

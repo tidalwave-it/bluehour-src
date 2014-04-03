@@ -64,7 +64,7 @@ public class CustomerTest
                                               .withBillingAddress(a1)
                                               .create();
 
-        assertThat(c1.toString(), is("Customer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
+        assertThat(c1.toString(), is("InMemoryCustomer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
                                    + "city=San Francisco, state=CA, country=USA, zip=12345), vatNumber=1233455345)"));
       }
   }

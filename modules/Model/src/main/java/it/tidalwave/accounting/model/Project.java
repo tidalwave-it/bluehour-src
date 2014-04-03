@@ -34,20 +34,15 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import it.tidalwave.util.As;
-import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.role.SimpleComposite;
+import it.tidalwave.accounting.model.impl.InMemoryProject;
 import lombok.AllArgsConstructor;
-import lombok.Delegate;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
@@ -57,19 +52,15 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Wither
-@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport"})
-public class Project implements SimpleComposite<JobEvent>, Identifiable, As
+@Immutable 
+public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
   {
-    @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
-
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor(access = PRIVATE)
+    @AllArgsConstructor // FIXME (access = PROTECTED)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
@@ -117,47 +108,11 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
         @Nonnull
         public Project create()
           {
-            final Project project = new Project(this);
+            final Project project = new InMemoryProject(this);
             callback.register(project);
             return project;
           }
       }
-
-    @Getter @Nonnull
-    private final Id id;
-    
-    @Getter @Nonnull
-    private final Customer customer;
-
-    @Getter @Nonnull
-    private final String name;
-
-    @Getter @Nonnull
-    private final String number;
-
-    @Getter @Nonnull
-    private final String description;
-
-    @Getter @Nonnull
-    private final String notes;
-    
-    @Getter
-    private final Builder.Status status;
-
-    @Getter @Nonnull
-    private final Money hourlyRate;
-
-    @Getter @Nonnull
-    private final Money amount;
-
-    @Getter @Nonnull
-    private final LocalDate startDate;
-
-    @Getter @Nonnull
-    private final LocalDate endDate;
-
-    @Nonnull
-    private final List<JobEvent> events; // FIXME: immutable
 
     /*******************************************************************************************************************
      *
@@ -173,63 +128,98 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
     /*******************************************************************************************************************
      *
      * 
-     *
+     * 
      ******************************************************************************************************************/
-    protected Project (final @Nonnull Builder builder)
-      {
-        this.id = builder.getId();
-        this.customer = builder.getCustomer();
-        this.name = builder.getName();
-        this.number = builder.getNumber();
-        this.description = builder.getDescription();
-        this.notes = builder.getNotes();
-        this.status = builder.getStatus();
-        this.hourlyRate = builder.getHourlyRate();
-        this.amount = builder.getAmount();
-        this.startDate = builder.getStartDate();
-        this.endDate = builder.getEndDate();
-        this.events = builder.getEvents();
-      }
+    @Nonnull
+    public String getName();
 
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public String getNumber();
+
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public String getNotes();
+
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Customer getCustomer();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public LocalDate getStartDate();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public LocalDate getEndDate();
+
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Duration getDuration();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Builder.Status getStatus();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getEarnings();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getAmount();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getHourlyRate();
+    
     /*******************************************************************************************************************
      *
      * {@inheritDoc}
      *
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public FinderStream<JobEvent> findChildren()
-      {
-        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
-          {
-            @Override @Nonnull
-            protected List<? extends JobEvent> computeResults()
-              {
-                return Collections.unmodifiableList(events);
-              }
-          };
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
     @Nonnull
-    public Money getEarnings()
-      {
-        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Duration getDuration()
-      {
-        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
-      }
+    public FinderStream<JobEvent> findChildren();
     
     /*******************************************************************************************************************
      *
@@ -237,9 +227,5 @@ public class Project implements SimpleComposite<JobEvent>, Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder()
-      {
-        return new Builder(id, customer, name, number, description, notes, status, hourlyRate, amount, 
-                           startDate, endDate, events, Project.Builder.Callback.DEFAULT);
-      }
+    public Builder asBuilder();
   }

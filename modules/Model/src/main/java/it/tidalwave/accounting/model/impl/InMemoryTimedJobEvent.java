@@ -25,109 +25,86 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.As;
-import it.tidalwave.util.Id;
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
-import lombok.AllArgsConstructor;
+import java.util.Collections;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEvent.Builder;
+import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.TimedJobEvent;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- *
- * This class models a customer.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Customer extends Identifiable, As
+@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
+public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobEvent
   {
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
-      {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
-          {
-            public void register (final @Nonnull Customer customer);
+    @Getter @Nonnull
+    private final LocalDateTime startDateTime;
 
-            public static final Callback DEFAULT = (customer) -> {};
-          }
+    @Getter @Nonnull
+    private final LocalDateTime endDateTime;
 
-        private final Id id;
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-        private final Callback callback;
+    @Getter @Nonnull
+    private final Money earnings;
 
-        public Builder()
-          {
-            this(Callback.DEFAULT);
-          }
-
-        public Builder (final @Nonnull Callback callback)
-          {
-            this(new Id(""), "", Address.EMPTY, "", callback);
-          }
-        
-        @Nonnull
-        public Builder with (final @Nonnull Builder builder)
-          {
-            return builder.withCallback(callback);
-          }
-
-        @Nonnull
-        public Customer create()
-          {
-            final Customer customer = new InMemoryCustomer(this);
-            callback.register(customer);
-            return customer;
-          }
-      }
+    @Getter @Nonnull
+    private final Money rate;
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @Nonnull
-    public static Builder builder()
+    public /* FIXME protected */ InMemoryTimedJobEvent (final @Nonnull Builder builder)
       {
-        return new Builder();
+        super(builder);
+        this.startDateTime = builder.getStartDateTime();
+        this.endDateTime = builder.getEndDateTime();
+        this.earnings = builder.getEarnings();
+        this.rate = builder.getRate();
       }
     
     /*******************************************************************************************************************
      *
+     * {@inheritDoc} 
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public String getName();
-    
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, Builder.Type.TIMED, startDateTime, endDateTime, name, description, 
+                           earnings, rate, Collections.<JobEvent>emptyList());
+      }
     /*******************************************************************************************************************
      *
+     * {@inheritDoc} 
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects();
-    
+    @Override @Nonnull
+    public LocalDateTime getDateTime()
+      {
+        return startDateTime;
+      }
+
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc} 
      * 
      ******************************************************************************************************************/
-    @Nonnull
-    public Builder asBuilder();
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return Duration.between(startDateTime, endDateTime);
+      }
   }

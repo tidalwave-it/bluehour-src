@@ -29,18 +29,8 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.role.SimpleComposite;
-import java.util.function.BinaryOperator;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  *
@@ -48,85 +38,9 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode(callSuper = true) @ToString(exclude = { "events" }, callSuper = true)
-public class JobEventGroup extends JobEvent implements SimpleComposite<JobEvent>
+@Immutable
+public interface JobEventGroup extends JobEvent, SimpleComposite<JobEvent>
   {
-    @Nonnull
-    private final List<JobEvent> events; // FIXME: immutable
-
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    protected JobEventGroup (final @Nonnull Builder builder)
-      {
-        super(builder);
-        this.events = builder.getEvents();
-      }
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     * 
-     ******************************************************************************************************************/
     @Override @Nonnull
-    public FinderStream<JobEvent> findChildren()
-      {
-        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
-          {
-            @Override @Nonnull
-            protected List<? extends JobEvent> computeResults()
-              {
-                return Collections.unmodifiableList(events);
-              }
-          };
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public JobEvent.Builder asBuilder()
-      {
-        return new Builder(id, null, null, null, name, 
-                           description, null, null, new ArrayList<>(findChildren().results()));
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public LocalDateTime getDateTime()
-      {
-//        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
-        final BinaryOperator<LocalDateTime> min = (a, b) -> (a.compareTo(b) > 0) ? b : a;
-        return findChildren().map(jobEvent -> jobEvent.getDateTime()).reduce(min).get();
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public Money getEarnings()
-      {
-        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public Duration getDuration() 
-      {
-        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
-      }
+    public FinderStream<JobEvent> findChildren();
   }

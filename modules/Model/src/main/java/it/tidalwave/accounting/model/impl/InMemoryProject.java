@@ -28,122 +28,150 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import javax.annotation.concurrent.Immutable;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
-import lombok.extern.slf4j.Slf4j;
+import it.tidalwave.accounting.model.Project.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Delegate;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.Wither;
+import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
+ *
+ * This class models a project.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class InMemoryProjectRegistry implements ProjectRegistry
+@Immutable @Wither
+@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport"})
+public class InMemoryProject implements Project
   {
-    private final Map<Id, Project> projectMapById = new HashMap<>();
+    @Delegate
+    private final AsSupport asSupport = new AsSupport(this);
+
+    @Getter @Nonnull
+    private final Id id;
     
+    @Getter @Nonnull
+    private final Customer customer;
+
+    @Getter @Nonnull
+    private final String name;
+
+    @Getter @Nonnull
+    private final String number;
+
+    @Getter @Nonnull
+    private final String description;
+
+    @Getter @Nonnull
+    private final String notes;
+    
+    @Getter
+    private final Builder.Status status;
+
+    @Getter @Nonnull
+    private final Money hourlyRate;
+
+    @Getter @Nonnull
+    private final Money amount;
+
+    @Getter @Nonnull
+    private final LocalDate startDate;
+
+    @Getter @Nonnull
+    private final LocalDate endDate;
+
+    @Nonnull
+    private final List<JobEvent> events; // FIXME: immutable
+
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
-                                implements ProjectRegistry.ProjectFinder
+    public /* FIXME protected */ InMemoryProject (final @Nonnull Builder builder)
       {
-        InMemoryProjectFinder()
-          {
-            super(projectMapById);  
-          }
+        this.id = builder.getId();
+        this.customer = builder.getCustomer();
+        this.name = builder.getName();
+        this.number = builder.getNumber();
+        this.description = builder.getDescription();
+        this.notes = builder.getNotes();
+        this.status = builder.getStatus();
+        this.hourlyRate = builder.getHourlyRate();
+        this.amount = builder.getAmount();
+        this.startDate = builder.getStartDate();
+        this.endDate = builder.getEndDate();
+        this.events = builder.getEvents();
       }
 
     /*******************************************************************************************************************
      *
-     * 
+     * {@inheritDoc}
      *
      ******************************************************************************************************************/
-    class InMemoryJobEventFinder extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
-                                 implements ProjectRegistry.JobEventFinder
+    @Override @Nonnull
+    public FinderStream<JobEvent> findChildren()
       {
-        // FIXME: very inefficient
-        @Override @Nonnull
-        protected Collection<? extends JobEvent> findAll() 
+        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
           {
-            final List<JobEvent> result = new ArrayList<>();
-            
-            findProjects().forEach(project -> 
+            @Override @Nonnull
+            protected List<? extends JobEvent> computeResults()
               {
-                project.findChildren().forEach(jobEvent -> 
-                  {
-                    result.add(jobEvent);
-                    
-                    // FIXME: should be recursive
-                    if (jobEvent instanceof InMemoryJobEventGroup)
-                      {
-                        result.addAll(((InMemoryJobEventGroup)jobEvent).findChildren().results());  
-                      }
-                  });
-              });
-            
-            return result;
-          }
-
-        @Override @Nonnull
-        protected JobEvent findById (final @Nonnull Id id) 
-          {
-            // FIXME: very inefficient
-            final Map<Id, JobEvent> map = findAll().stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
-            
-            // FIXME: should not happen
-            if (!map.containsKey(id))
-              {
-                return JobEvent.builder().withId(id).withName("DUMMY!").create();
+                return Collections.unmodifiableList(events);
               }
-            
-            return map.get(id);
-          }  
+          };
       }
     
     /*******************************************************************************************************************
      *
-     * {@inheritDoc}
-     *
+     * 
+     * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects()
+    public Money getEarnings()
       {
-        return new InMemoryProjectFinder();
-      }
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public ProjectRegistry.JobEventFinder findJobEvents()
-      {
-        return new InMemoryJobEventFinder();
+        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
       }
     
     /*******************************************************************************************************************
      *
-     * {@inheritDoc}
-     *
+     * 
+     * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Project.Builder addProject()
+    public Duration getDuration()
       {
-        return new Project.Builder(project -> projectMapById.put(project.getId(), project));
+        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Builder asBuilder()
+      {
+        return new Builder(id, customer, name, number, description, notes, status, hourlyRate, amount, 
+                           startDate, endDate, events, Project.Builder.Callback.DEFAULT);
       }
   }

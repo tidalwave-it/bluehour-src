@@ -34,7 +34,7 @@ import java.util.Collection;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.TimedJobEvent;
+import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -43,13 +43,13 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = TimedJobEvent.class)
+@DciRole(datumType = InMemoryTimedJobEvent.class)
 public class TimedJobEventPresentable extends JobEventPresentable
   {
     @Nonnull
-    private final TimedJobEvent timedJobEvent;
+    private final InMemoryTimedJobEvent timedJobEvent;
     
-    public TimedJobEventPresentable (final @Nonnull TimedJobEvent timedJobEvent)
+    public TimedJobEventPresentable (final @Nonnull InMemoryTimedJobEvent timedJobEvent)
       {
         super(timedJobEvent);
         this.timedJobEvent = timedJobEvent;

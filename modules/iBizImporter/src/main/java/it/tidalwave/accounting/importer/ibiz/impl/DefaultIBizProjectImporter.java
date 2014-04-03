@@ -45,8 +45,7 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.TimedJobEvent;
-import java.util.Optional;
+import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.toList;
@@ -161,7 +160,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
       
         if ((hourlyRate.compareTo(Money.ZERO) == 0) && !jobEvents.isEmpty())
             // don't use equals() - see http://stackoverflow.com/questions/6787142/bigdecimal-equals-versus-compareto
-          {
+                                        {
             JobEvent event = jobEvents.get(0);
             
             while ((event instanceof JobEventGroup) && ((JobEventGroup)event).findChildren().count() > 0)
@@ -169,9 +168,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                 event = ((JobEventGroup)event).findChildren().firstResult();
               }
             
-            if (event instanceof TimedJobEvent)
+            if (event instanceof InMemoryTimedJobEvent)
               {
-                hourlyRate = ((TimedJobEvent)event).getRate();
+                hourlyRate = ((InMemoryTimedJobEvent)event).getRate();
               }
           }
         return hourlyRate;

@@ -27,15 +27,7 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  *
@@ -43,58 +35,7 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
-public class FlatJobEvent extends JobEvent
+@Immutable 
+public interface FlatJobEvent extends JobEvent
   {
-    @Getter @Nonnull
-    private final LocalDate date;
-
-    @Getter @Nonnull
-    private final Money earnings;
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    protected FlatJobEvent (final @Nonnull Builder builder)
-      {
-        super(builder);
-        this.date = builder.getStartDateTime().toLocalDate();
-        this.earnings = builder.getEarnings();
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public JobEvent.Builder asBuilder()
-      {
-        return new Builder(id, Builder.Type.FLAT, date.atStartOfDay(), null,
-                           name, description, earnings, null, Collections.<JobEvent>emptyList());
-      }
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public LocalDateTime getDateTime()
-      {
-        return date.atStartOfDay();
-      }
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public Duration getDuration() 
-      {
-        return Duration.ZERO;
-      }
   }

@@ -25,109 +25,110 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.As;
-import it.tidalwave.util.Id;
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.BinaryOperator;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.accounting.model.Money;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- *
- * This class models a customer.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Customer extends Identifiable, As
+@Immutable @EqualsAndHashCode(callSuper = true) @ToString(exclude = { "events" }, callSuper = true)
+public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventGroup
   {
+    @Nonnull
+    private final List<JobEvent> events; // FIXME: immutable
+
     /*******************************************************************************************************************
      *
      * 
-     *
+     * 
      ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
+    public /* FIXME protected */ InMemoryJobEventGroup (final @Nonnull Builder builder)
       {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
-          {
-            public void register (final @Nonnull Customer customer);
-
-            public static final Callback DEFAULT = (customer) -> {};
-          }
-
-        private final Id id;
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-        private final Callback callback;
-
-        public Builder()
-          {
-            this(Callback.DEFAULT);
-          }
-
-        public Builder (final @Nonnull Callback callback)
-          {
-            this(new Id(""), "", Address.EMPTY, "", callback);
-          }
-        
-        @Nonnull
-        public Builder with (final @Nonnull Builder builder)
-          {
-            return builder.withCallback(callback);
-          }
-
-        @Nonnull
-        public Customer create()
-          {
-            final Customer customer = new InMemoryCustomer(this);
-            callback.register(customer);
-            return customer;
-          }
+        super(builder);
+        this.events = builder.getEvents();
       }
 
     /*******************************************************************************************************************
      *
+     * {@inheritDoc}
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public static Builder builder()
+    @Override @Nonnull
+    public FinderStream<JobEvent> findChildren()
       {
-        return new Builder();
+        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
+          {
+            @Override @Nonnull
+            protected List<? extends JobEvent> computeResults()
+              {
+                return Collections.unmodifiableList(events);
+              }
+          };
       }
     
     /*******************************************************************************************************************
      *
+     * {@inheritDoc} 
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public String getName();
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, null, null, null, name, 
+                           description, null, null, new ArrayList<>(findChildren().results()));
+      }
     
     /*******************************************************************************************************************
      *
+     * {@inheritDoc} 
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects();
+    @Override @Nonnull
+    public LocalDateTime getDateTime()
+      {
+//        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
+        final BinaryOperator<LocalDateTime> min = (a, b) -> (a.compareTo(b) > 0) ? b : a;
+        return findChildren().map(jobEvent -> jobEvent.getDateTime()).reduce(min).get();
+      }
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc} 
      * 
      ******************************************************************************************************************/
-    @Nonnull
-    public Builder asBuilder();
+    @Override @Nonnull
+    public Money getEarnings()
+      {
+        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
+      }
   }

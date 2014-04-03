@@ -29,20 +29,14 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
 import it.tidalwave.role.Identifiable;
+import it.tidalwave.accounting.model.impl.InMemoryInvoice;
 import lombok.AllArgsConstructor;
-import lombok.Delegate;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
@@ -54,18 +48,15 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
-public class Invoice implements Identifiable, As
+@Immutable 
+public interface Invoice extends Identifiable, As
   {
-    @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
-
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor(access = PRIVATE)
+    @AllArgsConstructor// FIXME (access = PRIVATE)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
@@ -112,7 +103,7 @@ public class Invoice implements Identifiable, As
 //                throw new IllegalArgumentException("Illegal project for jobEvent");
 //              }
             
-            final Invoice invoice = new Invoice(this);
+            final Invoice invoice = new InMemoryInvoice(this);
             callback.register(invoice);
             return invoice;
           }        
@@ -120,61 +111,11 @@ public class Invoice implements Identifiable, As
 
     /*******************************************************************************************************************
      *
+     * @return 
      * 
-     *
      ******************************************************************************************************************/
-    class JobEventFinder extends FinderStreamSupport<JobEvent, JobEventFinder>
-                         implements ExtendedFinderSupport<JobEvent, JobEventFinder>, 
-                                    FinderStream<JobEvent>, 
-                                    Finder<JobEvent>
-      {
-        @Override @Nonnull
-        protected List<? extends JobEvent> computeResults() 
-          {
-            return new ArrayList<>(jobEvents);
-          }
-      }
-    
-    @Getter @Nonnull
-    private final Id id;
-    
-    @Getter
-    private final String number;
-    
     @Nonnull
-    private final Project project;
-   
-    @Nonnull
-    private final List<JobEvent> jobEvents; // FIXME: immutablelist
-
-    @Nonnull
-    private final LocalDate date;
-
-    @Nonnull
-    private final LocalDate dueDate;
-
-    @Nonnull
-    private final Money earnings;
-
-    @Nonnull
-    private final Money tax;
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    private Invoice (final @Nonnull Builder builder)
-      {
-        this.id = builder.getId();
-        this.number = builder.getNumber();
-        this.project = builder.getProject();
-        this.jobEvents = builder.getJobEvents();
-        this.date = builder.getDate();
-        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
-        this.earnings = builder.getEarnings();
-        this.tax = builder.getTax();
-      }
+    public FinderStream<JobEvent> findJobEvents();
     
     /*******************************************************************************************************************
      *
@@ -182,10 +123,7 @@ public class Invoice implements Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public FinderStream<JobEvent> findJobEvents()
-      {
-        return new JobEventFinder();
-      }
+    public String getNumber();
     
     /*******************************************************************************************************************
      *
@@ -193,9 +131,5 @@ public class Invoice implements Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder()
-      {
-        return new Builder(id, number, project, jobEvents, date, dueDate, 
-                           earnings, tax, Builder.Callback.DEFAULT);
-      }
+    public Builder asBuilder();
   }

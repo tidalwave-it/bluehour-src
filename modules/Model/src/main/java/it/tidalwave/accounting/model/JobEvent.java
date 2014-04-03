@@ -35,11 +35,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
+import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
+import it.tidalwave.accounting.model.impl.InMemoryFlatJobEvent;
+import it.tidalwave.accounting.model.impl.InMemoryJobEventGroup;
 import lombok.AllArgsConstructor;
-import lombok.Delegate;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
@@ -53,18 +53,15 @@ import static lombok.AccessLevel.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
-public abstract class JobEvent implements Identifiable, As
+@Immutable 
+public interface JobEvent extends Identifiable, As
   {
-    @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
-
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor(access = PROTECTED)
+    @AllArgsConstructor// FIXME (access = PROTECTED)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
@@ -90,27 +87,18 @@ public abstract class JobEvent implements Identifiable, As
           {
             if ((events != null) && !events.isEmpty())
               {
-                return new JobEventGroup(this);
+                return new InMemoryJobEventGroup(this);
               }
             else if (type == Type.TIMED)
               {
-                return new TimedJobEvent(this);
+                return new InMemoryTimedJobEvent(this);
               }
             else
               {
-                return new FlatJobEvent(this);
+                return new InMemoryFlatJobEvent(this);
               }
           }
       }
-
-    @Getter @Nonnull
-    protected final Id id;
-    
-    @Getter @Nonnull
-    protected final String name;
-
-    @Getter @Nonnull
-    protected final String description;
 
     /*******************************************************************************************************************
      *
@@ -125,15 +113,11 @@ public abstract class JobEvent implements Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @param builder
+     * @return 
      * 
      ******************************************************************************************************************/
-    protected JobEvent (final @Nonnull Builder builder)
-      {
-        this.id = builder.getId();
-        this.name = builder.getName();
-        this.description = builder.getDescription();
-      }
+    @Nonnull
+    public String getName(); 
     
     /*******************************************************************************************************************
      *
@@ -141,7 +125,7 @@ public abstract class JobEvent implements Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public abstract JobEvent.Builder asBuilder();
+    public String getDescription(); 
     
     /*******************************************************************************************************************
      *
@@ -149,7 +133,7 @@ public abstract class JobEvent implements Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public abstract LocalDateTime getDateTime(); 
+    public LocalDateTime getDateTime(); 
     
     /*******************************************************************************************************************
      *
@@ -157,7 +141,7 @@ public abstract class JobEvent implements Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public abstract Duration getDuration(); 
+    public Duration getDuration(); 
     
     /*******************************************************************************************************************
      *
@@ -165,5 +149,13 @@ public abstract class JobEvent implements Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public abstract Money getEarnings();
+    public Money getEarnings();
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public JobEvent.Builder asBuilder();
   }

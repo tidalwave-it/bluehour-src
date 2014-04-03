@@ -82,8 +82,8 @@ public class JobEventTest
                                               .withEarnings(new Money(430, "EUR"))
                                               .create();
 
-        assertThat(j1.toString(), is("TimedJobEvent("
-                                   + "super=JobEvent(id=1, name=Consultancy, description=Consultancy description), "
+        assertThat(j1.toString(), is("InMemoryTimedJobEvent("
+                                   + "super=InMemoryJobEvent(id=1, name=Consultancy, description=Consultancy description), "
                                    + "startDateTime=2014-01-05T12:34:56, "
                                    + "endDateTime=2014-01-05T13:45:34, "
                                    + "earnings=430.00 EUR, rate=48.00 EUR)"));

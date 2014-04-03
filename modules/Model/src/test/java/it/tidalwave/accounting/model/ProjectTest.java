@@ -75,7 +75,7 @@ public class ProjectTest
                                            .withNumber("1")
                                            .withHourlyRate(new Money(43, "EUR"))
                                            .create();
-        assertThat(p.toString(), is("Project(id=2, customer=Customer(id=1, name=Acme Corp., billingAddress="
+        assertThat(p.toString(), is("InMemoryProject(id=2, customer=InMemoryCustomer(id=1, name=Acme Corp., billingAddress="
                                   + "Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345), "
                                   + "vatNumber=1233455345), name=Project 1, number=1, "
                                   + "description=description of project 1, notes=Notes for project 1, "

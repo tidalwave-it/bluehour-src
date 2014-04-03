@@ -25,103 +25,73 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.As;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import it.tidalwave.util.Id;
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
-import lombok.AllArgsConstructor;
+import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Money;
+import lombok.Delegate;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  *
- * This class models a customer.
+ * This class models a single job event.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Customer extends Identifiable, As
+@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+public abstract class InMemoryJobEvent implements JobEvent
   {
+    @Delegate
+    private final AsSupport asSupport = new AsSupport(this);
+
+    @Getter @Nonnull
+    protected final Id id;
+    
+    @Getter @Nonnull
+    protected final String name;
+
+    @Getter @Nonnull
+    protected final String description;
+
     /*******************************************************************************************************************
      *
+     * @return 
      * 
-     *
      ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
+    @Nonnull
+    public static JobEvent.Builder builder()
       {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
-          {
-            public void register (final @Nonnull Customer customer);
-
-            public static final Callback DEFAULT = (customer) -> {};
-          }
-
-        private final Id id;
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-        private final Callback callback;
-
-        public Builder()
-          {
-            this(Callback.DEFAULT);
-          }
-
-        public Builder (final @Nonnull Callback callback)
-          {
-            this(new Id(""), "", Address.EMPTY, "", callback);
-          }
-        
-        @Nonnull
-        public Builder with (final @Nonnull Builder builder)
-          {
-            return builder.withCallback(callback);
-          }
-
-        @Nonnull
-        public Customer create()
-          {
-            final Customer customer = new InMemoryCustomer(this);
-            callback.register(customer);
-            return customer;
-          }
+        return new JobEvent.Builder(); // FIXME: avoid nulls
       }
 
     /*******************************************************************************************************************
      *
+     * @param builder
      * 
-     *
      ******************************************************************************************************************/
-    @Nonnull
-    public static Builder builder()
+    protected InMemoryJobEvent (final @Nonnull Builder builder)
       {
-        return new Builder();
+        this.id = builder.getId();
+        this.name = builder.getName();
+        this.description = builder.getDescription();
       }
-    
     /*******************************************************************************************************************
      *
+     * @return 
      * 
-     *
      ******************************************************************************************************************/
     @Nonnull
-    public String getName();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects();
+    public abstract LocalDateTime getDateTime(); 
     
     /*******************************************************************************************************************
      *
@@ -129,5 +99,22 @@ public interface Customer extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder();
+    public abstract Duration getDuration(); 
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public abstract Money getEarnings();
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public abstract JobEvent.Builder asBuilder();
+    
   }

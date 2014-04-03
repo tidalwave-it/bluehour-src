@@ -25,109 +25,118 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.As;
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDate;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
-import lombok.AllArgsConstructor;
+import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
+import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.Project;
+import lombok.Delegate;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- *
- * This class models a customer.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Customer extends Identifiable, As
+@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+public class InMemoryInvoice implements Invoice
   {
+    @Delegate
+    private final AsSupport asSupport = new AsSupport(this);
+
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
+    class JobEventFinder extends FinderStreamSupport<JobEvent, JobEventFinder>
+                         implements ExtendedFinderSupport<JobEvent, JobEventFinder>, 
+                                    FinderStream<JobEvent>, 
+                                    Finder<JobEvent>
       {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
+        @Override @Nonnull
+        protected List<? extends JobEvent> computeResults() 
           {
-            public void register (final @Nonnull Customer customer);
-
-            public static final Callback DEFAULT = (customer) -> {};
-          }
-
-        private final Id id;
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-        private final Callback callback;
-
-        public Builder()
-          {
-            this(Callback.DEFAULT);
-          }
-
-        public Builder (final @Nonnull Callback callback)
-          {
-            this(new Id(""), "", Address.EMPTY, "", callback);
-          }
-        
-        @Nonnull
-        public Builder with (final @Nonnull Builder builder)
-          {
-            return builder.withCallback(callback);
-          }
-
-        @Nonnull
-        public Customer create()
-          {
-            final Customer customer = new InMemoryCustomer(this);
-            callback.register(customer);
-            return customer;
+            return new ArrayList<>(jobEvents);
           }
       }
+    
+    @Getter @Nonnull
+    private final Id id;
+    
+    @Getter
+    private final String number;
+    
+    @Nonnull
+    private final Project project;
+   
+    @Nonnull
+    private final List<JobEvent> jobEvents; // FIXME: immutablelist
+
+    @Nonnull
+    private final LocalDate date;
+
+    @Nonnull
+    private final LocalDate dueDate;
+
+    @Nonnull
+    private final Money earnings;
+
+    @Nonnull
+    private final Money tax;
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @Nonnull
-    public static Builder builder()
+    public /* FIXME private */ InMemoryInvoice (final @Nonnull Builder builder)
       {
-        return new Builder();
+        this.id = builder.getId();
+        this.number = builder.getNumber();
+        this.project = builder.getProject();
+        this.jobEvents = builder.getJobEvents();
+        this.date = builder.getDate();
+        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
+        this.earnings = builder.getEarnings();
+        this.tax = builder.getTax();
       }
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public String getName();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects();
     
     /*******************************************************************************************************************
      *
      * @return 
      * 
      ******************************************************************************************************************/
-    @Nonnull
-    public Builder asBuilder();
+    @Override @Nonnull
+    public FinderStream<JobEvent> findJobEvents()
+      {
+        return new JobEventFinder();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Builder asBuilder()
+      {
+        return new Builder(id, number, project, jobEvents, date, dueDate, 
+                           earnings, tax, Builder.Callback.DEFAULT);
+      }
   }

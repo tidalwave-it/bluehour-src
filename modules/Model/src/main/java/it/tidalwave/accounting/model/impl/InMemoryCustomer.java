@@ -25,19 +25,27 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.As;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
-import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
-import lombok.AllArgsConstructor;
+import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.model.Address;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
+import lombok.EqualsAndHashCode;
+import lombok.Delegate;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  *
@@ -47,81 +55,66 @@ import static lombok.AccessLevel.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Customer extends Identifiable, As
+@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
+public class InMemoryCustomer implements Customer
   {
+    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
+                               implements ProjectRegistry.ProjectFinder
+      {
+        InMemoryProjectFinder (final Map<Id, Project> projectMapById)
+          {
+            super(projectMapById);  
+          }
+      }
+    
+    @Delegate
+    private final AsSupport asSupport = new AsSupport(this);
+
+    @Getter @Nonnull
+    private final Id id;
+
+    @Nonnull
+    private final String name;
+
+    @Nonnull
+    private final Address billingAddress;
+
+    @Nonnull
+    private final String vatNumber;
+    
+    @Setter @Nonnull // FIXME: drop the setter!
+    private Accounting accounting;
+
+    /*******************************************************************************************************************
+     *
+     *
+     * 
+     ******************************************************************************************************************/
+    public /* FIXME protected */ InMemoryCustomer (final @Nonnull Builder builder)
+      {
+        this.id = builder.getId();
+        this.name = builder.getName();
+        this.billingAddress = builder.getBillingAddress();
+        this.vatNumber = builder.getVatNumber();
+      }
+
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
-    public static class Builder
+    @Override @Nonnull
+    public ProjectRegistry.ProjectFinder findProjects()
       {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
-          {
-            public void register (final @Nonnull Customer customer);
-
-            public static final Callback DEFAULT = (customer) -> {};
-          }
-
-        private final Id id;
-        private final String name;
-        private final Address billingAddress;
-        private final String vatNumber;
-        private final Callback callback;
-
-        public Builder()
-          {
-            this(Callback.DEFAULT);
-          }
-
-        public Builder (final @Nonnull Callback callback)
-          {
-            this(new Id(""), "", Address.EMPTY, "", callback);
-          }
+        final Map<Id, List<Project>> temp = accounting.getProjectRegistry().findProjects()
+                .filter(project -> project.getCustomer().getId().equals(getId()))
+                .collect(Collectors.groupingBy(Project::getId));
+        // FIXME: try to merge into a single pipeline
+        final Map<Id, Project> map = new HashMap<>();
+        temp.forEach((id, projects) -> map.put(id, projects.get(0)));
         
-        @Nonnull
-        public Builder with (final @Nonnull Builder builder)
-          {
-            return builder.withCallback(callback);
-          }
-
-        @Nonnull
-        public Customer create()
-          {
-            final Customer customer = new InMemoryCustomer(this);
-            callback.register(customer);
-            return customer;
-          }
+        return new InMemoryProjectFinder(map);
       }
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public static Builder builder()
-      {
-        return new Builder();
-      }
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public String getName();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects();
     
     /*******************************************************************************************************************
      *
@@ -129,5 +122,8 @@ public interface Customer extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder();
+    public Builder asBuilder()
+      {
+        return new Builder(id, name, billingAddress, vatNumber, InMemoryCustomer.Builder.Callback.DEFAULT);                
+      }
   }
