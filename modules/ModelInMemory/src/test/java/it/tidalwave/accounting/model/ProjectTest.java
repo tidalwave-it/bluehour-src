@@ -30,6 +30,8 @@ package it.tidalwave.accounting.model;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.util.spi.EmptyAsDelegateProvider;
+import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.accounting.model.types.Money;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.*;
@@ -65,7 +67,7 @@ public class ProjectTest
                                               .withBillingAddress(a1)
                                               .create();
         final Project p = Project.builder().withId(new Id("2"))
-                                           .withAmount(new Money(10500, "EUR"))
+                                           .withBudget(new Money(10500, "EUR"))
                                            .withCustomer(c1)
                                            .withName("Project 1")
                                            .withDescription("description of project 1")
@@ -79,7 +81,7 @@ public class ProjectTest
                                   + "Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345), "
                                   + "vatNumber=1233455345), name=Project 1, number=1, "
                                   + "description=description of project 1, notes=Notes for project 1, "
-                                  + "status=OPEN, hourlyRate=43.00 EUR, amount=10500.00 EUR, "
+                                  + "status=OPEN, hourlyRate=43.00 EUR, budget=10500.00 EUR, "
                                   + "startDate=2014-01-03, endDate=2014-02-12)"));
       }
   }

@@ -32,7 +32,6 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.impl.InMemoryObjectFactory;
 
 /***********************************************************************************************************************
  *
@@ -43,9 +42,18 @@ import it.tidalwave.accounting.model.impl.InMemoryObjectFactory;
 public interface ObjectFactory 
   {
     @Nonnull
-    public static ObjectFactory getInstance()
+    public static ObjectFactory getInstance() // FIXME: getDefault()
       {
-        return new InMemoryObjectFactory();
+        try
+          {
+            // FIXME: use Singleton
+            return (ObjectFactory)Class.forName("it.tidalwave.accounting.model.impl.InMemoryObjectFactory").newInstance();
+//        return new InMemoryObjectFactory();
+          } 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
+          {
+            throw new RuntimeException(e);
+          }
       }
 
     @Nonnull

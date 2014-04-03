@@ -25,15 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.impl;
+package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.Invoice;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.spi.ObjectFactory;
+import it.tidalwave.accounting.model.types.Address;
+import org.testng.annotations.Test;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 /***********************************************************************************************************************
  *
@@ -41,42 +38,18 @@ import it.tidalwave.accounting.model.spi.ObjectFactory;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class InMemoryObjectFactory implements ObjectFactory
+public class AddressTest
   {
-    @Override @Nonnull 
-    public Customer createCustomer (final @Nonnull Customer.Builder builder) 
+    @Test
+    public void toString_must_return_all_the_fields()
       {
-        return new InMemoryCustomer(builder);
-      }
+        final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
+                                            .withCity("San Francisco")
+                                            .withZip("12345")
+                                            .withState("CA")
+                                            .withCountry("USA")
+                                            .create();
 
-    @Override @Nonnull 
-    public Invoice createInvoice (final @Nonnull Invoice.Builder builder)
-      {
-        return new InMemoryInvoice(builder);
-      }
-
-    @Override @Nonnull 
-    public Project createProject (final @Nonnull Project.Builder builder)
-      {
-        return new InMemoryProject(builder);
-      }
-
-    @Override @Nonnull 
-    public JobEvent createJobEvent (final @Nonnull JobEvent.Builder builder) 
-      {
-        final List<JobEvent> events = builder.getEvents();
-        
-        if ((events != null) && !events.isEmpty())
-          {
-            return new InMemoryJobEventGroup(builder);
-          }
-        else if (builder.getType() == JobEvent.Builder.Type.TIMED)
-          {
-            return new InMemoryTimedJobEvent(builder);
-          }
-        else
-          {
-            return new InMemoryFlatJobEvent(builder);
-          }
+        assertThat(a1.toString(), is("Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345)"));
       }
   }

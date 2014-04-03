@@ -37,7 +37,7 @@ import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
@@ -49,13 +49,13 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = JobEventGroup.class)
+@DciRole(datumType = JobEventGroupSpi.class)
 public class JobEventGroupPresentable extends JobEventPresentable
   {
     @Nonnull
-    private final JobEventGroup jobEventGroup;
+    private final JobEventGroupSpi jobEventGroup;
     
-    public JobEventGroupPresentable (final @Nonnull JobEventGroup jobEventGroup)
+    public JobEventGroupPresentable (final @Nonnull JobEventGroupSpi jobEventGroup)
       {
         super(jobEventGroup);
         this.jobEventGroup = jobEventGroup;

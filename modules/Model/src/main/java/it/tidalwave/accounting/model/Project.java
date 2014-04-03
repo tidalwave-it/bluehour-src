@@ -29,7 +29,6 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +38,7 @@ import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.role.SimpleComposite;
 import it.tidalwave.accounting.model.spi.ObjectFactory;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -55,6 +55,8 @@ import lombok.experimental.Wither;
 @Immutable 
 public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
   {
+    public enum Status { OPEN, CLOSED };
+
     /*******************************************************************************************************************
      *
      * 
@@ -64,8 +66,6 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
-        public enum Status { OPEN, CLOSED };
-
         public static interface Callback // Lombok @Wither doesn't support builder subclasses
           {
             public void register (final @Nonnull Project project);
@@ -81,7 +81,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
         private final String notes;
         private final Status status;
         private final Money hourlyRate;
-        private final Money amount;
+        private final Money budget;
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final List<JobEvent> events; // FIXME: immutable
@@ -139,79 +139,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public String getNumber();
-
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public String getNotes();
-
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
     public Customer getCustomer();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public LocalDate getStartDate();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public LocalDate getEndDate();
-
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Duration getDuration();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Builder.Status getStatus();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Money getEarnings();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Money getAmount();
-    
-    /*******************************************************************************************************************
-     *
-     * 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Money getHourlyRate();
     
     /*******************************************************************************************************************
      *

@@ -25,10 +25,21 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.As;
+import javax.annotation.concurrent.Immutable;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEvent.Builder;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 /***********************************************************************************************************************
  *
@@ -36,43 +47,58 @@ import it.tidalwave.util.As;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface Accounting extends As
+@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
+public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEventSpi
   {
-    // FIXME: replace with a Factory
-    @Nonnull
-    public static Accounting createNew()
+    @Getter @Nonnull
+    private final LocalDate date;
+
+    @Getter @Nonnull
+    private final Money earnings;
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    public /* FIXME protected */ InMemoryFlatJobEvent (final @Nonnull Builder builder)
       {
-        try
-          {
-            return (Accounting)Class.forName("it.tidalwave.accounting.model.impl.InMemoryAccounting").newInstance();
-          } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
-          {
-            throw new RuntimeException(e);
-          }
+        super(builder);
+        this.date = builder.getStartDateTime().toLocalDate();
+        this.earnings = builder.getEarnings();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public JobEvent.Builder asBuilder()
+      {
+        return new Builder(id, Type.FLAT, date.atStartOfDay(), null,
+                           name, description, earnings, null, Collections.<JobEvent>emptyList());
       }
 
     /*******************************************************************************************************************
      *
-     * @return  the {@link CustomerRegistry}
-     *
+     * {@inheritDoc} 
+     * 
      ******************************************************************************************************************/
-    @Nonnull
-    public CustomerRegistry getCustomerRegistry();
-    
+    @Override @Nonnull
+    public LocalDateTime getDateTime()
+      {
+        return date.atStartOfDay();
+      }
+
     /*******************************************************************************************************************
      *
-     * @return  the {@link ProjectRegistry}
-     *
+     * {@inheritDoc} 
+     * 
      ******************************************************************************************************************/
-    @Nonnull
-    public ProjectRegistry getProjectRegistry();
-    
-    /*******************************************************************************************************************
-     *
-     * @return  the {@link InvoiceRegistry}
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public InvoiceRegistry getInvoiceRegistry();
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return Duration.ZERO;
+      }
   }

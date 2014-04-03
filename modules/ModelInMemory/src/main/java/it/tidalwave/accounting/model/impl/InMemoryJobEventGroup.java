@@ -39,8 +39,9 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -51,7 +52,7 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(exclude = { "events" }, callSuper = true)
-public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventGroup
+public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventGroupSpi
   {
     @Nonnull
     private final List<JobEvent> events; // FIXME: immutable
@@ -118,7 +119,7 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
     @Override @Nonnull
     public Money getEarnings()
       {
-        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
+        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getEarnings()).reduce(Money.ZERO, Money::add);
       }
     
     /*******************************************************************************************************************
@@ -129,6 +130,6 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
     @Override @Nonnull
     public Duration getDuration() 
       {
-        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
       }
   }

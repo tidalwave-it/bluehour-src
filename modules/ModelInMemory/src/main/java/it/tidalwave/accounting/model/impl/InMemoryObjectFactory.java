@@ -25,9 +25,15 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.Nonnull;
+import java.util.List;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 
 /***********************************************************************************************************************
  *
@@ -35,7 +41,42 @@ import javax.annotation.concurrent.Immutable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable 
-public interface FlatJobEvent extends JobEvent
+public class InMemoryObjectFactory implements ObjectFactory
   {
+    @Override @Nonnull 
+    public Customer createCustomer (final @Nonnull Customer.Builder builder) 
+      {
+        return new InMemoryCustomer(builder);
+      }
+
+    @Override @Nonnull 
+    public Invoice createInvoice (final @Nonnull Invoice.Builder builder)
+      {
+        return new InMemoryInvoice(builder);
+      }
+
+    @Override @Nonnull 
+    public Project createProject (final @Nonnull Project.Builder builder)
+      {
+        return new InMemoryProject(builder);
+      }
+
+    @Override @Nonnull 
+    public JobEvent createJobEvent (final @Nonnull JobEvent.Builder builder) 
+      {
+        final List<JobEvent> events = builder.getEvents();
+        
+        if ((events != null) && !events.isEmpty())
+          {
+            return new InMemoryJobEventGroup(builder);
+          }
+        else if (builder.getType() == JobEvent.Type.TIMED)
+          {
+            return new InMemoryTimedJobEvent(builder);
+          }
+        else
+          {
+            return new InMemoryFlatJobEvent(builder);
+          }
+      }
   }

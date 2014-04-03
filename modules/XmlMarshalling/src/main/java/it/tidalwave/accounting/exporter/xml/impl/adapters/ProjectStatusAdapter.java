@@ -37,16 +37,16 @@ import it.tidalwave.accounting.model.Project;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class ProjectStatusAdapter extends XmlAdapter<String, Project.Builder.Status>
+public class ProjectStatusAdapter extends XmlAdapter<String, Project.Status>
   {
     @Override @Nonnull
-    public Project.Builder.Status unmarshal(String v) 
+    public Project.Status unmarshal(String v) 
       {
-        return Project.Builder.Status.valueOf(v.toUpperCase());
+        return Project.Status.valueOf(v.toUpperCase());
       }
 
     @Override @Nonnull
-    public String marshal(Project.Builder.Status v)
+    public String marshal(Project.Status v)
       {
         return v.name().toLowerCase();
       }

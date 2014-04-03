@@ -25,10 +25,19 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.reporting.impl;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
+import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import it.tidalwave.util.test.FileComparisonUtils;
+import it.tidalwave.accounting.model.impl.DefaultHourlyReportGenerator;
+import it.tidalwave.accounting.model.HourlyReport;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.accounting.test.util.ScenarioFactory;
 import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
@@ -37,18 +46,27 @@ import org.testng.annotations.Test;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class MoneyTest
+public class DefaultHourlyReportGeneratorTest
   {
-    @Test
-    public void toString_must_be_properly_computed()
+    @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
+    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull ProjectSpi project) 
+      throws IOException
       {
-        final Money m1 = new Money(4053, "EUR");
-        assertThat(m1.toString(), is("4053.00 EUR"));
+        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
+        final Path testFolder = Paths.get("target/test-results");
+        Files.createDirectories(testFolder);
 
-      }
-    @Test
-    public void toString_for_ZERO_must_be_properly_computed()
-      {
-        assertThat(Money.ZERO.toString(), is("0.00 EUR"));
+        final String name = scenarioName + "-" + project.getName() + ".txt";
+        final Path actualResult = testFolder.resolve(name);
+        final Path expectedResult = expectedResultsFolder.resolve(name);
+        
+        final HourlyReport report = new DefaultHourlyReportGenerator(project).createReport();
+        
+        try (final PrintWriter pw = new PrintWriter(actualResult.toFile()))
+          {
+            pw.print(report.asString());
+          }
+
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
   }

@@ -88,6 +88,8 @@
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
+
+        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
     </properties>
 
     <!-- ===============================================================================================================
@@ -106,6 +108,17 @@
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+                <classifier>tests</classifier>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
                 <version>1.0-ALPHA-3-SNAPSHOT</version>
                 <classifier>tests</classifier>
             </dependency>
@@ -148,12 +161,12 @@
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx</artifactId>
-                <version>1.0-ALPHA-2-SNAPSHOT</version>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx-embedded-jre</artifactId>
-                <version>1.0-ALPHA-2-SNAPSHOT</version>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

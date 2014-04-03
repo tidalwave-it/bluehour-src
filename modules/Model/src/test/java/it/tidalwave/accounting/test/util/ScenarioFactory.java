@@ -42,20 +42,18 @@ import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.Address;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
-import it.tidalwave.accounting.model.impl.InMemoryAccounting;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  *
@@ -63,13 +61,13 @@ import org.testng.annotations.DataProvider;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@NoArgsConstructor(access = AccessLevel.PRIVATE) @Slf4j
+@Slf4j
 public final class ScenarioFactory 
   {
     private static int nextId = 1;
     
-    // Used to check that there are no problems - TestNG just silently skips tests with a broken provider
-    public static void main (String ... args) 
+    @Test
+    public void consistencyTest()
       {
         createScenarios();
       }
@@ -93,11 +91,20 @@ public final class ScenarioFactory
                 .toArray(new Object[0][0]); 
       }
     
+    @DataProvider(name = "accountings")
+    public static Object[][] accountingProvider()
+      {
+        return ScenarioFactory.createScenarios().entrySet().stream()
+                .map(entry -> new Object[] { entry.getKey(), entry.getValue() })
+                .collect(Collectors.toList())
+                .toArray(new Object[0][0]); 
+      }
+    
     @Nonnull
     public static Accounting createEmptyAccounting()
       {
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
-        final Accounting accounting = new InMemoryAccounting();
+        final Accounting accounting = Accounting.createNew();
         return accounting;
       }
     
@@ -107,7 +114,7 @@ public final class ScenarioFactory
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
         nextId = 1;
         
-        final Accounting accounting = new InMemoryAccounting();
+        final Accounting accounting = Accounting.createNew();
         final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
         final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
         final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();
@@ -167,7 +174,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-1")
                     .withEvents(je1)
                     .withHourlyRate(rate1)
-                    .withAmount(new Money(123456, "EUR"))
+                    .withBudget(new Money(123456, "EUR"))
                     .create();
         final Project acmeConsultingProject2 =
                 projectRegistry.addProject()
@@ -180,7 +187,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-2")
                     .withEvents(je2)
                     .withHourlyRate(rate2)
-                    .withAmount(new Money(234567, "EUR"))
+                    .withBudget(new Money(234567, "EUR"))
                     .create();
         final Project acmeFinancingProject1 =
                 projectRegistry.addProject()
@@ -193,7 +200,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-3")
                     .withHourlyRate(rate3)
                     .withEvents(je3)
-                    .withAmount(new Money(345678, "EUR"))
+                    .withBudget(new Money(345678, "EUR"))
                     .create();
         final Project acmeFinancingProject2 =
                 projectRegistry.addProject()
@@ -206,7 +213,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-4")
                     .withHourlyRate(rate4)
                     .withEvents(je4)
-                    .withAmount(new Money(456789, "EUR"))
+                    .withBudget(new Money(456789, "EUR"))
                     .create();
         
                 
@@ -235,11 +242,11 @@ public final class ScenarioFactory
             result.add(JobEvent.builder().withId(new Id("" + nextId++))
                                          .withName("Event #" + i)
                                          .withDescription("Description of Event #" + i)
-                                         .withType(JobEvent.Builder.Type.TIMED)
+                                         .withType(JobEvent.Type.TIMED)
                                          .withEarnings(new Money(earnings, "EUR"))
                                          .withStartDateTime(s)
                                          .withEndDateTime(e)
-                                         .withRate(rate)
+                                         .withHourlyRate(rate)
                                          .create());
           }
         
@@ -261,8 +268,8 @@ public final class ScenarioFactory
             List<JobEvent> eventsSubList = new ArrayList<>(jobEvents.subList(i * x, i * x + x));
             // FIXME: hack!
             List temp = eventsSubList;
-            List<InMemoryTimedJobEvent> timedEventsSubList = temp;
-            final InMemoryTimedJobEvent lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
+            List<TimedJobEventSpi> timedEventsSubList = temp;
+            final TimedJobEventSpi lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
             final LocalDate lastDate = lastEvent.getStartDateTime().toLocalDate();
             final double earnings = timedEventsSubList.stream()
                     .collect(Collectors.summingDouble(ev -> ev.getEarnings().getAmount().doubleValue()));

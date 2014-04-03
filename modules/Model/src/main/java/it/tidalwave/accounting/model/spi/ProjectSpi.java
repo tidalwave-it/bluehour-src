@@ -24,21 +24,14 @@
  *
  * *********************************************************************************************************************
  * #L%
- */
-package it.tidalwave.accounting.model.impl;
+ */package it.tidalwave.accounting.model.spi;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import java.util.Collections;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEvent.Builder;
-import it.tidalwave.accounting.model.Money;
-import it.tidalwave.accounting.model.TimedJobEvent;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import java.time.LocalDate;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.Project.Builder;
+import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *
@@ -46,65 +39,85 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
-public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobEvent
+public interface ProjectSpi extends Project
   {
-    @Getter @Nonnull
-    private final LocalDateTime startDateTime;
-
-    @Getter @Nonnull
-    private final LocalDateTime endDateTime;
-
-    @Getter @Nonnull
-    private final Money earnings;
-
-    @Getter @Nonnull
-    private final Money rate;
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public String getName();
 
     /*******************************************************************************************************************
      *
      * 
-     *
+     * 
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryTimedJobEvent (final @Nonnull Builder builder)
-      {
-        super(builder);
-        this.startDateTime = builder.getStartDateTime();
-        this.endDateTime = builder.getEndDateTime();
-        this.earnings = builder.getEarnings();
-        this.rate = builder.getRate();
-      }
+    @Nonnull
+    public String getNumber();
     
     /*******************************************************************************************************************
      *
-     * {@inheritDoc} 
+     * 
      * 
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public JobEvent.Builder asBuilder()
-      {
-        return new Builder(id, Builder.Type.TIMED, startDateTime, endDateTime, name, description, 
-                           earnings, rate, Collections.<JobEvent>emptyList());
-      }
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc} 
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public LocalDateTime getDateTime()
-      {
-        return startDateTime;
-      }
+    @Nonnull
+    public String getNotes();
 
     /*******************************************************************************************************************
      *
-     * {@inheritDoc} 
+     * 
      * 
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public Duration getDuration() 
-      {
-        return Duration.between(startDateTime, endDateTime);
-      }
+    @Nonnull
+    public LocalDate getStartDate();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public LocalDate getEndDate();
+
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Duration getDuration();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Status getStatus();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getEarnings();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getBudget();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getHourlyRate();
   }

@@ -25,9 +25,10 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.spi;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.Nonnull;
+import java.time.LocalDate;
 
 /***********************************************************************************************************************
  *
@@ -35,7 +36,13 @@ import javax.annotation.concurrent.Immutable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable 
-public interface TimedJobEvent extends JobEvent
+public interface FlatJobEventSpi extends JobEventSpi
   {
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public LocalDate getDate(); 
   }

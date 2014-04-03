@@ -29,91 +29,92 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
-import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.Address;
-import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
+import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
-import lombok.EqualsAndHashCode;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.Delegate;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 /***********************************************************************************************************************
- *
- * This class models a customer.
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
-public class InMemoryCustomer implements Customer
+@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+public class InMemoryInvoice implements Invoice
   {
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
-                               implements ProjectRegistry.ProjectFinder
-      {
-        InMemoryProjectFinder (final Map<Id, Project> projectMapById)
-          {
-            super(projectMapById);  
-          }
-      }
-    
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
 
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    class JobEventFinder extends FinderStreamSupport<JobEvent, JobEventFinder>
+                         implements ExtendedFinderSupport<JobEvent, JobEventFinder>, 
+                                    FinderStream<JobEvent>, 
+                                    Finder<JobEvent>
+      {
+        @Override @Nonnull
+        protected List<? extends JobEvent> computeResults() 
+          {
+            return new ArrayList<>(jobEvents);
+          }
+      }
+    
     @Getter @Nonnull
     private final Id id;
-
-    @Nonnull
-    private final String name;
-
-    @Nonnull
-    private final Address billingAddress;
-
-    @Nonnull
-    private final String vatNumber;
     
-    @Setter @Nonnull // FIXME: drop the setter!
-    private Accounting accounting;
+    @Getter
+    private final String number;
+    
+    @Nonnull
+    private final Project project;
+   
+    @Nonnull
+    private final List<JobEvent> jobEvents; // FIXME: immutablelist
+
+    @Nonnull
+    private final LocalDate date;
+
+    @Nonnull
+    private final LocalDate dueDate;
+
+    @Nonnull
+    private final Money earnings;
+
+    @Nonnull
+    private final Money tax;
 
     /*******************************************************************************************************************
      *
-     *
      * 
+     *
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryCustomer (final @Nonnull Builder builder)
+    public /* FIXME private */ InMemoryInvoice (final @Nonnull Builder builder)
       {
         this.id = builder.getId();
-        this.name = builder.getName();
-        this.billingAddress = builder.getBillingAddress();
-        this.vatNumber = builder.getVatNumber();
-      }
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public ProjectRegistry.ProjectFinder findProjects()
-      {
-        final Map<Id, List<Project>> temp = accounting.getProjectRegistry().findProjects()
-                .filter(project -> project.getCustomer().getId().equals(getId()))
-                .collect(Collectors.groupingBy(Project::getId));
-        // FIXME: try to merge into a single pipeline
-        final Map<Id, Project> map = new HashMap<>();
-        temp.forEach((id, projects) -> map.put(id, projects.get(0)));
-        
-        return new InMemoryProjectFinder(map);
+        this.number = builder.getNumber();
+        this.project = builder.getProject();
+        this.jobEvents = builder.getJobEvents();
+        this.date = builder.getDate();
+        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
+        this.earnings = builder.getEarnings();
+        this.tax = builder.getTax();
       }
     
     /*******************************************************************************************************************
@@ -121,9 +122,21 @@ public class InMemoryCustomer implements Customer
      * @return 
      * 
      ******************************************************************************************************************/
-    @Nonnull
+    @Override @Nonnull
+    public FinderStream<JobEvent> findJobEvents()
+      {
+        return new JobEventFinder();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
     public Builder asBuilder()
       {
-        return new Builder(id, name, billingAddress, vatNumber, InMemoryCustomer.Builder.Callback.DEFAULT);                
+        return new Builder(id, number, project, jobEvents, date, dueDate, 
+                           earnings, tax, Builder.Callback.DEFAULT);
       }
   }

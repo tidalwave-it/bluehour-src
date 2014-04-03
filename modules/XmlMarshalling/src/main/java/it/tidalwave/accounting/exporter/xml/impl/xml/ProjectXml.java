@@ -43,7 +43,7 @@ import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
@@ -90,7 +90,7 @@ public class ProjectXml
     
     @XmlElement(name = "status")
     @XmlJavaTypeAdapter(ProjectStatusAdapter.class)
-    private Project.Builder.Status status;
+    private Project.Status status;
     
     @XmlElement(name = "hourlyRate")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
@@ -98,7 +98,7 @@ public class ProjectXml
     
     @XmlElement(name = "amount")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money amount;
+    private Money budget;
     
     @XmlElement(name = "startDate")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
@@ -123,7 +123,7 @@ public class ProjectXml
         this.notes = builder.getNotes();
         this.status = builder.getStatus();
         this.hourlyRate = builder.getHourlyRate();
-        this.amount = builder.getAmount();
+        this.budget = builder.getBudget();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
         this.jobEventsXml = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
@@ -143,7 +143,7 @@ public class ProjectXml
                                         .withNotes(notes)
                                         .withStatus(status)
                                         .withHourlyRate(hourlyRate)
-                                        .withAmount(amount)
+                                        .withBudget(budget)
                                         .withStartDate(startDate)
                                         .withEndDate(endDate)
                                         .withEvents(JobEventXml.toJobEvents(jobEventsXml));

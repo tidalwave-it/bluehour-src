@@ -35,6 +35,7 @@ import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

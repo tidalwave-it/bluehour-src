@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.EventTypeAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
@@ -70,7 +70,7 @@ public class JobEventXml
     
     @XmlElement(name = "type")
     @XmlJavaTypeAdapter(EventTypeAdapter.class)
-    private JobEvent.Builder.Type type;
+    private JobEvent.Type type;
     
     @XmlElement(name = "startDateTime")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
@@ -90,9 +90,9 @@ public class JobEventXml
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     private Money earnings;
     
-    @XmlElement(name = "rate")
+    @XmlElement(name = "hourlyRate")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money rate;
+    private Money hourlyRate;
     
     @XmlElementWrapper(name = "events")
     @XmlElement(name = "event")
@@ -108,7 +108,7 @@ public class JobEventXml
         this.name = builder.getName();
         this.description = builder.getDescription();
         this.earnings = builder.getEarnings();
-        this.rate = builder.getRate();
+        this.hourlyRate = builder.getHourlyRate();
         this.jobEventsXml = builder.getEvents().isEmpty() 
                     ? null
                     : builder.getEvents().stream().map(event -> new JobEventXml(event)).collect(toList());
@@ -124,7 +124,7 @@ public class JobEventXml
                                  .withName(name)
                                  .withDescription(description)
                                  .withEarnings(earnings)
-                                 .withRate(rate)
+                                 .withHourlyRate(hourlyRate)
                                  .withEvents(toJobEvents(jobEventsXml));
       }
     

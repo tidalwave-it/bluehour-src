@@ -41,7 +41,8 @@ import it.tidalwave.accounting.model.HourlyReportGenerator;
 import it.tidalwave.accounting.model.HourlyReport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -51,7 +52,7 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @RequiredArgsConstructor
+@DciRole(datumType = ProjectSpi.class) @RequiredArgsConstructor
 public class DefaultHourlyReportGenerator implements HourlyReportGenerator
   {
     private static final String SEPARATOR = "===========================================================================";
@@ -61,7 +62,7 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
     private static final String PATTERN3 = "  %12s   %-30s   %8s   %12s  \n";
     
     @Nonnull
-    private final Project project;
+    private final ProjectSpi project;
     
     @Override @Nonnull
     public HourlyReport createReport()
@@ -75,12 +76,12 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
       {
         final PrintWriter pw = new PrintWriter(w);
         System.err.println("CREATE REPORT " + project);
-        final List<JobEvent> jobEvents = new ArrayList<>();
+        final List<JobEventSpi> jobEvents = new ArrayList<>();
         addAll(jobEvents, project.findChildren().results());
         
         // TODO: quick and dirty - refactor with visitor, closures
-        final List<JobEvent> r = jobEvents.stream().sorted(Comparator.comparing(JobEvent::getDateTime))
-                                                   .collect(Collectors.toList());
+        final List<JobEventSpi> r = jobEvents.stream().sorted(Comparator.comparing(JobEvent::getDateTime))
+                                                      .collect(Collectors.toList());
         
         pw.printf(SEPARATOR + "\n");
         pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
@@ -94,16 +95,16 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
-        final Duration duration = Duration.ofHours((long)project.getAmount().divided(project.getHourlyRate()));
-        pw.printf("BUDGET:           %s\n", MF.format(project.getAmount()));
+        final Duration duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
+        pw.printf("BUDGET:           %s\n", MF.format(project.getBudget()));
         pw.printf("HOURLY RATE:      %s\n", MF.format(project.getHourlyRate()));
         pw.printf("DURATION:         %s\n", DUF.format(duration));
-        pw.printf("REMAINING BUDGET: %s\n", MF.format(project.getAmount().subtract(project.getEarnings())));
+        pw.printf("REMAINING BUDGET: %s\n", MF.format(project.getBudget().subtract(project.getEarnings())));
         pw.printf("REMAINING TIME:   %s\n", DUF.format(duration.minus(project.getDuration())));
         pw.flush();
       }
     
-    private void addAll (final @Nonnull List<JobEvent> results,
+    private void addAll (final @Nonnull List<JobEventSpi> results,
                          final @Nonnull List<? extends JobEvent> jobEvents) 
       {
         for (final JobEvent jobEvent : jobEvents)
@@ -114,7 +115,7 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
               }
             else
               {
-                results.add(jobEvent);
+                results.add((JobEventSpi)jobEvent);
               }
           }
       }

@@ -34,7 +34,7 @@ import java.util.Collection;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -43,13 +43,13 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = InMemoryTimedJobEvent.class)
+@DciRole(datumType = TimedJobEventSpi.class)
 public class TimedJobEventPresentable extends JobEventPresentable
   {
     @Nonnull
-    private final InMemoryTimedJobEvent timedJobEvent;
+    private final TimedJobEventSpi timedJobEvent;
     
-    public TimedJobEventPresentable (final @Nonnull InMemoryTimedJobEvent timedJobEvent)
+    public TimedJobEventPresentable (final @Nonnull TimedJobEventSpi timedJobEvent)
       {
         super(timedJobEvent);
         this.timedJobEvent = timedJobEvent;
@@ -60,11 +60,11 @@ public class TimedJobEventPresentable extends JobEventPresentable
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        builder.add("Date",   (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime()));
-        builder.add("Time",   (Displayable) () -> DUF.format(computeDuration()),
-                              new DefaultStyleable("right-aligned"));
-        builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()),
-                              new DefaultStyleable("right-aligned"));
+        builder.add("Date",       (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime()));
+        builder.add("Time",       (Displayable) () -> DUF.format(computeDuration()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("HourlyRate", (Displayable) () -> MF.format(timedJobEvent.getHourlyRate()),
+                                  new DefaultStyleable("right-aligned"));
         
         return builder;
       }

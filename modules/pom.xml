@@ -330,6 +330,7 @@
         <module>Installers/MacOSXEmbeddedJRE</module>
         <module>UI</module>
         <module>UICommons</module>
+        <module>ModelInMemory</module>
     </modules>
 
 </project>

@@ -37,16 +37,16 @@ import it.tidalwave.accounting.model.JobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class EventTypeAdapter extends XmlAdapter<String, JobEvent.Builder.Type>
+public class EventTypeAdapter extends XmlAdapter<String, JobEvent.Type>
   {
     @Override @Nonnull
-    public JobEvent.Builder.Type unmarshal(String v) 
+    public JobEvent.Type unmarshal(String v) 
       {
-        return JobEvent.Builder.Type.valueOf(v.toUpperCase());
+        return JobEvent.Type.valueOf(v.toUpperCase());
       }
 
     @Override @Nonnull
-    public String marshal(JobEvent.Builder.Type v)
+    public String marshal(JobEvent.Type v)
       {
         return v.name().toLowerCase();
       }

@@ -36,9 +36,9 @@ import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.ui.jobeventexplorer.impl.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.accounting.ui.jobeventexplorer.impl.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -48,12 +48,12 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class)
+@DciRole(datumType = ProjectSpi.class)
 @RequiredArgsConstructor
 public class ProjectPresentable implements Presentable
   {
     @Nonnull
-    private final Project project;
+    private final ProjectSpi project;
 
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
@@ -77,7 +77,7 @@ public class ProjectPresentable implements Presentable
                                   new DefaultStyleable("right-aligned"));
         builder.add("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Estimate",   (Displayable) () -> MF.format(project.getAmount()),
+        builder.add("Budget",     (Displayable) () -> MF.format(project.getBudget()),
                                   new DefaultStyleable("right-aligned"));
         builder.add("Notes",      (Displayable) () -> project.getNotes());
         

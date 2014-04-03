@@ -46,27 +46,27 @@ public interface IBizProjectImporter
     @AllArgsConstructor
     enum IBizJobEventType
       {
-        EVENT(JobEvent.Builder.Type.TIMED),    // 0
-        FIXED(JobEvent.Builder.Type.FLAT),     // 1
-        UNKNOWN2(JobEvent.Builder.Type.TIMED), // 2
-        UNKNOWN3(JobEvent.Builder.Type.TIMED), // 3
-        UNKNOWN4(JobEvent.Builder.Type.TIMED), // 4
-        GROUP(JobEvent.Builder.Type.FLAT);     // 5
+        EVENT(JobEvent.Type.TIMED),    // 0
+        FIXED(JobEvent.Type.FLAT),     // 1
+        UNKNOWN2(JobEvent.Type.TIMED), // 2
+        UNKNOWN3(JobEvent.Type.TIMED), // 3
+        UNKNOWN4(JobEvent.Type.TIMED), // 4
+        GROUP(JobEvent.Type.FLAT);     // 5
 
         @Getter @Nonnull
-        private final JobEvent.Builder.Type mappedType;
+        private final JobEvent.Type mappedType;
       }
     
     @AllArgsConstructor
     enum IBizProjectStatus
       {
-        OPENED(Project.Builder.Status.OPEN),    // 0
-        CLOSED(Project.Builder.Status.CLOSED),  // 1
-        ON_HOLD(Project.Builder.Status.CLOSED), // 2  
-        DELETED(null);                          // 3
+        OPENED(Project.Status.OPEN),    // 0
+        CLOSED(Project.Status.CLOSED),  // 1
+        ON_HOLD(Project.Status.CLOSED), // 2  
+        DELETED(null);                  // 3
         
         @Getter @Nullable
-        private final Project.Builder.Status mappedStatus;
+        private final Project.Status mappedStatus;
       }
 
     /*******************************************************************************************************************

@@ -25,21 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.impl;
+package it.tidalwave.accounting.model.spi;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import it.tidalwave.accounting.model.FlatJobEvent;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEvent.Builder;
-import it.tidalwave.accounting.model.Money;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *
@@ -47,58 +38,37 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
-public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEvent
+public interface TimedJobEventSpi extends JobEventSpi
   {
-    @Getter @Nonnull
-    private final LocalDate date;
-
-    @Getter @Nonnull
-    private final Money earnings;
-
     /*******************************************************************************************************************
      *
      * 
-     *
+     * 
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryFlatJobEvent (final @Nonnull Builder builder)
-      {
-        super(builder);
-        this.date = builder.getStartDateTime().toLocalDate();
-        this.earnings = builder.getEarnings();
-      }
+    @Nonnull
+    public LocalDateTime getStartDateTime();
     
     /*******************************************************************************************************************
      *
-     * {@inheritDoc} 
+     * 
      * 
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public JobEvent.Builder asBuilder()
-      {
-        return new Builder(id, Builder.Type.FLAT, date.atStartOfDay(), null,
-                           name, description, earnings, null, Collections.<JobEvent>emptyList());
-      }
-
+    @Nonnull
+    public LocalDateTime getEndDateTime();
+    
     /*******************************************************************************************************************
      *
-     * {@inheritDoc} 
+     * 
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public LocalDateTime getDateTime()
-      {
-        return date.atStartOfDay();
-      }
-
+    public Duration getDuration();
+    
     /*******************************************************************************************************************
      *
-     * {@inheritDoc} 
+     * 
      * 
      ******************************************************************************************************************/
-    @Override @Nonnull
-    public Duration getDuration() 
-      {
-        return Duration.ZERO;
-      }
+    @Nonnull
+    public Money getHourlyRate();
   }

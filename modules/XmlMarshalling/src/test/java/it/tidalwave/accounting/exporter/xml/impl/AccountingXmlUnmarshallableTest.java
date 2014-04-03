@@ -35,7 +35,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.impl.InMemoryAccounting;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import org.testng.annotations.BeforeMethod;
@@ -72,7 +71,7 @@ public class AccountingXmlUnmarshallableTest
             final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
             final Path importFile = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
 
-            final Accounting accounting = new InMemoryAccounting();
+            final Accounting accounting = Accounting.createNew();
             final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
 
             try (final InputStream is = new FileInputStream(importFile.toFile())) 
@@ -100,7 +99,7 @@ public class AccountingXmlUnmarshallableTest
         final Path actualResult = testFolder.resolve(scenarioName + ".txt");
         final Path expectedResult = expectedResultsFolder.resolve(scenarioName + ".txt");
 
-        final Accounting accounting = new InMemoryAccounting();
+        final Accounting accounting = Accounting.createNew();
         final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
 
         try (final InputStream is = new FileInputStream(importFile.toFile())) 

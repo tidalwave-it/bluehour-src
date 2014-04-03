@@ -35,7 +35,7 @@ import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -49,7 +49,7 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 public abstract class JobEventPresentable implements Presentable
   {
     @Nonnull
-    private final JobEvent jobEvent;
+    private final JobEventSpi jobEvent;
 
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 

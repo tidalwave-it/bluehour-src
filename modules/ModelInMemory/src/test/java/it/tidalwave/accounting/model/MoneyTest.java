@@ -25,12 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.spi.util;
+package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
 import it.tidalwave.accounting.model.types.Money;
+import org.testng.annotations.Test;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 /***********************************************************************************************************************
  *
@@ -38,21 +38,18 @@ import it.tidalwave.accounting.model.types.Money;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class MoneyFormat 
+public class MoneyTest
   {
-    private final static Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
-    
-    static
+    @Test
+    public void toString_must_be_properly_computed()
       {
-        CURRENCY_SYMBOL_MAP.put("EUR", "€");
-        CURRENCY_SYMBOL_MAP.put("USD", "$");
+        final Money m1 = new Money(4053, "EUR");
+        assertThat(m1.toString(), is("4053.00 EUR"));
+
       }
-    
-    @Nonnull
-    public String format (final @Nonnull Money amount)
+    @Test
+    public void toString_for_ZERO_must_be_properly_computed()
       {
-        final String currency = amount.getCurrency();
-        return String.format("%s %s", Money.getFormat().format(amount.getAmount()), 
-                                      CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
+        assertThat(Money.ZERO.toString(), is("0.00 EUR"));
       }
   }

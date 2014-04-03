@@ -44,6 +44,7 @@ import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.util.spi.AsSupport;
 import lombok.RequiredArgsConstructor;
 import static java.util.Comparator.comparing;
@@ -60,11 +61,11 @@ public class Dumper
   {
     private final static Comparator<? super Project> PROJECT_COMPARATOR = (Project p1, Project p2) -> 
       {
-        int n = p1.getName().compareTo(p2.getName());
+        int n = ((ProjectSpi)p1).getName().compareTo(((ProjectSpi)p2).getName());
         
         if (n == 0)
           {
-            n = p1.getStartDate().compareTo(p2.getStartDate());
+            n = ((ProjectSpi)p1).getStartDate().compareTo(((ProjectSpi)p2).getStartDate());
           }
         
         return n;
@@ -141,19 +142,20 @@ public class Dumper
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
         
-        String className = null;
+        String className = "?";
         
         Class<?>[] interfaces = event.getClass().getInterfaces();
         
-        if (interfaces.length > 0)
+        if (interfaces.length > 0) // assumes the business interface is the first
           {
             className = interfaces[0].getSimpleName();
           }
-        else
+        else // FIXME
           {
             className = event.getClass().getSimpleName().replaceFirst("^InMemory", "");
           }
-
+        
+        className = className.replaceAll("Spi$", "");
         return String.format("%s(%s)", className, s);
       }
     
@@ -178,7 +180,7 @@ public class Dumper
               }
             else if (value instanceof Project)
               {
-                value = ((Project)value).getName();
+                value = ((ProjectSpi)value).getName();
               }
             
             return value;

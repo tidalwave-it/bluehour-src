@@ -30,6 +30,7 @@ package it.tidalwave.accounting.model;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.util.spi.EmptyAsDelegateProvider;
+import it.tidalwave.accounting.model.types.Money;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import static org.hamcrest.MatcherAssert.*;
@@ -78,7 +79,7 @@ public class JobEventTest
                                               .withDescription("Consultancy description")
                                               .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
                                               .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))
-                                              .withRate(new Money(48, "EUR"))
+                                              .withHourlyRate(new Money(48, "EUR"))
                                               .withEarnings(new Money(430, "EUR"))
                                               .create();
 
@@ -86,6 +87,6 @@ public class JobEventTest
                                    + "super=InMemoryJobEvent(id=1, name=Consultancy, description=Consultancy description), "
                                    + "startDateTime=2014-01-05T12:34:56, "
                                    + "endDateTime=2014-01-05T13:45:34, "
-                                   + "earnings=430.00 EUR, rate=48.00 EUR)"));
+                                   + "earnings=430.00 EUR, hourlyRate=48.00 EUR)"));
       }
   }

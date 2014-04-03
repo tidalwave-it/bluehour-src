@@ -24,12 +24,12 @@
  *
  * *********************************************************************************************************************
  * #L%
- */
-package it.tidalwave.accounting.model;
+ */package it.tidalwave.accounting.model.spi;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.testng.annotations.Test;
+import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.util.FinderStream;
 
 /***********************************************************************************************************************
  *
@@ -37,18 +37,8 @@ import org.testng.annotations.Test;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class AddressTest
+public interface JobEventGroupSpi extends JobEventGroup, JobEventSpi
   {
-    @Test
-    public void toString_must_return_all_the_fields()
-      {
-        final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
-                                            .withCity("San Francisco")
-                                            .withZip("12345")
-                                            .withState("CA")
-                                            .withCountry("USA")
-                                            .create();
-
-        assertThat(a1.toString(), is("Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345)"));
-      }
+    @Override @Nonnull
+    public FinderStream<JobEvent> findChildren();
   }

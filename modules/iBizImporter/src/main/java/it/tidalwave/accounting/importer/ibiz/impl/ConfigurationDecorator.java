@@ -36,7 +36,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.Delegate;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.configuration.Configuration;

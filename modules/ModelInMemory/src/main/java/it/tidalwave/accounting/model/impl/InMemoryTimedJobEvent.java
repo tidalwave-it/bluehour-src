@@ -29,20 +29,13 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.ArrayList;
-import java.util.List;
-import java.time.LocalDate;
-import it.tidalwave.util.Finder;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
-import it.tidalwave.accounting.model.Invoice;
+import java.util.Collections;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Money;
-import it.tidalwave.accounting.model.Project;
-import lombok.Delegate;
+import it.tidalwave.accounting.model.JobEvent.Builder;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -53,90 +46,66 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
-public class InMemoryInvoice implements Invoice
+@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
+public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobEventSpi
   {
-    @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    class JobEventFinder extends FinderStreamSupport<JobEvent, JobEventFinder>
-                         implements ExtendedFinderSupport<JobEvent, JobEventFinder>, 
-                                    FinderStream<JobEvent>, 
-                                    Finder<JobEvent>
-      {
-        @Override @Nonnull
-        protected List<? extends JobEvent> computeResults() 
-          {
-            return new ArrayList<>(jobEvents);
-          }
-      }
-    
     @Getter @Nonnull
-    private final Id id;
-    
-    @Getter
-    private final String number;
-    
-    @Nonnull
-    private final Project project;
-   
-    @Nonnull
-    private final List<JobEvent> jobEvents; // FIXME: immutablelist
+    private final LocalDateTime startDateTime;
 
-    @Nonnull
-    private final LocalDate date;
+    @Getter @Nonnull
+    private final LocalDateTime endDateTime;
 
-    @Nonnull
-    private final LocalDate dueDate;
-
-    @Nonnull
+    @Getter @Nonnull
     private final Money earnings;
 
-    @Nonnull
-    private final Money tax;
+    @Getter @Nonnull
+    private final Money hourlyRate;
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    public /* FIXME private */ InMemoryInvoice (final @Nonnull Builder builder)
+    public /* FIXME protected */ InMemoryTimedJobEvent (final @Nonnull Builder builder)
       {
-        this.id = builder.getId();
-        this.number = builder.getNumber();
-        this.project = builder.getProject();
-        this.jobEvents = builder.getJobEvents();
-        this.date = builder.getDate();
-        this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
+        super(builder);
+        this.startDateTime = builder.getStartDateTime();
+        this.endDateTime = builder.getEndDateTime();
         this.earnings = builder.getEarnings();
-        this.tax = builder.getTax();
+        this.hourlyRate = builder.getHourlyRate();
       }
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc} 
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public FinderStream<JobEvent> findJobEvents()
+    public JobEvent.Builder asBuilder()
       {
-        return new JobEventFinder();
+        return new Builder(id, Type.TIMED, startDateTime, endDateTime, name, description, 
+                           earnings, hourlyRate, Collections.<JobEvent>emptyList());
       }
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc} 
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Builder asBuilder()
+    public LocalDateTime getDateTime()
       {
-        return new Builder(id, number, project, jobEvents, date, dueDate, 
-                           earnings, tax, Builder.Callback.DEFAULT);
+        return startDateTime;
+      }
+
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return Duration.between(startDateTime, endDateTime);
       }
   }

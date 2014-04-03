@@ -31,12 +31,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
 import java.util.List;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.accounting.model.spi.ObjectFactory;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -53,6 +53,8 @@ import lombok.experimental.Wither;
 @Immutable 
 public interface JobEvent extends Identifiable, As
   {
+    public enum Type { TIMED, FLAT };
+
     /*******************************************************************************************************************
      *
      * 
@@ -62,8 +64,6 @@ public interface JobEvent extends Identifiable, As
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
-        public enum Type { TIMED, FLAT };
-
         private final Id id;
         private final Type type;
         private final LocalDateTime startDateTime;
@@ -71,7 +71,7 @@ public interface JobEvent extends Identifiable, As
         private final String name;
         private final String description;
         private final Money earnings;
-        private final Money rate;
+        private final Money hourlyRate;
         private final List<JobEvent> events; // FIXME: immutable
 
         public Builder()
@@ -103,39 +103,7 @@ public interface JobEvent extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public String getName(); 
-    
-    /*******************************************************************************************************************
-     *
-     * @return 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public String getDescription(); 
-    
-    /*******************************************************************************************************************
-     *
-     * @return 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
     public LocalDateTime getDateTime(); 
-    
-    /*******************************************************************************************************************
-     *
-     * @return 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Duration getDuration(); 
-    
-    /*******************************************************************************************************************
-     *
-     * @return 
-     * 
-     ******************************************************************************************************************/
-    @Nonnull
-    public Money getEarnings();
     
     /*******************************************************************************************************************
      *

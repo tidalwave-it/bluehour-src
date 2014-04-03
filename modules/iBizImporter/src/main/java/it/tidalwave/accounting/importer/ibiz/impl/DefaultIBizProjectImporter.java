@@ -43,9 +43,9 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.toList;
@@ -130,7 +130,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           {
             final List<JobEvent> jobEvents = importJobEvents(projectConfig.getStream("jobEvents"));
             projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
-                                        .withAmount(projectConfig.getMoney("projectEstimate"))
+                                        .withBudget(projectConfig.getMoney("projectEstimate"))
                                         .withCustomer(customer)
                                         .withName(projectConfig.getString("projectName"))
     //                                           .withDescription("description of project 1")
@@ -168,9 +168,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                 event = ((JobEventGroup)event).findChildren().firstResult();
               }
             
-            if (event instanceof InMemoryTimedJobEvent)
+            if (event instanceof TimedJobEventSpi)
               {
-                hourlyRate = ((InMemoryTimedJobEvent)event).getRate();
+                hourlyRate = ((TimedJobEventSpi)event).getHourlyRate();
               }
           }
         return hourlyRate;
@@ -211,7 +211,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                                  .withEndDateTime(jobEventConfig.getDateTime("jobEventEndDate"))
                                  .withName(jobEventConfig.getString("jobEventName"))
                                  .withDescription(jobEventConfig.getString("jobEventNotes"))
-                                 .withRate(jobEventConfig.getMoney("jobEventRate"))
+                                 .withHourlyRate(jobEventConfig.getMoney("jobEventRate"))
                                  .withEarnings(jobEventConfig.getMoney("jobEventEarnings"))
                                  .withEvents(importJobEvents(jobEventConfig.getStream("children")))
                                  .create();
