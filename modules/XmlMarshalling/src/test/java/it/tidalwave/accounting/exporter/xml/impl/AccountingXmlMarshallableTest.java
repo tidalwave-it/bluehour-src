@@ -62,7 +62,7 @@ public class AccountingXmlMarshallableTest
     public void must_properly_marshall_iBiz()
       throws Exception
       {
-        final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz/"); // FIXME
+        final Path iBizFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME
         
         if (Files.exists(iBizFolder))
           {
