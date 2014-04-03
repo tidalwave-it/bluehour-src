@@ -28,21 +28,19 @@
 package it.tidalwave.accounting.reporting.impl;
 
 import javax.annotation.Nonnull;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.accounting.commons.Formatters.DF;
-import static it.tidalwave.accounting.commons.Formatters.DUF;
-import static it.tidalwave.accounting.commons.Formatters.MF;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.time.Duration;
+import static it.tidalwave.accounting.commons.Formatters.*;
 
 /***********************************************************************************************************************
  *
