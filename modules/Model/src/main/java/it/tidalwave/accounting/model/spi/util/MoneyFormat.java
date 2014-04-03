@@ -25,10 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.commons;
+package it.tidalwave.accounting.model.spi.util;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
+import it.tidalwave.accounting.model.Money;
 
 /***********************************************************************************************************************
  *
@@ -36,10 +38,21 @@ import java.time.format.FormatStyle;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Formatters 
+public class MoneyFormat 
   {
-    public static final DateTimeFormatter DF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    public static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-    public static final MoneyFormat MF = new MoneyFormat();
-    public static final DurationFormat DUF = new DurationFormat();
+    private final static Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
+    
+    static
+      {
+        CURRENCY_SYMBOL_MAP.put("EUR", "€");
+        CURRENCY_SYMBOL_MAP.put("USD", "$");
+      }
+    
+    @Nonnull
+    public String format (final @Nonnull Money amount)
+      {
+        final String currency = amount.getCurrency();
+        return String.format("%s %s", Money.getFormat().format(amount.getAmount()), 
+                                      CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
+      }
   }

@@ -37,7 +37,7 @@ import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.FlatJobEvent;
-import static it.tidalwave.accounting.commons.Formatters.*;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *

@@ -37,7 +37,7 @@ import it.tidalwave.role.ui.spi.DefaultUserActionProvider;
 import it.tidalwave.role.ui.spi.UserActionSupport;
 import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.accounting.reporting.impl.HourlyReportGenerator.HourlyReportGenerator;
+import static it.tidalwave.accounting.model.HourlyReportGenerator.HourlyReportGenerator;
 
 /***********************************************************************************************************************
  *

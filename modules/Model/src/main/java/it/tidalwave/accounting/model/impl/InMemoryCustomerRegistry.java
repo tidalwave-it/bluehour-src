@@ -34,6 +34,7 @@ import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

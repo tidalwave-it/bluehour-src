@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.commons;
+package it.tidalwave.accounting.model.spi.util;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;

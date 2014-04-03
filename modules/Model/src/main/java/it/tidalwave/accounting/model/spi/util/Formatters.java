@@ -25,18 +25,10 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.reporting.impl;
+package it.tidalwave.accounting.model.spi.util;
 
-import javax.annotation.Nonnull;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import it.tidalwave.util.test.FileComparisonUtils;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.test.util.ScenarioFactory;
-import org.testng.annotations.Test;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /***********************************************************************************************************************
  *
@@ -44,27 +36,10 @@ import org.testng.annotations.Test;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class DefaultHourlyReportGeneratorTest
+public class Formatters 
   {
-    @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
-    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull Project project) 
-      throws IOException
-      {
-        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
-        final Path testFolder = Paths.get("target/test-results");
-        Files.createDirectories(testFolder);
-
-        final String name = scenarioName + "-" + project.getName() + ".txt";
-        final Path actualResult = testFolder.resolve(name);
-        final Path expectedResult = expectedResultsFolder.resolve(name);
-        
-        final HourlyReport report = new DefaultHourlyReportGenerator(project).createReport();
-        
-        try (final PrintWriter pw = new PrintWriter(actualResult.toFile()))
-          {
-            pw.print(report.asString());
-          }
-
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
-      }
+    public static final DateTimeFormatter DF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    public static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+    public static final MoneyFormat MF = new MoneyFormat();
+    public static final DurationFormat DUF = new DurationFormat();
   }

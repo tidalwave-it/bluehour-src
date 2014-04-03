@@ -25,34 +25,62 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.commons;
+package it.tidalwave.accounting.model.spi.util;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
-import it.tidalwave.accounting.model.Money;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.FinderStreamSupport;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
  *
+ * @param <TYPE>
+ * @param <FINDER>
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class MoneyFormat 
+public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
+                                extends FinderStreamSupport<TYPE, FINDER>
+                                implements ExtendedFinderSupport<TYPE, FINDER>, FinderStream<TYPE>, Finder<TYPE>
   {
-    private final static Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
+    @CheckForNull
+    /* package */ Id id;
     
-    static
+    @Nonnull
+    public FINDER withId (final @Nonnull Id id)
       {
-        CURRENCY_SYMBOL_MAP.put("EUR", "€");
-        CURRENCY_SYMBOL_MAP.put("USD", "$");
+        final FinderWithIdSupport clone = (FinderWithIdSupport)super.clone();
+        clone.id = id;
+        return (FINDER)clone;
+      }
+
+    @Override
+    protected List<? extends TYPE> computeResults()
+      {
+        if (id != null)
+          {
+            final TYPE item = findById(id);
+            return (item != null) ? Collections.singletonList(item) : Collections.<TYPE>emptyList();
+          }
+        else
+          {
+            return new ArrayList<>(findAll());
+          }
       }
     
     @Nonnull
-    public String format (final @Nonnull Money amount)
-      {
-        final String currency = amount.getCurrency();
-        return String.format("%s %s", Money.getFormat().format(amount.getAmount()), 
-                                      CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
-      }
+    protected abstract Collection<? extends TYPE> findAll();
+    
+    @CheckForNull
+    protected abstract TYPE findById (@Nonnull Id id);
   }
+

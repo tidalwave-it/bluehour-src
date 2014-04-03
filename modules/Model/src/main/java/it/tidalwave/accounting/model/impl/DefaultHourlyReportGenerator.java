@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.reporting.impl;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
@@ -37,11 +37,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.model.HourlyReportGenerator;
+import it.tidalwave.accounting.model.HourlyReport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.accounting.commons.Formatters.*;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *

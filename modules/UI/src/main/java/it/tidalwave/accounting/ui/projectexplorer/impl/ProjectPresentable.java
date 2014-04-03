@@ -40,7 +40,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.accounting.commons.Formatters.*;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *

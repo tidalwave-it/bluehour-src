@@ -25,11 +25,9 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.reporting.impl;
+package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -37,15 +35,10 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable
-@RequiredArgsConstructor
-public class HourlyReport 
+public interface HourlyReportGenerator 
   {
-    private final String string;
+    public static final Class<HourlyReportGenerator> HourlyReportGenerator = HourlyReportGenerator.class;
     
     @Nonnull
-    public String asString()
-      {
-        return string;  
-      }
+    public HourlyReport createReport();
   }

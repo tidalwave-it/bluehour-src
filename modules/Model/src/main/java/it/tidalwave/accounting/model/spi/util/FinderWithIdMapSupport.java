@@ -25,19 +25,15 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.impl;
+package it.tidalwave.accounting.model.spi.util;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import it.tidalwave.util.Finder;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
+import java.util.Map;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -48,39 +44,23 @@ import it.tidalwave.util.spi.ExtendedFinderSupport;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
-                                extends FinderStreamSupport<TYPE, FINDER>
-                                implements ExtendedFinderSupport<TYPE, FINDER>, FinderStream<TYPE>, Finder<TYPE>
+@RequiredArgsConstructor
+public class FinderWithIdMapSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
+  extends FinderWithIdSupport<TYPE, FINDER>
   {
-    @CheckForNull
-    /* package */ Id id;
-    
     @Nonnull
-    public FINDER withId (final @Nonnull Id id)
+    private final Map<Id, TYPE> mapById;
+    
+    @Override @Nonnull
+    protected Collection<? extends TYPE> findAll()
       {
-        final FinderWithIdSupport clone = (FinderWithIdSupport)super.clone();
-        clone.id = id;
-        return (FINDER)clone;
-      }
-
-    @Override
-    protected List<? extends TYPE> computeResults()
-      {
-        if (id != null)
-          {
-            final TYPE item = findById(id);
-            return (item != null) ? Collections.singletonList(item) : Collections.<TYPE>emptyList();
-          }
-        else
-          {
-            return new ArrayList<>(findAll());
-          }
+        return mapById.values();
       }
     
-    @Nonnull
-    protected abstract Collection<? extends TYPE> findAll();
-    
-    @CheckForNull
-    protected abstract TYPE findById (@Nonnull Id id);
+    @Override @CheckForNull
+    protected TYPE findById (final @Nonnull Id id)
+      {
+        return mapById.get(id);
+      }
   }
 

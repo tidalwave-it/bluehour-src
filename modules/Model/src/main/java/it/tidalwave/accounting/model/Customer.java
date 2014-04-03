@@ -37,7 +37,7 @@ import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.FinderWithIdMapSupport;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.AllArgsConstructor;
 import lombok.Delegate;
 import lombok.EqualsAndHashCode;

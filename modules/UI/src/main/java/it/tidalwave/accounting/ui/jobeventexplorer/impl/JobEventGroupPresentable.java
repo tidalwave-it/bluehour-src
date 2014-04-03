@@ -41,7 +41,7 @@ import it.tidalwave.accounting.model.JobEventGroup;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
-import static it.tidalwave.accounting.commons.Formatters.*;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *

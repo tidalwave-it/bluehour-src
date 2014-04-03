@@ -25,42 +25,27 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.impl;
+package it.tidalwave.accounting.model;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.Collection;
-import java.util.Map;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
+import javax.annotation.concurrent.Immutable;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
- * @param <TYPE>
- * @param <FINDER>
- * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
+@Immutable
 @RequiredArgsConstructor
-public class FinderWithIdMapSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
-  extends FinderWithIdSupport<TYPE, FINDER>
+public class HourlyReport 
   {
+    private final String string;
+    
     @Nonnull
-    private final Map<Id, TYPE> mapById;
-    
-    @Override @Nonnull
-    protected Collection<? extends TYPE> findAll()
+    public String asString()
       {
-        return mapById.values();
-      }
-    
-    @Override @CheckForNull
-    protected TYPE findById (final @Nonnull Id id)
-      {
-        return mapById.get(id);
+        return string;  
       }
   }
-

@@ -33,6 +33,7 @@ import java.util.Map;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************

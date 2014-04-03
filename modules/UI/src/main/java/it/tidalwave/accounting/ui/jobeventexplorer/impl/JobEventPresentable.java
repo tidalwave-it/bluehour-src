@@ -37,7 +37,7 @@ import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.JobEvent;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.accounting.commons.Formatters.*;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *

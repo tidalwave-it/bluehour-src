@@ -39,6 +39,8 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
