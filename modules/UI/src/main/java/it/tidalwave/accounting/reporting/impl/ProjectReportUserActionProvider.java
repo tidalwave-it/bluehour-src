@@ -58,7 +58,7 @@ public class ProjectReportUserActionProvider extends DefaultUserActionProvider
             @Override
             public void actionPerformed() 
               {
-                new HourlyReportGenerator(project).makeReport(System.out);
+                System.out.println(new HourlyReportGenerator(project).createReport().asString());
               }
           });
       }

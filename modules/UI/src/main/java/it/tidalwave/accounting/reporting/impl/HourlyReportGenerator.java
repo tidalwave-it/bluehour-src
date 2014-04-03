@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
@@ -41,6 +40,8 @@ import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.commons.Formatters.DF;
 import static it.tidalwave.accounting.commons.Formatters.DUF;
 import static it.tidalwave.accounting.commons.Formatters.MF;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.time.Duration;
 
 /***********************************************************************************************************************
@@ -61,9 +62,17 @@ public class HourlyReportGenerator
     @Nonnull
     private final Project project;
     
-    public void makeReport (final @Nonnull OutputStream os) 
+    @Nonnull
+    public HourlyReport createReport()
       {
-        final PrintWriter pw = new PrintWriter(os);
+        final StringWriter sw = new StringWriter();
+        makeReport(sw);
+        return new HourlyReport(sw.toString());
+      }
+    
+    private void makeReport (final @Nonnull Writer w) 
+      {
+        final PrintWriter pw = new PrintWriter(w);
         System.err.println("CREATE REPORT " + project);
         final List<JobEvent> jobEvents = new ArrayList<>();
         addAll(jobEvents, project.findChildren().results());

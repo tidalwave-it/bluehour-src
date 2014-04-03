@@ -28,17 +28,8 @@
 package it.tidalwave.accounting.reporting.impl;
 
 import javax.annotation.Nonnull;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import it.tidalwave.util.test.FileComparisonUtils;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.test.util.ScenarioFactory;
-import java.io.PrintWriter;
-import org.testng.annotations.Test;
+import javax.annotation.concurrent.Immutable;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -46,27 +37,15 @@ import org.testng.annotations.Test;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class HourlyReportGeneratorTest
+@Immutable
+@RequiredArgsConstructor
+public class HourlyReport 
   {
-    @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
-    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull Project project) 
-      throws IOException
+    private final String string;
+    
+    @Nonnull
+    public String asString()
       {
-        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
-        final Path testFolder = Paths.get("target/test-results");
-        Files.createDirectories(testFolder);
-
-        final String name = scenarioName + "-" + project.getName() + ".txt";
-        final Path actualResult = testFolder.resolve(name);
-        final Path expectedResult = expectedResultsFolder.resolve(name);
-        
-        final HourlyReport report = new HourlyReportGenerator(project).createReport();
-        
-        try (final PrintWriter pw = new PrintWriter(actualResult.toFile()))
-          {
-            pw.print(report.asString());
-          }
-
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+        return string;  
       }
   }
