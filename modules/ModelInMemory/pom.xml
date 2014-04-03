@@ -37,10 +37,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <properties>
-        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
-    </properties>
-
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
     <version>1.0-ALPHA-3-SNAPSHOT</version>
@@ -80,24 +76,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jabaddressbook</groupId>
-            <artifactId>jabaddressbook</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jabaddressbook</groupId>
-            <artifactId>addressbook</artifactId>
-            <type>jnilib</type>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-
+        
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -106,43 +85,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>jabaddressbook</groupId>
-                                    <artifactId>addressbook</artifactId>
-                                    <type>jnilib</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target</outputDirectory>
-                                    <destFileName>libAddressBook.jnilib</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>-Djava.library.path=target</argLine>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

@@ -88,6 +88,8 @@
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
+
+        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
     </properties>
 
     <!-- ===============================================================================================================
