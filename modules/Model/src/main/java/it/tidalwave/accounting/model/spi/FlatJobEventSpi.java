@@ -9,7 +9,6 @@ package it.tidalwave.accounting.model.spi;
 
 import javax.annotation.Nonnull;
 import java.time.LocalDate;
-import it.tidalwave.accounting.model.FlatJobEvent;
 
 /***********************************************************************************************************************
  *
@@ -17,7 +16,7 @@ import it.tidalwave.accounting.model.FlatJobEvent;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface FlatJobEventSpi extends FlatJobEvent, JobEventSpi
+public interface FlatJobEventSpi extends JobEventSpi
   {
     /*******************************************************************************************************************
      *
