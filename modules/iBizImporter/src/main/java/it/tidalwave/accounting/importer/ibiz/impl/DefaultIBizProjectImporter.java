@@ -42,7 +42,11 @@ import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
+import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.TimedJobEvent;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.toList;
@@ -125,6 +129,26 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           }
         else
           {
+            final List<JobEvent> jobEvents = importJobEvents(projectConfig.getStream("jobEvents"));
+            Money hourlyRate = projectConfig.getMoney("projectRate");
+            
+              System.err.println("RATE " + hourlyRate);
+            if ((hourlyRate.compareTo(Money.ZERO) == 0) && !jobEvents.isEmpty())
+            // don't use equals() - see http://stackoverflow.com/questions/6787142/bigdecimal-equals-versus-compareto
+              {
+                JobEvent event = jobEvents.get(0);
+                
+                while ((event instanceof JobEventGroup) && ((JobEventGroup)event).findChildren().count() > 0)
+                  {
+                    event = ((JobEventGroup)event).findChildren().firstResult();
+                  }
+                
+                if (event instanceof TimedJobEvent)
+                  {
+                    hourlyRate = ((TimedJobEvent)event).getRate();
+                  }
+              }
+            
             projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
                                         .withAmount(projectConfig.getMoney("projectEstimate"))
                                         .withCustomer(customer)
@@ -135,8 +159,8 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                                         .withNotes(projectConfig.getString("projectNotes"))
                                         .withNumber(projectConfig.getString("projectNumber"))
                                         .withStatus(status.getMappedStatus())
-                                        .withHourlyRate(projectConfig.getMoney("projectRate"))
-                                        .withEvents(importJobEvents(projectConfig.getStream("jobEvents")))
+                                        .withHourlyRate(hourlyRate)
+                                        .withEvents(jobEvents)
                                         .create();
           }
       }
