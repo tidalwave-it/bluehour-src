@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class HourlyReportGeneratorTest
+public class DefaultHourlyReportGeneratorTest
   {
     @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
     public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull Project project) 
@@ -58,7 +58,7 @@ public class HourlyReportGeneratorTest
         final Path actualResult = testFolder.resolve(name);
         final Path expectedResult = expectedResultsFolder.resolve(name);
         
-        final HourlyReport report = new HourlyReportGenerator(project).createReport();
+        final HourlyReport report = new DefaultHourlyReportGenerator(project).createReport();
         
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile()))
           {
