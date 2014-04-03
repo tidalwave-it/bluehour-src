@@ -51,10 +51,9 @@ import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  *
@@ -62,13 +61,13 @@ import org.testng.annotations.DataProvider;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@NoArgsConstructor(access = AccessLevel.PRIVATE) @Slf4j
+@Slf4j
 public final class ScenarioFactory 
   {
     private static int nextId = 1;
     
-    // Used to check that there are no problems - TestNG just silently skips tests with a broken provider
-    public static void main (String ... args) 
+    @Test
+    public void consistencyTest()
       {
         createScenarios();
       }
@@ -88,6 +87,15 @@ public final class ScenarioFactory
         return ScenarioFactory.createScenarios().entrySet().stream()
                 .flatMap(entry -> entry.getValue().getProjectRegistry().findProjects()
                         .map(project -> new Object[] { entry.getKey(), project }))
+                .collect(Collectors.toList())
+                .toArray(new Object[0][0]); 
+      }
+    
+    @DataProvider(name = "accountings")
+    public static Object[][] accountingProvider()
+      {
+        return ScenarioFactory.createScenarios().entrySet().stream()
+                .map(entry -> new Object[] { entry.getKey(), entry.getValue() })
                 .collect(Collectors.toList())
                 .toArray(new Object[0][0]); 
       }
