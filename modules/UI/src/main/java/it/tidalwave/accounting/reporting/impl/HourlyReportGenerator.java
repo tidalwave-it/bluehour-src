@@ -84,6 +84,8 @@ public class HourlyReportGenerator
                            DUF.format(project.getDuration()),
                            MF.format(project.getEarnings()));
         
+        // FIXME: rename getAmount() -> getBudget()
+        // FIXME: introduce getBudgetDuration()
         final Duration duration = Duration.ofHours((long)project.getAmount().divided(project.getHourlyRate()));
         pw.printf("BUDGET:           %s\n", MF.format(project.getAmount()));
         pw.printf("HOURLY RATE:      %s\n", MF.format(project.getHourlyRate()));
