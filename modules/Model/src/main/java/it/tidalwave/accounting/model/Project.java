@@ -38,7 +38,7 @@ import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.role.SimpleComposite;
-import it.tidalwave.accounting.model.impl.InMemoryProject;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -108,7 +108,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
         @Nonnull
         public Project create()
           {
-            final Project project = new InMemoryProject(this);
+            final Project project = ObjectFactory.getInstance().createProject(this);
             callback.register(project);
             return project;
           }

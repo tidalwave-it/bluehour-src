@@ -35,12 +35,11 @@ import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryInvoice;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
  *
@@ -103,7 +102,7 @@ public interface Invoice extends Identifiable, As
 //                throw new IllegalArgumentException("Illegal project for jobEvent");
 //              }
             
-            final Invoice invoice = new InMemoryInvoice(this);
+            final Invoice invoice = ObjectFactory.getInstance().createInvoice(this);
             callback.register(invoice);
             return invoice;
           }        

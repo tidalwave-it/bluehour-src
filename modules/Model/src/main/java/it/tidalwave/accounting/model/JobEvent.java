@@ -36,14 +36,11 @@ import java.time.LocalDateTime;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
-import it.tidalwave.accounting.model.impl.InMemoryFlatJobEvent;
-import it.tidalwave.accounting.model.impl.InMemoryJobEventGroup;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  *
@@ -85,18 +82,7 @@ public interface JobEvent extends Identifiable, As
         @Nonnull
         public JobEvent create()
           {
-            if ((events != null) && !events.isEmpty())
-              {
-                return new InMemoryJobEventGroup(this);
-              }
-            else if (type == Type.TIMED)
-              {
-                return new InMemoryTimedJobEvent(this);
-              }
-            else
-              {
-                return new InMemoryFlatJobEvent(this);
-              }
+            return ObjectFactory.getInstance().createJobEvent(this);
           }
       }
 

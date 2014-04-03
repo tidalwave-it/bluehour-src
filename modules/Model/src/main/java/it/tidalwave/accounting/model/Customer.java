@@ -27,17 +27,16 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.impl.InMemoryCustomer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Wither;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  *
@@ -54,7 +53,7 @@ public interface Customer extends Identifiable, As
      * 
      *
      ******************************************************************************************************************/
-    @AllArgsConstructor// FIXME (access = PROTECTED)
+    @AllArgsConstructor // FIXME (access = PROTECTED)
     @Immutable @Wither @Getter @ToString
     public static class Builder
       {
@@ -70,7 +69,7 @@ public interface Customer extends Identifiable, As
         private final Address billingAddress;
         private final String vatNumber;
         private final Callback callback;
-
+        
         public Builder()
           {
             this(Callback.DEFAULT);
@@ -90,7 +89,7 @@ public interface Customer extends Identifiable, As
         @Nonnull
         public Customer create()
           {
-            final Customer customer = new InMemoryCustomer(this);
+            final Customer customer = ObjectFactory.getInstance().createCustomer(this);
             callback.register(customer);
             return customer;
           }

@@ -82,5 +82,8 @@
           class="it.tidalwave.messagebus.impl.spring.SpringMessageBus">
         <property name="taskExecutor" ref="applicationMessageBusTaskExecutor"/>
     </bean>
-
+    
+<!--    <bean id="objectFactory"
+          class="it.tidalwave.accounting.model.impl.InMemoryObjectFactory" />
+-->
 </beans>
