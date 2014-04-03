@@ -62,7 +62,7 @@ public class DefaultAccountingController
     @Inject @Nonnull
     private PreferencesHandler preferencesHandler;
     
-    private Accounting accounting = Accounting.getDefault();
+    private Accounting accounting = Accounting.createNew();
 
     /*******************************************************************************************************************
      *

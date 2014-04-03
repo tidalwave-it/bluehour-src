@@ -96,7 +96,7 @@ public final class ScenarioFactory
     public static Accounting createEmptyAccounting()
       {
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
-        final Accounting accounting = Accounting.getDefault();
+        final Accounting accounting = Accounting.createNew();
         return accounting;
       }
     
@@ -106,7 +106,7 @@ public final class ScenarioFactory
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
         nextId = 1;
         
-        final Accounting accounting = Accounting.getDefault();
+        final Accounting accounting = Accounting.createNew();
         final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
         final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
         final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();

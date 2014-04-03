@@ -46,7 +46,7 @@ public class DefaultIBizImporter implements IBizImporter
 //    private final As asSupport = new AsSupport(this);
     
     @Delegate
-    private final Accounting accounting = Accounting.getDefault();
+    private final Accounting accounting = Accounting.createNew();
 
     @Nonnull
     private final Path path;

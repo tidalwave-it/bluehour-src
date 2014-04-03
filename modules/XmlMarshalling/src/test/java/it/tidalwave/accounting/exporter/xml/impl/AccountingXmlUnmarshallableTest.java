@@ -71,7 +71,7 @@ public class AccountingXmlUnmarshallableTest
             final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
             final Path importFile = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
 
-            final Accounting accounting = Accounting.getDefault();
+            final Accounting accounting = Accounting.createNew();
             final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
 
             try (final InputStream is = new FileInputStream(importFile.toFile())) 
@@ -99,7 +99,7 @@ public class AccountingXmlUnmarshallableTest
         final Path actualResult = testFolder.resolve(scenarioName + ".txt");
         final Path expectedResult = expectedResultsFolder.resolve(scenarioName + ".txt");
 
-        final Accounting accounting = Accounting.getDefault();
+        final Accounting accounting = Accounting.createNew();
         final AccountingXmlUnmarshallable fixture = new AccountingXmlUnmarshallable(accounting);
 
         try (final InputStream is = new FileInputStream(importFile.toFile())) 

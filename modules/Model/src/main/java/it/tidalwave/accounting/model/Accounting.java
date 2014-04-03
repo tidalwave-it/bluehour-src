@@ -38,12 +38,12 @@ import it.tidalwave.util.As;
  **********************************************************************************************************************/
 public interface Accounting extends As
   {
+    // FIXME: replace with a Factory
     @Nonnull
-    public static Accounting getDefault()
+    public static Accounting createNew()
       {
         try
           {
-            // FIXME: use Singleton
             return (Accounting)Class.forName("it.tidalwave.accounting.model.impl.InMemoryAccounting").newInstance();
           } 
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
