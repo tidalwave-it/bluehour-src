@@ -27,13 +27,14 @@
  */
 package it.tidalwave.accounting.model;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
-import javax.annotation.Nonnegative;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -45,9 +46,8 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable
-@RequiredArgsConstructor
-public class Money
+@Immutable @RequiredArgsConstructor @EqualsAndHashCode
+public class Money implements Comparable<Money>
   {
     public static final Money ZERO = new Money(BigDecimal.ZERO, "EUR");
 
@@ -109,6 +109,13 @@ public class Money
         decimalFormat.setParseBigDecimal(true);
         
         return decimalFormat;
+      }
+    
+    @Override
+    public int compareTo (final @Nonnull Money other) 
+      {
+        checkCurrencies(other);
+        return this.amount.compareTo(other.amount);
       }
     
     private void checkCurrencies (final @Nonnull Money other)
