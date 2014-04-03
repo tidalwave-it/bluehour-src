@@ -41,12 +41,6 @@
         <dependency>
             <groupId>it.tidalwave.northernwind.rca</groupId>
             <artifactId>it-tidalwave-role-ui-javafx</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>it-tidalwave-northernwind-rca-ui-commons</artifactId>
-                    <groupId>it.tidalwave.northernwind.rca</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
