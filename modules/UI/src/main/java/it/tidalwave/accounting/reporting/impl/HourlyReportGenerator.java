@@ -41,6 +41,7 @@ import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.commons.Formatters.DF;
 import static it.tidalwave.accounting.commons.Formatters.DUF;
 import static it.tidalwave.accounting.commons.Formatters.MF;
+import java.time.Duration;
 
 /***********************************************************************************************************************
  *
@@ -82,6 +83,13 @@ public class HourlyReportGenerator
         pw.printf(PATTERN3, "", "", 
                            DUF.format(project.getDuration()),
                            MF.format(project.getEarnings()));
+        
+        final Duration duration = Duration.ofHours((long)project.getAmount().divided(project.getHourlyRate()));
+        pw.printf("BUDGET:           %s\n", MF.format(project.getAmount()));
+        pw.printf("HOURLY RATE:      %s\n", MF.format(project.getHourlyRate()));
+        pw.printf("DURATION:         %s\n", DUF.format(duration));
+        pw.printf("REMAINING BUDGET: %s\n", MF.format(project.getAmount().subtract(project.getEarnings())));
+        pw.printf("REMAINING TIME:   %s\n", DUF.format(duration.minus(project.getDuration())));
         pw.flush();
       }
     
