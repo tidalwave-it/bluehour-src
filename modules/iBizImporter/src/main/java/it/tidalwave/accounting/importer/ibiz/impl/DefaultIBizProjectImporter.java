@@ -43,7 +43,7 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
 import lombok.RequiredArgsConstructor;

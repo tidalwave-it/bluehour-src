@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEvent.Builder;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

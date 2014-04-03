@@ -35,7 +35,7 @@ import corny.addressbook.NativeAddressBook;
 import corny.addressbook.data.Contact;
 import corny.addressbook.data.MultiValue;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizCustomerImporter;
-import it.tidalwave.accounting.model.Address;
+import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -29,9 +29,9 @@
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.time.LocalDate;
-import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.Project.Builder;
+import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *

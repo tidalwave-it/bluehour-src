@@ -27,9 +27,10 @@
  */
 package it.tidalwave.accounting.model;
 
+import it.tidalwave.accounting.model.types.Money;
+import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
-import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  *

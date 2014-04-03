@@ -27,12 +27,13 @@
  */
 package it.tidalwave.accounting.model;
 
-import it.tidalwave.accounting.model.spi.ObjectFactory;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
+import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

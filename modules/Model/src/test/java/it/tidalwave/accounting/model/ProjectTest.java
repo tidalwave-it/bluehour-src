@@ -30,6 +30,8 @@ package it.tidalwave.accounting.model;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.util.spi.EmptyAsDelegateProvider;
+import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.accounting.model.types.Money;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.*;

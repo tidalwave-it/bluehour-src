@@ -30,7 +30,7 @@ package it.tidalwave.accounting.model.spi;
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *

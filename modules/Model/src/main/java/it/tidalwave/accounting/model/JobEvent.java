@@ -36,6 +36,7 @@ import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.accounting.model.spi.ObjectFactory;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

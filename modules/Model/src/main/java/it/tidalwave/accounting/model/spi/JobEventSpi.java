@@ -29,7 +29,7 @@
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *

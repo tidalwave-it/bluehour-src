@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.types;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
