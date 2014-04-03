@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
@@ -48,7 +49,7 @@ import static it.tidalwave.accounting.commons.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
+@DciRole(datumType = Project.class) @RequiredArgsConstructor
 public class DefaultHourlyReportGenerator implements HourlyReportGenerator
   {
     private static final String SEPARATOR = "===========================================================================";

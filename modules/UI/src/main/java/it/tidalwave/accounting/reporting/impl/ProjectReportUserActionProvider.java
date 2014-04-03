@@ -30,13 +30,14 @@ package it.tidalwave.accounting.reporting.impl;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Collections;
-import it.tidalwave.accounting.model.Project;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider;
 import it.tidalwave.role.ui.spi.UserActionSupport;
+import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
+import static it.tidalwave.accounting.reporting.impl.HourlyReportGenerator.HourlyReportGenerator;
 
 /***********************************************************************************************************************
  *
@@ -58,7 +59,7 @@ public class ProjectReportUserActionProvider extends DefaultUserActionProvider
             @Override
             public void actionPerformed() 
               {
-                System.out.println(new DefaultHourlyReportGenerator(project).createReport().asString());
+                System.out.println(project.as(HourlyReportGenerator).createReport().asString());
               }
           });
       }

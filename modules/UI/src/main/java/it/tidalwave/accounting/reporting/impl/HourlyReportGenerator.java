@@ -37,6 +37,8 @@ import javax.annotation.Nonnull;
  **********************************************************************************************************************/
 public interface HourlyReportGenerator 
   {
+    public static final Class<HourlyReportGenerator> HourlyReportGenerator = HourlyReportGenerator.class;
+    
     @Nonnull
     public HourlyReport createReport();
   }
