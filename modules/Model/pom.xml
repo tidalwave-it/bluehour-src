@@ -78,11 +78,6 @@
         </dependency>
 
         <!-- TEST DEPENDENCIES -->
-        <dependency>
-            <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>
