@@ -71,7 +71,7 @@ public interface JobEvent extends Identifiable, As
         private final String name;
         private final String description;
         private final Money earnings;
-        private final Money rate;
+        private final Money hourlyRate;
         private final List<JobEvent> events; // FIXME: immutable
 
         public Builder()

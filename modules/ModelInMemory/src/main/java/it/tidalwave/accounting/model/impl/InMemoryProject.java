@@ -93,7 +93,7 @@ public class InMemoryProject implements ProjectSpi
     private final Money hourlyRate;
 
     @Getter @Nonnull
-    private final Money amount;
+    private final Money budget;
 
     @Getter @Nonnull
     private final LocalDate startDate;
@@ -119,7 +119,7 @@ public class InMemoryProject implements ProjectSpi
         this.notes = builder.getNotes();
         this.status = builder.getStatus();
         this.hourlyRate = builder.getHourlyRate();
-        this.amount = builder.getAmount();
+        this.budget = builder.getBudget();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
         this.events = builder.getEvents();
@@ -173,7 +173,7 @@ public class InMemoryProject implements ProjectSpi
     @Override @Nonnull
     public Builder asBuilder()
       {
-        return new Builder(id, customer, name, number, description, notes, status, hourlyRate, amount, 
+        return new Builder(id, customer, name, number, description, notes, status, hourlyRate, budget, 
                            startDate, endDate, events, Project.Builder.Callback.DEFAULT);
       }
   }

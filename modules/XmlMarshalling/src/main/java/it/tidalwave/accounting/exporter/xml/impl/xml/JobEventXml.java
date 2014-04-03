@@ -90,9 +90,9 @@ public class JobEventXml
     @XmlJavaTypeAdapter(MoneyAdapter.class)
     private Money earnings;
     
-    @XmlElement(name = "rate")
+    @XmlElement(name = "hourlyRate")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money rate;
+    private Money hourlyRate;
     
     @XmlElementWrapper(name = "events")
     @XmlElement(name = "event")
@@ -108,7 +108,7 @@ public class JobEventXml
         this.name = builder.getName();
         this.description = builder.getDescription();
         this.earnings = builder.getEarnings();
-        this.rate = builder.getRate();
+        this.hourlyRate = builder.getHourlyRate();
         this.jobEventsXml = builder.getEvents().isEmpty() 
                     ? null
                     : builder.getEvents().stream().map(event -> new JobEventXml(event)).collect(toList());
@@ -124,7 +124,7 @@ public class JobEventXml
                                  .withName(name)
                                  .withDescription(description)
                                  .withEarnings(earnings)
-                                 .withRate(rate)
+                                 .withHourlyRate(hourlyRate)
                                  .withEvents(toJobEvents(jobEventsXml));
       }
     

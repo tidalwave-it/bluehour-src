@@ -60,11 +60,11 @@ public class TimedJobEventPresentable extends JobEventPresentable
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        builder.add("Date",   (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime()));
-        builder.add("Time",   (Displayable) () -> DUF.format(computeDuration()),
-                              new DefaultStyleable("right-aligned"));
-        builder.add("Rate",   (Displayable) () -> MF.format(timedJobEvent.getRate()),
-                              new DefaultStyleable("right-aligned"));
+        builder.add("Date",       (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime()));
+        builder.add("Time",       (Displayable) () -> DUF.format(computeDuration()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("HourlyRate", (Displayable) () -> MF.format(timedJobEvent.getHourlyRate()),
+                                  new DefaultStyleable("right-aligned"));
         
         return builder;
       }

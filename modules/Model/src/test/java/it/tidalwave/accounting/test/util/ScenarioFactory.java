@@ -174,7 +174,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-1")
                     .withEvents(je1)
                     .withHourlyRate(rate1)
-                    .withAmount(new Money(123456, "EUR"))
+                    .withBudget(new Money(123456, "EUR"))
                     .create();
         final Project acmeConsultingProject2 =
                 projectRegistry.addProject()
@@ -187,7 +187,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-2")
                     .withEvents(je2)
                     .withHourlyRate(rate2)
-                    .withAmount(new Money(234567, "EUR"))
+                    .withBudget(new Money(234567, "EUR"))
                     .create();
         final Project acmeFinancingProject1 =
                 projectRegistry.addProject()
@@ -200,7 +200,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-3")
                     .withHourlyRate(rate3)
                     .withEvents(je3)
-                    .withAmount(new Money(345678, "EUR"))
+                    .withBudget(new Money(345678, "EUR"))
                     .create();
         final Project acmeFinancingProject2 =
                 projectRegistry.addProject()
@@ -213,7 +213,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-4")
                     .withHourlyRate(rate4)
                     .withEvents(je4)
-                    .withAmount(new Money(456789, "EUR"))
+                    .withBudget(new Money(456789, "EUR"))
                     .create();
         
                 
@@ -246,7 +246,7 @@ public final class ScenarioFactory
                                          .withEarnings(new Money(earnings, "EUR"))
                                          .withStartDateTime(s)
                                          .withEndDateTime(e)
-                                         .withRate(rate)
+                                         .withHourlyRate(rate)
                                          .create());
           }
         

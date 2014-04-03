@@ -130,7 +130,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           {
             final List<JobEvent> jobEvents = importJobEvents(projectConfig.getStream("jobEvents"));
             projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
-                                        .withAmount(projectConfig.getMoney("projectEstimate"))
+                                        .withBudget(projectConfig.getMoney("projectEstimate"))
                                         .withCustomer(customer)
                                         .withName(projectConfig.getString("projectName"))
     //                                           .withDescription("description of project 1")
@@ -170,7 +170,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
             
             if (event instanceof TimedJobEventSpi)
               {
-                hourlyRate = ((TimedJobEventSpi)event).getRate();
+                hourlyRate = ((TimedJobEventSpi)event).getHourlyRate();
               }
           }
         return hourlyRate;
@@ -211,7 +211,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                                  .withEndDateTime(jobEventConfig.getDateTime("jobEventEndDate"))
                                  .withName(jobEventConfig.getString("jobEventName"))
                                  .withDescription(jobEventConfig.getString("jobEventNotes"))
-                                 .withRate(jobEventConfig.getMoney("jobEventRate"))
+                                 .withHourlyRate(jobEventConfig.getMoney("jobEventRate"))
                                  .withEarnings(jobEventConfig.getMoney("jobEventEarnings"))
                                  .withEvents(importJobEvents(jobEventConfig.getStream("children")))
                                  .create();

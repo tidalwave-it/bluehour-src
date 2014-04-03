@@ -81,7 +81,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
         private final String notes;
         private final Status status;
         private final Money hourlyRate;
-        private final Money amount;
+        private final Money budget;
         private final LocalDate startDate;
         private final LocalDate endDate;
         private final List<JobEvent> events; // FIXME: immutable

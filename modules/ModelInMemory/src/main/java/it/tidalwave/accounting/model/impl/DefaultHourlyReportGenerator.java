@@ -95,11 +95,11 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
-        final Duration duration = Duration.ofHours((long)project.getAmount().divided(project.getHourlyRate()));
-        pw.printf("BUDGET:           %s\n", MF.format(project.getAmount()));
+        final Duration duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
+        pw.printf("BUDGET:           %s\n", MF.format(project.getBudget()));
         pw.printf("HOURLY RATE:      %s\n", MF.format(project.getHourlyRate()));
         pw.printf("DURATION:         %s\n", DUF.format(duration));
-        pw.printf("REMAINING BUDGET: %s\n", MF.format(project.getAmount().subtract(project.getEarnings())));
+        pw.printf("REMAINING BUDGET: %s\n", MF.format(project.getBudget().subtract(project.getEarnings())));
         pw.printf("REMAINING TIME:   %s\n", DUF.format(duration.minus(project.getDuration())));
         pw.flush();
       }

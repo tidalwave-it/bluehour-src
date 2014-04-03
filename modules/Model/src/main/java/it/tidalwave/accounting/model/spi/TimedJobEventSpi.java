@@ -70,5 +70,5 @@ public interface TimedJobEventSpi extends JobEventSpi
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Money getRate();
+    public Money getHourlyRate();
   }

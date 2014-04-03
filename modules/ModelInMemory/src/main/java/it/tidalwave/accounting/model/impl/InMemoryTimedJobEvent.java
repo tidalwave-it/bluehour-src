@@ -59,7 +59,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
     private final Money earnings;
 
     @Getter @Nonnull
-    private final Money rate;
+    private final Money hourlyRate;
 
     /*******************************************************************************************************************
      *
@@ -72,7 +72,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
         this.startDateTime = builder.getStartDateTime();
         this.endDateTime = builder.getEndDateTime();
         this.earnings = builder.getEarnings();
-        this.rate = builder.getRate();
+        this.hourlyRate = builder.getHourlyRate();
       }
     
     /*******************************************************************************************************************
@@ -84,7 +84,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
     public JobEvent.Builder asBuilder()
       {
         return new Builder(id, Type.TIMED, startDateTime, endDateTime, name, description, 
-                           earnings, rate, Collections.<JobEvent>emptyList());
+                           earnings, hourlyRate, Collections.<JobEvent>emptyList());
       }
     
     /*******************************************************************************************************************

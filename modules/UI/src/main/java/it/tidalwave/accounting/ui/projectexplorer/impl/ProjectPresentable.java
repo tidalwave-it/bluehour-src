@@ -77,7 +77,7 @@ public class ProjectPresentable implements Presentable
                                   new DefaultStyleable("right-aligned"));
         builder.add("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Estimate",   (Displayable) () -> MF.format(project.getAmount()),
+        builder.add("Budget",     (Displayable) () -> MF.format(project.getBudget()),
                                   new DefaultStyleable("right-aligned"));
         builder.add("Notes",      (Displayable) () -> project.getNotes());
         

@@ -98,7 +98,7 @@ public class ProjectXml
     
     @XmlElement(name = "amount")
     @XmlJavaTypeAdapter(MoneyAdapter.class)
-    private Money amount;
+    private Money budget;
     
     @XmlElement(name = "startDate")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
@@ -123,7 +123,7 @@ public class ProjectXml
         this.notes = builder.getNotes();
         this.status = builder.getStatus();
         this.hourlyRate = builder.getHourlyRate();
-        this.amount = builder.getAmount();
+        this.budget = builder.getBudget();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
         this.jobEventsXml = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
@@ -143,7 +143,7 @@ public class ProjectXml
                                         .withNotes(notes)
                                         .withStatus(status)
                                         .withHourlyRate(hourlyRate)
-                                        .withAmount(amount)
+                                        .withBudget(budget)
                                         .withStartDate(startDate)
                                         .withEndDate(endDate)
                                         .withEvents(JobEventXml.toJobEvents(jobEventsXml));
