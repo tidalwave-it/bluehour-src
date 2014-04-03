@@ -26,33 +26,78 @@
 #L%
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
         <version>1.0-ALPHA-3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    
-    <groupId>it.tidalwave.accounting</groupId>
-    <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
-    <version>1.0-ALPHA-3-SNAPSHOT</version>
-    <name>blueHour - Marshalling - XML</name>
-    <packaging>jar</packaging>
-   
+
     <properties>
-        <!-- Otherwise can't be released because of missing javadocs -->
-        <tft.javadoc.excludePackageNames />
+        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
     </properties>
- 
+
+    <groupId>it.tidalwave.accounting</groupId>
+    <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
+    <version>1.0-ALPHA-3-SNAPSHOT</version>
+    <name>blueHour - Model, In-Memory Implementation</name>
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-model</artifactId>
         </dependency>
-        
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-role</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org-slf4j-jdk14</artifactId>
+                    <groupId>com.kenai.nbpwr</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org-slf4j-jdk14</artifactId>
+                    <groupId>com.kenai.nbpwr</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>org-openide-util</artifactId>
+                    <groupId>org.netbeans.api</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jabaddressbook</groupId>
+            <artifactId>jabaddressbook</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jabaddressbook</groupId>
+            <artifactId>addressbook</artifactId>
+            <type>jnilib</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -60,43 +105,8 @@
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
-            <scope>test</scope>
-        </dependency>
-                
-        <!-- FIXME: temporary dependency to import data -->
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jabaddressbook</groupId>
-            <artifactId>jabaddressbook</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jabaddressbook</groupId>
-            <artifactId>addressbook</artifactId>
-            <type>jnilib</type>
-            <scope>test</scope>
-        </dependency>
-        <!-- END FIXME -->
     </dependencies>
-    
-    <!-- FIXME: temporary stuff to import data -->
+
     <build>
         <plugins>
             <plugin>
@@ -134,6 +144,5 @@
             </plugin>
         </plugins>
     </build>
-    <!-- END FIXME -->
-    
+
 </project>

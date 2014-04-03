@@ -38,6 +38,20 @@ import it.tidalwave.util.As;
  **********************************************************************************************************************/
 public interface Accounting extends As
   {
+    @Nonnull
+    public static Accounting getDefault()
+      {
+        try
+          {
+            // FIXME: use Singleton
+            return (Accounting)Class.forName("it.tidalwave.accounting.model.impl.InMemoryAccounting").newInstance();
+          } 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
+          {
+            throw new RuntimeException(e);
+          }
+      }
+
     /*******************************************************************************************************************
      *
      * @return  the {@link CustomerRegistry}

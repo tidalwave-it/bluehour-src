@@ -28,6 +28,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-ui</artifactId>
         </dependency>
         <dependency>

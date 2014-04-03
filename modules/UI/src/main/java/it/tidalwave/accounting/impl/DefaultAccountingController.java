@@ -43,7 +43,6 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.impl.InMemoryAccounting;
 import it.tidalwave.accounting.util.PreferencesHandler;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.role.Unmarshallable.Unmarshallable;
@@ -63,7 +62,7 @@ public class DefaultAccountingController
     @Inject @Nonnull
     private PreferencesHandler preferencesHandler;
     
-    private Accounting accounting = new InMemoryAccounting();
+    private Accounting accounting = Accounting.getDefault();
 
     /*******************************************************************************************************************
      *

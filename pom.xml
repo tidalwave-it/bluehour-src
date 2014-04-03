@@ -111,6 +111,17 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+                <classifier>tests</classifier>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
                 <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>

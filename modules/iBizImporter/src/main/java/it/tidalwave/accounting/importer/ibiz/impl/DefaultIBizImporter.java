@@ -30,17 +30,9 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
-import it.tidalwave.util.As;
-import it.tidalwave.util.spi.AsSupport;
-import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.impl.InMemoryCustomerRegistry;
-import it.tidalwave.accounting.model.impl.InMemoryInvoiceRegistry;
-import it.tidalwave.accounting.model.impl.InMemoryProjectRegistry;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import lombok.Delegate;
-import lombok.Getter;
 
 /***********************************************************************************************************************
  *
@@ -50,17 +42,11 @@ import lombok.Getter;
  **********************************************************************************************************************/
 public class DefaultIBizImporter implements IBizImporter
   {
-    @Delegate
-    private final As asSupport = new AsSupport(this);
-
-    @Getter
-    private final CustomerRegistry customerRegistry = new InMemoryCustomerRegistry(this);
-
-    @Getter
-    private final ProjectRegistry projectRegistry = new InMemoryProjectRegistry();
+//    @Delegate
+//    private final As asSupport = new AsSupport(this);
     
-    @Getter
-    private final InvoiceRegistry invoiceRegistry = new InMemoryInvoiceRegistry();
+    @Delegate
+    private final Accounting accounting = Accounting.getDefault();
 
     @Nonnull
     private final Path path;
@@ -95,8 +81,8 @@ public class DefaultIBizImporter implements IBizImporter
     public void importAll()
       throws IOException
       {
-        new DefaultIBizCustomerImporter(customerRegistry, path).importCustomers();
-        new DefaultIBizProjectImporter(customerRegistry, projectRegistry, path).importProjects();
-        new DefaultIBizInvoiceImporter(invoiceRegistry, projectRegistry, path).importInvoices();
+        new DefaultIBizCustomerImporter(getCustomerRegistry(), path).importCustomers();
+        new DefaultIBizProjectImporter(getCustomerRegistry(), getProjectRegistry(), path).importProjects();
+        new DefaultIBizInvoiceImporter(getInvoiceRegistry(), getProjectRegistry(), path).importInvoices();
       }
   }
