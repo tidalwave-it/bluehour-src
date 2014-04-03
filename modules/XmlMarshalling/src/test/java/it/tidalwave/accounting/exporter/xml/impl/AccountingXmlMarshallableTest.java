@@ -39,7 +39,6 @@ import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.test.util.ScenarioFactory;
@@ -56,6 +55,12 @@ public class AccountingXmlMarshallableTest
     public void installEmptyAsSupport()
       {
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+      }
+    
+    @Test
+    public void consistencyTest()
+      {
+        ScenarioFactory.createScenarios();
       }
     
     @Test
@@ -88,7 +93,7 @@ public class AccountingXmlMarshallableTest
           }
       }
     
-    @Test(dataProvider = "scenarios")
+    @Test(dataProvider = "accountings", dataProviderClass = ScenarioFactory.class)
     public void must_properly_marshall (final @Nonnull String scenarioName, final @Nonnull Accounting scenario)
       throws Exception
       {
@@ -106,15 +111,5 @@ public class AccountingXmlMarshallableTest
           }
         
         FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
-      }
-    
-    @DataProvider(name = "scenarios")
-    private Object[][] scenarios()
-      {
-        return new Object[][]
-          {
-            { "Empty",      ScenarioFactory.createEmptyAccounting() },
-            { "Scenario1",  ScenarioFactory.createScenario1()       }
-          };
       }
   }
