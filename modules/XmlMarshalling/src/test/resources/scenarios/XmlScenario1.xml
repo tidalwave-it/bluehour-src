@@ -1,0 +1,4097 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accounting>
+    <customers>
+        <customer id="1">
+            <billingAddress>
+                <city>Genova</city>
+                <country>Italy</country>
+                <state>GE</state>
+                <street>Corso Italia 10</street>
+                <zip>16145</zip>
+            </billingAddress>
+            <name>ACME Consulting</name>
+            <vatNumber>IT6546034963</vatNumber>
+        </customer>
+        <customer id="2">
+            <billingAddress>
+                <city>Milano</city>
+                <country>Italy</country>
+                <state>MI</state>
+                <street>Corso Magenta 20</street>
+                <zip>20100</zip>
+            </billingAddress>
+            <name>ACME Financing</name>
+            <vatNumber>IT3465346092</vatNumber>
+        </customer>
+    </customers>
+    <invoices>
+        <invoice id="410">
+            <date>2014-02-20</date>
+            <dueDate>2014-04-20</dueDate>
+            <earnings>7980.00 EUR</earnings>
+            <events>
+                <event>242</event>
+                <event>243</event>
+                <event>244</event>
+                <event>245</event>
+                <event>246</event>
+                <event>247</event>
+                <event>248</event>
+                <event>249</event>
+                <event>250</event>
+                <event>251</event>
+                <event>252</event>
+                <event>253</event>
+                <event>254</event>
+                <event>255</event>
+                <event>256</event>
+            </events>
+            <number>ACP3-2</number>
+            <project>400</project>
+            <tax>1596.00 EUR</tax>
+        </invoice>
+        <invoice id="411">
+            <date>2014-03-05</date>
+            <dueDate>2014-05-05</dueDate>
+            <earnings>6528.00 EUR</earnings>
+            <events>
+                <event>274</event>
+                <event>275</event>
+                <event>276</event>
+                <event>277</event>
+                <event>278</event>
+                <event>279</event>
+                <event>280</event>
+                <event>281</event>
+                <event>282</event>
+                <event>283</event>
+                <event>284</event>
+                <event>285</event>
+                <event>286</event>
+                <event>287</event>
+                <event>288</event>
+                <event>289</event>
+                <event>290</event>
+            </events>
+            <number>ACP4-1</number>
+            <project>401</project>
+            <tax>1305.60 EUR</tax>
+        </invoice>
+        <invoice id="412">
+            <date>2014-03-22</date>
+            <dueDate>2014-05-22</dueDate>
+            <earnings>11152.00 EUR</earnings>
+            <events>
+                <event>291</event>
+                <event>292</event>
+                <event>293</event>
+                <event>294</event>
+                <event>295</event>
+                <event>296</event>
+                <event>297</event>
+                <event>298</event>
+                <event>299</event>
+                <event>300</event>
+                <event>301</event>
+                <event>302</event>
+                <event>303</event>
+                <event>304</event>
+                <event>305</event>
+                <event>306</event>
+                <event>307</event>
+            </events>
+            <number>ACP4-2</number>
+            <project>401</project>
+            <tax>2230.40 EUR</tax>
+        </invoice>
+        <invoice id="402">
+            <date>2013-04-24</date>
+            <dueDate>2013-06-24</dueDate>
+            <earnings>4968.00 EUR</earnings>
+            <events>
+                <event>3</event>
+                <event>4</event>
+                <event>5</event>
+                <event>6</event>
+                <event>7</event>
+                <event>8</event>
+                <event>9</event>
+                <event>10</event>
+                <event>11</event>
+                <event>12</event>
+                <event>13</event>
+                <event>14</event>
+                <event>15</event>
+                <event>16</event>
+                <event>17</event>
+                <event>18</event>
+                <event>19</event>
+                <event>20</event>
+                <event>21</event>
+                <event>22</event>
+                <event>23</event>
+                <event>24</event>
+                <event>25</event>
+            </events>
+            <number>ACP1-1</number>
+            <project>398</project>
+            <tax>993.60 EUR</tax>
+        </invoice>
+        <invoice id="413">
+            <date>2014-04-08</date>
+            <dueDate>2014-06-08</dueDate>
+            <earnings>15776.00 EUR</earnings>
+            <events>
+                <event>308</event>
+                <event>309</event>
+                <event>310</event>
+                <event>311</event>
+                <event>312</event>
+                <event>313</event>
+                <event>314</event>
+                <event>315</event>
+                <event>316</event>
+                <event>317</event>
+                <event>318</event>
+                <event>319</event>
+                <event>320</event>
+                <event>321</event>
+                <event>322</event>
+                <event>323</event>
+                <event>324</event>
+            </events>
+            <number>ACP4-3</number>
+            <project>401</project>
+            <tax>3155.20 EUR</tax>
+        </invoice>
+        <invoice id="403">
+            <date>2013-05-17</date>
+            <dueDate>2013-07-17</dueDate>
+            <earnings>9200.00 EUR</earnings>
+            <events>
+                <event>26</event>
+                <event>27</event>
+                <event>28</event>
+                <event>29</event>
+                <event>30</event>
+                <event>31</event>
+                <event>32</event>
+                <event>33</event>
+                <event>34</event>
+                <event>35</event>
+                <event>36</event>
+                <event>37</event>
+                <event>38</event>
+                <event>39</event>
+                <event>40</event>
+                <event>41</event>
+                <event>42</event>
+                <event>43</event>
+                <event>44</event>
+                <event>45</event>
+                <event>46</event>
+                <event>47</event>
+                <event>48</event>
+            </events>
+            <number>ACP1-2</number>
+            <project>398</project>
+            <tax>1840.00 EUR</tax>
+        </invoice>
+        <invoice id="414">
+            <date>2014-04-25</date>
+            <dueDate>2014-06-25</dueDate>
+            <earnings>20400.00 EUR</earnings>
+            <events>
+                <event>325</event>
+                <event>326</event>
+                <event>327</event>
+                <event>328</event>
+                <event>329</event>
+                <event>330</event>
+                <event>331</event>
+                <event>332</event>
+                <event>333</event>
+                <event>334</event>
+                <event>335</event>
+                <event>336</event>
+                <event>337</event>
+                <event>338</event>
+                <event>339</event>
+                <event>340</event>
+                <event>341</event>
+            </events>
+            <number>ACP4-4</number>
+            <project>401</project>
+            <tax>4080.00 EUR</tax>
+        </invoice>
+        <invoice id="404">
+            <date>2013-06-09</date>
+            <dueDate>2013-08-09</dueDate>
+            <earnings>13432.00 EUR</earnings>
+            <events>
+                <event>49</event>
+                <event>50</event>
+                <event>51</event>
+                <event>52</event>
+                <event>53</event>
+                <event>54</event>
+                <event>55</event>
+                <event>56</event>
+                <event>57</event>
+                <event>58</event>
+                <event>59</event>
+                <event>60</event>
+                <event>61</event>
+                <event>62</event>
+                <event>63</event>
+                <event>64</event>
+                <event>65</event>
+                <event>66</event>
+                <event>67</event>
+                <event>68</event>
+                <event>69</event>
+                <event>70</event>
+                <event>71</event>
+            </events>
+            <number>ACP1-3</number>
+            <project>398</project>
+            <tax>2686.40 EUR</tax>
+        </invoice>
+        <invoice id="415">
+            <date>2014-05-12</date>
+            <dueDate>2014-07-12</dueDate>
+            <earnings>25024.00 EUR</earnings>
+            <events>
+                <event>342</event>
+                <event>343</event>
+                <event>344</event>
+                <event>345</event>
+                <event>346</event>
+                <event>347</event>
+                <event>348</event>
+                <event>349</event>
+                <event>350</event>
+                <event>351</event>
+                <event>352</event>
+                <event>353</event>
+                <event>354</event>
+                <event>355</event>
+                <event>356</event>
+                <event>357</event>
+                <event>358</event>
+            </events>
+            <number>ACP4-5</number>
+            <project>401</project>
+            <tax>5004.80 EUR</tax>
+        </invoice>
+        <invoice id="405">
+            <date>2013-05-28</date>
+            <dueDate>2013-07-28</dueDate>
+            <earnings>7410.00 EUR</earnings>
+            <events>
+                <event>96</event>
+                <event>97</event>
+                <event>98</event>
+                <event>99</event>
+                <event>100</event>
+                <event>101</event>
+                <event>102</event>
+                <event>103</event>
+                <event>104</event>
+                <event>105</event>
+                <event>106</event>
+                <event>107</event>
+                <event>108</event>
+                <event>109</event>
+                <event>110</event>
+                <event>111</event>
+                <event>112</event>
+                <event>113</event>
+                <event>114</event>
+                <event>115</event>
+                <event>116</event>
+                <event>117</event>
+                <event>118</event>
+                <event>119</event>
+                <event>120</event>
+                <event>121</event>
+            </events>
+            <number>ACP2-1</number>
+            <project>399</project>
+            <tax>1482.00 EUR</tax>
+        </invoice>
+        <invoice id="416">
+            <date>2014-05-29</date>
+            <dueDate>2014-07-29</dueDate>
+            <earnings>29648.00 EUR</earnings>
+            <events>
+                <event>359</event>
+                <event>360</event>
+                <event>361</event>
+                <event>362</event>
+                <event>363</event>
+                <event>364</event>
+                <event>365</event>
+                <event>366</event>
+                <event>367</event>
+                <event>368</event>
+                <event>369</event>
+                <event>370</event>
+                <event>371</event>
+                <event>372</event>
+                <event>373</event>
+                <event>374</event>
+                <event>375</event>
+            </events>
+            <number>ACP4-6</number>
+            <project>401</project>
+            <tax>5929.60 EUR</tax>
+        </invoice>
+        <invoice id="406">
+            <date>2013-06-23</date>
+            <dueDate>2013-08-23</dueDate>
+            <earnings>14170.00 EUR</earnings>
+            <events>
+                <event>122</event>
+                <event>123</event>
+                <event>124</event>
+                <event>125</event>
+                <event>126</event>
+                <event>127</event>
+                <event>128</event>
+                <event>129</event>
+                <event>130</event>
+                <event>131</event>
+                <event>132</event>
+                <event>133</event>
+                <event>134</event>
+                <event>135</event>
+                <event>136</event>
+                <event>137</event>
+                <event>138</event>
+                <event>139</event>
+                <event>140</event>
+                <event>141</event>
+                <event>142</event>
+                <event>143</event>
+                <event>144</event>
+                <event>145</event>
+                <event>146</event>
+                <event>147</event>
+            </events>
+            <number>ACP2-2</number>
+            <project>399</project>
+            <tax>2834.00 EUR</tax>
+        </invoice>
+        <invoice id="407">
+            <date>2013-07-19</date>
+            <dueDate>2013-09-19</dueDate>
+            <earnings>20930.00 EUR</earnings>
+            <events>
+                <event>148</event>
+                <event>149</event>
+                <event>150</event>
+                <event>151</event>
+                <event>152</event>
+                <event>153</event>
+                <event>154</event>
+                <event>155</event>
+                <event>156</event>
+                <event>157</event>
+                <event>158</event>
+                <event>159</event>
+                <event>160</event>
+                <event>161</event>
+                <event>162</event>
+                <event>163</event>
+                <event>164</event>
+                <event>165</event>
+                <event>166</event>
+                <event>167</event>
+                <event>168</event>
+                <event>169</event>
+                <event>170</event>
+                <event>171</event>
+                <event>172</event>
+                <event>173</event>
+            </events>
+            <number>ACP2-3</number>
+            <project>399</project>
+            <tax>4186.00 EUR</tax>
+        </invoice>
+        <invoice id="408">
+            <date>2013-08-14</date>
+            <dueDate>2013-10-14</dueDate>
+            <earnings>27690.00 EUR</earnings>
+            <events>
+                <event>174</event>
+                <event>175</event>
+                <event>176</event>
+                <event>177</event>
+                <event>178</event>
+                <event>179</event>
+                <event>180</event>
+                <event>181</event>
+                <event>182</event>
+                <event>183</event>
+                <event>184</event>
+                <event>185</event>
+                <event>186</event>
+                <event>187</event>
+                <event>188</event>
+                <event>189</event>
+                <event>190</event>
+                <event>191</event>
+                <event>192</event>
+                <event>193</event>
+                <event>194</event>
+                <event>195</event>
+                <event>196</event>
+                <event>197</event>
+                <event>198</event>
+                <event>199</event>
+            </events>
+            <number>ACP2-4</number>
+            <project>399</project>
+            <tax>5538.00 EUR</tax>
+        </invoice>
+        <invoice id="409">
+            <date>2014-02-05</date>
+            <dueDate>2014-04-05</dueDate>
+            <earnings>4830.00 EUR</earnings>
+            <events>
+                <event>227</event>
+                <event>228</event>
+                <event>229</event>
+                <event>230</event>
+                <event>231</event>
+                <event>232</event>
+                <event>233</event>
+                <event>234</event>
+                <event>235</event>
+                <event>236</event>
+                <event>237</event>
+                <event>238</event>
+                <event>239</event>
+                <event>240</event>
+                <event>241</event>
+            </events>
+            <number>ACP3-1</number>
+            <project>400</project>
+            <tax>966.00 EUR</tax>
+        </invoice>
+    </invoices>
+    <projects>
+        <project id="398">
+            <amount>0.00 EUR</amount>
+            <customer>1</customer>
+            <description>Acme Consulting Project 1</description>
+            <endDate>2013-07-04</endDate>
+            <hourlyRate>0.00 EUR</hourlyRate>
+            <events>
+                <event id="3">
+                    <description>Description of Event #1</description>
+                    <earnings>128.00 EUR</earnings>
+                    <endDateTime>2013-04-02T09:07:00</endDateTime>
+                    <name>Event #1</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-02T08:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="4">
+                    <description>Description of Event #2</description>
+                    <earnings>136.00 EUR</earnings>
+                    <endDateTime>2013-04-03T09:14:00</endDateTime>
+                    <name>Event #2</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-03T08:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="5">
+                    <description>Description of Event #3</description>
+                    <earnings>144.00 EUR</earnings>
+                    <endDateTime>2013-04-04T09:21:00</endDateTime>
+                    <name>Event #3</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-04T08:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="6">
+                    <description>Description of Event #4</description>
+                    <earnings>152.00 EUR</earnings>
+                    <endDateTime>2013-04-05T09:28:00</endDateTime>
+                    <name>Event #4</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-05T08:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="7">
+                    <description>Description of Event #5</description>
+                    <earnings>160.00 EUR</earnings>
+                    <endDateTime>2013-04-06T09:35:00</endDateTime>
+                    <name>Event #5</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-06T08:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="8">
+                    <description>Description of Event #6</description>
+                    <earnings>168.00 EUR</earnings>
+                    <endDateTime>2013-04-07T09:42:00</endDateTime>
+                    <name>Event #6</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-07T08:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="9">
+                    <description>Description of Event #7</description>
+                    <earnings>176.00 EUR</earnings>
+                    <endDateTime>2013-04-08T09:49:00</endDateTime>
+                    <name>Event #7</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-08T08:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="10">
+                    <description>Description of Event #8</description>
+                    <earnings>184.00 EUR</earnings>
+                    <endDateTime>2013-04-09T09:56:00</endDateTime>
+                    <name>Event #8</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-09T08:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="11">
+                    <description>Description of Event #9</description>
+                    <earnings>192.00 EUR</earnings>
+                    <endDateTime>2013-04-10T10:03:00</endDateTime>
+                    <name>Event #9</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-10T08:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="12">
+                    <description>Description of Event #10</description>
+                    <earnings>200.00 EUR</earnings>
+                    <endDateTime>2013-04-11T10:10:00</endDateTime>
+                    <name>Event #10</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-11T08:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="13">
+                    <description>Description of Event #11</description>
+                    <earnings>208.00 EUR</earnings>
+                    <endDateTime>2013-04-12T10:17:00</endDateTime>
+                    <name>Event #11</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-12T08:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="14">
+                    <description>Description of Event #12</description>
+                    <earnings>216.00 EUR</earnings>
+                    <endDateTime>2013-04-13T10:24:00</endDateTime>
+                    <name>Event #12</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-13T08:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="15">
+                    <description>Description of Event #13</description>
+                    <earnings>224.00 EUR</earnings>
+                    <endDateTime>2013-04-14T10:31:00</endDateTime>
+                    <name>Event #13</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-14T08:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="16">
+                    <description>Description of Event #14</description>
+                    <earnings>232.00 EUR</earnings>
+                    <endDateTime>2013-04-15T10:38:00</endDateTime>
+                    <name>Event #14</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-15T08:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="17">
+                    <description>Description of Event #15</description>
+                    <earnings>240.00 EUR</earnings>
+                    <endDateTime>2013-04-16T10:45:00</endDateTime>
+                    <name>Event #15</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-16T08:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="18">
+                    <description>Description of Event #16</description>
+                    <earnings>248.00 EUR</earnings>
+                    <endDateTime>2013-04-17T10:52:00</endDateTime>
+                    <name>Event #16</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-17T08:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="19">
+                    <description>Description of Event #17</description>
+                    <earnings>256.00 EUR</earnings>
+                    <endDateTime>2013-04-18T10:59:00</endDateTime>
+                    <name>Event #17</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-18T08:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="20">
+                    <description>Description of Event #18</description>
+                    <earnings>264.00 EUR</earnings>
+                    <endDateTime>2013-04-19T11:06:00</endDateTime>
+                    <name>Event #18</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-19T08:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="21">
+                    <description>Description of Event #19</description>
+                    <earnings>272.00 EUR</earnings>
+                    <endDateTime>2013-04-20T11:13:00</endDateTime>
+                    <name>Event #19</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-20T08:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="22">
+                    <description>Description of Event #20</description>
+                    <earnings>280.00 EUR</earnings>
+                    <endDateTime>2013-04-21T11:20:00</endDateTime>
+                    <name>Event #20</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-21T09:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="23">
+                    <description>Description of Event #21</description>
+                    <earnings>288.00 EUR</earnings>
+                    <endDateTime>2013-04-22T11:27:00</endDateTime>
+                    <name>Event #21</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-22T09:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="24">
+                    <description>Description of Event #22</description>
+                    <earnings>296.00 EUR</earnings>
+                    <endDateTime>2013-04-23T11:34:00</endDateTime>
+                    <name>Event #22</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-23T09:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="25">
+                    <description>Description of Event #23</description>
+                    <earnings>304.00 EUR</earnings>
+                    <endDateTime>2013-04-24T11:41:00</endDateTime>
+                    <name>Event #23</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-24T09:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="26">
+                    <description>Description of Event #24</description>
+                    <earnings>312.00 EUR</earnings>
+                    <endDateTime>2013-04-25T11:48:00</endDateTime>
+                    <name>Event #24</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-25T09:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="27">
+                    <description>Description of Event #25</description>
+                    <earnings>320.00 EUR</earnings>
+                    <endDateTime>2013-04-26T11:55:00</endDateTime>
+                    <name>Event #25</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-26T09:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="28">
+                    <description>Description of Event #26</description>
+                    <earnings>328.00 EUR</earnings>
+                    <endDateTime>2013-04-27T12:02:00</endDateTime>
+                    <name>Event #26</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-27T09:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="29">
+                    <description>Description of Event #27</description>
+                    <earnings>336.00 EUR</earnings>
+                    <endDateTime>2013-04-28T12:09:00</endDateTime>
+                    <name>Event #27</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-28T09:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="30">
+                    <description>Description of Event #28</description>
+                    <earnings>344.00 EUR</earnings>
+                    <endDateTime>2013-04-29T12:16:00</endDateTime>
+                    <name>Event #28</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-29T09:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="31">
+                    <description>Description of Event #29</description>
+                    <earnings>352.00 EUR</earnings>
+                    <endDateTime>2013-04-30T12:23:00</endDateTime>
+                    <name>Event #29</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-04-30T09:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="32">
+                    <description>Description of Event #30</description>
+                    <earnings>360.00 EUR</earnings>
+                    <endDateTime>2013-05-01T12:30:00</endDateTime>
+                    <name>Event #30</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-01T09:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="33">
+                    <description>Description of Event #31</description>
+                    <earnings>368.00 EUR</earnings>
+                    <endDateTime>2013-05-02T12:37:00</endDateTime>
+                    <name>Event #31</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-02T09:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="34">
+                    <description>Description of Event #32</description>
+                    <earnings>376.00 EUR</earnings>
+                    <endDateTime>2013-05-03T12:44:00</endDateTime>
+                    <name>Event #32</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-03T09:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="35">
+                    <description>Description of Event #33</description>
+                    <earnings>384.00 EUR</earnings>
+                    <endDateTime>2013-05-04T12:51:00</endDateTime>
+                    <name>Event #33</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-04T09:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="36">
+                    <description>Description of Event #34</description>
+                    <earnings>392.00 EUR</earnings>
+                    <endDateTime>2013-05-05T12:58:00</endDateTime>
+                    <name>Event #34</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-05T09:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="37">
+                    <description>Description of Event #35</description>
+                    <earnings>400.00 EUR</earnings>
+                    <endDateTime>2013-05-06T13:05:00</endDateTime>
+                    <name>Event #35</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-06T09:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="38">
+                    <description>Description of Event #36</description>
+                    <earnings>408.00 EUR</earnings>
+                    <endDateTime>2013-05-07T13:12:00</endDateTime>
+                    <name>Event #36</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-07T09:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="39">
+                    <description>Description of Event #37</description>
+                    <earnings>416.00 EUR</earnings>
+                    <endDateTime>2013-05-08T13:19:00</endDateTime>
+                    <name>Event #37</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-08T09:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="40">
+                    <description>Description of Event #38</description>
+                    <earnings>424.00 EUR</earnings>
+                    <endDateTime>2013-05-09T13:26:00</endDateTime>
+                    <name>Event #38</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-09T09:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="41">
+                    <description>Description of Event #39</description>
+                    <earnings>432.00 EUR</earnings>
+                    <endDateTime>2013-05-10T13:33:00</endDateTime>
+                    <name>Event #39</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-10T09:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="42">
+                    <description>Description of Event #40</description>
+                    <earnings>440.00 EUR</earnings>
+                    <endDateTime>2013-05-11T13:40:00</endDateTime>
+                    <name>Event #40</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-11T10:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="43">
+                    <description>Description of Event #41</description>
+                    <earnings>448.00 EUR</earnings>
+                    <endDateTime>2013-05-12T13:47:00</endDateTime>
+                    <name>Event #41</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-12T10:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="44">
+                    <description>Description of Event #42</description>
+                    <earnings>456.00 EUR</earnings>
+                    <endDateTime>2013-05-13T13:54:00</endDateTime>
+                    <name>Event #42</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-13T10:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="45">
+                    <description>Description of Event #43</description>
+                    <earnings>464.00 EUR</earnings>
+                    <endDateTime>2013-05-14T14:01:00</endDateTime>
+                    <name>Event #43</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-14T10:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="46">
+                    <description>Description of Event #44</description>
+                    <earnings>472.00 EUR</earnings>
+                    <endDateTime>2013-05-15T14:08:00</endDateTime>
+                    <name>Event #44</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-15T10:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="47">
+                    <description>Description of Event #45</description>
+                    <earnings>480.00 EUR</earnings>
+                    <endDateTime>2013-05-16T14:15:00</endDateTime>
+                    <name>Event #45</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-16T10:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="48">
+                    <description>Description of Event #46</description>
+                    <earnings>488.00 EUR</earnings>
+                    <endDateTime>2013-05-17T14:22:00</endDateTime>
+                    <name>Event #46</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-17T10:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="49">
+                    <description>Description of Event #47</description>
+                    <earnings>496.00 EUR</earnings>
+                    <endDateTime>2013-05-18T14:29:00</endDateTime>
+                    <name>Event #47</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-18T10:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="50">
+                    <description>Description of Event #48</description>
+                    <earnings>504.00 EUR</earnings>
+                    <endDateTime>2013-05-19T14:36:00</endDateTime>
+                    <name>Event #48</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-19T10:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="51">
+                    <description>Description of Event #49</description>
+                    <earnings>512.00 EUR</earnings>
+                    <endDateTime>2013-05-20T14:43:00</endDateTime>
+                    <name>Event #49</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-20T10:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="52">
+                    <description>Description of Event #50</description>
+                    <earnings>520.00 EUR</earnings>
+                    <endDateTime>2013-05-21T14:50:00</endDateTime>
+                    <name>Event #50</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-21T10:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="53">
+                    <description>Description of Event #51</description>
+                    <earnings>528.00 EUR</earnings>
+                    <endDateTime>2013-05-22T14:57:00</endDateTime>
+                    <name>Event #51</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-22T10:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="54">
+                    <description>Description of Event #52</description>
+                    <earnings>536.00 EUR</earnings>
+                    <endDateTime>2013-05-23T15:04:00</endDateTime>
+                    <name>Event #52</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-23T10:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="55">
+                    <description>Description of Event #53</description>
+                    <earnings>544.00 EUR</earnings>
+                    <endDateTime>2013-05-24T15:11:00</endDateTime>
+                    <name>Event #53</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-24T10:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="56">
+                    <description>Description of Event #54</description>
+                    <earnings>552.00 EUR</earnings>
+                    <endDateTime>2013-05-25T15:18:00</endDateTime>
+                    <name>Event #54</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-25T10:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="57">
+                    <description>Description of Event #55</description>
+                    <earnings>560.00 EUR</earnings>
+                    <endDateTime>2013-05-26T15:25:00</endDateTime>
+                    <name>Event #55</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-26T10:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="58">
+                    <description>Description of Event #56</description>
+                    <earnings>568.00 EUR</earnings>
+                    <endDateTime>2013-05-27T15:32:00</endDateTime>
+                    <name>Event #56</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-27T10:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="59">
+                    <description>Description of Event #57</description>
+                    <earnings>576.00 EUR</earnings>
+                    <endDateTime>2013-05-28T15:39:00</endDateTime>
+                    <name>Event #57</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-28T10:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="60">
+                    <description>Description of Event #58</description>
+                    <earnings>584.00 EUR</earnings>
+                    <endDateTime>2013-05-29T15:46:00</endDateTime>
+                    <name>Event #58</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-29T10:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="61">
+                    <description>Description of Event #59</description>
+                    <earnings>592.00 EUR</earnings>
+                    <endDateTime>2013-05-30T15:53:00</endDateTime>
+                    <name>Event #59</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-30T10:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="62">
+                    <description>Description of Event #60</description>
+                    <earnings>600.00 EUR</earnings>
+                    <endDateTime>2013-05-31T16:00:00</endDateTime>
+                    <name>Event #60</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-05-31T11:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="63">
+                    <description>Description of Event #61</description>
+                    <earnings>608.00 EUR</earnings>
+                    <endDateTime>2013-06-01T16:07:00</endDateTime>
+                    <name>Event #61</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-01T11:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="64">
+                    <description>Description of Event #62</description>
+                    <earnings>616.00 EUR</earnings>
+                    <endDateTime>2013-06-02T16:14:00</endDateTime>
+                    <name>Event #62</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-02T11:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="65">
+                    <description>Description of Event #63</description>
+                    <earnings>624.00 EUR</earnings>
+                    <endDateTime>2013-06-03T16:21:00</endDateTime>
+                    <name>Event #63</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-03T11:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="66">
+                    <description>Description of Event #64</description>
+                    <earnings>632.00 EUR</earnings>
+                    <endDateTime>2013-06-04T16:28:00</endDateTime>
+                    <name>Event #64</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-04T11:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="67">
+                    <description>Description of Event #65</description>
+                    <earnings>640.00 EUR</earnings>
+                    <endDateTime>2013-06-05T16:35:00</endDateTime>
+                    <name>Event #65</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-05T11:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="68">
+                    <description>Description of Event #66</description>
+                    <earnings>648.00 EUR</earnings>
+                    <endDateTime>2013-06-06T16:42:00</endDateTime>
+                    <name>Event #66</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-06T11:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="69">
+                    <description>Description of Event #67</description>
+                    <earnings>656.00 EUR</earnings>
+                    <endDateTime>2013-06-07T16:49:00</endDateTime>
+                    <name>Event #67</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-07T11:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="70">
+                    <description>Description of Event #68</description>
+                    <earnings>664.00 EUR</earnings>
+                    <endDateTime>2013-06-08T16:56:00</endDateTime>
+                    <name>Event #68</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-08T11:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="71">
+                    <description>Description of Event #69</description>
+                    <earnings>672.00 EUR</earnings>
+                    <endDateTime>2013-06-09T17:03:00</endDateTime>
+                    <name>Event #69</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-09T11:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="72">
+                    <description>Description of Event #70</description>
+                    <earnings>680.00 EUR</earnings>
+                    <endDateTime>2013-06-10T17:10:00</endDateTime>
+                    <name>Event #70</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-10T11:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="73">
+                    <description>Description of Event #71</description>
+                    <earnings>688.00 EUR</earnings>
+                    <endDateTime>2013-06-11T17:17:00</endDateTime>
+                    <name>Event #71</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-11T11:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="74">
+                    <description>Description of Event #72</description>
+                    <earnings>696.00 EUR</earnings>
+                    <endDateTime>2013-06-12T17:24:00</endDateTime>
+                    <name>Event #72</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-12T11:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="75">
+                    <description>Description of Event #73</description>
+                    <earnings>704.00 EUR</earnings>
+                    <endDateTime>2013-06-13T17:31:00</endDateTime>
+                    <name>Event #73</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-13T11:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="76">
+                    <description>Description of Event #74</description>
+                    <earnings>712.00 EUR</earnings>
+                    <endDateTime>2013-06-14T17:38:00</endDateTime>
+                    <name>Event #74</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-14T11:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="77">
+                    <description>Description of Event #75</description>
+                    <earnings>720.00 EUR</earnings>
+                    <endDateTime>2013-06-15T17:45:00</endDateTime>
+                    <name>Event #75</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-15T11:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="78">
+                    <description>Description of Event #76</description>
+                    <earnings>728.00 EUR</earnings>
+                    <endDateTime>2013-06-16T17:52:00</endDateTime>
+                    <name>Event #76</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-16T11:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="79">
+                    <description>Description of Event #77</description>
+                    <earnings>736.00 EUR</earnings>
+                    <endDateTime>2013-06-17T17:59:00</endDateTime>
+                    <name>Event #77</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-17T11:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="80">
+                    <description>Description of Event #78</description>
+                    <earnings>744.00 EUR</earnings>
+                    <endDateTime>2013-06-18T18:06:00</endDateTime>
+                    <name>Event #78</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-18T11:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="81">
+                    <description>Description of Event #79</description>
+                    <earnings>752.00 EUR</earnings>
+                    <endDateTime>2013-06-19T18:13:00</endDateTime>
+                    <name>Event #79</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-19T11:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="82">
+                    <description>Description of Event #80</description>
+                    <earnings>760.00 EUR</earnings>
+                    <endDateTime>2013-06-20T18:20:00</endDateTime>
+                    <name>Event #80</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-20T12:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="83">
+                    <description>Description of Event #81</description>
+                    <earnings>768.00 EUR</earnings>
+                    <endDateTime>2013-06-21T18:27:00</endDateTime>
+                    <name>Event #81</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-21T12:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="84">
+                    <description>Description of Event #82</description>
+                    <earnings>776.00 EUR</earnings>
+                    <endDateTime>2013-06-22T18:34:00</endDateTime>
+                    <name>Event #82</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-22T12:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="85">
+                    <description>Description of Event #83</description>
+                    <earnings>784.00 EUR</earnings>
+                    <endDateTime>2013-06-23T18:41:00</endDateTime>
+                    <name>Event #83</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-23T12:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="86">
+                    <description>Description of Event #84</description>
+                    <earnings>792.00 EUR</earnings>
+                    <endDateTime>2013-06-24T18:48:00</endDateTime>
+                    <name>Event #84</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-24T12:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="87">
+                    <description>Description of Event #85</description>
+                    <earnings>800.00 EUR</earnings>
+                    <endDateTime>2013-06-25T18:55:00</endDateTime>
+                    <name>Event #85</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-25T12:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="88">
+                    <description>Description of Event #86</description>
+                    <earnings>808.00 EUR</earnings>
+                    <endDateTime>2013-06-26T19:02:00</endDateTime>
+                    <name>Event #86</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-26T12:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="89">
+                    <description>Description of Event #87</description>
+                    <earnings>816.00 EUR</earnings>
+                    <endDateTime>2013-06-27T19:09:00</endDateTime>
+                    <name>Event #87</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-27T12:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="90">
+                    <description>Description of Event #88</description>
+                    <earnings>824.00 EUR</earnings>
+                    <endDateTime>2013-06-28T19:16:00</endDateTime>
+                    <name>Event #88</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-28T12:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="91">
+                    <description>Description of Event #89</description>
+                    <earnings>832.00 EUR</earnings>
+                    <endDateTime>2013-06-29T19:23:00</endDateTime>
+                    <name>Event #89</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-29T12:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="92">
+                    <description>Description of Event #90</description>
+                    <earnings>840.00 EUR</earnings>
+                    <endDateTime>2013-06-30T19:30:00</endDateTime>
+                    <name>Event #90</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-06-30T12:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="93">
+                    <description>Description of Event #91</description>
+                    <earnings>848.00 EUR</earnings>
+                    <endDateTime>2013-07-01T19:37:00</endDateTime>
+                    <name>Event #91</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-07-01T12:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="94">
+                    <description>Description of Event #92</description>
+                    <earnings>856.00 EUR</earnings>
+                    <endDateTime>2013-07-02T19:44:00</endDateTime>
+                    <name>Event #92</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-07-02T12:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="95">
+                    <description>Description of Event #93</description>
+                    <earnings>864.00 EUR</earnings>
+                    <endDateTime>2013-07-03T19:51:00</endDateTime>
+                    <name>Event #93</name>
+                    <rate>120.00 EUR</rate>
+                    <startDateTime>2013-07-03T12:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+            </events>
+            <name>Acme Consulting Project 1</name>
+            <notes></notes>
+            <number>PRJ ACME-1</number>
+            <startDate>2013-04-02</startDate>
+            <status>open</status>
+        </project>
+        <project id="399">
+            <amount>0.00 EUR</amount>
+            <customer>1</customer>
+            <description>Acme Consulting Project 2</description>
+            <endDate>2013-09-11</endDate>
+            <hourlyRate>0.00 EUR</hourlyRate>
+            <events>
+                <event id="96">
+                    <description>Description of Event #1</description>
+                    <earnings>160.00 EUR</earnings>
+                    <endDateTime>2013-05-03T09:07:00</endDateTime>
+                    <name>Event #1</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-03T08:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="97">
+                    <description>Description of Event #2</description>
+                    <earnings>170.00 EUR</earnings>
+                    <endDateTime>2013-05-04T09:14:00</endDateTime>
+                    <name>Event #2</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-04T08:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="98">
+                    <description>Description of Event #3</description>
+                    <earnings>180.00 EUR</earnings>
+                    <endDateTime>2013-05-05T09:21:00</endDateTime>
+                    <name>Event #3</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-05T08:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="99">
+                    <description>Description of Event #4</description>
+                    <earnings>190.00 EUR</earnings>
+                    <endDateTime>2013-05-06T09:28:00</endDateTime>
+                    <name>Event #4</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-06T08:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="100">
+                    <description>Description of Event #5</description>
+                    <earnings>200.00 EUR</earnings>
+                    <endDateTime>2013-05-07T09:35:00</endDateTime>
+                    <name>Event #5</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-07T08:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="101">
+                    <description>Description of Event #6</description>
+                    <earnings>210.00 EUR</earnings>
+                    <endDateTime>2013-05-08T09:42:00</endDateTime>
+                    <name>Event #6</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-08T08:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="102">
+                    <description>Description of Event #7</description>
+                    <earnings>220.00 EUR</earnings>
+                    <endDateTime>2013-05-09T09:49:00</endDateTime>
+                    <name>Event #7</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-09T08:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="103">
+                    <description>Description of Event #8</description>
+                    <earnings>230.00 EUR</earnings>
+                    <endDateTime>2013-05-10T09:56:00</endDateTime>
+                    <name>Event #8</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-10T08:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="104">
+                    <description>Description of Event #9</description>
+                    <earnings>240.00 EUR</earnings>
+                    <endDateTime>2013-05-11T10:03:00</endDateTime>
+                    <name>Event #9</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-11T08:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="105">
+                    <description>Description of Event #10</description>
+                    <earnings>250.00 EUR</earnings>
+                    <endDateTime>2013-05-12T10:10:00</endDateTime>
+                    <name>Event #10</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-12T08:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="106">
+                    <description>Description of Event #11</description>
+                    <earnings>260.00 EUR</earnings>
+                    <endDateTime>2013-05-13T10:17:00</endDateTime>
+                    <name>Event #11</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-13T08:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="107">
+                    <description>Description of Event #12</description>
+                    <earnings>270.00 EUR</earnings>
+                    <endDateTime>2013-05-14T10:24:00</endDateTime>
+                    <name>Event #12</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-14T08:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="108">
+                    <description>Description of Event #13</description>
+                    <earnings>280.00 EUR</earnings>
+                    <endDateTime>2013-05-15T10:31:00</endDateTime>
+                    <name>Event #13</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-15T08:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="109">
+                    <description>Description of Event #14</description>
+                    <earnings>290.00 EUR</earnings>
+                    <endDateTime>2013-05-16T10:38:00</endDateTime>
+                    <name>Event #14</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-16T08:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="110">
+                    <description>Description of Event #15</description>
+                    <earnings>300.00 EUR</earnings>
+                    <endDateTime>2013-05-17T10:45:00</endDateTime>
+                    <name>Event #15</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-17T08:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="111">
+                    <description>Description of Event #16</description>
+                    <earnings>310.00 EUR</earnings>
+                    <endDateTime>2013-05-18T10:52:00</endDateTime>
+                    <name>Event #16</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-18T08:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="112">
+                    <description>Description of Event #17</description>
+                    <earnings>320.00 EUR</earnings>
+                    <endDateTime>2013-05-19T10:59:00</endDateTime>
+                    <name>Event #17</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-19T08:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="113">
+                    <description>Description of Event #18</description>
+                    <earnings>330.00 EUR</earnings>
+                    <endDateTime>2013-05-20T11:06:00</endDateTime>
+                    <name>Event #18</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-20T08:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="114">
+                    <description>Description of Event #19</description>
+                    <earnings>340.00 EUR</earnings>
+                    <endDateTime>2013-05-21T11:13:00</endDateTime>
+                    <name>Event #19</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-21T08:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="115">
+                    <description>Description of Event #20</description>
+                    <earnings>350.00 EUR</earnings>
+                    <endDateTime>2013-05-22T11:20:00</endDateTime>
+                    <name>Event #20</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-22T09:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="116">
+                    <description>Description of Event #21</description>
+                    <earnings>360.00 EUR</earnings>
+                    <endDateTime>2013-05-23T11:27:00</endDateTime>
+                    <name>Event #21</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-23T09:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="117">
+                    <description>Description of Event #22</description>
+                    <earnings>370.00 EUR</earnings>
+                    <endDateTime>2013-05-24T11:34:00</endDateTime>
+                    <name>Event #22</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-24T09:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="118">
+                    <description>Description of Event #23</description>
+                    <earnings>380.00 EUR</earnings>
+                    <endDateTime>2013-05-25T11:41:00</endDateTime>
+                    <name>Event #23</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-25T09:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="119">
+                    <description>Description of Event #24</description>
+                    <earnings>390.00 EUR</earnings>
+                    <endDateTime>2013-05-26T11:48:00</endDateTime>
+                    <name>Event #24</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-26T09:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="120">
+                    <description>Description of Event #25</description>
+                    <earnings>400.00 EUR</earnings>
+                    <endDateTime>2013-05-27T11:55:00</endDateTime>
+                    <name>Event #25</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-27T09:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="121">
+                    <description>Description of Event #26</description>
+                    <earnings>410.00 EUR</earnings>
+                    <endDateTime>2013-05-28T12:02:00</endDateTime>
+                    <name>Event #26</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-28T09:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="122">
+                    <description>Description of Event #27</description>
+                    <earnings>420.00 EUR</earnings>
+                    <endDateTime>2013-05-29T12:09:00</endDateTime>
+                    <name>Event #27</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-29T09:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="123">
+                    <description>Description of Event #28</description>
+                    <earnings>430.00 EUR</earnings>
+                    <endDateTime>2013-05-30T12:16:00</endDateTime>
+                    <name>Event #28</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-30T09:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="124">
+                    <description>Description of Event #29</description>
+                    <earnings>440.00 EUR</earnings>
+                    <endDateTime>2013-05-31T12:23:00</endDateTime>
+                    <name>Event #29</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-05-31T09:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="125">
+                    <description>Description of Event #30</description>
+                    <earnings>450.00 EUR</earnings>
+                    <endDateTime>2013-06-01T12:30:00</endDateTime>
+                    <name>Event #30</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-01T09:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="126">
+                    <description>Description of Event #31</description>
+                    <earnings>460.00 EUR</earnings>
+                    <endDateTime>2013-06-02T12:37:00</endDateTime>
+                    <name>Event #31</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-02T09:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="127">
+                    <description>Description of Event #32</description>
+                    <earnings>470.00 EUR</earnings>
+                    <endDateTime>2013-06-03T12:44:00</endDateTime>
+                    <name>Event #32</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-03T09:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="128">
+                    <description>Description of Event #33</description>
+                    <earnings>480.00 EUR</earnings>
+                    <endDateTime>2013-06-04T12:51:00</endDateTime>
+                    <name>Event #33</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-04T09:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="129">
+                    <description>Description of Event #34</description>
+                    <earnings>490.00 EUR</earnings>
+                    <endDateTime>2013-06-05T12:58:00</endDateTime>
+                    <name>Event #34</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-05T09:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="130">
+                    <description>Description of Event #35</description>
+                    <earnings>500.00 EUR</earnings>
+                    <endDateTime>2013-06-06T13:05:00</endDateTime>
+                    <name>Event #35</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-06T09:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="131">
+                    <description>Description of Event #36</description>
+                    <earnings>510.00 EUR</earnings>
+                    <endDateTime>2013-06-07T13:12:00</endDateTime>
+                    <name>Event #36</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-07T09:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="132">
+                    <description>Description of Event #37</description>
+                    <earnings>520.00 EUR</earnings>
+                    <endDateTime>2013-06-08T13:19:00</endDateTime>
+                    <name>Event #37</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-08T09:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="133">
+                    <description>Description of Event #38</description>
+                    <earnings>530.00 EUR</earnings>
+                    <endDateTime>2013-06-09T13:26:00</endDateTime>
+                    <name>Event #38</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-09T09:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="134">
+                    <description>Description of Event #39</description>
+                    <earnings>540.00 EUR</earnings>
+                    <endDateTime>2013-06-10T13:33:00</endDateTime>
+                    <name>Event #39</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-10T09:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="135">
+                    <description>Description of Event #40</description>
+                    <earnings>550.00 EUR</earnings>
+                    <endDateTime>2013-06-11T13:40:00</endDateTime>
+                    <name>Event #40</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-11T10:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="136">
+                    <description>Description of Event #41</description>
+                    <earnings>560.00 EUR</earnings>
+                    <endDateTime>2013-06-12T13:47:00</endDateTime>
+                    <name>Event #41</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-12T10:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="137">
+                    <description>Description of Event #42</description>
+                    <earnings>570.00 EUR</earnings>
+                    <endDateTime>2013-06-13T13:54:00</endDateTime>
+                    <name>Event #42</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-13T10:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="138">
+                    <description>Description of Event #43</description>
+                    <earnings>580.00 EUR</earnings>
+                    <endDateTime>2013-06-14T14:01:00</endDateTime>
+                    <name>Event #43</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-14T10:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="139">
+                    <description>Description of Event #44</description>
+                    <earnings>590.00 EUR</earnings>
+                    <endDateTime>2013-06-15T14:08:00</endDateTime>
+                    <name>Event #44</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-15T10:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="140">
+                    <description>Description of Event #45</description>
+                    <earnings>600.00 EUR</earnings>
+                    <endDateTime>2013-06-16T14:15:00</endDateTime>
+                    <name>Event #45</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-16T10:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="141">
+                    <description>Description of Event #46</description>
+                    <earnings>610.00 EUR</earnings>
+                    <endDateTime>2013-06-17T14:22:00</endDateTime>
+                    <name>Event #46</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-17T10:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="142">
+                    <description>Description of Event #47</description>
+                    <earnings>620.00 EUR</earnings>
+                    <endDateTime>2013-06-18T14:29:00</endDateTime>
+                    <name>Event #47</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-18T10:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="143">
+                    <description>Description of Event #48</description>
+                    <earnings>630.00 EUR</earnings>
+                    <endDateTime>2013-06-19T14:36:00</endDateTime>
+                    <name>Event #48</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-19T10:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="144">
+                    <description>Description of Event #49</description>
+                    <earnings>640.00 EUR</earnings>
+                    <endDateTime>2013-06-20T14:43:00</endDateTime>
+                    <name>Event #49</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-20T10:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="145">
+                    <description>Description of Event #50</description>
+                    <earnings>650.00 EUR</earnings>
+                    <endDateTime>2013-06-21T14:50:00</endDateTime>
+                    <name>Event #50</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-21T10:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="146">
+                    <description>Description of Event #51</description>
+                    <earnings>660.00 EUR</earnings>
+                    <endDateTime>2013-06-22T14:57:00</endDateTime>
+                    <name>Event #51</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-22T10:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="147">
+                    <description>Description of Event #52</description>
+                    <earnings>670.00 EUR</earnings>
+                    <endDateTime>2013-06-23T15:04:00</endDateTime>
+                    <name>Event #52</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-23T10:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="148">
+                    <description>Description of Event #53</description>
+                    <earnings>680.00 EUR</earnings>
+                    <endDateTime>2013-06-24T15:11:00</endDateTime>
+                    <name>Event #53</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-24T10:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="149">
+                    <description>Description of Event #54</description>
+                    <earnings>690.00 EUR</earnings>
+                    <endDateTime>2013-06-25T15:18:00</endDateTime>
+                    <name>Event #54</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-25T10:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="150">
+                    <description>Description of Event #55</description>
+                    <earnings>700.00 EUR</earnings>
+                    <endDateTime>2013-06-26T15:25:00</endDateTime>
+                    <name>Event #55</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-26T10:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="151">
+                    <description>Description of Event #56</description>
+                    <earnings>710.00 EUR</earnings>
+                    <endDateTime>2013-06-27T15:32:00</endDateTime>
+                    <name>Event #56</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-27T10:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="152">
+                    <description>Description of Event #57</description>
+                    <earnings>720.00 EUR</earnings>
+                    <endDateTime>2013-06-28T15:39:00</endDateTime>
+                    <name>Event #57</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-28T10:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="153">
+                    <description>Description of Event #58</description>
+                    <earnings>730.00 EUR</earnings>
+                    <endDateTime>2013-06-29T15:46:00</endDateTime>
+                    <name>Event #58</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-29T10:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="154">
+                    <description>Description of Event #59</description>
+                    <earnings>740.00 EUR</earnings>
+                    <endDateTime>2013-06-30T15:53:00</endDateTime>
+                    <name>Event #59</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-06-30T10:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="155">
+                    <description>Description of Event #60</description>
+                    <earnings>750.00 EUR</earnings>
+                    <endDateTime>2013-07-01T16:00:00</endDateTime>
+                    <name>Event #60</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-01T11:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="156">
+                    <description>Description of Event #61</description>
+                    <earnings>760.00 EUR</earnings>
+                    <endDateTime>2013-07-02T16:07:00</endDateTime>
+                    <name>Event #61</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-02T11:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="157">
+                    <description>Description of Event #62</description>
+                    <earnings>770.00 EUR</earnings>
+                    <endDateTime>2013-07-03T16:14:00</endDateTime>
+                    <name>Event #62</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-03T11:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="158">
+                    <description>Description of Event #63</description>
+                    <earnings>780.00 EUR</earnings>
+                    <endDateTime>2013-07-04T16:21:00</endDateTime>
+                    <name>Event #63</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-04T11:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="159">
+                    <description>Description of Event #64</description>
+                    <earnings>790.00 EUR</earnings>
+                    <endDateTime>2013-07-05T16:28:00</endDateTime>
+                    <name>Event #64</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-05T11:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="160">
+                    <description>Description of Event #65</description>
+                    <earnings>800.00 EUR</earnings>
+                    <endDateTime>2013-07-06T16:35:00</endDateTime>
+                    <name>Event #65</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-06T11:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="161">
+                    <description>Description of Event #66</description>
+                    <earnings>810.00 EUR</earnings>
+                    <endDateTime>2013-07-07T16:42:00</endDateTime>
+                    <name>Event #66</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-07T11:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="162">
+                    <description>Description of Event #67</description>
+                    <earnings>820.00 EUR</earnings>
+                    <endDateTime>2013-07-08T16:49:00</endDateTime>
+                    <name>Event #67</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-08T11:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="163">
+                    <description>Description of Event #68</description>
+                    <earnings>830.00 EUR</earnings>
+                    <endDateTime>2013-07-09T16:56:00</endDateTime>
+                    <name>Event #68</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-09T11:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="164">
+                    <description>Description of Event #69</description>
+                    <earnings>840.00 EUR</earnings>
+                    <endDateTime>2013-07-10T17:03:00</endDateTime>
+                    <name>Event #69</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-10T11:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="165">
+                    <description>Description of Event #70</description>
+                    <earnings>850.00 EUR</earnings>
+                    <endDateTime>2013-07-11T17:10:00</endDateTime>
+                    <name>Event #70</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-11T11:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="166">
+                    <description>Description of Event #71</description>
+                    <earnings>860.00 EUR</earnings>
+                    <endDateTime>2013-07-12T17:17:00</endDateTime>
+                    <name>Event #71</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-12T11:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="167">
+                    <description>Description of Event #72</description>
+                    <earnings>870.00 EUR</earnings>
+                    <endDateTime>2013-07-13T17:24:00</endDateTime>
+                    <name>Event #72</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-13T11:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="168">
+                    <description>Description of Event #73</description>
+                    <earnings>880.00 EUR</earnings>
+                    <endDateTime>2013-07-14T17:31:00</endDateTime>
+                    <name>Event #73</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-14T11:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="169">
+                    <description>Description of Event #74</description>
+                    <earnings>890.00 EUR</earnings>
+                    <endDateTime>2013-07-15T17:38:00</endDateTime>
+                    <name>Event #74</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-15T11:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="170">
+                    <description>Description of Event #75</description>
+                    <earnings>900.00 EUR</earnings>
+                    <endDateTime>2013-07-16T17:45:00</endDateTime>
+                    <name>Event #75</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-16T11:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="171">
+                    <description>Description of Event #76</description>
+                    <earnings>910.00 EUR</earnings>
+                    <endDateTime>2013-07-17T17:52:00</endDateTime>
+                    <name>Event #76</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-17T11:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="172">
+                    <description>Description of Event #77</description>
+                    <earnings>920.00 EUR</earnings>
+                    <endDateTime>2013-07-18T17:59:00</endDateTime>
+                    <name>Event #77</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-18T11:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="173">
+                    <description>Description of Event #78</description>
+                    <earnings>930.00 EUR</earnings>
+                    <endDateTime>2013-07-19T18:06:00</endDateTime>
+                    <name>Event #78</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-19T11:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="174">
+                    <description>Description of Event #79</description>
+                    <earnings>940.00 EUR</earnings>
+                    <endDateTime>2013-07-20T18:13:00</endDateTime>
+                    <name>Event #79</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-20T11:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="175">
+                    <description>Description of Event #80</description>
+                    <earnings>950.00 EUR</earnings>
+                    <endDateTime>2013-07-21T18:20:00</endDateTime>
+                    <name>Event #80</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-21T12:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="176">
+                    <description>Description of Event #81</description>
+                    <earnings>960.00 EUR</earnings>
+                    <endDateTime>2013-07-22T18:27:00</endDateTime>
+                    <name>Event #81</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-22T12:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="177">
+                    <description>Description of Event #82</description>
+                    <earnings>970.00 EUR</earnings>
+                    <endDateTime>2013-07-23T18:34:00</endDateTime>
+                    <name>Event #82</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-23T12:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="178">
+                    <description>Description of Event #83</description>
+                    <earnings>980.00 EUR</earnings>
+                    <endDateTime>2013-07-24T18:41:00</endDateTime>
+                    <name>Event #83</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-24T12:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="179">
+                    <description>Description of Event #84</description>
+                    <earnings>990.00 EUR</earnings>
+                    <endDateTime>2013-07-25T18:48:00</endDateTime>
+                    <name>Event #84</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-25T12:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="180">
+                    <description>Description of Event #85</description>
+                    <earnings>1000.00 EUR</earnings>
+                    <endDateTime>2013-07-26T18:55:00</endDateTime>
+                    <name>Event #85</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-26T12:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="181">
+                    <description>Description of Event #86</description>
+                    <earnings>1010.00 EUR</earnings>
+                    <endDateTime>2013-07-27T19:02:00</endDateTime>
+                    <name>Event #86</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-27T12:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="182">
+                    <description>Description of Event #87</description>
+                    <earnings>1020.00 EUR</earnings>
+                    <endDateTime>2013-07-28T19:09:00</endDateTime>
+                    <name>Event #87</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-28T12:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="183">
+                    <description>Description of Event #88</description>
+                    <earnings>1030.00 EUR</earnings>
+                    <endDateTime>2013-07-29T19:16:00</endDateTime>
+                    <name>Event #88</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-29T12:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="184">
+                    <description>Description of Event #89</description>
+                    <earnings>1040.00 EUR</earnings>
+                    <endDateTime>2013-07-30T19:23:00</endDateTime>
+                    <name>Event #89</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-30T12:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="185">
+                    <description>Description of Event #90</description>
+                    <earnings>1050.00 EUR</earnings>
+                    <endDateTime>2013-07-31T19:30:00</endDateTime>
+                    <name>Event #90</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-07-31T12:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="186">
+                    <description>Description of Event #91</description>
+                    <earnings>1060.00 EUR</earnings>
+                    <endDateTime>2013-08-01T19:37:00</endDateTime>
+                    <name>Event #91</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-01T12:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="187">
+                    <description>Description of Event #92</description>
+                    <earnings>1070.00 EUR</earnings>
+                    <endDateTime>2013-08-02T19:44:00</endDateTime>
+                    <name>Event #92</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-02T12:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="188">
+                    <description>Description of Event #93</description>
+                    <earnings>1080.00 EUR</earnings>
+                    <endDateTime>2013-08-03T19:51:00</endDateTime>
+                    <name>Event #93</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-03T12:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="189">
+                    <description>Description of Event #94</description>
+                    <earnings>1090.00 EUR</earnings>
+                    <endDateTime>2013-08-04T19:58:00</endDateTime>
+                    <name>Event #94</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-04T12:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="190">
+                    <description>Description of Event #95</description>
+                    <earnings>1100.00 EUR</earnings>
+                    <endDateTime>2013-08-05T20:05:00</endDateTime>
+                    <name>Event #95</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-05T12:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="191">
+                    <description>Description of Event #96</description>
+                    <earnings>1110.00 EUR</earnings>
+                    <endDateTime>2013-08-06T20:12:00</endDateTime>
+                    <name>Event #96</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-06T12:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="192">
+                    <description>Description of Event #97</description>
+                    <earnings>1120.00 EUR</earnings>
+                    <endDateTime>2013-08-07T20:19:00</endDateTime>
+                    <name>Event #97</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-07T12:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="193">
+                    <description>Description of Event #98</description>
+                    <earnings>1130.00 EUR</earnings>
+                    <endDateTime>2013-08-08T20:26:00</endDateTime>
+                    <name>Event #98</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-08T12:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="194">
+                    <description>Description of Event #99</description>
+                    <earnings>1140.00 EUR</earnings>
+                    <endDateTime>2013-08-09T20:33:00</endDateTime>
+                    <name>Event #99</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-09T12:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="195">
+                    <description>Description of Event #100</description>
+                    <earnings>1150.00 EUR</earnings>
+                    <endDateTime>2013-08-10T20:40:00</endDateTime>
+                    <name>Event #100</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-10T13:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="196">
+                    <description>Description of Event #101</description>
+                    <earnings>1160.00 EUR</earnings>
+                    <endDateTime>2013-08-11T20:47:00</endDateTime>
+                    <name>Event #101</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-11T13:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="197">
+                    <description>Description of Event #102</description>
+                    <earnings>1170.00 EUR</earnings>
+                    <endDateTime>2013-08-12T20:54:00</endDateTime>
+                    <name>Event #102</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-12T13:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="198">
+                    <description>Description of Event #103</description>
+                    <earnings>1180.00 EUR</earnings>
+                    <endDateTime>2013-08-13T21:01:00</endDateTime>
+                    <name>Event #103</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-13T13:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="199">
+                    <description>Description of Event #104</description>
+                    <earnings>1190.00 EUR</earnings>
+                    <endDateTime>2013-08-14T21:08:00</endDateTime>
+                    <name>Event #104</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-14T13:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="200">
+                    <description>Description of Event #105</description>
+                    <earnings>1200.00 EUR</earnings>
+                    <endDateTime>2013-08-15T21:15:00</endDateTime>
+                    <name>Event #105</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-15T13:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="201">
+                    <description>Description of Event #106</description>
+                    <earnings>1210.00 EUR</earnings>
+                    <endDateTime>2013-08-16T21:22:00</endDateTime>
+                    <name>Event #106</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-16T13:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="202">
+                    <description>Description of Event #107</description>
+                    <earnings>1220.00 EUR</earnings>
+                    <endDateTime>2013-08-17T21:29:00</endDateTime>
+                    <name>Event #107</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-17T13:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="203">
+                    <description>Description of Event #108</description>
+                    <earnings>1230.00 EUR</earnings>
+                    <endDateTime>2013-08-18T21:36:00</endDateTime>
+                    <name>Event #108</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-18T13:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="204">
+                    <description>Description of Event #109</description>
+                    <earnings>1240.00 EUR</earnings>
+                    <endDateTime>2013-08-19T21:43:00</endDateTime>
+                    <name>Event #109</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-19T13:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="205">
+                    <description>Description of Event #110</description>
+                    <earnings>1250.00 EUR</earnings>
+                    <endDateTime>2013-08-20T21:50:00</endDateTime>
+                    <name>Event #110</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-20T13:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="206">
+                    <description>Description of Event #111</description>
+                    <earnings>1260.00 EUR</earnings>
+                    <endDateTime>2013-08-21T21:57:00</endDateTime>
+                    <name>Event #111</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-21T13:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="207">
+                    <description>Description of Event #112</description>
+                    <earnings>1270.00 EUR</earnings>
+                    <endDateTime>2013-08-22T22:04:00</endDateTime>
+                    <name>Event #112</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-22T13:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="208">
+                    <description>Description of Event #113</description>
+                    <earnings>1280.00 EUR</earnings>
+                    <endDateTime>2013-08-23T22:11:00</endDateTime>
+                    <name>Event #113</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-23T13:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="209">
+                    <description>Description of Event #114</description>
+                    <earnings>1290.00 EUR</earnings>
+                    <endDateTime>2013-08-24T22:18:00</endDateTime>
+                    <name>Event #114</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-24T13:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="210">
+                    <description>Description of Event #115</description>
+                    <earnings>1300.00 EUR</earnings>
+                    <endDateTime>2013-08-25T22:25:00</endDateTime>
+                    <name>Event #115</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-25T13:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="211">
+                    <description>Description of Event #116</description>
+                    <earnings>1310.00 EUR</earnings>
+                    <endDateTime>2013-08-26T22:32:00</endDateTime>
+                    <name>Event #116</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-26T13:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="212">
+                    <description>Description of Event #117</description>
+                    <earnings>1320.00 EUR</earnings>
+                    <endDateTime>2013-08-27T22:39:00</endDateTime>
+                    <name>Event #117</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-27T13:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="213">
+                    <description>Description of Event #118</description>
+                    <earnings>1330.00 EUR</earnings>
+                    <endDateTime>2013-08-28T22:46:00</endDateTime>
+                    <name>Event #118</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-28T13:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="214">
+                    <description>Description of Event #119</description>
+                    <earnings>1340.00 EUR</earnings>
+                    <endDateTime>2013-08-29T22:53:00</endDateTime>
+                    <name>Event #119</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-29T13:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="215">
+                    <description>Description of Event #120</description>
+                    <earnings>1350.00 EUR</earnings>
+                    <endDateTime>2013-08-30T23:00:00</endDateTime>
+                    <name>Event #120</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-30T14:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="216">
+                    <description>Description of Event #121</description>
+                    <earnings>1360.00 EUR</earnings>
+                    <endDateTime>2013-08-31T23:07:00</endDateTime>
+                    <name>Event #121</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-08-31T14:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="217">
+                    <description>Description of Event #122</description>
+                    <earnings>1370.00 EUR</earnings>
+                    <endDateTime>2013-09-01T23:14:00</endDateTime>
+                    <name>Event #122</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-01T14:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="218">
+                    <description>Description of Event #123</description>
+                    <earnings>1380.00 EUR</earnings>
+                    <endDateTime>2013-09-02T23:21:00</endDateTime>
+                    <name>Event #123</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-02T14:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="219">
+                    <description>Description of Event #124</description>
+                    <earnings>1390.00 EUR</earnings>
+                    <endDateTime>2013-09-03T23:28:00</endDateTime>
+                    <name>Event #124</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-03T14:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="220">
+                    <description>Description of Event #125</description>
+                    <earnings>1400.00 EUR</earnings>
+                    <endDateTime>2013-09-04T23:35:00</endDateTime>
+                    <name>Event #125</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-04T14:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="221">
+                    <description>Description of Event #126</description>
+                    <earnings>1410.00 EUR</earnings>
+                    <endDateTime>2013-09-05T23:42:00</endDateTime>
+                    <name>Event #126</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-05T14:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="222">
+                    <description>Description of Event #127</description>
+                    <earnings>1420.00 EUR</earnings>
+                    <endDateTime>2013-09-06T23:49:00</endDateTime>
+                    <name>Event #127</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-06T14:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="223">
+                    <description>Description of Event #128</description>
+                    <earnings>1430.00 EUR</earnings>
+                    <endDateTime>2013-09-07T23:56:00</endDateTime>
+                    <name>Event #128</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-07T14:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="224">
+                    <description>Description of Event #129</description>
+                    <earnings>1440.00 EUR</earnings>
+                    <endDateTime>2013-09-09T00:03:00</endDateTime>
+                    <name>Event #129</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-08T14:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="225">
+                    <description>Description of Event #130</description>
+                    <earnings>1450.00 EUR</earnings>
+                    <endDateTime>2013-09-10T00:10:00</endDateTime>
+                    <name>Event #130</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-09T14:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="226">
+                    <description>Description of Event #131</description>
+                    <earnings>1460.00 EUR</earnings>
+                    <endDateTime>2013-09-11T00:17:00</endDateTime>
+                    <name>Event #131</name>
+                    <rate>150.00 EUR</rate>
+                    <startDateTime>2013-09-10T14:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+            </events>
+            <name>Acme Consulting Project 2</name>
+            <notes></notes>
+            <number>PRJ ACME-2</number>
+            <startDate>2013-05-03</startDate>
+            <status>open</status>
+        </project>
+        <project id="400">
+            <amount>0.00 EUR</amount>
+            <customer>2</customer>
+            <description>Acme Financing Project 1</description>
+            <endDate>2014-03-10</endDate>
+            <hourlyRate>0.00 EUR</hourlyRate>
+            <events>
+                <event id="227">
+                    <description>Description of Event #1</description>
+                    <earnings>224.00 EUR</earnings>
+                    <endDateTime>2014-01-22T09:07:00</endDateTime>
+                    <name>Event #1</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-22T08:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="228">
+                    <description>Description of Event #2</description>
+                    <earnings>238.00 EUR</earnings>
+                    <endDateTime>2014-01-23T09:14:00</endDateTime>
+                    <name>Event #2</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-23T08:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="229">
+                    <description>Description of Event #3</description>
+                    <earnings>252.00 EUR</earnings>
+                    <endDateTime>2014-01-24T09:21:00</endDateTime>
+                    <name>Event #3</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-24T08:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="230">
+                    <description>Description of Event #4</description>
+                    <earnings>266.00 EUR</earnings>
+                    <endDateTime>2014-01-25T09:28:00</endDateTime>
+                    <name>Event #4</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-25T08:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="231">
+                    <description>Description of Event #5</description>
+                    <earnings>280.00 EUR</earnings>
+                    <endDateTime>2014-01-26T09:35:00</endDateTime>
+                    <name>Event #5</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-26T08:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="232">
+                    <description>Description of Event #6</description>
+                    <earnings>294.00 EUR</earnings>
+                    <endDateTime>2014-01-27T09:42:00</endDateTime>
+                    <name>Event #6</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-27T08:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="233">
+                    <description>Description of Event #7</description>
+                    <earnings>308.00 EUR</earnings>
+                    <endDateTime>2014-01-28T09:49:00</endDateTime>
+                    <name>Event #7</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-28T08:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="234">
+                    <description>Description of Event #8</description>
+                    <earnings>322.00 EUR</earnings>
+                    <endDateTime>2014-01-29T09:56:00</endDateTime>
+                    <name>Event #8</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-29T08:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="235">
+                    <description>Description of Event #9</description>
+                    <earnings>336.00 EUR</earnings>
+                    <endDateTime>2014-01-30T10:03:00</endDateTime>
+                    <name>Event #9</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-30T08:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="236">
+                    <description>Description of Event #10</description>
+                    <earnings>350.00 EUR</earnings>
+                    <endDateTime>2014-01-31T10:10:00</endDateTime>
+                    <name>Event #10</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-01-31T08:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="237">
+                    <description>Description of Event #11</description>
+                    <earnings>364.00 EUR</earnings>
+                    <endDateTime>2014-02-01T10:17:00</endDateTime>
+                    <name>Event #11</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-01T08:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="238">
+                    <description>Description of Event #12</description>
+                    <earnings>378.00 EUR</earnings>
+                    <endDateTime>2014-02-02T10:24:00</endDateTime>
+                    <name>Event #12</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-02T08:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="239">
+                    <description>Description of Event #13</description>
+                    <earnings>392.00 EUR</earnings>
+                    <endDateTime>2014-02-03T10:31:00</endDateTime>
+                    <name>Event #13</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-03T08:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="240">
+                    <description>Description of Event #14</description>
+                    <earnings>406.00 EUR</earnings>
+                    <endDateTime>2014-02-04T10:38:00</endDateTime>
+                    <name>Event #14</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-04T08:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="241">
+                    <description>Description of Event #15</description>
+                    <earnings>420.00 EUR</earnings>
+                    <endDateTime>2014-02-05T10:45:00</endDateTime>
+                    <name>Event #15</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-05T08:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="242">
+                    <description>Description of Event #16</description>
+                    <earnings>434.00 EUR</earnings>
+                    <endDateTime>2014-02-06T10:52:00</endDateTime>
+                    <name>Event #16</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-06T08:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="243">
+                    <description>Description of Event #17</description>
+                    <earnings>448.00 EUR</earnings>
+                    <endDateTime>2014-02-07T10:59:00</endDateTime>
+                    <name>Event #17</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-07T08:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="244">
+                    <description>Description of Event #18</description>
+                    <earnings>462.00 EUR</earnings>
+                    <endDateTime>2014-02-08T11:06:00</endDateTime>
+                    <name>Event #18</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-08T08:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="245">
+                    <description>Description of Event #19</description>
+                    <earnings>476.00 EUR</earnings>
+                    <endDateTime>2014-02-09T11:13:00</endDateTime>
+                    <name>Event #19</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-09T08:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="246">
+                    <description>Description of Event #20</description>
+                    <earnings>490.00 EUR</earnings>
+                    <endDateTime>2014-02-10T11:20:00</endDateTime>
+                    <name>Event #20</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-10T09:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="247">
+                    <description>Description of Event #21</description>
+                    <earnings>504.00 EUR</earnings>
+                    <endDateTime>2014-02-11T11:27:00</endDateTime>
+                    <name>Event #21</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-11T09:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="248">
+                    <description>Description of Event #22</description>
+                    <earnings>518.00 EUR</earnings>
+                    <endDateTime>2014-02-12T11:34:00</endDateTime>
+                    <name>Event #22</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-12T09:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="249">
+                    <description>Description of Event #23</description>
+                    <earnings>532.00 EUR</earnings>
+                    <endDateTime>2014-02-13T11:41:00</endDateTime>
+                    <name>Event #23</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-13T09:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="250">
+                    <description>Description of Event #24</description>
+                    <earnings>546.00 EUR</earnings>
+                    <endDateTime>2014-02-14T11:48:00</endDateTime>
+                    <name>Event #24</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-14T09:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="251">
+                    <description>Description of Event #25</description>
+                    <earnings>560.00 EUR</earnings>
+                    <endDateTime>2014-02-15T11:55:00</endDateTime>
+                    <name>Event #25</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-15T09:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="252">
+                    <description>Description of Event #26</description>
+                    <earnings>574.00 EUR</earnings>
+                    <endDateTime>2014-02-16T12:02:00</endDateTime>
+                    <name>Event #26</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-16T09:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="253">
+                    <description>Description of Event #27</description>
+                    <earnings>588.00 EUR</earnings>
+                    <endDateTime>2014-02-17T12:09:00</endDateTime>
+                    <name>Event #27</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-17T09:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="254">
+                    <description>Description of Event #28</description>
+                    <earnings>602.00 EUR</earnings>
+                    <endDateTime>2014-02-18T12:16:00</endDateTime>
+                    <name>Event #28</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-18T09:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="255">
+                    <description>Description of Event #29</description>
+                    <earnings>616.00 EUR</earnings>
+                    <endDateTime>2014-02-19T12:23:00</endDateTime>
+                    <name>Event #29</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-19T09:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="256">
+                    <description>Description of Event #30</description>
+                    <earnings>630.00 EUR</earnings>
+                    <endDateTime>2014-02-20T12:30:00</endDateTime>
+                    <name>Event #30</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-20T09:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="257">
+                    <description>Description of Event #31</description>
+                    <earnings>644.00 EUR</earnings>
+                    <endDateTime>2014-02-21T12:37:00</endDateTime>
+                    <name>Event #31</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-21T09:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="258">
+                    <description>Description of Event #32</description>
+                    <earnings>658.00 EUR</earnings>
+                    <endDateTime>2014-02-22T12:44:00</endDateTime>
+                    <name>Event #32</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-22T09:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="259">
+                    <description>Description of Event #33</description>
+                    <earnings>672.00 EUR</earnings>
+                    <endDateTime>2014-02-23T12:51:00</endDateTime>
+                    <name>Event #33</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-23T09:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="260">
+                    <description>Description of Event #34</description>
+                    <earnings>686.00 EUR</earnings>
+                    <endDateTime>2014-02-24T12:58:00</endDateTime>
+                    <name>Event #34</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-24T09:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="261">
+                    <description>Description of Event #35</description>
+                    <earnings>700.00 EUR</earnings>
+                    <endDateTime>2014-02-25T13:05:00</endDateTime>
+                    <name>Event #35</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-25T09:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="262">
+                    <description>Description of Event #36</description>
+                    <earnings>714.00 EUR</earnings>
+                    <endDateTime>2014-02-26T13:12:00</endDateTime>
+                    <name>Event #36</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-26T09:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="263">
+                    <description>Description of Event #37</description>
+                    <earnings>728.00 EUR</earnings>
+                    <endDateTime>2014-02-27T13:19:00</endDateTime>
+                    <name>Event #37</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-27T09:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="264">
+                    <description>Description of Event #38</description>
+                    <earnings>742.00 EUR</earnings>
+                    <endDateTime>2014-02-28T13:26:00</endDateTime>
+                    <name>Event #38</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-02-28T09:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="265">
+                    <description>Description of Event #39</description>
+                    <earnings>756.00 EUR</earnings>
+                    <endDateTime>2014-03-01T13:33:00</endDateTime>
+                    <name>Event #39</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-01T09:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="266">
+                    <description>Description of Event #40</description>
+                    <earnings>770.00 EUR</earnings>
+                    <endDateTime>2014-03-02T13:40:00</endDateTime>
+                    <name>Event #40</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-02T10:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="267">
+                    <description>Description of Event #41</description>
+                    <earnings>784.00 EUR</earnings>
+                    <endDateTime>2014-03-03T13:47:00</endDateTime>
+                    <name>Event #41</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-03T10:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="268">
+                    <description>Description of Event #42</description>
+                    <earnings>798.00 EUR</earnings>
+                    <endDateTime>2014-03-04T13:54:00</endDateTime>
+                    <name>Event #42</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-04T10:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="269">
+                    <description>Description of Event #43</description>
+                    <earnings>812.00 EUR</earnings>
+                    <endDateTime>2014-03-05T14:01:00</endDateTime>
+                    <name>Event #43</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-05T10:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="270">
+                    <description>Description of Event #44</description>
+                    <earnings>826.00 EUR</earnings>
+                    <endDateTime>2014-03-06T14:08:00</endDateTime>
+                    <name>Event #44</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-06T10:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="271">
+                    <description>Description of Event #45</description>
+                    <earnings>840.00 EUR</earnings>
+                    <endDateTime>2014-03-07T14:15:00</endDateTime>
+                    <name>Event #45</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-07T10:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="272">
+                    <description>Description of Event #46</description>
+                    <earnings>854.00 EUR</earnings>
+                    <endDateTime>2014-03-08T14:22:00</endDateTime>
+                    <name>Event #46</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-08T10:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="273">
+                    <description>Description of Event #47</description>
+                    <earnings>868.00 EUR</earnings>
+                    <endDateTime>2014-03-09T14:29:00</endDateTime>
+                    <name>Event #47</name>
+                    <rate>210.00 EUR</rate>
+                    <startDateTime>2014-03-09T10:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+            </events>
+            <name>Acme Financing Project 1</name>
+            <notes></notes>
+            <number>PRJ ACME-3</number>
+            <startDate>2014-01-22</startDate>
+            <status>open</status>
+        </project>
+        <project id="401">
+            <amount>0.00 EUR</amount>
+            <customer>2</customer>
+            <description>Acme Financing Project 2</description>
+            <endDate>2014-06-21</endDate>
+            <hourlyRate>0.00 EUR</hourlyRate>
+            <events>
+                <event id="274">
+                    <description>Description of Event #1</description>
+                    <earnings>256.00 EUR</earnings>
+                    <endDateTime>2014-02-17T09:07:00</endDateTime>
+                    <name>Event #1</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-17T08:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="275">
+                    <description>Description of Event #2</description>
+                    <earnings>272.00 EUR</earnings>
+                    <endDateTime>2014-02-18T09:14:00</endDateTime>
+                    <name>Event #2</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-18T08:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="276">
+                    <description>Description of Event #3</description>
+                    <earnings>288.00 EUR</earnings>
+                    <endDateTime>2014-02-19T09:21:00</endDateTime>
+                    <name>Event #3</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-19T08:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="277">
+                    <description>Description of Event #4</description>
+                    <earnings>304.00 EUR</earnings>
+                    <endDateTime>2014-02-20T09:28:00</endDateTime>
+                    <name>Event #4</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-20T08:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="278">
+                    <description>Description of Event #5</description>
+                    <earnings>320.00 EUR</earnings>
+                    <endDateTime>2014-02-21T09:35:00</endDateTime>
+                    <name>Event #5</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-21T08:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="279">
+                    <description>Description of Event #6</description>
+                    <earnings>336.00 EUR</earnings>
+                    <endDateTime>2014-02-22T09:42:00</endDateTime>
+                    <name>Event #6</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-22T08:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="280">
+                    <description>Description of Event #7</description>
+                    <earnings>352.00 EUR</earnings>
+                    <endDateTime>2014-02-23T09:49:00</endDateTime>
+                    <name>Event #7</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-23T08:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="281">
+                    <description>Description of Event #8</description>
+                    <earnings>368.00 EUR</earnings>
+                    <endDateTime>2014-02-24T09:56:00</endDateTime>
+                    <name>Event #8</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-24T08:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="282">
+                    <description>Description of Event #9</description>
+                    <earnings>384.00 EUR</earnings>
+                    <endDateTime>2014-02-25T10:03:00</endDateTime>
+                    <name>Event #9</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-25T08:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="283">
+                    <description>Description of Event #10</description>
+                    <earnings>400.00 EUR</earnings>
+                    <endDateTime>2014-02-26T10:10:00</endDateTime>
+                    <name>Event #10</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-26T08:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="284">
+                    <description>Description of Event #11</description>
+                    <earnings>416.00 EUR</earnings>
+                    <endDateTime>2014-02-27T10:17:00</endDateTime>
+                    <name>Event #11</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-27T08:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="285">
+                    <description>Description of Event #12</description>
+                    <earnings>432.00 EUR</earnings>
+                    <endDateTime>2014-02-28T10:24:00</endDateTime>
+                    <name>Event #12</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-02-28T08:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="286">
+                    <description>Description of Event #13</description>
+                    <earnings>448.00 EUR</earnings>
+                    <endDateTime>2014-03-01T10:31:00</endDateTime>
+                    <name>Event #13</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-01T08:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="287">
+                    <description>Description of Event #14</description>
+                    <earnings>464.00 EUR</earnings>
+                    <endDateTime>2014-03-02T10:38:00</endDateTime>
+                    <name>Event #14</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-02T08:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="288">
+                    <description>Description of Event #15</description>
+                    <earnings>480.00 EUR</earnings>
+                    <endDateTime>2014-03-03T10:45:00</endDateTime>
+                    <name>Event #15</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-03T08:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="289">
+                    <description>Description of Event #16</description>
+                    <earnings>496.00 EUR</earnings>
+                    <endDateTime>2014-03-04T10:52:00</endDateTime>
+                    <name>Event #16</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-04T08:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="290">
+                    <description>Description of Event #17</description>
+                    <earnings>512.00 EUR</earnings>
+                    <endDateTime>2014-03-05T10:59:00</endDateTime>
+                    <name>Event #17</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-05T08:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="291">
+                    <description>Description of Event #18</description>
+                    <earnings>528.00 EUR</earnings>
+                    <endDateTime>2014-03-06T11:06:00</endDateTime>
+                    <name>Event #18</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-06T08:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="292">
+                    <description>Description of Event #19</description>
+                    <earnings>544.00 EUR</earnings>
+                    <endDateTime>2014-03-07T11:13:00</endDateTime>
+                    <name>Event #19</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-07T08:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="293">
+                    <description>Description of Event #20</description>
+                    <earnings>560.00 EUR</earnings>
+                    <endDateTime>2014-03-08T11:20:00</endDateTime>
+                    <name>Event #20</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-08T09:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="294">
+                    <description>Description of Event #21</description>
+                    <earnings>576.00 EUR</earnings>
+                    <endDateTime>2014-03-09T11:27:00</endDateTime>
+                    <name>Event #21</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-09T09:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="295">
+                    <description>Description of Event #22</description>
+                    <earnings>592.00 EUR</earnings>
+                    <endDateTime>2014-03-10T11:34:00</endDateTime>
+                    <name>Event #22</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-10T09:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="296">
+                    <description>Description of Event #23</description>
+                    <earnings>608.00 EUR</earnings>
+                    <endDateTime>2014-03-11T11:41:00</endDateTime>
+                    <name>Event #23</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-11T09:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="297">
+                    <description>Description of Event #24</description>
+                    <earnings>624.00 EUR</earnings>
+                    <endDateTime>2014-03-12T11:48:00</endDateTime>
+                    <name>Event #24</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-12T09:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="298">
+                    <description>Description of Event #25</description>
+                    <earnings>640.00 EUR</earnings>
+                    <endDateTime>2014-03-13T11:55:00</endDateTime>
+                    <name>Event #25</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-13T09:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="299">
+                    <description>Description of Event #26</description>
+                    <earnings>656.00 EUR</earnings>
+                    <endDateTime>2014-03-14T12:02:00</endDateTime>
+                    <name>Event #26</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-14T09:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="300">
+                    <description>Description of Event #27</description>
+                    <earnings>672.00 EUR</earnings>
+                    <endDateTime>2014-03-15T12:09:00</endDateTime>
+                    <name>Event #27</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-15T09:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="301">
+                    <description>Description of Event #28</description>
+                    <earnings>688.00 EUR</earnings>
+                    <endDateTime>2014-03-16T12:16:00</endDateTime>
+                    <name>Event #28</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-16T09:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="302">
+                    <description>Description of Event #29</description>
+                    <earnings>704.00 EUR</earnings>
+                    <endDateTime>2014-03-17T12:23:00</endDateTime>
+                    <name>Event #29</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-17T09:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="303">
+                    <description>Description of Event #30</description>
+                    <earnings>720.00 EUR</earnings>
+                    <endDateTime>2014-03-18T12:30:00</endDateTime>
+                    <name>Event #30</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-18T09:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="304">
+                    <description>Description of Event #31</description>
+                    <earnings>736.00 EUR</earnings>
+                    <endDateTime>2014-03-19T12:37:00</endDateTime>
+                    <name>Event #31</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-19T09:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="305">
+                    <description>Description of Event #32</description>
+                    <earnings>752.00 EUR</earnings>
+                    <endDateTime>2014-03-20T12:44:00</endDateTime>
+                    <name>Event #32</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-20T09:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="306">
+                    <description>Description of Event #33</description>
+                    <earnings>768.00 EUR</earnings>
+                    <endDateTime>2014-03-21T12:51:00</endDateTime>
+                    <name>Event #33</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-21T09:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="307">
+                    <description>Description of Event #34</description>
+                    <earnings>784.00 EUR</earnings>
+                    <endDateTime>2014-03-22T12:58:00</endDateTime>
+                    <name>Event #34</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-22T09:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="308">
+                    <description>Description of Event #35</description>
+                    <earnings>800.00 EUR</earnings>
+                    <endDateTime>2014-03-23T13:05:00</endDateTime>
+                    <name>Event #35</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-23T09:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="309">
+                    <description>Description of Event #36</description>
+                    <earnings>816.00 EUR</earnings>
+                    <endDateTime>2014-03-24T13:12:00</endDateTime>
+                    <name>Event #36</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-24T09:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="310">
+                    <description>Description of Event #37</description>
+                    <earnings>832.00 EUR</earnings>
+                    <endDateTime>2014-03-25T13:19:00</endDateTime>
+                    <name>Event #37</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-25T09:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="311">
+                    <description>Description of Event #38</description>
+                    <earnings>848.00 EUR</earnings>
+                    <endDateTime>2014-03-26T13:26:00</endDateTime>
+                    <name>Event #38</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-26T09:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="312">
+                    <description>Description of Event #39</description>
+                    <earnings>864.00 EUR</earnings>
+                    <endDateTime>2014-03-27T13:33:00</endDateTime>
+                    <name>Event #39</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-27T09:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="313">
+                    <description>Description of Event #40</description>
+                    <earnings>880.00 EUR</earnings>
+                    <endDateTime>2014-03-28T13:40:00</endDateTime>
+                    <name>Event #40</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-28T10:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="314">
+                    <description>Description of Event #41</description>
+                    <earnings>896.00 EUR</earnings>
+                    <endDateTime>2014-03-29T13:47:00</endDateTime>
+                    <name>Event #41</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-29T10:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="315">
+                    <description>Description of Event #42</description>
+                    <earnings>912.00 EUR</earnings>
+                    <endDateTime>2014-03-30T13:54:00</endDateTime>
+                    <name>Event #42</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-30T10:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="316">
+                    <description>Description of Event #43</description>
+                    <earnings>928.00 EUR</earnings>
+                    <endDateTime>2014-03-31T14:01:00</endDateTime>
+                    <name>Event #43</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-03-31T10:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="317">
+                    <description>Description of Event #44</description>
+                    <earnings>944.00 EUR</earnings>
+                    <endDateTime>2014-04-01T14:08:00</endDateTime>
+                    <name>Event #44</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-01T10:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="318">
+                    <description>Description of Event #45</description>
+                    <earnings>960.00 EUR</earnings>
+                    <endDateTime>2014-04-02T14:15:00</endDateTime>
+                    <name>Event #45</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-02T10:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="319">
+                    <description>Description of Event #46</description>
+                    <earnings>976.00 EUR</earnings>
+                    <endDateTime>2014-04-03T14:22:00</endDateTime>
+                    <name>Event #46</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-03T10:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="320">
+                    <description>Description of Event #47</description>
+                    <earnings>992.00 EUR</earnings>
+                    <endDateTime>2014-04-04T14:29:00</endDateTime>
+                    <name>Event #47</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-04T10:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="321">
+                    <description>Description of Event #48</description>
+                    <earnings>1008.00 EUR</earnings>
+                    <endDateTime>2014-04-05T14:36:00</endDateTime>
+                    <name>Event #48</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-05T10:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="322">
+                    <description>Description of Event #49</description>
+                    <earnings>1024.00 EUR</earnings>
+                    <endDateTime>2014-04-06T14:43:00</endDateTime>
+                    <name>Event #49</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-06T10:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="323">
+                    <description>Description of Event #50</description>
+                    <earnings>1040.00 EUR</earnings>
+                    <endDateTime>2014-04-07T14:50:00</endDateTime>
+                    <name>Event #50</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-07T10:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="324">
+                    <description>Description of Event #51</description>
+                    <earnings>1056.00 EUR</earnings>
+                    <endDateTime>2014-04-08T14:57:00</endDateTime>
+                    <name>Event #51</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-08T10:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="325">
+                    <description>Description of Event #52</description>
+                    <earnings>1072.00 EUR</earnings>
+                    <endDateTime>2014-04-09T15:04:00</endDateTime>
+                    <name>Event #52</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-09T10:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="326">
+                    <description>Description of Event #53</description>
+                    <earnings>1088.00 EUR</earnings>
+                    <endDateTime>2014-04-10T15:11:00</endDateTime>
+                    <name>Event #53</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-10T10:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="327">
+                    <description>Description of Event #54</description>
+                    <earnings>1104.00 EUR</earnings>
+                    <endDateTime>2014-04-11T15:18:00</endDateTime>
+                    <name>Event #54</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-11T10:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="328">
+                    <description>Description of Event #55</description>
+                    <earnings>1120.00 EUR</earnings>
+                    <endDateTime>2014-04-12T15:25:00</endDateTime>
+                    <name>Event #55</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-12T10:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="329">
+                    <description>Description of Event #56</description>
+                    <earnings>1136.00 EUR</earnings>
+                    <endDateTime>2014-04-13T15:32:00</endDateTime>
+                    <name>Event #56</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-13T10:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="330">
+                    <description>Description of Event #57</description>
+                    <earnings>1152.00 EUR</earnings>
+                    <endDateTime>2014-04-14T15:39:00</endDateTime>
+                    <name>Event #57</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-14T10:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="331">
+                    <description>Description of Event #58</description>
+                    <earnings>1168.00 EUR</earnings>
+                    <endDateTime>2014-04-15T15:46:00</endDateTime>
+                    <name>Event #58</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-15T10:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="332">
+                    <description>Description of Event #59</description>
+                    <earnings>1184.00 EUR</earnings>
+                    <endDateTime>2014-04-16T15:53:00</endDateTime>
+                    <name>Event #59</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-16T10:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="333">
+                    <description>Description of Event #60</description>
+                    <earnings>1200.00 EUR</earnings>
+                    <endDateTime>2014-04-17T16:00:00</endDateTime>
+                    <name>Event #60</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-17T11:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="334">
+                    <description>Description of Event #61</description>
+                    <earnings>1216.00 EUR</earnings>
+                    <endDateTime>2014-04-18T16:07:00</endDateTime>
+                    <name>Event #61</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-18T11:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="335">
+                    <description>Description of Event #62</description>
+                    <earnings>1232.00 EUR</earnings>
+                    <endDateTime>2014-04-19T16:14:00</endDateTime>
+                    <name>Event #62</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-19T11:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="336">
+                    <description>Description of Event #63</description>
+                    <earnings>1248.00 EUR</earnings>
+                    <endDateTime>2014-04-20T16:21:00</endDateTime>
+                    <name>Event #63</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-20T11:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="337">
+                    <description>Description of Event #64</description>
+                    <earnings>1264.00 EUR</earnings>
+                    <endDateTime>2014-04-21T16:28:00</endDateTime>
+                    <name>Event #64</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-21T11:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="338">
+                    <description>Description of Event #65</description>
+                    <earnings>1280.00 EUR</earnings>
+                    <endDateTime>2014-04-22T16:35:00</endDateTime>
+                    <name>Event #65</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-22T11:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="339">
+                    <description>Description of Event #66</description>
+                    <earnings>1296.00 EUR</earnings>
+                    <endDateTime>2014-04-23T16:42:00</endDateTime>
+                    <name>Event #66</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-23T11:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="340">
+                    <description>Description of Event #67</description>
+                    <earnings>1312.00 EUR</earnings>
+                    <endDateTime>2014-04-24T16:49:00</endDateTime>
+                    <name>Event #67</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-24T11:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="341">
+                    <description>Description of Event #68</description>
+                    <earnings>1328.00 EUR</earnings>
+                    <endDateTime>2014-04-25T16:56:00</endDateTime>
+                    <name>Event #68</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-25T11:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="342">
+                    <description>Description of Event #69</description>
+                    <earnings>1344.00 EUR</earnings>
+                    <endDateTime>2014-04-26T17:03:00</endDateTime>
+                    <name>Event #69</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-26T11:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="343">
+                    <description>Description of Event #70</description>
+                    <earnings>1360.00 EUR</earnings>
+                    <endDateTime>2014-04-27T17:10:00</endDateTime>
+                    <name>Event #70</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-27T11:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="344">
+                    <description>Description of Event #71</description>
+                    <earnings>1376.00 EUR</earnings>
+                    <endDateTime>2014-04-28T17:17:00</endDateTime>
+                    <name>Event #71</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-28T11:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="345">
+                    <description>Description of Event #72</description>
+                    <earnings>1392.00 EUR</earnings>
+                    <endDateTime>2014-04-29T17:24:00</endDateTime>
+                    <name>Event #72</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-29T11:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="346">
+                    <description>Description of Event #73</description>
+                    <earnings>1408.00 EUR</earnings>
+                    <endDateTime>2014-04-30T17:31:00</endDateTime>
+                    <name>Event #73</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-04-30T11:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="347">
+                    <description>Description of Event #74</description>
+                    <earnings>1424.00 EUR</earnings>
+                    <endDateTime>2014-05-01T17:38:00</endDateTime>
+                    <name>Event #74</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-01T11:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="348">
+                    <description>Description of Event #75</description>
+                    <earnings>1440.00 EUR</earnings>
+                    <endDateTime>2014-05-02T17:45:00</endDateTime>
+                    <name>Event #75</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-02T11:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="349">
+                    <description>Description of Event #76</description>
+                    <earnings>1456.00 EUR</earnings>
+                    <endDateTime>2014-05-03T17:52:00</endDateTime>
+                    <name>Event #76</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-03T11:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="350">
+                    <description>Description of Event #77</description>
+                    <earnings>1472.00 EUR</earnings>
+                    <endDateTime>2014-05-04T17:59:00</endDateTime>
+                    <name>Event #77</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-04T11:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="351">
+                    <description>Description of Event #78</description>
+                    <earnings>1488.00 EUR</earnings>
+                    <endDateTime>2014-05-05T18:06:00</endDateTime>
+                    <name>Event #78</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-05T11:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="352">
+                    <description>Description of Event #79</description>
+                    <earnings>1504.00 EUR</earnings>
+                    <endDateTime>2014-05-06T18:13:00</endDateTime>
+                    <name>Event #79</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-06T11:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="353">
+                    <description>Description of Event #80</description>
+                    <earnings>1520.00 EUR</earnings>
+                    <endDateTime>2014-05-07T18:20:00</endDateTime>
+                    <name>Event #80</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-07T12:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="354">
+                    <description>Description of Event #81</description>
+                    <earnings>1536.00 EUR</earnings>
+                    <endDateTime>2014-05-08T18:27:00</endDateTime>
+                    <name>Event #81</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-08T12:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="355">
+                    <description>Description of Event #82</description>
+                    <earnings>1552.00 EUR</earnings>
+                    <endDateTime>2014-05-09T18:34:00</endDateTime>
+                    <name>Event #82</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-09T12:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="356">
+                    <description>Description of Event #83</description>
+                    <earnings>1568.00 EUR</earnings>
+                    <endDateTime>2014-05-10T18:41:00</endDateTime>
+                    <name>Event #83</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-10T12:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="357">
+                    <description>Description of Event #84</description>
+                    <earnings>1584.00 EUR</earnings>
+                    <endDateTime>2014-05-11T18:48:00</endDateTime>
+                    <name>Event #84</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-11T12:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="358">
+                    <description>Description of Event #85</description>
+                    <earnings>1600.00 EUR</earnings>
+                    <endDateTime>2014-05-12T18:55:00</endDateTime>
+                    <name>Event #85</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-12T12:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="359">
+                    <description>Description of Event #86</description>
+                    <earnings>1616.00 EUR</earnings>
+                    <endDateTime>2014-05-13T19:02:00</endDateTime>
+                    <name>Event #86</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-13T12:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="360">
+                    <description>Description of Event #87</description>
+                    <earnings>1632.00 EUR</earnings>
+                    <endDateTime>2014-05-14T19:09:00</endDateTime>
+                    <name>Event #87</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-14T12:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="361">
+                    <description>Description of Event #88</description>
+                    <earnings>1648.00 EUR</earnings>
+                    <endDateTime>2014-05-15T19:16:00</endDateTime>
+                    <name>Event #88</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-15T12:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="362">
+                    <description>Description of Event #89</description>
+                    <earnings>1664.00 EUR</earnings>
+                    <endDateTime>2014-05-16T19:23:00</endDateTime>
+                    <name>Event #89</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-16T12:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="363">
+                    <description>Description of Event #90</description>
+                    <earnings>1680.00 EUR</earnings>
+                    <endDateTime>2014-05-17T19:30:00</endDateTime>
+                    <name>Event #90</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-17T12:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="364">
+                    <description>Description of Event #91</description>
+                    <earnings>1696.00 EUR</earnings>
+                    <endDateTime>2014-05-18T19:37:00</endDateTime>
+                    <name>Event #91</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-18T12:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="365">
+                    <description>Description of Event #92</description>
+                    <earnings>1712.00 EUR</earnings>
+                    <endDateTime>2014-05-19T19:44:00</endDateTime>
+                    <name>Event #92</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-19T12:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="366">
+                    <description>Description of Event #93</description>
+                    <earnings>1728.00 EUR</earnings>
+                    <endDateTime>2014-05-20T19:51:00</endDateTime>
+                    <name>Event #93</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-20T12:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="367">
+                    <description>Description of Event #94</description>
+                    <earnings>1744.00 EUR</earnings>
+                    <endDateTime>2014-05-21T19:58:00</endDateTime>
+                    <name>Event #94</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-21T12:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="368">
+                    <description>Description of Event #95</description>
+                    <earnings>1760.00 EUR</earnings>
+                    <endDateTime>2014-05-22T20:05:00</endDateTime>
+                    <name>Event #95</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-22T12:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="369">
+                    <description>Description of Event #96</description>
+                    <earnings>1776.00 EUR</earnings>
+                    <endDateTime>2014-05-23T20:12:00</endDateTime>
+                    <name>Event #96</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-23T12:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="370">
+                    <description>Description of Event #97</description>
+                    <earnings>1792.00 EUR</earnings>
+                    <endDateTime>2014-05-24T20:19:00</endDateTime>
+                    <name>Event #97</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-24T12:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="371">
+                    <description>Description of Event #98</description>
+                    <earnings>1808.00 EUR</earnings>
+                    <endDateTime>2014-05-25T20:26:00</endDateTime>
+                    <name>Event #98</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-25T12:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="372">
+                    <description>Description of Event #99</description>
+                    <earnings>1824.00 EUR</earnings>
+                    <endDateTime>2014-05-26T20:33:00</endDateTime>
+                    <name>Event #99</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-26T12:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="373">
+                    <description>Description of Event #100</description>
+                    <earnings>1840.00 EUR</earnings>
+                    <endDateTime>2014-05-27T20:40:00</endDateTime>
+                    <name>Event #100</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-27T13:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="374">
+                    <description>Description of Event #101</description>
+                    <earnings>1856.00 EUR</earnings>
+                    <endDateTime>2014-05-28T20:47:00</endDateTime>
+                    <name>Event #101</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-28T13:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="375">
+                    <description>Description of Event #102</description>
+                    <earnings>1872.00 EUR</earnings>
+                    <endDateTime>2014-05-29T20:54:00</endDateTime>
+                    <name>Event #102</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-29T13:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="376">
+                    <description>Description of Event #103</description>
+                    <earnings>1888.00 EUR</earnings>
+                    <endDateTime>2014-05-30T21:01:00</endDateTime>
+                    <name>Event #103</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-30T13:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="377">
+                    <description>Description of Event #104</description>
+                    <earnings>1904.00 EUR</earnings>
+                    <endDateTime>2014-05-31T21:08:00</endDateTime>
+                    <name>Event #104</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-05-31T13:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="378">
+                    <description>Description of Event #105</description>
+                    <earnings>1920.00 EUR</earnings>
+                    <endDateTime>2014-06-01T21:15:00</endDateTime>
+                    <name>Event #105</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-01T13:15:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="379">
+                    <description>Description of Event #106</description>
+                    <earnings>1936.00 EUR</earnings>
+                    <endDateTime>2014-06-02T21:22:00</endDateTime>
+                    <name>Event #106</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-02T13:18:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="380">
+                    <description>Description of Event #107</description>
+                    <earnings>1952.00 EUR</earnings>
+                    <endDateTime>2014-06-03T21:29:00</endDateTime>
+                    <name>Event #107</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-03T13:21:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="381">
+                    <description>Description of Event #108</description>
+                    <earnings>1968.00 EUR</earnings>
+                    <endDateTime>2014-06-04T21:36:00</endDateTime>
+                    <name>Event #108</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-04T13:24:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="382">
+                    <description>Description of Event #109</description>
+                    <earnings>1984.00 EUR</earnings>
+                    <endDateTime>2014-06-05T21:43:00</endDateTime>
+                    <name>Event #109</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-05T13:27:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="383">
+                    <description>Description of Event #110</description>
+                    <earnings>2000.00 EUR</earnings>
+                    <endDateTime>2014-06-06T21:50:00</endDateTime>
+                    <name>Event #110</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-06T13:30:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="384">
+                    <description>Description of Event #111</description>
+                    <earnings>2016.00 EUR</earnings>
+                    <endDateTime>2014-06-07T21:57:00</endDateTime>
+                    <name>Event #111</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-07T13:33:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="385">
+                    <description>Description of Event #112</description>
+                    <earnings>2032.00 EUR</earnings>
+                    <endDateTime>2014-06-08T22:04:00</endDateTime>
+                    <name>Event #112</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-08T13:36:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="386">
+                    <description>Description of Event #113</description>
+                    <earnings>2048.00 EUR</earnings>
+                    <endDateTime>2014-06-09T22:11:00</endDateTime>
+                    <name>Event #113</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-09T13:39:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="387">
+                    <description>Description of Event #114</description>
+                    <earnings>2064.00 EUR</earnings>
+                    <endDateTime>2014-06-10T22:18:00</endDateTime>
+                    <name>Event #114</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-10T13:42:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="388">
+                    <description>Description of Event #115</description>
+                    <earnings>2080.00 EUR</earnings>
+                    <endDateTime>2014-06-11T22:25:00</endDateTime>
+                    <name>Event #115</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-11T13:45:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="389">
+                    <description>Description of Event #116</description>
+                    <earnings>2096.00 EUR</earnings>
+                    <endDateTime>2014-06-12T22:32:00</endDateTime>
+                    <name>Event #116</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-12T13:48:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="390">
+                    <description>Description of Event #117</description>
+                    <earnings>2112.00 EUR</earnings>
+                    <endDateTime>2014-06-13T22:39:00</endDateTime>
+                    <name>Event #117</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-13T13:51:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="391">
+                    <description>Description of Event #118</description>
+                    <earnings>2128.00 EUR</earnings>
+                    <endDateTime>2014-06-14T22:46:00</endDateTime>
+                    <name>Event #118</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-14T13:54:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="392">
+                    <description>Description of Event #119</description>
+                    <earnings>2144.00 EUR</earnings>
+                    <endDateTime>2014-06-15T22:53:00</endDateTime>
+                    <name>Event #119</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-15T13:57:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="393">
+                    <description>Description of Event #120</description>
+                    <earnings>2160.00 EUR</earnings>
+                    <endDateTime>2014-06-16T23:00:00</endDateTime>
+                    <name>Event #120</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-16T14:00:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="394">
+                    <description>Description of Event #121</description>
+                    <earnings>2176.00 EUR</earnings>
+                    <endDateTime>2014-06-17T23:07:00</endDateTime>
+                    <name>Event #121</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-17T14:03:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="395">
+                    <description>Description of Event #122</description>
+                    <earnings>2192.00 EUR</earnings>
+                    <endDateTime>2014-06-18T23:14:00</endDateTime>
+                    <name>Event #122</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-18T14:06:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="396">
+                    <description>Description of Event #123</description>
+                    <earnings>2208.00 EUR</earnings>
+                    <endDateTime>2014-06-19T23:21:00</endDateTime>
+                    <name>Event #123</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-19T14:09:00</startDateTime>
+                    <type>timed</type>
+                </event>
+                <event id="397">
+                    <description>Description of Event #124</description>
+                    <earnings>2224.00 EUR</earnings>
+                    <endDateTime>2014-06-20T23:28:00</endDateTime>
+                    <name>Event #124</name>
+                    <rate>240.00 EUR</rate>
+                    <startDateTime>2014-06-20T14:12:00</startDateTime>
+                    <type>timed</type>
+                </event>
+            </events>
+            <name>Acme Financing Project 2</name>
+            <notes></notes>
+            <number>PRJ ACME-4</number>
+            <startDate>2014-02-17</startDate>
+            <status>open</status>
+        </project>
+    </projects>
+</accounting>
