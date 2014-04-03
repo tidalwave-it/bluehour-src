@@ -142,7 +142,7 @@ public class Dumper
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
         
-        String className = null;
+        String className = "?";
         
         Class<?>[] interfaces = event.getClass().getInterfaces();
         
@@ -154,7 +154,8 @@ public class Dumper
           {
             className = event.getClass().getSimpleName().replaceFirst("^InMemory", "");
           }
-
+        
+        className = className.replaceAll("Spi$", "");
         return String.format("%s(%s)", className, s);
       }
     
