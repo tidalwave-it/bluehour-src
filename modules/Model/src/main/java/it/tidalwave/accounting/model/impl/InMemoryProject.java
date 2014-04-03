@@ -43,6 +43,8 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.Project.Builder;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.AllArgsConstructor;
 import lombok.Delegate;
 import lombok.EqualsAndHashCode;
@@ -61,7 +63,7 @@ import static lombok.AccessLevel.PRIVATE;
  **********************************************************************************************************************/
 @Immutable @Wither
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport"})
-public class InMemoryProject implements Project
+public class InMemoryProject implements ProjectSpi
   {
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
@@ -149,7 +151,7 @@ public class InMemoryProject implements Project
     @Override @Nonnull
     public Money getEarnings()
       {
-        return findChildren().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
+        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getEarnings()).reduce(Money.ZERO, Money::add);
       }
     
     /*******************************************************************************************************************
@@ -160,7 +162,7 @@ public class InMemoryProject implements Project
     @Override @Nonnull
     public Duration getDuration()
       {
-        return findChildren().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
       }
     
     /*******************************************************************************************************************

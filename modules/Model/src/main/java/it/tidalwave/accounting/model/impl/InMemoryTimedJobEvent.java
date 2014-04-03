@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEvent.Builder;
 import it.tidalwave.accounting.model.Money;
-import it.tidalwave.accounting.model.TimedJobEvent;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -47,7 +47,7 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
-public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobEvent
+public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobEventSpi
   {
     @Getter @Nonnull
     private final LocalDateTime startDateTime;
@@ -86,6 +86,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
         return new Builder(id, Builder.Type.TIMED, startDateTime, endDateTime, name, description, 
                            earnings, rate, Collections.<JobEvent>emptyList());
       }
+    
     /*******************************************************************************************************************
      *
      * {@inheritDoc} 

@@ -36,7 +36,7 @@ import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.impl.InMemoryFlatJobEvent;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -45,13 +45,13 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = InMemoryFlatJobEvent.class)
+@DciRole(datumType = FlatJobEventSpi.class)
 public class FlatJobEventPresentable extends JobEventPresentable
   {
     @Nonnull
-    private final InMemoryFlatJobEvent flatJobEvent;
+    private final FlatJobEventSpi flatJobEvent;
     
-    public FlatJobEventPresentable (final @Nonnull InMemoryFlatJobEvent flatJobEvent)
+    public FlatJobEventPresentable (final @Nonnull FlatJobEventSpi flatJobEvent)
       {
         super(flatJobEvent);
         this.flatJobEvent = flatJobEvent;

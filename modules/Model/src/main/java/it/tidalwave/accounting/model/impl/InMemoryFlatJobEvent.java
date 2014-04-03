@@ -33,10 +33,10 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
-import it.tidalwave.accounting.model.FlatJobEvent;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEvent.Builder;
 import it.tidalwave.accounting.model.Money;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -48,7 +48,7 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
-public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEvent
+public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEventSpi
   {
     @Getter @Nonnull
     private final LocalDate date;
