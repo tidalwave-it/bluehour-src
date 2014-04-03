@@ -483,11 +483,11 @@
     </invoices>
     <projects>
         <project id="398">
-            <amount>0.00 EUR</amount>
+            <amount>123456.00 EUR</amount>
             <customer>1</customer>
             <description>Acme Consulting Project 1</description>
             <endDate>2013-07-04</endDate>
-            <hourlyRate>0.00 EUR</hourlyRate>
+            <hourlyRate>120.00 EUR</hourlyRate>
             <events>
                 <event id="3">
                     <description>Description of Event #1</description>
@@ -1334,11 +1334,11 @@
             <status>open</status>
         </project>
         <project id="399">
-            <amount>0.00 EUR</amount>
+            <amount>234567.00 EUR</amount>
             <customer>1</customer>
             <description>Acme Consulting Project 2</description>
             <endDate>2013-09-11</endDate>
-            <hourlyRate>0.00 EUR</hourlyRate>
+            <hourlyRate>150.00 EUR</hourlyRate>
             <events>
                 <event id="96">
                     <description>Description of Event #1</description>
@@ -2527,11 +2527,11 @@
             <status>open</status>
         </project>
         <project id="400">
-            <amount>0.00 EUR</amount>
+            <amount>345678.00 EUR</amount>
             <customer>2</customer>
             <description>Acme Financing Project 1</description>
             <endDate>2014-03-10</endDate>
-            <hourlyRate>0.00 EUR</hourlyRate>
+            <hourlyRate>210.00 EUR</hourlyRate>
             <events>
                 <event id="227">
                     <description>Description of Event #1</description>
@@ -2964,11 +2964,11 @@
             <status>open</status>
         </project>
         <project id="401">
-            <amount>0.00 EUR</amount>
+            <amount>456789.00 EUR</amount>
             <customer>2</customer>
             <description>Acme Financing Project 2</description>
             <endDate>2014-06-21</endDate>
-            <hourlyRate>0.00 EUR</hourlyRate>
+            <hourlyRate>240.00 EUR</hourlyRate>
             <events>
                 <event id="274">
                     <description>Description of Event #1</description>
