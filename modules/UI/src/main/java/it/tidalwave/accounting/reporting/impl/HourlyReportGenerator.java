@@ -80,9 +80,7 @@ public class HourlyReportGenerator
                                           DUF.format(e.getDuration()),
                                           MF.format(e.getEarnings())));
         pw.printf(SEPARATOR + "\n");
-        pw.printf(PATTERN3, "", "", 
-                           DUF.format(project.getDuration()),
-                           MF.format(project.getEarnings()));
+        pw.printf(PATTERN3, "", "", DUF.format(project.getDuration()), MF.format(project.getEarnings()));
         
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
