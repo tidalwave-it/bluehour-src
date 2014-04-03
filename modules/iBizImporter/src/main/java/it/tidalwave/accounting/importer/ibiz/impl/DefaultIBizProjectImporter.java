@@ -130,25 +130,6 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
         else
           {
             final List<JobEvent> jobEvents = importJobEvents(projectConfig.getStream("jobEvents"));
-            Money hourlyRate = projectConfig.getMoney("projectRate");
-            
-              System.err.println("RATE " + hourlyRate);
-            if ((hourlyRate.compareTo(Money.ZERO) == 0) && !jobEvents.isEmpty())
-            // don't use equals() - see http://stackoverflow.com/questions/6787142/bigdecimal-equals-versus-compareto
-              {
-                JobEvent event = jobEvents.get(0);
-                
-                while ((event instanceof JobEventGroup) && ((JobEventGroup)event).findChildren().count() > 0)
-                  {
-                    event = ((JobEventGroup)event).findChildren().firstResult();
-                  }
-                
-                if (event instanceof TimedJobEvent)
-                  {
-                    hourlyRate = ((TimedJobEvent)event).getRate();
-                  }
-              }
-            
             projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
                                         .withAmount(projectConfig.getMoney("projectEstimate"))
                                         .withCustomer(customer)
@@ -159,10 +140,41 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                                         .withNotes(projectConfig.getString("projectNotes"))
                                         .withNumber(projectConfig.getString("projectNumber"))
                                         .withStatus(status.getMappedStatus())
-                                        .withHourlyRate(hourlyRate)
+                                        .withHourlyRate(getHourlyRate(projectConfig, jobEvents))
                                         .withEvents(jobEvents)
                                         .create();
           }
+      }
+
+    /*******************************************************************************************************************
+     *
+     * Retrieves the hourly rates - if missing from the project description, tries to recover it from the first 
+     * meaningful job event.
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private Money getHourlyRate(final ConfigurationDecorator projectConfig,
+                                final List<JobEvent> jobEvents) 
+      throws NotFoundException 
+      {
+        Money hourlyRate = projectConfig.getMoney("projectRate");
+      
+        if ((hourlyRate.compareTo(Money.ZERO) == 0) && !jobEvents.isEmpty())
+            // don't use equals() - see http://stackoverflow.com/questions/6787142/bigdecimal-equals-versus-compareto
+          {
+            JobEvent event = jobEvents.get(0);
+            
+            while ((event instanceof JobEventGroup) && ((JobEventGroup)event).findChildren().count() > 0)
+              {
+                event = ((JobEventGroup)event).findChildren().firstResult();
+              }
+            
+            if (event instanceof TimedJobEvent)
+              {
+                hourlyRate = ((TimedJobEvent)event).getRate();
+              }
+          }
+        return hourlyRate;
       }
 
     /*******************************************************************************************************************
