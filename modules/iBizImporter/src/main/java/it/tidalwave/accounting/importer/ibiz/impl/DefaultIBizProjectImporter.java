@@ -45,7 +45,7 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.impl.InMemoryTimedJobEvent;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.toList;
@@ -168,9 +168,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
                 event = ((JobEventGroup)event).findChildren().firstResult();
               }
             
-            if (event instanceof InMemoryTimedJobEvent)
+            if (event instanceof TimedJobEventSpi)
               {
-                hourlyRate = ((InMemoryTimedJobEvent)event).getRate();
+                hourlyRate = ((TimedJobEventSpi)event).getRate();
               }
           }
         return hourlyRate;
