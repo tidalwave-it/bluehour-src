@@ -146,10 +146,15 @@ public final class ScenarioFactory
         final LocalDate project4StartDate = LocalDate.parse("2014-02-17");
         final LocalDate project4EndDate = LocalDate.parse("2014-06-21");
         
-        final List<JobEvent> je1 = createJobEvents(project1StartDate, project1EndDate, new Money(120, "EUR"));
-        final List<JobEvent> je2 = createJobEvents(project2StartDate, project2EndDate, new Money(150, "EUR"));
-        final List<JobEvent> je3 = createJobEvents(project3StartDate, project3EndDate, new Money(210, "EUR"));
-        final List<JobEvent> je4 = createJobEvents(project4StartDate, project4EndDate, new Money(240, "EUR"));
+        final Money rate1 = new Money(120, "EUR");
+        final Money rate2 = new Money(150, "EUR");
+        final Money rate3 = new Money(210, "EUR");
+        final Money rate4 = new Money(240, "EUR");
+        
+        final List<JobEvent> je1 = createJobEvents(project1StartDate, project1EndDate, rate1);
+        final List<JobEvent> je2 = createJobEvents(project2StartDate, project2EndDate, rate2);
+        final List<JobEvent> je3 = createJobEvents(project3StartDate, project3EndDate, rate3);
+        final List<JobEvent> je4 = createJobEvents(project4StartDate, project4EndDate, rate4);
         
         final Project acmeConsultingProject1 =
                 projectRegistry.addProject()
@@ -161,6 +166,8 @@ public final class ScenarioFactory
                     .withEndDate(project1EndDate)
                     .withNumber("PRJ ACME-1")
                     .withEvents(je1)
+                    .withHourlyRate(rate1)
+                    .withAmount(new Money(123456, "EUR"))
                     .create();
         final Project acmeConsultingProject2 =
                 projectRegistry.addProject()
@@ -172,6 +179,8 @@ public final class ScenarioFactory
                     .withEndDate(project2EndDate)
                     .withNumber("PRJ ACME-2")
                     .withEvents(je2)
+                    .withHourlyRate(rate2)
+                    .withAmount(new Money(234567, "EUR"))
                     .create();
         final Project acmeFinancingProject1 =
                 projectRegistry.addProject()
@@ -182,7 +191,9 @@ public final class ScenarioFactory
                     .withStartDate(project3StartDate)
                     .withEndDate(project3EndDate)
                     .withNumber("PRJ ACME-3")
+                    .withHourlyRate(rate3)
                     .withEvents(je3)
+                    .withAmount(new Money(345678, "EUR"))
                     .create();
         final Project acmeFinancingProject2 =
                 projectRegistry.addProject()
@@ -193,7 +204,9 @@ public final class ScenarioFactory
                     .withStartDate(project4StartDate)
                     .withEndDate(project4EndDate)
                     .withNumber("PRJ ACME-4")
+                    .withHourlyRate(rate4)
                     .withEvents(je4)
+                    .withAmount(new Money(456789, "EUR"))
                     .create();
         
                 
