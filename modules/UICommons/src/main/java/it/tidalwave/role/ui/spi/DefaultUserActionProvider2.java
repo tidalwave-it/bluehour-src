@@ -2,8 +2,8 @@
  * #%L
  * *********************************************************************************************************************
  *
- * blueHour
- * http://bluehour.tidalwave.it - hg clone https://bitbucket.org/tidalwave/bluehour-src
+ * NorthernWind - lightweight CMS
+ * http://northernwind.tidalwave.it - hg clone https://bitbucket.org/tidalwave/northernwind-src
  * %%
  * Copyright (C) 2013 - 2014 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
@@ -25,41 +25,43 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl;
+package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
+import java.util.Collection;
+import java.util.Collections;
 import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
 
 /***********************************************************************************************************************
  *
+ * FIXME: merge to DefaultUserActionProvider
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+public class DefaultUserActionProvider2 extends DefaultUserActionProvider
   {
-    @Nonnull
-    private final Project project;
-    
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override @Nonnull
-    protected UserAction getSingleAction() 
+    public Collection<? extends UserAction> getActions()
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+        return Collections.singletonList(getSingleAction());
+      }
+
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    protected UserAction getSingleAction()
+      {
+        throw new UnsupportedOperationException();
       }
   }
+

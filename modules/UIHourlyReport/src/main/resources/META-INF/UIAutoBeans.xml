@@ -59,19 +59,6 @@
 
     <aop:aspectj-autoproxy/>
 
-    <bean id="preferencesHandler"
-          class="it.tidalwave.accounting.util.DefaultPreferencesHandler"/>
-        
-    <bean id="accountingController"
-          class="it.tidalwave.accounting.impl.DefaultAccountingController" />
-
-    <bean id="customerExplorerPresentationControl"
-          class="it.tidalwave.accounting.ui.customerexplorer.impl.DefaultCustomerExplorerPresentationControl" />
-    
-    <bean id="projectExplorerPresentationControl"
-          class="it.tidalwave.accounting.ui.projectexplorer.impl.DefaultProjectExplorerPresentationControl" />
-
-    <bean id="jobEventExplorerPresentationControl"
-          class="it.tidalwave.accounting.ui.jobeventexplorer.impl.DefaultJobEventExplorerPresentationControl" />
+    <bean class="it.tidalwave.accounting.ui.hourlyreport.impl.DefaultHourlyReportPresentationControl" />
 
 </beans>

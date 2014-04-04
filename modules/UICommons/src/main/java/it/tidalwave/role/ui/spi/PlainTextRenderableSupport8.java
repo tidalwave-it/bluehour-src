@@ -25,20 +25,11 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl;
+package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import java.io.PrintWriter;
+import it.tidalwave.role.PlainTextRenderable;
 
 /***********************************************************************************************************************
  *
@@ -46,20 +37,23 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+@FunctionalInterface
+public interface PlainTextRenderableSupport8 extends PlainTextRenderable
   {
-    @Nonnull
-    private final Project project;
+    public static final Class<PlainTextRenderableSupport8> PlainTextRenderableSupport8 = PlainTextRenderableSupport8.class;
     
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-
-    @Override @Nonnull
-    protected UserAction getSingleAction() 
+    @Override
+    public default void renderTo (final @Nonnull StringBuilder stringBuilder, 
+                                  final @Nonnull Object ... args)
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+        stringBuilder.append(render(args));
+      }
+
+    @Override
+    public default void renderTo (final @Nonnull PrintWriter printWriter, 
+                                  final @Nonnull Object ... args)
+      {
+        printWriter.print(render(args));
       }
   }
+

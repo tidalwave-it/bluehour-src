@@ -29,16 +29,19 @@ package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.messagebus.MessageBus;
+import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.dci.annotation.DciContext;
+import it.tidalwave.messagebus.annotation.ListensTo;
+import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
+import it.tidalwave.accounting.model.HourlyReport;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
+import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
+import it.tidalwave.role.ui.spi.DefaultPresentationModel;
+import it.tidalwave.role.ui.spi.PlainTextRenderableSupport8;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
+import static it.tidalwave.accounting.model.HourlyReportGenerator.HourlyReportGenerator;
 
 /***********************************************************************************************************************
  *
@@ -46,20 +49,18 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+@DciContext @SimpleMessageSubscriber @Slf4j
+public class DefaultHourlyReportPresentationControl implements HourlyReportPresentationControl
   {
-    @Nonnull
-    private final Project project;
+    @Inject @Nonnull
+    private HourlyReportPresentation presentation;
     
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-
-    @Override @Nonnull
-    protected UserAction getSingleAction() 
+    @VisibleForTesting void onProjectHourlyReportRequest (final @Nonnull @ListensTo ProjectHourlyReportRequest request)
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+        final HourlyReport report = request.getProject().as(HourlyReportGenerator).createReport();
+        presentation.bind();
+        presentation.showUp(notificationWithFeedback().withCaption("Project Hourly Report"));
+        presentation.populate(new DefaultPresentationModel(null, 
+                (PlainTextRenderableSupport8) (args) -> report.asString()));
       }
   }

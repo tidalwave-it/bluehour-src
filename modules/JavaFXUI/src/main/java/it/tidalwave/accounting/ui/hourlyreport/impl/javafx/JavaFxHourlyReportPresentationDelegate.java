@@ -25,41 +25,40 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl;
+package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
+import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.util.ui.UserNotificationWithFeedback;
+import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
 
 /***********************************************************************************************************************
  *
- * @author  Fabrizio Giudici
+ * @author  fritz
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPresentation
   {
-    @Nonnull
-    private final Project project;
+    @FXML
+    private TextArea taReport;
     
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-
-    @Override @Nonnull
-    protected UserAction getSingleAction() 
+    @Override
+    public void bind() 
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+      }
+    
+    @Override
+    public void showUp (final @Nonnull UserNotificationWithFeedback notification) 
+      {
+      }
+
+    @Override
+    public void populate (final @Nonnull PresentationModel pm) 
+      {
+        taReport.setText(pm.as(PlainTextRenderable).render());
       }
   }

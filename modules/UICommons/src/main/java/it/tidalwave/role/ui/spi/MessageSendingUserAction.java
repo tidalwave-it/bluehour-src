@@ -2,8 +2,8 @@
  * #%L
  * *********************************************************************************************************************
  *
- * blueHour
- * http://bluehour.tidalwave.it - hg clone https://bitbucket.org/tidalwave/bluehour-src
+ * NorthernWind - lightweight CMS
+ * http://northernwind.tidalwave.it - hg clone https://bitbucket.org/tidalwave/northernwind-src
  * %%
  * Copyright (C) 2013 - 2014 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
@@ -25,20 +25,12 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl;
+package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
+import java.util.function.Supplier;
+import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
 
 /***********************************************************************************************************************
  *
@@ -46,20 +38,27 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+public class MessageSendingUserAction extends UserActionSupport
   {
     @Nonnull
-    private final Project project;
+    private final MessageBus messageBus;
     
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-
-    @Override @Nonnull
-    protected UserAction getSingleAction() 
+    @Nonnull 
+    private final Supplier<Object> messageSupplier;
+    
+    public MessageSendingUserAction (final @Nonnull MessageBus messageBus,
+                                     final @Nonnull String displayName,
+                                     final @Nonnull Supplier<Object> messageSupplier)
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+        super(new DefaultDisplayable(displayName));  
+        this.messageBus = messageBus;
+        this.messageSupplier = messageSupplier;
+      }
+    
+    @Override
+    public void actionPerformed() 
+      {
+        messageBus.publish(messageSupplier.get());
       }
   }
+

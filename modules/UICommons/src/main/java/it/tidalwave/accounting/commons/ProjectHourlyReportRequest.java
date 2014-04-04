@@ -25,41 +25,28 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl;
+package it.tidalwave.accounting.commons;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
+import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import lombok.ToString;
 
 /***********************************************************************************************************************
  *
+ * A message which notifies that a {@link Customer} has been selected.
+ * 
+ * @stereotype Message
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+@RequiredArgsConstructor @Getter @ToString
+public class ProjectHourlyReportRequest 
   {
     @Nonnull
     private final Project project;
-    
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-
-    @Override @Nonnull
-    protected UserAction getSingleAction() 
-      {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
-      }
   }

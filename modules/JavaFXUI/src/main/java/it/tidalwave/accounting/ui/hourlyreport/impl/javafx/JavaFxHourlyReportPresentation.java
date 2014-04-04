@@ -25,20 +25,19 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl;
+package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javax.inject.Named;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import javafx.application.Platform;
+import javafx.scene.Node;
+import java.io.IOException;
+import it.tidalwave.util.ui.UserNotificationWithFeedback;
+import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.javafx.JavaFXBinder;
+import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
+import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***********************************************************************************************************************
  *
@@ -46,20 +45,43 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
-public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
+public class JavaFxHourlyReportPresentation implements HourlyReportPresentation
   {
-    @Nonnull
-    private final Project project;
+    @Inject @Nonnull
+    private JavaFXBinder binder;
     
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    // @Delegate
+    private HourlyReportPresentation delegate;
+    
+    private Node node;
 
-    @Override @Nonnull
-    protected UserAction getSingleAction() 
+    public JavaFxHourlyReportPresentation() 
+      throws IOException 
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+        if (node == null)
+          {
+            final NodeAndDelegate nad = createNodeAndDelegate(getClass(), "HourlyReportPresentation.fxml");
+            node = nad.getNode();
+            delegate = nad.getDelegate();
+          }
+      }
+    
+    @Override
+    public void bind() 
+      {
+      }  
+    
+    @Override
+    public void showUp (final @Nonnull UserNotificationWithFeedback notification) 
+      {
+        assert Platform.isFxApplicationThread();
+
+        binder.showInModalDialog(node, notification);
+      }
+
+    @Override
+    public void populate (final @Nonnull PresentationModel pm) 
+      {
+        delegate.populate(pm);
       }
   }
