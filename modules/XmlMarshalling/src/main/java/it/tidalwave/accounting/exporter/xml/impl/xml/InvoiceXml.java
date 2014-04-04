@@ -99,7 +99,7 @@ public class InvoiceXml
     
     public InvoiceXml (final @Nonnull Invoice invoice)
       {
-        final Invoice.Builder builder = invoice.asBuilder();
+        final Invoice.Builder builder = invoice.toBuilder();
         this.id = builder.getId();
         this.number = builder.getNumber();
         this.projectXml = new ProjectXml(builder.getProject());

@@ -100,7 +100,7 @@ public class JobEventXml
     
     public JobEventXml (final @Nonnull JobEvent jobEvent)
       {
-        final JobEvent.Builder builder = jobEvent.asBuilder();
+        final JobEvent.Builder builder = jobEvent.toBuilder();
         this.id = builder.getId();
         this.type = builder.getType();
         this.startDateTime = builder.getStartDateTime();

@@ -70,7 +70,7 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public JobEvent.Builder asBuilder()
+    public JobEvent.Builder toBuilder()
       {
         return new Builder(id, null, null, null, name, 
                            description, null, null, new ArrayList<>(findChildren().results()));

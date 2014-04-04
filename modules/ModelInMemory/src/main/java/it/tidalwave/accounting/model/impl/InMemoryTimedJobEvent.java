@@ -81,7 +81,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public JobEvent.Builder asBuilder()
+    public JobEvent.Builder toBuilder()
       {
         return new Builder(id, Type.TIMED, startDateTime, endDateTime, name, description, 
                            earnings, hourlyRate, Collections.<JobEvent>emptyList());

@@ -155,5 +155,5 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder();
+    public Builder toBuilder();
   }

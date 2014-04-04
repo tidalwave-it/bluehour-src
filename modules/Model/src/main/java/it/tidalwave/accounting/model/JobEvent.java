@@ -111,5 +111,5 @@ public interface JobEvent extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public JobEvent.Builder asBuilder();
+    public JobEvent.Builder toBuilder();
   }

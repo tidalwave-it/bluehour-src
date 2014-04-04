@@ -176,7 +176,7 @@ public class InMemoryProject implements ProjectSpi
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Builder asBuilder()
+    public Builder toBuilder()
       {
         return new Builder(id, customer, name, number, description, notes, status, hourlyRate, budget, 
                            startDate, endDate, events, Project.Builder.Callback.DEFAULT);

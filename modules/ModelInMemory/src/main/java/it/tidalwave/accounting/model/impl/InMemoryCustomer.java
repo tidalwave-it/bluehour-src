@@ -122,7 +122,7 @@ public class InMemoryCustomer implements Customer
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder()
+    public Builder toBuilder()
       {
         return new Builder(id, name, billingAddress, vatNumber, InMemoryCustomer.Builder.Callback.DEFAULT);                
       }

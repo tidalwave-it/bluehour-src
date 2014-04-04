@@ -116,5 +116,5 @@ public abstract class InMemoryJobEvent implements JobEvent
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public abstract JobEvent.Builder asBuilder();
+    public abstract JobEvent.Builder toBuilder();
   }
