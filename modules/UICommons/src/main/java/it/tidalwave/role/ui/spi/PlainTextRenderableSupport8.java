@@ -40,8 +40,6 @@ import it.tidalwave.role.PlainTextRenderable;
 @FunctionalInterface
 public interface PlainTextRenderableSupport8 extends PlainTextRenderable
   {
-    public static final Class<PlainTextRenderableSupport8> PlainTextRenderableSupport8 = PlainTextRenderableSupport8.class;
-    
     @Override
     public default void renderTo (final @Nonnull StringBuilder stringBuilder, 
                                   final @Nonnull Object ... args)
