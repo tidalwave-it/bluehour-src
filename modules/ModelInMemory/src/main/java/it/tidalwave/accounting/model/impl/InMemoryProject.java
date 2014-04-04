@@ -165,7 +165,7 @@ public class InMemoryProject implements ProjectSpi
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Money getInvoicedAmount()
+    public Money getInvoicedEarnings()
       {
         return accounting.getInvoiceRegistry().findInvoices().withProject(this).getEarnings();
       }

@@ -86,7 +86,7 @@ public class ProjectPresentable implements Presentable
                                   new DefaultStyleable("right-aligned"));
         builder.add("Time",       (Displayable) () -> DUF.format(project.getDuration()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Invoiced",   (Displayable) () -> MF.format(project.getInvoicedAmount()),
+        builder.add("Invoiced",   (Displayable) () -> MF.format(project.getInvoicedEarnings()),
                                   new DefaultStyleable("right-aligned"));
 
         return builder;
