@@ -28,12 +28,15 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
+import java.time.Duration;
 import java.util.Map;
+import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Invoice;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import lombok.extern.slf4j.Slf4j;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
 
 /***********************************************************************************************************************
  *
@@ -41,30 +44,33 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class InMemoryInvoiceRegistry implements InvoiceRegistry
+public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
+                                implements ProjectRegistry.JobEventFinder
   {
-    private final Map<Id, Invoice> invoiceMapById = new HashMap<>();
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
     @Override @Nonnull
-    public InvoiceRegistry.Finder findInvoices()
+    protected JobEvent findById (final @Nonnull Id id) 
       {
-        return new InMemoryInvoiceFinderFromMap(invoiceMapById);
+        // FIXME: very inefficient
+        final Map<Id, JobEvent> map = findAll().stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
+
+        // FIXME: should not happen
+        if (!map.containsKey(id))
+          {
+            return JobEvent.builder().withId(id).withName("DUMMY!").create();
+          }
+
+        return map.get(id);
+      }  
+
+    @Override @Nonnull
+    public Duration getDuration() 
+      {
+        return map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
       }
 
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
     @Override @Nonnull
-    public Invoice.Builder addInvoice()
+    public Money getEarnings() 
       {
-        return new Invoice.Builder(invoice -> invoiceMapById.put(invoice.getId(), invoice));
+        return map(jobEvent -> ((JobEventSpi)jobEvent).getEarnings()).reduce(Money.ZERO, Money::add);
       }
   }

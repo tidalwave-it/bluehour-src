@@ -27,13 +27,19 @@
  */
 package it.tidalwave.accounting.model.impl;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
-import lombok.extern.slf4j.Slf4j;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
+import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
+import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
@@ -41,30 +47,41 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class InMemoryInvoiceRegistry implements InvoiceRegistry
+public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
+                                          implements InvoiceRegistry.Finder
   {
-    private final Map<Id, Invoice> invoiceMapById = new HashMap<>();
+    @CheckForNull
+    private Project project;
 
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public InvoiceRegistry.Finder findInvoices()
+    public InMemoryInvoiceFinderFromMap (final @Nonnull Map<Id, Invoice> invoiceMapById)
       {
-        return new InMemoryInvoiceFinderFromMap(invoiceMapById);
+        super(invoiceMapById);  
       }
 
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
     @Override @Nonnull
-    public Invoice.Builder addInvoice()
+    public InvoiceRegistry.Finder withProject (final @Nonnull Project project) 
       {
-        return new Invoice.Builder(invoice -> invoiceMapById.put(invoice.getId(), invoice));
+        final InMemoryInvoiceFinderFromMap clone = (InMemoryInvoiceFinderFromMap)super.clone();
+        clone.project = project;
+        return clone;
+      }
+
+    @Override @Nonnull
+    protected List<? extends Invoice> computeResults()
+      {
+        Stream<? extends Invoice> stream = super.computeResults().stream();
+
+        if (project != null)
+          {
+            stream = stream.filter(invoice -> ((InvoiceSpi)invoice).getProject().equals(project));
+          }
+
+        return stream.collect(toList());
+      }
+
+    @Override @Nonnull
+    public Money getEarnings() 
+      {
+        return map(invoice -> ((InvoiceSpi)invoice).getEarnings()).reduce(Money.ZERO, Money::add);
       }
   }

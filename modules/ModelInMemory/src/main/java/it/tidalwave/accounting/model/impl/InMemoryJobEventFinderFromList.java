@@ -28,12 +28,11 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
-import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Invoice;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import it.tidalwave.accounting.model.JobEvent;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -41,30 +40,15 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class InMemoryInvoiceRegistry implements InvoiceRegistry
+@RequiredArgsConstructor
+public class InMemoryJobEventFinderFromList extends InMemoryJobEventFinderSupport
   {
-    private final Map<Id, Invoice> invoiceMapById = new HashMap<>();
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
+    @Nonnull
+    private final List<? extends JobEvent> events;
+    
     @Override @Nonnull
-    public InvoiceRegistry.Finder findInvoices()
+    protected Collection<? extends JobEvent> findAll() 
       {
-        return new InMemoryInvoiceFinderFromMap(invoiceMapById);
-      }
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public Invoice.Builder addInvoice()
-      {
-        return new Invoice.Builder(invoice -> invoiceMapById.put(invoice.getId(), invoice));
+        return new CopyOnWriteArrayList<>(events);
       }
   }

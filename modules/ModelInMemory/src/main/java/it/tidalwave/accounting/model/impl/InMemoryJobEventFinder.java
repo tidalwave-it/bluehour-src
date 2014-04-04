@@ -28,12 +28,12 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
-import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Invoice;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.ProjectRegistry;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -41,30 +41,33 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class InMemoryInvoiceRegistry implements InvoiceRegistry
+@RequiredArgsConstructor
+public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
   {
-    private final Map<Id, Invoice> invoiceMapById = new HashMap<>();
-
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
+    @Nonnull
+    private final ProjectRegistry.ProjectFinder projectFinder;
+    
+    // FIXME: very inefficient
     @Override @Nonnull
-    public InvoiceRegistry.Finder findInvoices()
+    protected Collection<? extends JobEvent> findAll() 
       {
-        return new InMemoryInvoiceFinderFromMap(invoiceMapById);
-      }
+        final List<JobEvent> result = new ArrayList<>();
+            
+        projectFinder.results().forEach(project -> 
+          {
+            project.findChildren().forEach(jobEvent -> 
+              {
+                result.add(jobEvent);
 
-    /*******************************************************************************************************************
-     *
-     * {@inheritDoc}
-     *
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public Invoice.Builder addInvoice()
-      {
-        return new Invoice.Builder(invoice -> invoiceMapById.put(invoice.getId(), invoice));
+                // FIXME: should be recursive
+                if (jobEvent instanceof InMemoryJobEventGroup)
+                  {
+                    result.addAll(((InMemoryJobEventGroup)jobEvent).findChildren().results());  
+                  }
+              });
+          });
+            
+        return result;
       }
   }
+    
