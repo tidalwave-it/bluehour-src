@@ -27,13 +27,11 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.NotFoundException;
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
@@ -41,14 +39,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import static java.util.stream.Collectors.toList;
-import java.util.stream.Stream;
-import javax.annotation.Nonnull;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
+import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
