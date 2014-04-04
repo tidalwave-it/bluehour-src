@@ -49,6 +49,13 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 @RequiredArgsConstructor
 public abstract class JobEventPresentable implements Presentable
   {
+    protected static final String JOB_EVENT = "Job Event";
+    protected static final String NOTES = "Notes";
+    protected static final String AMOUNT = "Amount";
+    protected static final String HOURLY_RATE = "HourlyRate";
+    protected static final String TIME = "Time";
+    protected static final String DATE = "Date";
+
     @Nonnull
     private final JobEventSpi jobEvent;
 
@@ -64,12 +71,12 @@ public abstract class JobEventPresentable implements Presentable
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         // FIXME: uses the column header names, should be an internal id instead
-        builder.put("Job Event", (Displayable) () -> jobEvent.getName());
-        builder.put("Notes",     (Displayable) () -> jobEvent.getDescription());
+        builder.put(JOB_EVENT, (Displayable) () -> jobEvent.getName());
+        builder.put(NOTES,     (Displayable) () -> jobEvent.getDescription());
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.put("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()),
-                                 new DefaultStyleable("right-aligned"));
+        builder.put(AMOUNT,    (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
+                               new DefaultStyleable("right-aligned"));
 
         return builder;
       }

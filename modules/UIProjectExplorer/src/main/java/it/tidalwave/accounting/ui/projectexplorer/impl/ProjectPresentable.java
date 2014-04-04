@@ -73,20 +73,20 @@ public class ProjectPresentable implements Presentable
         builder.put("Status",     (Displayable) () -> project.getStatus().name());
         builder.put("#",          (Displayable) () -> project.getNumber());
         builder.put("Name",       (Displayable) () -> project.getName());
-        builder.put("Start Date", (Displayable) () -> DF.format(project.getStartDate()),
+        builder.put("Start Date", (Displayable) () -> DATE_FORMATTER.format(project.getStartDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.put("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
+        builder.put("Due Date",   (Displayable) () -> DATE_FORMATTER.format(project.getEndDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.put("Budget",     (Displayable) () -> MF.format(project.getBudget()),
+        builder.put("Budget",     (Displayable) () -> MONEY_FORMATTER.format(project.getBudget()),
                                   new DefaultStyleable("right-aligned"));
         builder.put("Notes",      (Displayable) () -> project.getNotes());
         
         // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
-        builder.put("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
+        builder.put("Earnings",   (Displayable) () -> MONEY_FORMATTER.format(project.getEarnings()),
                                   new DefaultStyleable("right-aligned"));
-        builder.put("Time",       (Displayable) () -> DUF.format(project.getDuration()),
+        builder.put("Time",       (Displayable) () -> DURATION_FORMATTER.format(project.getDuration()),
                                   new DefaultStyleable("right-aligned"));
-        builder.put("Invoiced",   (Displayable) () -> MF.format(project.getInvoicedEarnings()),
+        builder.put("Invoiced",   (Displayable) () -> MONEY_FORMATTER.format(project.getInvoicedEarnings()),
                                   new DefaultStyleable("right-aligned"));
 
         return builder;

@@ -86,21 +86,21 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         pw.printf(SEPARATOR + "\n");
         pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
         pw.printf(SEPARATOR + "\n");
-        r.forEach(e -> pw.printf(PATTERN2, DF.format(e.getDateTime()),
+        r.forEach(e -> pw.printf(PATTERN2, DATE_FORMATTER.format(e.getDateTime()),
                                           e.getName(),
-                                          DUF.format(e.getDuration()),
-                                          MF.format(e.getEarnings())));
+                                          DURATION_FORMATTER.format(e.getDuration()),
+                                          MONEY_FORMATTER.format(e.getEarnings())));
         pw.printf(SEPARATOR + "\n");
-        pw.printf(PATTERN3, "", "", DUF.format(project.getDuration()), MF.format(project.getEarnings()));
+        pw.printf(PATTERN3, "", "", DURATION_FORMATTER.format(project.getDuration()), MONEY_FORMATTER.format(project.getEarnings()));
         
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
         final Duration duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
-        pw.printf("BUDGET:           %s\n", MF.format(project.getBudget()));
-        pw.printf("HOURLY RATE:      %s\n", MF.format(project.getHourlyRate()));
-        pw.printf("DURATION:         %s\n", DUF.format(duration));
-        pw.printf("REMAINING BUDGET: %s\n", MF.format(project.getBudget().subtract(project.getEarnings())));
-        pw.printf("REMAINING TIME:   %s\n", DUF.format(duration.minus(project.getDuration())));
+        pw.printf("BUDGET:           %s\n", MONEY_FORMATTER.format(project.getBudget()));
+        pw.printf("HOURLY RATE:      %s\n", MONEY_FORMATTER.format(project.getHourlyRate()));
+        pw.printf("DURATION:         %s\n", DURATION_FORMATTER.format(duration));
+        pw.printf("REMAINING BUDGET: %s\n", MONEY_FORMATTER.format(project.getBudget().subtract(project.getEarnings())));
+        pw.printf("REMAINING TIME:   %s\n", DURATION_FORMATTER.format(duration.minus(project.getDuration())));
         pw.flush();
       }
     
