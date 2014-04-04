@@ -27,31 +27,32 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
-import static it.tidalwave.accounting.model.spi.util.Formatters.*;
-import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.role.spi.DefaultDisplayable;
-import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
+import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Supplier;
-import javax.annotation.Nonnull;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
 import lombok.RequiredArgsConstructor;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 @RequiredArgsConstructor
-class RedStyleForNegativeNumber implements Styleable
+class RedStyleForNegativeMoney implements Styleable
   {
     @Nonnull
-    private final Supplier<BigDecimal> numberSupplier;
+    private final Supplier<Money> moneySupplier;
     
     @Override
     public Collection<String> getStyles() 
       {
-        return Arrays.asList(numberSupplier.get().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
+        return Arrays.asList(moneySupplier.get().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
       }
   }
 
@@ -83,7 +84,7 @@ public class FlatJobEventPresentable extends JobEventPresentable
         builder.add("HourlyRate", new DefaultDisplayable(""));
         builder.add("Amount",     (Displayable) () -> MF.format(flatJobEvent.getEarnings()),
                                   new DefaultStyleable("right-aligned"),
-                                  new RedStyleForNegativeNumber(() -> flatJobEvent.getEarnings().getAmount()));
+                                  new RedStyleForNegativeMoney(() -> flatJobEvent.getEarnings()));
         
         return builder;
       }
