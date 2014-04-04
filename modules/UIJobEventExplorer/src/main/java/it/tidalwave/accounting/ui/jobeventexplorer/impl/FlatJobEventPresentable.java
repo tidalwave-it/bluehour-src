@@ -49,7 +49,7 @@ class RedStyleForNegativeMoney implements Styleable
     @Nonnull
     private final Supplier<Money> moneySupplier;
     
-    @Override
+    @Override @Nonnull
     public Collection<String> getStyles() 
       {
         return Arrays.asList(moneySupplier.get().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
