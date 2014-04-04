@@ -35,11 +35,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -48,9 +50,12 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
+@RequiredArgsConstructor @Slf4j
 public class InMemoryProjectRegistry implements ProjectRegistry
   {
+    @Nonnull
+    private final Accounting accounting;
+    
     private final Map<Id, Project> projectMapById = new HashMap<>();
     
     /*******************************************************************************************************************
@@ -144,6 +149,10 @@ public class InMemoryProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public Project.Builder addProject()
       {
-        return new Project.Builder(project -> projectMapById.put(project.getId(), project));
+        return new Project.Builder(project -> 
+          {
+            projectMapById.put(project.getId(), project);
+            ((InMemoryProject)project).setAccounting(accounting);
+          });
       }
   }

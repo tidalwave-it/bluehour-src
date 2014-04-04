@@ -29,26 +29,29 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.time.Duration;
+import java.time.LocalDate;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.AllArgsConstructor;
 import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Wither;
 import static lombok.AccessLevel.PRIVATE;
@@ -65,6 +68,9 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport"})
 public class InMemoryProject implements ProjectSpi
   {
+    @Setter // FIXME
+    private Accounting accounting;
+    
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
 
@@ -145,7 +151,7 @@ public class InMemoryProject implements ProjectSpi
     
     /*******************************************************************************************************************
      *
-     * 
+     * {@inheritDoc}
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
@@ -156,18 +162,32 @@ public class InMemoryProject implements ProjectSpi
     
     /*******************************************************************************************************************
      *
+     * {@inheritDoc}
      * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Money getInvoicedAmount()
+      {
+        return accounting.getInvoiceRegistry().findInvoices().withProject(this)
+                .map(invoice -> ((InvoiceSpi)invoice).getEarnings())
+                .reduce(Money.ZERO, Money::add);
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
     public Duration getDuration()
       {
-        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getDuration())
+                             .reduce(Duration.ZERO, Duration::plus);
       }
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc}
      * 
      ******************************************************************************************************************/
     @Override @Nonnull

@@ -27,14 +27,20 @@
  */
 package it.tidalwave.accounting.model.impl;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import it.tidalwave.util.Id;
+import java.util.stream.Stream;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
+import it.tidalwave.util.Id;
 import lombok.extern.slf4j.Slf4j;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *
@@ -55,9 +61,33 @@ public class InMemoryInvoiceRegistry implements InvoiceRegistry
     class InMemoryInvoiceFinder extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
                                 implements InvoiceRegistry.Finder
       {
+        @CheckForNull
+        private Project project;
+        
         InMemoryInvoiceFinder()
           {
             super(invoiceMapById);  
+          }
+
+        @Override @Nonnull
+        public Finder withProject (final @Nonnull Project project) 
+          {
+            final InMemoryInvoiceFinder clone = (InMemoryInvoiceFinder)super.clone();
+            clone.project = project;
+            return clone;
+          }
+        
+        @Override @Nonnull
+        protected List<? extends Invoice> computeResults()
+          {
+            Stream<? extends Invoice> stream = super.computeResults().stream();
+            
+            if (project != null)
+              {
+                stream = stream.filter(invoice -> ((InvoiceSpi)invoice).getProject().equals(project));
+              }
+
+            return stream.collect(toList());
           }
       }
 

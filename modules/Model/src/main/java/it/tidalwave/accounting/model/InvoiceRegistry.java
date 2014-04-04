@@ -50,6 +50,9 @@ public interface InvoiceRegistry
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);
+        
+        @Nonnull
+        public Finder withProject (@Nonnull Project project);
       }
 
     /*******************************************************************************************************************
