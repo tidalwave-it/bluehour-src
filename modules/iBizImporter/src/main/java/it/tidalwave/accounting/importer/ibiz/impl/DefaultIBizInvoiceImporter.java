@@ -46,6 +46,7 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.toList;
@@ -114,13 +115,15 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
             final List<JobEvent> events = eventIds.flatMap(id -> projectRegistry.findJobEvents().withId(id).stream())
                                                   .collect(toList());
             // FIXME: iBiz duplicates events that are already inside a group - filter them away
+            final Money tax = configuration.getMoney("taxes1");
+            final Money earnings = configuration.getMoney("invoiceAmount");
 
             invoiceRegistry.addInvoice().withId(configuration.getId("uniqueIdentifier"))
                                         .withNumber(configuration.getString("invoiceNumber"))
                                         .withDate(configuration.getDate("date"))
                                         .withDueDate(configuration.getDate("dueDate"))
-                                        .withEarnings(configuration.getMoney("invoiceAmount"))
-                                        .withTax(configuration.getMoney("taxes1"))
+                                        .withEarnings(earnings.subtract(tax))
+                                        .withTax(tax)
                                         .withProject(project)
                                         .withJobEvents(events)
                                         .create();
