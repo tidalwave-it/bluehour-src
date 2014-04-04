@@ -85,6 +85,7 @@ public abstract class InMemoryJobEvent implements JobEvent
         this.name = builder.getName();
         this.description = builder.getDescription();
       }
+    
     /*******************************************************************************************************************
      *
      * @return 
