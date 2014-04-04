@@ -38,10 +38,11 @@ import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
-import it.tidalwave.accounting.model.Invoice;
+import it.tidalwave.accounting.model.Invoice.Builder;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -54,7 +55,7 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
-public class InMemoryInvoice implements Invoice
+public class InMemoryInvoice implements InvoiceSpi
   {
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
@@ -82,7 +83,7 @@ public class InMemoryInvoice implements Invoice
     @Getter
     private final String number;
     
-    @Nonnull
+    @Getter @Nonnull
     private final Project project;
    
     @Nonnull
@@ -94,10 +95,10 @@ public class InMemoryInvoice implements Invoice
     @Nonnull
     private final LocalDate dueDate;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money earnings;
 
-    @Nonnull
+    @Getter @Nonnull
     private final Money tax;
 
     /*******************************************************************************************************************
