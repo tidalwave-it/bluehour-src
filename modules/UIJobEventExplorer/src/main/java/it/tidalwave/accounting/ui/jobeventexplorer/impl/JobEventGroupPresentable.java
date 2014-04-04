@@ -77,9 +77,9 @@ public class JobEventGroupPresentable extends JobEventPresentable
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.add("Date",       (Displayable) () -> DF.format(jobEventGroup.getDateTime().toLocalDate()));
-        builder.add("HourlyRate", new DefaultDisplayable(""));
-        builder.add("Time",       (Displayable) () -> DUF.format(jobEventGroup.getDuration()),
+        builder.put("Date",       (Displayable) () -> DF.format(jobEventGroup.getDateTime().toLocalDate()));
+        builder.put("HourlyRate", new DefaultDisplayable(""));
+        builder.put("Time",       (Displayable) () -> DUF.format(jobEventGroup.getDuration()),
                                   new DefaultStyleable("right-aligned"));
         
         return builder;

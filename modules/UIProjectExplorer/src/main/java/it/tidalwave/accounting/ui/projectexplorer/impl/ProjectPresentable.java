@@ -69,24 +69,24 @@ public class ProjectPresentable implements Presentable
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         // FIXME: uses the column header names, should be an internal id instead
-        builder.add("Client",     (Displayable) () -> project.getCustomer().getName());
-        builder.add("Status",     (Displayable) () -> project.getStatus().name());
-        builder.add("#",          (Displayable) () -> project.getNumber());
-        builder.add("Name",       (Displayable) () -> project.getName());
-        builder.add("Start Date", (Displayable) () -> DF.format(project.getStartDate()),
+        builder.put("Client",     (Displayable) () -> project.getCustomer().getName());
+        builder.put("Status",     (Displayable) () -> project.getStatus().name());
+        builder.put("#",          (Displayable) () -> project.getNumber());
+        builder.put("Name",       (Displayable) () -> project.getName());
+        builder.put("Start Date", (Displayable) () -> DF.format(project.getStartDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
+        builder.put("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Budget",     (Displayable) () -> MF.format(project.getBudget()),
+        builder.put("Budget",     (Displayable) () -> MF.format(project.getBudget()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Notes",      (Displayable) () -> project.getNotes());
+        builder.put("Notes",      (Displayable) () -> project.getNotes());
         
         // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
-        builder.add("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
+        builder.put("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Time",       (Displayable) () -> DUF.format(project.getDuration()),
+        builder.put("Time",       (Displayable) () -> DUF.format(project.getDuration()),
                                   new DefaultStyleable("right-aligned"));
-        builder.add("Invoiced",   (Displayable) () -> MF.format(project.getInvoicedEarnings()),
+        builder.put("Invoiced",   (Displayable) () -> MF.format(project.getInvoicedEarnings()),
                                   new DefaultStyleable("right-aligned"));
 
         return builder;

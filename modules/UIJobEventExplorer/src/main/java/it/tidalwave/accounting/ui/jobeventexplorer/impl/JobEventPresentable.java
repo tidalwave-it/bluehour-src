@@ -64,11 +64,11 @@ public abstract class JobEventPresentable implements Presentable
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         // FIXME: uses the column header names, should be an internal id instead
-        builder.add("Job Event", (Displayable) () -> jobEvent.getName());
-        builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
+        builder.put("Job Event", (Displayable) () -> jobEvent.getName());
+        builder.put("Notes",     (Displayable) () -> jobEvent.getDescription());
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.add("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()),
+        builder.put("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()),
                                  new DefaultStyleable("right-aligned"));
 
         return builder;

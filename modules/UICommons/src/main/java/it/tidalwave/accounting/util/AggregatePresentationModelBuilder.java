@@ -46,7 +46,7 @@ public class AggregatePresentationModelBuilder
     private final Map<String, PresentationModel> map = new HashMap<>();
     
     @Nonnull
-    public void add (final @Nonnull String name, final @Nonnull Object ... roles)
+    public void put (final @Nonnull String name, final @Nonnull Object ... roles)
       {
         map.put(name, new DefaultPresentationModel("", roles));
       }
