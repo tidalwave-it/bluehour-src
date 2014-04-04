@@ -27,18 +27,33 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.spi.DefaultDisplayable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
-import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
-import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import java.util.function.Supplier;
+import javax.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+class RedStyleForNegativeNumber implements Styleable
+  {
+    @Nonnull
+    private final Supplier<BigDecimal> numberSupplier;
+    
+    @Override
+    public Collection<String> getStyles() 
+      {
+        return Arrays.asList(numberSupplier.get().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
+      }
+  }
 
 /***********************************************************************************************************************
  *
@@ -63,13 +78,12 @@ public class FlatJobEventPresentable extends JobEventPresentable
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        builder.add("Date",   (Displayable) () -> DF.format(flatJobEvent.getDate()));
-        builder.add("Time",   new DefaultDisplayable(""));
-        builder.add("Rate",   new DefaultDisplayable(""));
-        builder.add("Amount", (Displayable) () -> MF.format(flatJobEvent.getEarnings()),
-                              new DefaultStyleable("right-aligned"),
-                              (Styleable) ()   -> 
-                                      Arrays.asList(flatJobEvent.getEarnings().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red"));
+        builder.add("Date",       (Displayable) () -> DF.format(flatJobEvent.getDate()));
+        builder.add("Time",       new DefaultDisplayable(""));
+        builder.add("HourlyRate", new DefaultDisplayable(""));
+        builder.add("Amount",     (Displayable) () -> MF.format(flatJobEvent.getEarnings()),
+                                  new DefaultStyleable("right-aligned"),
+                                  new RedStyleForNegativeNumber(() -> flatJobEvent.getEarnings().getAmount()));
         
         return builder;
       }
