@@ -56,6 +56,8 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
     protected static final String TIME = "Time";
     protected static final String DATE = "Date";
 
+    protected static final DefaultStyleable STYLE_RIGHT_ALIGNED = new DefaultStyleable("right-aligned");
+        
     @Nonnull
     protected final TYPE jobEvent;
 
@@ -76,7 +78,7 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
         builder.put(AMOUNT,    (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
-                               new DefaultStyleable("right-aligned"));
+                               STYLE_RIGHT_ALIGNED);
 
         return builder;
       }

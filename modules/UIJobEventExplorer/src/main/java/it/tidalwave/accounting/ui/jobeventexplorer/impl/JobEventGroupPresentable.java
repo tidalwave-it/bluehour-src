@@ -76,7 +76,7 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
         builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDateTime().toLocalDate()));
         builder.put(HOURLY_RATE, new DefaultDisplayable(""));
         builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(jobEvent.getDuration()),
-                                 new DefaultStyleable("right-aligned"));
+                                 STYLE_RIGHT_ALIGNED);
         return builder;
       }
 

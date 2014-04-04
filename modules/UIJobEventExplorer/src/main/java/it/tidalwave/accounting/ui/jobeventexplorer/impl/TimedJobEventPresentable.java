@@ -32,7 +32,6 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.role.Displayable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
@@ -57,10 +56,10 @@ public class TimedJobEventPresentable extends JobEventPresentable<TimedJobEventS
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         builder.put(DATE,        (Displayable) () -> DATETIME_FORMATTER.format(jobEvent.getStartDateTime()));
-        builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(computeDuration()),
-                                 new DefaultStyleable("right-aligned"));
-        builder.put(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getHourlyRate()),
-                                 new DefaultStyleable("right-aligned"));
+        builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(computeDuration()), 
+                                 STYLE_RIGHT_ALIGNED);
+        builder.put(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getHourlyRate()), 
+                                 STYLE_RIGHT_ALIGNED);
         return builder;
       }
 
