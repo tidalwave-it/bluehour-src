@@ -51,22 +51,18 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  *
  **********************************************************************************************************************/
 @DciRole(datumType = JobEventGroupSpi.class)
-public class JobEventGroupPresentable extends JobEventPresentable
+public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupSpi>
   {
-    @Nonnull
-    private final JobEventGroupSpi jobEventGroup;
-    
     public JobEventGroupPresentable (final @Nonnull JobEventGroupSpi jobEventGroup)
       {
         super(jobEventGroup);
-        this.jobEventGroup = jobEventGroup;
       }
     
     @Override @Nonnull
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
         final Styleable styleable = new DefaultStyleable(getStyles());
-        return jobEventGroup.findChildren()
+        return jobEvent.findChildren()
                             .sorted(comparing(JobEvent::getDateTime))
                             .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
                             .collect(toContainerPresentationModel(aggregateBuilder().create(), styleable));
@@ -77,9 +73,9 @@ public class JobEventGroupPresentable extends JobEventPresentable
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEventGroup.getDateTime().toLocalDate()));
+        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDateTime().toLocalDate()));
         builder.put(HOURLY_RATE, new DefaultDisplayable(""));
-        builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(jobEventGroup.getDuration()),
+        builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(jobEvent.getDuration()),
                                  new DefaultStyleable("right-aligned"));
         return builder;
       }

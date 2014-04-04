@@ -45,25 +45,21 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  *
  **********************************************************************************************************************/
 @DciRole(datumType = TimedJobEventSpi.class)
-public class TimedJobEventPresentable extends JobEventPresentable
+public class TimedJobEventPresentable extends JobEventPresentable<TimedJobEventSpi>
   {
-    @Nonnull
-    private final TimedJobEventSpi timedJobEvent;
-    
     public TimedJobEventPresentable (final @Nonnull TimedJobEventSpi timedJobEvent)
       {
         super(timedJobEvent);
-        this.timedJobEvent = timedJobEvent;
       }
     
     @Override @Nonnull
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.put(DATE,        (Displayable) () -> DATETIME_FORMATTER.format(timedJobEvent.getStartDateTime()));
+        builder.put(DATE,        (Displayable) () -> DATETIME_FORMATTER.format(jobEvent.getStartDateTime()));
         builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(computeDuration()),
                                  new DefaultStyleable("right-aligned"));
-        builder.put(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(timedJobEvent.getHourlyRate()),
+        builder.put(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getHourlyRate()),
                                  new DefaultStyleable("right-aligned"));
         return builder;
       }
@@ -71,7 +67,7 @@ public class TimedJobEventPresentable extends JobEventPresentable
     @Nonnull
     private Duration computeDuration() 
       {
-        return Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
+        return Duration.between(jobEvent.getStartDateTime(), jobEvent.getEndDateTime());
       }
 
     @Override @Nonnull

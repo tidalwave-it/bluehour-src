@@ -47,7 +47,7 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public abstract class JobEventPresentable implements Presentable
+public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements Presentable
   {
     protected static final String JOB_EVENT = "Job Event";
     protected static final String NOTES = "Notes";
@@ -57,7 +57,7 @@ public abstract class JobEventPresentable implements Presentable
     protected static final String DATE = "Date";
 
     @Nonnull
-    private final JobEventSpi jobEvent;
+    protected final TYPE jobEvent;
 
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
