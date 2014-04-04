@@ -331,6 +331,7 @@
         <module>UI</module>
         <module>UICommons</module>
         <module>ModelInMemory</module>
+        <module>TheseFoolishThingsSupplements8</module>
     </modules>
 
 </project>

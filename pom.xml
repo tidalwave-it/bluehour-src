@@ -166,6 +166,12 @@
                 <artifactId>bluehour-macosx-embedded-jre</artifactId>
                 <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
+            
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-util-jdk8</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
