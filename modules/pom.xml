@@ -322,15 +322,20 @@
     ================================================================================================================ -->
     <modules>
         <module>Model</module>
-        <module>iBizImporter</module>
+        <module>ModelInMemory</module>
+        <module>TheseFoolishThingsSupplements8</module>
         <module>XmlMarshalling</module>
+        <module>iBizImporter</module>
+        <module>UI</module>
+        <module>UICommons</module>
+        <module>UICustomerExplorer</module>
+        <module>UIProjectExplorer</module>
+        <module>UIJobEventExplorer</module>
+        <module>UIHourlyReport</module>
         <module>JavaFXUI</module>
         <module>JavaFXApplication</module>
         <module>Installers/MacOSX</module>
         <module>Installers/MacOSXEmbeddedJRE</module>
-        <module>UI</module>
-        <module>UICommons</module>
-        <module>ModelInMemory</module>
     </modules>
 
 </project>

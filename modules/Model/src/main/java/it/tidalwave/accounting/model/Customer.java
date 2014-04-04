@@ -129,5 +129,5 @@ public interface Customer extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder();
+    public Builder toBuilder();
   }

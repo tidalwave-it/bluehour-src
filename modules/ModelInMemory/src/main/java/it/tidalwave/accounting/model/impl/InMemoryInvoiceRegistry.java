@@ -33,7 +33,6 @@ import java.util.Map;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -49,27 +48,13 @@ public class InMemoryInvoiceRegistry implements InvoiceRegistry
 
     /*******************************************************************************************************************
      *
-     * 
-     *
-     ******************************************************************************************************************/
-    class InMemoryInvoiceFinder extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
-                                implements InvoiceRegistry.Finder
-      {
-        InMemoryInvoiceFinder()
-          {
-            super(invoiceMapById);  
-          }
-      }
-
-    /*******************************************************************************************************************
-     *
      * {@inheritDoc}
      *
      ******************************************************************************************************************/
     @Override @Nonnull
     public InvoiceRegistry.Finder findInvoices()
       {
-        return new InMemoryInvoiceFinder();
+        return new InMemoryInvoiceFinderFromMap(invoiceMapById);
       }
 
     /*******************************************************************************************************************

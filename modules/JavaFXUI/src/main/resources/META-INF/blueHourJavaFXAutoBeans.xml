@@ -65,4 +65,6 @@
 
     <bean class="it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation" />
 
+    <bean class="it.tidalwave.accounting.ui.hourlyreport.impl.javafx.JavaFxHourlyReportPresentation" />
+
 </beans>

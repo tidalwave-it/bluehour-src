@@ -29,9 +29,11 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import it.tidalwave.accounting.model.Project.Builder;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
+import java.time.Duration;
 
 /***********************************************************************************************************************
  *
@@ -65,6 +67,12 @@ public interface ProjectRegistry
       {
         @Nonnull
         public JobEventFinder withId (@Nonnull Id id);
+
+        @Nonnull
+        public Duration getDuration();
+
+        @Nonnull
+        public Money getEarnings();
       }
     
     /*******************************************************************************************************************

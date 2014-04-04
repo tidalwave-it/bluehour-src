@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
+import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *
@@ -50,6 +51,12 @@ public interface InvoiceRegistry
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);
+        
+        @Nonnull
+        public Finder withProject (@Nonnull Project project);
+
+        @Nonnull
+        public Money getEarnings();
       }
 
     /*******************************************************************************************************************

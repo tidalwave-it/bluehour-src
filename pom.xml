@@ -148,6 +148,26 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-ui-customerexplorer</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-ui-projectexplorer</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-ui-jobeventexplorer</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-ui-hourlyreport</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
                 <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
@@ -164,6 +184,12 @@
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx-embedded-jre</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-util-jdk8</artifactId>
                 <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
         </dependencies>

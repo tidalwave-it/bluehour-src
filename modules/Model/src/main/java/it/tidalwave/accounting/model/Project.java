@@ -33,12 +33,12 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import it.tidalwave.util.As;
-import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
 import it.tidalwave.role.SimpleComposite;
-import it.tidalwave.accounting.model.spi.ObjectFactory;
+import it.tidalwave.accounting.model.ProjectRegistry.JobEventFinder;
 import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -147,7 +147,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
      *
      ******************************************************************************************************************/
     @Nonnull
-    public FinderStream<JobEvent> findChildren();
+    public JobEventFinder findChildren();
     
     /*******************************************************************************************************************
      *
@@ -155,5 +155,5 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder();
+    public Builder toBuilder();
   }

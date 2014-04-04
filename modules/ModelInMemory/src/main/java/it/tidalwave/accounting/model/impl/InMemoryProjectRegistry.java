@@ -28,18 +28,14 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -48,9 +44,12 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
+@RequiredArgsConstructor @Slf4j
 public class InMemoryProjectRegistry implements ProjectRegistry
   {
+    @Nonnull
+    private final Accounting accounting;
+    
     private final Map<Id, Project> projectMapById = new HashMap<>();
     
     /*******************************************************************************************************************
@@ -67,53 +66,6 @@ public class InMemoryProjectRegistry implements ProjectRegistry
           }
       }
 
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    class InMemoryJobEventFinder extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
-                                 implements ProjectRegistry.JobEventFinder
-      {
-        // FIXME: very inefficient
-        @Override @Nonnull
-        protected Collection<? extends JobEvent> findAll() 
-          {
-            final List<JobEvent> result = new ArrayList<>();
-            
-            findProjects().forEach(project -> 
-              {
-                project.findChildren().forEach(jobEvent -> 
-                  {
-                    result.add(jobEvent);
-                    
-                    // FIXME: should be recursive
-                    if (jobEvent instanceof InMemoryJobEventGroup)
-                      {
-                        result.addAll(((InMemoryJobEventGroup)jobEvent).findChildren().results());  
-                      }
-                  });
-              });
-            
-            return result;
-          }
-
-        @Override @Nonnull
-        protected JobEvent findById (final @Nonnull Id id) 
-          {
-            // FIXME: very inefficient
-            final Map<Id, JobEvent> map = findAll().stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
-            
-            // FIXME: should not happen
-            if (!map.containsKey(id))
-              {
-                return JobEvent.builder().withId(id).withName("DUMMY!").create();
-              }
-            
-            return map.get(id);
-          }  
-      }
-    
     /*******************************************************************************************************************
      *
      * {@inheritDoc}
@@ -133,7 +85,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public ProjectRegistry.JobEventFinder findJobEvents()
       {
-        return new InMemoryJobEventFinder();
+        return new InMemoryJobEventFinder(findProjects());
       }
     
     /*******************************************************************************************************************
@@ -144,6 +96,10 @@ public class InMemoryProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public Project.Builder addProject()
       {
-        return new Project.Builder(project -> projectMapById.put(project.getId(), project));
+        return new Project.Builder(project -> 
+          {
+            projectMapById.put(project.getId(), project);
+            ((InMemoryProject)project).setAccounting(accounting);
+          });
       }
   }

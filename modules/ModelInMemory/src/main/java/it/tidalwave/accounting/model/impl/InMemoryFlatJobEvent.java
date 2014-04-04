@@ -74,7 +74,7 @@ public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEve
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public JobEvent.Builder asBuilder()
+    public JobEvent.Builder toBuilder()
       {
         return new Builder(id, Type.FLAT, date.atStartOfDay(), null,
                            name, description, earnings, null, Collections.<JobEvent>emptyList());

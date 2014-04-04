@@ -32,16 +32,12 @@ import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BinaryOperator;
-import it.tidalwave.util.Finder;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
-import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -70,29 +66,11 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
 
     /*******************************************************************************************************************
      *
-     * {@inheritDoc}
-     * 
-     ******************************************************************************************************************/
-    @Override @Nonnull
-    public FinderStream<JobEvent> findChildren()
-      {
-        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
-          {
-            @Override @Nonnull
-            protected List<? extends JobEvent> computeResults()
-              {
-                return Collections.unmodifiableList(events);
-              }
-          };
-      }
-    
-    /*******************************************************************************************************************
-     *
      * {@inheritDoc} 
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public JobEvent.Builder asBuilder()
+    public JobEvent.Builder toBuilder()
       {
         return new Builder(id, null, null, null, name, 
                            description, null, null, new ArrayList<>(findChildren().results()));
@@ -119,7 +97,7 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
     @Override @Nonnull
     public Money getEarnings()
       {
-        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getEarnings()).reduce(Money.ZERO, Money::add);
+        return findChildren().getEarnings();
       }
     
     /*******************************************************************************************************************
@@ -130,6 +108,17 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
     @Override @Nonnull
     public Duration getDuration() 
       {
-        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return findChildren().getDuration();
       }
-  }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc} 
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public ProjectRegistry.JobEventFinder findChildren()
+      {
+        return new InMemoryJobEventFinderFromList(events);  
+      }
+  }  

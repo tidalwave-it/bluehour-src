@@ -131,5 +131,5 @@ public interface Invoice extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public Builder asBuilder();
+    public Builder toBuilder();
   }

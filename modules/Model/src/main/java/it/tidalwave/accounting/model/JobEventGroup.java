@@ -29,7 +29,6 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import it.tidalwave.util.FinderStream;
 import it.tidalwave.role.SimpleComposite;
 
 /***********************************************************************************************************************
@@ -42,5 +41,5 @@ import it.tidalwave.role.SimpleComposite;
 public interface JobEventGroup extends JobEvent, SimpleComposite<JobEvent>
   {
     @Override @Nonnull
-    public FinderStream<JobEvent> findChildren();
+    public ProjectRegistry.JobEventFinder findChildren();
   }

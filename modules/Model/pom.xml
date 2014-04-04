@@ -69,6 +69,10 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-util-jdk8</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>

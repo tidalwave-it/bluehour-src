@@ -49,6 +49,26 @@
             <artifactId>it-tidalwave-accounting-ui</artifactId>
         </dependency>
         <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-ui-customerexplorer</artifactId>
+            <version>1.0-ALPHA-3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-ui-projectexplorer</artifactId>
+            <version>1.0-ALPHA-3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-ui-jobeventexplorer</artifactId>
+            <version>1.0-ALPHA-3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-ui-hourlyreport</artifactId>
+            <version>1.0-ALPHA-3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>it.tidalwave.northernwind.rca</groupId>
             <artifactId>it-tidalwave-role-ui-javafx</artifactId>
         </dependency>

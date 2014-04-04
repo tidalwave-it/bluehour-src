@@ -51,7 +51,7 @@ public class InMemoryAccounting implements Accounting
     private final CustomerRegistry customerRegistry = new InMemoryCustomerRegistry(this);
 
     @Getter
-    private final ProjectRegistry projectRegistry = new InMemoryProjectRegistry();
+    private final ProjectRegistry projectRegistry = new InMemoryProjectRegistry(this);
     
     @Getter
     private final InvoiceRegistry invoiceRegistry = new InMemoryInvoiceRegistry();

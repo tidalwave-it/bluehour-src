@@ -31,24 +31,22 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
-import it.tidalwave.util.Finder;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.Project.Builder;
+import it.tidalwave.accounting.model.ProjectRegistry.JobEventFinder;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.AllArgsConstructor;
 import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Wither;
 import static lombok.AccessLevel.PRIVATE;
@@ -65,6 +63,9 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport"})
 public class InMemoryProject implements ProjectSpi
   {
+    @Setter // FIXME
+    private Accounting accounting;
+    
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
 
@@ -103,7 +104,7 @@ public class InMemoryProject implements ProjectSpi
 
     @Nonnull
     private final List<JobEvent> events; // FIXME: immutable
-
+    
     /*******************************************************************************************************************
      *
      * 
@@ -131,47 +132,51 @@ public class InMemoryProject implements ProjectSpi
      *
      ******************************************************************************************************************/
     @Override @Nonnull
-    public FinderStream<JobEvent> findChildren()
+    public JobEventFinder findChildren()
       {
-        return new FinderStreamSupport<JobEvent, Finder<JobEvent>>()
-          {
-            @Override @Nonnull
-            protected List<? extends JobEvent> computeResults()
-              {
-                return Collections.unmodifiableList(events);
-              }
-          };
+        return new InMemoryJobEventFinderFromList(events);
       }
     
     /*******************************************************************************************************************
      *
-     * 
+     * {@inheritDoc}
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
     public Money getEarnings()
       {
-        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getEarnings()).reduce(Money.ZERO, Money::add);
+        return findChildren().getEarnings();
       }
     
     /*******************************************************************************************************************
      *
-     * 
+     * {@inheritDoc}
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
     public Duration getDuration()
       {
-        return findChildren().map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return findChildren().getDuration();
       }
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * {@inheritDoc}
      * 
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Builder asBuilder()
+    public Money getInvoicedEarnings()
+      {
+        return accounting.getInvoiceRegistry().findInvoices().withProject(this).getEarnings();
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     * 
+     ******************************************************************************************************************/
+    @Override @Nonnull
+    public Builder toBuilder()
       {
         return new Builder(id, customer, name, number, description, notes, status, hourlyRate, budget, 
                            startDate, endDate, events, Project.Builder.Callback.DEFAULT);

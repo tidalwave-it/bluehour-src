@@ -30,7 +30,6 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.time.LocalDate;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
@@ -112,6 +111,14 @@ public interface ProjectSpi extends Project
      ******************************************************************************************************************/
     @Nonnull
     public Money getBudget();
+    
+    /*******************************************************************************************************************
+     *
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public Money getInvoicedEarnings();
     
     /*******************************************************************************************************************
      *

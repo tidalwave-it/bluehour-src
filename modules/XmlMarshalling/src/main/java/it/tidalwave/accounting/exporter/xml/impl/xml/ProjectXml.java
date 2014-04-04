@@ -114,7 +114,7 @@ public class ProjectXml
     
     public ProjectXml (final @Nonnull Project project)
       {
-        final Project.Builder builder = project.asBuilder();
+        final Project.Builder builder = project.toBuilder();
         this.id = builder.getId();
         this.customerXml = new CustomerXml(builder.getCustomer());
         this.name = builder.getName();
