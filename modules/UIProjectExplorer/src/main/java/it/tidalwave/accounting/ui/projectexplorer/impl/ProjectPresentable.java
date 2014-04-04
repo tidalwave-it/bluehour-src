@@ -81,10 +81,12 @@ public class ProjectPresentable implements Presentable
                                   new DefaultStyleable("right-aligned"));
         builder.add("Notes",      (Displayable) () -> project.getNotes());
         
-        // FIXME: this is dynamically computed, can be slow - should be also cached
+        // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
         builder.add("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
                                   new DefaultStyleable("right-aligned"));
         builder.add("Time",       (Displayable) () -> DUF.format(project.getDuration()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("Invoiced",   (Displayable) () -> MF.format(project.getInvoicedAmount()),
                                   new DefaultStyleable("right-aligned"));
 
         return builder;
