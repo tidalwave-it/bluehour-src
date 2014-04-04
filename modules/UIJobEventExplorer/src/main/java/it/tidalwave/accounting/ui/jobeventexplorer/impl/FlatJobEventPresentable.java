@@ -28,15 +28,16 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.role.Displayable;
-import it.tidalwave.role.ui.Presentable;
-import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
+import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.accounting.model.spi.JobEventSpi;
-import lombok.RequiredArgsConstructor;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -45,34 +46,37 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
-public abstract class JobEventPresentable implements Presentable
+@DciRole(datumType = FlatJobEventSpi.class)
+public class FlatJobEventPresentable extends JobEventPresentable
   {
     @Nonnull
-    private final JobEventSpi jobEvent;
-
-    @Override
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
+    private final FlatJobEventSpi flatJobEvent;
+    
+    public FlatJobEventPresentable (final @Nonnull FlatJobEventSpi flatJobEvent)
       {
-        final Styleable styleable = new DefaultStyleable(getStyles());
-        return new DefaultPresentationModel("", aggregateBuilder().create(), styleable);
+        super(flatJobEvent);
+        this.flatJobEvent = flatJobEvent;
       }
     
-    @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    @Override @Nonnull
+    protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
-        final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
-        // FIXME: uses the column header names, should be an internal id instead
-        builder.add("Job Event", (Displayable) () -> jobEvent.getName());
-        builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
+        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
         
-        // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.add("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()),
-                                 new DefaultStyleable("right-aligned"));
-
+        builder.add("Date",   (Displayable) () -> DF.format(flatJobEvent.getDate()));
+        builder.add("Time",   new DefaultDisplayable(""));
+        builder.add("Rate",   new DefaultDisplayable(""));
+        builder.add("Amount", (Displayable) () -> MF.format(flatJobEvent.getEarnings()),
+                              new DefaultStyleable("right-aligned"),
+                              (Styleable) ()   -> 
+                                      Arrays.asList(flatJobEvent.getEarnings().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red"));
+        
         return builder;
       }
-    
-    @Nonnull
-    protected abstract Collection<String> getStyles();
+
+    @Override @Nonnull
+    protected Collection<String> getStyles() 
+      {
+        return Arrays.asList("flat-job-event");
+      }
   }

@@ -28,13 +28,20 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
+import static java.util.Comparator.comparing;
+import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -43,41 +50,44 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = TimedJobEventSpi.class)
-public class TimedJobEventPresentable extends JobEventPresentable
+@DciRole(datumType = JobEventGroupSpi.class)
+public class JobEventGroupPresentable extends JobEventPresentable
   {
     @Nonnull
-    private final TimedJobEventSpi timedJobEvent;
+    private final JobEventGroupSpi jobEventGroup;
     
-    public TimedJobEventPresentable (final @Nonnull TimedJobEventSpi timedJobEvent)
+    public JobEventGroupPresentable (final @Nonnull JobEventGroupSpi jobEventGroup)
       {
-        super(timedJobEvent);
-        this.timedJobEvent = timedJobEvent;
+        super(jobEventGroup);
+        this.jobEventGroup = jobEventGroup;
       }
     
+    @Override @Nonnull
+    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
+      {
+        final Styleable styleable = new DefaultStyleable(getStyles());
+        return jobEventGroup.findChildren()
+                            .sorted(comparing(JobEvent::getDateTime))
+                            .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
+                            .collect(toContainerPresentationModel(aggregateBuilder().create(), styleable));
+        // FIXME: use SimpleCompositePresentable?
+      }
+
     @Override @Nonnull
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        
-        builder.add("Date",       (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime()));
-        builder.add("Time",       (Displayable) () -> DUF.format(computeDuration()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.add("HourlyRate", (Displayable) () -> MF.format(timedJobEvent.getHourlyRate()),
+        builder.add("Date",       (Displayable) () -> DF.format(jobEventGroup.getDateTime().toLocalDate()));
+        builder.add("HourlyRate", new DefaultDisplayable(""));
+        builder.add("Time",       (Displayable) () -> DUF.format(jobEventGroup.getDuration()),
                                   new DefaultStyleable("right-aligned"));
         
         return builder;
       }
 
-    @Nonnull
-    private Duration computeDuration() 
-      {
-        return Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
-      }
-
     @Override @Nonnull
     protected Collection<String> getStyles() 
       {
-        return Arrays.asList("timed-job-event");
+        return Arrays.asList("job-event-group");
       }
   }

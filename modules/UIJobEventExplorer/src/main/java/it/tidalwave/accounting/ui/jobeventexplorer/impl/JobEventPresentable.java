@@ -25,20 +25,18 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.projectexplorer.impl;
+package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import it.tidalwave.dci.annotation.DciRole;
+import java.util.Collection;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.accounting.ui.jobeventexplorer.impl.AggregatePresentationModelBuilder;
-import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -48,20 +46,17 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = ProjectSpi.class)
 @RequiredArgsConstructor
-public class ProjectPresentable implements Presentable
+public abstract class JobEventPresentable implements Presentable
   {
     @Nonnull
-    private final ProjectSpi project;
+    private final JobEventSpi jobEvent;
 
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
-        final List<Object> temp = new ArrayList<>();
-        temp.addAll(Arrays.asList(instanceRoles));
-        temp.add(aggregateBuilder().create());
-        return new DefaultPresentationModel(project, temp.toArray());
+        final Styleable styleable = new DefaultStyleable(getStyles());
+        return new DefaultPresentationModel("", aggregateBuilder().create(), styleable);
       }
     
     @Nonnull
@@ -69,24 +64,16 @@ public class ProjectPresentable implements Presentable
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         // FIXME: uses the column header names, should be an internal id instead
-        builder.add("Client",     (Displayable) () -> project.getCustomer().getName());
-        builder.add("Status",     (Displayable) () -> project.getStatus().name());
-        builder.add("#",          (Displayable) () -> project.getNumber());
-        builder.add("Name",       (Displayable) () -> project.getName());
-        builder.add("Start Date", (Displayable) () -> DF.format(project.getStartDate()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.add("Due Date",   (Displayable) () -> DF.format(project.getEndDate()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.add("Budget",     (Displayable) () -> MF.format(project.getBudget()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.add("Notes",      (Displayable) () -> project.getNotes());
+        builder.add("Job Event", (Displayable) () -> jobEvent.getName());
+        builder.add("Notes",     (Displayable) () -> jobEvent.getDescription());
         
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.add("Earnings",   (Displayable) () -> MF.format(project.getEarnings()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.add("Time",       (Displayable) () -> DUF.format(project.getDuration()),
-                                  new DefaultStyleable("right-aligned"));
+        builder.add("Amount",    (Displayable) () -> MF.format(jobEvent.getEarnings()),
+                                 new DefaultStyleable("right-aligned"));
 
         return builder;
       }
+    
+    @Nonnull
+    protected abstract Collection<String> getStyles();
   }

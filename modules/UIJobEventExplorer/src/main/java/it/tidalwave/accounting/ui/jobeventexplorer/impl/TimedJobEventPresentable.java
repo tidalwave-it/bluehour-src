@@ -28,12 +28,15 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
-import it.tidalwave.role.Aggregate;
-import it.tidalwave.role.spi.MapAggregate;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collection;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *
@@ -41,19 +44,41 @@ import it.tidalwave.role.ui.spi.DefaultPresentationModel;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class AggregatePresentationModelBuilder 
+@DciRole(datumType = TimedJobEventSpi.class)
+public class TimedJobEventPresentable extends JobEventPresentable
   {
-    private final Map<String, PresentationModel> map = new HashMap<>();
-    
     @Nonnull
-    public void add (final @Nonnull String name, final @Nonnull Object ... roles)
+    private final TimedJobEventSpi timedJobEvent;
+    
+    public TimedJobEventPresentable (final @Nonnull TimedJobEventSpi timedJobEvent)
       {
-        map.put(name, new DefaultPresentationModel("", roles));
+        super(timedJobEvent);
+        this.timedJobEvent = timedJobEvent;
       }
     
-    @Nonnull
-    public Aggregate create()
+    @Override @Nonnull
+    protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
-        return new MapAggregate<>(map);
+        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
+        
+        builder.add("Date",       (Displayable) () -> DTF.format(timedJobEvent.getStartDateTime()));
+        builder.add("Time",       (Displayable) () -> DUF.format(computeDuration()),
+                                  new DefaultStyleable("right-aligned"));
+        builder.add("HourlyRate", (Displayable) () -> MF.format(timedJobEvent.getHourlyRate()),
+                                  new DefaultStyleable("right-aligned"));
+        
+        return builder;
+      }
+
+    @Nonnull
+    private Duration computeDuration() 
+      {
+        return Duration.between(timedJobEvent.getStartDateTime(), timedJobEvent.getEndDateTime());
+      }
+
+    @Override @Nonnull
+    protected Collection<String> getStyles() 
+      {
+        return Arrays.asList("timed-job-event");
       }
   }
