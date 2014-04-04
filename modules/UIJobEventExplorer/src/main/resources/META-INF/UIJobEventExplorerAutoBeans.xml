@@ -23,9 +23,9 @@
 
   $Id$
 
-  *********************************************************************************************************************
-  #L%
-  -->
+*********************************************************************************************************************
+#L%
+-->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -59,10 +59,8 @@
 
     <aop:aspectj-autoproxy/>
 
-    <bean id="preferencesHandler"
-          class="it.tidalwave.accounting.util.DefaultPreferencesHandler"/>
-        
-    <bean id="accountingController"
-          class="it.tidalwave.accounting.impl.DefaultAccountingController" />
+    <bean id="jobEventExplorerPresentationControl"
+              class="it.tidalwave.accounting.ui.jobeventexplorer.impl.DefaultJobEventExplorerPresentationControl" />
+
 
 </beans>
