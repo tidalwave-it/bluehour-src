@@ -41,8 +41,6 @@ import it.tidalwave.accounting.model.Project.Builder;
  **********************************************************************************************************************/
 public interface CustomerRegistry
   {
-    public static final Class<CustomerRegistry> CustomerRegistry = CustomerRegistry.class;
-
     /*******************************************************************************************************************
      *
      * 

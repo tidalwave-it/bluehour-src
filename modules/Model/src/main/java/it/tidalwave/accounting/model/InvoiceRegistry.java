@@ -40,8 +40,6 @@ import it.tidalwave.util.spi.ExtendedFinderSupport;
  **********************************************************************************************************************/
 public interface InvoiceRegistry
   {
-    public static final Class<InvoiceRegistry> InvoiceRegistry = InvoiceRegistry.class;
-
     /*******************************************************************************************************************
      *
      * 
