@@ -89,7 +89,7 @@
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
     </properties>
-
+    
     <!-- ===============================================================================================================
 
         Here you declare the versions for all the modules in your project. Don't declare here the versions for
@@ -205,6 +205,12 @@
 
     ================================================================================================================ -->
     <repositories>
+        <!-- For Mac OS X native libraries -->
+        <repository>
+            <id>maven2-thirdparty-repository.tidalwave.it</id>
+            <name>Tidalwave Release Repository</name>
+            <url>http://services.tidalwave.it/nexus/content/repositories/thirdparty</url>
+        </repository>
         <repository>
             <id>releases-oss.sonatype.org</id>
             <name>Sonatype Releases Repository</name>
@@ -221,7 +227,8 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories>    
+
 
 <!--    <mailingLists>
         <mailingList>
