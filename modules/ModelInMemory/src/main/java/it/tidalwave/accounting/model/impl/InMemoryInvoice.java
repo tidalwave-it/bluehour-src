@@ -57,6 +57,8 @@ import lombok.ToString;
 @Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
 public class InMemoryInvoice implements InvoiceSpi
   {
+    private static final long serialVersionUID = 1L;
+    
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
 
@@ -70,6 +72,8 @@ public class InMemoryInvoice implements InvoiceSpi
                                     FinderStream<JobEvent>, 
                                     Finder<JobEvent>
       {
+        private static final long serialVersionUID = 1L;
+    
         @Override @Nonnull
         protected List<? extends JobEvent> computeResults() 
           {

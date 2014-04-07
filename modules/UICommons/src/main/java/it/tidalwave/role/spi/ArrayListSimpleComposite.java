@@ -44,6 +44,8 @@ import it.tidalwave.util.spi.SimpleFinderSupport;
  **********************************************************************************************************************/
 public class ArrayListSimpleComposite<TYPE> extends DefaultSimpleComposite<TYPE>
   {
+    private static final long serialVersionUID = 1L;
+    
     public ArrayListSimpleComposite (final @Nonnull List<TYPE> items)
       {
         super(new SimpleFinderSupport<TYPE>()

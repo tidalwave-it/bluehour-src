@@ -48,6 +48,8 @@ import lombok.RequiredArgsConstructor;
 public class FinderWithIdMapSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
   extends FinderWithIdSupport<TYPE, FINDER>
   {
+    private static final long serialVersionUID = 1L;
+    
     @Nonnull
     private final Map<Id, TYPE> mapById;
     

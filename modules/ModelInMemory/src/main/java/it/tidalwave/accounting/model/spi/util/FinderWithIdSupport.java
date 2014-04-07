@@ -52,13 +52,15 @@ public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSup
                                 extends FinderStreamSupport<TYPE, FINDER>
                                 implements ExtendedFinderSupport<TYPE, FINDER>, FinderStream<TYPE>, Finder<TYPE>
   {
+    private static final long serialVersionUID = 1L;
+    
     @CheckForNull
     /* package */ Id id;
     
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
-        final FinderWithIdSupport clone = (FinderWithIdSupport)super.clone();
+        final FinderWithIdSupport<TYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
         clone.id = id;
         return (FINDER)clone;
       }

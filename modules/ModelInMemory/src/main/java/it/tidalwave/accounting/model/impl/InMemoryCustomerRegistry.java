@@ -47,6 +47,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor @Slf4j
 public class InMemoryCustomerRegistry implements CustomerRegistry
   {
+    private static final long serialVersionUID = 1L;
+    
     @Nonnull
     private final Accounting accounting;
     
@@ -60,6 +62,8 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
     class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, CustomerRegistry.Finder>
                                  implements CustomerRegistry.Finder
       {
+        private static final long serialVersionUID = 1L;
+    
         InMemoryCustomerFinder()
           {
             super(customerMapById);  

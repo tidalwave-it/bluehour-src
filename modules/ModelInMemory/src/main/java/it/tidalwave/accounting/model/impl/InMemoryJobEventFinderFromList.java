@@ -43,6 +43,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class InMemoryJobEventFinderFromList extends InMemoryJobEventFinderSupport
   {
+    private static final long serialVersionUID = 1L;
+    
     @Nonnull
     private final List<? extends JobEvent> events;
     

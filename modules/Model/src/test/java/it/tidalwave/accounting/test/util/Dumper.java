@@ -46,6 +46,7 @@ import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.util.spi.AsSupport;
+import java.lang.reflect.Modifier;
 import lombok.RequiredArgsConstructor;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
@@ -162,7 +163,8 @@ public class Dumper
     private final static Predicate<? super Field> excludeUnwantedFields = field ->
       {
         final Class<?> type = field.getType();
-        return !Collection.class.isAssignableFrom(type)
+        return !Modifier.isStatic(field.getModifiers())
+               && !Collection.class.isAssignableFrom(type)
                && !Accounting.class.isAssignableFrom(type) 
                && !AsSupport.class.isAssignableFrom(type);
       };
