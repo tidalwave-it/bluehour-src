@@ -213,9 +213,9 @@
         </repository>
         <!-- For AspectJ RC -->
         <repository>
-            <id>jboss-releases</id>
-            <name>JBoss Release Repository</name>
-            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/milestone</url>
         </repository>
         <repository>
             <id>releases-oss.sonatype.org</id>
