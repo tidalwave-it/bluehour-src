@@ -63,6 +63,8 @@ public class FinderStreamSupport<TYPE, EXTENDED_FINDER extends Finder<TYPE>>
                                 implements ExtendedFinderSupport<TYPE, EXTENDED_FINDER>, 
                                            FinderStream<TYPE>
   {
+    private static final long serialVersionUID = 1L;
+    
     @Override @Nonnull
     public Optional<TYPE> optionalResult()
       {

@@ -47,22 +47,26 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor @Slf4j
 public class InMemoryProjectRegistry implements ProjectRegistry
   {
+    private static final long serialVersionUID = 1L;
+
     @Nonnull
     private final Accounting accounting;
-    
+
     private final Map<Id, Project> projectMapById = new HashMap<>();
-    
+
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
                                 implements ProjectRegistry.ProjectFinder
       {
+        private static final long serialVersionUID = 1L;
+
         InMemoryProjectFinder()
           {
-            super(projectMapById);  
+            super(projectMapById);
           }
       }
 
@@ -87,7 +91,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
       {
         return new InMemoryJobEventFinder(findProjects());
       }
-    
+
     /*******************************************************************************************************************
      *
      * {@inheritDoc}
@@ -96,7 +100,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public Project.Builder addProject()
       {
-        return new Project.Builder(project -> 
+        return new Project.Builder(project ->
           {
             projectMapById.put(project.getId(), project);
             ((InMemoryProject)project).setAccounting(accounting);

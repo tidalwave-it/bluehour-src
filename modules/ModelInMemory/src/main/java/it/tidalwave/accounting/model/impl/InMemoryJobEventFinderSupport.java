@@ -47,6 +47,8 @@ import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
 public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
                                 implements ProjectRegistry.JobEventFinder
   {
+    private static final long serialVersionUID = 1L;
+    
     @Override @Nonnull
     protected JobEvent findById (final @Nonnull Id id) 
       {

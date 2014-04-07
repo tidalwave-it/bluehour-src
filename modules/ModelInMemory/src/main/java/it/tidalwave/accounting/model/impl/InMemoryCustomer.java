@@ -58,9 +58,13 @@ import lombok.ToString;
 @Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
 public class InMemoryCustomer implements Customer
   {
+    private static final long serialVersionUID = 1L;
+    
     class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
                                implements ProjectRegistry.ProjectFinder
       {
+        private static final long serialVersionUID = 1L;
+    
         InMemoryProjectFinder (final Map<Id, Project> projectMapById)
           {
             super(projectMapById);  

@@ -50,6 +50,8 @@ import static java.util.stream.Collectors.toList;
 public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
                                           implements InvoiceRegistry.Finder
   {
+    private static final long serialVersionUID = 1L;
+    
     @CheckForNull
     private Project project;
 
