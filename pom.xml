@@ -213,9 +213,9 @@
         </repository>
         <!-- For AspectJ RC -->
         <repository>
-            <id>jobss-releases</id>
+            <id>jboss-releases</id>
             <name>JBoss Release Repository</name>
-            <url>http://services.tidalwave.it/nexus/content/repositories/jboss-releases/</url>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
         </repository>
         <repository>
             <id>releases-oss.sonatype.org</id>
