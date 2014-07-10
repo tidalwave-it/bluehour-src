@@ -64,6 +64,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
     public void importCustomers()
       throws IOException
       {
+        log.debug("importCustomers()");
         final NativeAddressBook addressBook = NativeAddressBook.instance();
         IBizUtils.loadConfiguration(path.resolve("clients")).getStream("clients").forEach(customerConfig -> 
           {
