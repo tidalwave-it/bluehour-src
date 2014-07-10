@@ -31,18 +31,24 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.TreeTableView;
-import org.springframework.beans.factory.annotation.Configurable;
+import it.tidalwave.util.AsException;
 import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.application.ToolBarModel;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
-import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
-import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation;
+import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
+import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
+import it.tidalwave.role.ui.javafx.JavaFXBinder;
+import org.springframework.beans.factory.annotation.Configurable;
 import lombok.extern.slf4j.Slf4j;
-//import static it.tidalwave.role.ui.javafx.impl.JavaFXSafeComponentBuilder.*;
+import static it.tidalwave.role.Displayable.Displayable;
+import static it.tidalwave.role.ui.UserActionProvider.UserActionProvider;
 
 /***********************************************************************************************************************
  *
@@ -71,6 +77,15 @@ public class JavaFXApplicationPresentationDelegate
     @Inject @Nonnull
     private JavaFxJobEventExplorerPresentation javaFxJobEventExplorerPresentation;
     
+    @Inject @Nonnull
+    private ToolBarModel toolBarModel;
+    
+    @Inject @Nonnull
+    private JavaFXBinder javaFXBinder;
+    
+    @FXML
+    private ToolBar tbToolBar;
+    
     @FXML
     private ListView<PresentationModel> lvCustomerExplorer;
     
@@ -91,5 +106,31 @@ public class JavaFXApplicationPresentationDelegate
         javaFxCustomerExplorerPresentation.bind(lvCustomerExplorer);
         javaFxProjectExplorerPresentation.bind(tvProjectExplorer);
         javaFxJobEventExplorerPresentation.bind(ttvJobEventExplorer);
+        
+        populateToolBar();
+      }
+    
+    private void populateToolBar() // FIXME: push up
+      {
+        toolBarModel.as(UserActionProvider).getActions().stream().map((action) -> 
+          {
+            final Button button = new Button();
+            
+            try // FIXME: move to JavaFXBinder
+              {
+                button.setText(action.as(Displayable).getDisplayName());
+              }
+            catch (AsException e)
+              {
+                button.setText("???");
+              }
+            
+            javaFXBinder.bind(button, action);
+            return button;
+          })
+        .forEach((button) -> 
+          {
+            tbToolBar.getItems().add(button);
+          });
       }
   }
