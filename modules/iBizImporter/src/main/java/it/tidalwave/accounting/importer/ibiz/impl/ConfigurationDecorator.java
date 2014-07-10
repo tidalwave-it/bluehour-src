@@ -44,6 +44,8 @@ import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
  *
+ * Decorates Apache Commons' {@link Configuration} to provide extra methods for specific data types.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
