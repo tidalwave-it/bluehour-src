@@ -128,7 +128,7 @@
                                     <artifactId>addressbook</artifactId>
                                     <type>jnilib</type>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>target</outputDirectory>
+                                    <outputDirectory>${basedir}/target</outputDirectory>
                                     <destFileName>libAddressBook.jnilib</destFileName>
                                 </artifactItem>
                             </artifactItems>
@@ -141,7 +141,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>-Djava.library.path=target</argLine>
+                    <argLine>-Djava.library.path=${basedir}/target</argLine>
                 </configuration>
             </plugin>
         </plugins>
