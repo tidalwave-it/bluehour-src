@@ -60,6 +60,7 @@ public class AccountingXmlUnmarshallable implements Unmarshallable
           {
             final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
             final Unmarshaller unmarshaller = jaxbc.createUnmarshaller();
+            // FIXME: Set encoding
             final AccountingXml accountingXml = (AccountingXml)unmarshaller.unmarshal(is);
             accountingXml.fill(accounting);
             return (TYPE)accounting; 
