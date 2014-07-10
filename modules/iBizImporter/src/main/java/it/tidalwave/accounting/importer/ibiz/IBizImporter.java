@@ -40,6 +40,8 @@ import lombok.experimental.Wither;
 
 /***********************************************************************************************************************
  *
+ * An object capable to import data from iBiz.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -66,10 +68,12 @@ public interface IBizImporter extends Accounting
 
     /*******************************************************************************************************************
      *
+     * Runs a full import round.
+     * 
      * @throws  IOException in case of error
      * 
      ******************************************************************************************************************/
     @Nonnull
     public void importAll()
       throws IOException;
-      }
+  }
