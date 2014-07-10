@@ -37,6 +37,7 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
@@ -70,8 +71,14 @@ public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSup
       {
         if (id != null)
           {
-            final TYPE item = findById(id);
-            return (item != null) ? Collections.singletonList(item) : Collections.<TYPE>emptyList();
+            try
+              {
+                return Collections.singletonList(findById(id));
+              }
+            catch (NotFoundException e)
+              {
+                return Collections.<TYPE>emptyList();
+              }
           }
         else
           {
@@ -82,7 +89,8 @@ public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSup
     @Nonnull
     protected abstract Collection<? extends TYPE> findAll();
     
-    @CheckForNull
-    protected abstract TYPE findById (@Nonnull Id id);
+    @Nonnull
+    protected abstract TYPE findById (@Nonnull Id id)
+      throws NotFoundException;
   }
 
