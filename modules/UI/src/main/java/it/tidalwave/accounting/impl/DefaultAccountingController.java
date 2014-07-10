@@ -105,7 +105,7 @@ public class DefaultAccountingController
     @VisibleForTesting void loadData()
       throws IOException
       {
-        final Path dataFile = preferencesHandler.getAppFolder().resolve("blueHour.xml");
+        final Path dataFile = preferencesHandler.getAppFolder().resolve(PreferencesHandler.BLUEHOUR_FILE_NAME);
         log.info(">>>> loading data from {}...", dataFile);
 
         try (final InputStream is = new FileInputStream(dataFile.toFile()))
