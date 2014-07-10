@@ -59,6 +59,6 @@
 
     <aop:aspectj-autoproxy/>
     
-    <bean name="toolBar" class="it.tidalwave.application.impl.DefaultToolBarModel" />
+    <bean name="toolBar" class="it.tidalwave.application.javafx.JavaFXToolBarModel" />
 
 </beans>

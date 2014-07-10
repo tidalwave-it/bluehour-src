@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.application.impl;
+package it.tidalwave.application.spi;
 
 import it.tidalwave.application.ToolBarModel;
 import it.tidalwave.util.spi.AsSupport;
@@ -37,7 +37,7 @@ import lombok.Delegate;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class DefaultToolBarModel implements ToolBarModel 
+public abstract class ToolBarModelSupport implements ToolBarModel 
   {
     @Delegate
     private final AsSupport asSupport = new AsSupport(this);
