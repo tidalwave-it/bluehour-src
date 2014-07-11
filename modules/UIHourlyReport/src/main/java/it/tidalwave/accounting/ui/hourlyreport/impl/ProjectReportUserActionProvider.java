@@ -42,6 +42,8 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 /***********************************************************************************************************************
  *
+ * This role provides a "Create time report..." action for {@link Project} objects.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *

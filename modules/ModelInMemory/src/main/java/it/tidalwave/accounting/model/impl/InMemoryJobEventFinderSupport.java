@@ -37,6 +37,7 @@ import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
+import it.tidalwave.util.NotFoundException;
 
 /***********************************************************************************************************************
  *
@@ -45,12 +46,13 @@ import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
  *
  **********************************************************************************************************************/
 public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
-                                implements ProjectRegistry.JobEventFinder
+                                                    implements ProjectRegistry.JobEventFinder
   {
     private static final long serialVersionUID = 1L;
     
     @Override @Nonnull
     protected JobEvent findById (final @Nonnull Id id) 
+      throws NotFoundException 
       {
         // FIXME: very inefficient
         final Map<Id, JobEvent> map = findAll().stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
@@ -58,7 +60,8 @@ public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<
         // FIXME: should not happen
         if (!map.containsKey(id))
           {
-            return JobEvent.builder().withId(id).withName("DUMMY!").create();
+            throw new NotFoundException(id.toString());
+//            return JobEvent.builder().withId(id).withName("DUMMY!").create();
           }
 
         return map.get(id);

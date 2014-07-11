@@ -38,6 +38,8 @@ import java.nio.file.Path;
  **********************************************************************************************************************/
 public interface PreferencesHandler 
   {
+    public final static String BLUEHOUR_FILE_NAME = "blueHour.xml";
+    
     @Nonnull
     public Path getAppFolder();
     

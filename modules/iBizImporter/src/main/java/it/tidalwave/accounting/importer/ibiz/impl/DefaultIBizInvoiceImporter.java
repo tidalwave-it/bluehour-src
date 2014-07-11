@@ -81,6 +81,7 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
     public void importInvoices()
       throws IOException
       {
+        log.debug("importInvoices()");
         Files.walkFileTree(path.resolve("Invoices"), NO_OPTIONS, 1, new SimpleFileVisitor<Path>()
           {
             @Override

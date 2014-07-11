@@ -68,6 +68,7 @@ public class AccountingXmlMarshallableTest
       throws Exception
       {
         final Path iBizFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME
+//        final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz"); // FIXME
         
         if (Files.exists(iBizFolder))
           {

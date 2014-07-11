@@ -36,6 +36,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-ui-importer-ibiz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
         </dependency>
         <dependency>
@@ -132,5 +136,51 @@
             <artifactId>it-tidalwave-messagebus-spring</artifactId>
         </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>jabaddressbook</groupId>
+                                    <artifactId>addressbook</artifactId>
+                                    <type>jnilib</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${basedir}/target/nativelibs</outputDirectory>
+                                    <destFileName>libAddressBook.jnilib</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <arguments>
+                        <argument>-verbose:class</argument>
+                    </arguments>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>java.library.path</key>
+                            <value>${basedir}/target/nativelibs</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     
 </project>

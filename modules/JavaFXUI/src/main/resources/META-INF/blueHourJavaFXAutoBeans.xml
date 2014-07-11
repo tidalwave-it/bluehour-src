@@ -67,4 +67,6 @@
 
     <bean class="it.tidalwave.accounting.ui.hourlyreport.impl.javafx.JavaFxHourlyReportPresentation" />
 
+    <bean class="it.tidalwave.accounting.ui.importer.ibiz.impl.javafx.JavaFxIBizImporterPresentation" />
+
 </beans>
