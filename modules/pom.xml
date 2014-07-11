@@ -332,6 +332,7 @@
         <module>UIProjectExplorer</module>
         <module>UIJobEventExplorer</module>
         <module>UIHourlyReport</module>
+        <module>UIiBizImporter</module>
         <module>JavaFXUI</module>
         <module>JavaFXApplication</module>
         <module>Installers/MacOSX</module>

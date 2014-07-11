@@ -173,6 +173,11 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
+                <artifactId>it-tidalwave-accounting-ui-importer-ibiz</artifactId>
+                <version>1.0-ALPHA-3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
                 <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
