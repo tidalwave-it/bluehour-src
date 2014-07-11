@@ -84,9 +84,9 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
       {
         log.info("onAccountingOpenedEvent({})", event);
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers()
-                .sorted(comparing(Customer::getName))
-                .map(customer -> createPresentationModelFor(customer))
-                .collect(toContainerPresentationModel()));
+                                .sorted(comparing(Customer::getName))
+                                .map(customer -> createPresentationModelFor(customer))
+                                .collect(toContainerPresentationModel()));
       }
 
     /*******************************************************************************************************************
