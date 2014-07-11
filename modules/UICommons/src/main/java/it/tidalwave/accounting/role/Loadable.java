@@ -25,66 +25,32 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.impl;
+package it.tidalwave.accounting.role;
 
-import javax.annotation.Nonnull;
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
-import com.google.common.annotations.VisibleForTesting;
-import it.tidalwave.dci.annotation.DciContext;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.messagebus.annotation.ListensTo;
-import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
-import it.tidalwave.accounting.commons.AccountingOpenRequest;
-import it.tidalwave.accounting.commons.AccountingOpenedEvent;
-import it.tidalwave.accounting.model.Accounting;
-import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.accounting.role.Loadable.Loadable;
 
 /***********************************************************************************************************************
  *
+ * A role which provides loading from a default source.
+ * 
+ * @stereotype Role
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
-public class DefaultAccountingController 
+public interface Loadable
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
-    
-    private Accounting accounting = Accounting.createNew();
-
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    @PostConstruct
-    @VisibleForTesting void initialize()
-      {
-        try
-          {
-            log.info("initialize()");
-            accounting = accounting.as(Loadable).load();
-            messageBus.publish(new AccountingOpenedEvent(accounting));
-          }
-        catch (IOException e)
-          {
-            throw new RuntimeException(e);
-          }
-      }
+    public static final Class<Loadable> Loadable = Loadable.class;
     
     /*******************************************************************************************************************
      *
+     * Load from a default source.
      * 
+     * @return  the loaded object
+     * @throws  IOException         in case of error
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onAccountingOpenRequest (final @Nonnull @ListensTo AccountingOpenRequest request)
-      {
-        // already done at this point, just send a response
-        messageBus.publish(new AccountingOpenedEvent(accounting));
-      }
+    public <TYPE> TYPE load()
+      throws IOException;
   }
