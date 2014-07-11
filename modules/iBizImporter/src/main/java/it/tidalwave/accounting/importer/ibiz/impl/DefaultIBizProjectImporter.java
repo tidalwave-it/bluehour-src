@@ -77,13 +77,18 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
     public void importProjects()
       throws IOException
       {
+        log.debug("importProjects()");
         Files.walkFileTree(path.resolve("Projects"), new SimpleFileVisitor<Path>()
           {
             @Override
             public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
               throws IOException
               {
-                importProject(file);
+                if (!file.toFile().getName().equals(".DS_Store"))
+                  {
+                    importProject(file);
+                  }
+                        
                 return FileVisitResult.CONTINUE;
               }
           });
