@@ -71,10 +71,10 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
       {
         log.info("onCustomerSelectedEvent({})", event);
         presentation.populate(event.getCustomer().findProjects()
-                .sorted(comparing(Project::getName))
-                .map(project -> createPresentationModelFor(project))
-//                .map(project -> project.as(Presentable).createPresentationModel())
-                .collect(toContainerPresentationModel()));
+                    .sorted(comparing(Project::getName))
+                    .map(project -> createPresentationModelFor(project))
+//                  .map(project -> project.as(Presentable).createPresentationModel())
+                    .collect(toContainerPresentationModel()));
       }
     
     @Nonnull
