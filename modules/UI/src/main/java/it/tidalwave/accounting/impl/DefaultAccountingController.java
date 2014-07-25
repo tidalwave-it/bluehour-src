@@ -52,7 +52,7 @@ import static it.tidalwave.accounting.role.Loadable.Loadable;
 @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultAccountingController 
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
+    @Inject @Named("applicationMessageBus")
     private MessageBus messageBus;
     
     private Accounting accounting;
