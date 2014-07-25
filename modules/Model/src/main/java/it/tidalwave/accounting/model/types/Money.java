@@ -118,6 +118,11 @@ public class Money implements Comparable<Money>
         return this.amount.compareTo(other.amount);
       }
     
+    public boolean isEqualTo (final @Nonnull Money other)
+      {
+        return compareTo(other) == 0;
+      }
+    
     public boolean greaterThan (final @Nonnull Money other) 
       {
         return compareTo(other) > 0;

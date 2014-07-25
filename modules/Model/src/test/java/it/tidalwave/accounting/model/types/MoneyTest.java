@@ -53,6 +53,19 @@ public class MoneyTest
       }
     
     @Test
+    public void isEqualTo_must_work()
+      {
+        final Money m1 = new Money(349, "EUR");
+        final Money m2 = new Money(349, "EUR");
+        final Money m3 = new Money(495, "EUR");
+        
+        assertThat(m1.isEqualTo(m2), is(true));
+        assertThat(m2.isEqualTo(m1), is(true));
+        assertThat(m1.isEqualTo(m3), is(false));
+        assertThat(m3.isEqualTo(m1), is(false));
+      }
+    
+    @Test
     public void greaterThan_and_lowerThan_must_work_at_the_opposite()
       {
         final Money greater = new Money(349, "EUR");
