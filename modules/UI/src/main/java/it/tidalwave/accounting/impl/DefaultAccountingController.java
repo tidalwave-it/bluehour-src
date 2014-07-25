@@ -55,7 +55,7 @@ public class DefaultAccountingController
     @Inject @Named("applicationMessageBus") @Nonnull
     private MessageBus messageBus;
     
-    private Accounting accounting = Accounting.createNew();
+    private Accounting accounting;
 
     /*******************************************************************************************************************
      *
@@ -68,7 +68,7 @@ public class DefaultAccountingController
         try
           {
             log.info("initialize()");
-            accounting = accounting.as(Loadable).load();
+            accounting = Accounting.createNew().as(Loadable).load();
             messageBus.publish(new AccountingOpenedEvent(accounting));
           }
         catch (IOException e)
