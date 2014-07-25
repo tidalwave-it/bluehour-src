@@ -40,6 +40,7 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
@@ -65,7 +66,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
 
     /*******************************************************************************************************************
      *
-     * 
+     * Requests the opening of an {@link Accounting} during initialization.
      *
      ******************************************************************************************************************/
     @Override
@@ -77,7 +78,10 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     
     /*******************************************************************************************************************
      *
+     * Reacts to the notification that an {@link Accounting} has been opened by populating the presentation with
+     * the customers.
      * 
+     * @param  event  the notification event
      *
      ******************************************************************************************************************/
     @VisibleForTesting void onAccountingOpenedEvent (final @Nonnull @ListensTo AccountingOpenedEvent event)
@@ -91,7 +95,11 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
 
     /*******************************************************************************************************************
      *
+     * Creates a {@link PresentationModel} for a {@link Customer} injecting a {@link Selectable} role which fires a
+     * {@link CustomerSelectedEvent} on selection.
      * 
+     * @param  customer     the {@code Customer}
+     * @return              the {@code PresentationModel}
      *
      ******************************************************************************************************************/
     @Nonnull
