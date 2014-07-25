@@ -97,7 +97,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
             vat = email.getFirstHomeValue(); // VAT is also there in my address book...
           }
         
-        if (vat.equals("") && (phone != null))
+        if (((vat == null) || vat.equals("")) && (phone != null))
           {
             vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
           }
