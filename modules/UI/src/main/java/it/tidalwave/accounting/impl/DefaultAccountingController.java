@@ -45,6 +45,11 @@ import static it.tidalwave.accounting.role.Loadable.Loadable;
 
 /***********************************************************************************************************************
  *
+ * @stereotype Controller
+ * 
+ * This business controller manages the life cycle of the {@link Accounting} instance, loading it during the 
+ * initialization.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -59,7 +64,7 @@ public class DefaultAccountingController
 
     /*******************************************************************************************************************
      *
-     * 
+     * Loads the {@link Accounting} at initialization.
      *
      ******************************************************************************************************************/
     @PostConstruct
@@ -79,7 +84,7 @@ public class DefaultAccountingController
     
     /*******************************************************************************************************************
      *
-     * 
+     * Reply with a message carrying a reference to the {@link Accounting} instance. 
      *
      ******************************************************************************************************************/
     @VisibleForTesting void onAccountingOpenRequest (final @Nonnull @ListensTo AccountingOpenRequest request)
