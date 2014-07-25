@@ -48,6 +48,7 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
     private final List<Object> roles = new ArrayList<>();
     
     @Nonnull
+    // FIXME: rename to toCompositePresentationModel
     public static PresentationModelCollectors toContainerPresentationModel (final @Nonnull Object ... roles)
       {
         return new PresentationModelCollectors(Arrays.asList(roles));
