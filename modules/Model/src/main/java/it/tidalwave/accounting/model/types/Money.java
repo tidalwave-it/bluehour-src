@@ -118,6 +118,16 @@ public class Money implements Comparable<Money>
         return this.amount.compareTo(other.amount);
       }
     
+    public boolean greaterThan (final @Nonnull Money other) 
+      {
+        return compareTo(other) > 0;
+      }
+    
+    public boolean lowerThan (final @Nonnull Money other) 
+      {
+        return compareTo(other) < 0;
+      }
+    
     private void checkCurrencies (final @Nonnull Money other)
       {
         if (!this.currency.equals(other.currency))

@@ -52,4 +52,26 @@ public class MoneyTest
       {
         assertThat(Money.ZERO.toString(), is("0.00 EUR"));
       }
+    
+    @Test
+    public void greaterThan_and_lowerThan_must_work_at_the_opposite()
+      {
+        final Money greater = new Money(349, "EUR");
+        final Money lower = new Money(130, "EUR");
+        assertThat(greater.greaterThan(lower), is(true));  
+        assertThat(greater.lowerThan(lower)  , is(false));  
+        assertThat(lower.greaterThan(greater), is(false));  
+        assertThat(lower.lowerThan(greater),   is(true));  
+      }
+    
+    @Test
+    public void greaterThan_and_lowerThan_must_be_false_when_equality()
+      {
+        final Money greater = new Money(349, "EUR");
+        final Money lower = new Money(349, "EUR");
+        assertThat(greater.greaterThan(lower), is(false));  
+        assertThat(greater.lowerThan(lower),   is(false));  
+        assertThat(lower.greaterThan(greater), is(false));  
+        assertThat(lower.lowerThan(greater),   is(false));  
+      }
   }
