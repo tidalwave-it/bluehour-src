@@ -65,7 +65,7 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
         return jobEvent.findChildren()
                             .sorted(comparing(JobEvent::getDateTime))
                             .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                            .collect(toContainerPresentationModel(aggregateBuilder().create(), styleable));
+                            .collect(toCompositePresentationModel(aggregateBuilder().create(), styleable));
         // FIXME: use SimpleCompositePresentable?
       }
 

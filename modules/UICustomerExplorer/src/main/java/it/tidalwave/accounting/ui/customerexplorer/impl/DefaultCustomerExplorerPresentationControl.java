@@ -46,7 +46,7 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationC
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
 import static it.tidalwave.role.ui.Presentable.Presentable;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
@@ -86,7 +86,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers()
                                 .sorted(comparing(Customer::getName))
                                 .map(customer -> createPresentationModelFor(customer))
-                                .collect(toContainerPresentationModel()));
+                                .collect(toCompositePresentationModel()));
       }
 
     /*******************************************************************************************************************

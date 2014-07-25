@@ -59,7 +59,7 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
      * 
      * <pre>
      * List<PresentationModel> pms = ...
-     * PresentationModel compositePm = pms.stream().collect(toContainerPresentationModel());
+     * PresentationModel compositePm = pms.stream().collect(toCompositePresentationModel());
      * // same contents as childrenPms
      * List<PresentationModel> childrenPms = compositePm.as(Composite).findChildren().results();
      * </pre>
@@ -69,8 +69,7 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
      * 
      ******************************************************************************************************************/
     @Nonnull
-    // FIXME: rename to toCompositePresentationModel
-    public static PresentationModelCollectors toContainerPresentationModel (final @Nonnull Object ... roles)
+    public static PresentationModelCollectors toCompositePresentationModel (final @Nonnull Object ... roles)
       {
         return new PresentationModelCollectors(Arrays.asList(roles));
       }

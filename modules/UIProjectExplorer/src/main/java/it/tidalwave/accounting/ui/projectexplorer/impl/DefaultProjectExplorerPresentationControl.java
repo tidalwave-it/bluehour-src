@@ -45,7 +45,7 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationCon
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
@@ -74,7 +74,7 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
                     .sorted(comparing(Project::getName))
                     .map(project -> createPresentationModelFor(project))
 //                  .map(project -> project.as(Presentable).createPresentationModel())
-                    .collect(toContainerPresentationModel()));
+                    .collect(toCompositePresentationModel()));
       }
     
     @Nonnull
