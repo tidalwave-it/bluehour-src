@@ -62,10 +62,10 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
     @Override @Nonnull 
     public Function<List<PresentationModel>, PresentationModel> finisher() 
       {
-        return childPms ->
+        return childrenPms ->
           {
             final List<Object> temp = new ArrayList<>(roles);
-            temp.add(new ArrayListSimpleComposite<>(childPms));
+            temp.add(new ArrayListSimpleComposite<>(childrenPms));
             // FIXME: "" triggers a NPE in RoleManagerSupport.java:341
             return new DefaultPresentationModel("", temp.toArray());
           };
