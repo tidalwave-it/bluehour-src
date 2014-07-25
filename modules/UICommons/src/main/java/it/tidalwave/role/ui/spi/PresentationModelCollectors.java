@@ -55,7 +55,14 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
     /*******************************************************************************************************************
      *
      * A {@link Collector} which collects a {@link Stream} of {@link PresentationModel}s into a single
-     * {@code PresentationModel} with a {@link Composite} role containing them.
+     * {@code PresentationModel} with a {@link Composite} role containing them. In other words:
+     * 
+     * <pre>
+     * List<PresentationModel> pms = ...
+     * PresentationModel compositePm = pms.stream().collect(toContainerPresentationModel());
+     * // same contents as childrenPms
+     * List<PresentationModel> childrenPms = compositePm.as(Composite).findChildren().results();
+     * </pre>
      * 
      * @param   roles   some extra roles included in the resulting {@code PresentationModel}
      * @return          a {@code PresentationModel}
