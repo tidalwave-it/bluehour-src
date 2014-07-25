@@ -25,9 +25,8 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.types;
 
-import it.tidalwave.accounting.model.types.Money;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -67,11 +66,11 @@ public class MoneyTest
     @Test
     public void greaterThan_and_lowerThan_must_be_false_when_equality()
       {
-        final Money greater = new Money(349, "EUR");
-        final Money lower = new Money(349, "EUR");
-        assertThat(greater.greaterThan(lower), is(false));  
-        assertThat(greater.lowerThan(lower),   is(false));  
-        assertThat(lower.greaterThan(greater), is(false));  
-        assertThat(lower.lowerThan(greater),   is(false));  
+        final Money m1 = new Money(349, "EUR");
+        final Money m2 = new Money(349, "EUR");
+        assertThat(m1.greaterThan(m2), is(false));  
+        assertThat(m1.lowerThan(m2),   is(false));  
+        assertThat(m2.greaterThan(m1), is(false));  
+        assertThat(m2.lowerThan(m1),   is(false));  
       }
   }
