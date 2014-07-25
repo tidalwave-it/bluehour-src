@@ -84,9 +84,9 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
       {
         log.info("onAccountingOpenedEvent({})", event);
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers()
-                                .sorted(comparing(Customer::getName))
-                                .map(customer -> createPresentationModelFor(customer))
-                                .collect(toCompositePresentationModel()));
+                                   .sorted(comparing(Customer::getName))
+                                   .map(customer -> createPresentationModelFor(customer))
+                                   .collect(toCompositePresentationModel()));
       }
 
     /*******************************************************************************************************************
@@ -97,7 +97,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     @Nonnull
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
       {
-        final Selectable selectable = () -> messageBus.publish(new CustomerSelectedEvent(customer));
-        return customer.as(Presentable).createPresentationModel(selectable);
+        final Selectable publishEventOnSelection = () -> messageBus.publish(new CustomerSelectedEvent(customer));
+        return customer.as(Presentable).createPresentationModel(publishEventOnSelection);
       }
   }
