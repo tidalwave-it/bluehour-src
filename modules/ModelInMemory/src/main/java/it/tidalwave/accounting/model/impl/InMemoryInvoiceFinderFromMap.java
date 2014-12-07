@@ -37,7 +37,6 @@ import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import static java.util.stream.Collectors.toList;
 
