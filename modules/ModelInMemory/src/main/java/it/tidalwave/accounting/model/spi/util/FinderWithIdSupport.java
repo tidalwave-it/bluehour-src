@@ -40,8 +40,11 @@ import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
  *
- * @param <TYPE>
- * @param <FINDER>
+ * A support class for implementing a {@link Finder} that provides filtering by id.
+ * 
+ * @param <TYPE>     the product abstract type
+ * @param <IMPLTYPE> the product concrete type
+ * @param <FINDER>   the {@code Finder} type
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
@@ -53,7 +56,7 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
                                            FinderStream<TYPE>,
                                            Finder<TYPE>
   {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     
     @Nonnull
     /* package */ Optional<Id> id = Optional.empty();
