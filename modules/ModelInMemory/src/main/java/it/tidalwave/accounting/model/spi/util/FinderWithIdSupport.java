@@ -28,8 +28,6 @@
 package it.tidalwave.accounting.model.spi.util;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
