@@ -20,9 +20,19 @@
 
   /** Role-based Styles */
   
+.-rs-alerted
+  {
+    -fx-text-fill: red;
+  }
+  
 .-rs-red
   {
     -fx-text-fill: red;
+  }
+
+.-rs-green
+  {
+    -fx-text-fill: green;
   }
 
 .-rs-right-aligned

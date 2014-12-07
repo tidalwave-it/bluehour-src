@@ -37,8 +37,9 @@ import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -68,6 +69,7 @@ public class ProjectPresentable implements Presentable
     protected AggregatePresentationModelBuilder aggregateBuilder()
       {
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
+        
         // FIXME: uses the column header names, should be an internal id instead
         builder.put("Client",     (Displayable) () -> project.getCustomer().getName());
         builder.put("Status",     (Displayable) () -> project.getStatus().name());
@@ -77,17 +79,26 @@ public class ProjectPresentable implements Presentable
                                   new DefaultStyleable("right-aligned"));
         builder.put("Due Date",   (Displayable) () -> DATE_FORMATTER.format(project.getEndDate()),
                                   new DefaultStyleable("right-aligned"));
-        builder.put("Budget",     (Displayable) () -> MONEY_FORMATTER.format(project.getBudget()),
-                                  new DefaultStyleable("right-aligned"));
         builder.put("Notes",      (Displayable) () -> project.getNotes());
         
+        final Money budget           = project.getBudget();
         // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
-        builder.put("Earnings",   (Displayable) () -> MONEY_FORMATTER.format(project.getEarnings()),
-                                  new DefaultStyleable("right-aligned"));
+        final Money earnings         = project.getEarnings();
+        final Money invoicedEarnings = project.getInvoicedEarnings();
+        
+        builder.put("Budget",     (Displayable) () -> MONEY_FORMATTER.format(budget),
+                                  new DefaultStyleable("right-aligned",
+                                                       budget.isEqualTo(Money.ZERO) ? "alerted" : ""));
+        builder.put("Earnings",   (Displayable) () -> MONEY_FORMATTER.format(earnings),
+                                  new DefaultStyleable("right-aligned",
+                                                       earnings.greaterThan(budget) ? "alerted" : "",
+                                                       earnings.isEqualTo(budget) ? "green" : ""));
         builder.put("Time",       (Displayable) () -> DURATION_FORMATTER.format(project.getDuration()),
                                   new DefaultStyleable("right-aligned"));
-        builder.put("Invoiced",   (Displayable) () -> MONEY_FORMATTER.format(project.getInvoicedEarnings()),
-                                  new DefaultStyleable("right-aligned"));
+        builder.put("Invoiced",   (Displayable) () -> MONEY_FORMATTER.format(invoicedEarnings),
+                                  new DefaultStyleable("right-aligned",
+                                                       invoicedEarnings.greaterThan(earnings) ? "alerted" : "",
+                                                       invoicedEarnings.isEqualTo(earnings) ? "green" : ""));
 
         return builder;
       }
