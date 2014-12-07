@@ -71,13 +71,14 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
     @Override @Nonnull
     protected List<? extends Invoice> computeResults()
       {
-        Stream<? extends Invoice> stream = super.computeResults().stream();
+        Stream<Invoice> stream = (Stream<Invoice>)super.computeResults().stream();
+//        Stream<Invoice> stream = super.stream();
 
         if (project != null)
           {
             stream = stream.filter(invoice -> ((InvoiceSpi)invoice).getProject().equals(project));
           }
-
+        
         return stream.collect(toList());
       }
 

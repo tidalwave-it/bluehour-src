@@ -31,13 +31,14 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
-import it.tidalwave.util.NotFoundException;
 
 /***********************************************************************************************************************
  *
@@ -55,7 +56,8 @@ public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<
       throws NotFoundException 
       {
         // FIXME: very inefficient
-        final Map<Id, JobEvent> map = findAll().stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
+        final Map<Id, JobEvent> map = ((Stream<JobEvent>)findAll().stream()).collect(Collectors.toMap(JobEvent::getId, item -> item));
+//        final Map<Id, JobEvent> map = stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
 
         // FIXME: should not happen
         if (!map.containsKey(id))
