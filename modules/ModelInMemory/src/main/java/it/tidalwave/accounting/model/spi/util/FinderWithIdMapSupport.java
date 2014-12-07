@@ -38,9 +38,11 @@ import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
- * @param <TYPE>
- * @param <IMPLTYPE>
- * @param <FINDER>
+ * An implementation of {@link FinderWithIdSupport} based on a {@link Map}.
+ * 
+ * @param <TYPE>     the product abstract type
+ * @param <IMPLTYPE> the product concrete type
+ * @param <FINDER>   the {@code Finder} type
  *
  * @author  Fabrizio Giudici
  * @version $Id$
