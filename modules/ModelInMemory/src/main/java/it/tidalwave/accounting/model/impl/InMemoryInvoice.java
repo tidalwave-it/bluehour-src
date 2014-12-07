@@ -32,12 +32,10 @@ import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
-import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
 import it.tidalwave.accounting.model.Invoice.Builder;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
@@ -68,9 +66,6 @@ public class InMemoryInvoice implements InvoiceSpi
      *
      ******************************************************************************************************************/
     class JobEventFinder extends FinderStreamSupport<JobEvent, JobEventFinder>
-                         implements ExtendedFinderSupport<JobEvent, JobEventFinder>, 
-                                    FinderStream<JobEvent>, 
-                                    Finder<JobEvent>
       {
         private static final long serialVersionUID = 1L;
     
