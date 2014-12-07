@@ -29,10 +29,7 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
@@ -46,6 +43,7 @@ import lombok.Delegate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import static java.util.stream.Collectors.toMap;
 
 /***********************************************************************************************************************
  *
@@ -110,14 +108,9 @@ public class InMemoryCustomer implements Customer
     @Override @Nonnull
     public ProjectRegistry.ProjectFinder findProjects()
       {
-        final Map<Id, List<Project>> temp = accounting.getProjectRegistry().findProjects()
-                .filter(project -> project.getCustomer().getId().equals(getId()))
-                .collect(Collectors.groupingBy(Project::getId));
-        // FIXME: try to merge into a single pipeline
-        final Map<Id, InMemoryProject> map = new HashMap<>();
-        temp.forEach((id, projects) -> map.put(id, (InMemoryProject)projects.get(0)));
-        
-        return new InMemoryProjectFinder(map);
+        return new InMemoryProjectFinder(accounting.getProjectRegistry().findProjects()
+                                                   .filter(project -> project.getCustomer().getId().equals(getId()))
+                                                   .collect(toMap(Project::getId, project -> (InMemoryProject)project)));
       }
     
     /*******************************************************************************************************************
