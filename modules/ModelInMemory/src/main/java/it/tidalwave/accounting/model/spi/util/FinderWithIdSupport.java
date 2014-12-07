@@ -66,7 +66,7 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
         return (FINDER)clone;
       }
 
-    @Override
+    @Override @Nonnull
     protected List<IMPLTYPE> computeResults()
       {
         return id.map(id -> findById(id).map(item -> Collections.singletonList(item))
