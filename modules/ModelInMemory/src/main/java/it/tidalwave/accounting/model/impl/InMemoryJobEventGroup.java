@@ -51,7 +51,7 @@ import lombok.ToString;
 public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventGroupSpi
   {
     @Nonnull
-    private final List<JobEvent> events; // FIXME: immutable
+    private final List<InMemoryJobEvent> events; // FIXME: immutable
 
     /*******************************************************************************************************************
      *
@@ -61,7 +61,7 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
     public /* FIXME protected */ InMemoryJobEventGroup (final @Nonnull Builder builder)
       {
         super(builder);
-        this.events = builder.getEvents();
+        this.events = (List<InMemoryJobEvent>)builder.getEvents();
       }
 
     /*******************************************************************************************************************

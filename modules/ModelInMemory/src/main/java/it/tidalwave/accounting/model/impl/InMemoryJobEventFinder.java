@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.RequiredArgsConstructor;
 
@@ -51,20 +51,21 @@ public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
     
     // FIXME: very inefficient
     @Override @Nonnull
-    protected Collection<? extends JobEvent> findAll() 
+    protected Collection<InMemoryJobEvent> findAll() 
       {
-        final List<JobEvent> result = new ArrayList<>();
+        final List<InMemoryJobEvent> result = new ArrayList<>();
             
         projectFinder.results().forEach(project -> 
           {
             project.findChildren().forEach(jobEvent -> 
               {
-                result.add(jobEvent);
+                final InMemoryJobEvent inMemoryJobEvent = (InMemoryJobEvent) jobEvent;
+                result.add(inMemoryJobEvent);
 
                 // FIXME: should be recursive
-                if (jobEvent instanceof InMemoryJobEventGroup)
+                if (jobEvent instanceof JobEventGroup)
                   {
-                    result.addAll(((InMemoryJobEventGroup)jobEvent).findChildren().results());  
+                    result.addAll((List<? extends InMemoryJobEvent>)((JobEventGroup)jobEvent).findChildren().results());  
                   }
               });
           });

@@ -34,6 +34,7 @@ import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,14 +53,14 @@ public class InMemoryProjectRegistry implements ProjectRegistry
     @Nonnull
     private final Accounting accounting;
 
-    private final Map<Id, Project> projectMapById = new HashMap<>();
+    private final Map<Id, ProjectSpi> projectMapById = new HashMap<>();
 
     /*******************************************************************************************************************
      *
      *
      *
      ******************************************************************************************************************/
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
+    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectSpi, ProjectRegistry.ProjectFinder>
                                 implements ProjectRegistry.ProjectFinder
       {
         private static final long serialVersionUID = 1L;
@@ -102,8 +103,9 @@ public class InMemoryProjectRegistry implements ProjectRegistry
       {
         return new Project.Builder(project ->
           {
-            projectMapById.put(project.getId(), project);
-            ((InMemoryProject)project).setAccounting(accounting);
+            final InMemoryProject inMemoryProject = (InMemoryProject)project;
+            projectMapById.put(project.getId(), inMemoryProject);
+            inMemoryProject.setAccounting(accounting);
           });
       }
   }

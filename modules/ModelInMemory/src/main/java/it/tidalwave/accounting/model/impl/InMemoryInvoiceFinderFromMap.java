@@ -47,7 +47,7 @@ import static java.util.stream.Collectors.toList;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InvoiceRegistry.Finder>
+public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InMemoryInvoice, InvoiceRegistry.Finder>
                                           implements InvoiceRegistry.Finder
   {
     private static final long serialVersionUID = 1L;
@@ -55,7 +55,7 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
     @CheckForNull
     private Project project;
 
-    public InMemoryInvoiceFinderFromMap (final @Nonnull Map<Id, Invoice> invoiceMapById)
+    public InMemoryInvoiceFinderFromMap (final @Nonnull Map<Id, InMemoryInvoice> invoiceMapById)
       {
         super(invoiceMapById);  
       }
@@ -69,14 +69,14 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
       }
 
     @Override @Nonnull
-    protected List<? extends Invoice> computeResults()
+    protected List<? extends InMemoryInvoice> computeResults()
       {
-        Stream<Invoice> stream = (Stream<Invoice>)super.computeResults().stream();
+        Stream<InMemoryInvoice> stream = (Stream<InMemoryInvoice>)super.computeResults().stream();
 //        Stream<Invoice> stream = super.stream();
 
         if (project != null)
           {
-            stream = stream.filter(invoice -> ((InvoiceSpi)invoice).getProject().equals(project));
+            stream = stream.filter(invoice -> invoice.getProject().equals(project));
           }
         
         return stream.collect(toList());
@@ -85,6 +85,6 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
     @Override @Nonnull
     public Money getEarnings() 
       {
-        return map(invoice -> ((InvoiceSpi)invoice).getEarnings()).reduce(Money.ZERO, Money::add);
+        return implStream().map(invoice -> invoice.getEarnings()).reduce(Money.ZERO, Money::add);
       }
   }

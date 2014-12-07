@@ -36,7 +36,6 @@ import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.accounting.model.ProjectRegistry.JobEventFinder;
@@ -103,7 +102,7 @@ public class InMemoryProject implements ProjectSpi
     private final LocalDate endDate;
 
     @Nonnull
-    private final List<JobEvent> events; // FIXME: immutable
+    private final List<InMemoryJobEvent> events; // FIXME: immutable
     
     /*******************************************************************************************************************
      *
@@ -123,7 +122,7 @@ public class InMemoryProject implements ProjectSpi
         this.budget = builder.getBudget();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
-        this.events = builder.getEvents();
+        this.events = (List<InMemoryJobEvent>)builder.getEvents();
       }
 
     /*******************************************************************************************************************

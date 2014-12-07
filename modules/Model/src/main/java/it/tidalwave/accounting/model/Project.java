@@ -84,7 +84,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
         private final Money budget;
         private final LocalDate startDate;
         private final LocalDate endDate;
-        private final List<JobEvent> events; // FIXME: immutable
+        private final List<? extends JobEvent> events; // FIXME: immutable
         private final Callback callback;
 
         public Builder()

@@ -52,14 +52,14 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
     @Nonnull
     private final Accounting accounting;
     
-    private final Map<Id, Customer> customerMapById = new HashMap<>();
+    private final Map<Id, InMemoryCustomer> customerMapById = new HashMap<>();
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, CustomerRegistry.Finder>
+    class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, InMemoryCustomer, CustomerRegistry.Finder>
                                  implements CustomerRegistry.Finder
       {
         private static final long serialVersionUID = 1L;
@@ -91,8 +91,9 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
       {
         return new Customer.Builder(customer -> 
           {
-            ((InMemoryCustomer)customer).setAccounting(accounting); // FIXME
-            customerMapById.put(customer.getId(), customer);
+            final InMemoryCustomer inMemoryCustomer = (InMemoryCustomer)customer;
+            inMemoryCustomer.setAccounting(accounting);
+            customerMapById.put(customer.getId(), inMemoryCustomer);
           });
       }
   }

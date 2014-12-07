@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
@@ -48,9 +49,11 @@ import it.tidalwave.util.spi.ExtendedFinderSupport;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
+public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
                                 extends FinderStreamSupport<TYPE, FINDER>
-                                implements ExtendedFinderSupport<TYPE, FINDER>, FinderStream<TYPE>, Finder<TYPE>
+                                implements ExtendedFinderSupport<TYPE, FINDER>, 
+                                           FinderStream<TYPE>,
+                                           Finder<TYPE>
   {
     private static final long serialVersionUID = 1L;
     
@@ -60,23 +63,29 @@ public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSup
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
-        final FinderWithIdSupport<TYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
+        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
         clone.id = Optional.of(id);
         return (FINDER)clone;
       }
 
     @Override
-    protected List<? extends TYPE> computeResults()
+    protected List<? extends IMPLTYPE> computeResults()
       {
         return id.map(id -> findById(id).map(item -> Collections.singletonList(item))
-                                        .orElse(Collections.<TYPE>emptyList()))
+                                        .orElse(Collections.<IMPLTYPE>emptyList()))
                  .orElse(new ArrayList<>(findAll()));
       }
     
     @Nonnull
-    protected abstract Collection<? extends TYPE> findAll();
+    protected abstract Collection<? extends IMPLTYPE> findAll();
     
     @Nonnull
-    protected abstract Optional<TYPE> findById (@Nonnull Id id);
+    protected abstract Optional<IMPLTYPE> findById (@Nonnull Id id);
+    
+    @Nonnull
+    protected Stream<IMPLTYPE> streamImpl()
+      {
+        return (Stream<IMPLTYPE>)stream();
+      }
   }
 

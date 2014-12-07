@@ -60,12 +60,12 @@ public class InMemoryCustomer implements Customer
   {
     private static final long serialVersionUID = 1L;
     
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
-                               implements ProjectRegistry.ProjectFinder
+    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, InMemoryProject, ProjectRegistry.ProjectFinder>
+                                implements ProjectRegistry.ProjectFinder
       {
         private static final long serialVersionUID = 1L;
     
-        InMemoryProjectFinder (final Map<Id, Project> projectMapById)
+        InMemoryProjectFinder (final Map<Id, InMemoryProject> projectMapById)
           {
             super(projectMapById);  
           }
@@ -114,8 +114,8 @@ public class InMemoryCustomer implements Customer
                 .filter(project -> project.getCustomer().getId().equals(getId()))
                 .collect(Collectors.groupingBy(Project::getId));
         // FIXME: try to merge into a single pipeline
-        final Map<Id, Project> map = new HashMap<>();
-        temp.forEach((id, projects) -> map.put(id, projects.get(0)));
+        final Map<Id, InMemoryProject> map = new HashMap<>();
+        temp.forEach((id, projects) -> map.put(id, (InMemoryProject)projects.get(0)));
         
         return new InMemoryProjectFinder(map);
       }
@@ -125,7 +125,7 @@ public class InMemoryCustomer implements Customer
      * @return 
      * 
      ******************************************************************************************************************/
-    @Nonnull
+    @Override @Nonnull
     public Builder toBuilder()
       {
         return new Builder(id, name, billingAddress, vatNumber, InMemoryCustomer.Builder.Callback.DEFAULT);                
