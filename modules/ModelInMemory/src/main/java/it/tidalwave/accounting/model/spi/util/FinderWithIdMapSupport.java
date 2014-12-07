@@ -27,10 +27,10 @@
  */
 package it.tidalwave.accounting.model.spi.util;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import lombok.RequiredArgsConstructor;
@@ -59,10 +59,10 @@ public class FinderWithIdMapSupport<TYPE, FINDER extends ExtendedFinderSupport<T
         return mapById.values();
       }
     
-    @Override @CheckForNull
-    protected TYPE findById (final @Nonnull Id id)
+    @Override @Nonnull
+    protected Optional<TYPE> findById (final @Nonnull Id id)
       {
-        return mapById.get(id);
+        return Optional.ofNullable(mapById.get(id));
       }
   }
 

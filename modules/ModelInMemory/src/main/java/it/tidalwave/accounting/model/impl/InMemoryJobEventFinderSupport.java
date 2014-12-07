@@ -30,6 +30,7 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import it.tidalwave.util.Id;
@@ -52,21 +53,13 @@ public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<
     private static final long serialVersionUID = 1L;
     
     @Override @Nonnull
-    protected JobEvent findById (final @Nonnull Id id) 
-      throws NotFoundException 
+    protected Optional<JobEvent> findById (final @Nonnull Id id) 
       {
+        return ((Stream<JobEvent>)findAll().stream()).filter(item -> item.getId().equals(id)).findFirst();
         // FIXME: very inefficient
-        final Map<Id, JobEvent> map = ((Stream<JobEvent>)findAll().stream()).collect(Collectors.toMap(JobEvent::getId, item -> item));
+//        final Map<Id, JobEvent> map = stream.collect(Collectors.toMap(JobEvent::getId, item -> item));
 //        final Map<Id, JobEvent> map = stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
-
-        // FIXME: should not happen
-        if (!map.containsKey(id))
-          {
-            throw new NotFoundException(id.toString());
-//            return JobEvent.builder().withId(id).withName("DUMMY!").create();
-          }
-
-        return map.get(id);
+//        return Optional.ofNullable(map.get(id));
       }  
 
     @Override @Nonnull

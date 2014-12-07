@@ -27,17 +27,16 @@
  */
 package it.tidalwave.accounting.model.spi.util;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.NotFoundException;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
@@ -55,42 +54,29 @@ public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSup
   {
     private static final long serialVersionUID = 1L;
     
-    @CheckForNull
-    /* package */ Id id;
+    @Nonnull
+    /* package */ Optional<Id> id = Optional.empty();
     
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
         final FinderWithIdSupport<TYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
-        clone.id = id;
+        clone.id = Optional.of(id);
         return (FINDER)clone;
       }
 
     @Override
     protected List<? extends TYPE> computeResults()
       {
-        if (id != null)
-          {
-            try
-              {
-                return Collections.singletonList(findById(id));
-              }
-            catch (NotFoundException e)
-              {
-                return Collections.<TYPE>emptyList();
-              }
-          }
-        else
-          {
-            return new ArrayList<>(findAll());
-          }
+        return id.map(id -> findById(id).map(item -> Collections.singletonList(item))
+                                        .orElse(Collections.<TYPE>emptyList()))
+                 .orElse(new ArrayList<>(findAll()));
       }
     
     @Nonnull
     protected abstract Collection<? extends TYPE> findAll();
     
     @Nonnull
-    protected abstract TYPE findById (@Nonnull Id id)
-      throws NotFoundException;
+    protected abstract Optional<TYPE> findById (@Nonnull Id id);
   }
 
