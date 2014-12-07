@@ -29,7 +29,6 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.ProjectRegistry;
@@ -51,7 +50,7 @@ public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
     
     // FIXME: very inefficient
     @Override @Nonnull
-    protected Collection<InMemoryJobEvent> findAll() 
+    protected List<InMemoryJobEvent> findAll() 
       {
         final List<InMemoryJobEvent> result = new ArrayList<>();
             

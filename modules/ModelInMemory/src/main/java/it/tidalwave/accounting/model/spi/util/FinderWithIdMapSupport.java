@@ -27,14 +27,14 @@
  */
 package it.tidalwave.accounting.model.spi.util;
 
-import it.tidalwave.util.FinderStream;
 import javax.annotation.Nonnull;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -57,9 +57,9 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
     private final Map<Id, IMPLTYPE> mapById;
 
     @Override @Nonnull
-    protected Collection<? extends IMPLTYPE> findAll()
+    protected List<IMPLTYPE> findAll()
       {
-        return mapById.values();
+        return new ArrayList<>(mapById.values());
       }
 
     @Override @Nonnull

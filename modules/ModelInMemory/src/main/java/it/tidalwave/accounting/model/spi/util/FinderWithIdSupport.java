@@ -69,15 +69,15 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
       }
 
     @Override
-    protected List<? extends IMPLTYPE> computeResults()
+    protected List<IMPLTYPE> computeResults()
       {
         return id.map(id -> findById(id).map(item -> Collections.singletonList(item))
                                         .orElse(Collections.<IMPLTYPE>emptyList()))
-                 .orElse(new ArrayList<>(findAll()));
+                 .orElse(findAll());
       }
     
     @Nonnull
-    protected abstract Collection<? extends IMPLTYPE> findAll();
+    protected abstract List<IMPLTYPE> findAll();
     
     @Nonnull
     protected abstract Optional<IMPLTYPE> findById (@Nonnull Id id);
