@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import lombok.RequiredArgsConstructor;
@@ -67,11 +66,5 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
       {
         return Optional.ofNullable(mapById.get(id));
       }
-    
-    @Nonnull
-    public Stream<IMPLTYPE> implStream()
-      {
-        return (Stream<IMPLTYPE>)super.stream();
-      }
-  }
+   }
 

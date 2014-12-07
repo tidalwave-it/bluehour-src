@@ -83,6 +83,6 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
     @Override @Nonnull
     public Money getEarnings() 
       {
-        return implStream().map(invoice -> invoice.getEarnings()).reduce(Money.ZERO, Money::add);
+        return streamImpl().map(invoice -> invoice.getEarnings()).reduce(Money.ZERO, Money::add);
       }
   }
