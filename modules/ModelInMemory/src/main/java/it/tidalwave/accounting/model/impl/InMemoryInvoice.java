@@ -141,7 +141,6 @@ public class InMemoryInvoice implements InvoiceSpi
     @Override @Nonnull
     public Builder toBuilder()
       {
-        return new Builder(id, number, project, jobEvents, date, dueDate, 
-                           earnings, tax, Builder.Callback.DEFAULT);
+        return new Builder(id, number, project, jobEvents, date, dueDate, earnings, tax, Builder.Callback.DEFAULT);
       }
   }
