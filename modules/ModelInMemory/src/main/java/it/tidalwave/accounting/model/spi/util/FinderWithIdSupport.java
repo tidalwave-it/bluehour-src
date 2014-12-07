@@ -28,7 +28,6 @@
 package it.tidalwave.accounting.model.spi.util;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -37,6 +36,7 @@ import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
+import static java.util.Collections.*;
 
 /***********************************************************************************************************************
  *
@@ -72,8 +72,7 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
     @Override @Nonnull
     protected List<IMPLTYPE> computeResults()
       {
-        return id.map(id -> findById(id).map(item -> Collections.singletonList(item))
-                                        .orElse(Collections.<IMPLTYPE>emptyList()))
+        return id.map(id -> findById(id).map(item -> singletonList(item)).orElse(emptyList()))
                  .orElse(findAll());
       }
     
