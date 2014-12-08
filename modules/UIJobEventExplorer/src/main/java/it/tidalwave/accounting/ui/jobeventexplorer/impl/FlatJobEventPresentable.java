@@ -65,25 +65,21 @@ class RedStyleForNegativeMoney implements Styleable
 @DciRole(datumType = FlatJobEventSpi.class)
 public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi>
   {
-    @Nonnull
-    private final FlatJobEventSpi flatJobEvent;
-    
     public FlatJobEventPresentable (final @Nonnull FlatJobEventSpi flatJobEvent)
       {
         super(flatJobEvent);
-        this.flatJobEvent = flatJobEvent;
       }
     
     @Override @Nonnull
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(flatJobEvent.getDate()));
+        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDate()));
         builder.put(TIME,        new DefaultDisplayable(""));
         builder.put(HOURLY_RATE, new DefaultDisplayable(""));
-        builder.put(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(flatJobEvent.getEarnings()),
+        builder.put(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
                                  new DefaultStyleable("right-aligned"),
-                                 new RedStyleForNegativeMoney(flatJobEvent::getEarnings));
+                                 new RedStyleForNegativeMoney(jobEvent::getEarnings));
         return builder;
       }
     
