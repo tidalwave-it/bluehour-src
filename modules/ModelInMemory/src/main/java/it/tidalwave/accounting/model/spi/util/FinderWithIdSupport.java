@@ -53,8 +53,7 @@ import static java.util.Collections.*;
 public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
                                 extends FinderStreamSupport<TYPE, FINDER>
                                 implements ExtendedFinderSupport<TYPE, FINDER>, 
-                                           FinderStream<TYPE>,
-                                           Finder<TYPE>
+                                           FinderStream<TYPE>
   {
     private static final long serialVersionUID = 2L;
     
@@ -64,7 +63,7 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
-        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
+        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport<TYPE, IMPLTYPE, FINDER>)super.clone();
         clone.id = Optional.of(id);
         return (FINDER)clone;
       }
