@@ -36,7 +36,7 @@ import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
-import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.spi.CustomerSpi;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -45,12 +45,12 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Customer.class)
+@DciRole(datumType = CustomerSpi.class)
 @RequiredArgsConstructor
 public class CustomerPresentable implements Presentable
   {
     @Nonnull
-    private final Customer customer;
+    private final CustomerSpi customer;
 
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 

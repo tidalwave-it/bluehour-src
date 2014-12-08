@@ -33,10 +33,10 @@ import java.util.Map;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.EqualsAndHashCode;
 import lombok.Delegate;
@@ -54,7 +54,7 @@ import static java.util.stream.Collectors.toMap;
  *
  **********************************************************************************************************************/
 @Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
-public class InMemoryCustomer implements Customer
+public class InMemoryCustomer implements CustomerSpi
   {
     private static final long serialVersionUID = 1L;
     

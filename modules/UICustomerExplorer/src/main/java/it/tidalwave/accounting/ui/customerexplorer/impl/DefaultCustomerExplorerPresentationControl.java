@@ -42,6 +42,7 @@ import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
@@ -88,7 +89,8 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
       {
         log.info("onAccountingOpenedEvent({})", event);
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers()
-                                   .sorted(comparing(Customer::getName))
+                                   .map(customer -> (CustomerSpi)customer)
+                                   .sorted(comparing(CustomerSpi::getName))
                                    .map(customer -> createPresentationModelFor(customer))
                                    .collect(toCompositePresentationModel()));
       }

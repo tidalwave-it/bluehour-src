@@ -36,7 +36,8 @@ import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
-import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
@@ -82,7 +83,8 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
       {
         log.info("onProjectSelectedEvent({})", event);
         presentation.populate(event.getProject().findChildren()
-                                                .sorted(comparing(JobEvent::getDateTime))
+                                                .map(jobEvent -> (JobEventSpi)jobEvent)
+                                                .sorted(comparing(JobEventSpi::getDateTime))
                                                 .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
                                                 .collect(toCompositePresentationModel()));
       }
