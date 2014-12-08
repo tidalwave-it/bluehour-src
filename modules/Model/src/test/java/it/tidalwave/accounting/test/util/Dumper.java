@@ -79,25 +79,25 @@ public class Dumper
     
     private void dumpCustomers (final @Nonnull FinderStream<Customer> customers)
       {
-        customers.map(customer -> (CustomerSpi)customer)
-                 .sorted(comparing(CustomerSpi::getName))
-                 .forEach(customer -> pw.printf("%s\n", toString(customer)));
+        customers.stream().map(customer -> (CustomerSpi)customer)
+                          .sorted(comparing(CustomerSpi::getName))
+                          .forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
     
     private void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
       throws IOException
       {
-        invoices.map(invoice -> (InvoiceSpi)invoice)
-                .sorted(comparing(InvoiceSpi::getNumber))
-                .forEach(invoice -> dump(invoice));
+        invoices.stream().map(invoice -> (InvoiceSpi)invoice)
+                         .sorted(comparing(InvoiceSpi::getNumber))
+                         .forEach(invoice -> dump(invoice));
       }
     
     private void dumpProjects (final @Nonnull FinderStream<Project> projects)
       throws IOException
       {
-        projects.map(project -> (ProjectSpi)project)
-                .sorted(comparing(ProjectSpi::getName).thenComparing(ProjectSpi::getStartDate))
-                .forEach(project -> dump(project));
+        projects.stream().map(project -> (ProjectSpi)project)
+                         .sorted(comparing(ProjectSpi::getName).thenComparing(ProjectSpi::getStartDate))
+                         .forEach(project -> dump(project));
       }
     
     private void dump (final @Nonnull Project project)
@@ -114,7 +114,7 @@ public class Dumper
 
     private void dump (final @Nonnull FinderStream<JobEvent> events, final @Nonnull String prefix)
       {
-        events.forEach((event) -> dump(event, prefix));
+        events.stream().forEach(event -> dump(event, prefix));
       }
 
     private void dump (final @Nonnull JobEvent event, final @Nonnull String prefix)

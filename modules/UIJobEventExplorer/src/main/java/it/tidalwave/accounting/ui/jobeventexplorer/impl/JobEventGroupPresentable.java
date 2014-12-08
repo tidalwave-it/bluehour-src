@@ -63,6 +63,7 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
       {
         final Styleable styleable = new DefaultStyleable(getStyles());
         return jobEvent.findChildren()
+                       .stream()
                        .map(jobEvent -> (JobEventSpi)jobEvent)
                        .sorted(comparing(JobEventSpi::getDateTime))
                        .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())

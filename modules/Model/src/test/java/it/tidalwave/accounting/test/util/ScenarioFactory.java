@@ -85,7 +85,7 @@ public final class ScenarioFactory
     public static Object[][] projectProvider()
       {
         return ScenarioFactory.createScenarios().entrySet().stream()
-                .flatMap(entry -> entry.getValue().getProjectRegistry().findProjects()
+                .flatMap(entry -> entry.getValue().getProjectRegistry().findProjects().stream()
                         .map(project -> new Object[] { entry.getKey(), project }))
                 .collect(Collectors.toList())
                 .toArray(new Object[0][0]); 

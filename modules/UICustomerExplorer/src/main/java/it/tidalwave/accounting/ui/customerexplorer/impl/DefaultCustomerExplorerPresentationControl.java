@@ -88,7 +88,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     @VisibleForTesting void onAccountingOpenedEvent (final @Nonnull @ListensTo AccountingOpenedEvent event)
       {
         log.info("onAccountingOpenedEvent({})", event);
-        presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers()
+        presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers().stream()
                                    .map(customer -> (CustomerSpi)customer)
                                    .sorted(comparing(CustomerSpi::getName))
                                    .map(customer -> createPresentationModelFor(customer))

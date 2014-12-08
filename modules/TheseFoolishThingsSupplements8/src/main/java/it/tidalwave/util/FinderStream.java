@@ -37,7 +37,7 @@ import java.util.stream.Stream;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface FinderStream<TYPE> extends Finder<TYPE>, PartialStream<TYPE>
+public interface FinderStream<TYPE> extends Finder<TYPE>
   {
     @Nonnull
     public Optional<TYPE> optionalResult();

@@ -109,6 +109,7 @@ public class InMemoryCustomer implements CustomerSpi
     public ProjectRegistry.ProjectFinder findProjects()
       {
         return new InMemoryProjectFinder(accounting.getProjectRegistry().findProjects()
+                                                   .stream()
                                                    .filter(project -> project.getCustomer().getId().equals(getId()))
                                                    .collect(toMap(Project::getId, project -> (InMemoryProject)project)));
       }

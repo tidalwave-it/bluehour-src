@@ -68,12 +68,12 @@ public class AccountingXml
     
     public AccountingXml (final @Nonnull Accounting accounting)
       {
-        customersXml = accounting.getCustomerRegistry().findCustomers().map(customer -> new CustomerXml(customer))
-                                                                       .collect(toList());
-        projectsXml = accounting.getProjectRegistry().findProjects().map(project -> new ProjectXml(project))
-                                                                    .collect(toList());
-        invoicesxml = accounting.getInvoiceRegistry().findInvoices().map(invoice -> new InvoiceXml(invoice))
-                                                                    .collect(toList());
+        customersXml = accounting.getCustomerRegistry().findCustomers().stream().map(customer -> new CustomerXml(customer))
+                                                                                .collect(toList());
+        projectsXml = accounting.getProjectRegistry().findProjects().stream().map(project -> new ProjectXml(project))
+                                                                             .collect(toList());
+        invoicesxml = accounting.getInvoiceRegistry().findInvoices().stream().map(invoice -> new InvoiceXml(invoice))
+                                                                             .collect(toList());
       }
 
     public void fill (final @Nonnull Accounting accounting) 

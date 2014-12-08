@@ -83,6 +83,7 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
       {
         log.info("onProjectSelectedEvent({})", event);
         presentation.populate(event.getProject().findChildren()
+                                                .stream()
                                                 .map(jobEvent -> (JobEventSpi)jobEvent)
                                                 .sorted(comparing(JobEventSpi::getDateTime))
                                                 .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())

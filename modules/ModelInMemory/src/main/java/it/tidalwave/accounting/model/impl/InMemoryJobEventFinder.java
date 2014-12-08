@@ -56,10 +56,9 @@ public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
             
         projectFinder.results().forEach(project -> 
           {
-            project.findChildren().forEach(jobEvent -> 
+            project.findChildren().stream().map(jobEvent -> (InMemoryJobEvent)jobEvent).forEach(jobEvent -> 
               {
-                final InMemoryJobEvent inMemoryJobEvent = (InMemoryJobEvent) jobEvent;
-                result.add(inMemoryJobEvent);
+                result.add(jobEvent);
 
                 // FIXME: should be recursive
                 if (jobEvent instanceof JobEventGroup)
