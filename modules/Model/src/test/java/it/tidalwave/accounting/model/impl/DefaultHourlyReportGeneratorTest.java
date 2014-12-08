@@ -28,11 +28,16 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.ProjectRegistry;
-import lombok.RequiredArgsConstructor;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import it.tidalwave.util.test.FileComparisonUtils;
+import it.tidalwave.accounting.model.HourlyReport;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.accounting.test.util.ScenarioFactory;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  *
@@ -40,35 +45,27 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
-public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
+public class DefaultHourlyReportGeneratorTest
   {
-    private static final long serialVersionUID = 1L;
-    
-    @Nonnull
-    private final ProjectRegistry.ProjectFinder projectFinder;
-    
-    // FIXME: very inefficient
-    @Override @Nonnull
-    protected List<InMemoryJobEvent> findAll() 
+    @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
+    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull ProjectSpi project) 
+      throws IOException
       {
-        final List<InMemoryJobEvent> result = new ArrayList<>();
-            
-        projectFinder.results().forEach(project -> 
-          {
-            project.findChildren().stream().map(jobEvent -> (InMemoryJobEvent)jobEvent).forEach(jobEvent -> 
-              {
-                result.add(jobEvent);
+        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
+        final Path testFolder = Paths.get("target/test-results");
+        Files.createDirectories(testFolder);
 
-                // FIXME: should be recursive
-                if (jobEvent instanceof JobEventGroup)
-                  {
-                    result.addAll((List<? extends InMemoryJobEvent>)((JobEventGroup)jobEvent).findChildren().results());  
-                  }
-              });
-          });
-            
-        return result;
+        final String name = scenarioName + "-" + project.getName() + ".txt";
+        final Path actualResult = testFolder.resolve(name);
+        final Path expectedResult = expectedResultsFolder.resolve(name);
+        
+        final HourlyReport report = new DefaultHourlyReportGenerator(project).createReport();
+        
+        try (final PrintWriter pw = new PrintWriter(actualResult.toFile()))
+          {
+            pw.print(report.asString());
+          }
+
+        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
       }
   }
-    

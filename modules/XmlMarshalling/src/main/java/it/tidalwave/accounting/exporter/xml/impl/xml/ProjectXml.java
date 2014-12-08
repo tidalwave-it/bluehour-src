@@ -126,7 +126,7 @@ public class ProjectXml
         this.budget = builder.getBudget();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
-        this.jobEventsXml = project.findChildren().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
+        this.jobEventsXml = project.findChildren().stream().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
       }
     
     @Nonnull

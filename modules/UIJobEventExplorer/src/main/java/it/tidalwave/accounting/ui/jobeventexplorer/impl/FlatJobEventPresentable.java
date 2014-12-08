@@ -28,33 +28,15 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.function.Supplier;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Displayable;
-import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
-import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
-import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
-
-@RequiredArgsConstructor
-class RedStyleForNegativeMoney implements Styleable
-  {
-    @Nonnull
-    private final Supplier<Money> moneySupplier;
-    
-    @Override @Nonnull
-    public Collection<String> getStyles() 
-      {
-        return Arrays.asList(moneySupplier.get().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
-      }
-  }
 
 /***********************************************************************************************************************
  *
@@ -63,27 +45,23 @@ class RedStyleForNegativeMoney implements Styleable
  *
  **********************************************************************************************************************/
 @DciRole(datumType = FlatJobEventSpi.class)
-public class FlatJobEventPresentable extends JobEventPresentable
+public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi>
   {
-    @Nonnull
-    private final FlatJobEventSpi flatJobEvent;
-    
     public FlatJobEventPresentable (final @Nonnull FlatJobEventSpi flatJobEvent)
       {
         super(flatJobEvent);
-        this.flatJobEvent = flatJobEvent;
       }
     
     @Override @Nonnull
     protected AggregatePresentationModelBuilder aggregateBuilder() 
       {
         final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(flatJobEvent.getDate()));
+        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDate()));
         builder.put(TIME,        new DefaultDisplayable(""));
         builder.put(HOURLY_RATE, new DefaultDisplayable(""));
-        builder.put(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(flatJobEvent.getEarnings()),
+        builder.put(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
                                  new DefaultStyleable("right-aligned"),
-                                 new RedStyleForNegativeMoney(flatJobEvent::getEarnings));
+                                 new RedStyleForNegativeMoney(jobEvent::getEarnings));
         return builder;
       }
     

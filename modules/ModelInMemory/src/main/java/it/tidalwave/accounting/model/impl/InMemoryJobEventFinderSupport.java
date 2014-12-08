@@ -30,7 +30,6 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Optional;
-import java.util.stream.Stream;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
@@ -51,7 +50,7 @@ public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<
     @Override @Nonnull
     protected Optional<InMemoryJobEvent> findById (final @Nonnull Id id) 
       {
-        return ((Stream<InMemoryJobEvent>)findAll().stream()).filter(item -> item.getId().equals(id)).findFirst();
+        return findAll().stream().filter(item -> item.getId().equals(id)).findFirst();
       }  
 
     @Override @Nonnull

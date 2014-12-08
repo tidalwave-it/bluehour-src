@@ -70,7 +70,7 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
     @Override @Nonnull
     protected List<InMemoryInvoice> computeResults()
       {
-        Stream<InMemoryInvoice> stream = (Stream<InMemoryInvoice>)super.computeResults().stream();
+        Stream<InMemoryInvoice> stream = super.computeResults().stream();
 
         if (project != null)
           {

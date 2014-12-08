@@ -25,9 +25,14 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.types.impl;
 
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.AsDelegateProvider;
+import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import it.tidalwave.accounting.model.types.Address;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -38,8 +43,14 @@ import static org.hamcrest.CoreMatchers.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class AddressTest
+public class CustomerTest
   {
+    @BeforeMethod
+    public void installEmptyAsSupport()
+      {
+        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+      }
+    
     @Test
     public void toString_must_return_all_the_fields()
       {
@@ -49,7 +60,13 @@ public class AddressTest
                                             .withState("CA")
                                             .withCountry("USA")
                                             .create();
+        final Customer c1 = Customer.builder().withId(new Id("the id"))
+                                              .withName("Acme Corp.")
+                                              .withVatNumber("1233455345")
+                                              .withBillingAddress(a1)
+                                              .create();
 
-        assertThat(a1.toString(), is("Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345)"));
+        assertThat(c1.toString(), is("InMemoryCustomer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
+                                   + "city=San Francisco, state=CA, country=USA, zip=12345), vatNumber=1233455345)"));
       }
   }

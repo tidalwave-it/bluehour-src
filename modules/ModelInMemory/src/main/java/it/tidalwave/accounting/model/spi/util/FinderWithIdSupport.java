@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.FinderStream;
-import it.tidalwave.util.FinderStreamSupport;
+import it.tidalwave.util.Finder8;
+import it.tidalwave.util.Finder8Support;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import static java.util.Collections.*;
@@ -51,10 +51,9 @@ import static java.util.Collections.*;
  *
  **********************************************************************************************************************/
 public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
-                                extends FinderStreamSupport<TYPE, FINDER>
+                                extends Finder8Support<TYPE, FINDER>
                                 implements ExtendedFinderSupport<TYPE, FINDER>, 
-                                           FinderStream<TYPE>,
-                                           Finder<TYPE>
+                                           Finder8<TYPE>
   {
     private static final long serialVersionUID = 2L;
     
@@ -64,7 +63,7 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
-        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
+        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport<TYPE, IMPLTYPE, FINDER>)super.clone();
         clone.id = Optional.of(id);
         return (FINDER)clone;
       }

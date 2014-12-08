@@ -25,16 +25,14 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.util;
 
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsDelegateProvider;
-import it.tidalwave.util.spi.EmptyAsDelegateProvider;
-import it.tidalwave.accounting.model.types.Address;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
+import it.tidalwave.util.spi.FinderSupport;
 
 /***********************************************************************************************************************
  *
@@ -42,30 +40,42 @@ import static org.hamcrest.CoreMatchers.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class CustomerTest
+public class Finder8Support<TYPE, EXTENDED_FINDER extends Finder<TYPE>> 
+                                extends FinderSupport<TYPE, EXTENDED_FINDER>
+                                implements ExtendedFinderSupport<TYPE, EXTENDED_FINDER>, 
+                                           Finder8<TYPE>
   {
-    @BeforeMethod
-    public void installEmptyAsSupport()
+    private static final long serialVersionUID = 1L;
+    
+    @Override @Nonnull
+    public Optional<TYPE> optionalResult()
       {
-        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+        try 
+          {
+            return Optional.of(result());
+          } 
+        catch (NotFoundException e) 
+          {
+            return Optional.empty();
+          }
       }
     
-    @Test
-    public void toString_must_return_all_the_fields()
+    @Override @Nonnull
+    public Optional<TYPE> optionalFirstResult()
       {
-        final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
-                                            .withCity("San Francisco")
-                                            .withZip("12345")
-                                            .withState("CA")
-                                            .withCountry("USA")
-                                            .create();
-        final Customer c1 = Customer.builder().withId(new Id("the id"))
-                                              .withName("Acme Corp.")
-                                              .withVatNumber("1233455345")
-                                              .withBillingAddress(a1)
-                                              .create();
-
-        assertThat(c1.toString(), is("InMemoryCustomer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
-                                   + "city=San Francisco, state=CA, country=USA, zip=12345), vatNumber=1233455345)"));
+        try 
+          {
+            return Optional.of(firstResult());
+          } 
+        catch (NotFoundException e) 
+          {
+            return Optional.empty();
+          }
       }
+    
+    @Override @Nonnull
+    public Stream<TYPE> stream() 
+      {
+        return ((List<TYPE>)results()).stream();
+      }    
   }

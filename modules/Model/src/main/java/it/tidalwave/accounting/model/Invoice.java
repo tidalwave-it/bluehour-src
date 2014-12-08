@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.List;
 import java.time.LocalDate;
-import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.Finder8;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
@@ -115,7 +115,7 @@ public interface Invoice extends Identifiable, As
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public FinderStream<JobEvent> findJobEvents();
+    public Finder8<JobEvent> findJobEvents();
         
     /*******************************************************************************************************************
      *

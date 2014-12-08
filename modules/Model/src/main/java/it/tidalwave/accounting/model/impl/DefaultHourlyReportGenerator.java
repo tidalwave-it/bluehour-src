@@ -30,9 +30,7 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -44,6 +42,7 @@ import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.RequiredArgsConstructor;
+import static java.util.Comparator.*;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -76,22 +75,22 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
       {
         final PrintWriter pw = new PrintWriter(w);
         System.err.println("CREATE REPORT " + project);
-        final List<JobEventSpi> jobEvents = new ArrayList<>();
-        addAll(jobEvents, project.findChildren().results());
-        
-        // TODO: quick and dirty - refactor with visitor, closures
-        final List<JobEventSpi> r = jobEvents.stream().sorted(Comparator.comparing(JobEventSpi::getDateTime))
-                                                      .collect(Collectors.toList());
         
         pw.printf(SEPARATOR + "\n");
         pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
         pw.printf(SEPARATOR + "\n");
-        r.forEach(e -> pw.printf(PATTERN2, DATE_FORMATTER.format(e.getDateTime()),
-                                          e.getName(),
-                                          DURATION_FORMATTER.format(e.getDuration()),
-                                          MONEY_FORMATTER.format(e.getEarnings())));
+        
+        // TODO: quick and dirty - refactor with visitor, lambdas
+        final List<JobEventSpi> jobEvents = new ArrayList<>();
+        addAll(jobEvents, project.findChildren().results());
+        jobEvents.stream().sorted(comparing(JobEventSpi::getDateTime))
+                          .forEach(event -> pw.printf(PATTERN2, DATE_FORMATTER.format(event.getDateTime()),
+                                                                event.getName(),
+                                                                DURATION_FORMATTER.format(event.getDuration()),
+                                                                MONEY_FORMATTER.format(event.getEarnings())));
         pw.printf(SEPARATOR + "\n");
-        pw.printf(PATTERN3, "", "", DURATION_FORMATTER.format(project.getDuration()), MONEY_FORMATTER.format(project.getEarnings()));
+        pw.printf(PATTERN3, "", "", DURATION_FORMATTER.format(project.getDuration()), 
+                                    MONEY_FORMATTER.format(project.getEarnings()));
         
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()

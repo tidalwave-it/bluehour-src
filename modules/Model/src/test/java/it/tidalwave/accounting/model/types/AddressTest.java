@@ -25,11 +25,11 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.util;
+package it.tidalwave.accounting.model.types;
 
-import javax.annotation.Nonnull;
-import java.util.Optional;
-import java.util.stream.Stream;
+import org.testng.annotations.Test;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 /***********************************************************************************************************************
  *
@@ -37,11 +37,18 @@ import java.util.stream.Stream;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface FinderStream<TYPE> extends Finder<TYPE>, PartialStream<TYPE>
+public class AddressTest
   {
-    @Nonnull
-    public Optional<TYPE> optionalResult();
-    
-    @Nonnull
-    public Stream<TYPE> stream(); // TODO: needed because it can't implement a full Stream
+    @Test
+    public void toString_must_return_all_the_fields()
+      {
+        final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
+                                            .withCity("San Francisco")
+                                            .withZip("12345")
+                                            .withState("CA")
+                                            .withCountry("USA")
+                                            .create();
+
+        assertThat(a1.toString(), is("Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345)"));
+      }
   }

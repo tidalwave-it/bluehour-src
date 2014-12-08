@@ -25,13 +25,16 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.impl;
+package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.ProjectRegistry;
+import javax.annotation.concurrent.Immutable;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Supplier;
+import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -40,35 +43,15 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
-public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
+@Immutable @RequiredArgsConstructor 
+public class RedStyleForNegativeMoney implements Styleable
   {
-    private static final long serialVersionUID = 1L;
-    
     @Nonnull
-    private final ProjectRegistry.ProjectFinder projectFinder;
+    private final Supplier<Money> moneySupplier;
     
-    // FIXME: very inefficient
     @Override @Nonnull
-    protected List<InMemoryJobEvent> findAll() 
+    public Collection<String> getStyles() 
       {
-        final List<InMemoryJobEvent> result = new ArrayList<>();
-            
-        projectFinder.results().forEach(project -> 
-          {
-            project.findChildren().stream().map(jobEvent -> (InMemoryJobEvent)jobEvent).forEach(jobEvent -> 
-              {
-                result.add(jobEvent);
-
-                // FIXME: should be recursive
-                if (jobEvent instanceof JobEventGroup)
-                  {
-                    result.addAll((List<? extends InMemoryJobEvent>)((JobEventGroup)jobEvent).findChildren().results());  
-                  }
-              });
-          });
-            
-        return result;
+        return Arrays.asList(moneySupplier.get().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
       }
   }
-    

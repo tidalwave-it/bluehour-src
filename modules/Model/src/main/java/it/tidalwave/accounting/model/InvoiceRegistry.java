@@ -28,7 +28,7 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.Finder8;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import it.tidalwave.accounting.model.types.Money;
@@ -46,8 +46,7 @@ public interface InvoiceRegistry
      * 
      *
      ******************************************************************************************************************/
-    public static interface Finder extends FinderStream<Invoice>, 
-                                           ExtendedFinderSupport<Invoice, InvoiceRegistry.Finder>
+    public static interface Finder extends Finder8<Invoice>, ExtendedFinderSupport<Invoice, InvoiceRegistry.Finder>
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);

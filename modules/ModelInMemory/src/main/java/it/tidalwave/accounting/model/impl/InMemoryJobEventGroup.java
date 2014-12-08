@@ -87,9 +87,9 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
       {
 //        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
         final BinaryOperator<LocalDateTime> min = (a, b) -> (a.compareTo(b) > 0) ? b : a;
-        return findChildren().map(jobEvent -> (JobEventSpi)jobEvent)
-                             .map(jobEvent -> jobEvent.getDateTime())
-                             .reduce(min).get();
+        return findChildren().stream().map(jobEvent -> (JobEventSpi)jobEvent)
+                                      .map(jobEvent -> jobEvent.getDateTime())
+                                      .reduce(min).get();
       }
     
     /*******************************************************************************************************************
