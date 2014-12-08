@@ -63,7 +63,7 @@ class RedStyleForNegativeMoney implements Styleable
  *
  **********************************************************************************************************************/
 @DciRole(datumType = FlatJobEventSpi.class)
-public class FlatJobEventPresentable extends JobEventPresentable
+public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi>
   {
     @Nonnull
     private final FlatJobEventSpi flatJobEvent;
