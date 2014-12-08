@@ -162,17 +162,17 @@ public class FinderStreamSupport<TYPE, EXTENDED_FINDER extends Finder<TYPE>>
         return stream().peek(action);
       }  
 
-//    @Override
-//    public Stream<Type> limit(long maxSize) 
-//      {
-//        return stream().limit(maxSize);
-//      }
-//
-//    @Override
-//    public Stream<Type> skip(long n) 
-//      {
-//        return stream().skip(n);
-//      } 
+    @Override
+    public Stream<TYPE> limit(long maxSize) 
+      {
+        return stream().limit(maxSize);
+      }
+
+    @Override
+    public Stream<TYPE> skip(long n) 
+      {
+        return stream().skip(n);
+      } 
 
     @Override
     public void forEach(Consumer<? super TYPE> action) 

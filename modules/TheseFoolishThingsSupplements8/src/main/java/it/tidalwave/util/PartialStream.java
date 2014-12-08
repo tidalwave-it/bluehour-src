@@ -49,6 +49,8 @@ import java.util.stream.Stream;
 
 /***********************************************************************************************************************
  *
+ * A partial copy of Stream, without long count() for classes that already have an int count().
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -116,4 +118,8 @@ public interface PartialStream<T> extends BaseStream<T, Stream<T>>
     Optional<T> findFirst();
 
     Optional<T> findAny();
+    
+    Stream<T> limit(long maxSize);
+
+    Stream<T> skip(long n);
   }
