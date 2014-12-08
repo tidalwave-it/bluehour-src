@@ -43,5 +43,8 @@ public interface FinderStream<TYPE> extends Finder<TYPE>
     public Optional<TYPE> optionalResult();
     
     @Nonnull
+    public Optional<TYPE> optionalFirstResult();
+    
+    @Nonnull
     public Stream<TYPE> stream(); // TODO: needed because it can't implement a full Stream
   }

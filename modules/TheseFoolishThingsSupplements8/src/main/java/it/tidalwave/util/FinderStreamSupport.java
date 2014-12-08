@@ -61,6 +61,19 @@ public class FinderStreamSupport<TYPE, EXTENDED_FINDER extends Finder<TYPE>>
       }
     
     @Override @Nonnull
+    public Optional<TYPE> optionalFirstResult()
+      {
+        try 
+          {
+            return Optional.of(firstResult());
+          } 
+        catch (NotFoundException e) 
+          {
+            return Optional.empty();
+          }
+      }
+    
+    @Override @Nonnull
     public Stream<TYPE> stream() 
       {
         return ((List<TYPE>)results()).stream();
