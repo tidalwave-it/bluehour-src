@@ -47,7 +47,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-macosx-embedded-jre</artifactId>
     <version>1.0-ALPHA-2-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>blueHour - Installer, Mac OS X with embedded JRE</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
     
