@@ -25,16 +25,20 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.types.impl;
 
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.Project;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.accounting.model.types.Money;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+import static it.tidalwave.accounting.model.types.impl.TestUtils.parseDate;
 
 /***********************************************************************************************************************
  *
@@ -42,7 +46,7 @@ import static org.hamcrest.CoreMatchers.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class CustomerTest
+public class ProjectTest
   {
     @BeforeMethod
     public void installEmptyAsSupport()
@@ -51,7 +55,7 @@ public class CustomerTest
       }
     
     @Test
-    public void toString_must_return_all_the_fields()
+    public void toString_must_be_properly_computed()
       {
         final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
                                             .withCity("San Francisco")
@@ -59,13 +63,27 @@ public class CustomerTest
                                             .withState("CA")
                                             .withCountry("USA")
                                             .create();
-        final Customer c1 = Customer.builder().withId(new Id("the id"))
+        final Customer c1 = Customer.builder().withId(new Id("1"))
                                               .withName("Acme Corp.")
                                               .withVatNumber("1233455345")
                                               .withBillingAddress(a1)
                                               .create();
-
-        assertThat(c1.toString(), is("InMemoryCustomer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
-                                   + "city=San Francisco, state=CA, country=USA, zip=12345), vatNumber=1233455345)"));
+        final Project p = Project.builder().withId(new Id("2"))
+                                           .withBudget(new Money(10500, "EUR"))
+                                           .withCustomer(c1)
+                                           .withName("Project 1")
+                                           .withDescription("description of project 1")
+                                           .withStartDate(parseDate("2014-01-03"))
+                                           .withEndDate(parseDate("2014-02-12"))
+                                           .withNotes("Notes for project 1")
+                                           .withNumber("1")
+                                           .withHourlyRate(new Money(43, "EUR"))
+                                           .create();
+        assertThat(p.toString(), is("InMemoryProject(id=2, customer=InMemoryCustomer(id=1, name=Acme Corp., billingAddress="
+                                  + "Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345), "
+                                  + "vatNumber=1233455345), name=Project 1, number=1, "
+                                  + "description=description of project 1, notes=Notes for project 1, "
+                                  + "status=OPEN, hourlyRate=43.00 EUR, budget=10500.00 EUR, "
+                                  + "startDate=2014-01-03, endDate=2014-02-12)"));
       }
   }

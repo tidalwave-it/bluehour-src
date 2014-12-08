@@ -25,9 +25,8 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model;
+package it.tidalwave.accounting.model.types;
 
-import it.tidalwave.accounting.model.types.Address;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
