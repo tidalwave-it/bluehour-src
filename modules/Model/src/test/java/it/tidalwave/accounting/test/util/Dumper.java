@@ -30,23 +30,24 @@ package it.tidalwave.accounting.test.util;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import it.tidalwave.util.FinderStream;
+import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.CustomerSpi;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
-import it.tidalwave.util.spi.AsSupport;
-import java.lang.reflect.Modifier;
 import lombok.RequiredArgsConstructor;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
@@ -60,18 +61,6 @@ import static java.util.stream.Collectors.joining;
 @RequiredArgsConstructor
 public class Dumper 
   {
-    private final static Comparator<? super Project> PROJECT_COMPARATOR = (Project p1, Project p2) -> 
-      {
-        int n = ((ProjectSpi)p1).getName().compareTo(((ProjectSpi)p2).getName());
-        
-        if (n == 0)
-          {
-            n = ((ProjectSpi)p1).getStartDate().compareTo(((ProjectSpi)p2).getStartDate());
-          }
-        
-        return n;
-      };
-    
     private static final String INDENT = "    ";
     
     @Nonnull
@@ -90,19 +79,25 @@ public class Dumper
     
     private void dumpCustomers (final @Nonnull FinderStream<Customer> customers)
       {
-        customers.sorted(comparing(Customer::getName)).forEach(customer -> pw.printf("%s\n", toString(customer)));
+        customers.map(customer -> (CustomerSpi)customer)
+                 .sorted(comparing(CustomerSpi::getName))
+                 .forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
     
     private void dumpInvoices (final @Nonnull FinderStream<Invoice> invoices)
       throws IOException
       {
-        invoices.sorted(comparing(Invoice::getNumber)).forEach(invoice -> dump(invoice));
+        invoices.map(invoice -> (InvoiceSpi)invoice)
+                .sorted(comparing(InvoiceSpi::getNumber))
+                .forEach(invoice -> dump(invoice));
       }
     
     private void dumpProjects (final @Nonnull FinderStream<Project> projects)
       throws IOException
       {
-        projects.sorted(PROJECT_COMPARATOR).forEach(project -> dump(project));
+        projects.map(project -> (ProjectSpi)project)
+                .sorted(comparing(ProjectSpi::getName).thenComparing(ProjectSpi::getStartDate))
+                .forEach(project -> dump(project));
       }
     
     private void dump (final @Nonnull Project project)
@@ -178,7 +173,7 @@ public class Dumper
             
             if (value instanceof Customer)
               {
-                value = ((Customer)value).getName();
+                value = ((CustomerSpi)value).getName();
               }
             else if (value instanceof Project)
               {

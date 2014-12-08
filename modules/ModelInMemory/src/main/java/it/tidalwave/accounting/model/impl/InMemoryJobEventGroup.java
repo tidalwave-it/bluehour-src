@@ -38,6 +38,7 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -86,7 +87,9 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
       {
 //        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
         final BinaryOperator<LocalDateTime> min = (a, b) -> (a.compareTo(b) > 0) ? b : a;
-        return findChildren().map(jobEvent -> jobEvent.getDateTime()).reduce(min).get();
+        return findChildren().map(jobEvent -> (JobEventSpi)jobEvent)
+                             .map(jobEvent -> jobEvent.getDateTime())
+                             .reduce(min).get();
       }
     
     /*******************************************************************************************************************

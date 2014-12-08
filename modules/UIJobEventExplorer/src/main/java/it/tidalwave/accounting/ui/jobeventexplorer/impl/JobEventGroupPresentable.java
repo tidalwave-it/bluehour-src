@@ -37,8 +37,8 @@ import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
-import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
@@ -63,9 +63,10 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
       {
         final Styleable styleable = new DefaultStyleable(getStyles());
         return jobEvent.findChildren()
-                            .sorted(comparing(JobEvent::getDateTime))
-                            .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                            .collect(toCompositePresentationModel(aggregateBuilder().create(), styleable));
+                       .map(jobEvent -> (JobEventSpi)jobEvent)
+                       .sorted(comparing(JobEventSpi::getDateTime))
+                       .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
+                       .collect(toCompositePresentationModel(aggregateBuilder().create(), styleable));
         // FIXME: use SimpleCompositePresentable?
       }
 

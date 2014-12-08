@@ -80,7 +80,7 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         addAll(jobEvents, project.findChildren().results());
         
         // TODO: quick and dirty - refactor with visitor, closures
-        final List<JobEventSpi> r = jobEvents.stream().sorted(Comparator.comparing(JobEvent::getDateTime))
+        final List<JobEventSpi> r = jobEvents.stream().sorted(Comparator.comparing(JobEventSpi::getDateTime))
                                                       .collect(Collectors.toList());
         
         pw.printf(SEPARATOR + "\n");

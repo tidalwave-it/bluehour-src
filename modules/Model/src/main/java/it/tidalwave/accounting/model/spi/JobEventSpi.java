@@ -28,6 +28,7 @@
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.types.Money;
 
@@ -70,4 +71,12 @@ public interface JobEventSpi extends JobEvent
      ******************************************************************************************************************/
     @Nonnull
     public Money getEarnings();
+    
+    /*******************************************************************************************************************
+     *
+     * @return 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    public LocalDateTime getDateTime(); 
   }

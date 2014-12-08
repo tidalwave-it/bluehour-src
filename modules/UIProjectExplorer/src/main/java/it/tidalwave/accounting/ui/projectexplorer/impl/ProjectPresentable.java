@@ -37,9 +37,10 @@ import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.accounting.model.spi.CustomerSpi;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -71,7 +72,7 @@ public class ProjectPresentable implements Presentable
         final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         
         // FIXME: uses the column header names, should be an internal id instead
-        builder.put("Client",     (Displayable) () -> project.getCustomer().getName());
+        builder.put("Client",     (Displayable) () -> ((CustomerSpi)project.getCustomer()).getName());
         builder.put("Status",     (Displayable) () -> project.getStatus().name());
         builder.put("#",          (Displayable) () -> project.getNumber());
         builder.put("Name",       (Displayable) () -> project.getName());

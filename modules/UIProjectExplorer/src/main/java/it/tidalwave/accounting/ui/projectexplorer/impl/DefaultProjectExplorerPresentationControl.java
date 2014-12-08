@@ -39,7 +39,9 @@ import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
+import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
@@ -79,7 +81,8 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
       {
         log.info("onCustomerSelectedEvent({})", event);
         presentation.populate(event.getCustomer().findProjects()
-                                                 .sorted(comparing(Project::getName))
+                                                 .map(project -> (ProjectSpi)project)
+                                                 .sorted(comparing(ProjectSpi::getName))
                                                  .map(project -> createPresentationModelFor(project))
                                                  .collect(toCompositePresentationModel()));
       }
