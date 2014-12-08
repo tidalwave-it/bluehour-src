@@ -25,7 +25,7 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.reporting.impl;
+package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -34,7 +34,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import it.tidalwave.util.test.FileComparisonUtils;
-import it.tidalwave.accounting.model.impl.DefaultHourlyReportGenerator;
 import it.tidalwave.accounting.model.HourlyReport;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.test.util.ScenarioFactory;
