@@ -27,70 +27,65 @@
  */
 package it.tidalwave.accounting.model.spi.util;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.FinderStream;
 import it.tidalwave.util.FinderStreamSupport;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.NotFoundException;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
+import static java.util.Collections.*;
 
 /***********************************************************************************************************************
  *
- * @param <TYPE>
- * @param <FINDER>
+ * A support class for implementing a {@link Finder} that provides filtering by id.
+ * 
+ * @param <TYPE>     the product abstract type
+ * @param <IMPLTYPE> the product concrete type
+ * @param <FINDER>   the {@code Finder} type
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class FinderWithIdSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
+public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
                                 extends FinderStreamSupport<TYPE, FINDER>
-                                implements ExtendedFinderSupport<TYPE, FINDER>, FinderStream<TYPE>, Finder<TYPE>
+                                implements ExtendedFinderSupport<TYPE, FINDER>, 
+                                           FinderStream<TYPE>,
+                                           Finder<TYPE>
   {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     
-    @CheckForNull
-    /* package */ Id id;
+    @Nonnull
+    /* package */ Optional<Id> id = Optional.empty();
     
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
-        final FinderWithIdSupport<TYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
-        clone.id = id;
+        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport)super.clone();
+        clone.id = Optional.of(id);
         return (FINDER)clone;
       }
 
-    @Override
-    protected List<? extends TYPE> computeResults()
+    @Override @Nonnull
+    protected List<IMPLTYPE> computeResults()
       {
-        if (id != null)
-          {
-            try
-              {
-                return Collections.singletonList(findById(id));
-              }
-            catch (NotFoundException e)
-              {
-                return Collections.<TYPE>emptyList();
-              }
-          }
-        else
-          {
-            return new ArrayList<>(findAll());
-          }
+        return id.map(id -> findById(id).map(item -> singletonList(item)).orElse(emptyList()))
+                 .orElse(findAll());
       }
     
     @Nonnull
-    protected abstract Collection<? extends TYPE> findAll();
+    protected abstract List<IMPLTYPE> findAll();
     
     @Nonnull
-    protected abstract TYPE findById (@Nonnull Id id)
-      throws NotFoundException;
+    protected abstract Optional<IMPLTYPE> findById (@Nonnull Id id);
+    
+    @Nonnull
+    protected Stream<IMPLTYPE> streamImpl()
+      {
+        return (Stream<IMPLTYPE>)stream();
+      }
   }
 

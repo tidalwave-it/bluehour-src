@@ -29,15 +29,13 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.stream.Stream;
 import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
-import it.tidalwave.util.NotFoundException;
 
 /***********************************************************************************************************************
  *
@@ -45,37 +43,26 @@ import it.tidalwave.util.NotFoundException;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, ProjectRegistry.JobEventFinder>
+public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
                                                     implements ProjectRegistry.JobEventFinder
   {
     private static final long serialVersionUID = 1L;
     
     @Override @Nonnull
-    protected JobEvent findById (final @Nonnull Id id) 
-      throws NotFoundException 
+    protected Optional<InMemoryJobEvent> findById (final @Nonnull Id id) 
       {
-        // FIXME: very inefficient
-        final Map<Id, JobEvent> map = findAll().stream().collect(Collectors.toMap(JobEvent::getId, item -> item));
-
-        // FIXME: should not happen
-        if (!map.containsKey(id))
-          {
-            throw new NotFoundException(id.toString());
-//            return JobEvent.builder().withId(id).withName("DUMMY!").create();
-          }
-
-        return map.get(id);
+        return ((Stream<InMemoryJobEvent>)findAll().stream()).filter(item -> item.getId().equals(id)).findFirst();
       }  
 
     @Override @Nonnull
     public Duration getDuration() 
       {
-        return map(jobEvent -> ((JobEventSpi)jobEvent).getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return streamImpl().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
       }
 
     @Override @Nonnull
     public Money getEarnings() 
       {
-        return map(jobEvent -> ((JobEventSpi)jobEvent).getEarnings()).reduce(Money.ZERO, Money::add);
+        return streamImpl().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
       }
   }

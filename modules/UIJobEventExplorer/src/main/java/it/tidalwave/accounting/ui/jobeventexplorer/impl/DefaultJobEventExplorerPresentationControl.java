@@ -42,7 +42,7 @@ import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationC
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
@@ -72,24 +72,18 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
     
     /*******************************************************************************************************************
      *
+     * Reacts to the notification that a {@link Project} has been selected by populating the presentation with
+     * its job events.
      * 
+     * @param  event  the notification event
      *
      ******************************************************************************************************************/
     @VisibleForTesting void onProjectSelectedEvent (final @Nonnull @ListensTo ProjectSelectedEvent event)
       {
         log.info("onProjectSelectedEvent({})", event);
-//        final Selectable selectable = new Selectable() 
-//          {
-//            @Override
-//            public void select() 
-//              {
-//                log.info("selected {}", event);
-////                messageBus.publish(new ProjectSelectedEvent(jobEvent));
-//              }
-//          };
         presentation.populate(event.getProject().findChildren()
                                                 .sorted(comparing(JobEvent::getDateTime))
                                                 .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                                                .collect(toContainerPresentationModel()));
+                                                .collect(toCompositePresentationModel()));
       }
   }

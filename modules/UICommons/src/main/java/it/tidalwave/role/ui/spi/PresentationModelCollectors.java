@@ -27,10 +27,12 @@
  */
 package it.tidalwave.role.ui.spi;
 
+import it.tidalwave.role.Composite;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 import java.util.function.Function;
 import it.tidalwave.util.ArrayListCollectorSupport;
 import it.tidalwave.role.ui.PresentationModel;
@@ -38,6 +40,9 @@ import it.tidalwave.role.spi.ArrayListSimpleComposite;
 
 /***********************************************************************************************************************
  *
+ * A {@link Collector} which collects a {@link Stream} of {@link PresentationModel}s into a single
+ * {@code PresentationModel} with a {@link Composite} role containing them.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -47,24 +52,49 @@ public class PresentationModelCollectors extends ArrayListCollectorSupport<Prese
     @Nonnull
     private final List<Object> roles = new ArrayList<>();
     
+    /*******************************************************************************************************************
+     *
+     * A {@link Collector} which collects a {@link Stream} of {@link PresentationModel}s into a single
+     * {@code PresentationModel} with a {@link Composite} role containing them. In other words:
+     * 
+     * <pre>
+     * List<PresentationModel> pms = ...
+     * PresentationModel compositePm = pms.stream().collect(toCompositePresentationModel());
+     * // same contents as childrenPms
+     * List<PresentationModel> childrenPms = compositePm.as(Composite).findChildren().results();
+     * </pre>
+     * 
+     * @param   roles   some extra roles included in the resulting {@code PresentationModel}
+     * @return          a {@code PresentationModel}
+     * 
+     ******************************************************************************************************************/
     @Nonnull
-    public static PresentationModelCollectors toContainerPresentationModel (final @Nonnull Object ... roles)
+    public static PresentationModelCollectors toCompositePresentationModel (final @Nonnull Object ... roles)
       {
         return new PresentationModelCollectors(Arrays.asList(roles));
       }
 
+    /*******************************************************************************************************************
+     *
+     * 
+     ******************************************************************************************************************/
     private PresentationModelCollectors (final @Nonnull List<Object> roles) 
       {
         this.roles.addAll(roles);
       }
     
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     * 
+     ******************************************************************************************************************/
     @Override @Nonnull 
     public Function<List<PresentationModel>, PresentationModel> finisher() 
       {
-        return childPms ->
+        return childrenPms ->
           {
             final List<Object> temp = new ArrayList<>(roles);
-            temp.add(new ArrayListSimpleComposite<>(childPms));
+            temp.add(new ArrayListSimpleComposite<>(childrenPms));
             // FIXME: "" triggers a NPE in RoleManagerSupport.java:341
             return new DefaultPresentationModel("", temp.toArray());
           };

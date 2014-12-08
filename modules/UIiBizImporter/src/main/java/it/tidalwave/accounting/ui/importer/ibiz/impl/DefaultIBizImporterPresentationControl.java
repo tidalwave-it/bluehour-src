@@ -82,6 +82,7 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
             public void onConfirm() 
               {
                 // TODO: warn for overwriting data, ask for confirmation
+                // FIXME: this gets executed in JavaFX thread
                 try
                   {
                     presentation.lock();

@@ -44,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class InMemoryInvoiceRegistry implements InvoiceRegistry
   {
-    private final Map<Id, Invoice> invoiceMapById = new HashMap<>();
+    private final Map<Id, InMemoryInvoice> invoiceMapById = new HashMap<>();
 
     /*******************************************************************************************************************
      *
@@ -65,6 +65,6 @@ public class InMemoryInvoiceRegistry implements InvoiceRegistry
     @Override @Nonnull
     public Invoice.Builder addInvoice()
       {
-        return new Invoice.Builder(invoice -> invoiceMapById.put(invoice.getId(), invoice));
+        return new Invoice.Builder(invoice -> invoiceMapById.put(invoice.getId(), (InMemoryInvoice)invoice));
       }
   }

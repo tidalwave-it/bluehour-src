@@ -29,10 +29,7 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
@@ -46,6 +43,7 @@ import lombok.Delegate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import static java.util.stream.Collectors.toMap;
 
 /***********************************************************************************************************************
  *
@@ -60,12 +58,12 @@ public class InMemoryCustomer implements Customer
   {
     private static final long serialVersionUID = 1L;
     
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectRegistry.ProjectFinder>
-                               implements ProjectRegistry.ProjectFinder
+    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, InMemoryProject, ProjectRegistry.ProjectFinder>
+                                implements ProjectRegistry.ProjectFinder
       {
         private static final long serialVersionUID = 1L;
     
-        InMemoryProjectFinder (final Map<Id, Project> projectMapById)
+        InMemoryProjectFinder (final Map<Id, InMemoryProject> projectMapById)
           {
             super(projectMapById);  
           }
@@ -110,14 +108,9 @@ public class InMemoryCustomer implements Customer
     @Override @Nonnull
     public ProjectRegistry.ProjectFinder findProjects()
       {
-        final Map<Id, List<Project>> temp = accounting.getProjectRegistry().findProjects()
-                .filter(project -> project.getCustomer().getId().equals(getId()))
-                .collect(Collectors.groupingBy(Project::getId));
-        // FIXME: try to merge into a single pipeline
-        final Map<Id, Project> map = new HashMap<>();
-        temp.forEach((id, projects) -> map.put(id, projects.get(0)));
-        
-        return new InMemoryProjectFinder(map);
+        return new InMemoryProjectFinder(accounting.getProjectRegistry().findProjects()
+                                                   .filter(project -> project.getCustomer().getId().equals(getId()))
+                                                   .collect(toMap(Project::getId, project -> (InMemoryProject)project)));
       }
     
     /*******************************************************************************************************************
@@ -125,7 +118,7 @@ public class InMemoryCustomer implements Customer
      * @return 
      * 
      ******************************************************************************************************************/
-    @Nonnull
+    @Override @Nonnull
     public Builder toBuilder()
       {
         return new Builder(id, name, billingAddress, vatNumber, InMemoryCustomer.Builder.Callback.DEFAULT);                

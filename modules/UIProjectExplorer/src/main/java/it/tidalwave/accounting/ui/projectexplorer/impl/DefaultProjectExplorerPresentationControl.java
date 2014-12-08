@@ -45,7 +45,7 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationCon
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
@@ -67,20 +67,36 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
       {
       }
 
+    /*******************************************************************************************************************
+     *
+     * Reacts to the notification that a {@link Customer} has been selected by populating the presentation with
+     * his projects.
+     * 
+     * @param  event  the notification event
+     *
+     ******************************************************************************************************************/
     @VisibleForTesting void onCustomerSelectedEvent (final @Nonnull @ListensTo CustomerSelectedEvent event)
       {
         log.info("onCustomerSelectedEvent({})", event);
         presentation.populate(event.getCustomer().findProjects()
-                .sorted(comparing(Project::getName))
-                .map(project -> createPresentationModelFor(project))
-//                .map(project -> project.as(Presentable).createPresentationModel())
-                .collect(toContainerPresentationModel()));
+                                                 .sorted(comparing(Project::getName))
+                                                 .map(project -> createPresentationModelFor(project))
+                                                 .collect(toCompositePresentationModel()));
       }
     
+    /*******************************************************************************************************************
+     *
+     * Creates a {@link PresentationModel} for a {@link Project} injecting a {@link Selectable} role which fires a
+     * {@link ProjectSelectedEvent} on selection.
+     * 
+     * @param  customer     the {@code Project}
+     * @return              the {@code PresentationModel}
+     *
+     ******************************************************************************************************************/
     @Nonnull
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Project project)
       {
-        final Selectable selectable = () -> messageBus.publish(new ProjectSelectedEvent(project));
-        return project.as(Presentable).createPresentationModel(selectable);
+        final Selectable publishEventOnSelection = () -> messageBus.publish(new ProjectSelectedEvent(project));
+        return project.as(Presentable).createPresentationModel(publishEventOnSelection);
       }
   }

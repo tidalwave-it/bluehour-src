@@ -38,9 +38,9 @@
                                                         <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Start Date" />
                                                         <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Due Date" />
                                                         <TableColumn editable="false" prefWidth="40.0" sortable="false" text="Time" />
+                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Budget" />
                                                         <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Earnings" />
                                                         <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Invoiced" />
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Budget" />
                                                         <TableColumn editable="false" prefWidth="200.0" sortable="false" text="Notes" />
                                                     </columns>
                                                     <columnResizePolicy>

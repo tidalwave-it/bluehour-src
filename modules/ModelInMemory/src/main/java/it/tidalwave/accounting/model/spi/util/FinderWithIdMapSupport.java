@@ -27,42 +27,46 @@
  */
 package it.tidalwave.accounting.model.spi.util;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
- * @param <TYPE>
- * @param <FINDER>
+ * An implementation of {@link FinderWithIdSupport} based on a {@link Map}.
  * 
+ * @param <TYPE>     the product abstract type
+ * @param <IMPLTYPE> the product concrete type
+ * @param <FINDER>   the {@code Finder} type
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class FinderWithIdMapSupport<TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
-  extends FinderWithIdSupport<TYPE, FINDER>
+public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>>
+  extends FinderWithIdSupport<TYPE, IMPLTYPE, FINDER>
   {
     private static final long serialVersionUID = 1L;
-    
+
     @Nonnull
-    private final Map<Id, TYPE> mapById;
-    
+    private final Map<Id, IMPLTYPE> mapById;
+
     @Override @Nonnull
-    protected Collection<? extends TYPE> findAll()
+    protected List<IMPLTYPE> findAll()
       {
-        return mapById.values();
+        return new ArrayList<>(mapById.values());
       }
-    
-    @Override @CheckForNull
-    protected TYPE findById (final @Nonnull Id id)
+
+    @Override @Nonnull
+    protected Optional<IMPLTYPE> findById (final @Nonnull Id id)
       {
-        return mapById.get(id);
+        return Optional.ofNullable(mapById.get(id));
       }
-  }
+   }
 

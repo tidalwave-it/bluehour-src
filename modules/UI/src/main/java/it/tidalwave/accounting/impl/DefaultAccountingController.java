@@ -45,6 +45,11 @@ import static it.tidalwave.accounting.role.Loadable.Loadable;
 
 /***********************************************************************************************************************
  *
+ * @stereotype Controller
+ * 
+ * This business controller manages the life cycle of the {@link Accounting} instance, loading it during the 
+ * initialization.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -52,14 +57,14 @@ import static it.tidalwave.accounting.role.Loadable.Loadable;
 @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultAccountingController 
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
+    @Inject @Named("applicationMessageBus")
     private MessageBus messageBus;
     
-    private Accounting accounting = Accounting.createNew();
+    private Accounting accounting;
 
     /*******************************************************************************************************************
      *
-     * 
+     * Loads the {@link Accounting} at initialization.
      *
      ******************************************************************************************************************/
     @PostConstruct
@@ -68,7 +73,7 @@ public class DefaultAccountingController
         try
           {
             log.info("initialize()");
-            accounting = accounting.as(Loadable).load();
+            accounting = Accounting.createNew().as(Loadable).load();
             messageBus.publish(new AccountingOpenedEvent(accounting));
           }
         catch (IOException e)
@@ -79,7 +84,7 @@ public class DefaultAccountingController
     
     /*******************************************************************************************************************
      *
-     * 
+     * Reply with a message carrying a reference to the {@link Accounting} instance. 
      *
      ******************************************************************************************************************/
     @VisibleForTesting void onAccountingOpenRequest (final @Nonnull @ListensTo AccountingOpenRequest request)

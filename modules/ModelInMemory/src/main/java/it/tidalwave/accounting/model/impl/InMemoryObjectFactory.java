@@ -64,7 +64,7 @@ public class InMemoryObjectFactory implements ObjectFactory
     @Override @Nonnull 
     public JobEvent createJobEvent (final @Nonnull JobEvent.Builder builder) 
       {
-        final List<JobEvent> events = builder.getEvents();
+        final List<? extends JobEvent> events = builder.getEvents();
         
         if ((events != null) && !events.isEmpty())
           {

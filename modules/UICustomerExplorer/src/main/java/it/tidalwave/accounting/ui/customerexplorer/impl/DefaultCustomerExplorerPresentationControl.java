@@ -40,13 +40,14 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
 import static it.tidalwave.role.ui.Presentable.Presentable;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toContainerPresentationModel;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
@@ -65,7 +66,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
 
     /*******************************************************************************************************************
      *
-     * 
+     * Requests the opening of an {@link Accounting} during initialization.
      *
      ******************************************************************************************************************/
     @Override
@@ -77,27 +78,34 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     
     /*******************************************************************************************************************
      *
+     * Reacts to the notification that an {@link Accounting} has been opened by populating the presentation with
+     * the customers.
      * 
+     * @param  event  the notification event
      *
      ******************************************************************************************************************/
     @VisibleForTesting void onAccountingOpenedEvent (final @Nonnull @ListensTo AccountingOpenedEvent event)
       {
         log.info("onAccountingOpenedEvent({})", event);
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers()
-                                .sorted(comparing(Customer::getName))
-                                .map(customer -> createPresentationModelFor(customer))
-                                .collect(toContainerPresentationModel()));
+                                   .sorted(comparing(Customer::getName))
+                                   .map(customer -> createPresentationModelFor(customer))
+                                   .collect(toCompositePresentationModel()));
       }
 
     /*******************************************************************************************************************
      *
+     * Creates a {@link PresentationModel} for a {@link Customer} injecting a {@link Selectable} role which fires a
+     * {@link CustomerSelectedEvent} on selection.
      * 
+     * @param  customer     the {@code Customer}
+     * @return              the {@code PresentationModel}
      *
      ******************************************************************************************************************/
     @Nonnull
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
       {
-        final Selectable selectable = () -> messageBus.publish(new CustomerSelectedEvent(customer));
-        return customer.as(Presentable).createPresentationModel(selectable);
+        final Selectable publishEventOnSelection = () -> messageBus.publish(new CustomerSelectedEvent(customer));
+        return customer.as(Presentable).createPresentationModel(publishEventOnSelection);
       }
   }

@@ -27,6 +27,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
         final NativeAddressBook addressBook = NativeAddressBook.instance();
         IBizUtils.loadConfiguration(path.resolve("clients")).getStream("clients").forEach(customerConfig -> 
           {
-            final String firstName = customerConfig.getString("firstName").trim();
+            final String firstName = trim(customerConfig.getString("firstName"));
             final String clientCompany = customerConfig.getString("clientCompany");
             final Contact contact = getContact(addressBook, firstName, clientCompany);
 
@@ -97,7 +98,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
             vat = email.getFirstHomeValue(); // VAT is also there in my address book...
           }
         
-        if (vat.equals("") && (phone != null))
+        if (((vat == null) || vat.equals("")) && (phone != null))
           {
             vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
           }
@@ -145,5 +146,11 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
           }
         
         return contacts.get(0);
+      }
+    
+    @Nonnull
+    private static String trim (final @CheckForNull String string)
+      {
+        return (string == null) ? "" : string.trim();
       }
   }
