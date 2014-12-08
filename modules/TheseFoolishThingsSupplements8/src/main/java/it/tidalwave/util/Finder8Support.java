@@ -40,10 +40,10 @@ import it.tidalwave.util.spi.FinderSupport;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class FinderStreamSupport<TYPE, EXTENDED_FINDER extends Finder<TYPE>> 
+public class Finder8Support<TYPE, EXTENDED_FINDER extends Finder<TYPE>> 
                                 extends FinderSupport<TYPE, EXTENDED_FINDER>
                                 implements ExtendedFinderSupport<TYPE, EXTENDED_FINDER>, 
-                                           FinderStream<TYPE>
+                                           Finder8<TYPE>
   {
     private static final long serialVersionUID = 1L;
     

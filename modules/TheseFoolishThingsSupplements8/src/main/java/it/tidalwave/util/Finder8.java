@@ -37,7 +37,7 @@ import java.util.stream.Stream;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface FinderStream<TYPE> extends Finder<TYPE>
+public interface Finder8<TYPE> extends Finder<TYPE>
   {
     @Nonnull
     public Optional<TYPE> optionalResult();
@@ -46,5 +46,5 @@ public interface FinderStream<TYPE> extends Finder<TYPE>
     public Optional<TYPE> optionalFirstResult();
     
     @Nonnull
-    public Stream<TYPE> stream(); // TODO: needed because it can't implement a full Stream
+    public Stream<TYPE> stream();
   }
