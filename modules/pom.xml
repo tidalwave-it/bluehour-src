@@ -59,7 +59,6 @@
 
     ================================================================================================================ -->
     <properties>
-        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
         <tft.clirr.skip>true</tft.clirr.skip> <!-- breaks Hudson, see BH-5 -->
         
         <commons-codec.version>1.9</commons-codec.version>
@@ -73,7 +72,6 @@
         <openbluesky.version>0.17</openbluesky.version>
         <slf4j.version>1.7.5</slf4j.version>
         <spring.version>4.0.2.RELEASE</spring.version>
-        <tft.aspectjrt.version>1.8.1</tft.aspectjrt.version>        
         <thesefoolishthings.version>1.35</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
     </properties>
