@@ -1,0 +1,58 @@
+
+.mainFxmlClass
+  {
+
+  }
+
+/*.table-tree-view .column-header,*/
+.table-view .column-header
+  {
+    -fx-font-size: 10px;
+    -fx-alignment: center;
+    /* TODO: bold */
+  }
+
+.tree-table-view,
+.table-view
+  {
+    -fx-font-size: 10px;
+  }
+
+  /** Role-based Styles */
+  
+.-rs-alerted
+  {
+    -fx-text-fill: red;
+  }
+  
+.-rs-red
+  {
+    -fx-text-fill: red;
+  }
+
+.-rs-green
+  {
+    -fx-text-fill: green;
+  }
+
+.-rs-right-aligned
+  {
+    -fx-alignment: center-right;
+  }
+
+/*.-rs-job-event
+  {
+  }*/
+
+.-rs-job-event-group
+  {
+    -fx-font-weight: bold;
+  }
+
+.-rs-timed-job-event
+  {
+  }
+
+.-rs-flat-job-event
+  {
+  }
