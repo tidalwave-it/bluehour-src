@@ -69,7 +69,7 @@
             <artifactId>it-tidalwave-accounting-ui-importer-ibiz</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.northernwind.rca</groupId>
+            <groupId>it.tidalwave.steelblue</groupId>
             <artifactId>it-tidalwave-role-ui-javafx</artifactId>
         </dependency>
         <dependency>

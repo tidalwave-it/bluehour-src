@@ -85,8 +85,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.northernwind.rca</groupId>
-            <artifactId>it-tidalwave-util-supplement</artifactId>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util-java8supplement</artifactId>
         </dependency>
     </dependencies>
     
