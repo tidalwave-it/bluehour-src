@@ -50,6 +50,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
+            <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-ui-commons</artifactId>
         </dependency>
         <dependency>
@@ -85,8 +89,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.northernwind.rca</groupId>
-            <artifactId>it-tidalwave-util-supplement</artifactId>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util-java8supplement</artifactId>
         </dependency>
         
         <!-- TEST DEPENDENCIES -->
@@ -95,12 +99,6 @@
             <artifactId>it-tidalwave-accounting-model</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-            <version>1.0-ALPHA-3-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
     

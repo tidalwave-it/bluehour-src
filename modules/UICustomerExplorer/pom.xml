@@ -47,6 +47,12 @@
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-model</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>it.tidalwave.accounting</groupId>
+                    <artifactId>it-tidalwave-util-jdk8</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -83,10 +89,6 @@
                     <groupId>com.kenai.nbpwr</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.northernwind.rca</groupId>
-            <artifactId>it-tidalwave-util-supplement</artifactId>
         </dependency>
         
         <!-- TEST DEPENDENCIES -->

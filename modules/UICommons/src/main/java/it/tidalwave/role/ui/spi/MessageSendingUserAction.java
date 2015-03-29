@@ -34,6 +34,8 @@ import it.tidalwave.messagebus.MessageBus;
 
 /***********************************************************************************************************************
  *
+ * FIXME: move to TheseFoolishThings.
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
