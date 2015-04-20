@@ -56,20 +56,24 @@
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-ui-commons</artifactId>
         </dependency>
-        <dependency>
-            <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-role</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org-slf4j-jdk14</artifactId>
-                    <groupId>com.kenai.nbpwr</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-messagebus-spring</artifactId>
         </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-messagebus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util-java8supplement</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-role</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -78,21 +82,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
-        <dependency>
-            <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-messagebus</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org-slf4j-jdk14</artifactId>
-                    <groupId>com.kenai.nbpwr</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-util-java8supplement</artifactId>
-        </dependency>
-        
+                
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>

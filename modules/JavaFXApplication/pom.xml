@@ -37,6 +37,12 @@
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-ui-importer-ibiz</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -50,44 +56,28 @@
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-messagebus</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org-slf4j-jdk14</artifactId>
-                    <groupId>com.kenai.nbpwr</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- These are indirect dependencies, directly referencing them solves convergency problems -->
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-role-spring</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org-slf4j-jdk14</artifactId>
-                    <groupId>com.kenai.nbpwr</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- end -->
 
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-util</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>org-slf4j-jdk14</artifactId>
-                    <groupId>com.kenai.nbpwr</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>org-openide-util</artifactId>
-                    <groupId>org.netbeans.api</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
