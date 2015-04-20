@@ -59,12 +59,17 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
      * 
      *
      ******************************************************************************************************************/
-    class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, InMemoryCustomer, CustomerRegistry.Finder>
+    static class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, InMemoryCustomer, CustomerRegistry.Finder>
                                  implements CustomerRegistry.Finder
       {
         private static final long serialVersionUID = 1L;
     
-        InMemoryCustomerFinder()
+        public InMemoryCustomerFinder (final @Nonnull InMemoryCustomerFinder other, final @Nonnull Object override)
+          {
+            super(other, override);  
+          }
+        
+        InMemoryCustomerFinder (final @Nonnull Map<Id, InMemoryCustomer> customerMapById)
           {
             super(customerMapById);  
           }
@@ -78,7 +83,7 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
     @Override @Nonnull
     public CustomerRegistry.Finder findCustomers()
       {
-        return new InMemoryCustomerFinder();
+        return new InMemoryCustomerFinder(customerMapById);
       }
 
     /*******************************************************************************************************************

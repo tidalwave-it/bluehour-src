@@ -60,12 +60,17 @@ public class InMemoryProjectRegistry implements ProjectRegistry
      *
      *
      ******************************************************************************************************************/
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectSpi, ProjectRegistry.ProjectFinder>
+    static class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectSpi, ProjectRegistry.ProjectFinder>
                                 implements ProjectRegistry.ProjectFinder
       {
         private static final long serialVersionUID = 1L;
 
-        InMemoryProjectFinder()
+        public InMemoryProjectFinder (final @Nonnull InMemoryProjectFinder other, final @Nonnull Object override)
+          {
+            super(other, override);  
+          }
+        
+        InMemoryProjectFinder (final @Nonnull Map<Id, ProjectSpi> projectMapById)
           {
             super(projectMapById);
           }
@@ -79,7 +84,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
     @Override @Nonnull
     public ProjectRegistry.ProjectFinder findProjects()
       {
-        return new InMemoryProjectFinder();
+        return new InMemoryProjectFinder(projectMapById);
       }
 
     /*******************************************************************************************************************

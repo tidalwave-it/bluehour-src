@@ -35,6 +35,7 @@ import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
+import lombok.NoArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -42,10 +43,17 @@ import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
+@NoArgsConstructor
+public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
                                                     implements ProjectRegistry.JobEventFinder
   {
     private static final long serialVersionUID = 1L;
+
+    public InMemoryJobEventFinderSupport (final @Nonnull InMemoryJobEventFinderSupport other,
+                                          final @Nonnull Object override) 
+      {
+        super(other, override);
+      } 
     
     @Override @Nonnull
     protected Optional<InMemoryJobEvent> findById (final @Nonnull Id id) 

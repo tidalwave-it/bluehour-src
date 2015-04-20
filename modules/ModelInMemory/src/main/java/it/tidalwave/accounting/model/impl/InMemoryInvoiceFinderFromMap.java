@@ -38,6 +38,7 @@ import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
+import lombok.RequiredArgsConstructor;
 import static java.util.stream.Collectors.toList;
 
 /***********************************************************************************************************************
@@ -46,25 +47,33 @@ import static java.util.stream.Collectors.toList;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InMemoryInvoice, InvoiceRegistry.Finder>
                                           implements InvoiceRegistry.Finder
   {
     private static final long serialVersionUID = 1L;
     
     @CheckForNull
-    private Project project;
+    private final Project project;
 
     public InMemoryInvoiceFinderFromMap (final @Nonnull Map<Id, InMemoryInvoice> invoiceMapById)
       {
         super(invoiceMapById);  
+        this.project = null;
+      }
+    
+    public InMemoryInvoiceFinderFromMap (final @Nonnull InMemoryInvoiceFinderFromMap other, 
+                                         final @Nonnull Object override)
+      {
+        super(other, override);
+        final InMemoryInvoiceFinderFromMap source = getSource(InMemoryInvoiceFinderFromMap.class, other, override);
+        this.project = source.project;
       }
 
     @Override @Nonnull
     public InvoiceRegistry.Finder withProject (final @Nonnull Project project) 
       {
-        final InMemoryInvoiceFinderFromMap clone = (InMemoryInvoiceFinderFromMap)super.clone();
-        clone.project = project;
-        return clone;
+        return clone(new InMemoryInvoiceFinderFromMap(project));
       }
 
     @Override @Nonnull

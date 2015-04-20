@@ -35,8 +35,9 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.util.Finder8;
 import it.tidalwave.util.Finder8Support;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
+import it.tidalwave.util.spi.ExtendedFinder8Support;
 import static java.util.Collections.*;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -50,22 +51,34 @@ import static java.util.Collections.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>> 
+@RequiredArgsConstructor
+public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinder8Support<TYPE, FINDER>> 
                                 extends Finder8Support<TYPE, FINDER>
-                                implements ExtendedFinderSupport<TYPE, FINDER>, 
+                                implements ExtendedFinder8Support<TYPE, FINDER>, 
                                            Finder8<TYPE>
   {
     private static final long serialVersionUID = 2L;
     
     @Nonnull
-    /* package */ Optional<Id> id = Optional.empty();
+    /* package */ final Optional<Id> id;
+
+    public FinderWithIdSupport()
+      {
+        id = Optional.empty();
+      }
+    
+    public FinderWithIdSupport (final @Nonnull FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> other, 
+                                final @Nonnull Object override) 
+      {
+        super(other, override);
+        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> source = getSource(FinderWithIdSupport.class, other, override);
+        this.id = source.id;
+      }
     
     @Nonnull
     public FINDER withId (final @Nonnull Id id)
       {
-        final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> clone = (FinderWithIdSupport<TYPE, IMPLTYPE, FINDER>)super.clone();
-        clone.id = Optional.of(id);
-        return (FINDER)clone;
+        return clone(new FinderWithIdSupport<>(Optional.of(id)));
       }
 
     @Override @Nonnull
@@ -76,10 +89,16 @@ public abstract class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER ex
       }
     
     @Nonnull
-    protected abstract List<IMPLTYPE> findAll();
+    protected List<IMPLTYPE> findAll()
+      {
+        throw new UnsupportedOperationException("Must be overridden");
+      }
     
     @Nonnull
-    protected abstract Optional<IMPLTYPE> findById (@Nonnull Id id);
+    protected Optional<IMPLTYPE> findById (@Nonnull Id id)
+      {
+        throw new UnsupportedOperationException("Must be overridden");
+      }
     
     @Nonnull
     protected Stream<IMPLTYPE> streamImpl()

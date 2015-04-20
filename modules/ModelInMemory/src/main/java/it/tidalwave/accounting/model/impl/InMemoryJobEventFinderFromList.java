@@ -28,6 +28,8 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +47,18 @@ public class InMemoryJobEventFinderFromList extends InMemoryJobEventFinderSuppor
     
     @Nonnull
     private final List<? extends InMemoryJobEvent> events;
+    
+    public InMemoryJobEventFinderFromList()
+      {
+        events = Collections.emptyList();
+      }
+     
+    public InMemoryJobEventFinderFromList (final @Nonnull InMemoryJobEventFinderFromList other,
+                                           final @Nonnull Object override) 
+      {
+        super(other, override);
+        this.events = new ArrayList<>(other.events);
+      } 
     
     @Override @Nonnull
     protected List<InMemoryJobEvent> findAll() 

@@ -48,6 +48,12 @@ public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
     @Nonnull
     private final ProjectRegistry.ProjectFinder projectFinder;
     
+    public InMemoryJobEventFinder (final @Nonnull InMemoryJobEventFinder other, final @Nonnull Object override)
+      {
+        super(other, override);
+        this.projectFinder = other.projectFinder;
+      }
+            
     // FIXME: very inefficient
     @Override @Nonnull
     protected List<InMemoryJobEvent> findAll() 

@@ -29,11 +29,13 @@ package it.tidalwave.accounting.model.spi.util;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinderSupport;
+import it.tidalwave.util.spi.ExtendedFinder8Support;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -49,7 +51,7 @@ import lombok.RequiredArgsConstructor;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>>
+public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinder8Support<TYPE, FINDER>>
   extends FinderWithIdSupport<TYPE, IMPLTYPE, FINDER>
   {
     private static final long serialVersionUID = 1L;
@@ -57,6 +59,19 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
     @Nonnull
     private final Map<Id, IMPLTYPE> mapById;
 
+    public FinderWithIdMapSupport()
+      {
+        mapById = Collections.emptyMap();
+      }
+    
+    public FinderWithIdMapSupport (final @Nonnull FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> other,
+                                   final @Nonnull Object override) 
+      {
+        super(other, override);
+        final FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> source = getSource(FinderWithIdMapSupport.class, other, override);
+        mapById = new HashMap<>(source.mapById);
+      }
+    
     @Override @Nonnull
     protected List<IMPLTYPE> findAll()
       {

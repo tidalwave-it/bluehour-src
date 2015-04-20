@@ -75,7 +75,7 @@
          
         <!-- FIXME: 1.0-ALPHA-2 causes a regression - doesn't populate with data -->
         <steelblue.version>1.0-ALPHA-1</steelblue.version>
-        <thesefoolishthings.version>1.39</thesefoolishthings.version>
+        <thesefoolishthings.version>2.0-SNAPSHOT</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
     </properties>
 

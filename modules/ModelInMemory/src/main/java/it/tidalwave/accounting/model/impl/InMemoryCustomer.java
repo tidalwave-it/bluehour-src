@@ -58,12 +58,17 @@ public class InMemoryCustomer implements CustomerSpi
   {
     private static final long serialVersionUID = 1L;
     
-    class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, InMemoryProject, ProjectRegistry.ProjectFinder>
+    static class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, InMemoryProject, ProjectRegistry.ProjectFinder>
                                 implements ProjectRegistry.ProjectFinder
       {
         private static final long serialVersionUID = 1L;
     
-        InMemoryProjectFinder (final Map<Id, InMemoryProject> projectMapById)
+        public InMemoryProjectFinder (final @Nonnull InMemoryProjectFinder other, final @Nonnull Object override)
+          {
+            super(other, override);  
+          }
+        
+        InMemoryProjectFinder (final @Nonnull Map<Id, InMemoryProject> projectMapById)
           {
             super(projectMapById);  
           }
