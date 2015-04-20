@@ -70,9 +70,9 @@
         <javax-inject.version>1</javax-inject.version>
         <logback.version>1.0.13</logback.version>
         <openbluesky.version>0.17</openbluesky.version>
-        <slf4j.version>1.7.5</slf4j.version>
-        <spring.version>4.0.2.RELEASE</spring.version>
-        
+        <slf4j.version>1.7.10</slf4j.version>
+        <spring.version>4.1.4.RELEASE</spring.version>
+         
         <!-- FIXME: 1.0-ALPHA-2 causes a regression - doesn't populate with data -->
         <steelblue.version>1.0-ALPHA-1</steelblue.version>
         <thesefoolishthings.version>1.39</thesefoolishthings.version>
