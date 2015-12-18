@@ -39,18 +39,18 @@
 
     <!-- ===============================================================================================================
 
-        This is the "Mac OS X Installer with embedded JRE module" of the project. It generates a Mac OS X application 
+        This is the "Mac OS X Installer with embedded JRE module" of the project. It generates a Mac OS X application
         bundle in form of a dmg.gz file  an embedded JRE.
 
     ================================================================================================================ -->
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-macosx-embedded-jre</artifactId>
-    <version>1.0-ALPHA-2-SNAPSHOT</version>
+    <version>1.0-ALPHA-3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueHour - Installer, Mac OS X with embedded JRE</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
-    
+
     <properties>
         <tft.javafx.vmargs>it.tidalwave.accounting.ui.impl.javafx.Main</tft.javafx.vmargs> <!-- FIXME: DRY -->
     </properties>
@@ -58,7 +58,7 @@
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
+            <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
         </dependency>
     </dependencies>
 
