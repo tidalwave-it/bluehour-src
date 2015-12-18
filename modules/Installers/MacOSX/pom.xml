@@ -5,7 +5,7 @@
 
   Tidalwave - blueHour
   %%
-  Copyright (C) 2013 - 2014 Tidalwave_s.a.s. (http://tidalwave.it)
+  Copyright (C) 2013 - 2015 Tidalwave_s.a.s. (http://tidalwave.it)
   %%
   *********************************************************************************************************************
 
@@ -46,7 +46,7 @@
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-bluehour-macosx</artifactId>
-    <version>1.0-ALPHA-2-SNAPSHOT</version>
+    <version>1.0-ALPHA-3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueHour - Installer, Mac OS X</name>
     <description>This module creates a Mac OS X application bundle.</description>
@@ -58,7 +58,7 @@
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
-            <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
+            <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
         </dependency>
     </dependencies>
 
