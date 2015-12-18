@@ -67,8 +67,9 @@
 
     ================================================================================================================ -->
     <properties>
-        <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/bluehour-src</scm.repo.url>
-        <scm.repo.readonly.url>https://bitbucket.org/tidalwave/bluehour-src</scm.repo.readonly.url>
+        <tft.scm>git</tft.scm>
+        <scm.repo.url>git@bitbucket.org:tidalwave/bluehour-src.git</scm.repo.url>
+        <scm.repo.readonly.url>https://tidalwave@bitbucket.org/tidalwave/bluehour-src.git</scm.repo.readonly.url>
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/bluehour-src/src</scm.repo.browse.url>
 
         <tidalwave.ci.view>blueHour</tidalwave.ci.view>
@@ -251,8 +252,8 @@
 
     <!-- Repeated because of http://jira.codehaus.org/browse/SCM-442 -->
     <scm>
-        <connection>scm:hg:${scm.repo.readonly.url}</connection>
-        <developerConnection>scm:hg:${scm.repo.effective.url}</developerConnection>
+        <connection>scm:git:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
       <tag>HEAD</tag>
   </scm>
