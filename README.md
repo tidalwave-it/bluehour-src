@@ -3,7 +3,7 @@ blueHour
 
 [![Build Status](https://drone.io/bitbucket.org/tidalwave/bluehour-src/status.png)](https://drone.io/bitbucket.org/tidalwave/bluehour-src/latest)
 
-        blueHour is a small application for accounting and invoicing. Still under development in the early stage.
+blueHour is a small application for accounting and invoicing. Still under development in the early stage.
 
 
 Bootstrapping
