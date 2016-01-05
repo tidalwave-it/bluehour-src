@@ -64,7 +64,6 @@
         <guava.version>16.0.1</guava.version>
         <jabaddressbook.version>0.3.1</jabaddressbook.version>
         <openbluesky.version>0.17</openbluesky.version>
-        <tft.spring.version>4.1.4.RELEASE</tft.spring.version>
         <steelblue.version>1.0-ALPHA-11</steelblue.version>
         <thesefoolishthings.version>3.0</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
