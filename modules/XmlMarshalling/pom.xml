@@ -28,31 +28,31 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
         <version>1.0-ALPHA-3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    
+
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
     <version>1.0-ALPHA-3-SNAPSHOT</version>
     <name>blueHour - Marshalling - XML</name>
     <packaging>jar</packaging>
-   
+
     <properties>
         <!-- Otherwise can't be released because of missing javadocs -->
         <tft.javadoc.excludePackageNames />
     </properties>
- 
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-model</artifactId>
         </dependency>
-        
+
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -70,12 +70,18 @@
             <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
             <scope>test</scope>
         </dependency>
-                
+
         <!-- FIXME: temporary dependency to import data -->
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -95,7 +101,7 @@
         </dependency>
         <!-- END FIXME -->
     </dependencies>
-    
+
     <!-- FIXME: temporary stuff to import data -->
     <build>
         <plugins>
@@ -135,5 +141,5 @@
         </plugins>
     </build>
     <!-- END FIXME -->
-    
+
 </project>
