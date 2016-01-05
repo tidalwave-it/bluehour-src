@@ -273,15 +273,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- FIXME: workaround - without some modules don't get the .class files in the .jar -->
-        <!-- It is due to something from libraries in TheseFoolishThings, but the cause is not yet understood. -->
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-util</artifactId>
-            <version>RELEASE712</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
@@ -344,7 +335,7 @@
             </plugin>
         </plugins>
     </build>
-    
+
     <!-- ===============================================================================================================
 
         Inclusion of modules participating in this project. Remember to list all the modules as soon as you add them
