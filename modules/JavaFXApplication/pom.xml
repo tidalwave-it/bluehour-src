@@ -8,9 +8,9 @@
         <version>1.0-ALPHA-3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    
+
     <groupId>it.tidalwave.accounting</groupId>
-    <artifactId>it-tidalwave-accounting-application-javafx</artifactId>    
+    <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
     <version>1.0-ALPHA-3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>blueHour - Application (JavaFX)</name>
@@ -20,7 +20,7 @@
         <!-- Otherwise can't be released because of missing javadocs -->
         <tft.javadoc.excludePackageNames />
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -102,14 +102,16 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
@@ -126,7 +128,7 @@
             <artifactId>it-tidalwave-messagebus-spring</artifactId>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -154,7 +156,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -172,5 +174,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
