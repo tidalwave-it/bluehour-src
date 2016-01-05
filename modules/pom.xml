@@ -94,7 +94,7 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.steelblue</groupId>
-                <artifactId>it-tidalwave-steelblue</artifactId>
+                <artifactId>steelblue</artifactId>
                 <version>${steelblue.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
