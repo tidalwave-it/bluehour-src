@@ -65,8 +65,8 @@
         <jabaddressbook.version>0.3.1</jabaddressbook.version>
         <openbluesky.version>0.17</openbluesky.version>
         <tft.spring.version>4.1.4.RELEASE</tft.spring.version>
-        <steelblue.version>1.0-ALPHA-9</steelblue.version>
-        <thesefoolishthings.version>2.1</thesefoolishthings.version>
+        <steelblue.version>1.0-ALPHA-11</steelblue.version>
+        <thesefoolishthings.version>3.0</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
     </properties>
 
@@ -99,7 +99,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
@@ -170,19 +170,19 @@
                 <artifactId>spring-webmvc</artifactId>
                 <version>${tft.spring.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${tft.aspectjrt.version}</version>
-            </dependency>            
+            </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-        
+
             <dependency>
                 <groupId>commons-configuration</groupId>
                 <artifactId>commons-configuration</artifactId>
@@ -282,7 +282,7 @@
             <version>RELEASE712</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
