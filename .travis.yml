@@ -1,3 +1,7 @@
+addons:
+  apt:
+    packages:
+    - genisoimage
 language: java
 jdk:
   - oraclejdk8
