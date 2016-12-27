@@ -27,13 +27,11 @@
  */
 package it.tidalwave.accounting.ui.projectexplorer.impl.javafx;
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javafx.scene.control.TableView;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
-import javafx.application.Platform;
+import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import lombok.Delegate;
+import lombok.Getter;
+import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***********************************************************************************************************************
  *
@@ -43,20 +41,9 @@ import javafx.application.Platform;
  **********************************************************************************************************************/
 public class JavaFxProjectExplorerPresentation implements ProjectExplorerPresentation
   {
-    @Inject @Nonnull
-    private JavaFXBinder binder;
-    
-    private TableView<PresentationModel> tvProjectExplorer;
+    @Getter
+    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxProjectExplorerPresentation.class);
 
-    public void bind (final @Nonnull TableView<PresentationModel> tvProjectExplorer) 
-      {
-        this.tvProjectExplorer = tvProjectExplorer;
-      }
-    
-    @Override
-    public void populate (final @Nonnull PresentationModel pm) 
-      {
-        // FIXME: runLater should be provided by the infrastructure
-        Platform.runLater(() -> binder.bind(tvProjectExplorer, pm));
-      }
+    @Delegate
+    private final ProjectExplorerPresentation delegate = nad.getDelegate();
   }

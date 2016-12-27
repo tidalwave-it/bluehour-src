@@ -25,50 +25,33 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
+package it.tidalwave.accounting.ui.customerexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.TextArea;
-import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
-import it.tidalwave.util.ui.UserNotificationWithFeedback;
+import javafx.scene.control.ListView;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
+import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 
 /***********************************************************************************************************************
  *
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPresentation
+public class JavaFxCustomerExplorerPresentationDelegate implements CustomerExplorerPresentation
   {
-    @FXML
-    private Pane pnHourlyReport;
-
-    @FXML
-    private TextArea taReport;
-
     @Inject
     private JavaFXBinder binder;
 
-    @Override
-    public void bind()
-      {
-      }
-
-    @Override
-    public void showUp (final @Nonnull UserNotificationWithFeedback notification)
-      {
-        binder.showInModalDialog(pnHourlyReport, notification);
-      }
+    @FXML
+    private ListView<PresentationModel> lvCustomerExplorer;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)
       {
-        taReport.setText(pm.as(PlainTextRenderable).render());
+        binder.bind(lvCustomerExplorer, pm);
       }
   }

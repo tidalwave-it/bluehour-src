@@ -30,9 +30,12 @@ package it.tidalwave.accounting.ui.impl.javafx;
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
 import javafx.application.Platform;
+import org.springframework.context.ApplicationContext;
+import it.tidalwave.ui.javafx.JavaFXSpringApplication;
 import it.tidalwave.accounting.util.DefaultPreferencesHandler;
 import it.tidalwave.accounting.util.PreferencesHandler;
-import it.tidalwave.ui.javafx.JavaFXSpringApplication;
+import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
+import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 
 /***********************************************************************************************************************
  *
@@ -58,5 +61,21 @@ public class Main extends JavaFXSpringApplication
             t.printStackTrace();
             System.exit(-1);
           }
+      }
+
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
+    @Override
+    protected void onStageCreated (final @Nonnull ApplicationContext applicationContext)
+      {
+        // FIXME: controllers can't initialize in postconstruct
+        // Too bad because with PAC+EventBus we'd get rid of the control interfaces
+        // Could be fixed by firing a PowerOnNotification, such as in blueMarine II.
+        applicationContext.getBean(CustomerExplorerPresentationControl.class).initialize();
+        applicationContext.getBean(ProjectExplorerPresentationControl.class).initialize();
+        applicationContext.getBean(ProjectExplorerPresentationControl.class).initialize();
       }
   }
