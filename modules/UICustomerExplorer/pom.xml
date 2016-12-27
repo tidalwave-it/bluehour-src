@@ -33,13 +33,13 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
-        <version>1.0-ALPHA-4-SNAPSHOT</version>
+        <version>1.0-ALPHA-4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-customerexplorer</artifactId>
-    <version>1.0-ALPHA-4-SNAPSHOT</version>
+    <version>1.0-ALPHA-4</version>
     <name>blueHour - UI - Customer Explorer</name>
     <packaging>jar</packaging>
     

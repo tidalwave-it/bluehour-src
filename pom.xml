@@ -49,7 +49,7 @@
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour</artifactId>
-    <version>1.0-ALPHA-4-SNAPSHOT</version>
+    <version>1.0-ALPHA-4</version>
     <packaging>pom</packaging>
     <name>blueHour</name>
     <url>http://bluehour.tidalwave.it</url>
@@ -106,85 +106,85 @@ blueHour is a small application for accounting and invoicing. Still under develo
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
                 <classifier>tests</classifier>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
                 <classifier>tests</classifier>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
                 <classifier>tests</classifier>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-commons</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-customerexplorer</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-projectexplorer</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-jobeventexplorer</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-hourlyreport</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-importer-ibiz</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
@@ -194,7 +194,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx-embedded-jre</artifactId>
-                <version>1.0-ALPHA-4-SNAPSHOT</version>
+                <version>1.0-ALPHA-4</version>
             </dependency>
 
             <dependency>
@@ -258,7 +258,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
         <connection>scm:git:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
+      <tag>1.0-ALPHA-4</tag>
   </scm>
 
     <!-- ===============================================================================================================
