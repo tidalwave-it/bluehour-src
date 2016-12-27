@@ -25,50 +25,56 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
+package it.tidalwave.accounting.ui.importer.ibiz.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.TextArea;
-import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
+import java.nio.file.Path;
 import it.tidalwave.util.ui.UserNotificationWithFeedback;
-import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.BoundProperty;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
+import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 
 /***********************************************************************************************************************
  *
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPresentation
+public class JavaFxIBizImporterPresentationDelegate implements IBizImporterPresentation
   {
-    @FXML
-    private Pane pnHourlyReport;
-
-    @FXML
-    private TextArea taReport;
-
     @Inject
     private JavaFXBinder binder;
 
+    private BoundProperty<Path> iBizFolder;
+
     @Override
-    public void bind()
+    public void bind (final @Nonnull BoundProperty<Path> iBizFolder)
       {
+        this.iBizFolder = iBizFolder;
       }
 
     @Override
-    public void showUp (final @Nonnull UserNotificationWithFeedback notification)
+    public void lock()
       {
-        binder.showInModalDialog(pnHourlyReport, notification);
+        // TODO
       }
 
     @Override
-    public void populate (final @Nonnull PresentationModel pm)
+    public void unlock()
       {
-        taReport.setText(pm.as(PlainTextRenderable).render());
+        // TODO
+      }
+
+    @Override
+    public void chooseFolder (final @Nonnull UserNotificationWithFeedback feedback)
+      {
+        binder.openDirectoryChooserFor(feedback, iBizFolder);
+      }
+
+    @Override
+    public void notifyError()
+      {
+        // TODO
       }
   }

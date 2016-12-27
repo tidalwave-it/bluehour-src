@@ -27,14 +27,11 @@
  */
 package it.tidalwave.accounting.ui.customerexplorer.impl.javafx;
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javafx.scene.control.ListView;
-import javafx.application.Platform;
-import org.springframework.beans.factory.annotation.Configurable;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
+import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import lombok.Delegate;
+import lombok.Getter;
+import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***********************************************************************************************************************
  *
@@ -42,22 +39,11 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Configurable
 public class JavaFxCustomerExplorerPresentation implements CustomerExplorerPresentation
   {
-    @Inject @Nonnull
-    private JavaFXBinder binder;
-    
-    private ListView<PresentationModel> lvCustomerExplorer;
-    
-    public void bind (final @Nonnull ListView<PresentationModel> lvCustomers)
-      {
-        this.lvCustomerExplorer = lvCustomers;
-      }
-    
-    @Override
-    public void populate (final @Nonnull PresentationModel pm)
-      {
-        Platform.runLater(() -> binder.bind(lvCustomerExplorer, pm));
-      }
+    @Getter
+    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxCustomerExplorerPresentation.class);
+
+    @Delegate
+    private final CustomerExplorerPresentation delegate = nad.getDelegate();
   }

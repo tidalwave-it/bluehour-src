@@ -25,50 +25,34 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
+package it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javafx.scene.control.TreeTableView;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.TextArea;
-import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
-import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
+import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 
 /***********************************************************************************************************************
  *
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPresentation
+public class JavaFxJobEventExplorerPresentationDelegate implements JobEventExplorerPresentation
   {
-    @FXML
-    private Pane pnHourlyReport;
-
-    @FXML
-    private TextArea taReport;
-
     @Inject
     private JavaFXBinder binder;
 
-    @Override
-    public void bind()
-      {
-      }
-
-    @Override
-    public void showUp (final @Nonnull UserNotificationWithFeedback notification)
-      {
-        binder.showInModalDialog(pnHourlyReport, notification);
-      }
+    @FXML
+    private TreeTableView<PresentationModel> ttvJobEventExplorer;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)
       {
-        taReport.setText(pm.as(PlainTextRenderable).render());
+        binder.bind(ttvJobEventExplorer, pm);
+        ttvJobEventExplorer.getRoot().setExpanded(true);
       }
   }

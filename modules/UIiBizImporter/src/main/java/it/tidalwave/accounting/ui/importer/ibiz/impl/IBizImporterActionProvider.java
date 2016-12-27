@@ -43,7 +43,7 @@ import lombok.RequiredArgsConstructor;
 /***********************************************************************************************************************
  *
  * This role provides a "Import..." action for the ToolBar.
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -55,10 +55,10 @@ public class IBizImporterActionProvider extends DefaultUserActionProvider2
     private MessageBus messageBus;
 
     @Override @Nonnull
-    protected UserAction getSingleAction() 
+    protected UserAction getSingleAction()
       {
         return new MessageSendingUserAction(messageBus,
-                                            "Import...", 
+                                            "Import...",
                                             () -> new ImportRequest());
       }
   }

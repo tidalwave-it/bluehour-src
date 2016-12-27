@@ -38,5 +38,5 @@ import it.tidalwave.util.As;
  **********************************************************************************************************************/
 public interface ToolBarModel extends As
   {
-    public void populate (@Nonnull Object toolBar);
+    public void populate (@Nonnull Object binder, @Nonnull Object toolBar);
   }
