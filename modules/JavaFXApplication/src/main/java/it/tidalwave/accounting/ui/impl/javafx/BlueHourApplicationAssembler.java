@@ -29,56 +29,39 @@ package it.tidalwave.accounting.ui.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.ToolBar;
-import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.application.ToolBarModel;
-import javafx.scene.layout.AnchorPane;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
+import it.tidalwave.role.ui.javafx.ApplicationPresentationAssembler;
+import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
+import it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation;
+import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
 
 /***********************************************************************************************************************
  *
- * @author Fabrizio Giudici
- * @version $Id$
+ * @author  Fabrizio Giudici (Fabrizio.Giudici@tidalwave.it)
+ * @version $Id: Class.java,v 631568052e17 2013/02/19 15:45:02 fabrizio $
  *
  **********************************************************************************************************************/
-@Slf4j @Getter
-public class JavaFXApplicationPresentationDelegate
+public class BlueHourApplicationAssembler
+        implements ApplicationPresentationAssembler<JavaFXApplicationPresentationDelegate>
   {
-    @FXML
-    private ToolBar tbToolBar;
-
-    @FXML
-    private AnchorPane pnCustomerExplorer;
-
-    @FXML
-    private AnchorPane pnProjectExplorer;
-
-    @FXML
-    private AnchorPane pnJobEventExplorer;
+    @Inject
+    private JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
 
     @Inject
-    private JavaFXBinder binder;
+    private JavaFxProjectExplorerPresentation javaFxProjectExplorerPresentation;
 
-    public void assemble (final @Nonnull ToolBarModel toolBarModel,
-                          final @Nonnull Node ndCustomerExplorer,
-                          final @Nonnull Node ndProjectExplorer,
-                          final @Nonnull Node ndJobEventExplorer)
-      {
-        toolBarModel.populate(binder, tbToolBar);
-        put(pnCustomerExplorer, ndCustomerExplorer);
-        put(pnProjectExplorer, ndProjectExplorer);
-        put(pnJobEventExplorer, ndJobEventExplorer);
-      }
+    @Inject
+    private JavaFxJobEventExplorerPresentation javaFxJobEventExplorerPresentation;
 
-    private static void put (final @Nonnull AnchorPane anchorPane, final @Nonnull Node node)
+    @Inject
+    private ToolBarModel toolBarModel;
+
+    @Override
+    public void assemble (final @Nonnull JavaFXApplicationPresentationDelegate applicationPresentation)
       {
-        AnchorPane.setLeftAnchor(node, 0.0);
-        AnchorPane.setRightAnchor(node, 0.0);
-        AnchorPane.setTopAnchor(node, 0.0);
-        AnchorPane.setBottomAnchor(node, 0.0);
-        anchorPane.getChildren().add(node);
+        applicationPresentation.assemble(toolBarModel,
+                                         javaFxCustomerExplorerPresentation.getNad().getNode(),
+                                         javaFxProjectExplorerPresentation.getNad().getNode(),
+                                         javaFxJobEventExplorerPresentation.getNad().getNode());
       }
   }

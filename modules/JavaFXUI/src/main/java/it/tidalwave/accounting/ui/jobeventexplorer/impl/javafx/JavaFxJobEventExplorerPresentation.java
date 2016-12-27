@@ -27,14 +27,11 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx;
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javafx.application.Platform;
-import javafx.scene.control.TreeTableView;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
-import org.springframework.beans.factory.annotation.Configurable;
+import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import lombok.Delegate;
+import lombok.Getter;
+import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***********************************************************************************************************************
  *
@@ -42,28 +39,11 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Configurable
 public class JavaFxJobEventExplorerPresentation implements JobEventExplorerPresentation
   {
-    @Inject @Nonnull
-    private JavaFXBinder binder;
-    
-    private TreeTableView<PresentationModel> ttvJobEventExplorer;
+    @Getter
+    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxJobEventExplorerPresentation.class);
 
-    public void bind (final @Nonnull TreeTableView<PresentationModel> ttvJobEventExplorer) 
-      {
-        this.ttvJobEventExplorer = ttvJobEventExplorer;
-        ttvJobEventExplorer.setShowRoot(false);
-      }
-    
-    @Override
-    public void populate (final @Nonnull PresentationModel pm) 
-      {
-        // FIXME: runLater should be provided by the infrastructure
-        Platform.runLater(() ->
-          {
-            binder.bind(ttvJobEventExplorer, pm);
-            ttvJobEventExplorer.getRoot().setExpanded(true);
-          });
-      }
+    @Delegate
+    private final JobEventExplorerPresentation delegate = nad.getDelegate();
   }

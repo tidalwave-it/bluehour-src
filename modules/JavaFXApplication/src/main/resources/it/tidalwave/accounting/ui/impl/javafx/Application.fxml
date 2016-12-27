@@ -7,72 +7,27 @@
 <?import javafx.scene.layout.*?>
 
 <VBox prefHeight="721.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tidalwave.accounting.ui.impl.javafx.JavaFXApplicationPresentationDelegate">
+    <stylesheets>
+        <URL value="@Application.css" />
+    </stylesheets>
     <children>
         <ToolBar fx:id="tbToolBar" layoutX="7.0" layoutY="7.0" maxHeight="64.0" minHeight="64.0" prefHeight="64.0" prefWidth="818.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER" />
         <SplitPane dividerPositions="0.15" focusTraversable="true" layoutX="8.0" layoutY="77.0" prefHeight="571.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane fx:id="pnCustomerExplorer" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <VBox layoutX="-45.0" layoutY="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <children>
-                                <ListView fx:id="lvCustomerExplorer" layoutX="-45.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                            </children>
-                        </VBox>
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
                         <SplitPane dividerPositions="0.3" focusTraversable="true" layoutX="77.0" layoutY="115.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <AnchorPane fx:id="pnProjectExplorer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <VBox layoutX="59.0" layoutY="34.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <children>
-                                                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-                                                <TableView fx:id="tvProjectExplorer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                    <columns>
-                                                        <TableColumn fx:id="customer" editable="false" prefWidth="75.0" sortable="false" text="Client" />
-                                                        <TableColumn editable="false" prefWidth="50.0" sortable="false" text="Status" />
-                                                        <TableColumn editable="false" prefWidth="75.0" sortable="false" text="#" />
-                                                        <TableColumn fx:id="name" editable="false" prefWidth="75.0" sortable="false" text="Name" />
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Start Date" />
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Due Date" />
-                                                        <TableColumn editable="false" prefWidth="40.0" sortable="false" text="Time" />
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Budget" />
-                                                        <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Earnings" />
-                                                        <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Invoiced" />
-                                                        <TableColumn editable="false" prefWidth="200.0" sortable="false" text="Notes" />
-                                                    </columns>
-                                                    <columnResizePolicy>
-                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                    </columnResizePolicy>
-                                                </TableView>
-                                                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-                                            </children>
-                                        </VBox>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <AnchorPane fx:id="pnJobEventExplorer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                     <children>
-                                        <VBox layoutX="22.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <children>
-                                                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-                                                <TreeTableView fx:id="ttvJobEventExplorer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                                                    <columns>
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Date" />
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Job Event" />
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Time" />
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="HourlyRate" />
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Amount" />
-                                                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Notes" />
-                                                    </columns>
-                                                    <columnResizePolicy>
-                                                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                    </columnResizePolicy>
-                                                </TreeTableView>
-                                                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-                                            </children>
-                                        </VBox>
                                     </children>
                                     <opaqueInsets>
                                         <Insets />
@@ -86,7 +41,4 @@
         </SplitPane>
         <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
     </children>
-    <stylesheets>
-        <URL value="@Application.css" />
-    </stylesheets>
 </VBox>

@@ -27,13 +27,12 @@
  */
 package it.tidalwave.application.javafx;
 
+import it.tidalwave.application.spi.ToolBarModelSupport;
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import it.tidalwave.util.AsException;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import it.tidalwave.application.spi.ToolBarModelSupport;
 import static it.tidalwave.role.Displayable.Displayable;
 import static it.tidalwave.role.ui.UserActionProvider.UserActionProvider;
 
@@ -45,16 +44,13 @@ import static it.tidalwave.role.ui.UserActionProvider.UserActionProvider;
  **********************************************************************************************************************/
 public class JavaFXToolBarModel extends ToolBarModelSupport
   {
-    @Inject @Nonnull
-    private JavaFXBinder binder;
-    
     @Override
-    public void populate (final @Nonnull Object toolBar) 
+    public void populate (final @Nonnull Object binder, final @Nonnull Object toolBar)
       {
-        as(UserActionProvider).getActions().stream().map((action) -> 
+        as(UserActionProvider).getActions().stream().map((action) ->
           {
             final Button button = new Button();
-            
+
             try // FIXME: move to JavaFXBinder
               {
                 button.setText(action.as(Displayable).getDisplayName());
@@ -63,11 +59,11 @@ public class JavaFXToolBarModel extends ToolBarModelSupport
               {
                 button.setText("???");
               }
-            
-            binder.bind(button, action);
+
+            ((JavaFXBinder)binder).bind(button, action);
             return button;
           })
-        .forEach((button) -> 
+        .forEach((button) ->
           {
             ((ToolBar)toolBar).getItems().add(button);
           });
