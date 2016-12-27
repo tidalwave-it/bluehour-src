@@ -33,13 +33,13 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
-        <version>1.0-ALPHA-4-SNAPSHOT</version>
+        <version>1.0-ALPHA-5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-model</artifactId>
-    <version>1.0-ALPHA-4-SNAPSHOT</version>
+    <version>1.0-ALPHA-5-SNAPSHOT</version>
     <name>blueHour - Model</name>
     <packaging>jar</packaging>
 
