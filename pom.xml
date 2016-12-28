@@ -66,7 +66,6 @@ blueHour is a small application for accounting and invoicing. Still under develo
 
     ================================================================================================================ -->
     <properties>
-        <tft.scm>git</tft.scm>
         <scm.repo.url>git@bitbucket.org:tidalwave/bluehour-src.git</scm.repo.url>
         <scm.repo.readonly.url>https://tidalwave@bitbucket.org/tidalwave/bluehour-src.git</scm.repo.readonly.url>
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/bluehour-src/src</scm.repo.browse.url>
@@ -74,7 +73,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
         <tidalwave.ci.view>blueHour</tidalwave.ci.view>
         <tidalwave.issues>BH</tidalwave.issues>
 
-        <tft.maven.requiredJdk>[1.8.0-0,1.8.0-999)</tft.maven.requiredJdk>
+        <tft.maven.requiredJdk>[1.8.0-0,)</tft.maven.requiredJdk>
         <tft.javac.source>1.8</tft.javac.source>
         <tft.javac.target>1.8</tft.javac.target>
 
@@ -186,19 +185,8 @@ blueHour is a small application for accounting and invoicing. Still under develo
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
-                <artifactId>bluehour-macosx</artifactId>
-                <version>1.0-ALPHA-3-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macosx-embedded-jre</artifactId>
                 <version>1.0-ALPHA-5-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>it.tidalwave.accounting</groupId>
-                <artifactId>it-tidalwave-util-jdk8</artifactId>
-                <version>1.0-ALPHA-3-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -236,20 +224,6 @@ blueHour is a small application for accounting and invoicing. Still under develo
             </snapshots>
         </repository>
     </repositories>
-
-
-<!--    <mailingLists>
-        <mailingList>
-            <name>Continuous Integration</name>
-            <post>ci@bluehour.java.net</post>
-            <archive>http://java.net/projects/bluehour/lists/ci/archive</archive>
-        </mailingList>
-        <mailingList>
-            <name>Developers</name>
-            <post>dev@bluehour.java.net</post>
-            <archive>http://java.net/projects/bluehour/lists/dev/archive</archive>
-        </mailingList>
-    </mailingLists>-->
 
     <!-- Repeated because of http://jira.codehaus.org/browse/SCM-442 -->
     <scm>
