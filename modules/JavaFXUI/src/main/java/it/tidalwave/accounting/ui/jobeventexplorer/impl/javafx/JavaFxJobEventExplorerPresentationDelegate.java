@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -43,11 +43,11 @@ import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
  **********************************************************************************************************************/
 public class JavaFxJobEventExplorerPresentationDelegate implements JobEventExplorerPresentation
   {
-    @Inject
-    private JavaFXBinder binder;
-
     @FXML
     private TreeTableView<PresentationModel> ttvJobEventExplorer;
+
+    @Inject
+    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -36,13 +36,13 @@ import java.time.Duration;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class DurationFormat 
+public class DurationFormat
   {
     @Nonnull
     public String format (final @Nonnull Duration duration)
       {
-        final long hours = duration.toHours(); 
+        final long hours = duration.toHours();
         final long minutes = duration.minusHours(hours).toMinutes();
-        return String.format("%d:%02d", hours, minutes);     
-      }  
+        return String.format("%d:%02d", hours, minutes);
+      }
   }

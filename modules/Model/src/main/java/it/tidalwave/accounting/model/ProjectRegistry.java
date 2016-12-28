@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -47,7 +47,7 @@ public interface ProjectRegistry
 
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     public static interface ProjectFinder extends Finder8<Project>, ExtendedFinder8Support<Project, ProjectFinder>
@@ -58,7 +58,7 @@ public interface ProjectRegistry
 
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     public static interface JobEventFinder extends Finder8<JobEvent>, ExtendedFinder8Support<JobEvent, JobEventFinder>
@@ -72,11 +72,11 @@ public interface ProjectRegistry
         @Nonnull
         public Money getEarnings();
       }
-    
+
     /*******************************************************************************************************************
      *
      * Returns a {@link ProjectFinder} for finding {@link Project}s.
-     * 
+     *
      * @return  the finder
      *
      ******************************************************************************************************************/
@@ -86,17 +86,17 @@ public interface ProjectRegistry
     /*******************************************************************************************************************
      *
      * Returns a {@link ProjectFinder} for finding {@link JobEvent}s.
-     * 
+     *
      * @return  the finder
      *
      ******************************************************************************************************************/
     @Nonnull
     public JobEventFinder findJobEvents();
-    
+
     /*******************************************************************************************************************
      *
      * Returns a {@link Builder} for adding a {@link Project} to the registry.
-     * 
+     *
      * @return  the builder
      *
      ******************************************************************************************************************/

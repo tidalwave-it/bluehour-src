@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -45,8 +45,8 @@ public interface Accounting extends As
         try
           {
             return (Accounting)Class.forName("it.tidalwave.accounting.model.impl.InMemoryAccounting").newInstance();
-          } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
+          }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
           {
             throw new RuntimeException(e);
           }
@@ -59,7 +59,7 @@ public interface Accounting extends As
      ******************************************************************************************************************/
     @Nonnull
     public CustomerRegistry getCustomerRegistry();
-    
+
     /*******************************************************************************************************************
      *
      * @return  the {@link ProjectRegistry}
@@ -67,7 +67,7 @@ public interface Accounting extends As
      ******************************************************************************************************************/
     @Nonnull
     public ProjectRegistry getProjectRegistry();
-    
+
     /*******************************************************************************************************************
      *
      * @return  the {@link InvoiceRegistry}

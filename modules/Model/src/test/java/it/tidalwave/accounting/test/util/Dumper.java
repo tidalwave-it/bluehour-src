@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -59,16 +59,16 @@ import static java.util.stream.Collectors.joining;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class Dumper 
+public class Dumper
   {
     private static final String INDENT = "    ";
-    
+
     @Nonnull
     private final Accounting accounting;
 
     @Nonnull
     private final PrintWriter pw;
-    
+
     public void dumpAll()
       throws IOException
       {
@@ -76,14 +76,14 @@ public class Dumper
         dumpProjects(accounting.getProjectRegistry().findProjects());
         dumpInvoices(accounting.getInvoiceRegistry().findInvoices());
       }
-    
+
     private void dumpCustomers (final @Nonnull Finder8<Customer> customers)
       {
         customers.stream().map(customer -> (CustomerSpi)customer)
                           .sorted(comparing(CustomerSpi::getName))
                           .forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
-    
+
     private void dumpInvoices (final @Nonnull Finder8<Invoice> invoices)
       throws IOException
       {
@@ -91,7 +91,7 @@ public class Dumper
                          .sorted(comparing(InvoiceSpi::getNumber))
                          .forEach(invoice -> dump(invoice));
       }
-    
+
     private void dumpProjects (final @Nonnull Finder8<Project> projects)
       throws IOException
       {
@@ -99,17 +99,17 @@ public class Dumper
                          .sorted(comparing(ProjectSpi::getName).thenComparing(ProjectSpi::getStartDate))
                          .forEach(project -> dump(project));
       }
-    
+
     private void dump (final @Nonnull Project project)
       {
         pw.printf("%s\n", toString(project));
         dump(project.findChildren(), INDENT);
       }
-    
+
     private void dump (final @Nonnull Invoice invoice)
       {
         pw.printf("%s\n", toString(invoice));
-        dump(invoice.findJobEvents(), INDENT); 
+        dump(invoice.findJobEvents(), INDENT);
       }
 
     private void dump (final @Nonnull Finder8<JobEvent> events, final @Nonnull String prefix)
@@ -126,7 +126,7 @@ public class Dumper
             dump(((JobEventGroup)event).findChildren(), prefix + INDENT);
           }
       }
-    
+
     @Nonnull
     public static String toString (final @Nonnull Object event)
       {
@@ -137,11 +137,11 @@ public class Dumper
                                         .peek(field -> field.setAccessible(true))
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
-        
+
         String className = "?";
-        
+
         Class<?>[] interfaces = event.getClass().getInterfaces();
-        
+
         if (interfaces.length > 0) // assumes the business interface is the first
           {
             className = interfaces[0].getSimpleName();
@@ -150,27 +150,27 @@ public class Dumper
           {
             className = event.getClass().getSimpleName().replaceFirst("^InMemory", "");
           }
-        
+
         className = className.replaceAll("Spi$", "");
         return String.format("%s(%s)", className, s);
       }
-    
+
     private final static Predicate<? super Field> excludeUnwantedFields = field ->
       {
         final Class<?> type = field.getType();
         return !Modifier.isStatic(field.getModifiers())
                && !Collection.class.isAssignableFrom(type)
-               && !Accounting.class.isAssignableFrom(type) 
+               && !Accounting.class.isAssignableFrom(type)
                && !AsSupport.class.isAssignableFrom(type);
       };
-    
+
     @CheckForNull
     private static Object safeGet (final @Nonnull Field field, final @Nonnull Object object)
       {
         try
           {
             Object value = field.get(object);
-            
+
             if (value instanceof Customer)
               {
                 value = ((CustomerSpi)value).getName();
@@ -179,7 +179,7 @@ public class Dumper
               {
                 value = ((ProjectSpi)value).getName();
               }
-            
+
             return value;
           }
         catch (IllegalArgumentException | IllegalAccessException e)

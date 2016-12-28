@@ -28,29 +28,54 @@
 package it.tidalwave.accounting.util;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import it.tidalwave.role.Aggregate;
 import it.tidalwave.role.spi.MapAggregate;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.spi.DefaultPresentationModel;
+import lombok.NoArgsConstructor;
 
 /***********************************************************************************************************************
+ *
+ * A builder for an {@link Aggregate} of {@link PresentationModel}s.
+ * 
+ * FIXME: move to TFT
+ *
+ * @stereotype  role factory, builder
  *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class AggregatePresentationModelBuilder 
+@NoArgsConstructor(staticName = "newInstance")
+public class AggregatePresentationModelBuilder
   {
-    private final Map<String, PresentationModel> map = new HashMap<>();
-    
+    private final Map<String, PresentationModel> map = new ConcurrentHashMap<>();
+
+    /*******************************************************************************************************************
+     *
+     * Adds another {@link PresentationModel} with the given roles, associated to the given name.
+     *
+     * @param   name    the name of the {@code PresentationModel}
+     * @param   roles   the roles
+     * @return          the new {@code PresentationModel}
+     *
+     ******************************************************************************************************************/
     @Nonnull
-    public void put (final @Nonnull String name, final @Nonnull Object ... roles)
+    public AggregatePresentationModelBuilder with (final @Nonnull String name, final @Nonnull Object ... roles)
       {
         map.put(name, new DefaultPresentationModel("", roles));
+        return this;
       }
-    
+
+    /*******************************************************************************************************************
+     *
+     * Creates the {@link Agggregate} from the previously accumulated items.
+     *
+     * @return  the {@code Agggregate}
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public Aggregate create()
       {

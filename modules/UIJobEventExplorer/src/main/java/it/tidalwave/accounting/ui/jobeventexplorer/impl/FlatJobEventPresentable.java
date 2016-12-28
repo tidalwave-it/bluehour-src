@@ -34,8 +34,8 @@ import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -51,22 +51,21 @@ public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi
       {
         super(flatJobEvent);
       }
-    
+
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder() 
+    protected AggregatePresentationModelBuilder aggregateBuilder()
       {
-        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.put(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDate()));
-        builder.put(TIME,        new DefaultDisplayable(""));
-        builder.put(HOURLY_RATE, new DefaultDisplayable(""));
-        builder.put(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
-                                 new DefaultStyleable("right-aligned"),
-                                 new RedStyleForNegativeMoney(jobEvent::getEarnings));
-        return builder;
+        return super.aggregateBuilder()
+                .with(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDate()))
+                .with(TIME,        new DefaultDisplayable(""))
+                .with(HOURLY_RATE, new DefaultDisplayable(""))
+                .with(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
+                                         new DefaultStyleable("right-aligned"),
+                                         new RedStyleForNegativeMoney(jobEvent::getEarnings));
       }
-    
+
     @Override @Nonnull
-    protected Collection<String> getStyles() 
+    protected Collection<String> getStyles()
       {
         return Arrays.asList("flat-job-event");
       }

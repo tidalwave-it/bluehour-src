@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -48,7 +48,7 @@ import org.testng.annotations.Test;
 public class DefaultHourlyReportGeneratorTest
   {
     @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
-    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull ProjectSpi project) 
+    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull ProjectSpi project)
       throws IOException
       {
         final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
@@ -58,9 +58,9 @@ public class DefaultHourlyReportGeneratorTest
         final String name = scenarioName + "-" + project.getName() + ".txt";
         final Path actualResult = testFolder.resolve(name);
         final Path expectedResult = expectedResultsFolder.resolve(name);
-        
+
         final HourlyReport report = new DefaultHourlyReportGenerator(project).createReport();
-        
+
         try (final PrintWriter pw = new PrintWriter(actualResult.toFile()))
           {
             pw.print(report.asString());

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -55,14 +55,14 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 public class DefaultHourlyReportGenerator implements HourlyReportGenerator
   {
     private static final String SEPARATOR = "===========================================================================";
-    
+
     private static final String PATTERN = "| %-12s | %-30s | %-8s | %-12s |\n";
     private static final String PATTERN2 = "| %12s | %-30s | %8s | %12s |\n";
     private static final String PATTERN3 = "  %12s   %-30s   %8s   %12s  \n";
-    
+
     @Nonnull
     private final ProjectSpi project;
-    
+
     @Override @Nonnull
     public HourlyReport createReport()
       {
@@ -70,16 +70,16 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         makeReport(sw);
         return new HourlyReport(sw.toString());
       }
-    
-    private void makeReport (final @Nonnull Writer w) 
+
+    private void makeReport (final @Nonnull Writer w)
       {
         final PrintWriter pw = new PrintWriter(w);
         System.err.println("CREATE REPORT " + project);
-        
+
         pw.printf(SEPARATOR + "\n");
         pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
         pw.printf(SEPARATOR + "\n");
-        
+
         // TODO: quick and dirty - refactor with visitor, lambdas
         final List<JobEventSpi> jobEvents = new ArrayList<>();
         addAll(jobEvents, project.findChildren().results());
@@ -89,9 +89,9 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
                                                                 DURATION_FORMATTER.format(event.getDuration()),
                                                                 MONEY_FORMATTER.format(event.getEarnings())));
         pw.printf(SEPARATOR + "\n");
-        pw.printf(PATTERN3, "", "", DURATION_FORMATTER.format(project.getDuration()), 
+        pw.printf(PATTERN3, "", "", DURATION_FORMATTER.format(project.getDuration()),
                                     MONEY_FORMATTER.format(project.getEarnings()));
-        
+
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
         final Duration duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
@@ -102,15 +102,15 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         pw.printf("REMAINING TIME:   %s\n", DURATION_FORMATTER.format(duration.minus(project.getDuration())));
         pw.flush();
       }
-    
+
     private void addAll (final @Nonnull List<JobEventSpi> results,
-                         final @Nonnull List<? extends JobEvent> jobEvents) 
+                         final @Nonnull List<? extends JobEvent> jobEvents)
       {
         for (final JobEvent jobEvent : jobEvents)
           {
             if (jobEvent instanceof JobEventGroup)
               {
-                addAll(results, ((JobEventGroup)jobEvent).findChildren().results());  
+                addAll(results, ((JobEventGroup)jobEvent).findChildren().results());
               }
             else
               {

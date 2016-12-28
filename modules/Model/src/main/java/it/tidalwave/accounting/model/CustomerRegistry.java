@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -43,10 +43,10 @@ public interface CustomerRegistry
   {
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
-    public static interface Finder extends Finder8<Customer>, 
+    public static interface Finder extends Finder8<Customer>,
                                            ExtendedFinder8Support<Customer, CustomerRegistry.Finder>
       {
         @Nonnull
@@ -56,7 +56,7 @@ public interface CustomerRegistry
     /*******************************************************************************************************************
      *
      * Returns a {@link Finder} for finding {@link Customer}s.
-     * 
+     *
      * @return  the finder
      *
      ******************************************************************************************************************/
@@ -66,7 +66,7 @@ public interface CustomerRegistry
     /*******************************************************************************************************************
      *
      * Returns a {@link Builder} for adding a {@link Customer} to the registry.
-     * 
+     *
      * @return  the builder
      *
      ******************************************************************************************************************/
