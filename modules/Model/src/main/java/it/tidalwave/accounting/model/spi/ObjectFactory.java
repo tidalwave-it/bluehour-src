@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -39,7 +39,7 @@ import it.tidalwave.accounting.model.Project;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface ObjectFactory 
+public interface ObjectFactory
   {
     @Nonnull
     public static ObjectFactory getInstance() // FIXME: getDefault()
@@ -49,8 +49,8 @@ public interface ObjectFactory
             // FIXME: use Singleton
             return (ObjectFactory)Class.forName("it.tidalwave.accounting.model.impl.InMemoryObjectFactory").newInstance();
 //        return new InMemoryObjectFactory();
-          } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) 
+          }
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
           {
             throw new RuntimeException(e);
           }
@@ -58,11 +58,11 @@ public interface ObjectFactory
 
     @Nonnull
     public Customer createCustomer (@Nonnull Customer.Builder builder);
-    
+
     @Nonnull
     public Invoice createInvoice (@Nonnull Invoice.Builder builder);
 
-    @Nonnull 
+    @Nonnull
     public Project createProject (@Nonnull Project.Builder builder);
 
     @Nonnull

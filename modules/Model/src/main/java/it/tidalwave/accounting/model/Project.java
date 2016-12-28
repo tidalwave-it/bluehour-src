@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -52,14 +52,14 @@ import lombok.experimental.Wither;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable 
+@Immutable
 public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
   {
     public enum Status { OPEN, CLOSED };
 
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PROTECTED)
@@ -95,7 +95,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
         public Builder (final @Nonnull Callback callback)
           {
              // FIXME: avoid null
-            this(new Id(""), null, "", "", "", "", Status.OPEN, Money.ZERO, Money.ZERO, null, null, 
+            this(new Id(""), null, "", "", "", "", Status.OPEN, Money.ZERO, Money.ZERO, null, null,
                  Collections.<JobEvent>emptyList(), callback);
           }
 
@@ -116,7 +116,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @Nonnull
@@ -127,12 +127,12 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * 
-     * 
+     *
+     *
      ******************************************************************************************************************/
     @Nonnull
     public Customer getCustomer();
-    
+
     /*******************************************************************************************************************
      *
      * {@inheritDoc}
@@ -140,11 +140,11 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
      ******************************************************************************************************************/
     @Nonnull
     public JobEventFinder findChildren();
-    
+
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
     public Builder toBuilder();

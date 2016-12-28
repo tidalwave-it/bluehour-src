@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -40,9 +40,9 @@ public interface FlatJobEventSpi extends JobEventSpi
   {
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
-    public LocalDate getDate(); 
+    public LocalDate getDate();
   }

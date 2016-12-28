@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -48,12 +48,12 @@ import lombok.experimental.Wither;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable 
+@Immutable
 public interface Invoice extends Identifiable, As
   {
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @AllArgsConstructor// FIXME (access = PRIVATE)
@@ -102,25 +102,25 @@ public interface Invoice extends Identifiable, As
 //                // FIXME: better diagnostics
 //                throw new IllegalArgumentException("Illegal project for jobEvent");
 //              }
-            
+
             final Invoice invoice = ObjectFactory.getInstance().createInvoice(this);
             callback.register(invoice);
             return invoice;
-          }        
+          }
       }
 
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
     public Finder8<JobEvent> findJobEvents();
-        
+
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
     public Builder toBuilder();

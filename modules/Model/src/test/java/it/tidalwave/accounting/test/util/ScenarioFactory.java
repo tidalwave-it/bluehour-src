@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -62,16 +62,16 @@ import org.testng.annotations.Test;
  *
  **********************************************************************************************************************/
 @Slf4j
-public final class ScenarioFactory 
+public final class ScenarioFactory
   {
     private static int nextId = 1;
-    
+
     @Test
     public void consistencyTest()
       {
         createScenarios();
       }
-    
+
     @Nonnull
     public static Map<String, Accounting> createScenarios()
       {
@@ -80,7 +80,7 @@ public final class ScenarioFactory
         map.put("Scenario1", createScenario1());
         return map;
       }
-    
+
     @DataProvider(name = "projects")
     public static Object[][] projectProvider()
       {
@@ -88,18 +88,18 @@ public final class ScenarioFactory
                 .flatMap(entry -> entry.getValue().getProjectRegistry().findProjects().stream()
                         .map(project -> new Object[] { entry.getKey(), project }))
                 .collect(Collectors.toList())
-                .toArray(new Object[0][0]); 
+                .toArray(new Object[0][0]);
       }
-    
+
     @DataProvider(name = "accountings")
     public static Object[][] accountingProvider()
       {
         return ScenarioFactory.createScenarios().entrySet().stream()
                 .map(entry -> new Object[] { entry.getKey(), entry.getValue() })
                 .collect(Collectors.toList())
-                .toArray(new Object[0][0]); 
+                .toArray(new Object[0][0]);
       }
-    
+
     @Nonnull
     public static Accounting createEmptyAccounting()
       {
@@ -107,43 +107,43 @@ public final class ScenarioFactory
         final Accounting accounting = Accounting.createNew();
         return accounting;
       }
-    
+
     @Nonnull
     public static Accounting createScenario1()
       {
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
         nextId = 1;
-        
+
         final Accounting accounting = Accounting.createNew();
         final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
         final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
         final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();
-        
-        final Customer acmeConsulting = 
+
+        final Customer acmeConsulting =
                 customerRegistry.addCustomer()
                     .withId(new Id("" + nextId++))
                     .withName("ACME Consulting")
                     .withBillingAddress(Address.builder().withStreet("Corso Italia 10")
                                                          .withCity("Genova")
-                                                         .withState("GE") 
+                                                         .withState("GE")
                                                          .withZip("16145")
                                                          .withCountry("Italy")
                                                          .create())
                     .withVatNumber("IT6546034963")
                     .create();
-        final Customer acmeFinancing = 
+        final Customer acmeFinancing =
                 customerRegistry.addCustomer()
                     .withId(new Id("" + nextId++))
                     .withName("ACME Financing")
                     .withBillingAddress(Address.builder().withStreet("Corso Magenta 20")
                                                          .withCity("Milano")
-                                                         .withState("MI") 
+                                                         .withState("MI")
                                                          .withZip("20100")
                                                          .withCountry("Italy")
                                                          .create())
                     .withVatNumber("IT3465346092")
                   .  create();
-        
+
         final LocalDate project1StartDate = LocalDate.parse("2013-04-02");
         final LocalDate project1EndDate = LocalDate.parse("2013-07-04");
         final LocalDate project2StartDate = LocalDate.parse("2013-05-03");
@@ -152,17 +152,17 @@ public final class ScenarioFactory
         final LocalDate project3EndDate = LocalDate.parse("2014-03-10");
         final LocalDate project4StartDate = LocalDate.parse("2014-02-17");
         final LocalDate project4EndDate = LocalDate.parse("2014-06-21");
-        
+
         final Money rate1 = new Money(120, "EUR");
         final Money rate2 = new Money(150, "EUR");
         final Money rate3 = new Money(210, "EUR");
         final Money rate4 = new Money(240, "EUR");
-        
+
         final List<JobEvent> je1 = createJobEvents(project1StartDate, project1EndDate, rate1);
         final List<JobEvent> je2 = createJobEvents(project2StartDate, project2EndDate, rate2);
         final List<JobEvent> je3 = createJobEvents(project3StartDate, project3EndDate, rate3);
         final List<JobEvent> je4 = createJobEvents(project4StartDate, project4EndDate, rate4);
-        
+
         final Project acmeConsultingProject1 =
                 projectRegistry.addProject()
                     .withId(new Id("" + nextId++))
@@ -215,16 +215,16 @@ public final class ScenarioFactory
                     .withEvents(je4)
                     .withBudget(new Money(456789, "EUR"))
                     .create();
-        
-                
+
+
         createInvoices(invoiceRegistry, acmeConsultingProject1, 3, "ACP1-");
         createInvoices(invoiceRegistry, acmeConsultingProject2, 4, "ACP2-");
         createInvoices(invoiceRegistry, acmeFinancingProject1, 2,  "ACP3-");
         createInvoices(invoiceRegistry, acmeFinancingProject2, 6,  "ACP4-");
-                
+
         return accounting;
       }
-    
+
     @Nonnull
     private static List<JobEvent> createJobEvents (final @Nonnull LocalDate startDate,
                                                    final @Nonnull LocalDate endDate,
@@ -232,13 +232,13 @@ public final class ScenarioFactory
       {
         final List<JobEvent> result = new ArrayList<>();
         final long days = startDate.until(endDate, ChronoUnit.DAYS);
-        
+
         for (int i = 1; i <= days; i++)
           {
             final LocalDateTime s = startDate.plusDays(i - 1).atTime(8, 0).plusMinutes(i * 3);
             final LocalDateTime e = s.plusMinutes(60 + i * 4);
             final double hours = s.until(e, ChronoUnit.MINUTES) / 60.0;
-            final BigDecimal earnings = rate.getAmount().multiply(new BigDecimal(hours)); 
+            final BigDecimal earnings = rate.getAmount().multiply(new BigDecimal(hours));
             result.add(JobEvent.builder().withId(new Id("" + nextId++))
                                          .withName("Event #" + i)
                                          .withDescription("Description of Event #" + i)
@@ -249,7 +249,7 @@ public final class ScenarioFactory
                                          .withHourlyRate(rate)
                                          .create());
           }
-        
+
         return result;
       }
 
@@ -260,9 +260,9 @@ public final class ScenarioFactory
       {
         List<? extends JobEvent> jobEvents = project.findChildren().results();
         int x = jobEvents.size() / (invoiceCount + 1);
-        
+
 //        log.info("jobEvents: {} - invoiceCount: {}", jobEvents.size(), invoiceCount);
-        
+
         for (int i = 0; i < invoiceCount; i++)
           {
             List<JobEvent> eventsSubList = new ArrayList<>(jobEvents.subList(i * x, i * x + x));
@@ -274,7 +274,7 @@ public final class ScenarioFactory
             final double earnings = timedEventsSubList.stream()
                     .collect(Collectors.summingDouble(ev -> ev.getEarnings().getAmount().doubleValue()));
             final double taxRate = 0.20d;
-            
+
             invoiceRegistry.addInvoice().withId(new Id("" + nextId++))
                                         .withDate(lastDate)
                                         .withDueDate(lastDate.plusMonths(2))

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -38,21 +38,21 @@ import it.tidalwave.accounting.model.types.Money;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class MoneyFormat 
+public class MoneyFormat
   {
     private final static Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
-    
+
     static
       {
         CURRENCY_SYMBOL_MAP.put("EUR", "€");
         CURRENCY_SYMBOL_MAP.put("USD", "$");
       }
-    
+
     @Nonnull
     public String format (final @Nonnull Money amount)
       {
         final String currency = amount.getCurrency();
-        return String.format("%s %s", Money.getFormat().format(amount.getAmount()), 
+        return String.format("%s %s", Money.getFormat().format(amount.getAmount()),
                                       CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
       }
   }

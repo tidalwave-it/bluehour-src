@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -43,14 +43,14 @@ public interface InvoiceRegistry
   {
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     public static interface Finder extends Finder8<Invoice>, ExtendedFinder8Support<Invoice, InvoiceRegistry.Finder>
       {
         @Nonnull
         public Finder withId (@Nonnull Id id);
-        
+
         @Nonnull
         public Finder withProject (@Nonnull Project project);
 
@@ -61,7 +61,7 @@ public interface InvoiceRegistry
     /*******************************************************************************************************************
      *
      * Returns a {@link Finder} for finding {@link Invoice}s.
-     * 
+     *
      * @return  the finder
      *
      ******************************************************************************************************************/
@@ -71,7 +71,7 @@ public interface InvoiceRegistry
     /*******************************************************************************************************************
      *
      * Returns a {@link Builder} for adding a {@link Invoice} to the registry.
-     * 
+     *
      * @return  the builder
      *
      ******************************************************************************************************************/

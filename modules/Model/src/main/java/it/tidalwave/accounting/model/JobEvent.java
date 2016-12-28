@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -50,14 +50,14 @@ import lombok.experimental.Wither;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable 
+@Immutable
 public interface JobEvent extends Identifiable, As
   {
     public enum Type { TIMED, FLAT };
 
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @AllArgsConstructor// FIXME (access = PROTECTED)
@@ -88,8 +88,8 @@ public interface JobEvent extends Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
     public static JobEvent.Builder builder()
@@ -99,8 +99,8 @@ public interface JobEvent extends Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
     public JobEvent.Builder toBuilder();

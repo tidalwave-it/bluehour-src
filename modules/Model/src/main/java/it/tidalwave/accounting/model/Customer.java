@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -51,7 +51,7 @@ public interface Customer extends Identifiable, As
   {
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PROTECTED)
@@ -70,7 +70,7 @@ public interface Customer extends Identifiable, As
         private final Address billingAddress;
         private final String vatNumber;
         private final Callback callback;
-        
+
         public Builder()
           {
             this(Callback.DEFAULT);
@@ -80,7 +80,7 @@ public interface Customer extends Identifiable, As
           {
             this(new Id(""), "", Address.EMPTY, "", callback);
           }
-        
+
         @Nonnull
         public Builder with (final @Nonnull Builder builder)
           {
@@ -98,7 +98,7 @@ public interface Customer extends Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @Nonnull
@@ -106,19 +106,19 @@ public interface Customer extends Identifiable, As
       {
         return new Builder();
       }
-    
+
     /*******************************************************************************************************************
      *
-     * 
+     *
      *
      ******************************************************************************************************************/
     @Nonnull
     public ProjectRegistry.ProjectFinder findProjects();
-    
+
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * @return
+     *
      ******************************************************************************************************************/
     @Nonnull
     public Builder toBuilder();

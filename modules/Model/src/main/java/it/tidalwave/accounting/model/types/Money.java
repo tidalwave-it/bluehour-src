@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2015 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2016 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -41,7 +41,7 @@ import lombok.RequiredArgsConstructor;
 /***********************************************************************************************************************
  *
  * This class models an amount of money.
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -63,26 +63,26 @@ public class Money implements Comparable<Money>
       }
 
     @Nonnull
-    public static Money parse (final @Nonnull String string) 
-      throws ParseException 
+    public static Money parse (final @Nonnull String string)
+      throws ParseException
       {
         final String[] parts = string.split(" ");
         return new Money((BigDecimal)getFormat().parse(parts[0]), parts[1]);
       }
-    
+
     @Override @Nonnull
     public String toString()
       {
         return String.format("%s %s", getFormat().format(amount), currency);
       }
-    
+
     @Nonnull
     public Money add (final @Nonnull Money other)
       {
         checkCurrencies(other);
         return new Money(amount.add(other.amount), currency);
       }
-    
+
     @Nonnull
     public Money subtract (final @Nonnull Money other)
       {
@@ -98,7 +98,7 @@ public class Money implements Comparable<Money>
 //        return amount.divide(other.amount).doubleValue();
         return amount.doubleValue() / other.amount.doubleValue();
       }
-    
+
     @Nonnull
     public static DecimalFormat getFormat()
       {
@@ -107,37 +107,37 @@ public class Money implements Comparable<Money>
         final String pattern = "###0.00";
         final DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
         decimalFormat.setParseBigDecimal(true);
-        
+
         return decimalFormat;
       }
-    
+
     @Override
-    public int compareTo (final @Nonnull Money other) 
+    public int compareTo (final @Nonnull Money other)
       {
         checkCurrencies(other);
         return this.amount.compareTo(other.amount);
       }
-    
+
     public boolean isEqualTo (final @Nonnull Money other)
       {
         return compareTo(other) == 0;
       }
-    
-    public boolean greaterThan (final @Nonnull Money other) 
+
+    public boolean greaterThan (final @Nonnull Money other)
       {
         return compareTo(other) > 0;
       }
-    
-    public boolean lowerThan (final @Nonnull Money other) 
+
+    public boolean lowerThan (final @Nonnull Money other)
       {
         return compareTo(other) < 0;
       }
-    
+
     private void checkCurrencies (final @Nonnull Money other)
       {
         if (!this.currency.equals(other.currency))
           {
-            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s", 
+            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s",
                                                              this.currency, other.currency));
           }
       }
