@@ -43,11 +43,11 @@ import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
  **********************************************************************************************************************/
 public class JavaFxJobEventExplorerPresentationDelegate implements JobEventExplorerPresentation
   {
-    @Inject
-    private JavaFXBinder binder;
-
     @FXML
     private TreeTableView<PresentationModel> ttvJobEventExplorer;
+
+    @Inject
+    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)

@@ -43,5 +43,5 @@ public class JavaFxHourlyReportPresentation implements HourlyReportPresentation
     private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxHourlyReportPresentation.class);
 
     @Delegate
-    private HourlyReportPresentation delegate = nad.getDelegate();
+    private final HourlyReportPresentation delegate = nad.getDelegate();
   }

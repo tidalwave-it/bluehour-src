@@ -43,11 +43,11 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
  **********************************************************************************************************************/
 public class JavaFxProjectExplorerPresentationDelegate implements ProjectExplorerPresentation
   {
-    @Inject
-    private JavaFXBinder binder;
-
     @FXML
     private TableView<PresentationModel> tvProjectExplorer;
+
+    @Inject
+    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)

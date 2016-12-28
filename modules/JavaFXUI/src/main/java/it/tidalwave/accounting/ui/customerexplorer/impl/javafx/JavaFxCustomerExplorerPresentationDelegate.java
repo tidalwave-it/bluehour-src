@@ -43,11 +43,11 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
  **********************************************************************************************************************/
 public class JavaFxCustomerExplorerPresentationDelegate implements CustomerExplorerPresentation
   {
-    @Inject
-    private JavaFXBinder binder;
-
     @FXML
     private ListView<PresentationModel> lvCustomerExplorer;
+
+    @Inject
+    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)
