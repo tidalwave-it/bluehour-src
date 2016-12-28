@@ -3,10 +3,9 @@
   #%L
   *********************************************************************************************************************
 
-  NorthernWind - lightweight CMS
-  http://northernwind.tidalwave.it - hg clone https://bitbucket.org/tidalwave/northernwind-src
+  Tidalwave - blueHour
   %%
-  Copyright (C) 2013 - 2014 Tidalwave s.a.s. (http://tidalwave.it)
+  Copyright (C) 2013 - 2016 Tidalwave_s.a.s. (http://tidalwave.it)
   %%
   *********************************************************************************************************************
 
@@ -23,10 +22,9 @@
 
   $Id$
 
-  *********************************************************************************************************************
-  #L%
-  -->
-
+*********************************************************************************************************************
+#L%
+-->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"

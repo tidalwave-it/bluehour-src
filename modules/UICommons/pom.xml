@@ -5,7 +5,7 @@
 
   Tidalwave - blueHour
   %%
-  Copyright (C) 2013 - 2015 Tidalwave_s.a.s. (http://tidalwave.it)
+  Copyright (C) 2013 - 2016 Tidalwave_s.a.s. (http://tidalwave.it)
   %%
   *********************************************************************************************************************
 
@@ -25,7 +25,6 @@
 *********************************************************************************************************************
 #L%
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -42,7 +41,7 @@
     <version>1.0-ALPHA-5-SNAPSHOT</version>
     <name>blueHour - UI - Commons</name>
     <packaging>jar</packaging>
-    
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -52,8 +51,8 @@
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
         </dependency>
-        
-        
+
+
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-messagebus-spring</artifactId>
@@ -70,18 +69,18 @@
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-role</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -98,5 +97,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
