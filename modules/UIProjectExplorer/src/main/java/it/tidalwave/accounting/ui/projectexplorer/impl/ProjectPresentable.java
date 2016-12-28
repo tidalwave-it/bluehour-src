@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.Aggregate;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
@@ -58,49 +59,51 @@ public class ProjectPresentable implements Presentable
     private final ProjectSpi project;
 
     @Override
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
+    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
       {
-        final List<Object> temp = new ArrayList<>();
-        temp.addAll(Arrays.asList(instanceRoles));
-        temp.add(aggregateBuilder().create());
-        return new DefaultPresentationModel(project, temp.toArray());
+        return new DefaultPresentationModel(project, concat(aggregatePresentationModel(), instanceRoles));
       }
-    
+
     @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    protected Aggregate aggregatePresentationModel()
       {
-        final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
-        
-        // FIXME: uses the column header names, should be an internal id instead
-        builder.put("Client",     (Displayable) () -> ((CustomerSpi)project.getCustomer()).getName());
-        builder.put("Status",     (Displayable) () -> project.getStatus().name());
-        builder.put("#",          (Displayable) () -> project.getNumber());
-        builder.put("Name",       (Displayable) () -> project.getName());
-        builder.put("Start Date", (Displayable) () -> DATE_FORMATTER.format(project.getStartDate()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.put("Due Date",   (Displayable) () -> DATE_FORMATTER.format(project.getEndDate()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.put("Notes",      (Displayable) () -> project.getNotes());
-        
         final Money budget           = project.getBudget();
         // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
         final Money earnings         = project.getEarnings();
         final Money invoicedEarnings = project.getInvoicedEarnings();
-        
-        builder.put("Budget",     (Displayable) () -> MONEY_FORMATTER.format(budget),
-                                  new DefaultStyleable("right-aligned",
-                                                       budget.isEqualTo(Money.ZERO) ? "alerted" : ""));
-        builder.put("Earnings",   (Displayable) () -> MONEY_FORMATTER.format(earnings),
-                                  new DefaultStyleable("right-aligned",
-                                                       earnings.greaterThan(budget) ? "alerted" : "",
-                                                       earnings.isEqualTo(budget) ? "green" : ""));
-        builder.put("Time",       (Displayable) () -> DURATION_FORMATTER.format(project.getDuration()),
-                                  new DefaultStyleable("right-aligned"));
-        builder.put("Invoiced",   (Displayable) () -> MONEY_FORMATTER.format(invoicedEarnings),
-                                  new DefaultStyleable("right-aligned",
-                                                       invoicedEarnings.greaterThan(earnings) ? "alerted" : "",
-                                                       invoicedEarnings.isEqualTo(earnings) ? "green" : ""));
 
-        return builder;
+        // FIXME: uses the column header names, should be an internal id instead
+        return AggregatePresentationModelBuilder.newInstance()
+                .with("Client",     (Displayable) () -> ((CustomerSpi)project.getCustomer()).getName())
+                .with("Status",     (Displayable) () -> project.getStatus().name())
+                .with("#",          (Displayable) () -> project.getNumber())
+                .with("Name",       (Displayable) () -> project.getName())
+                .with("Start Date", (Displayable) () -> DATE_FORMATTER.format(project.getStartDate()),
+                                                        new DefaultStyleable("right-aligned"))
+                .with("Due Date",   (Displayable) () -> DATE_FORMATTER.format(project.getEndDate()),
+                                                        new DefaultStyleable("right-aligned"))
+                .with("Notes",      (Displayable) () -> project.getNotes())
+                .with("Budget",     (Displayable) () -> MONEY_FORMATTER.format(budget),
+                                                    new DefaultStyleable("right-aligned",
+                                                                budget.isEqualTo(Money.ZERO) ? "alerted" : ""))
+                .with("Earnings",   (Displayable) () -> MONEY_FORMATTER.format(earnings),
+                                                    new DefaultStyleable("right-aligned",
+                                                                earnings.greaterThan(budget) ? "alerted" : "",
+                                                                earnings.isEqualTo(budget) ? "green" : ""))
+                .with("Time",       (Displayable) () -> DURATION_FORMATTER.format(project.getDuration()),
+                                                    new DefaultStyleable("right-aligned"))
+                .with("Invoiced",   (Displayable) () -> MONEY_FORMATTER.format(invoicedEarnings),
+                                                    new DefaultStyleable("right-aligned",
+                                                                invoicedEarnings.greaterThan(earnings) ? "alerted" : "",
+                                                                invoicedEarnings.isEqualTo(earnings) ? "green" : ""))
+                .create();
+      }
+
+    @Nonnull
+    public static Object[] concat (final @Nonnull Object object, final @Nonnull Object ... objects)
+      {
+        final List<Object> temp = new ArrayList<>(Arrays.asList(objects));
+        temp.add(object);
+        return temp.toArray();
       }
   }

@@ -57,32 +57,29 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
     protected static final String DATE = "Date";
 
     protected static final DefaultStyleable STYLE_RIGHT_ALIGNED = new DefaultStyleable("right-aligned");
-        
+
     @Nonnull
     protected final TYPE jobEvent;
 
     @Override
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
+    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
       {
         final Styleable styleable = new DefaultStyleable(getStyles());
         return new DefaultPresentationModel("", aggregateBuilder().create(), styleable);
       }
-    
+
     @Nonnull
     protected AggregatePresentationModelBuilder aggregateBuilder()
       {
-        final AggregatePresentationModelBuilder builder = new AggregatePresentationModelBuilder();
         // FIXME: uses the column header names, should be an internal id instead
-        builder.put(JOB_EVENT, (Displayable) () -> jobEvent.getName());
-        builder.put(NOTES,     (Displayable) () -> jobEvent.getDescription());
-        
+        return AggregatePresentationModelBuilder.newInstance()
+                .with(JOB_EVENT, (Displayable) () -> jobEvent.getName())
+                .with(NOTES,     (Displayable) () -> jobEvent.getDescription())
         // FIXME: this is dynamically computed, can be slow - should be also cached
-        builder.put(AMOUNT,    (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
-                               STYLE_RIGHT_ALIGNED);
-
-        return builder;
+                .with(AMOUNT,    (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
+                                 STYLE_RIGHT_ALIGNED);
       }
-    
+
     @Nonnull
     protected abstract Collection<String> getStyles();
   }

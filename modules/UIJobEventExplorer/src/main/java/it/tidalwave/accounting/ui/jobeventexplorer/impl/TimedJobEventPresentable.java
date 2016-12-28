@@ -50,27 +50,26 @@ public class TimedJobEventPresentable extends JobEventPresentable<TimedJobEventS
       {
         super(timedJobEvent);
       }
-    
+
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder() 
+    protected AggregatePresentationModelBuilder aggregateBuilder()
       {
-        final AggregatePresentationModelBuilder builder = super.aggregateBuilder();
-        builder.put(DATE,        (Displayable) () -> DATETIME_FORMATTER.format(jobEvent.getStartDateTime()));
-        builder.put(TIME,        (Displayable) () -> DURATION_FORMATTER.format(computeDuration()), 
-                                 STYLE_RIGHT_ALIGNED);
-        builder.put(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getHourlyRate()), 
-                                 STYLE_RIGHT_ALIGNED);
-        return builder;
+        return super.aggregateBuilder()
+                .with(DATE,        (Displayable) () -> DATETIME_FORMATTER.format(jobEvent.getStartDateTime()))
+                .with(TIME,        (Displayable) () -> DURATION_FORMATTER.format(computeDuration()),
+                                         STYLE_RIGHT_ALIGNED)
+                .with(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getHourlyRate()),
+                                         STYLE_RIGHT_ALIGNED);
       }
 
     @Nonnull
-    private Duration computeDuration() 
+    private Duration computeDuration()
       {
         return Duration.between(jobEvent.getStartDateTime(), jobEvent.getEndDateTime());
       }
 
     @Override @Nonnull
-    protected Collection<String> getStyles() 
+    protected Collection<String> getStyles()
       {
         return Arrays.asList("timed-job-event");
       }
