@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
+import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 

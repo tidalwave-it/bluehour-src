@@ -30,20 +30,19 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
+import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.util.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
-import static java.util.Comparator.comparing;
 
 /***********************************************************************************************************************
  *
