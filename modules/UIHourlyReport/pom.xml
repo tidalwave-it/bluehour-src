@@ -32,13 +32,13 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
-        <version>1.0-ALPHA-5</version>
+        <version>1.0-ALPHA-6-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-hourlyreport</artifactId>
-    <version>1.0-ALPHA-5</version>
+    <version>1.0-ALPHA-6-SNAPSHOT</version>
     <name>blueHour - UI - Hourly Report</name>
     <packaging>jar</packaging>
 
