@@ -42,6 +42,11 @@
     <name>blueHour - UI - JavaFX</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <!-- Otherwise can't be released because of missing javadocs -->
+        <tft.javadoc.excludePackageNames />
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
