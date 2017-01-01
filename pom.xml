@@ -90,6 +90,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
 
         <tft.clirr.skip>true</tft.clirr.skip> <!-- Clirr is not compatible with JDK 8 -->
+        <tft.maven-checkstyle-plugin.version>2.16</tft.maven-checkstyle-plugin.version> <!-- FIXME: see BH-28 -->
     </properties>
 
     <!-- ===============================================================================================================
