@@ -1,12 +1,10 @@
 ![Maven Central](https://img.shields.io/maven-central/v/it.tidalwave.accounting/bluehour.svg)
-[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/blueHour_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/blueHour)
-[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/blueHour.svg)](http://services.tidalwave.it/ci/view/blueHour)
-[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/blueHour.svg)](http://services.tidalwave.it/ci/view/blueHour)
+[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/job/blueHour_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/blueHour)
+[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/job/blueHour.svg)](http://services.tidalwave.it/ci/view/blueHour)
+[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/job/blueHour.svg)](http://services.tidalwave.it/ci/view/blueHour)
 
 blueHour
 ================================
-
-[![Build Status](https://drone.io/bitbucket.org/tidalwave/bluehour-src/status.png)](https://drone.io/bitbucket.org/tidalwave/bluehour-src/latest)
 
 blueHour is a small application for accounting and invoicing. Still under development in the early stage.
 
@@ -29,6 +27,7 @@ More information can be found on the [homepage](http://bluehour.tidalwave.it) of
 
 Where can I get the latest release?
 -----------------------------------
+
 You can download source and binaries from the [download page](https://bitbucket.org/tidalwave/bluehour-src/src).
 
 Alternatively you can pull it from the central Maven repositories:
@@ -62,6 +61,7 @@ If you plan to contribute on a regular basis, please consider filing a contribut
 
 License
 -------
+
 Code is released under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
 
