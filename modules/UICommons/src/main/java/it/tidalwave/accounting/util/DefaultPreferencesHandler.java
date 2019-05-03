@@ -5,7 +5,7 @@
  * NorthernWind - lightweight CMS
  * http://northernwind.tidalwave.it - hg clone https://bitbucket.org/tidalwave/northernwind-src
  * %%
- * Copyright (C) 2013 - 2017 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2019 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *

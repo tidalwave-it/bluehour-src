@@ -5,7 +5,7 @@
 
   Tidalwave - blueHour
   %%
-  Copyright (C) 2013 - 2017 Tidalwave_s.a.s. (http://tidalwave.it)
+  Copyright (C) 2013 - 2019 Tidalwave_s.a.s. (http://tidalwave.it)
   %%
   *********************************************************************************************************************
 
@@ -33,7 +33,7 @@
     <parent>
         <groupId>it.tidalwave.superpom</groupId>
         <artifactId>superpom</artifactId>
-        <version>4.5</version>
+        <version>4.7</version>
         <relativePath />
     </parent>
 
