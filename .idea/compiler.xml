@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="it-tidalwave-accounting-ui" />
+        <module name="it-tidalwave-accounting-marshalling-xml" />
+        <module name="it-tidalwave-accounting-ui-jobeventexplorer" />
+        <module name="it-tidalwave-accounting-ui-hourlyreport" />
+        <module name="it-tidalwave-accounting-ui-commons" />
+        <module name="it-tidalwave-accounting-application-javafx" />
+        <module name="it-tidalwave-accounting-model" />
+        <module name="it-tidalwave-accounting-ui-javafx" />
+        <module name="it-tidalwave-accounting-ui-customerexplorer" />
+        <module name="it-tidalwave-accounting-importer-ibiz" />
+        <module name="it-tidalwave-accounting-model-impl-inmemory" />
+        <module name="it-tidalwave-accounting-ui-importer-ibiz" />
+        <module name="it-tidalwave-accounting-ui-projectexplorer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bluehour" target="1.5" />
+      <module name="bluehour-macosx" target="1.5" />
+      <module name="bluehour-modules" target="1.5" />
+      <module name="it-tidalwave-accounting-application-javafx" target="1.5" />
+      <module name="it-tidalwave-accounting-importer-ibiz" target="1.5" />
+      <module name="it-tidalwave-accounting-marshalling-xml" target="1.5" />
+      <module name="it-tidalwave-accounting-model" target="1.5" />
+      <module name="it-tidalwave-accounting-model-impl-inmemory" target="1.5" />
+      <module name="it-tidalwave-accounting-ui" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-commons" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-customerexplorer" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-hourlyreport" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-importer-ibiz" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-javafx" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-jobeventexplorer" target="1.5" />
+      <module name="it-tidalwave-accounting-ui-projectexplorer" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
