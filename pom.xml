@@ -22,10 +22,11 @@
 
   $Id$
 
-*********************************************************************************************************************
+  *********************************************************************************************************************
 #L%
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -33,7 +34,7 @@
         <groupId>it.tidalwave.superpom</groupId>
         <artifactId>superpom</artifactId>
         <version>4.16</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <!-- ===============================================================================================================
@@ -54,7 +55,7 @@
     <url>http://bluehour.tidalwave.it</url>
     <inceptionYear>2013</inceptionYear>
     <description>
-blueHour is a small application for accounting and invoicing. Still under development in the early stage.
+        blueHour is a small application for accounting and invoicing. Still under development in the early stage.
     </description>
 
     <!-- ===============================================================================================================
@@ -190,7 +191,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
         <connection>scm:git:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <!-- ===============================================================================================================
