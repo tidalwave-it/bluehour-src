@@ -4,6 +4,6 @@ addons:
     - genisoimage
 language: java
 jdk:
-  - oraclejdk8
+  - oraclejdk11
 script: mvn install -B -Pit.tidalwave-ci-v1
 
