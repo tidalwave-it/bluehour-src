@@ -260,7 +260,7 @@
         <module>UIiBizImporter</module>
         <module>JavaFXUI</module>
         <module>JavaFXApplication</module>
-        <module>Installers/MacOSX</module>
+        <module>Installers/macOS</module>
     </modules>
 
 </project>

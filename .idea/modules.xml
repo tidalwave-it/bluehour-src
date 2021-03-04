@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bluehour.iml" filepath="$PROJECT_DIR$/bluehour.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/Installers/MacOSX/bluehour-macosx.iml" filepath="$PROJECT_DIR$/modules/Installers/MacOSX/bluehour-macosx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/Installers/macOS/bluehour-macos.iml" filepath="$PROJECT_DIR$/modules/Installers/macOS/bluehour-macos.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/bluehour-modules.iml" filepath="$PROJECT_DIR$/modules/bluehour-modules.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/JavaFXApplication/it-tidalwave-accounting-application-javafx.iml" filepath="$PROJECT_DIR$/modules/JavaFXApplication/it-tidalwave-accounting-application-javafx.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/iBizImporter/it-tidalwave-accounting-importer-ibiz.iml" filepath="$PROJECT_DIR$/modules/iBizImporter/it-tidalwave-accounting-importer-ibiz.iml" />
