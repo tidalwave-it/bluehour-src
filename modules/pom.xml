@@ -58,6 +58,9 @@
 
     ================================================================================================================ -->
     <properties>
+        <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
+        <tft.javafx.version>11.0.1</tft.javafx.version>
+
         <activation.version>1.1.1</activation.version>
         <aquafx.version>0.2</aquafx.version>
         <commons-codec.version>1.9</commons-codec.version>
@@ -127,10 +130,32 @@
                 <version>${jabaddressbook.version}</version>
                 <type>jnilib</type>
             </dependency>
+
             <dependency>
                 <groupId>com.aquafx-project</groupId>
                 <artifactId>aquafx</artifactId>
                 <version>${aquafx.version}</version>
+            </dependency>
+            <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-base</artifactId>
+                <version>${tft.javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-graphics</artifactId>
+                <version>${tft.javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>${tft.javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version>${tft.javafx.version}</version>
             </dependency>
 
             <dependency>
