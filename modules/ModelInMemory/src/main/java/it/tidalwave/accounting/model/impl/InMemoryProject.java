@@ -42,12 +42,12 @@ import it.tidalwave.accounting.model.ProjectRegistry.JobEventFinder;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.AllArgsConstructor;
-import lombok.Delegate;
+import lombok.experimental.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Wither;
+import lombok.With;
 import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
@@ -58,7 +58,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Wither
+@Immutable @With
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport", "accounting"})
 public class InMemoryProject implements ProjectSpi
   {

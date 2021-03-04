@@ -37,7 +37,7 @@ import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
+import lombok.With;
 
 /***********************************************************************************************************************
  *
@@ -55,10 +55,10 @@ public interface Customer extends Identifiable, As
      *
      ******************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
+    @Immutable @With @Getter @ToString
     public static class Builder
       {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
+        public static interface Callback // Lombok @With doesn't support builder subclasses
           {
             public void register (final @Nonnull Customer customer);
 

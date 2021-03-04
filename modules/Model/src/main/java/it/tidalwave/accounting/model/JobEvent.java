@@ -40,7 +40,7 @@ import it.tidalwave.accounting.model.types.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
+import lombok.With;
 
 /***********************************************************************************************************************
  *
@@ -61,7 +61,7 @@ public interface JobEvent extends Identifiable, As
      *
      ******************************************************************************************************************/
     @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @Wither @Getter @ToString
+    @Immutable @With @Getter @ToString
     public static class Builder
       {
         private final Id id;

@@ -41,7 +41,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import java.util.concurrent.CopyOnWriteArrayList;
-import lombok.Delegate;
+import lombok.experimental.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

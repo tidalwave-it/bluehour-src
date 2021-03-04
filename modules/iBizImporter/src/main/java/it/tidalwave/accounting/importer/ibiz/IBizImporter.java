@@ -36,7 +36,7 @@ import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
+import lombok.With;
 
 /***********************************************************************************************************************
  *
@@ -54,7 +54,7 @@ public interface IBizImporter extends Accounting
      *
      ******************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PRIVATE)
-    @Immutable @Wither @Getter @ToString
+    @Immutable @With @Getter @ToString
     public static class Builder
       {
         private final Path path;

@@ -22,22 +22,39 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bluehour" target="1.5" />
-      <module name="bluehour-macosx" target="1.5" />
-      <module name="bluehour-modules" target="1.5" />
-      <module name="it-tidalwave-accounting-application-javafx" target="1.5" />
-      <module name="it-tidalwave-accounting-importer-ibiz" target="1.5" />
-      <module name="it-tidalwave-accounting-marshalling-xml" target="1.5" />
-      <module name="it-tidalwave-accounting-model" target="1.5" />
-      <module name="it-tidalwave-accounting-model-impl-inmemory" target="1.5" />
-      <module name="it-tidalwave-accounting-ui" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-commons" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-customerexplorer" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-hourlyreport" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-importer-ibiz" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-javafx" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-jobeventexplorer" target="1.5" />
-      <module name="it-tidalwave-accounting-ui-projectexplorer" target="1.5" />
+      <module name="bluehour" target="1.8" />
+      <module name="bluehour-macos" target="1.8" />
+      <module name="bluehour-modules" target="1.8" />
+      <module name="it-tidalwave-accounting-application-javafx" target="1.8" />
+      <module name="it-tidalwave-accounting-importer-ibiz" target="1.8" />
+      <module name="it-tidalwave-accounting-marshalling-xml" target="1.8" />
+      <module name="it-tidalwave-accounting-model" target="1.8" />
+      <module name="it-tidalwave-accounting-model-impl-inmemory" target="1.8" />
+      <module name="it-tidalwave-accounting-ui" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-commons" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-customerexplorer" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-hourlyreport" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-importer-ibiz" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-javafx" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-jobeventexplorer" target="1.8" />
+      <module name="it-tidalwave-accounting-ui-projectexplorer" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="it-tidalwave-accounting-application-javafx" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-importer-ibiz" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-marshalling-xml" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-model" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-model-impl-inmemory" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-commons" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-customerexplorer" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-hourlyreport" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-importer-ibiz" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-javafx" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-jobeventexplorer" options="-Xlint:all" />
+      <module name="it-tidalwave-accounting-ui-projectexplorer" options="-Xlint:all" />
+    </option>
   </component>
 </project>

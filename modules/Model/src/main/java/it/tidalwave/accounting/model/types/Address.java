@@ -33,7 +33,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
+import lombok.With;
 import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
@@ -50,7 +50,7 @@ public class Address
     public static final Address EMPTY = builder().create();
 
     @AllArgsConstructor(access = PRIVATE)
-    @Immutable @Wither @Getter @ToString
+    @Immutable @With @Getter @ToString
     public static class Builder
       {
         private final String street;

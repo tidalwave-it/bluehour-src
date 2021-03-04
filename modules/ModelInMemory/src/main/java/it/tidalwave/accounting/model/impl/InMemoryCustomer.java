@@ -39,7 +39,7 @@ import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.EqualsAndHashCode;
-import lombok.Delegate;
+import lombok.experimental.Delegate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

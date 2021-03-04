@@ -29,7 +29,7 @@ package it.tidalwave.accounting.ui.importer.ibiz.impl.javafx;
 
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
-import lombok.Delegate;
+import lombok.experimental.Delegate;
 import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***********************************************************************************************************************

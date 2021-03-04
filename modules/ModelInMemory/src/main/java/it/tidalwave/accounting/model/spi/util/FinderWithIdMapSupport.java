@@ -71,7 +71,7 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
         final FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> source = getSource(FinderWithIdMapSupport.class, other, override);
         mapById = new HashMap<>(source.mapById);
       }
-    
+
     @Override @Nonnull
     protected List<IMPLTYPE> findAll()
       {
