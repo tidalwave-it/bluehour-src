@@ -29,7 +29,7 @@ package it.tidalwave.application.spi;
 
 import it.tidalwave.application.ToolBarModel;
 import it.tidalwave.util.spi.AsSupport;
-import lombok.Delegate;
+import lombok.experimental.Delegate;
 
 /***********************************************************************************************************************
  *
