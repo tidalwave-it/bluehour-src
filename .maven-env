@@ -1,4 +1,5 @@
 JAVA_HOME=$JAVA11_HOME
+# JAVA_HOME=$JAVA15_HOME
 
 MAVEN_OPTS="-Xmx2048m -Djava.library.path=$PWD/modules/JavaFXApplication/target/nativelibs/"
 ## MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256M -XX:-UseSplitVerifier -Djava.library.path=$PWD/modules/JavaFXApplication/target/nativelibs/"
