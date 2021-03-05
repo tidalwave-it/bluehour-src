@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bluehour.iml" filepath="$PROJECT_DIR$/bluehour.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/Installers/macOS/bluehour-macos.iml" filepath="$PROJECT_DIR$/modules/Installers/macOS/bluehour-macos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/bluehour-modules.iml" filepath="$PROJECT_DIR$/modules/bluehour-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/JavaFXApplication/it-tidalwave-accounting-application-javafx.iml" filepath="$PROJECT_DIR$/modules/JavaFXApplication/it-tidalwave-accounting-application-javafx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/iBizImporter/it-tidalwave-accounting-importer-ibiz.iml" filepath="$PROJECT_DIR$/modules/iBizImporter/it-tidalwave-accounting-importer-ibiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/XmlMarshalling/it-tidalwave-accounting-marshalling-xml.iml" filepath="$PROJECT_DIR$/modules/XmlMarshalling/it-tidalwave-accounting-marshalling-xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/Model/it-tidalwave-accounting-model.iml" filepath="$PROJECT_DIR$/modules/Model/it-tidalwave-accounting-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/ModelInMemory/it-tidalwave-accounting-model-impl-inmemory.iml" filepath="$PROJECT_DIR$/modules/ModelInMemory/it-tidalwave-accounting-model-impl-inmemory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UI/it-tidalwave-accounting-ui.iml" filepath="$PROJECT_DIR$/modules/UI/it-tidalwave-accounting-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UICommons/it-tidalwave-accounting-ui-commons.iml" filepath="$PROJECT_DIR$/modules/UICommons/it-tidalwave-accounting-ui-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UICustomerExplorer/it-tidalwave-accounting-ui-customerexplorer.iml" filepath="$PROJECT_DIR$/modules/UICustomerExplorer/it-tidalwave-accounting-ui-customerexplorer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UIHourlyReport/it-tidalwave-accounting-ui-hourlyreport.iml" filepath="$PROJECT_DIR$/modules/UIHourlyReport/it-tidalwave-accounting-ui-hourlyreport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UIiBizImporter/it-tidalwave-accounting-ui-importer-ibiz.iml" filepath="$PROJECT_DIR$/modules/UIiBizImporter/it-tidalwave-accounting-ui-importer-ibiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/JavaFXUI/it-tidalwave-accounting-ui-javafx.iml" filepath="$PROJECT_DIR$/modules/JavaFXUI/it-tidalwave-accounting-ui-javafx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UIJobEventExplorer/it-tidalwave-accounting-ui-jobeventexplorer.iml" filepath="$PROJECT_DIR$/modules/UIJobEventExplorer/it-tidalwave-accounting-ui-jobeventexplorer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/UIProjectExplorer/it-tidalwave-accounting-ui-projectexplorer.iml" filepath="$PROJECT_DIR$/modules/UIProjectExplorer/it-tidalwave-accounting-ui-projectexplorer.iml" />
+    </modules>
+  </component>
+</project>

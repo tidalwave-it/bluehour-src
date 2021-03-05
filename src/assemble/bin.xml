@@ -3,10 +3,12 @@
   #%L
   *********************************************************************************************************************
 
-  Tidalwave - blueHour
+  SteelBlue
+  http://steelblue.tidalwave.it - git clone git@bitbucket.org:tidalwave/steelblue-src.git
   %%
-  Copyright (C) 2013 - 2016 Tidalwave_s.a.s. (http://tidalwave.it)
+  Copyright (C) 2015 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
   %%
+
   *********************************************************************************************************************
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
@@ -25,7 +27,9 @@
 *********************************************************************************************************************
 #L%
 -->
-<assembly>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
     <id>bin</id>
     <formats>
         <format>tar.gz</format>
@@ -39,6 +43,23 @@
                 <include>LICENSE*</include>
                 <include>NOTICE*</include>
             </includes>
+        </fileSet>
+        <fileSet>
+            <directory>.</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>**/target/*.jar</include>
+                <include>**/target/*.war</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.tar.gz</exclude>
+                <exclude>**/*-tests.jar</exclude>
+                <exclude>**/*-sources.jar</exclude>
+                <exclude>**/*-test-sources.jar</exclude>
+                <exclude>**/*-javadoc.jar</exclude>
+                <exclude>**/it-tidalwave-steelblue-example*.jar</exclude>
+                <exclude>.description</exclude>
+            </excludes>
         </fileSet>
         <fileSet>
             <directory>target/site/apidocs</directory>

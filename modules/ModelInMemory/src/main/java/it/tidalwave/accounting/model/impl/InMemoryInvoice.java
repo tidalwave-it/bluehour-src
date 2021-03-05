@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2019 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -41,7 +41,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import java.util.concurrent.CopyOnWriteArrayList;
-import lombok.Delegate;
+import lombok.experimental.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

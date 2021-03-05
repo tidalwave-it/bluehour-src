@@ -5,7 +5,7 @@
 
   Tidalwave - blueHour
   %%
-  Copyright (C) 2013 - 2019 Tidalwave_s.a.s. (http://tidalwave.it)
+  Copyright (C) 2013 - 2021 Tidalwave_s.a.s. (http://tidalwave.it)
   %%
   *********************************************************************************************************************
 
@@ -22,19 +22,19 @@
 
   $Id$
 
-*********************************************************************************************************************
+  *********************************************************************************************************************
 #L%
 -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>it.tidalwave.superpom</groupId>
         <artifactId>superpom</artifactId>
-        <version>4.14</version>
-        <relativePath />
+        <version>4.18</version>
+        <relativePath/>
     </parent>
 
     <!-- ===============================================================================================================
@@ -55,7 +55,7 @@
     <url>http://bluehour.tidalwave.it</url>
     <inceptionYear>2013</inceptionYear>
     <description>
-blueHour is a small application for accounting and invoicing. Still under development in the early stage.
+        blueHour is a small application for accounting and invoicing. Still under development in the early stage.
     </description>
 
     <!-- ===============================================================================================================
@@ -73,16 +73,10 @@ blueHour is a small application for accounting and invoicing. Still under develo
         <tidalwave.ci.view>blueHour</tidalwave.ci.view>
         <tidalwave.issues>BH</tidalwave.issues>
 
-        <tft.maven.requiredJdk>[1.8.0-0,)</tft.maven.requiredJdk>
+        <tft.maven.requiredJdk>[11,16)</tft.maven.requiredJdk>
         <tft.javac.source>1.8</tft.javac.source>
         <tft.javac.target>1.8</tft.javac.target>
 
-        <tft.embedded-jdk-artifactId>it-tidalwave-oraclejdk8</tft.embedded-jdk-artifactId>
-        <tft.embedded-jdk-classifier>macosx-intel</tft.embedded-jdk-classifier>
-        <tft.embedded-jdk-name>jdk1.8.0</tft.embedded-jdk-name>
-        <tft.embedded-jdk-version>1.8.0-1</tft.embedded-jdk-version>
-
-        <netbeans.hint.jdkPlatform>JDK_1.8.0</netbeans.hint.jdkPlatform>
         <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
 
@@ -186,7 +180,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
-                <artifactId>bluehour-macosx-embedded-jre</artifactId>
+                <artifactId>bluehour-macosx</artifactId>
                 <version>1.0-ALPHA-6-SNAPSHOT</version>
             </dependency>
         </dependencies>
@@ -197,7 +191,7 @@ blueHour is a small application for accounting and invoicing. Still under develo
         <connection>scm:git:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <!-- ===============================================================================================================

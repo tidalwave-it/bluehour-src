@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2019 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -40,7 +40,7 @@ import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.experimental.Wither;
+import lombok.With;
 
 /***********************************************************************************************************************
  *
@@ -57,10 +57,10 @@ public interface Invoice extends Identifiable, As
      *
      ******************************************************************************************************************/
     @AllArgsConstructor// FIXME (access = PRIVATE)
-    @Immutable @Wither @Getter @ToString
+    @Immutable @With @Getter @ToString
     public static class Builder
       {
-        public static interface Callback // Lombok @Wither doesn't support builder subclasses
+        public static interface Callback // Lombok @With doesn't support builder subclasses
           {
             public void register (final @Nonnull Invoice invoice);
 

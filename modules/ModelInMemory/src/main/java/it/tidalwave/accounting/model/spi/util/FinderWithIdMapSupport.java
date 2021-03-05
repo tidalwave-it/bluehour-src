@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2019 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -71,7 +71,7 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
         final FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> source = getSource(FinderWithIdMapSupport.class, other, override);
         mapById = new HashMap<>(source.mapById);
       }
-    
+
     @Override @Nonnull
     protected List<IMPLTYPE> findAll()
       {

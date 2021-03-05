@@ -5,7 +5,7 @@
 
   Tidalwave - blueHour
   %%
-  Copyright (C) 2013 - 2019 Tidalwave_s.a.s. (http://tidalwave.it)
+  Copyright (C) 2013 - 2021 Tidalwave_s.a.s. (http://tidalwave.it)
   %%
   *********************************************************************************************************************
 
@@ -52,6 +52,28 @@
             <artifactId>it-tidalwave-accounting-model</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+
+        <!-- RUNTIME DEPENDENCIES -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
@@ -87,58 +109,7 @@
             <artifactId>commons-codec</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>jabaddressbook</groupId>
-            <artifactId>jabaddressbook</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jabaddressbook</groupId>
-            <artifactId>addressbook</artifactId>
-            <type>jnilib</type>
-            <scope>test</scope>
-        </dependency>
         <!-- END FIXME -->
     </dependencies>
-
-    <!-- FIXME: temporary stuff to import data -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>jabaddressbook</groupId>
-                                    <artifactId>addressbook</artifactId>
-                                    <type>jnilib</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target</outputDirectory>
-                                    <destFileName>libAddressBook.jnilib</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>-Djava.library.path=target</argLine>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <!-- END FIXME -->
 
 </project>
