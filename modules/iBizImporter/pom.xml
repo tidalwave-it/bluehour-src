@@ -32,13 +32,13 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
-        <version>1.0-ALPHA-6-SNAPSHOT</version>
+        <version>1.0-ALPHA-6</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-    <version>1.0-ALPHA-6-SNAPSHOT</version>
+    <version>1.0-ALPHA-6</version>
     <name>blueHour - Importer - iBiz</name>
     <packaging>jar</packaging>
 
