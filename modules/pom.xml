@@ -68,6 +68,7 @@
         <guava.version>30.1-jre</guava.version>
         <jabaddressbook.version>0.3.1</jabaddressbook.version>
         <jaxb.version>2.2.11</jaxb.version>
+        <tft.spring.version>5.3.1</tft.spring.version>
         <steelblue.version>1.0-ALPHA-16</steelblue.version>
         <thesefoolishthings.version>3.1-ALPHA-7</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
@@ -88,6 +89,13 @@
     ================================================================================================================ -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${tft.spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>it.tidalwave.thesefoolishthings</groupId>
                 <artifactId>thesefoolishthings</artifactId>
