@@ -32,9 +32,9 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.io.IOException;
 import java.nio.file.Path;
-import corny.addressbook.NativeAddressBook;
-import corny.addressbook.data.Contact;
-import corny.addressbook.data.MultiValue;
+//import corny.addressbook.NativeAddressBook;
+//import corny.addressbook.data.Contact;
+//import corny.addressbook.data.MultiValue;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizCustomerImporter;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.CustomerRegistry;
@@ -66,7 +66,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
       throws IOException
       {
         log.debug("importCustomers()");
-        final NativeAddressBook addressBook = NativeAddressBook.instance();
+/*        final NativeAddressBook addressBook = NativeAddressBook.instance();
         IBizUtils.loadConfiguration(path.resolve("clients")).getStream("clients").forEach(customerConfig -> 
           {
             final String firstName = trim(customerConfig.getString("firstName"));
@@ -78,7 +78,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
                                           .withBillingAddress(getAddress(contact))
                                           .withVatNumber(getVatNumber(contact))
                                           .create();
-          });
+          });*/
       }
 
     /*******************************************************************************************************************
@@ -86,67 +86,67 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
      * 
      *
      ******************************************************************************************************************/
-    @Nonnull
-    private String getVatNumber (final @Nonnull Contact contact)
-      {
-        final MultiValue<String> phone = contact.getPhone();
-        final MultiValue<String> email = contact.getEmail();
-        String vat = "";
-        
-        if (email != null)
-          {
-            vat = email.getFirstHomeValue(); // VAT is also there in my address book...
-          }
-        
-        if (((vat == null) || vat.equals("")) && (phone != null))
-          {
-            vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
-          }
-        
-        return vat;
-      }
+//    @Nonnull
+//    private String getVatNumber (final @Nonnull Contact contact)
+//      {
+//        final MultiValue<String> phone = contact.getPhone();
+//        final MultiValue<String> email = contact.getEmail();
+//        String vat = "";
+//
+//        if (email != null)
+//          {
+//            vat = email.getFirstHomeValue(); // VAT is also there in my address book...
+//          }
+//
+//        if (((vat == null) || vat.equals("")) && (phone != null))
+//          {
+//            vat = phone.getFirstHomeValue(); // VAT is also there in my address book...
+//          }
+//
+//        return vat;
+//      }
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @Nonnull
-    private Address getAddress (final @Nonnull Contact contact)   
-      {
-        Address.Builder addressBuilder = Address.builder();
-        
-        if (contact.getAddress() != null)
-          {
-            final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
-            addressBuilder = addressBuilder.withCity(addr.getCity())
-                                           .withState(addr.getCountry())
-                                           .withStreet(addr.getStreet())
-                                           .withZip("" + addr.getZip());
-          }
-        
-        return addressBuilder.create();
-    }
+//    @Nonnull
+//    private Address getAddress (final @Nonnull Contact contact)
+//      {
+//        Address.Builder addressBuilder = Address.builder();
+//
+//        if (contact.getAddress() != null)
+//          {
+//            final corny.addressbook.data.Address addr = contact.getAddress().getFirstHomeValue();
+//            addressBuilder = addressBuilder.withCity(addr.getCity())
+//                                           .withState(addr.getCountry())
+//                                           .withStreet(addr.getStreet())
+//                                           .withZip("" + addr.getZip());
+//          }
+//
+//        return addressBuilder.create();
+//    }
 
     /*******************************************************************************************************************
      *
      * 
      *
      ******************************************************************************************************************/
-    @Nonnull
-    private Contact getContact (final @Nonnull NativeAddressBook addressBook, 
-                                final @Nonnull String firstName, 
-                                final @Nonnull String clientCompany) 
-      {
-        List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
-      
-        if (contacts.isEmpty())
-          {
-            contacts = addressBook.getContactsWithSomeAttribute(clientCompany);
-          }
-        
-        return contacts.get(0);
-      }
+//    @Nonnull
+//    private Contact getContact (final @Nonnull NativeAddressBook addressBook,
+//                                final @Nonnull String firstName,
+//                                final @Nonnull String clientCompany)
+//      {
+//        List<Contact> contacts = addressBook.getContactsWithFirstName(firstName);
+//
+//        if (contacts.isEmpty())
+//          {
+//            contacts = addressBook.getContactsWithSomeAttribute(clientCompany);
+//          }
+//
+//        return contacts.get(0);
+//      }
     
     @Nonnull
     private static String trim (final @CheckForNull String string)

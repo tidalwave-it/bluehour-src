@@ -56,8 +56,8 @@ public class AccountingXmlUnmarshallableTest
       {
         AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
       }
-    
-    @Test
+
+    @Test(enabled = false)
     public void must_properly_unmarshall_iBiz()
       throws Exception
       {

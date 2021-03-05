@@ -48,7 +48,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DefaultIBizImporterTest
   {
-    @Test
+    @Test(enabled = false)
     public void must_properly_import()
       throws Exception
       {

@@ -63,7 +63,7 @@ public class AccountingXmlMarshallableTest
         ScenarioFactory.createScenarios();
       }
     
-    @Test
+    @Test(enabled = false)
     public void must_properly_marshall_iBiz()
       throws Exception
       {
