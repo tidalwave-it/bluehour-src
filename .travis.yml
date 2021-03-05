@@ -8,13 +8,5 @@ jdk:
 cache:
   directories:
     - ~/.m2
-before_install:
-  - rm -rfv ~/tools
-  - mkdir -p ~/tools/jpackager-linux ~/tools/jpackager-osx
-  - wget -P ~/tools/jpackager-linux http://download2.gluonhq.com/jpackager/11/jdk.packager-linux.zip
-  - wget -P ~/tools/jpackager-osx   http://download2.gluonhq.com/jpackager/11/jdk.packager-osx.zip
-  - unzip ~/tools/jpackager-linux/jdk.packager-linux.zip -d ~/tools/jpackager-linux
-  - unzip ~/tools/jpackager-osx/jdk.packager-osx.zip -d ~/tools/jpackager-osx
-  - echo "MAVEN_OPTS=-Dtft.tool.jpackager=~/tools/jpackager-osx/jpackager" > ~/.mavenrc
 script: mvn install -B -Pit.tidalwave-ci-v1
 
