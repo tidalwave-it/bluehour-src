@@ -47,7 +47,7 @@
     <artifactId>bluehour-macosx</artifactId>
     <version>1.0-ALPHA-6-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>blueHour - Installer, Mac OS X</name>
+    <name>blueHour - Installer, macOS</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
 
     <properties>
