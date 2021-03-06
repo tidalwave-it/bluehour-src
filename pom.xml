@@ -179,7 +179,7 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
-                <artifactId>bluehour-macosx</artifactId>
+                <artifactId>bluehour-macos</artifactId>
                 <version>1.0-ALPHA-7-SNAPSHOT</version>
             </dependency>
         </dependencies>
