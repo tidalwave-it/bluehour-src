@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.List;
 import java.time.LocalDate;
-import it.tidalwave.util.Finder8;
+import it.tidalwave.util.Finder;
 import it.tidalwave.util.F8;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsSupport;
@@ -107,7 +107,7 @@ public class InMemoryInvoice implements InvoiceSpi
      *
      ******************************************************************************************************************/
     @Override @Nonnull
-    public Finder8<JobEvent> findJobEvents()
+    public Finder<JobEvent> findJobEvents()
       {
         return F8.ofComputeResults(f -> new CopyOnWriteArrayList<>(jobEvents));
       }

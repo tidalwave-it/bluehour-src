@@ -33,7 +33,7 @@ import java.io.InputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import it.tidalwave.role.Unmarshallable;
+import it.tidalwave.role.io.Unmarshallable;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
 import it.tidalwave.dci.annotation.DciRole;

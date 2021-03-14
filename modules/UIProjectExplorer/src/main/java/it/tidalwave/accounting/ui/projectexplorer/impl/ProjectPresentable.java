@@ -33,10 +33,9 @@ import java.util.Arrays;
 import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Aggregate;
-import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.types.Money;
@@ -61,7 +60,7 @@ public class ProjectPresentable implements Presentable
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
       {
-        return new DefaultPresentationModel(project, concat(aggregatePresentationModel(), instanceRoles));
+        return PresentationModel.of(project, concat(aggregatePresentationModel(), instanceRoles));
       }
 
     @Nonnull

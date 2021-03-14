@@ -40,7 +40,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
-import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
@@ -103,7 +102,7 @@ public final class ScenarioFactory
     @Nonnull
     public static Accounting createEmptyAccounting()
       {
-        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
         final Accounting accounting = Accounting.createNew();
         return accounting;
       }
@@ -111,7 +110,7 @@ public final class ScenarioFactory
     @Nonnull
     public static Accounting createScenario1()
       {
-        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
         nextId = 1;
 
         final Accounting accounting = Accounting.createNew();

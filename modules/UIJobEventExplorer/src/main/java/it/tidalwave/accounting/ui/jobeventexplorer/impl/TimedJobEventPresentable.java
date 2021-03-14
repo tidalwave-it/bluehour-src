@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
-import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;

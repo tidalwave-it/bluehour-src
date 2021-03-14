@@ -36,7 +36,6 @@ import java.nio.file.Paths;
 import com.google.common.annotations.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.BoundProperty;
-import it.tidalwave.util.ui.UserNotificationWithFeedback.Feedback;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
@@ -76,35 +75,33 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
         log.info("onImportRequest({})", request);
         presentation.bind(iBizFolder);
         iBizFolder.set(Paths.get(System.getProperty("user.home") + "/Settings/iBiz"));
-        presentation.chooseFolder(notificationWithFeedback().withFeedback(new Feedback()
-          {
-            @Override
-            public void onConfirm() 
-              {
-                // TODO: warn for overwriting data, ask for confirmation
-                // FIXME: this gets executed in JavaFX thread
-                try
-                  {
-                    presentation.lock();
-                    final IBizImporter accounting = importerBuilderFactory.newBuilder()
-                                                                          .withPath(iBizFolder.get())
-                                                                          .create();
-                    accounting.importAll();
-                    accounting.as(Saveable).save();
-                    messageBus.publish(new AccountingOpenRequest());
+        presentation.chooseFolder(notificationWithFeedback().withFeedback(feedback().withOnConfirm(this::onConfirm)));
+      }
 
-                    // TODO: use a progress bar during the import process
-                  }
-                catch (Exception e)
-                  {
-                    log.error("", e);
-                    presentation.notifyError();  
-                  }
-                finally
-                  {
-                    presentation.unlock();
-                  }
-              }
-          }));
+    private void onConfirm()
+      {
+        // TODO: warn for overwriting data, ask for confirmation
+        // FIXME: this gets executed in JavaFX thread
+        try
+          {
+            presentation.lock();
+            final IBizImporter accounting = importerBuilderFactory.newBuilder()
+                                                                  .withPath(iBizFolder.get())
+                                                                  .create();
+            accounting.importAll();
+            accounting.as(Saveable).save();
+            messageBus.publish(new AccountingOpenRequest());
+
+            // TODO: use a progress bar during the import process
+          }
+        catch (Exception e)
+          {
+            log.error("", e);
+            presentation.notifyError();
+          }
+        finally
+          {
+            presentation.unlock();
+          }
       }
   }

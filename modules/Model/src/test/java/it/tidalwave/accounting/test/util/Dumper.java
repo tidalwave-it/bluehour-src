@@ -37,7 +37,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import it.tidalwave.util.Finder8;
+import it.tidalwave.util.Finder;
 import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
@@ -77,14 +77,14 @@ public class Dumper
         dumpInvoices(accounting.getInvoiceRegistry().findInvoices());
       }
 
-    private void dumpCustomers (final @Nonnull Finder8<Customer> customers)
+    private void dumpCustomers (final @Nonnull Finder<Customer> customers)
       {
         customers.stream().map(customer -> (CustomerSpi)customer)
                           .sorted(comparing(CustomerSpi::getName))
                           .forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
 
-    private void dumpInvoices (final @Nonnull Finder8<Invoice> invoices)
+    private void dumpInvoices (final @Nonnull Finder<Invoice> invoices)
       throws IOException
       {
         invoices.stream().map(invoice -> (InvoiceSpi)invoice)
@@ -92,7 +92,7 @@ public class Dumper
                          .forEach(invoice -> dump(invoice));
       }
 
-    private void dumpProjects (final @Nonnull Finder8<Project> projects)
+    private void dumpProjects (final @Nonnull Finder<Project> projects)
       throws IOException
       {
         projects.stream().map(project -> (ProjectSpi)project)
@@ -112,7 +112,7 @@ public class Dumper
         dump(invoice.findJobEvents(), INDENT);
       }
 
-    private void dump (final @Nonnull Finder8<JobEvent> events, final @Nonnull String prefix)
+    private void dump (final @Nonnull Finder<JobEvent> events, final @Nonnull String prefix)
       {
         events.stream().forEach(event -> dump(event, prefix));
       }

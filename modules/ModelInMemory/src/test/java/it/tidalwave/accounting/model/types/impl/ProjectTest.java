@@ -31,7 +31,6 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
-import it.tidalwave.util.spi.EmptyAsDelegateProvider;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.types.Money;
 import org.testng.annotations.BeforeMethod;
@@ -51,7 +50,7 @@ public class ProjectTest
     @BeforeMethod
     public void installEmptyAsSupport()
       {
-        AsDelegateProvider.Locator.set(new EmptyAsDelegateProvider());
+        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
       }
     
     @Test

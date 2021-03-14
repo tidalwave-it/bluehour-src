@@ -31,9 +31,9 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.util.Finder8;
+import it.tidalwave.util.Finder;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinder8Support;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
  *
@@ -50,7 +50,7 @@ public interface ProjectRegistry
      *
      *
      ******************************************************************************************************************/
-    public static interface ProjectFinder extends Finder8<Project>, ExtendedFinder8Support<Project, ProjectFinder>
+    public static interface ProjectFinder extends Finder<Project>, ExtendedFinderSupport<Project, ProjectFinder>
       {
         @Nonnull
         public ProjectFinder withId (@Nonnull Id id);
@@ -61,7 +61,7 @@ public interface ProjectRegistry
      *
      *
      ******************************************************************************************************************/
-    public static interface JobEventFinder extends Finder8<JobEvent>, ExtendedFinder8Support<JobEvent, JobEventFinder>
+    public static interface JobEventFinder extends Finder<JobEvent>, ExtendedFinderSupport<JobEvent, JobEventFinder>
       {
         @Nonnull
         public JobEventFinder withId (@Nonnull Id id);

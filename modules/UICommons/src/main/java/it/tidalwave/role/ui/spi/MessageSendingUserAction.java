@@ -29,8 +29,9 @@ package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
-import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.messagebus.MessageBus;
+import it.tidalwave.role.ui.UserAction;
 
 /***********************************************************************************************************************
  *
@@ -40,27 +41,14 @@ import it.tidalwave.messagebus.MessageBus;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class MessageSendingUserAction extends UserActionSupport
+public class MessageSendingUserAction
   {
     @Nonnull
-    private final MessageBus messageBus;
-    
-    @Nonnull 
-    private final Supplier<Object> messageSupplier;
-    
-    public MessageSendingUserAction (final @Nonnull MessageBus messageBus,
-                                     final @Nonnull String displayName,
-                                     final @Nonnull Supplier<Object> messageSupplier)
+    public static UserAction of (final @Nonnull MessageBus messageBus,
+                                 final @Nonnull String displayName,
+                                 final @Nonnull Supplier<Object> messageSupplier)
       {
-        super(new DefaultDisplayable(displayName));  
-        this.messageBus = messageBus;
-        this.messageSupplier = messageSupplier;
-      }
-    
-    @Override
-    public void actionPerformed() 
-      {
-        messageBus.publish(messageSupplier.get());
+        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), Displayable.of(displayName));
       }
   }
 

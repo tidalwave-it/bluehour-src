@@ -31,9 +31,9 @@ import it.tidalwave.application.spi.ToolBarModelSupport;
 import javax.annotation.Nonnull;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
-import it.tidalwave.util.AsException;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import static it.tidalwave.role.Displayable.Displayable;
+//import static it.tidalwave.role.ui.Displayable.Displayable;
 import static it.tidalwave.role.ui.UserActionProvider.UserActionProvider;
 
 /***********************************************************************************************************************
@@ -50,16 +50,8 @@ public class JavaFXToolBarModel extends ToolBarModelSupport
         as(UserActionProvider).getActions().stream().map((action) ->
           {
             final Button button = new Button();
-
-            try // FIXME: move to JavaFXBinder
-              {
-                button.setText(action.as(Displayable).getDisplayName());
-              }
-            catch (AsException e)
-              {
-                button.setText("???");
-              }
-
+            // FIXME: move to JavaFXBinder
+            button.setText(action.asOptional(Displayable.class).map(Displayable::getDisplayName).orElse("???"));
             ((JavaFXBinder)binder).bind(button, action);
             return button;
           })

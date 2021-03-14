@@ -40,8 +40,8 @@ import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.util.PreferencesHandler;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.role.Marshallable.Marshallable;
-import static it.tidalwave.role.Unmarshallable.Unmarshallable;
+import static it.tidalwave.role.io.Marshallable.Marshallable;
+import static it.tidalwave.role.io.Unmarshallable.Unmarshallable;
 
 /***********************************************************************************************************************
  *
