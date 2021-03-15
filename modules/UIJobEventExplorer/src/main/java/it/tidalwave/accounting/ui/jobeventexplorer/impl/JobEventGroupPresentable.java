@@ -31,11 +31,11 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
@@ -76,7 +76,7 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
       {
         return super.aggregateBuilder()
                 .with(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDateTime().toLocalDate()))
-                .with(HOURLY_RATE, new DefaultDisplayable(""))
+                .with(HOURLY_RATE, Displayable.of(""))
                 .with(TIME,        (Displayable) () -> DURATION_FORMATTER.format(jobEvent.getDuration()),
                                  STYLE_RIGHT_ALIGNED);
       }

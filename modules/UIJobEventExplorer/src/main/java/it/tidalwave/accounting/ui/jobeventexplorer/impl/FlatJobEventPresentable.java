@@ -31,8 +31,7 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.Displayable;
-import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
@@ -57,8 +56,8 @@ public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi
       {
         return super.aggregateBuilder()
                 .with(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDate()))
-                .with(TIME,        new DefaultDisplayable(""))
-                .with(HOURLY_RATE, new DefaultDisplayable(""))
+                .with(TIME,        Displayable.of(""))
+                .with(HOURLY_RATE, Displayable.of(""))
                 .with(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
                                          new DefaultStyleable("right-aligned"),
                                          new RedStyleForNegativeMoney(jobEvent::getEarnings));

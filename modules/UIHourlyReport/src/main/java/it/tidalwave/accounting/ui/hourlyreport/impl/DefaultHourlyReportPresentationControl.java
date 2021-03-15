@@ -37,8 +37,8 @@ import it.tidalwave.accounting.model.HourlyReport;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
-import it.tidalwave.role.ui.spi.PlainTextRenderableSupport8;
+import it.tidalwave.role.PlainTextRenderable;
+import it.tidalwave.role.ui.PresentationModel;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
 import static it.tidalwave.accounting.model.HourlyReportGenerator.HourlyReportGenerator;
@@ -60,7 +60,6 @@ public class DefaultHourlyReportPresentationControl implements HourlyReportPrese
         final HourlyReport report = request.getProject().as(HourlyReportGenerator).createReport();
         presentation.bind();
         presentation.showUp(notificationWithFeedback().withCaption("Project Hourly Report"));
-        presentation.populate(new DefaultPresentationModel(null, 
-                (PlainTextRenderableSupport8) (args) -> report.asString()));
+        presentation.populate(PresentationModel.of("???", (PlainTextRenderable) (args) -> report.asString()));
       }
   }

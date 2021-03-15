@@ -32,10 +32,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.Displayable;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.spi.DefaultPresentationModel;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import lombok.RequiredArgsConstructor;
 
@@ -55,9 +54,10 @@ public class CustomerPresentable implements Presentable
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
+        // FIXME: concat
         final List<Object> temp = new ArrayList<>();
         temp.addAll(Arrays.asList(instanceRoles));
-        temp.add((Displayable) () -> customer.getName());
-        return new DefaultPresentationModel(customer, temp.toArray());
+        temp.add(Displayable.of(customer.getName()));
+        return PresentationModel.of(customer, temp.toArray());
       }
   }

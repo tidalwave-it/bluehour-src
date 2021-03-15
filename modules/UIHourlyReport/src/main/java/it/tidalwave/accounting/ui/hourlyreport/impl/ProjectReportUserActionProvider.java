@@ -60,8 +60,8 @@ public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
     @Override @Nonnull
     protected UserAction getSingleAction() 
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Create time report...", 
-                                            () -> new ProjectHourlyReportRequest(project));
+        return MessageSendingUserAction.of(messageBus,
+                                           "Create time report...",
+                                           () -> new ProjectHourlyReportRequest(project));
       }
   }

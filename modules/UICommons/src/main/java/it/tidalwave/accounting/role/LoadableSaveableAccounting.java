@@ -36,12 +36,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Configurable;
+import it.tidalwave.util.PreferencesHandler;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.util.PreferencesHandler;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.role.Marshallable.Marshallable;
-import static it.tidalwave.role.Unmarshallable.Unmarshallable;
+import static it.tidalwave.role.io.Marshallable.Marshallable;
+import static it.tidalwave.role.io.Unmarshallable.Unmarshallable;
 
 /***********************************************************************************************************************
  *
@@ -56,6 +56,8 @@ import static it.tidalwave.role.Unmarshallable.Unmarshallable;
 @DciRole(datumType = Accounting.class) @Configurable @Slf4j
 public class LoadableSaveableAccounting implements Loadable, Saveable
   {
+    public final static String BLUEHOUR_FILE_NAME = "blueHour.xml";
+
     @Nonnull
     private final Accounting accounting;
     
@@ -116,6 +118,6 @@ public class LoadableSaveableAccounting implements Loadable, Saveable
     @Nonnull
     protected Path getDataFile() 
       {
-        return preferencesHandler.getAppFolder().resolve(PreferencesHandler.BLUEHOUR_FILE_NAME);
+        return preferencesHandler.getAppFolder().resolve(BLUEHOUR_FILE_NAME);
       }
   }

@@ -31,9 +31,8 @@ import javax.annotation.Nonnull;
 import java.nio.file.Path;
 import javafx.application.Platform;
 import org.springframework.context.ApplicationContext;
+import it.tidalwave.util.PreferencesHandler;
 import it.tidalwave.ui.javafx.JavaFXSpringApplication;
-import it.tidalwave.accounting.util.DefaultPreferencesHandler;
-import it.tidalwave.accounting.util.PreferencesHandler;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 
@@ -49,9 +48,10 @@ public class Main extends JavaFXSpringApplication
       {
         try
           {
-            final PreferencesHandler preferenceHandler = new DefaultPreferencesHandler();
-            final Path logfolder = preferenceHandler.getLogFolder();
-            System.setProperty("it.tidalwave.northernwind.bluehour.logFolder", logfolder.toFile().getAbsolutePath());
+            System.setProperty(PreferencesHandler.PROP_APP_NAME, "blueHour");
+            final PreferencesHandler preferenceHandler = PreferencesHandler.getInstance();
+            final Path logFolder = preferenceHandler.getLogFolder();
+            System.setProperty("it.tidalwave.northernwind.bluehour.logFolder", logFolder.toString());
             Platform.setImplicitExit(true);
             launch(args);
           }

@@ -32,10 +32,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.Finder8;
-import it.tidalwave.util.Finder8Support;
+import it.tidalwave.util.spi.FinderSupport;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinder8Support;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 import static java.util.Collections.*;
 import lombok.RequiredArgsConstructor;
 
@@ -52,10 +51,10 @@ import lombok.RequiredArgsConstructor;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinder8Support<TYPE, FINDER>> 
-                                extends Finder8Support<TYPE, FINDER>
-                                implements ExtendedFinder8Support<TYPE, FINDER>, 
-                                           Finder8<TYPE>
+public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>>
+                                extends FinderSupport<TYPE, FINDER>
+                                implements ExtendedFinderSupport<TYPE, FINDER>,
+                                           Finder<TYPE>
   {
     private static final long serialVersionUID = 2L;
     

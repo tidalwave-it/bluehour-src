@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.ExtendedFinder8Support;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -51,7 +51,7 @@ import lombok.RequiredArgsConstructor;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinder8Support<TYPE, FINDER>>
+public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>>
   extends FinderWithIdSupport<TYPE, IMPLTYPE, FINDER>
   {
     private static final long serialVersionUID = 1L;

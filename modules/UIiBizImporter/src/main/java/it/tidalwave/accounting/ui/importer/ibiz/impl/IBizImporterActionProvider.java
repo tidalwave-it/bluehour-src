@@ -57,8 +57,6 @@ public class IBizImporterActionProvider extends DefaultUserActionProvider2
     @Override @Nonnull
     protected UserAction getSingleAction()
       {
-        return new MessageSendingUserAction(messageBus,
-                                            "Import...",
-                                            () -> new ImportRequest());
+        return MessageSendingUserAction.of(messageBus,"Import...", ImportRequest::new);
       }
   }

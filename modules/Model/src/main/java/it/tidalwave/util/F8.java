@@ -31,7 +31,8 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import it.tidalwave.util.spi.ExtendedFinder8Support;
+import it.tidalwave.util.spi.FinderSupport;
+import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
  *
@@ -39,11 +40,11 @@ import it.tidalwave.util.spi.ExtendedFinder8Support;
  * @version $Id$
  *
  **********************************************************************************************************************/
-// TODO: merge to Finder8
-public interface F8<TYPE, EXTENDED_FINDER extends Finder8<TYPE>> extends ExtendedFinder8Support<TYPE, EXTENDED_FINDER>
+// TODO: merge to Finder
+public interface F8<TYPE, EXTENDED_FINDER extends Finder<TYPE>> extends ExtendedFinderSupport<TYPE, EXTENDED_FINDER>
   {
-    static class LambdaFinder<TYPE, EXTENDED_FINDER extends Finder8<TYPE>>
-            extends Finder8Support<TYPE, EXTENDED_FINDER>
+    static class LambdaFinder<TYPE, EXTENDED_FINDER extends it.tidalwave.util.Finder<TYPE>>
+            extends FinderSupport<TYPE, EXTENDED_FINDER>
             implements F8<TYPE, EXTENDED_FINDER>
       {
         private static final long serialVersionUID = 2688397754942922706L;
@@ -90,14 +91,14 @@ public interface F8<TYPE, EXTENDED_FINDER extends Finder8<TYPE>> extends Extende
       }
 
     @Nonnull
-    public static <TYPE, EXTENDED_FINDER extends Finder8<TYPE>> F8<TYPE, EXTENDED_FINDER> ofComputeResults (
+    public static <TYPE, EXTENDED_FINDER extends Finder<TYPE>> F8<TYPE, EXTENDED_FINDER> ofComputeResults (
             final @Nonnull Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>> computeResults)
       {
         return new LambdaFinder(Optional.of(computeResults), Optional.empty());
       }
 
     @Nonnull
-    public static <TYPE, EXTENDED_FINDER extends Finder8<TYPE>> F8<TYPE, EXTENDED_FINDER> ofComputeNeededResults (
+    public static <TYPE, EXTENDED_FINDER extends Finder<TYPE>> F8<TYPE, EXTENDED_FINDER> ofComputeNeededResults (
             final @Nonnull Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>> computeNeededResults)
       {
         return new LambdaFinder(Optional.empty(), Optional.of(computeNeededResults));
