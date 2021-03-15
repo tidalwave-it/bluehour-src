@@ -28,15 +28,13 @@
 package it.tidalwave.accounting.ui.customerexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import lombok.RequiredArgsConstructor;
+import static it.tidalwave.role.ui.PresentationModel.concat;
 
 /***********************************************************************************************************************
  *
@@ -54,10 +52,6 @@ public class CustomerPresentable implements Presentable
     @Override
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
       {
-        // FIXME: concat
-        final List<Object> temp = new ArrayList<>();
-        temp.addAll(Arrays.asList(instanceRoles));
-        temp.add(Displayable.of(customer.getName()));
-        return PresentationModel.of(customer, temp.toArray());
+        return PresentationModel.of(customer, concat(Displayable.of(customer.getName()), instanceRoles));
       }
   }

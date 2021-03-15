@@ -28,9 +28,6 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Aggregate;
 import it.tidalwave.role.ui.Displayable;
@@ -43,6 +40,7 @@ import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static it.tidalwave.role.ui.PresentationModel.concat;
 
 /***********************************************************************************************************************
  *
@@ -64,7 +62,7 @@ public class ProjectPresentable implements Presentable
       }
 
     @Nonnull
-    protected Aggregate aggregatePresentationModel()
+    protected Aggregate<PresentationModel> aggregatePresentationModel()
       {
         final Money budget           = project.getBudget();
         // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
@@ -96,13 +94,5 @@ public class ProjectPresentable implements Presentable
                                                                 invoicedEarnings.greaterThan(earnings) ? "alerted" : "",
                                                                 invoicedEarnings.isEqualTo(earnings) ? "green" : ""))
                 .create();
-      }
-
-    @Nonnull
-    public static Object[] concat (final @Nonnull Object object, final @Nonnull Object ... objects)
-      {
-        final List<Object> temp = new ArrayList<>(Arrays.asList(objects));
-        temp.add(object);
-        return temp.toArray();
       }
   }
