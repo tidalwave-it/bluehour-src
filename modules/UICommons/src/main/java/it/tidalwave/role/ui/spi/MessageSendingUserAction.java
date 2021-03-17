@@ -29,7 +29,6 @@ package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
-import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.role.ui.UserAction;
 
@@ -45,10 +44,10 @@ public class MessageSendingUserAction
   {
     @Nonnull
     public static UserAction of (final @Nonnull MessageBus messageBus,
-                                 final @Nonnull String displayName,
-                                 final @Nonnull Supplier<Object> messageSupplier)
+                                 final @Nonnull Supplier<Object> messageSupplier,
+                                 final @Nonnull Object ... rolesOrFactories)
       {
-        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), Displayable.of(displayName));
+        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), rolesOrFactories);
       }
   }
 

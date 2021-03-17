@@ -30,6 +30,7 @@ package it.tidalwave.accounting.ui.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
 import it.tidalwave.role.ui.spi.MessageSendingUserAction;
@@ -54,6 +55,6 @@ public class IBizImporterActionProvider extends DefaultUserActionProvider2
     @Override @Nonnull
     protected UserAction getSingleAction()
       {
-        return MessageSendingUserAction.of(messageBus,"Import...", ImportRequest::new);
+        return MessageSendingUserAction.of(messageBus, ImportRequest::new, Displayable.of("Import..."));
       }
   }

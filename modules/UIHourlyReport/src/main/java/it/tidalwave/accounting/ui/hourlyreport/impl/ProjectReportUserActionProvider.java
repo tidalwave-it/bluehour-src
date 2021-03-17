@@ -29,6 +29,7 @@ package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
 import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
 import it.tidalwave.role.ui.spi.MessageSendingUserAction;
@@ -58,7 +59,7 @@ public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
     protected UserAction getSingleAction() 
       {
         return MessageSendingUserAction.of(messageBus,
-                                           "Create time report...",
-                                           () -> new ProjectHourlyReportRequest(project));
+                                           () -> new ProjectHourlyReportRequest(project),
+                                           Displayable.of("Create time report..."));
       }
   }
