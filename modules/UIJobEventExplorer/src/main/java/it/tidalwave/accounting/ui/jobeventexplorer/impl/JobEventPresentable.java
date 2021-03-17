@@ -29,13 +29,15 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
-import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
+import it.tidalwave.role.ui.Displayable;
+import it.tidalwave.role.ui.Displayable2;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
+import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.RequiredArgsConstructor;
+import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
@@ -54,8 +56,6 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
     protected static final String TIME = "Time";
     protected static final String DATE = "Date";
 
-    protected static final DefaultStyleable STYLE_RIGHT_ALIGNED = new DefaultStyleable("right-aligned");
-
     @Nonnull
     protected final TYPE jobEvent;
 
@@ -63,7 +63,7 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
       {
         // FIXME: doesn't concat instanceRoles
-        return PresentationModel.of("", aggregateBuilder().create(), new DefaultStyleable(getStyles()));
+        return PresentationModel.of("", aggregateBuilder().create(), Styleable.of(getStyles()));
       }
 
     @Nonnull
@@ -71,11 +71,10 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
       {
         // FIXME: uses the column header names, should be an internal id instead
         return AggregatePresentationModelBuilder.newInstance()
-                .with(JOB_EVENT, (Displayable) () -> jobEvent.getName())
-                .with(NOTES,     (Displayable) () -> jobEvent.getDescription())
+                .with(JOB_EVENT, Displayable.of(jobEvent.getName()))
+                .with(NOTES,     Displayable.of(jobEvent.getDescription()))
         // FIXME: this is dynamically computed, can be slow - should be also cached
-                .with(AMOUNT,    (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
-                                 STYLE_RIGHT_ALIGNED);
+                .with(AMOUNT, Displayable2.of(MONEY_FORMATTER, jobEvent.getEarnings()), RIGHT_ALIGNED);
       }
 
     @Nonnull

@@ -33,14 +33,13 @@ import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
+import it.tidalwave.role.ui.Displayable2;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import static java.util.Comparator.comparing;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -61,7 +60,7 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
     @Override @Nonnull
     public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
       {
-        final Styleable styleable = new DefaultStyleable(getStyles());
+        final Styleable styleable = Styleable.of(getStyles());
         return jobEvent.findChildren()
                        .stream()
                        .map(jobEvent -> (JobEventSpi)jobEvent)
@@ -75,10 +74,9 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
     protected AggregatePresentationModelBuilder aggregateBuilder()
       {
         return super.aggregateBuilder()
-                .with(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDateTime().toLocalDate()))
+                .with(DATE,        Displayable2.of(DATE_FORMATTER, jobEvent.getDateTime().toLocalDate()))
                 .with(HOURLY_RATE, Displayable.of(""))
-                .with(TIME,        (Displayable) () -> DURATION_FORMATTER.format(jobEvent.getDuration()),
-                                 STYLE_RIGHT_ALIGNED);
+                .with(TIME,        Displayable2.of(DURATION_FORMATTER, jobEvent.getDuration()), RIGHT_ALIGNED);
       }
 
     @Override @Nonnull
