@@ -28,12 +28,12 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import java.nio.file.Path;
 import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.BoundProperty;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -41,10 +41,11 @@ import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class JavaFxIBizImporterPresentationDelegate implements IBizImporterPresentation
   {
-    @Inject
-    private JavaFXBinder binder;
+    @Nonnull
+    private final JavaFXBinder binder;
 
     private BoundProperty<Path> iBizFolder;
 

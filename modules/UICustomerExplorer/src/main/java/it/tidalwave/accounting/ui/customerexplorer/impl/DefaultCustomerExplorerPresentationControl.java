@@ -28,8 +28,6 @@
 package it.tidalwave.accounting.ui.customerexplorer.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
 import com.google.common.annotations.VisibleForTesting;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;
@@ -45,6 +43,7 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
 import static it.tidalwave.role.ui.Presentable.Presentable;
@@ -56,14 +55,14 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultCustomerExplorerPresentationControl implements CustomerExplorerPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
-    @Inject @Nonnull
-    private CustomerExplorerPresentation presentation;
+    @Nonnull
+    private final CustomerExplorerPresentation presentation;
 
     /*******************************************************************************************************************
      *

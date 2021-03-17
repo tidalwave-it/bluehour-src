@@ -28,8 +28,6 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
 import com.google.common.annotations.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.PresentationModel;
@@ -44,6 +42,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
@@ -55,14 +54,14 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultProjectExplorerPresentationControl implements ProjectExplorerPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
-    @Inject @Nonnull
-    private ProjectExplorerPresentation presentation;
+    @Nonnull
+    private final ProjectExplorerPresentation presentation;
 
     @Override
     public void initialize() 

@@ -28,12 +28,12 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.scene.control.TableView;
 import javafx.fxml.FXML;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -41,13 +41,14 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class JavaFxProjectExplorerPresentationDelegate implements ProjectExplorerPresentation
   {
+    @Nonnull
+    private final JavaFXBinder binder;
+
     @FXML
     private TableView<PresentationModel> tvProjectExplorer;
-
-    @Inject
-    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)

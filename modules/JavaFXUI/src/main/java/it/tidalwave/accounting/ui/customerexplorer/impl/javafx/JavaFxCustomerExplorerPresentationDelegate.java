@@ -28,12 +28,12 @@
 package it.tidalwave.accounting.ui.customerexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -41,13 +41,14 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class JavaFxCustomerExplorerPresentationDelegate implements CustomerExplorerPresentation
   {
+    @Nonnull
+    private final JavaFXBinder binder;
+
     @FXML
     private ListView<PresentationModel> lvCustomerExplorer;
-
-    @Inject
-    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)

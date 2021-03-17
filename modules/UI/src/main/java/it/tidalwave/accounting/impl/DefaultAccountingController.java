@@ -29,8 +29,6 @@ package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 import com.google.common.annotations.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
@@ -40,6 +38,7 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.accounting.role.Loadable.Loadable;
 
@@ -54,12 +53,13 @@ import static it.tidalwave.accounting.role.Loadable.Loadable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultAccountingController 
   {
-    @Inject @Named("applicationMessageBus")
-    private MessageBus messageBus;
-    
+    @Nonnull
+    private final MessageBus messageBus;
+
+    // Don't use @Nonnull or Lombok will try to initialize it in the constructor
     private Accounting accounting;
 
     /*******************************************************************************************************************

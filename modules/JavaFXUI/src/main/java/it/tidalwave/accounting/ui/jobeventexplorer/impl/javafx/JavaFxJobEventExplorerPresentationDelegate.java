@@ -28,12 +28,12 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.scene.control.TreeTableView;
 import javafx.fxml.FXML;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
@@ -41,13 +41,14 @@ import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class JavaFxJobEventExplorerPresentationDelegate implements JobEventExplorerPresentation
   {
+    @Nonnull
+    private final JavaFXBinder binder;
+
     @FXML
     private TreeTableView<PresentationModel> ttvJobEventExplorer;
-
-    @Inject
-    private JavaFXBinder binder;
 
     @Override
     public void populate (final @Nonnull PresentationModel pm)

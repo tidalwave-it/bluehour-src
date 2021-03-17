@@ -28,7 +28,6 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.TextArea;
@@ -36,6 +35,7 @@ import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
+import lombok.RequiredArgsConstructor;
 import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
 
 /***********************************************************************************************************************
@@ -44,16 +44,17 @@ import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPresentation
   {
+    @Nonnull
+    private final JavaFXBinder binder;
+
     @FXML
     private Pane pnHourlyReport;
 
     @FXML
     private TextArea taReport;
-
-    @Inject
-    private JavaFXBinder binder;
 
     @Override
     public void bind()

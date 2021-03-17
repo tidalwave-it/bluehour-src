@@ -28,8 +28,6 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
 import com.google.common.annotations.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
@@ -40,6 +38,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.role.ui.Presentable.Presentable;
@@ -51,14 +50,14 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultJobEventExplorerPresentationControl implements JobEventExplorerPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
-    @Inject @Nonnull
-    private JobEventExplorerPresentation presentation;
+    @Nonnull
+    private final JobEventExplorerPresentation presentation;
 
     /*******************************************************************************************************************
      *

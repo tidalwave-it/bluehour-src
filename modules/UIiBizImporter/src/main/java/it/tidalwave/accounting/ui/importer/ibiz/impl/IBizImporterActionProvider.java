@@ -28,9 +28,6 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.springframework.beans.factory.annotation.Configurable;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.UserAction;
@@ -48,11 +45,11 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = ToolBarModel.class) @Configurable @RequiredArgsConstructor
+@RequiredArgsConstructor @DciRole(datumType = ToolBarModel.class)
 public class IBizImporterActionProvider extends DefaultUserActionProvider2
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
     @Override @Nonnull
     protected UserAction getSingleAction()

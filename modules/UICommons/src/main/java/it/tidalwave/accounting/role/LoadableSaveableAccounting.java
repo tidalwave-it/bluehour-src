@@ -28,14 +28,13 @@
 package it.tidalwave.accounting.role;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
-import org.springframework.beans.factory.annotation.Configurable;
+import lombok.RequiredArgsConstructor;
 import it.tidalwave.util.PreferencesHandler;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.Accounting;
@@ -53,7 +52,7 @@ import static it.tidalwave.role.io.Unmarshallable.Unmarshallable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Accounting.class) @Configurable @Slf4j
+@RequiredArgsConstructor @DciRole(datumType = Accounting.class) @Slf4j
 public class LoadableSaveableAccounting implements Loadable, Saveable
   {
     public final static String BLUEHOUR_FILE_NAME = "blueHour.xml";
@@ -61,19 +60,9 @@ public class LoadableSaveableAccounting implements Loadable, Saveable
     @Nonnull
     private final Accounting accounting;
     
-    @Inject @Nonnull
-    private PreferencesHandler preferencesHandler;
+    @Nonnull
+    private final PreferencesHandler preferencesHandler;
 
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
-    public LoadableSaveableAccounting (final @Nonnull Accounting accounting)
-      {
-        this.accounting = accounting;
-      }
-    
     /*******************************************************************************************************************
      *
      * {@inheritDoc} 

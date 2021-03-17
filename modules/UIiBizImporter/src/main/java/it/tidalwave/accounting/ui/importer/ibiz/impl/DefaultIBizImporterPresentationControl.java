@@ -28,8 +28,6 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,6 +43,7 @@ import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
 import static it.tidalwave.accounting.role.Saveable.Saveable;
@@ -55,18 +54,18 @@ import static it.tidalwave.accounting.role.Saveable.Saveable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultIBizImporterPresentationControl implements IBizImporterPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
     
-    @Inject @Nonnull
-    private IBizImporterBuilderFactory importerBuilderFactory;
+    @Nonnull
+    private final IBizImporterBuilderFactory importerBuilderFactory;
     
     private final BoundProperty<Path> iBizFolder = new BoundProperty<>();
 
-    @Inject @Nonnull
+    @Nonnull
     private IBizImporterPresentation presentation;
     
     @VisibleForTesting void onImportRequest (final @Nonnull @ListensTo ImportRequest request)
