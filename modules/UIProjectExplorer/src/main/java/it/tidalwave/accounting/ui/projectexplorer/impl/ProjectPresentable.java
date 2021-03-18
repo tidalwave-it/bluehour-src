@@ -30,7 +30,6 @@ package it.tidalwave.accounting.ui.projectexplorer.impl;
 import javax.annotation.Nonnull;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Aggregate;
-import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Displayable2;
 import it.tidalwave.role.ui.Presentable;
@@ -39,10 +38,12 @@ import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.role.ui.spi.PresentationModelAggregate;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 import static it.tidalwave.role.ui.PresentationModel.concat;
+import static it.tidalwave.role.ui.spi.PresentationModelAggregate.r;
 
 /***********************************************************************************************************************
  *
@@ -73,23 +74,22 @@ public class ProjectPresentable implements Presentable
 
         // FIXME: uses the column header names, should be an internal id instead
 
-        return AggregatePresentationModelBuilder.newInstance()
-                .with("Client",     Displayable.of(((CustomerSpi)project.getCustomer()).getName()))
-                .with("Status",     Displayable.of(project.getStatus().name()))
-                .with("#",          Displayable2.of(project::getNumber))
-                .with("Name",       Displayable2.of(project::getName))
-                .with("Start Date", Displayable2.of(DATE_FORMATTER, project.getStartDate()), RIGHT_ALIGNED)
-                .with("Due Date",   Displayable2.of(DATE_FORMATTER, project.getEndDate()),   RIGHT_ALIGNED)
-                .with("Notes",      Displayable2.of(project::getNotes))
-                .with("Time",       Displayable2.of(DURATION_FORMATTER, project.getDuration()), RIGHT_ALIGNED)
-                .with("Budget",     Displayable2.of(MONEY_FORMATTER, budget),
-                      Styleable.of("right-aligned", budget.isEqualTo(Money.ZERO) ? "alerted" : ""))
-                .with("Earnings",   Displayable2.of(MONEY_FORMATTER, earnings),
+        return PresentationModelAggregate.newInstance()
+                .withPmOf("Client",     r(Displayable.of(((CustomerSpi)project.getCustomer()).getName())))
+                .withPmOf("Status",     r(Displayable.of(project.getStatus().name())))
+                .withPmOf("#",          r(Displayable2.of(project::getNumber)))
+                .withPmOf("Name",       r(Displayable2.of(project::getName)))
+                .withPmOf("Start Date", r(Displayable2.of(DATE_FORMATTER, project.getStartDate()), RIGHT_ALIGNED))
+                .withPmOf("Due Date",   r(Displayable2.of(DATE_FORMATTER, project.getEndDate()),   RIGHT_ALIGNED))
+                .withPmOf("Notes",      r(Displayable2.of(project::getNotes)))
+                .withPmOf("Time",       r(Displayable2.of(DURATION_FORMATTER, project.getDuration()), RIGHT_ALIGNED))
+                .withPmOf("Budget",     r(Displayable2.of(MONEY_FORMATTER, budget),
+                      Styleable.of("right-aligned", budget.isEqualTo(Money.ZERO) ? "alerted" : "")))
+                .withPmOf("Earnings",   r(Displayable2.of(MONEY_FORMATTER, earnings),
                       Styleable.of("right-aligned", earnings.greaterThan(budget) ? "alerted" : "",
-                                                    earnings.isEqualTo(budget) ? "green" : ""))
-                .with("Invoiced",   Displayable2.of(MONEY_FORMATTER, invoicedEarnings),
+                                                    earnings.isEqualTo(budget) ? "green" : "")))
+                .withPmOf("Invoiced",   r(Displayable2.of(MONEY_FORMATTER, invoicedEarnings),
                       Styleable.of("right-aligned", invoicedEarnings.greaterThan(earnings) ? "alerted" :
-                                                    invoicedEarnings.isEqualTo(earnings) ? "green" : ""))
-                .create();
+                                                    invoicedEarnings.isEqualTo(earnings) ? "green" : "")));
       }
   }

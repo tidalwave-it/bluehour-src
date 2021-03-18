@@ -32,11 +32,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
 import it.tidalwave.role.ui.Displayable2;
+import it.tidalwave.role.ui.spi.PresentationModelAggregate;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static it.tidalwave.role.ui.spi.PresentationModelAggregate.r;
 
 /***********************************************************************************************************************
  *
@@ -53,14 +54,14 @@ public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi
       }
 
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    protected PresentationModelAggregate presentationModelAggregate()
       {
-        return super.aggregateBuilder()
-                .with(DATE,        Displayable2.of(DATE_FORMATTER, jobEvent.getDate()))
-                .with(TIME,        Displayable.of(""))
-                .with(HOURLY_RATE, Displayable.of(""))
-                .with(AMOUNT ,     Displayable2.of(MONEY_FORMATTER, jobEvent.getEarnings()),
-                                   RIGHT_ALIGNED, new RedStyleForNegativeMoney(jobEvent::getEarnings));
+        return super.presentationModelAggregate()
+                .withPmOf(DATE,        r(Displayable2.of(DATE_FORMATTER, jobEvent.getDate())))
+                .withPmOf(TIME,        r(Displayable.of("")))
+                .withPmOf(HOURLY_RATE, r(Displayable.of("")))
+                .withPmOf(AMOUNT ,     r(Displayable2.of(MONEY_FORMATTER, jobEvent.getEarnings()),
+                                           RIGHT_ALIGNED, new RedStyleForNegativeMoney(jobEvent::getEarnings)));
       }
 
     @Override @Nonnull

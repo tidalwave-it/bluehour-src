@@ -33,11 +33,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import it.tidalwave.role.ui.Displayable2;
+import it.tidalwave.role.ui.spi.PresentationModelAggregate;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static it.tidalwave.role.ui.spi.PresentationModelAggregate.r;
 
 /***********************************************************************************************************************
  *
@@ -54,12 +55,12 @@ public class TimedJobEventPresentable extends JobEventPresentable<TimedJobEventS
       }
 
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    protected PresentationModelAggregate presentationModelAggregate ()
       {
-        return super.aggregateBuilder()
-                .with(DATE,        Displayable.of(DATETIME_FORMATTER.format(jobEvent.getStartDateTime())))
-                .with(TIME,        Displayable2.of(DURATION_FORMATTER, computeDuration()), RIGHT_ALIGNED)
-                .with(HOURLY_RATE, Displayable2.of(MONEY_FORMATTER, jobEvent.getHourlyRate()), RIGHT_ALIGNED);
+        return super.presentationModelAggregate()
+                .withPmOf(DATE,        r(Displayable.of(DATETIME_FORMATTER.format(jobEvent.getStartDateTime()))))
+                .withPmOf(TIME,        r(Displayable2.of(DURATION_FORMATTER, computeDuration()), RIGHT_ALIGNED))
+                .withPmOf(HOURLY_RATE, r(Displayable2.of(MONEY_FORMATTER, jobEvent.getHourlyRate()), RIGHT_ALIGNED));
       }
 
     @Nonnull
