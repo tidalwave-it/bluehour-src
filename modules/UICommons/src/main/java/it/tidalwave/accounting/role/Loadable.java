@@ -39,7 +39,7 @@ import java.io.IOException;
  **********************************************************************************************************************/
 public interface Loadable
   {
-    public static final Class<Loadable> Loadable = Loadable.class;
+    public static final Class<Loadable> _Loadable_ = Loadable.class;
     
     /*******************************************************************************************************************
      *

@@ -27,22 +27,21 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.Aggregate;
 import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.Displayable2;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
-import it.tidalwave.role.ui.spi.PresentationModelAggregate;
+import it.tidalwave.role.ui.PresentationModelAggregate;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
-import static it.tidalwave.role.ui.PresentationModel.concat;
-import static it.tidalwave.role.ui.spi.PresentationModelAggregate.r;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *
@@ -57,9 +56,9 @@ public class ProjectPresentable implements Presentable
     private final ProjectSpi project;
 
     @Override
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
+    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
       {
-        return PresentationModel.of(project, concat(aggregatePresentationModel(), instanceRoles));
+        return PresentationModel.of(project, r(aggregatePresentationModel(), instanceRoles));
       }
 
     @Nonnull
@@ -71,22 +70,24 @@ public class ProjectPresentable implements Presentable
         final Money invoicedEarnings = project.getInvoicedEarnings();
 
         // FIXME: uses the column header names, should be an internal id instead
-
         return PresentationModelAggregate.newInstance()
                 .withPmOf("Client",     r(Displayable.of(((CustomerSpi)project.getCustomer()).getName())))
                 .withPmOf("Status",     r(Displayable.of(project.getStatus().name())))
-                .withPmOf("#",          r(Displayable2.of(project::getNumber)))
-                .withPmOf("Name",       r(Displayable2.of(project::getName)))
-                .withPmOf("Start Date", r(Displayable2.of(DATE_FORMATTER, project.getStartDate()), RIGHT_ALIGNED))
-                .withPmOf("Due Date",   r(Displayable2.of(DATE_FORMATTER, project.getEndDate()),   RIGHT_ALIGNED))
-                .withPmOf("Notes",      r(Displayable2.of(project::getNotes)))
-                .withPmOf("Time",       r(Displayable2.of(DURATION_FORMATTER, project.getDuration()), RIGHT_ALIGNED))
-                .withPmOf("Budget",     r(Displayable2.of(MONEY_FORMATTER, budget),
+                .withPmOf("#",          r(Displayable.of(project::getNumber)))
+                .withPmOf("Name",       r(Displayable.of(project::getName)))
+                .withPmOf("Start Date", r(Displayable.of(DATE_FORMATTER::format, project.getStartDate()),
+                                                 RIGHT_ALIGNED))
+                .withPmOf("Due Date",   r(Displayable.of(DATE_FORMATTER::format, project.getEndDate()),
+                                                 RIGHT_ALIGNED))
+                .withPmOf("Notes",      r(Displayable.of(project::getNotes)))
+                .withPmOf("Time",       r(Displayable.of(DURATION_FORMATTER::format, project.getDuration()),
+                                                 RIGHT_ALIGNED))
+                .withPmOf("Budget",     r(Displayable.of(MONEY_FORMATTER::format, budget),
                       Styleable.of("right-aligned", budget.isEqualTo(Money.ZERO) ? "alerted" : "")))
-                .withPmOf("Earnings",   r(Displayable2.of(MONEY_FORMATTER, earnings),
+                .withPmOf("Earnings",   r(Displayable.of(MONEY_FORMATTER::format, earnings),
                       Styleable.of("right-aligned", earnings.greaterThan(budget) ? "alerted" : "",
                                                     earnings.isEqualTo(budget) ? "green" : "")))
-                .withPmOf("Invoiced",   r(Displayable2.of(MONEY_FORMATTER, invoicedEarnings),
+                .withPmOf("Invoiced",   r(Displayable.of(MONEY_FORMATTER::format, invoicedEarnings),
                       Styleable.of("right-aligned", invoicedEarnings.greaterThan(earnings) ? "alerted" :
                                                     invoicedEarnings.isEqualTo(earnings) ? "green" : "")));
       }

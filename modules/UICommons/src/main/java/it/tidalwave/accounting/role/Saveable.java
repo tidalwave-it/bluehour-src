@@ -38,7 +38,7 @@ import java.io.IOException;
  **********************************************************************************************************************/
 public interface Saveable 
   {
-    public static final Class<Saveable> Saveable = Saveable.class;
+    public static final Class<Saveable> _Saveable_ = Saveable.class;
     
     /*******************************************************************************************************************
      *

@@ -44,7 +44,7 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationCon
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
@@ -98,6 +98,6 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Project project)
       {
         final Selectable publishEventOnSelection = () -> messageBus.publish(new ProjectSelectedEvent(project));
-        return project.as(Presentable).createPresentationModel(publishEventOnSelection);
+        return project.as(_Presentable_).createPresentationModel(publishEventOnSelection);
       }
   }

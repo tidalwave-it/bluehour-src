@@ -35,7 +35,7 @@ import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
+import static it.tidalwave.role.PlainTextRenderable._PlainTextRenderable_;
 
 /***********************************************************************************************************************
  *
@@ -68,6 +68,6 @@ public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPrese
     @Override
     public void populate (final @Nonnull PresentationModel pm)
       {
-        taReport.setText(pm.as(PlainTextRenderable).render());
+        taReport.setText(pm.as(_PlainTextRenderable_).render());
       }
   }

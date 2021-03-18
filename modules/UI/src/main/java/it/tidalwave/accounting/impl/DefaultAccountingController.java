@@ -39,7 +39,7 @@ import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.accounting.role.Loadable.Loadable;
+import static it.tidalwave.accounting.role.Loadable._Loadable_;
 
 /***********************************************************************************************************************
  *
@@ -71,7 +71,7 @@ public class DefaultAccountingController
         try
           {
             log.info("initialize()");
-            accounting = Accounting.createNew().as(Loadable).load();
+            accounting = Accounting.createNew().as(_Loadable_).load();
             messageBus.publish(new AccountingOpenedEvent(accounting));
           }
         catch (IOException e)

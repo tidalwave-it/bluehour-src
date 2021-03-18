@@ -38,8 +38,8 @@ import it.tidalwave.util.PreferencesHandler;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.accounting.model.Accounting;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.role.io.Marshallable.Marshallable;
-import static it.tidalwave.role.io.Unmarshallable.Unmarshallable;
+import static it.tidalwave.role.io.Marshallable._Marshallable_;
+import static it.tidalwave.role.io.Unmarshallable._Unmarshallable_;
 
 /***********************************************************************************************************************
  *
@@ -75,7 +75,7 @@ public class LoadableSaveableAccounting implements Loadable, Saveable
 
         try (final InputStream is = new FileInputStream(dataFile.toFile()))
           {
-            return accounting.as(Unmarshallable).unmarshal(is);
+            return accounting.as(_Unmarshallable_).unmarshal(is);
           }
       }
 
@@ -93,7 +93,7 @@ public class LoadableSaveableAccounting implements Loadable, Saveable
 
         try (final OutputStream os = new FileOutputStream(dataFile.toFile()))
           {
-            accounting.as(Marshallable).marshal(os);
+            accounting.as(_Marshallable_).marshal(os);
           }
       }
 

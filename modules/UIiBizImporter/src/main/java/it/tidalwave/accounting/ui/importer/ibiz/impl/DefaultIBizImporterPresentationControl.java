@@ -45,7 +45,7 @@ import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentationControl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
-import static it.tidalwave.accounting.role.Saveable.Saveable;
+import static it.tidalwave.accounting.role.Saveable._Saveable_;
 
 /***********************************************************************************************************************
  *
@@ -86,7 +86,7 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
                                                                   .withPath(iBizFolder.get())
                                                                   .create();
             accounting.importAll();
-            accounting.as(Saveable).save();
+            accounting.as(_Saveable_).save();
             messageBus.publish(new AccountingOpenRequest());
 
             // TODO: use a progress bar during the import process

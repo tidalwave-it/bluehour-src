@@ -29,14 +29,13 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.Displayable2;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.ui.spi.PresentationModelAggregate;
+import it.tidalwave.role.ui.PresentationModelAggregate;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.role.ui.spi.PresentationModelAggregate.r;
+import static it.tidalwave.util.Parameters.r;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
@@ -59,10 +58,9 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
     protected final TYPE jobEvent;
 
     @Override
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
+    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
       {
-        // FIXME: doesn't concat instanceRoles
-        return PresentationModel.of("", presentationModelAggregate(), Styleable.of(getStyles()));
+        return PresentationModel.of(jobEvent, r(presentationModelAggregate(), Styleable.of(getStyles()), instanceRoles));
       }
 
     @Nonnull
@@ -73,7 +71,8 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
                 .withPmOf(JOB_EVENT,  r(Displayable.of(jobEvent.getName())))
                 .withPmOf(NOTES,      r(Displayable.of(jobEvent.getDescription())))
         // FIXME: this is dynamically computed, can be slow - should be also cached
-                .withPmOf(AMOUNT,     r(Displayable2.of(MONEY_FORMATTER, jobEvent.getEarnings()), RIGHT_ALIGNED));
+                .withPmOf(AMOUNT,     r(Displayable.of(MONEY_FORMATTER::format, jobEvent.getEarnings()),
+                                        RIGHT_ALIGNED));
       }
 
     @Nonnull

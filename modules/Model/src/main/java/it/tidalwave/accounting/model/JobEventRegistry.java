@@ -36,7 +36,7 @@ import it.tidalwave.util.Finder;
  **********************************************************************************************************************/
 public interface JobEventRegistry
   {
-    public static final Class<JobEventRegistry> JobEventRegistry = JobEventRegistry.class;
+    public static final Class<JobEventRegistry> _JobEventRegistry_ = JobEventRegistry.class;
 
     /*******************************************************************************************************************
      *

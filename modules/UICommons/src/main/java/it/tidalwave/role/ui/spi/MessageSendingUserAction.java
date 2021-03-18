@@ -27,25 +27,39 @@
 package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import java.util.function.Supplier;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.role.ui.UserAction;
+import it.tidalwave.util.Parameters;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *
- * FIXME: move to TheseFoolishThings.
+ * TODO: move to TheseFoolishThings?
  * 
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-public class MessageSendingUserAction
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class MessageSendingUserAction
   {
     @Nonnull
     public static UserAction of (final @Nonnull MessageBus messageBus,
                                  final @Nonnull Supplier<Object> messageSupplier,
-                                 final @Nonnull Object ... rolesOrFactories)
+                                 final @Nonnull Collection<Object> roles)
       {
-        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), rolesOrFactories);
+        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), roles);
+      }
+
+    @Nonnull
+    public static UserAction of (final @Nonnull MessageBus messageBus,
+                                 final @Nonnull Supplier<Object> messageSupplier,
+                                 final @Nonnull Object role)
+      {
+        Parameters.mustNotBeArrayOrCollection(role, "role");
+        return of(messageBus, messageSupplier, r(role));
       }
   }
-

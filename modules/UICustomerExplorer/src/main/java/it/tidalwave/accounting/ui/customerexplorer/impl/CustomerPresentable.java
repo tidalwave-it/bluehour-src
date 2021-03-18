@@ -27,13 +27,14 @@
 package it.tidalwave.accounting.ui.customerexplorer.impl;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.role.ui.PresentationModel.concat;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *
@@ -48,8 +49,8 @@ public class CustomerPresentable implements Presentable
     private final CustomerSpi customer;
 
     @Override
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles) 
+    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
       {
-        return PresentationModel.of(customer, concat(Displayable.of(customer.getName()), instanceRoles));
+        return PresentationModel.of(customer, r(Displayable.of(customer.getName()), instanceRoles));
       }
   }

@@ -40,7 +40,7 @@ import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationC
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
@@ -83,7 +83,7 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
                                                 .stream()
                                                 .map(jobEvent -> (JobEventSpi)jobEvent)
                                                 .sorted(comparing(JobEventSpi::getDateTime))
-                                                .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
+                                                .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
                                                 .collect(toCompositePresentationModel()));
       }
   }

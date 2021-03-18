@@ -32,8 +32,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-//import static it.tidalwave.role.ui.Displayable.Displayable;
-import static it.tidalwave.role.ui.UserActionProvider.UserActionProvider;
+import static it.tidalwave.role.ui.Displayable._Displayable_;
+import static it.tidalwave.role.ui.UserActionProvider._UserActionProvider_;
 
 /***********************************************************************************************************************
  *
@@ -45,11 +45,11 @@ public class JavaFXToolBarModel extends ToolBarModelSupport
     @Override
     public void populate (final @Nonnull Object binder, final @Nonnull Object toolBar)
       {
-        as(UserActionProvider).getActions().stream().map((action) ->
+        as(_UserActionProvider_).getActions().stream().map((action) ->
           {
             final Button button = new Button();
             // FIXME: move to JavaFXBinder
-            button.setText(action.asOptional(Displayable.class).map(Displayable::getDisplayName).orElse("???"));
+            button.setText(action.maybeAs(_Displayable_).map(Displayable::getDisplayName).orElse("???"));
             ((JavaFXBinder)binder).bind(button, action);
             return button;
           })

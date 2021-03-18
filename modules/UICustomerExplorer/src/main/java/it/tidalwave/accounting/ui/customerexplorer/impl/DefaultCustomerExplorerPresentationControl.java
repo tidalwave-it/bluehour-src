@@ -45,7 +45,7 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationC
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
@@ -105,6 +105,6 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
       {
         final Selectable publishEventOnSelection = () -> messageBus.publish(new CustomerSelectedEvent(customer));
-        return customer.as(Presentable).createPresentationModel(publishEventOnSelection);
+        return customer.as(_Presentable_).createPresentationModel(publishEventOnSelection);
       }
   }

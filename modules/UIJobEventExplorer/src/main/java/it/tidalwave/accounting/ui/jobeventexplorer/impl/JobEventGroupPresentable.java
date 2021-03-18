@@ -31,13 +31,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.Displayable2;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
-import it.tidalwave.role.ui.spi.PresentationModelAggregate;
-import static it.tidalwave.role.ui.spi.PresentationModelAggregate.r;
+import it.tidalwave.role.ui.PresentationModelAggregate;
+import static it.tidalwave.util.Parameters.r;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 import static java.util.Comparator.comparing;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
@@ -57,25 +56,25 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
       }
 
     @Override @Nonnull
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
+    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
       {
         final Styleable styleable = Styleable.of(getStyles());
         return jobEvent.findChildren()
                        .stream()
                        .map(jobEvent -> (JobEventSpi)jobEvent)
                        .sorted(comparing(JobEventSpi::getDateTime))
-                       .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                       .collect(toCompositePresentationModel(presentationModelAggregate(), styleable));
+                       .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
+                       .collect(toCompositePresentationModel(r(presentationModelAggregate(), styleable)));
         // FIXME: use SimpleCompositePresentable?
       }
 
     @Override @Nonnull
-    protected PresentationModelAggregate presentationModelAggregate ()
+    protected PresentationModelAggregate presentationModelAggregate()
       {
         return super.presentationModelAggregate()
-                .withPmOf(DATE,        r(Displayable2.of(DATE_FORMATTER, jobEvent.getDateTime().toLocalDate())))
+                .withPmOf(DATE,        r(Displayable.of(DATE_FORMATTER::format, jobEvent.getDateTime().toLocalDate())))
                 .withPmOf(HOURLY_RATE, r(Displayable.of("")))
-                .withPmOf(TIME,        r(Displayable2.of(DURATION_FORMATTER, jobEvent.getDuration()), RIGHT_ALIGNED));
+                .withPmOf(TIME,        r(Displayable.of(DURATION_FORMATTER::format, jobEvent.getDuration()), RIGHT_ALIGNED));
       }
 
     @Override @Nonnull

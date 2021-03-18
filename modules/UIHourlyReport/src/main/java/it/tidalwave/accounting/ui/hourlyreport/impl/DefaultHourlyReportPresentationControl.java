@@ -40,7 +40,7 @@ import it.tidalwave.role.ui.PresentationModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
-import static it.tidalwave.accounting.model.HourlyReportGenerator.HourlyReportGenerator;
+import static it.tidalwave.accounting.model.HourlyReportGenerator._HourlyReportGenerator_;
 
 /***********************************************************************************************************************
  *
@@ -55,7 +55,7 @@ public class DefaultHourlyReportPresentationControl implements HourlyReportPrese
     
     @VisibleForTesting void onProjectHourlyReportRequest (final @Nonnull @ListensTo ProjectHourlyReportRequest request)
       {
-        final HourlyReport report = request.getProject().as(HourlyReportGenerator).createReport();
+        final HourlyReport report = request.getProject().as(_HourlyReportGenerator_).createReport();
         presentation.bind();
         presentation.showUp(notificationWithFeedback().withCaption("Project Hourly Report"));
         presentation.populate(PresentationModel.of("???", (PlainTextRenderable) (args) -> report.asString()));
