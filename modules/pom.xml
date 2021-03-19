@@ -226,7 +226,19 @@
         <module>UIiBizImporter</module>
         <module>JavaFXUI</module>
         <module>JavaFXApplication</module>
-        <module>Installers/macOS</module>
     </modules>
+
+
+    <!-- ===============================================================================================================
+
+    ================================================================================================================ -->
+    <profiles>
+        <profile>
+            <id>installers</id>
+            <modules>
+                <module>Installers/macOS</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
