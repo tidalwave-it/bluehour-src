@@ -52,7 +52,7 @@
 
     <distributionManagement>
         <site>
-            <id>northernwind-rca-site</id>
+            <id>bluehour-site</id>
             <url>http://tidalwave.it/projects/bluehour</url>
         </site>
     </distributionManagement>
