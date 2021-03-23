@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -29,14 +28,9 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.io.IOException;
 import java.nio.file.Path;
-//import corny.addressbook.NativeAddressBook;
-//import corny.addressbook.data.Contact;
-//import corny.addressbook.data.MultiValue;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizCustomerImporter;
-import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +38,6 @@ import lombok.extern.slf4j.Slf4j;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
@@ -149,7 +142,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
 //      }
     
     @Nonnull
-    private static String trim (final @CheckForNull String string)
+    private static String trim (@CheckForNull final String string)
       {
         return (string == null) ? "" : string.trim();
       }

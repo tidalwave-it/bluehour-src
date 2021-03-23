@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -44,7 +43,6 @@ import lombok.ToString;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
@@ -61,7 +59,7 @@ public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEve
      * 
      *
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryFlatJobEvent (final @Nonnull Builder builder)
+    public /* FIXME protected */ InMemoryFlatJobEvent (@Nonnull final Builder builder)
       {
         super(builder);
         this.date = builder.getStartDateTime().toLocalDate();
@@ -77,7 +75,7 @@ public class InMemoryFlatJobEvent extends InMemoryJobEvent implements FlatJobEve
     public JobEvent.Builder toBuilder()
       {
         return new Builder(id, Type.FLAT, date.atStartOfDay(), null,
-                           name, description, earnings, null, Collections.<JobEvent>emptyList());
+                           name, description, earnings, null, Collections.emptyList());
       }
 
     /*******************************************************************************************************************

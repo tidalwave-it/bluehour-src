@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,44 +27,43 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
-import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
+import it.tidalwave.role.ui.PresentationModelAggregate;
+import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @DciRole(datumType = FlatJobEventSpi.class)
 public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi>
   {
-    public FlatJobEventPresentable (final @Nonnull FlatJobEventSpi flatJobEvent)
+    public FlatJobEventPresentable (@Nonnull final FlatJobEventSpi flatJobEvent)
       {
         super(flatJobEvent);
       }
 
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    protected PresentationModelAggregate presentationModelAggregate()
       {
-        return super.aggregateBuilder()
-                .with(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDate()))
-                .with(TIME,        Displayable.of(""))
-                .with(HOURLY_RATE, Displayable.of(""))
-                .with(AMOUNT ,     (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getEarnings()),
-                                         new DefaultStyleable("right-aligned"),
-                                         new RedStyleForNegativeMoney(jobEvent::getEarnings));
+        return super.presentationModelAggregate()
+                .withPmOf(DATE,        r(Displayable.of(DATE_FORMATTER::format, jobEvent.getDate())))
+                .withPmOf(TIME,        r(Displayable.of("")))
+                .withPmOf(HOURLY_RATE, r(Displayable.of("")))
+                .withPmOf(AMOUNT ,     r(Displayable.of(MONEY_FORMATTER::format, jobEvent.getEarnings()),
+                                           RIGHT_ALIGNED, new RedStyleForNegativeMoney(jobEvent::getEarnings)));
       }
 
     @Override @Nonnull
     protected Collection<String> getStyles()
       {
-        return Arrays.asList("flat-job-event");
+        return List.of("flat-job-event");
       }
   }

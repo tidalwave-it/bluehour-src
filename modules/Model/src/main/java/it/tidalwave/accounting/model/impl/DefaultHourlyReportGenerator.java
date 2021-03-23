@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -48,7 +47,6 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @DciRole(datumType = ProjectSpi.class) @RequiredArgsConstructor
@@ -56,9 +54,9 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
   {
     private static final String SEPARATOR = "===========================================================================";
 
-    private static final String PATTERN = "| %-12s | %-30s | %-8s | %-12s |\n";
-    private static final String PATTERN2 = "| %12s | %-30s | %8s | %12s |\n";
-    private static final String PATTERN3 = "  %12s   %-30s   %8s   %12s  \n";
+    private static final String PATTERN = "| %-12s | %-30s | %-8s | %-12s |%n";
+    private static final String PATTERN2 = "| %12s | %-30s | %8s | %12s |%n";
+    private static final String PATTERN3 = "  %12s   %-30s   %8s   %12s  %n";
 
     @Nonnull
     private final ProjectSpi project;
@@ -71,14 +69,14 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         return new HourlyReport(sw.toString());
       }
 
-    private void makeReport (final @Nonnull Writer w)
+    private void makeReport (@Nonnull final Writer w)
       {
         final PrintWriter pw = new PrintWriter(w);
         System.err.println("CREATE REPORT " + project);
 
-        pw.printf(SEPARATOR + "\n");
+        pw.print(SEPARATOR + "\n");
         pw.printf(PATTERN, "Date", "Description", "Time", "Cost");
-        pw.printf(SEPARATOR + "\n");
+        pw.print(SEPARATOR + "\n");
 
         // TODO: quick and dirty - refactor with visitor, lambdas
         final List<JobEventSpi> jobEvents = new ArrayList<>();
@@ -88,23 +86,24 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
                                                                 event.getName(),
                                                                 DURATION_FORMATTER.format(event.getDuration()),
                                                                 MONEY_FORMATTER.format(event.getEarnings())));
-        pw.printf(SEPARATOR + "\n");
+        pw.print(SEPARATOR + "\n");
         pw.printf(PATTERN3, "", "", DURATION_FORMATTER.format(project.getDuration()),
                                     MONEY_FORMATTER.format(project.getEarnings()));
 
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
         final Duration duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
-        pw.printf("BUDGET:           %s\n", MONEY_FORMATTER.format(project.getBudget()));
-        pw.printf("HOURLY RATE:      %s\n", MONEY_FORMATTER.format(project.getHourlyRate()));
-        pw.printf("DURATION:         %s\n", DURATION_FORMATTER.format(duration));
-        pw.printf("REMAINING BUDGET: %s\n", MONEY_FORMATTER.format(project.getBudget().subtract(project.getEarnings())));
-        pw.printf("REMAINING TIME:   %s\n", DURATION_FORMATTER.format(duration.minus(project.getDuration())));
+        pw.printf("BUDGET:           %s%n", MONEY_FORMATTER.format(project.getBudget()));
+        pw.printf("HOURLY RATE:      %s%n", MONEY_FORMATTER.format(project.getHourlyRate()));
+        pw.printf("DURATION:         %s%n", DURATION_FORMATTER.format(duration));
+        pw.printf("REMAINING BUDGET: %s%n",
+                  MONEY_FORMATTER.format(project.getBudget().subtract(project.getEarnings())));
+        pw.printf("REMAINING TIME:   %s%n", DURATION_FORMATTER.format(duration.minus(project.getDuration())));
         pw.flush();
       }
 
-    private void addAll (final @Nonnull List<JobEventSpi> results,
-                         final @Nonnull List<? extends JobEvent> jobEvents)
+    private void addAll (@Nonnull final List<JobEventSpi> results,
+                         @Nonnull final List<? extends JobEvent> jobEvents)
       {
         for (final JobEvent jobEvent : jobEvents)
           {

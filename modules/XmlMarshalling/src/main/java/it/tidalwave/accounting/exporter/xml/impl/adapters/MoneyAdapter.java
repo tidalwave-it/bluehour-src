@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -35,20 +34,19 @@ import it.tidalwave.accounting.model.types.Money;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public class MoneyAdapter extends XmlAdapter<String, Money>
   {
     @Override @Nonnull
-    public Money unmarshal (final @Nonnull String string) 
+    public Money unmarshal (@Nonnull final String string)
       throws ParseException 
       {
         return Money.parse(string);
       }
 
     @Override @Nonnull
-    public String marshal (final @Nonnull Money money) 
+    public String marshal (@Nonnull final Money money)
       {
         return money.toString();
       }

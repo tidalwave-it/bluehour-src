@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -42,13 +41,12 @@ import org.testng.annotations.Test;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public class DefaultHourlyReportGeneratorTest
   {
     @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
-    public void must_properly_generate_report (final @Nonnull String scenarioName, final @Nonnull ProjectSpi project)
+    public void must_properly_generate_report (@Nonnull final String scenarioName, @Nonnull final ProjectSpi project)
       throws IOException
       {
         final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");

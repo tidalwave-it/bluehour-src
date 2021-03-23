@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="it.tidalwave.accounting.ui.impl.javafx.Main" />
+    <module name="it-tidalwave-accounting-application-javafx" />
+    <option name="VM_PARAMETERS" value="--module-path $MODULE_DIR$/../Installers/macOS/target/app/mods --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics -Dit.tidalwave.ui.javafx.JavaFXSafeProxyCreator.initTimeout=99999" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="it.tidalwave.accounting.ui.impl.javafx.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

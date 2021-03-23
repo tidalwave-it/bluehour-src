@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,9 +27,7 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;
@@ -44,25 +41,25 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultProjectExplorerPresentationControl implements ProjectExplorerPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
-    @Inject @Nonnull
-    private ProjectExplorerPresentation presentation;
+    @Nonnull
+    private final ProjectExplorerPresentation presentation;
 
     @Override
     public void initialize() 
@@ -77,14 +74,14 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
      * @param  event  the notification event
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onCustomerSelectedEvent (final @Nonnull @ListensTo CustomerSelectedEvent event)
+    @VisibleForTesting void onCustomerSelectedEvent (@Nonnull @ListensTo final CustomerSelectedEvent event)
       {
         log.info("onCustomerSelectedEvent({})", event);
         presentation.populate(event.getCustomer().findProjects()
                                                  .stream()
                                                  .map(project -> (ProjectSpi)project)
                                                  .sorted(comparing(ProjectSpi::getName))
-                                                 .map(project -> createPresentationModelFor(project))
+                                                 .map(this::createPresentationModelFor)
                                                  .collect(toCompositePresentationModel()));
       }
     
@@ -93,14 +90,14 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
      * Creates a {@link PresentationModel} for a {@link Project} injecting a {@link Selectable} role which fires a
      * {@link ProjectSelectedEvent} on selection.
      * 
-     * @param  customer     the {@code Project}
+     * @param  project      the {@code Project}
      * @return              the {@code PresentationModel}
      *
      ******************************************************************************************************************/
     @Nonnull
-    @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Project project)
+    @VisibleForTesting PresentationModel createPresentationModelFor (@Nonnull final Project project)
       {
         final Selectable publishEventOnSelection = () -> messageBus.publish(new ProjectSelectedEvent(project));
-        return project.as(Presentable).createPresentationModel(publishEventOnSelection);
+        return project.as(_Presentable_).createPresentationModel(publishEventOnSelection);
       }
   }

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -43,7 +42,6 @@ import lombok.With;
  * An object capable to import data from iBiz.
  * 
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public interface IBizImporter extends Accounting
@@ -73,7 +71,6 @@ public interface IBizImporter extends Accounting
      * @throws  IOException in case of error
      * 
      ******************************************************************************************************************/
-    @Nonnull
     public void importAll()
       throws IOException;
   }

@@ -20,15 +20,14 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -44,7 +43,6 @@ import static java.util.stream.Collectors.toList;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
@@ -53,17 +51,17 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
   {
     private static final long serialVersionUID = 1L;
     
-    @CheckForNull
+    @Nullable
     private final Project project;
 
-    public InMemoryInvoiceFinderFromMap (final @Nonnull Map<Id, InMemoryInvoice> invoiceMapById)
+    public InMemoryInvoiceFinderFromMap (@Nonnull final Map<Id, InMemoryInvoice> invoiceMapById)
       {
         super(invoiceMapById);  
         this.project = null;
       }
     
-    public InMemoryInvoiceFinderFromMap (final @Nonnull InMemoryInvoiceFinderFromMap other, 
-                                         final @Nonnull Object override)
+    public InMemoryInvoiceFinderFromMap (@Nonnull final InMemoryInvoiceFinderFromMap other,
+                                         @Nonnull final Object override)
       {
         super(other, override);
         final InMemoryInvoiceFinderFromMap source = getSource(InMemoryInvoiceFinderFromMap.class, other, override);
@@ -71,7 +69,7 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
       }
 
     @Override @Nonnull
-    public InvoiceRegistry.Finder withProject (final @Nonnull Project project) 
+    public InvoiceRegistry.Finder withProject (@Nonnull final Project project)
       {
         return clone(new InMemoryInvoiceFinderFromMap(project));
       }
@@ -92,6 +90,6 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
     @Override @Nonnull
     public Money getEarnings() 
       {
-        return streamImpl().map(invoice -> invoice.getEarnings()).reduce(Money.ZERO, Money::add);
+        return streamImpl().map(InMemoryInvoice::getEarnings).reduce(Money.ZERO, Money::add);
       }
   }

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,27 +27,39 @@
 package it.tidalwave.role.ui.spi;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
 import java.util.function.Supplier;
-import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.role.ui.UserAction;
+import it.tidalwave.util.Parameters;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *
- * FIXME: move to TheseFoolishThings.
+ * TODO: move to TheseFoolishThings?
  * 
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-public class MessageSendingUserAction
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class MessageSendingUserAction
   {
     @Nonnull
-    public static UserAction of (final @Nonnull MessageBus messageBus,
-                                 final @Nonnull String displayName,
-                                 final @Nonnull Supplier<Object> messageSupplier)
+    public static UserAction of (@Nonnull final MessageBus messageBus,
+                                 @Nonnull final Supplier<Object> messageSupplier,
+                                 @Nonnull final Collection<Object> roles)
       {
-        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), Displayable.of(displayName));
+        return UserAction.of(() -> messageBus.publish(messageSupplier.get()), roles);
+      }
+
+    @Nonnull
+    public static UserAction of (@Nonnull final MessageBus messageBus,
+                                 @Nonnull final Supplier<Object> messageSupplier,
+                                 @Nonnull final Object role)
+      {
+        Parameters.mustNotBeArrayOrCollection(role, "role");
+        return of(messageBus, messageSupplier, r(role));
       }
   }
-

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -37,7 +36,6 @@ import lombok.RequiredArgsConstructor;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
@@ -53,8 +51,8 @@ public class InMemoryJobEventFinderFromList extends InMemoryJobEventFinderSuppor
         events = Collections.emptyList();
       }
      
-    public InMemoryJobEventFinderFromList (final @Nonnull InMemoryJobEventFinderFromList other,
-                                           final @Nonnull Object override) 
+    public InMemoryJobEventFinderFromList (@Nonnull final InMemoryJobEventFinderFromList other,
+                                           @Nonnull final Object override)
       {
         super(other, override);
         this.events = new ArrayList<>(other.events);

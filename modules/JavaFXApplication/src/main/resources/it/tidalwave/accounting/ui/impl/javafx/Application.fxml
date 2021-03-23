@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.*?>
-
-<VBox prefHeight="721.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tidalwave.accounting.ui.impl.javafx.JavaFXApplicationPresentationDelegate">
+<?import java.net.URL?>
+<VBox prefHeight="721.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.tidalwave.accounting.ui.impl.javafx.JavaFXApplicationPresentationDelegate">
     <stylesheets>
-        <URL value="@Application.css" />
+        <URL value="@Application.css"/>
     </stylesheets>
-    <children>
-        <ToolBar fx:id="tbToolBar" layoutX="7.0" layoutY="7.0" maxHeight="64.0" minHeight="64.0" prefHeight="64.0" prefWidth="818.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER" />
-        <SplitPane dividerPositions="0.15" focusTraversable="true" layoutX="8.0" layoutY="77.0" prefHeight="571.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
-            <items>
-                <AnchorPane fx:id="pnCustomerExplorer" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                    </children>
+    <ToolBar fx:id="tbToolBar" layoutX="7.0" layoutY="7.0" maxHeight="64.0" minHeight="64.0" prefHeight="64.0" prefWidth="818.0" AnchorPane.leftAnchor="0.0"
+             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER"/>
+    <SplitPane dividerPositions="0.15" focusTraversable="true" layoutX="8.0" layoutY="77.0" prefHeight="571.0" prefWidth="825.0"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+        <AnchorPane fx:id="pnCustomerExplorer" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <SplitPane dividerPositions="0.3" focusTraversable="true" layoutX="77.0" layoutY="115.5" orientation="VERTICAL" prefHeight="200.0"
+                       prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                       AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="pnProjectExplorer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <SplitPane dividerPositions="0.3" focusTraversable="true" layoutX="77.0" layoutY="115.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <items>
-                                <AnchorPane fx:id="pnProjectExplorer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                    <children>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane fx:id="pnJobEventExplorer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                    <children>
-                                    </children>
-                                    <opaqueInsets>
-                                        <Insets />
-                                    </opaqueInsets>
-                                </AnchorPane>
-                            </items>
-                        </SplitPane>
-                    </children>
+                <AnchorPane fx:id="pnJobEventExplorer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
                 </AnchorPane>
-            </items>
-        </SplitPane>
-        <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-    </children>
+            </SplitPane>
+        </AnchorPane>
+    </SplitPane>
+    <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER"/>
 </VBox>

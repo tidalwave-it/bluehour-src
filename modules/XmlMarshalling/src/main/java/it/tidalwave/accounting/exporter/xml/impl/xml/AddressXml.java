@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -40,7 +39,6 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @NoArgsConstructor
@@ -62,7 +60,7 @@ public class AddressXml
     @XmlElement(name = "country")
     private String country;
     
-    public AddressXml (final @Nonnull Address address)
+    public AddressXml (@Nonnull final Address address)
       {
         this.street = address.getStreet();
         this.city = address.getCity();

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -56,7 +55,6 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 //@Mutable
@@ -97,7 +95,7 @@ public class InvoiceXml
     @XmlIDREF
     private List<JobEventXml> jobEventsXml; 
     
-    public InvoiceXml (final @Nonnull Invoice invoice)
+    public InvoiceXml (@Nonnull final Invoice invoice)
       {
         final Invoice.Builder builder = invoice.toBuilder();
         this.id = builder.getId();
@@ -109,11 +107,11 @@ public class InvoiceXml
         this.tax = builder.getTax();
         this.jobEventsXml = builder.getJobEvents().isEmpty() 
                     ? null
-                    : builder.getJobEvents().stream().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
+                    : builder.getJobEvents().stream().map(JobEventXml::new).collect(toList());
       }
 
     @Nonnull
-    public Invoice.Builder toBuilder (final @Nonnull Accounting accounting) 
+    public Invoice.Builder toBuilder (@Nonnull final Accounting accounting)
       {
         try 
           {

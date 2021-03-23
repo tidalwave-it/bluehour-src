@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -29,37 +28,36 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import it.tidalwave.role.ui.PresentationModelAggregate;
+import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @DciRole(datumType = TimedJobEventSpi.class)
 public class TimedJobEventPresentable extends JobEventPresentable<TimedJobEventSpi>
   {
-    public TimedJobEventPresentable (final @Nonnull TimedJobEventSpi timedJobEvent)
+    public TimedJobEventPresentable (@Nonnull final TimedJobEventSpi timedJobEvent)
       {
         super(timedJobEvent);
       }
 
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    protected PresentationModelAggregate presentationModelAggregate ()
       {
-        return super.aggregateBuilder()
-                .with(DATE,        (Displayable) () -> DATETIME_FORMATTER.format(jobEvent.getStartDateTime()))
-                .with(TIME,        (Displayable) () -> DURATION_FORMATTER.format(computeDuration()),
-                                         STYLE_RIGHT_ALIGNED)
-                .with(HOURLY_RATE, (Displayable) () -> MONEY_FORMATTER.format(jobEvent.getHourlyRate()),
-                                         STYLE_RIGHT_ALIGNED);
+        return super.presentationModelAggregate()
+            .withPmOf(DATE,        r(Displayable.of(DATETIME_FORMATTER.format(jobEvent.getStartDateTime()))))
+            .withPmOf(TIME,        r(Displayable.of(DURATION_FORMATTER::format, computeDuration()), RIGHT_ALIGNED))
+            .withPmOf(HOURLY_RATE, r(Displayable.of(MONEY_FORMATTER::format, jobEvent.getHourlyRate()), RIGHT_ALIGNED));
       }
 
     @Nonnull
@@ -71,6 +69,6 @@ public class TimedJobEventPresentable extends JobEventPresentable<TimedJobEventS
     @Override @Nonnull
     protected Collection<String> getStyles()
       {
-        return Arrays.asList("timed-job-event");
+        return List.of("timed-job-event");
       }
   }

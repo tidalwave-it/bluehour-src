@@ -41,6 +41,9 @@
     <version>1.0-ALPHA-7-SNAPSHOT</version>
     <name>blueHour - UI - Customer Explorer</name>
     <packaging>jar</packaging>
+    <description>
+        This module implements the Customer explorer.
+    </description>
 
     <dependencies>
         <dependency>
@@ -66,16 +69,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
 
-        <!-- TEST DEPENDENCIES -->
+       <!-- Test dependencies -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-model</artifactId>
@@ -83,22 +81,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <configuration>
-                    <aspectLibraries combine.children="append">
-                        <dependency>
-                            <groupId>it.tidalwave.thesefoolishthings</groupId>
-                            <artifactId>it-tidalwave-messagebus-spring</artifactId>
-                        </dependency>
-                    </aspectLibraries>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

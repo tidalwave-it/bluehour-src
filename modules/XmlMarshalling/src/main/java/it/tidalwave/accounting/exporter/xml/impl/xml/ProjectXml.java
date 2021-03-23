@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -58,7 +57,6 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 //@Mutable
@@ -112,7 +110,7 @@ public class ProjectXml
     @XmlElement(name = "event")
     private List<JobEventXml> jobEventsXml; 
     
-    public ProjectXml (final @Nonnull Project project)
+    public ProjectXml (@Nonnull final Project project)
       {
         final Project.Builder builder = project.toBuilder();
         this.id = builder.getId();
@@ -126,11 +124,11 @@ public class ProjectXml
         this.budget = builder.getBudget();
         this.startDate = builder.getStartDate();
         this.endDate = builder.getEndDate();
-        this.jobEventsXml = project.findChildren().stream().map(jobEvent -> new JobEventXml(jobEvent)).collect(toList());
+        this.jobEventsXml = project.findChildren().stream().map(JobEventXml::new).collect(toList());
       }
     
     @Nonnull
-    public Project.Builder toBuilder (final @Nonnull Accounting accounting)
+    public Project.Builder toBuilder (@Nonnull final Accounting accounting)
       {
         try 
           {

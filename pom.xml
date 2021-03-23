@@ -20,7 +20,6 @@
 
   *********************************************************************************************************************
 
-  $Id$
 
   *********************************************************************************************************************
 #L%
@@ -32,17 +31,11 @@
     <parent>
         <groupId>it.tidalwave.superpom</groupId>
         <artifactId>superpom</artifactId>
-        <version>5.0-ALPHA-4</version>
+        <version>5.0-ALPHA-8</version>
         <relativePath />
     </parent>
 
     <!-- ===============================================================================================================
-
-        This is the "Master POM" of the project. It contains all the metadata of the project, the global compilation
-        and test settings, and a <dependencyManagement> section describing the versions of all the modules of this
-        project (or the modules that are "exported", that is made available to others. This setup allows other projects
-        to import all the modules in this project by means of reusing this POM with the "import scope" - see
-        http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies
 
     ================================================================================================================ -->
 
@@ -57,39 +50,36 @@
         blueHour is a small application for accounting and invoicing. Still under development in the early stage.
     </description>
 
-    <!-- ===============================================================================================================
+    <distributionManagement>
+        <site>
+            <id>northernwind-rca-site</id>
+            <url>http://tidalwave.it/projects/bluehour</url>
+        </site>
+    </distributionManagement>
 
-        TODO: review settings after the generation of the archetype and delete unwanted stuff. Delete this comment too.
-        Some sections are alternate settings for different corporates / forge. Just keep the one you need and eventually
-        add more.
+    <!-- Repeated because of http://jira.codehaus.org/browse/SCM-442 -->
+    <scm>
+        <connection>scm:git:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
+        <url>${scm.repo.browse.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- ===============================================================================================================
 
     ================================================================================================================ -->
     <properties>
+        <tft.maven.requiredJdk>[11,16)</tft.maven.requiredJdk>
+        <tidalwave.ci.view>blueHour</tidalwave.ci.view>
+        <tidalwave.issues>BH</tidalwave.issues>
         <scm.repo.url>git@bitbucket.org:tidalwave/bluehour-src.git</scm.repo.url>
         <scm.repo.readonly.url>https://tidalwave@bitbucket.org/tidalwave/bluehour-src.git</scm.repo.readonly.url>
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/bluehour-src/src</scm.repo.browse.url>
-
-        <tidalwave.ci.view>blueHour</tidalwave.ci.view>
-        <tidalwave.issues>BH</tidalwave.issues>
-
-        <tft.maven.requiredJdk>[11,16)</tft.maven.requiredJdk>
-        <tft.javac.source>1.8</tft.javac.source>
-        <tft.javac.target>1.8</tft.javac.target>
-
-        <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
-        <netbeans.compile.on.save>none</netbeans.compile.on.save>
-
-        <tft.appbundle.name>blueHour</tft.appbundle.name>
-        <tft.appbundle.signature>TDLW</tft.appbundle.signature>
-
-        <tft.clirr.skip>true</tft.clirr.skip> <!-- Clirr is not compatible with JDK 8 -->
-        <tft.maven-checkstyle-plugin.version>2.16</tft.maven-checkstyle-plugin.version> <!-- FIXME: see BH-28 -->
+        <tft.project.url>http://tidalwave.it/projects/bluehour</tft.project.url>
+        <release.profiles>release-sign-artifacts, installers</release.profiles>
     </properties>
 
     <!-- ===============================================================================================================
-
-        Here you declare the versions for all the modules in your project. Don't declare here the versions for
-        external dependencies, as they should go in the "modules POM" specific <dependencyManagement>
 
     ================================================================================================================ -->
     <dependencyManagement>
@@ -185,55 +175,9 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Repeated because of http://jira.codehaus.org/browse/SCM-442 -->
-    <scm>
-        <connection>scm:git:${scm.repo.readonly.url}</connection>
-        <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
-        <url>${scm.repo.browse.url}</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <!-- ===============================================================================================================
-
-         Here you customize your build workflow.
-
-    ================================================================================================================ -->
-    <profiles>
-        <profile>
-            <id>deploy-extra-artifacts</id>
-            <build>
-                <plugins>
-                    <!-- Attaches the extra artifacts prepared during the release process by the assembly plugin -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}-project.tar.gz</file>
-                                    <type>tar.gz</type>
-                                    <classifier>project</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}-bin.tar.gz</file>
-                                    <type>tar.gz</type>
-                                    <classifier>bin</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>application/target/bluehour-application-${project.version}.zip</file>
-                                    <type>zip</type>
-                                    <classifier>executable</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <modules>
         <module>modules</module>
     </modules>
+
 </project>
 

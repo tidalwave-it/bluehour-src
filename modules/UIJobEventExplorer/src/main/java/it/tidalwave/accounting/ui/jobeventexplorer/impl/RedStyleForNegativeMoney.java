@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -30,8 +29,8 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.accounting.model.types.Money;
@@ -40,7 +39,6 @@ import lombok.RequiredArgsConstructor;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable @RequiredArgsConstructor 
@@ -52,6 +50,6 @@ public class RedStyleForNegativeMoney implements Styleable
     @Override @Nonnull
     public Collection<String> getStyles() 
       {
-        return Arrays.asList(moneySupplier.get().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
+        return List.of(moneySupplier.get().getAmount().compareTo(BigDecimal.ZERO) >= 0 ? "" : "red");
       }
   }

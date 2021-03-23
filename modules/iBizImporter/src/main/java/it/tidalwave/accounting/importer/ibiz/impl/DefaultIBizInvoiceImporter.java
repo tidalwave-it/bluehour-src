@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -54,14 +53,13 @@ import static java.util.stream.Collectors.toList;
 /***********************************************************************************************************************
  *
  * @author Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Slf4j
 @RequiredArgsConstructor
 public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter 
   {
-    private static final Set<FileVisitOption> NO_OPTIONS = Collections.<FileVisitOption>emptySet();
+    private static final Set<FileVisitOption> NO_OPTIONS = Collections.emptySet();
     
     @Nonnull
     private final InvoiceRegistry invoiceRegistry;
@@ -82,17 +80,17 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
       throws IOException
       {
         log.debug("importInvoices()");
-        Files.walkFileTree(path.resolve("Invoices"), NO_OPTIONS, 1, new SimpleFileVisitor<Path>()
+        Files.walkFileTree(path.resolve("Invoices"), NO_OPTIONS, 1, new SimpleFileVisitor<>()
           {
             @Override
-            public FileVisitResult visitFile (final @Nonnull Path path, final @Nonnull BasicFileAttributes attrs)
-              throws IOException
+            public FileVisitResult visitFile (@Nonnull final Path path, @Nonnull final BasicFileAttributes attrs)
+                    throws IOException
               {
                 if (path.getFileName().toString().endsWith(".invoice"))
                   {
                     importInvoice(path.resolve("Attributes"));
                   }
-                
+
                 return FileVisitResult.CONTINUE;
               }
           });
@@ -103,7 +101,7 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
      * 
      *
      ******************************************************************************************************************/
-    private void importInvoice (final @Nonnull Path documentFile)
+    private void importInvoice (@Nonnull final Path documentFile)
       throws IOException 
       {
         try

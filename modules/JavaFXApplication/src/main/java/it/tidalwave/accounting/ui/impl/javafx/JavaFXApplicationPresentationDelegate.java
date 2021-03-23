@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,7 +27,6 @@
 package it.tidalwave.accounting.ui.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ToolBar;
@@ -36,17 +34,20 @@ import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import it.tidalwave.application.ToolBarModel;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  *
  * @author Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j @Getter
+@RequiredArgsConstructor @Slf4j @Getter
 public class JavaFXApplicationPresentationDelegate
   {
+    @Nonnull
+    private final JavaFXBinder binder;
+
     @FXML
     private ToolBar tbToolBar;
 
@@ -59,13 +60,10 @@ public class JavaFXApplicationPresentationDelegate
     @FXML
     private AnchorPane pnJobEventExplorer;
 
-    @Inject
-    private JavaFXBinder binder;
-
-    public void assemble (final @Nonnull ToolBarModel toolBarModel,
-                          final @Nonnull Node ndCustomerExplorer,
-                          final @Nonnull Node ndProjectExplorer,
-                          final @Nonnull Node ndJobEventExplorer)
+    public void assemble (@Nonnull final ToolBarModel toolBarModel,
+                          @Nonnull final Node ndCustomerExplorer,
+                          @Nonnull final Node ndProjectExplorer,
+                          @Nonnull final Node ndJobEventExplorer)
       {
         toolBarModel.populate(binder, tbToolBar);
         put(pnCustomerExplorer, ndCustomerExplorer);
@@ -73,7 +71,7 @@ public class JavaFXApplicationPresentationDelegate
         put(pnJobEventExplorer, ndJobEventExplorer);
       }
 
-    private static void put (final @Nonnull AnchorPane anchorPane, final @Nonnull Node node)
+    private static void put (@Nonnull final AnchorPane anchorPane, @Nonnull final Node node)
       {
         AnchorPane.setLeftAnchor(node, 0.0);
         AnchorPane.setRightAnchor(node, 0.0);

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -39,12 +38,11 @@ import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationCon
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public class Main extends JavaFXSpringApplication
   {
-    public static void main (final @Nonnull String ... args)
+    public static void main (@Nonnull final String ... args)
       {
         try
           {
@@ -69,7 +67,7 @@ public class Main extends JavaFXSpringApplication
      *
      ******************************************************************************************************************/
     @Override
-    protected void onStageCreated (final @Nonnull ApplicationContext applicationContext)
+    protected void onStageCreated (@Nonnull final ApplicationContext applicationContext)
       {
         // FIXME: controllers can't initialize in postconstruct
         // Too bad because with PAC+EventBus we'd get rid of the control interfaces

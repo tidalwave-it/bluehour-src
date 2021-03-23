@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -41,7 +40,6 @@ import static lombok.AccessLevel.PRIVATE;
  * This class models the address of a customer.
  *
  * @author Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable @Getter @EqualsAndHashCode @ToString
@@ -97,7 +95,7 @@ public class Address
      *
      *
      ******************************************************************************************************************/
-    protected Address (final @Nonnull Builder builder)
+    protected Address (@Nonnull final Builder builder)
       {
         this.street = builder.getStreet();
         this.city = builder.getCity();

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -46,7 +45,6 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 //@Mutable
@@ -66,17 +64,17 @@ public class AccountingXml
     @XmlElement(name = "invoice")
     private List<InvoiceXml> invoicesxml;
     
-    public AccountingXml (final @Nonnull Accounting accounting)
+    public AccountingXml (@Nonnull final Accounting accounting)
       {
-        customersXml = accounting.getCustomerRegistry().findCustomers().stream().map(customer -> new CustomerXml(customer))
+        customersXml = accounting.getCustomerRegistry().findCustomers().stream().map(CustomerXml::new)
                                                                                 .collect(toList());
-        projectsXml = accounting.getProjectRegistry().findProjects().stream().map(project -> new ProjectXml(project))
+        projectsXml = accounting.getProjectRegistry().findProjects().stream().map(ProjectXml::new)
                                                                              .collect(toList());
-        invoicesxml = accounting.getInvoiceRegistry().findInvoices().stream().map(invoice -> new InvoiceXml(invoice))
+        invoicesxml = accounting.getInvoiceRegistry().findInvoices().stream().map(InvoiceXml::new)
                                                                              .collect(toList());
       }
 
-    public void fill (final @Nonnull Accounting accounting) 
+    public void fill (@Nonnull final Accounting accounting)
       {
         final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
         final ProjectRegistry projectRegistry = accounting.getProjectRegistry();

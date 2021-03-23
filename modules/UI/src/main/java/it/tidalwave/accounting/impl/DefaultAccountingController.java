@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -29,10 +28,8 @@ package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
@@ -40,8 +37,9 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.accounting.role.Loadable.Loadable;
+import static it.tidalwave.accounting.role.Loadable._Loadable_;
 
 /***********************************************************************************************************************
  *
@@ -51,15 +49,15 @@ import static it.tidalwave.accounting.role.Loadable.Loadable;
  * initialization.
  * 
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultAccountingController 
   {
-    @Inject @Named("applicationMessageBus")
-    private MessageBus messageBus;
-    
+    @Nonnull
+    private final MessageBus messageBus;
+
+    // Don't use @Nonnull or Lombok will try to initialize it in the constructor
     private Accounting accounting;
 
     /*******************************************************************************************************************
@@ -73,7 +71,7 @@ public class DefaultAccountingController
         try
           {
             log.info("initialize()");
-            accounting = Accounting.createNew().as(Loadable).load();
+            accounting = Accounting.createNew().as(_Loadable_).load();
             messageBus.publish(new AccountingOpenedEvent(accounting));
           }
         catch (IOException e)
@@ -87,7 +85,8 @@ public class DefaultAccountingController
      * Reply with a message carrying a reference to the {@link Accounting} instance. 
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onAccountingOpenRequest (final @Nonnull @ListensTo AccountingOpenRequest request)
+    @VisibleForTesting
+    void onAccountingOpenRequest (@Nonnull @ListensTo final AccountingOpenRequest request)
       {
         // already done at this point, just send a response
         messageBus.publish(new AccountingOpenedEvent(accounting));

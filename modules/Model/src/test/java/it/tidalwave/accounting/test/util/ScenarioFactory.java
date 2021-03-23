@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -57,7 +56,6 @@ import org.testng.annotations.Test;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Slf4j
@@ -103,8 +101,7 @@ public final class ScenarioFactory
     public static Accounting createEmptyAccounting()
       {
         AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
-        final Accounting accounting = Accounting.createNew();
-        return accounting;
+        return Accounting.createNew();
       }
 
     @Nonnull
@@ -225,9 +222,9 @@ public final class ScenarioFactory
       }
 
     @Nonnull
-    private static List<JobEvent> createJobEvents (final @Nonnull LocalDate startDate,
-                                                   final @Nonnull LocalDate endDate,
-                                                   final @Nonnull Money rate)
+    private static List<JobEvent> createJobEvents (@Nonnull final LocalDate startDate,
+                                                   @Nonnull final LocalDate endDate,
+                                                   @Nonnull final Money rate)
       {
         final List<JobEvent> result = new ArrayList<>();
         final long days = startDate.until(endDate, ChronoUnit.DAYS);
@@ -252,10 +249,10 @@ public final class ScenarioFactory
         return result;
       }
 
-    private static void createInvoices (final @Nonnull InvoiceRegistry invoiceRegistry,
-                                        final @Nonnull Project project,
-                                        final @Nonnegative int invoiceCount,
-                                        final @Nonnull String prefix)
+    private static void createInvoices (@Nonnull final InvoiceRegistry invoiceRegistry,
+                                        @Nonnull final Project project,
+                                        @Nonnegative final int invoiceCount,
+                                        @Nonnull final String prefix)
       {
         List<? extends JobEvent> jobEvents = project.findChildren().results();
         int x = jobEvents.size() / (invoiceCount + 1);
@@ -271,7 +268,7 @@ public final class ScenarioFactory
             final TimedJobEventSpi lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
             final LocalDate lastDate = lastEvent.getStartDateTime().toLocalDate();
             final double earnings = timedEventsSubList.stream()
-                    .collect(Collectors.summingDouble(ev -> ev.getEarnings().getAmount().doubleValue()));
+                                            .mapToDouble(ev -> ev.getEarnings().getAmount().doubleValue()).sum();
             final double taxRate = 0.20d;
 
             invoiceRegistry.addInvoice().withId(new Id("" + nextId++))

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -38,31 +37,30 @@ import it.tidalwave.accounting.model.spi.ObjectFactory;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public class InMemoryObjectFactory implements ObjectFactory
   {
     @Override @Nonnull 
-    public Customer createCustomer (final @Nonnull Customer.Builder builder) 
+    public Customer createCustomer (@Nonnull final Customer.Builder builder)
       {
         return new InMemoryCustomer(builder);
       }
 
     @Override @Nonnull 
-    public Invoice createInvoice (final @Nonnull Invoice.Builder builder)
+    public Invoice createInvoice (@Nonnull final Invoice.Builder builder)
       {
         return new InMemoryInvoice(builder);
       }
 
     @Override @Nonnull 
-    public Project createProject (final @Nonnull Project.Builder builder)
+    public Project createProject (@Nonnull final Project.Builder builder)
       {
         return new InMemoryProject(builder);
       }
 
     @Override @Nonnull 
-    public JobEvent createJobEvent (final @Nonnull JobEvent.Builder builder) 
+    public JobEvent createJobEvent (@Nonnull final JobEvent.Builder builder)
       {
         final List<? extends JobEvent> events = builder.getEvents();
         

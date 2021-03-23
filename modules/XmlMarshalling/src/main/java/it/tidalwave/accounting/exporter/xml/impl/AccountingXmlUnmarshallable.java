@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -42,7 +41,6 @@ import lombok.RequiredArgsConstructor;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @DciRole(datumType = Accounting.class)
@@ -53,7 +51,7 @@ public class AccountingXmlUnmarshallable implements Unmarshallable
     private final Accounting accounting;
     
     @Override @Nonnull
-    public <TYPE> TYPE unmarshal (final @Nonnull InputStream is) 
+    public <TYPE> TYPE unmarshal (@Nonnull final InputStream is)
       throws IOException 
       {
         try 

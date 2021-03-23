@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -35,7 +34,6 @@ import java.time.format.DateTimeFormatter;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime>
@@ -43,13 +41,13 @@ public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime>
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     
     @Override @Nonnull
-    public LocalDateTime unmarshal (final @Nonnull String v) 
+    public LocalDateTime unmarshal (@Nonnull final String v)
       {
         return LocalDateTime.parse(v, FORMATTER);
       }
 
     @Override @Nonnull
-    public String marshal (final @Nonnull LocalDateTime v) 
+    public String marshal (@Nonnull final LocalDateTime v)
       {
         return FORMATTER.format(v);
       }

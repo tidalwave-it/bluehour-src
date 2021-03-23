@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,62 +27,58 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.AggregatePresentationModelBuilder;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Styleable;
-import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.spi.DefaultStyleable;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
+import it.tidalwave.role.ui.PresentationModelAggregate;
+import static it.tidalwave.util.Parameters.r;
+import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 import static java.util.Comparator.comparing;
-import static it.tidalwave.role.ui.Presentable.Presentable;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.*;
+import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @DciRole(datumType = JobEventGroupSpi.class)
 public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupSpi>
   {
-    public JobEventGroupPresentable (final @Nonnull JobEventGroupSpi jobEventGroup)
+    public JobEventGroupPresentable (@Nonnull final JobEventGroupSpi jobEventGroup)
       {
         super(jobEventGroup);
       }
 
     @Override @Nonnull
-    public PresentationModel createPresentationModel (final @Nonnull Object... instanceRoles)
+    public PresentationModel createPresentationModel (@Nonnull final Collection<Object> instanceRoles)
       {
-        final Styleable styleable = new DefaultStyleable(getStyles());
         return jobEvent.findChildren()
                        .stream()
                        .map(jobEvent -> (JobEventSpi)jobEvent)
                        .sorted(comparing(JobEventSpi::getDateTime))
-                       .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                       .collect(toCompositePresentationModel(aggregateBuilder().create(), styleable));
+                       .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
+                       .collect(toCompositePresentationModel(r(presentationModelAggregate(), Styleable.of(getStyles()))));
         // FIXME: use SimpleCompositePresentable?
       }
 
     @Override @Nonnull
-    protected AggregatePresentationModelBuilder aggregateBuilder()
+    protected PresentationModelAggregate presentationModelAggregate()
       {
-        return super.aggregateBuilder()
-                .with(DATE,        (Displayable) () -> DATE_FORMATTER.format(jobEvent.getDateTime().toLocalDate()))
-                .with(HOURLY_RATE, Displayable.of(""))
-                .with(TIME,        (Displayable) () -> DURATION_FORMATTER.format(jobEvent.getDuration()),
-                                 STYLE_RIGHT_ALIGNED);
+        return super.presentationModelAggregate()
+                .withPmOf(DATE,        r(Displayable.of(DATE_FORMATTER::format, jobEvent.getDateTime().toLocalDate())))
+                .withPmOf(HOURLY_RATE, r(Displayable.of("")))
+                .withPmOf(TIME,        r(Displayable.of(DURATION_FORMATTER::format, jobEvent.getDuration()), RIGHT_ALIGNED));
       }
 
     @Override @Nonnull
     protected Collection<String> getStyles()
       {
-        return Arrays.asList("job-event-group");
+        return List.of("job-event-group");
       }
   }

@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -42,7 +41,6 @@ import lombok.extern.slf4j.Slf4j;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
@@ -65,12 +63,12 @@ public class InMemoryProjectRegistry implements ProjectRegistry
       {
         private static final long serialVersionUID = 1L;
 
-        public InMemoryProjectFinder (final @Nonnull InMemoryProjectFinder other, final @Nonnull Object override)
+        public InMemoryProjectFinder (@Nonnull final InMemoryProjectFinder other, @Nonnull final Object override)
           {
             super(other, override);  
           }
         
-        InMemoryProjectFinder (final @Nonnull Map<Id, ProjectSpi> projectMapById)
+        InMemoryProjectFinder (@Nonnull final Map<Id, ProjectSpi> projectMapById)
           {
             super(projectMapById);
           }

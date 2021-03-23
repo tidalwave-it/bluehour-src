@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -46,7 +45,6 @@ import static javax.xml.bind.annotation.XmlAccessType.*;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 //@Mutable
@@ -70,7 +68,7 @@ public class CustomerXml
     @XmlElement(name = "vatNumber")
     private String vatNumber;
     
-    public CustomerXml (final @Nonnull Customer customer)
+    public CustomerXml (@Nonnull final Customer customer)
       {
         final Customer.Builder builder = customer.toBuilder();
         this.id = builder.getId();

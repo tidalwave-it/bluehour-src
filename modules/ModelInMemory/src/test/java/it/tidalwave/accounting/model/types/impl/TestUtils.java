@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -35,19 +34,18 @@ import java.time.format.DateTimeFormatter;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 public class TestUtils
   {
     @Nonnull
-    public static LocalDateTime parseDateTime (final @Nonnull String text)
+    public static LocalDateTime parseDateTime (@Nonnull final String text)
       {
         return LocalDateTime.parse(text, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
       }
 
     @Nonnull
-    public static LocalDate parseDate (final @Nonnull String text)
+    public static LocalDate parseDate (@Nonnull final String text)
       {
         return LocalDate.parse(text, DateTimeFormatter.ISO_LOCAL_DATE);
       }

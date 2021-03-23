@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,9 +27,7 @@
 package it.tidalwave.accounting.ui.customerexplorer.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;
 import it.tidalwave.dci.annotation.DciContext;
@@ -45,25 +42,25 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultCustomerExplorerPresentationControl implements CustomerExplorerPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
-    @Inject @Nonnull
-    private CustomerExplorerPresentation presentation;
+    @Nonnull
+    private final CustomerExplorerPresentation presentation;
 
     /*******************************************************************************************************************
      *
@@ -85,13 +82,13 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
      * @param  event  the notification event
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onAccountingOpenedEvent (final @Nonnull @ListensTo AccountingOpenedEvent event)
+    @VisibleForTesting void onAccountingOpenedEvent (@Nonnull @ListensTo final AccountingOpenedEvent event)
       {
         log.info("onAccountingOpenedEvent({})", event);
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers().stream()
                                    .map(customer -> (CustomerSpi)customer)
                                    .sorted(comparing(CustomerSpi::getName))
-                                   .map(customer -> createPresentationModelFor(customer))
+                                   .map(this::createPresentationModelFor)
                                    .collect(toCompositePresentationModel()));
       }
 
@@ -105,9 +102,9 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
      *
      ******************************************************************************************************************/
     @Nonnull
-    @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
+    @VisibleForTesting PresentationModel createPresentationModelFor (@Nonnull final Customer customer)
       {
         final Selectable publishEventOnSelection = () -> messageBus.publish(new CustomerSelectedEvent(customer));
-        return customer.as(Presentable).createPresentationModel(publishEventOnSelection);
+        return customer.as(_Presentable_).createPresentationModel(publishEventOnSelection);
       }
   }

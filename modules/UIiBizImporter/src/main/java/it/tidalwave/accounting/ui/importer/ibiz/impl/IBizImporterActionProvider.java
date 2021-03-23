@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,11 +27,9 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.springframework.beans.factory.annotation.Configurable;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
 import it.tidalwave.role.ui.spi.MessageSendingUserAction;
@@ -45,18 +42,17 @@ import lombok.RequiredArgsConstructor;
  * This role provides a "Import..." action for the ToolBar.
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = ToolBarModel.class) @Configurable @RequiredArgsConstructor
+@RequiredArgsConstructor @DciRole(datumType = ToolBarModel.class)
 public class IBizImporterActionProvider extends DefaultUserActionProvider2
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
     @Override @Nonnull
     protected UserAction getSingleAction()
       {
-        return MessageSendingUserAction.of(messageBus,"Import...", ImportRequest::new);
+        return MessageSendingUserAction.of(messageBus, ImportRequest::new, Displayable.of("Import..."));
       }
   }

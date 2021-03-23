@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,36 +27,36 @@
 package it.tidalwave.accounting.ui.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import it.tidalwave.application.ToolBarModel;
 import it.tidalwave.role.ui.javafx.ApplicationPresentationAssembler;
 import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici (Fabrizio.Giudici@tidalwave.it)
- * @version $Id: Class.java,v 631568052e17 2013/02/19 15:45:02 fabrizio $
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class BlueHourApplicationAssembler
         implements ApplicationPresentationAssembler<JavaFXApplicationPresentationDelegate>
   {
-    @Inject
-    private JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
+    @Nonnull
+    private final JavaFxCustomerExplorerPresentation javaFxCustomerExplorerPresentation;
 
-    @Inject
-    private JavaFxProjectExplorerPresentation javaFxProjectExplorerPresentation;
+    @Nonnull
+    private final JavaFxProjectExplorerPresentation javaFxProjectExplorerPresentation;
 
-    @Inject
-    private JavaFxJobEventExplorerPresentation javaFxJobEventExplorerPresentation;
+    @Nonnull
+    private final JavaFxJobEventExplorerPresentation javaFxJobEventExplorerPresentation;
 
-    @Inject
-    private ToolBarModel toolBarModel;
+    @Nonnull
+    private final ToolBarModel toolBarModel;
 
     @Override
-    public void assemble (final @Nonnull JavaFXApplicationPresentationDelegate applicationPresentation)
+    public void assemble (@Nonnull final JavaFXApplicationPresentationDelegate applicationPresentation)
       {
         applicationPresentation.assemble(toolBarModel,
                                          javaFxCustomerExplorerPresentation.getNad().getNode(),

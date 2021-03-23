@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,12 +27,10 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.BoundProperty;
 import it.tidalwave.messagebus.MessageBus;
@@ -45,31 +42,31 @@ import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
-import static it.tidalwave.accounting.role.Saveable.Saveable;
+import static it.tidalwave.accounting.role.Saveable._Saveable_;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultIBizImporterPresentationControl implements IBizImporterPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
     
-    @Inject @Nonnull
-    private IBizImporterBuilderFactory importerBuilderFactory;
+    @Nonnull
+    private final IBizImporterBuilderFactory importerBuilderFactory;
     
     private final BoundProperty<Path> iBizFolder = new BoundProperty<>();
 
-    @Inject @Nonnull
-    private IBizImporterPresentation presentation;
+    @Nonnull
+    private final IBizImporterPresentation presentation;
     
-    @VisibleForTesting void onImportRequest (final @Nonnull @ListensTo ImportRequest request)
+    @VisibleForTesting void onImportRequest (@Nonnull @ListensTo final ImportRequest request)
       throws IOException
       {
         log.info("onImportRequest({})", request);
@@ -89,7 +86,7 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
                                                                   .withPath(iBizFolder.get())
                                                                   .create();
             accounting.importAll();
-            accounting.as(Saveable).save();
+            accounting.as(_Saveable_).save();
             messageBus.publish(new AccountingOpenRequest());
 
             // TODO: use a progress bar during the import process

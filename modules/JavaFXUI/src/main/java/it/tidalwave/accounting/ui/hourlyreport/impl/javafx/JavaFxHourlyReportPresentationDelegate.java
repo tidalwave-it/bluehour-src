@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,7 +27,6 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.TextArea;
@@ -36,24 +34,25 @@ import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import static it.tidalwave.role.PlainTextRenderable.PlainTextRenderable;
+import lombok.RequiredArgsConstructor;
+import static it.tidalwave.role.PlainTextRenderable._PlainTextRenderable_;
 
 /***********************************************************************************************************************
  *
  * @author  fritz
- * @version $Id$
  *
  **********************************************************************************************************************/
+@RequiredArgsConstructor
 public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPresentation
   {
+    @Nonnull
+    private final JavaFXBinder binder;
+
     @FXML
     private Pane pnHourlyReport;
 
     @FXML
     private TextArea taReport;
-
-    @Inject
-    private JavaFXBinder binder;
 
     @Override
     public void bind()
@@ -61,14 +60,14 @@ public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPrese
       }
 
     @Override
-    public void showUp (final @Nonnull UserNotificationWithFeedback notification)
+    public void showUp (@Nonnull final UserNotificationWithFeedback notification)
       {
         binder.showInModalDialog(pnHourlyReport, notification);
       }
 
     @Override
-    public void populate (final @Nonnull PresentationModel pm)
+    public void populate (@Nonnull final PresentationModel pm)
       {
-        taReport.setText(pm.as(PlainTextRenderable).render());
+        taReport.setText(pm.as(_PlainTextRenderable_).render());
       }
   }

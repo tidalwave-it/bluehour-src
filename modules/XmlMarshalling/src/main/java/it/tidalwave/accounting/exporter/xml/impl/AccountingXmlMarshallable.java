@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -42,7 +41,6 @@ import lombok.RequiredArgsConstructor;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @DciRole(datumType = Accounting.class)
@@ -53,7 +51,7 @@ public class AccountingXmlMarshallable implements Marshallable
     private final Accounting accounting;
 
     @Override
-    public void marshal (final @Nonnull OutputStream os)
+    public void marshal (@Nonnull final OutputStream os)
       throws IOException 
       {
         try 

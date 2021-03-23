@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -40,7 +39,6 @@ import lombok.NoArgsConstructor;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @NoArgsConstructor
@@ -49,14 +47,14 @@ public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent,
   {
     private static final long serialVersionUID = 1L;
 
-    public InMemoryJobEventFinderSupport (final @Nonnull InMemoryJobEventFinderSupport other,
-                                          final @Nonnull Object override) 
+    public InMemoryJobEventFinderSupport (@Nonnull final InMemoryJobEventFinderSupport other,
+                                          @Nonnull final Object override)
       {
         super(other, override);
       } 
     
     @Override @Nonnull
-    protected Optional<InMemoryJobEvent> findById (final @Nonnull Id id) 
+    protected Optional<InMemoryJobEvent> findById (@Nonnull final Id id)
       {
         return findAll().stream().filter(item -> item.getId().equals(id)).findFirst();
       }  
@@ -64,12 +62,12 @@ public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent,
     @Override @Nonnull
     public Duration getDuration() 
       {
-        return streamImpl().map(jobEvent -> jobEvent.getDuration()).reduce(Duration.ZERO, Duration::plus);
+        return streamImpl().map(InMemoryJobEvent::getDuration).reduce(Duration.ZERO, Duration::plus);
       }
 
     @Override @Nonnull
     public Money getEarnings() 
       {
-        return streamImpl().map(jobEvent -> jobEvent.getEarnings()).reduce(Money.ZERO, Money::add);
+        return streamImpl().map(InMemoryJobEvent::getEarnings).reduce(Money.ZERO, Money::add);
       }
   }

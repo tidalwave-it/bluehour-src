@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -50,7 +49,6 @@ import static java.util.stream.Collectors.toMap;
  * This class models a customer.
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
@@ -63,12 +61,12 @@ public class InMemoryCustomer implements CustomerSpi
       {
         private static final long serialVersionUID = 1L;
     
-        public InMemoryProjectFinder (final @Nonnull InMemoryProjectFinder other, final @Nonnull Object override)
+        public InMemoryProjectFinder (@Nonnull final InMemoryProjectFinder other, @Nonnull final Object override)
           {
             super(other, override);  
           }
         
-        InMemoryProjectFinder (final @Nonnull Map<Id, InMemoryProject> projectMapById)
+        InMemoryProjectFinder (@Nonnull final Map<Id, InMemoryProject> projectMapById)
           {
             super(projectMapById);  
           }
@@ -97,7 +95,7 @@ public class InMemoryCustomer implements CustomerSpi
      *
      * 
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryCustomer (final @Nonnull Builder builder)
+    public /* FIXME protected */ InMemoryCustomer (@Nonnull final Builder builder)
       {
         this.id = builder.getId();
         this.name = builder.getName();
@@ -121,8 +119,8 @@ public class InMemoryCustomer implements CustomerSpi
     
     /*******************************************************************************************************************
      *
-     * @return 
-     * 
+     * {@inheritDoc}
+     *
      ******************************************************************************************************************/
     @Override @Nonnull
     public Builder toBuilder()

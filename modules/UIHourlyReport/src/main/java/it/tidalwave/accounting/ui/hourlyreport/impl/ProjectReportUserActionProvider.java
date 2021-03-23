@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,9 +27,8 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
 import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
 import it.tidalwave.role.ui.spi.MessageSendingUserAction;
@@ -38,30 +36,28 @@ import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
 
 /***********************************************************************************************************************
  *
  * This role provides a "Create time report..." action for {@link Project} objects.
  * 
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciRole(datumType = Project.class) @Configurable @RequiredArgsConstructor
+@RequiredArgsConstructor @DciRole(datumType = Project.class)
 public class ProjectReportUserActionProvider extends DefaultUserActionProvider2
   {
     @Nonnull
     private final Project project;
     
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
     @Override @Nonnull
     protected UserAction getSingleAction() 
       {
         return MessageSendingUserAction.of(messageBus,
-                                           "Create time report...",
-                                           () -> new ProjectHourlyReportRequest(project));
+                                           () -> new ProjectHourlyReportRequest(project),
+                                           Displayable.of("Create time report..."));
       }
   }

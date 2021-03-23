@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -55,7 +54,6 @@ import static lombok.AccessLevel.PRIVATE;
  * This class models a project.
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable @With
@@ -109,7 +107,7 @@ public class InMemoryProject implements ProjectSpi
      * 
      *
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryProject (final @Nonnull Builder builder)
+    public /* FIXME protected */ InMemoryProject (@Nonnull final Builder builder)
       {
         this.id = builder.getId();
         this.customer = builder.getCustomer();

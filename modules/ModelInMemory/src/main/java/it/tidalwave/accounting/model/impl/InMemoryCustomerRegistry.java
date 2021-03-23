@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -41,7 +40,6 @@ import lombok.extern.slf4j.Slf4j;
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
@@ -64,12 +62,12 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
       {
         private static final long serialVersionUID = 1L;
     
-        public InMemoryCustomerFinder (final @Nonnull InMemoryCustomerFinder other, final @Nonnull Object override)
+        public InMemoryCustomerFinder (@Nonnull final InMemoryCustomerFinder other, @Nonnull final Object override)
           {
             super(other, override);  
           }
         
-        InMemoryCustomerFinder (final @Nonnull Map<Id, InMemoryCustomer> customerMapById)
+        InMemoryCustomerFinder (@Nonnull final Map<Id, InMemoryCustomer> customerMapById)
           {
             super(customerMapById);  
           }

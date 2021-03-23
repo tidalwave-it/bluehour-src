@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,8 +27,7 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
@@ -39,25 +37,25 @@ import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
 import it.tidalwave.role.PlainTextRenderable;
 import it.tidalwave.role.ui.PresentationModel;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
-import static it.tidalwave.accounting.model.HourlyReportGenerator.HourlyReportGenerator;
+import static it.tidalwave.accounting.model.HourlyReportGenerator._HourlyReportGenerator_;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultHourlyReportPresentationControl implements HourlyReportPresentationControl
   {
-    @Inject @Nonnull
-    private HourlyReportPresentation presentation;
+    @Nonnull
+    private final HourlyReportPresentation presentation;
     
-    @VisibleForTesting void onProjectHourlyReportRequest (final @Nonnull @ListensTo ProjectHourlyReportRequest request)
+    @VisibleForTesting void onProjectHourlyReportRequest (@Nonnull @ListensTo final ProjectHourlyReportRequest request)
       {
-        final HourlyReport report = request.getProject().as(HourlyReportGenerator).createReport();
+        final HourlyReport report = request.getProject().as(_HourlyReportGenerator_).createReport();
         presentation.bind();
         presentation.showUp(notificationWithFeedback().withCaption("Project Hourly Report"));
         presentation.populate(PresentationModel.of("???", (PlainTextRenderable) (args) -> report.asString()));

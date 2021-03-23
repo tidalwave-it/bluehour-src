@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -47,13 +46,12 @@ import lombok.With;
  * This class models a single job event.
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
 @Immutable
 public interface JobEvent extends Identifiable, As
   {
-    public enum Type { TIMED, FLAT };
+    public enum Type { TIMED, FLAT }
 
     /*******************************************************************************************************************
      *
@@ -76,7 +74,7 @@ public interface JobEvent extends Identifiable, As
 
         public Builder()
           {
-            this(new Id(""), Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.<JobEvent>emptyList());
+            this(new Id(""), Type.TIMED, null, null, "", "", Money.ZERO, Money.ZERO, Collections.emptyList());
           }
 
         @Nonnull
@@ -88,7 +86,9 @@ public interface JobEvent extends Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @return
+     * Creates a builder for a job event.
+     *
+     * @return  the builder
      *
      ******************************************************************************************************************/
     @Nonnull
@@ -99,7 +99,9 @@ public interface JobEvent extends Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @return
+     * Returns a builder pre-populated with all the attributes.
+     *
+     * @return  the builder
      *
      ******************************************************************************************************************/
     @Nonnull

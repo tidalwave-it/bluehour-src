@@ -20,7 +20,6 @@
 
   *********************************************************************************************************************
 
-  $Id$
 
 *********************************************************************************************************************
 #L%
@@ -38,10 +37,6 @@
 
     <!-- ===============================================================================================================
 
-        This is the "Modules POM" of the project. It is an intermediate-level POM, just below the "Master POM", which
-        takes care of everything we need for used dependencies: declare their versions with a <dependencyManagement>
-        section. This POM includes, one by one, all the actual modules of the project.
-
     ================================================================================================================ -->
 
     <groupId>it.tidalwave.accounting</groupId>
@@ -53,37 +48,29 @@
 
     <!-- ===============================================================================================================
 
-        Here you declare some properties defining the version of dependencies used by this project. All dependencies
-        for all modules must be enumerated, and specified below in the <dependencyManagement> section.
-
     ================================================================================================================ -->
     <properties>
-        <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
-        <tft.javafx.version>11.0.1</tft.javafx.version>
+        <tft.javac.source>11</tft.javac.source>
+        <tft.javac.target>11</tft.javac.target>
+        <tft.javac.release>11</tft.javac.release>
 
         <activation.version>1.1.1</activation.version>
         <aquafx.version>0.2</aquafx.version>
         <commons-codec.version>1.9</commons-codec.version>
         <commons-configuration.version>1.10</commons-configuration.version>
-        <guava.version>30.1-jre</guava.version>
         <jaxb.version>2.2.11</jaxb.version>
+        <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
+        <tft.javafx.version>11.0.1</tft.javafx.version>
         <tft.spring.version>5.3.1</tft.spring.version>
-        <steelblue.version>1.0-ALPHA-17</steelblue.version>
-        <thesefoolishthings.version>3.2-ALPHA-1</thesefoolishthings.version>
+        <steelblue.version>1.1-ALPHA-1</steelblue.version>
+        <thesefoolishthings.version>3.2-ALPHA-7</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
+
+        <tft.appbundle.name>blueHour</tft.appbundle.name>
+        <tft.appbundle.signature>TDLW</tft.appbundle.signature>
     </properties>
 
     <!-- ===============================================================================================================
-
-        Here you declare the dependencies used by all the modules in the project. This section only instructs Maven to
-        remember the version of each dependency, while actual dependencies will be enumerated in each module requiring
-        them. This section is a fundamental part of Maven best practices, as it ensures that dependency convergence is
-        preserved: that is the same dependency is not listed in different places with different versions.
-        For the sake of readability, don't inline version numbers here, but use properties specified in the
-        <properties> section above.
-        Keep dependencies for tests separated for better readability.
-        You shouldn't declare the modules of this project here, instead they should go in the <dependencyManagement>
-        section of the "Master POM".
 
     ================================================================================================================ -->
     <dependencyManagement>
@@ -108,12 +95,6 @@
                 <version>${steelblue.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
@@ -179,17 +160,11 @@
 
     <!-- ===============================================================================================================
 
-        Here you declare some actual dependencies that are shared by all the modules in this project. This usually
-        includes common stuff such as annotations, annotation processors, and the libraries for testing. This section
-        might be empty.
-        Don't specify versions here - they should be listed in the <dependencyManagement> section above.
-        Keep dependencies for tests separated for better readability.
-
     ================================================================================================================ -->
     <dependencies>
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
 
         <dependency>
@@ -198,7 +173,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- TEST DEPENDENCIES -->
+       <!-- Test dependencies -->
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-util-test</artifactId>
@@ -227,44 +202,17 @@
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce-banned-dependencies</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <bannedDependencies>
-                                    <excludes>
-                                        <exclude>commons-logging:commons-logging</exclude>
-                                        <exclude>org.aspectj:aspectjweaver</exclude>
-                                        <exclude>com.kenai.nbpwr:org-slf4j-jdk14</exclude>
-                                    </excludes>
-                                </bannedDependencies>
-                            </rules>
-                            <fail>true</fail>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <!-- ===============================================================================================================
-
-        Inclusion of modules participating in this project. Remember to list all the modules as soon as you add them
-        to the project.
 
     ================================================================================================================ -->
     <modules>
@@ -281,7 +229,19 @@
         <module>UIiBizImporter</module>
         <module>JavaFXUI</module>
         <module>JavaFXApplication</module>
-        <module>Installers/macOS</module>
     </modules>
+
+
+    <!-- ===============================================================================================================
+
+    ================================================================================================================ -->
+    <profiles>
+        <profile>
+            <id>installers</id>
+            <modules>
+                <module>Installers/macOS</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>

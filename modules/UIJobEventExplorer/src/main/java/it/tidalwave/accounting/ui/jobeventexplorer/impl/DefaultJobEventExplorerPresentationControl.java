@@ -20,7 +20,6 @@
  *
  * *********************************************************************************************************************
  *
- * $Id$
  *
  * *********************************************************************************************************************
  * #L%
@@ -28,9 +27,8 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
-import javax.inject.Named;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.role.ui.Visible;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
@@ -40,25 +38,26 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
-import static it.tidalwave.role.ui.Presentable.Presentable;
+import static it.tidalwave.util.Parameters.r;
+import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
- * @version $Id$
  *
  **********************************************************************************************************************/
-@DciContext @SimpleMessageSubscriber @Slf4j
+@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultJobEventExplorerPresentationControl implements JobEventExplorerPresentationControl
   {
-    @Inject @Named("applicationMessageBus") @Nonnull
-    private MessageBus messageBus;
+    @Nonnull
+    private final MessageBus messageBus;
 
-    @Inject @Nonnull
-    private JobEventExplorerPresentation presentation;
+    @Nonnull
+    private final JobEventExplorerPresentation presentation;
 
     /*******************************************************************************************************************
      *
@@ -79,14 +78,14 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
      * @param  event  the notification event
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onProjectSelectedEvent (final @Nonnull @ListensTo ProjectSelectedEvent event)
+    @VisibleForTesting void onProjectSelectedEvent (@Nonnull @ListensTo final ProjectSelectedEvent event)
       {
         log.info("onProjectSelectedEvent({})", event);
         presentation.populate(event.getProject().findChildren()
                                                 .stream()
                                                 .map(jobEvent -> (JobEventSpi)jobEvent)
                                                 .sorted(comparing(JobEventSpi::getDateTime))
-                                                .map(jobEvent -> jobEvent.as(Presentable).createPresentationModel())
-                                                .collect(toCompositePresentationModel()));
+                                                .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
+                                                .collect(toCompositePresentationModel(r(Visible.INVISIBLE))));
       }
   }
