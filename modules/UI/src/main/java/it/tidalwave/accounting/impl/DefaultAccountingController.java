@@ -29,7 +29,7 @@ package it.tidalwave.accounting.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
@@ -85,7 +85,8 @@ public class DefaultAccountingController
      * Reply with a message carrying a reference to the {@link Accounting} instance. 
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onAccountingOpenRequest (@Nonnull @ListensTo final AccountingOpenRequest request)
+    @VisibleForTesting
+    void onAccountingOpenRequest (@Nonnull @ListensTo final AccountingOpenRequest request)
       {
         // already done at this point, just send a response
         messageBus.publish(new AccountingOpenedEvent(accounting));

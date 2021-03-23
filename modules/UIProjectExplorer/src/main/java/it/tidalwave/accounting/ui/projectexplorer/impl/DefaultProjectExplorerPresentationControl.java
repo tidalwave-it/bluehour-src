@@ -27,7 +27,7 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;

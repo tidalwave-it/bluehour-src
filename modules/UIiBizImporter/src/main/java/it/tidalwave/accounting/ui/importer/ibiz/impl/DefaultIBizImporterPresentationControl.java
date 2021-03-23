@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.BoundProperty;
 import it.tidalwave.messagebus.MessageBus;

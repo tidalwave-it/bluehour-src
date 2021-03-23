@@ -27,7 +27,7 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
-import com.google.common.annotations.VisibleForTesting;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;

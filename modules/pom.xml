@@ -58,7 +58,6 @@
         <aquafx.version>0.2</aquafx.version>
         <commons-codec.version>1.9</commons-codec.version>
         <commons-configuration.version>1.10</commons-configuration.version>
-        <guava.version>30.1-jre</guava.version>
         <jaxb.version>2.2.11</jaxb.version>
         <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
         <tft.javafx.version>11.0.1</tft.javafx.version>
@@ -96,12 +95,6 @@
                 <version>${steelblue.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
