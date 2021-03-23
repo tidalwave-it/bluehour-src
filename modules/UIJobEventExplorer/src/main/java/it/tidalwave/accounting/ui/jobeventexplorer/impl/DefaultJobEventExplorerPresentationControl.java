@@ -27,6 +27,7 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
+import it.tidalwave.role.ui.Visible;
 import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
@@ -40,6 +41,7 @@ import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationC
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.comparing;
+import static it.tidalwave.util.Parameters.r;
 import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
@@ -84,6 +86,6 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
                                                 .map(jobEvent -> (JobEventSpi)jobEvent)
                                                 .sorted(comparing(JobEventSpi::getDateTime))
                                                 .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
-                                                .collect(toCompositePresentationModel()));
+                                                .collect(toCompositePresentationModel(r(Visible.INVISIBLE))));
       }
   }
