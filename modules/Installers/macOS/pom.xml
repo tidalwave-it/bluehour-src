@@ -36,13 +36,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <!-- ===============================================================================================================
-
-        This is the "Mac OS X Installer with embedded JRE module" of the project. It generates a Mac OS X application
-        bundle in form of a dmg.gz file  an embedded JRE.
-
-    ================================================================================================================ -->
-
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-macos</artifactId>
     <version>1.0-ALPHA-7-SNAPSHOT</version>
@@ -68,6 +61,24 @@
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
+        </dependency>
+
+        <!-- Runtime dependencies. -->
+        <!-- They should be transitive of it-tidalwave-accounting-application-javafx<, but some are missing if not listed here. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

@@ -40,6 +40,9 @@
     <version>1.0-ALPHA-7-SNAPSHOT</version>
     <name>blueHour - UI - Commons</name>
     <packaging>jar</packaging>
+    <description>
+        This module provides some common stuff shared among all UI modules.
+    </description>
 
     <dependencies>
         <dependency>
@@ -79,22 +82,5 @@
             <artifactId>it-tidalwave-role-ui-javafx</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <configuration>
-                    <aspectLibraries combine.children="append">
-                        <dependency>
-                            <groupId>it.tidalwave.thesefoolishthings</groupId>
-                            <artifactId>it-tidalwave-messagebus-spring</artifactId>
-                        </dependency>
-                    </aspectLibraries>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

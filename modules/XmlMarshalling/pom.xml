@@ -39,6 +39,9 @@
     <version>1.0-ALPHA-7-SNAPSHOT</version>
     <name>blueHour - Marshalling - XML</name>
     <packaging>jar</packaging>
+    <description>
+        This module implements XML marshalling for data structures.
+    </description>
 
     <properties>
         <!-- Otherwise can't be released because of missing javadocs -->
@@ -56,7 +59,7 @@
             <artifactId>jaxb-api</artifactId>
         </dependency>
 
-        <!-- RUNTIME DEPENDENCIES -->
+        <!-- Runtime dependencies -->
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
@@ -73,7 +76,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- TEST DEPENDENCIES -->
+       <!-- Test dependencies -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>

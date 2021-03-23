@@ -40,6 +40,9 @@
     <version>1.0-ALPHA-7-SNAPSHOT</version>
     <name>blueHour - Model, In-Memory Implementation</name>
     <packaging>jar</packaging>
+    <description>
+        This module provides an in-memory implementation for all model classes.
+    </description>
 
     <dependencies>
         <dependency>
@@ -57,15 +60,9 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
-        <!-- TEST DEPENDENCIES -->
+       <!-- Test dependencies -->
         <dependency>
             <groupId>it.tidalwave.accounting</groupId>
             <artifactId>it-tidalwave-accounting-model</artifactId>
