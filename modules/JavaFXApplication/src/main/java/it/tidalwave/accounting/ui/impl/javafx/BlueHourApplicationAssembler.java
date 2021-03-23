@@ -56,7 +56,7 @@ public class BlueHourApplicationAssembler
     private final ToolBarModel toolBarModel;
 
     @Override
-    public void assemble (final @Nonnull JavaFXApplicationPresentationDelegate applicationPresentation)
+    public void assemble (@Nonnull final JavaFXApplicationPresentationDelegate applicationPresentation)
       {
         applicationPresentation.assemble(toolBarModel,
                                          javaFxCustomerExplorerPresentation.getNad().getNode(),

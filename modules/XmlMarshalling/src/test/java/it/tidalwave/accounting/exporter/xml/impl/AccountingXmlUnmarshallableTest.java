@@ -86,7 +86,7 @@ public class AccountingXmlUnmarshallableTest
       }
     
     @Test(dataProvider = "scenarios")
-    public void must_properly_unmarshall (final @Nonnull String scenarioName)
+    public void must_properly_unmarshall (@Nonnull final String scenarioName)
       throws Exception
       {
         final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");

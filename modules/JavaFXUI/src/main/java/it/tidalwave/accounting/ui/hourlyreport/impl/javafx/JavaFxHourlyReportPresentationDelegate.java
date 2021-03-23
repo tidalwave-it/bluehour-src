@@ -60,13 +60,13 @@ public class JavaFxHourlyReportPresentationDelegate implements HourlyReportPrese
       }
 
     @Override
-    public void showUp (final @Nonnull UserNotificationWithFeedback notification)
+    public void showUp (@Nonnull final UserNotificationWithFeedback notification)
       {
         binder.showInModalDialog(pnHourlyReport, notification);
       }
 
     @Override
-    public void populate (final @Nonnull PresentationModel pm)
+    public void populate (@Nonnull final PresentationModel pm)
       {
         taReport.setText(pm.as(_PlainTextRenderable_).render());
       }

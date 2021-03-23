@@ -43,7 +43,7 @@ import static it.tidalwave.role.ui.UserActionProvider._UserActionProvider_;
 public class JavaFXToolBarModel extends ToolBarModelSupport
   {
     @Override
-    public void populate (final @Nonnull Object binder, final @Nonnull Object toolBar)
+    public void populate (@Nonnull final Object binder, @Nonnull final Object toolBar)
       {
         as(_UserActionProvider_).getActions().stream().map((action) ->
           {
@@ -53,9 +53,6 @@ public class JavaFXToolBarModel extends ToolBarModelSupport
             ((JavaFXBinder)binder).bind(button, action);
             return button;
           })
-        .forEach((button) ->
-          {
-            ((ToolBar)toolBar).getItems().add(button);
-          });
+        .forEach(button -> ((ToolBar)toolBar).getItems().add(button));
       }
   }

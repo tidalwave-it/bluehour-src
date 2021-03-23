@@ -58,7 +58,7 @@ public interface Customer extends Identifiable, As
       {
         public static interface Callback // Lombok @With doesn't support builder subclasses
           {
-            public void register (final @Nonnull Customer customer);
+            public void register (@Nonnull final Customer customer);
 
             public static final Callback DEFAULT = (customer) -> {};
           }
@@ -74,13 +74,13 @@ public interface Customer extends Identifiable, As
             this(Callback.DEFAULT);
           }
 
-        public Builder (final @Nonnull Callback callback)
+        public Builder (@Nonnull final Callback callback)
           {
             this(new Id(""), "", Address.EMPTY, "", callback);
           }
 
         @Nonnull
-        public Builder with (final @Nonnull Builder builder)
+        public Builder with (@Nonnull final Builder builder)
           {
             return builder.withCallback(callback);
           }
@@ -115,7 +115,9 @@ public interface Customer extends Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @return
+     * Returns a builder pre-populated with all the attributes.
+     *
+     * @return  the builder
      *
      ******************************************************************************************************************/
     @Nonnull

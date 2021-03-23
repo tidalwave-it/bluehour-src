@@ -27,8 +27,8 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;
@@ -45,7 +45,7 @@ import static it.tidalwave.util.Parameters.r;
 @DciRole(datumType = FlatJobEventSpi.class)
 public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi>
   {
-    public FlatJobEventPresentable (final @Nonnull FlatJobEventSpi flatJobEvent)
+    public FlatJobEventPresentable (@Nonnull final FlatJobEventSpi flatJobEvent)
       {
         super(flatJobEvent);
       }
@@ -64,6 +64,6 @@ public class FlatJobEventPresentable extends JobEventPresentable<FlatJobEventSpi
     @Override @Nonnull
     protected Collection<String> getStyles()
       {
-        return Arrays.asList("flat-job-event");
+        return List.of("flat-job-event");
       }
   }

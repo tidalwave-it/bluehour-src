@@ -37,7 +37,7 @@ import java.time.Duration;
 public class DurationFormat
   {
     @Nonnull
-    public String format (final @Nonnull Duration duration)
+    public String format (@Nonnull final Duration duration)
       {
         final long hours = duration.toHours();
         final long minutes = duration.minusHours(hours).toMinutes();

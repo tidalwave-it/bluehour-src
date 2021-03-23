@@ -67,7 +67,7 @@ public interface InvoiceRegistry
 
     /*******************************************************************************************************************
      *
-     * Returns a {@link Builder} for adding a {@link Invoice} to the registry.
+     * Returns an {@link Invoice.Builder} for adding a {@link Invoice} to the registry.
      *
      * @return  the builder
      *

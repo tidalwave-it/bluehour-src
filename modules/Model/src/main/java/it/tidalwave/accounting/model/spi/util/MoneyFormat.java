@@ -38,7 +38,7 @@ import it.tidalwave.accounting.model.types.Money;
  **********************************************************************************************************************/
 public class MoneyFormat
   {
-    private final static Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
+    private static final Map<String, String> CURRENCY_SYMBOL_MAP = new HashMap<>();
 
     static
       {
@@ -47,7 +47,7 @@ public class MoneyFormat
       }
 
     @Nonnull
-    public String format (final @Nonnull Money amount)
+    public String format (@Nonnull final Money amount)
       {
         final String currency = amount.getCurrency();
         return String.format("%s %s", Money.getFormat().format(amount.getAmount()),

@@ -96,7 +96,7 @@ public class JobEventXml
     @XmlElement(name = "event")
     private List<JobEventXml> jobEventsXml; 
     
-    public JobEventXml (final @Nonnull JobEvent jobEvent)
+    public JobEventXml (@Nonnull final JobEvent jobEvent)
       {
         final JobEvent.Builder builder = jobEvent.toBuilder();
         this.id = builder.getId();
@@ -109,7 +109,7 @@ public class JobEventXml
         this.hourlyRate = builder.getHourlyRate();
         this.jobEventsXml = builder.getEvents().isEmpty() 
                     ? null
-                    : builder.getEvents().stream().map(event -> new JobEventXml(event)).collect(toList());
+                    : builder.getEvents().stream().map(JobEventXml::new).collect(toList());
       }
     
     @Nonnull
@@ -127,7 +127,7 @@ public class JobEventXml
       }
     
     @Nonnull
-    public static List<JobEvent> toJobEvents (final @Nullable List<JobEventXml> jobEventsXml)
+    public static List<JobEvent> toJobEvents (@Nullable final List<JobEventXml> jobEventsXml)
       {
         return (jobEventsXml == null) 
                 ? Collections.emptyList()

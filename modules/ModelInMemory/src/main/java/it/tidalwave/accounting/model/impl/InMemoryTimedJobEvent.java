@@ -64,7 +64,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
      * 
      *
      ******************************************************************************************************************/
-    public /* FIXME protected */ InMemoryTimedJobEvent (final @Nonnull Builder builder)
+    public /* FIXME protected */ InMemoryTimedJobEvent (@Nonnull final Builder builder)
       {
         super(builder);
         this.startDateTime = builder.getStartDateTime();
@@ -82,7 +82,7 @@ public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobE
     public JobEvent.Builder toBuilder()
       {
         return new Builder(id, Type.TIMED, startDateTime, endDateTime, name, description, 
-                           earnings, hourlyRate, Collections.<JobEvent>emptyList());
+                           earnings, hourlyRate, Collections.emptyList());
       }
     
     /*******************************************************************************************************************

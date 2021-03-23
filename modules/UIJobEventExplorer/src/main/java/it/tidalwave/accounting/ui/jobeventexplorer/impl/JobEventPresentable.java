@@ -57,8 +57,8 @@ public abstract class JobEventPresentable<TYPE extends JobEventSpi> implements P
     @Nonnull
     protected final TYPE jobEvent;
 
-    @Override
-    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
+    @Override @Nonnull
+    public PresentationModel createPresentationModel (@Nonnull final Collection<Object> instanceRoles)
       {
         return PresentationModel.of(jobEvent, r(presentationModelAggregate(), Styleable.of(getStyles()), instanceRoles));
       }

@@ -57,38 +57,38 @@ public class ConfigurationDecorator implements Configuration
     private final Configuration delegate;
 
     @Nonnull
-    public Id getId (final @Nonnull String key)
+    public Id getId (@Nonnull final String key)
       {
         return new Id(delegate.getString(key).replace(":ABPerson", ""));
       }
 
     @Nonnull
-    public Money getMoney (final @Nonnull String key)
+    public Money getMoney (@Nonnull final String key)
       {
         return new Money(delegate.getBigDecimal(key).round(ROUNDING), "EUR");
       }
 
     @Nonnull
-    public LocalDateTime getDateTime (final @Nonnull String key)
+    public LocalDateTime getDateTime (@Nonnull final String key)
       {
         return LocalDateTime.ofInstant(((Date)delegate.getProperty(key)).toInstant(), ZoneId.systemDefault());
       }
 
     @Nonnull
-    public LocalDate getDate (final @Nonnull String key)
+    public LocalDate getDate (@Nonnull final String key)
       {
         return getDateTime(key).toLocalDate();
       }
 
     @Nonnull
-    public Stream<ConfigurationDecorator> getStream (final @Nonnull String name)
+    public Stream<ConfigurationDecorator> getStream (@Nonnull final String name)
       {
         return delegate.getList(name).stream().map(o -> new ConfigurationDecorator((Configuration)o));
       }
 
     @Nonnull
-    public List<Id> getIds (final @Nonnull String key) 
+    public List<Id> getIds (@Nonnull final String key)
       {
-        return delegate.getList(key).stream().map(id -> new Id(id)).collect(toList());
+        return delegate.getList(key).stream().map(Id::new).collect(toList());
       }
   }

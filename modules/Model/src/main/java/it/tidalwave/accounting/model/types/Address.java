@@ -95,7 +95,7 @@ public class Address
      *
      *
      ******************************************************************************************************************/
-    protected Address (final @Nonnull Builder builder)
+    protected Address (@Nonnull final Builder builder)
       {
         this.street = builder.getStreet();
         this.city = builder.getCity();

@@ -53,7 +53,7 @@ import lombok.With;
 @Immutable
 public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
   {
-    public enum Status { OPEN, CLOSED };
+    public enum Status { OPEN, CLOSED }
 
     /*******************************************************************************************************************
      *
@@ -66,7 +66,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
       {
         public static interface Callback // Lombok @With doesn't support builder subclasses
           {
-            public void register (final @Nonnull Project project);
+            public void register (@Nonnull final Project project);
 
             public static final Callback DEFAULT = (project) -> {};
           }
@@ -90,15 +90,15 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
             this(Callback.DEFAULT);
           }
 
-        public Builder (final @Nonnull Callback callback)
+        public Builder (@Nonnull final Callback callback)
           {
              // FIXME: avoid null
             this(new Id(""), null, "", "", "", "", Status.OPEN, Money.ZERO, Money.ZERO, null, null,
-                 Collections.<JobEvent>emptyList(), callback);
+                 Collections.emptyList(), callback);
           }
 
         @Nonnull
-        public Builder with (final @Nonnull Builder builder)
+        public Builder with (@Nonnull final Builder builder)
           {
             return builder.withCallback(callback);
           }
@@ -141,7 +141,9 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
 
     /*******************************************************************************************************************
      *
-     * @return
+     * Returns a builder pre-populated with all the attributes.
+     *
+     * @return  the builder
      *
      ******************************************************************************************************************/
     @Nonnull

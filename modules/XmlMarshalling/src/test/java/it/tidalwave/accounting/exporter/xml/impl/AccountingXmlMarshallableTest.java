@@ -92,7 +92,7 @@ public class AccountingXmlMarshallableTest
       }
     
     @Test(dataProvider = "accountings", dataProviderClass = ScenarioFactory.class)
-    public void must_properly_marshall (final @Nonnull String scenarioName, final @Nonnull Accounting scenario)
+    public void must_properly_marshall (@Nonnull final String scenarioName, @Nonnull final Accounting scenario)
       throws Exception
       {
         final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");

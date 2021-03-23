@@ -72,7 +72,6 @@ public interface IBizProjectImporter
      * @throws  IOException     in case of error
      * 
      ******************************************************************************************************************/
-    @Nonnull
     public void importProjects()
       throws IOException;
   }

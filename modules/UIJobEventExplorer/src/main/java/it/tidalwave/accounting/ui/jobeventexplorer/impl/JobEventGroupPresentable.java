@@ -27,8 +27,8 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.PresentationModel;
@@ -50,21 +50,20 @@ import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 @DciRole(datumType = JobEventGroupSpi.class)
 public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupSpi>
   {
-    public JobEventGroupPresentable (final @Nonnull JobEventGroupSpi jobEventGroup)
+    public JobEventGroupPresentable (@Nonnull final JobEventGroupSpi jobEventGroup)
       {
         super(jobEventGroup);
       }
 
     @Override @Nonnull
-    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
+    public PresentationModel createPresentationModel (@Nonnull final Collection<Object> instanceRoles)
       {
-        final Styleable styleable = Styleable.of(getStyles());
         return jobEvent.findChildren()
                        .stream()
                        .map(jobEvent -> (JobEventSpi)jobEvent)
                        .sorted(comparing(JobEventSpi::getDateTime))
                        .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
-                       .collect(toCompositePresentationModel(r(presentationModelAggregate(), styleable)));
+                       .collect(toCompositePresentationModel(r(presentationModelAggregate(), Styleable.of(getStyles()))));
         // FIXME: use SimpleCompositePresentable?
       }
 
@@ -80,6 +79,6 @@ public class JobEventGroupPresentable extends JobEventPresentable<JobEventGroupS
     @Override @Nonnull
     protected Collection<String> getStyles()
       {
-        return Arrays.asList("job-event-group");
+        return List.of("job-event-group");
       }
   }

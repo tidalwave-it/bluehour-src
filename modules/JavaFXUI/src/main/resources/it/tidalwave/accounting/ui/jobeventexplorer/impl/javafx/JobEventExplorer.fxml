@@ -6,26 +6,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentationDelegate">
-    <children>
-        <VBox layoutX="22.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-                <TreeTableView fx:id="ttvJobEventExplorer" prefHeight="200.0" prefWidth="200.0" showRoot="false" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Date" />
-                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Job Event" />
-                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Time" />
-                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="HourlyRate" />
-                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Amount" />
-                        <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Notes" />
-                    </columns>
-                    <columnResizePolicy>
-                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                    </columnResizePolicy>
-                </TreeTableView>
-                <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER" />
-            </children>
-        </VBox>
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentationDelegate">
+    <VBox layoutX="22.0" layoutY="35.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER"/>
+        <TreeTableView fx:id="ttvJobEventExplorer" prefHeight="200.0" prefWidth="200.0" showRoot="false" VBox.vgrow="ALWAYS">
+            <columns>
+                <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Date"/>
+                <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Job Event"/>
+                <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Time"/>
+                <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="HourlyRate"/>
+                <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Amount"/>
+                <TreeTableColumn editable="false" prefWidth="75.0" sortable="false" text="Notes"/>
+            </columns>
+            <columnResizePolicy>
+                <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TreeTableView>
+        <HBox maxHeight="24.0" minHeight="24.0" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER"/>
+    </VBox>
 </AnchorPane>

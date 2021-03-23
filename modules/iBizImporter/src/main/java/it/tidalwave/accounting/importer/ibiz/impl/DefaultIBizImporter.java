@@ -51,7 +51,7 @@ public class DefaultIBizImporter implements IBizImporter
 
     /*******************************************************************************************************************
      *
-     * @return 
+     * @return    a builder
      * 
      ******************************************************************************************************************/
     @Nonnull
@@ -65,7 +65,7 @@ public class DefaultIBizImporter implements IBizImporter
      * @param   builder
      *
      ******************************************************************************************************************/
-    public DefaultIBizImporter (final @Nonnull IBizImporter.Builder builder) // FIXME: protected
+    public DefaultIBizImporter (@Nonnull final IBizImporter.Builder builder) // FIXME: protected
       {
         this.path = builder.getPath();
       }
@@ -75,7 +75,7 @@ public class DefaultIBizImporter implements IBizImporter
      * {@inheritDoc}
      * 
      ******************************************************************************************************************/    
-    @Override @Nonnull
+    @Override
     public void importAll()
       throws IOException
       {

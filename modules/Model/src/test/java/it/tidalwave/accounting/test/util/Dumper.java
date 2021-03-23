@@ -75,47 +75,47 @@ public class Dumper
         dumpInvoices(accounting.getInvoiceRegistry().findInvoices());
       }
 
-    private void dumpCustomers (final @Nonnull Finder<Customer> customers)
+    private void dumpCustomers (@Nonnull final Finder<Customer> customers)
       {
         customers.stream().map(customer -> (CustomerSpi)customer)
                           .sorted(comparing(CustomerSpi::getName))
                           .forEach(customer -> pw.printf("%s\n", toString(customer)));
       }
 
-    private void dumpInvoices (final @Nonnull Finder<Invoice> invoices)
+    private void dumpInvoices (@Nonnull final Finder<Invoice> invoices)
       throws IOException
       {
         invoices.stream().map(invoice -> (InvoiceSpi)invoice)
                          .sorted(comparing(InvoiceSpi::getNumber))
-                         .forEach(invoice -> dump(invoice));
+                         .forEach(this::dump);
       }
 
-    private void dumpProjects (final @Nonnull Finder<Project> projects)
+    private void dumpProjects (@Nonnull final Finder<Project> projects)
       throws IOException
       {
         projects.stream().map(project -> (ProjectSpi)project)
                          .sorted(comparing(ProjectSpi::getName).thenComparing(ProjectSpi::getStartDate))
-                         .forEach(project -> dump(project));
+                         .forEach(this::dump);
       }
 
-    private void dump (final @Nonnull Project project)
+    private void dump (@Nonnull final Project project)
       {
         pw.printf("%s\n", toString(project));
         dump(project.findChildren(), INDENT);
       }
 
-    private void dump (final @Nonnull Invoice invoice)
+    private void dump (@Nonnull final Invoice invoice)
       {
         pw.printf("%s\n", toString(invoice));
         dump(invoice.findJobEvents(), INDENT);
       }
 
-    private void dump (final @Nonnull Finder<JobEvent> events, final @Nonnull String prefix)
+    private void dump (@Nonnull final Finder<JobEvent> events, @Nonnull final String prefix)
       {
         events.stream().forEach(event -> dump(event, prefix));
       }
 
-    private void dump (final @Nonnull JobEvent event, final @Nonnull String prefix)
+    private void dump (@Nonnull final JobEvent event, @Nonnull final String prefix)
       {
         pw.printf("%s%s\n", prefix, toString(event));
 
@@ -126,18 +126,17 @@ public class Dumper
       }
 
     @Nonnull
-    public static String toString (final @Nonnull Object event)
+    public static String toString (@Nonnull final Object event)
       {
-        final String s = Stream.concat(Arrays.asList(event.getClass().getDeclaredFields()).stream(),
-                                       Arrays.asList(event.getClass().getSuperclass().getDeclaredFields()).stream())
+        final String s = Stream.concat(Arrays.stream(event.getClass().getDeclaredFields()),
+                                       Arrays.stream(event.getClass().getSuperclass().getDeclaredFields()))
                                         .sorted(comparing(Field::getName))
                                         .filter(excludeUnwantedFields)
                                         .peek(field -> field.setAccessible(true))
                                         .map(field -> field.getName() + "=" + safeGet(field, event))
                                         .collect(joining(", "));
 
-        String className = "?";
-
+        String className;
         Class<?>[] interfaces = event.getClass().getInterfaces();
 
         if (interfaces.length > 0) // assumes the business interface is the first
@@ -153,7 +152,7 @@ public class Dumper
         return String.format("%s(%s)", className, s);
       }
 
-    private final static Predicate<? super Field> excludeUnwantedFields = field ->
+    private static final Predicate<? super Field> excludeUnwantedFields = field ->
       {
         final Class<?> type = field.getType();
         return !Modifier.isStatic(field.getModifiers())
@@ -163,7 +162,7 @@ public class Dumper
       };
 
     @CheckForNull
-    private static Object safeGet (final @Nonnull Field field, final @Nonnull Object object)
+    private static Object safeGet (@Nonnull final Field field, @Nonnull final Object object)
       {
         try
           {

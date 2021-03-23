@@ -60,10 +60,10 @@ public class JavaFXApplicationPresentationDelegate
     @FXML
     private AnchorPane pnJobEventExplorer;
 
-    public void assemble (final @Nonnull ToolBarModel toolBarModel,
-                          final @Nonnull Node ndCustomerExplorer,
-                          final @Nonnull Node ndProjectExplorer,
-                          final @Nonnull Node ndJobEventExplorer)
+    public void assemble (@Nonnull final ToolBarModel toolBarModel,
+                          @Nonnull final Node ndCustomerExplorer,
+                          @Nonnull final Node ndProjectExplorer,
+                          @Nonnull final Node ndJobEventExplorer)
       {
         toolBarModel.populate(binder, tbToolBar);
         put(pnCustomerExplorer, ndCustomerExplorer);
@@ -71,7 +71,7 @@ public class JavaFXApplicationPresentationDelegate
         put(pnJobEventExplorer, ndJobEventExplorer);
       }
 
-    private static void put (final @Nonnull AnchorPane anchorPane, final @Nonnull Node node)
+    private static void put (@Nonnull final AnchorPane anchorPane, @Nonnull final Node node)
       {
         AnchorPane.setLeftAnchor(node, 0.0);
         AnchorPane.setRightAnchor(node, 0.0);

@@ -74,14 +74,14 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
      * @param  event  the notification event
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onCustomerSelectedEvent (final @Nonnull @ListensTo CustomerSelectedEvent event)
+    @VisibleForTesting void onCustomerSelectedEvent (@Nonnull @ListensTo final CustomerSelectedEvent event)
       {
         log.info("onCustomerSelectedEvent({})", event);
         presentation.populate(event.getCustomer().findProjects()
                                                  .stream()
                                                  .map(project -> (ProjectSpi)project)
                                                  .sorted(comparing(ProjectSpi::getName))
-                                                 .map(project -> createPresentationModelFor(project))
+                                                 .map(this::createPresentationModelFor)
                                                  .collect(toCompositePresentationModel()));
       }
     
@@ -90,12 +90,12 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
      * Creates a {@link PresentationModel} for a {@link Project} injecting a {@link Selectable} role which fires a
      * {@link ProjectSelectedEvent} on selection.
      * 
-     * @param  customer     the {@code Project}
+     * @param  project      the {@code Project}
      * @return              the {@code PresentationModel}
      *
      ******************************************************************************************************************/
     @Nonnull
-    @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Project project)
+    @VisibleForTesting PresentationModel createPresentationModelFor (@Nonnull final Project project)
       {
         final Selectable publishEventOnSelection = () -> messageBus.publish(new ProjectSelectedEvent(project));
         return project.as(_Presentable_).createPresentationModel(publishEventOnSelection);

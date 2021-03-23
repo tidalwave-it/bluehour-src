@@ -68,7 +68,7 @@ public class CustomerXml
     @XmlElement(name = "vatNumber")
     private String vatNumber;
     
-    public CustomerXml (final @Nonnull Customer customer)
+    public CustomerXml (@Nonnull final Customer customer)
       {
         final Customer.Builder builder = customer.toBuilder();
         this.id = builder.getId();

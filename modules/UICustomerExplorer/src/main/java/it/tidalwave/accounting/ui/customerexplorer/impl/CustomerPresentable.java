@@ -41,15 +41,14 @@ import static it.tidalwave.util.Parameters.r;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@DciRole(datumType = CustomerSpi.class)
-@RequiredArgsConstructor
+@DciRole(datumType = CustomerSpi.class) @RequiredArgsConstructor
 public class CustomerPresentable implements Presentable
   {
     @Nonnull
     private final CustomerSpi customer;
 
-    @Override
-    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
+    @Override @Nonnull
+    public PresentationModel createPresentationModel (@Nonnull final Collection<Object> instanceRoles)
       {
         return PresentationModel.of(customer, r(Displayable.of(customer.getName()), instanceRoles));
       }

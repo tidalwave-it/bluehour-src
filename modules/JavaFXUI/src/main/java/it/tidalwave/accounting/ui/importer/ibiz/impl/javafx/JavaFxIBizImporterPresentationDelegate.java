@@ -48,7 +48,7 @@ public class JavaFxIBizImporterPresentationDelegate implements IBizImporterPrese
     private BoundProperty<Path> iBizFolder;
 
     @Override
-    public void bind (final @Nonnull BoundProperty<Path> iBizFolder)
+    public void bind (@Nonnull final BoundProperty<Path> iBizFolder)
       {
         this.iBizFolder = iBizFolder;
       }
@@ -66,7 +66,7 @@ public class JavaFxIBizImporterPresentationDelegate implements IBizImporterPrese
       }
 
     @Override
-    public void chooseFolder (final @Nonnull UserNotificationWithFeedback feedback)
+    public void chooseFolder (@Nonnull final UserNotificationWithFeedback feedback)
       {
         binder.openDirectoryChooserFor(feedback, iBizFolder);
       }

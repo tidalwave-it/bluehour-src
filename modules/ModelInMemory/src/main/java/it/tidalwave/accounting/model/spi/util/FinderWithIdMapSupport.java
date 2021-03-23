@@ -62,8 +62,8 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
         mapById = Collections.emptyMap();
       }
     
-    public FinderWithIdMapSupport (final @Nonnull FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> other,
-                                   final @Nonnull Object override) 
+    public FinderWithIdMapSupport (@Nonnull final FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> other,
+                                   @Nonnull final Object override)
       {
         super(other, override);
         final FinderWithIdMapSupport<TYPE, IMPLTYPE, FINDER> source = getSource(FinderWithIdMapSupport.class, other, override);
@@ -77,7 +77,7 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
       }
 
     @Override @Nonnull
-    protected Optional<IMPLTYPE> findById (final @Nonnull Id id)
+    protected Optional<IMPLTYPE> findById (@Nonnull final Id id)
       {
         return Optional.ofNullable(mapById.get(id));
       }

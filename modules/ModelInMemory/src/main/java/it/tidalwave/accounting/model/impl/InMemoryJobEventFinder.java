@@ -46,7 +46,7 @@ public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
     @Nonnull
     private final ProjectRegistry.ProjectFinder projectFinder;
     
-    public InMemoryJobEventFinder (final @Nonnull InMemoryJobEventFinder other, final @Nonnull Object override)
+    public InMemoryJobEventFinder (@Nonnull final InMemoryJobEventFinder other, @Nonnull final Object override)
       {
         super(other, override);
         this.projectFinder = other.projectFinder;
@@ -58,19 +58,17 @@ public class InMemoryJobEventFinder extends InMemoryJobEventFinderSupport
       {
         final List<InMemoryJobEvent> result = new ArrayList<>();
             
-        projectFinder.results().forEach(project -> 
-          {
-            project.findChildren().stream().map(jobEvent -> (InMemoryJobEvent)jobEvent).forEach(jobEvent -> 
+        projectFinder.results().forEach(project ->
+            project.findChildren().stream().map(jobEvent -> (InMemoryJobEvent)jobEvent).forEach(jobEvent ->
               {
                 result.add(jobEvent);
 
                 // FIXME: should be recursive
                 if (jobEvent instanceof JobEventGroup)
                   {
-                    result.addAll((List<? extends InMemoryJobEvent>)((JobEventGroup)jobEvent).findChildren().results());  
+                    result.addAll((List<? extends InMemoryJobEvent>)((JobEventGroup)jobEvent).findChildren().results());
                   }
-              });
-          });
+              }));
             
         return result;
       }

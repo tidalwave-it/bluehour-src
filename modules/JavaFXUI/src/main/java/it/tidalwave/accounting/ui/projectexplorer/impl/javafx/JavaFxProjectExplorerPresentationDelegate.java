@@ -49,7 +49,7 @@ public class JavaFxProjectExplorerPresentationDelegate implements ProjectExplore
     private TableView<PresentationModel> tvProjectExplorer;
 
     @Override
-    public void populate (final @Nonnull PresentationModel pm)
+    public void populate (@Nonnull final PresentationModel pm)
       {
         binder.bind(tvProjectExplorer, pm);
       }

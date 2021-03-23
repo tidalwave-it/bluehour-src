@@ -41,13 +41,13 @@ public class LocalDateAdapter extends XmlAdapter<String, LocalDate>
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
     
     @Override @Nonnull
-    public LocalDate unmarshal (final @Nonnull String v) 
+    public LocalDate unmarshal (@Nonnull final String v)
       {
         return LocalDate.parse(v, FORMATTER);
       }
 
     @Override @Nonnull
-    public String marshal (final @Nonnull LocalDate v) 
+    public String marshal (@Nonnull final LocalDate v)
       {
         return FORMATTER.format(v);
       }

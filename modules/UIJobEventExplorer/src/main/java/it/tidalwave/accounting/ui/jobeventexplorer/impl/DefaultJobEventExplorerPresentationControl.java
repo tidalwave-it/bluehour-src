@@ -76,7 +76,7 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
      * @param  event  the notification event
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onProjectSelectedEvent (final @Nonnull @ListensTo ProjectSelectedEvent event)
+    @VisibleForTesting void onProjectSelectedEvent (@Nonnull @ListensTo final ProjectSelectedEvent event)
       {
         log.info("onProjectSelectedEvent({})", event);
         presentation.populate(event.getProject().findChildren()

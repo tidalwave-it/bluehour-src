@@ -53,7 +53,7 @@ public class DefaultHourlyReportPresentationControl implements HourlyReportPrese
     @Nonnull
     private final HourlyReportPresentation presentation;
     
-    @VisibleForTesting void onProjectHourlyReportRequest (final @Nonnull @ListensTo ProjectHourlyReportRequest request)
+    @VisibleForTesting void onProjectHourlyReportRequest (@Nonnull @ListensTo final ProjectHourlyReportRequest request)
       {
         final HourlyReport report = request.getProject().as(_HourlyReportGenerator_).createReport();
         presentation.bind();

@@ -64,9 +64,9 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
     private final BoundProperty<Path> iBizFolder = new BoundProperty<>();
 
     @Nonnull
-    private IBizImporterPresentation presentation;
+    private final IBizImporterPresentation presentation;
     
-    @VisibleForTesting void onImportRequest (final @Nonnull @ListensTo ImportRequest request)
+    @VisibleForTesting void onImportRequest (@Nonnull @ListensTo final ImportRequest request)
       throws IOException
       {
         log.info("onImportRequest({})", request);

@@ -49,7 +49,7 @@ public class JavaFxJobEventExplorerPresentationDelegate implements JobEventExplo
     private TreeTableView<PresentationModel> ttvJobEventExplorer;
 
     @Override
-    public void populate (final @Nonnull PresentationModel pm)
+    public void populate (@Nonnull final PresentationModel pm)
       {
         binder.bind(ttvJobEventExplorer, pm);
         ttvJobEventExplorer.getRoot().setExpanded(true);

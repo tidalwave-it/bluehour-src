@@ -50,7 +50,7 @@ public final class IBizUtils
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public static <T> List<T> toList (final @Nonnull Iterator<T> i)
+    public static <T> List<T> toList (@Nonnull final Iterator<T> i)
       {
         final List<T> list = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public final class IBizUtils
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public static ConfigurationDecorator loadConfiguration (final @Nonnull Path path)
+    public static ConfigurationDecorator loadConfiguration (@Nonnull final Path path)
       throws IOException
       {
         try

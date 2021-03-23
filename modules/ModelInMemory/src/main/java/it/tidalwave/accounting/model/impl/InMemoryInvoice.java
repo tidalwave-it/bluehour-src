@@ -87,7 +87,7 @@ public class InMemoryInvoice implements InvoiceSpi
      *
      *
      ******************************************************************************************************************/
-    public /* FIXME private */ InMemoryInvoice (final @Nonnull Builder builder)
+    public /* FIXME private */ InMemoryInvoice (@Nonnull final Builder builder)
       {
         this.id = builder.getId();
         this.number = builder.getNumber();
@@ -101,7 +101,7 @@ public class InMemoryInvoice implements InvoiceSpi
 
     /*******************************************************************************************************************
      *
-     * @return
+     * {@inheritDoc}
      *
      ******************************************************************************************************************/
     @Override @Nonnull
@@ -112,7 +112,7 @@ public class InMemoryInvoice implements InvoiceSpi
 
     /*******************************************************************************************************************
      *
-     * @return
+     * {@inheritDoc}
      *
      ******************************************************************************************************************/
     @Override @Nonnull

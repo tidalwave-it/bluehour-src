@@ -82,13 +82,13 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
      * @param  event  the notification event
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onAccountingOpenedEvent (final @Nonnull @ListensTo AccountingOpenedEvent event)
+    @VisibleForTesting void onAccountingOpenedEvent (@Nonnull @ListensTo final AccountingOpenedEvent event)
       {
         log.info("onAccountingOpenedEvent({})", event);
         presentation.populate(event.getAccounting().getCustomerRegistry().findCustomers().stream()
                                    .map(customer -> (CustomerSpi)customer)
                                    .sorted(comparing(CustomerSpi::getName))
-                                   .map(customer -> createPresentationModelFor(customer))
+                                   .map(this::createPresentationModelFor)
                                    .collect(toCompositePresentationModel()));
       }
 
@@ -102,7 +102,7 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
      *
      ******************************************************************************************************************/
     @Nonnull
-    @VisibleForTesting PresentationModel createPresentationModelFor (final @Nonnull Customer customer)
+    @VisibleForTesting PresentationModel createPresentationModelFor (@Nonnull final Customer customer)
       {
         final Selectable publishEventOnSelection = () -> messageBus.publish(new CustomerSelectedEvent(customer));
         return customer.as(_Presentable_).createPresentationModel(publishEventOnSelection);

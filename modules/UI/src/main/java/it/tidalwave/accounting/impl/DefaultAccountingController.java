@@ -85,7 +85,7 @@ public class DefaultAccountingController
      * Reply with a message carrying a reference to the {@link Accounting} instance. 
      *
      ******************************************************************************************************************/
-    @VisibleForTesting void onAccountingOpenRequest (final @Nonnull @ListensTo AccountingOpenRequest request)
+    @VisibleForTesting void onAccountingOpenRequest (@Nonnull @ListensTo final AccountingOpenRequest request)
       {
         // already done at this point, just send a response
         messageBus.publish(new AccountingOpenedEvent(accounting));

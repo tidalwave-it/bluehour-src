@@ -63,7 +63,9 @@ public abstract class InMemoryJobEvent implements JobEvent
 
     /*******************************************************************************************************************
      *
-     * @return 
+     * Creates a new builder.
+     *
+     * @return  the builder
      * 
      ******************************************************************************************************************/
     @Nonnull
@@ -74,10 +76,12 @@ public abstract class InMemoryJobEvent implements JobEvent
 
     /*******************************************************************************************************************
      *
-     * @param builder
+     * Creates a new instance from a builder.
+     *
+     * @param builder   the builder
      * 
      ******************************************************************************************************************/
-    protected InMemoryJobEvent (final @Nonnull Builder builder)
+    protected InMemoryJobEvent (@Nonnull final Builder builder)
       {
         this.id = builder.getId();
         this.name = builder.getName();
@@ -86,7 +90,9 @@ public abstract class InMemoryJobEvent implements JobEvent
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * Returns the datetime of the event.
+     *
+     * @return    the date
      * 
      ******************************************************************************************************************/
     @Nonnull
@@ -94,7 +100,9 @@ public abstract class InMemoryJobEvent implements JobEvent
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * Returns the duration of the event.
+     *
+     * @return    the duration
      * 
      ******************************************************************************************************************/
     @Nonnull
@@ -102,7 +110,9 @@ public abstract class InMemoryJobEvent implements JobEvent
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * Returns the earnings for the event.
+     *
+     * @return    the earnings
      * 
      ******************************************************************************************************************/
     @Nonnull
@@ -110,7 +120,9 @@ public abstract class InMemoryJobEvent implements JobEvent
     
     /*******************************************************************************************************************
      *
-     * @return 
+     * Returns a builder pre-populated with all the attributes.
+     *
+     * @return  the builder
      * 
      ******************************************************************************************************************/
     @Nonnull

@@ -76,17 +76,17 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
       throws IOException
       {
         log.debug("importProjects()");
-        Files.walkFileTree(path.resolve("Projects"), new SimpleFileVisitor<Path>()
+        Files.walkFileTree(path.resolve("Projects"), new SimpleFileVisitor<>()
           {
             @Override
-            public FileVisitResult visitFile (final @Nonnull Path file, final @Nonnull BasicFileAttributes attrs)
-              throws IOException
+            public FileVisitResult visitFile (@Nonnull final Path file, @Nonnull final BasicFileAttributes attrs)
+                    throws IOException
               {
                 if (!file.toFile().getName().equals(".DS_Store"))
                   {
                     importProject(file);
                   }
-                        
+
                 return FileVisitResult.CONTINUE;
               }
           });
@@ -97,7 +97,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      * @throws  IOException  in case of error
      * 
      ******************************************************************************************************************/
-    private void importProject (final @Nonnull Path file)
+    private void importProject (@Nonnull final Path file)
       throws IOException
       {
         try
@@ -117,8 +117,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      * @param  projectConfig  the configuration object
      *
      ******************************************************************************************************************/
-    @Nonnull
-    private void importProject (final @Nonnull ConfigurationDecorator projectConfig)
+    private void importProject (@Nonnull final ConfigurationDecorator projectConfig)
       throws NotFoundException
       {
         final Id customerId = projectConfig.getId("clientIdentifier");
@@ -185,9 +184,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private List<JobEvent> importJobEvents (final @Nonnull Stream<ConfigurationDecorator> jobEventsConfig)
+    private List<JobEvent> importJobEvents (@Nonnull final Stream<ConfigurationDecorator> jobEventsConfig)
       {
-        return jobEventsConfig.map(jobEventConfig -> importJobEvent(jobEventConfig)).collect(toList());
+        return jobEventsConfig.map(this::importJobEvent).collect(toList());
       }
 
     /*******************************************************************************************************************
@@ -196,7 +195,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private JobEvent importJobEvent (final @Nonnull ConfigurationDecorator jobEventConfig)
+    private JobEvent importJobEvent (@Nonnull final ConfigurationDecorator jobEventConfig)
       {
 //        log.debug(">>>> properties: {}", toList(jobEvent.getKeys()));
 

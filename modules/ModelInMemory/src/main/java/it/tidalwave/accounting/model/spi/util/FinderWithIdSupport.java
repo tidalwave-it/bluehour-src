@@ -27,6 +27,7 @@
 package it.tidalwave.accounting.model.spi.util;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -64,8 +65,8 @@ public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends Ext
         id = Optional.empty();
       }
     
-    public FinderWithIdSupport (final @Nonnull FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> other, 
-                                final @Nonnull Object override) 
+    public FinderWithIdSupport (@Nonnull final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> other,
+                                @Nonnull final Object override)
       {
         super(other, override);
         final FinderWithIdSupport<TYPE, IMPLTYPE, FINDER> source = getSource(FinderWithIdSupport.class, other, override);
@@ -73,7 +74,7 @@ public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends Ext
       }
     
     @Nonnull
-    public FINDER withId (final @Nonnull Id id)
+    public FINDER withId (@Nonnull final Id id)
       {
         return clone(new FinderWithIdSupport<>(Optional.of(id)));
       }
@@ -81,8 +82,7 @@ public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends Ext
     @Override @Nonnull
     protected List<IMPLTYPE> computeResults()
       {
-        return id.map(id -> findById(id).map(item -> singletonList(item)).orElse(emptyList()))
-                 .orElse(findAll());
+        return id.map(id -> findById(id).map(Collections::singletonList).orElse(emptyList())).orElse(findAll());
       }
     
     @Nonnull

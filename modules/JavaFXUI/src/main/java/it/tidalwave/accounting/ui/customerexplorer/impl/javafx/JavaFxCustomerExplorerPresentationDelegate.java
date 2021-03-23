@@ -49,7 +49,7 @@ public class JavaFxCustomerExplorerPresentationDelegate implements CustomerExplo
     private ListView<PresentationModel> lvCustomerExplorer;
 
     @Override
-    public void populate (final @Nonnull PresentationModel pm)
+    public void populate (@Nonnull final PresentationModel pm)
       {
         binder.bind(lvCustomerExplorer, pm);
       }

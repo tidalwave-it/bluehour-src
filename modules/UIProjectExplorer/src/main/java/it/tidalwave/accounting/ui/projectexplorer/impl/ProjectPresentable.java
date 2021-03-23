@@ -55,8 +55,8 @@ public class ProjectPresentable implements Presentable
     @Nonnull
     private final ProjectSpi project;
 
-    @Override
-    public PresentationModel createPresentationModel (final @Nonnull Collection<Object> instanceRoles)
+    @Override @Nonnull
+    public PresentationModel createPresentationModel (@Nonnull final Collection<Object> instanceRoles)
       {
         return PresentationModel.of(project, r(aggregatePresentationModel(), instanceRoles));
       }

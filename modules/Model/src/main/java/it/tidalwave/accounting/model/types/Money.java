@@ -55,13 +55,13 @@ public class Money implements Comparable<Money>
     @Getter @Nonnull
     private final String currency;
 
-    public Money (final long amount, final @Nonnull String currency)
+    public Money (final long amount, @Nonnull final String currency)
       {
         this(BigDecimal.valueOf(amount), currency);
       }
 
     @Nonnull
-    public static Money parse (final @Nonnull String string)
+    public static Money parse (@Nonnull final String string)
       throws ParseException
       {
         final String[] parts = string.split(" ");
@@ -75,21 +75,21 @@ public class Money implements Comparable<Money>
       }
 
     @Nonnull
-    public Money add (final @Nonnull Money other)
+    public Money add (@Nonnull final Money other)
       {
         checkCurrencies(other);
         return new Money(amount.add(other.amount), currency);
       }
 
     @Nonnull
-    public Money subtract (final @Nonnull Money other)
+    public Money subtract (@Nonnull final Money other)
       {
         checkCurrencies(other);
         return new Money(amount.subtract(other.amount), currency);
       }
 
     @Nonnegative
-    public double divided (final @Nonnull Money other)
+    public double divided (@Nonnull final Money other)
       {
         checkCurrencies(other);
         // Can fail with ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.
@@ -110,28 +110,28 @@ public class Money implements Comparable<Money>
       }
 
     @Override
-    public int compareTo (final @Nonnull Money other)
+    public int compareTo (@Nonnull final Money other)
       {
         checkCurrencies(other);
         return this.amount.compareTo(other.amount);
       }
 
-    public boolean isEqualTo (final @Nonnull Money other)
+    public boolean isEqualTo (@Nonnull final Money other)
       {
         return compareTo(other) == 0;
       }
 
-    public boolean greaterThan (final @Nonnull Money other)
+    public boolean greaterThan (@Nonnull final Money other)
       {
         return compareTo(other) > 0;
       }
 
-    public boolean lowerThan (final @Nonnull Money other)
+    public boolean lowerThan (@Nonnull final Money other)
       {
         return compareTo(other) < 0;
       }
 
-    private void checkCurrencies (final @Nonnull Money other)
+    private void checkCurrencies (@Nonnull final Money other)
       {
         if (!this.currency.equals(other.currency))
           {

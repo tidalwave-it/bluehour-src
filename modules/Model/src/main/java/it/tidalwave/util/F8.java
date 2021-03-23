@@ -53,19 +53,19 @@ public interface F8<TYPE, EXTENDED_FINDER extends Finder<TYPE>> extends Extended
         @Nonnull
         private final Optional<Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>>> computeNeededResults;
 
-        private LambdaFinder (final @Nonnull Optional<Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>>> computeResults,
-                              final @Nonnull Optional<Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>>> computeNeededResults)
+        private LambdaFinder (@Nonnull final Optional<Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>>> computeResults,
+                              @Nonnull final Optional<Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>>> computeNeededResults)
           {
             this.computeResults = computeResults;
             this.computeNeededResults = computeNeededResults;
 
-            if (!this.computeResults.isPresent() && !this.computeNeededResults.isPresent())
+            if (this.computeResults.isEmpty() && this.computeNeededResults.isEmpty())
               {
                 throw new ExceptionInInitializerError("One of computeResults or computeNeededResults must be present");
               }
           }
 
-        public LambdaFinder (final @Nonnull LambdaFinder<TYPE, EXTENDED_FINDER> other, final @Nonnull Object override)
+        public LambdaFinder (@Nonnull final LambdaFinder<TYPE, EXTENDED_FINDER> other, @Nonnull final Object override)
           {
             super(other, override);
             final LambdaFinder<TYPE, EXTENDED_FINDER> source = getSource(LambdaFinder.class, other, override);
@@ -90,14 +90,14 @@ public interface F8<TYPE, EXTENDED_FINDER extends Finder<TYPE>> extends Extended
 
     @Nonnull
     public static <TYPE, EXTENDED_FINDER extends Finder<TYPE>> F8<TYPE, EXTENDED_FINDER> ofComputeResults (
-            final @Nonnull Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>> computeResults)
+            @Nonnull final Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>> computeResults)
       {
         return new LambdaFinder(Optional.of(computeResults), Optional.empty());
       }
 
     @Nonnull
     public static <TYPE, EXTENDED_FINDER extends Finder<TYPE>> F8<TYPE, EXTENDED_FINDER> ofComputeNeededResults (
-            final @Nonnull Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>> computeNeededResults)
+            @Nonnull final Function<F8<? extends TYPE, EXTENDED_FINDER>, List<TYPE>> computeNeededResults)
       {
         return new LambdaFinder(Optional.empty(), Optional.of(computeNeededResults));
       }

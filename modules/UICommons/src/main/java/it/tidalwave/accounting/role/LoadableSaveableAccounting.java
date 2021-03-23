@@ -53,7 +53,7 @@ import static it.tidalwave.role.io.Unmarshallable._Unmarshallable_;
 @RequiredArgsConstructor @DciRole(datumType = Accounting.class) @Slf4j
 public class LoadableSaveableAccounting implements Loadable, Saveable
   {
-    public final static String BLUEHOUR_FILE_NAME = "blueHour.xml";
+    public static final String BLUEHOUR_FILE_NAME = "blueHour.xml";
 
     @Nonnull
     private final Accounting accounting;

@@ -47,17 +47,17 @@ import static it.tidalwave.util.Parameters.r;
 public final class MessageSendingUserAction
   {
     @Nonnull
-    public static UserAction of (final @Nonnull MessageBus messageBus,
-                                 final @Nonnull Supplier<Object> messageSupplier,
-                                 final @Nonnull Collection<Object> roles)
+    public static UserAction of (@Nonnull final MessageBus messageBus,
+                                 @Nonnull final Supplier<Object> messageSupplier,
+                                 @Nonnull final Collection<Object> roles)
       {
         return UserAction.of(() -> messageBus.publish(messageSupplier.get()), roles);
       }
 
     @Nonnull
-    public static UserAction of (final @Nonnull MessageBus messageBus,
-                                 final @Nonnull Supplier<Object> messageSupplier,
-                                 final @Nonnull Object role)
+    public static UserAction of (@Nonnull final MessageBus messageBus,
+                                 @Nonnull final Supplier<Object> messageSupplier,
+                                 @Nonnull final Object role)
       {
         Parameters.mustNotBeArrayOrCollection(role, "role");
         return of(messageBus, messageSupplier, r(role));
