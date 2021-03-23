@@ -63,8 +63,8 @@
         <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
         <tft.javafx.version>11.0.1</tft.javafx.version>
         <tft.spring.version>5.3.1</tft.spring.version>
-        <steelblue.version>1.0-ALPHA-19</steelblue.version>
-        <thesefoolishthings.version>3.2-ALPHA-4</thesefoolishthings.version>
+        <steelblue.version>1.1-ALPHA-1</steelblue.version>
+        <thesefoolishthings.version>3.2-ALPHA-7</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
