@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.spi.FinderSupport;
+import it.tidalwave.util.spi.HierarchicFinderSupport;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 import static java.util.Collections.*;
@@ -51,7 +51,7 @@ import lombok.RequiredArgsConstructor;
  **********************************************************************************************************************/
 @RequiredArgsConstructor
 public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends ExtendedFinderSupport<TYPE, FINDER>>
-                                extends FinderSupport<TYPE, FINDER>
+                                extends HierarchicFinderSupport<TYPE, FINDER>
                                 implements ExtendedFinderSupport<TYPE, FINDER>,
                                            Finder<TYPE>
   {
@@ -80,19 +80,19 @@ public class FinderWithIdSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends Ext
       }
 
     @Override @Nonnull
-    protected List<IMPLTYPE> computeResults()
+    protected List<TYPE> computeResults()
       {
         return id.map(id -> findById(id).map(Collections::singletonList).orElse(emptyList())).orElse(findAll());
       }
     
     @Nonnull
-    protected List<IMPLTYPE> findAll()
+    protected List<TYPE> findAll()
       {
         throw new UnsupportedOperationException("Must be overridden");
       }
     
     @Nonnull
-    protected Optional<IMPLTYPE> findById (@Nonnull Id id)
+    protected Optional<TYPE> findById (@Nonnull Id id)
       {
         throw new UnsupportedOperationException("Must be overridden");
       }

@@ -30,8 +30,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.types.Money;
 import lombok.experimental.Delegate;
@@ -50,7 +50,7 @@ import lombok.ToString;
 public abstract class InMemoryJobEvent implements JobEvent
   {
     @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
+    private final As as = As.forObject(this);
 
     @Getter @Nonnull
     protected final Id id;

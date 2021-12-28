@@ -75,13 +75,13 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
       }
 
     @Override @Nonnull
-    protected List<InMemoryInvoice> computeResults()
+    protected List<Invoice> computeResults()
       {
-        Stream<InMemoryInvoice> stream = super.computeResults().stream();
+        Stream<Invoice> stream = super.computeResults().stream();
 
         if (project != null)
           {
-            stream = stream.filter(invoice -> invoice.getProject().equals(project));
+            stream = stream.filter(invoice -> ((InMemoryInvoice)invoice).getProject().equals(project));
           }
         
         return stream.collect(toList());

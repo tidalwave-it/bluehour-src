@@ -71,13 +71,13 @@ public class FinderWithIdMapSupport<TYPE, IMPLTYPE extends TYPE, FINDER extends 
       }
 
     @Override @Nonnull
-    protected List<IMPLTYPE> findAll()
+    protected List<TYPE> findAll()
       {
         return new ArrayList<>(mapById.values());
       }
 
     @Override @Nonnull
-    protected Optional<IMPLTYPE> findById (@Nonnull final Id id)
+    protected Optional<TYPE> findById (@Nonnull final Id id)
       {
         return Optional.ofNullable(mapById.get(id));
       }

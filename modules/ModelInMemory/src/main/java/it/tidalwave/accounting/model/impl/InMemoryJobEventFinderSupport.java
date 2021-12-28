@@ -54,7 +54,7 @@ public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent,
       } 
     
     @Override @Nonnull
-    protected Optional<InMemoryJobEvent> findById (@Nonnull final Id id)
+    protected Optional<JobEvent> findById (@Nonnull final Id id)
       {
         return findAll().stream().filter(item -> item.getId().equals(id)).findFirst();
       }  

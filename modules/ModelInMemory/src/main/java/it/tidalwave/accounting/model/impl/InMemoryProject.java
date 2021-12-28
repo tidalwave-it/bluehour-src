@@ -31,8 +31,8 @@ import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
@@ -64,7 +64,7 @@ public class InMemoryProject implements ProjectSpi
     private Accounting accounting;
     
     @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
+    private final As as = As.forObject(this);
 
     @Getter @Nonnull
     private final Id id;

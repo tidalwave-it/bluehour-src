@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import it.tidalwave.util.spi.FinderSupport;
+import it.tidalwave.util.spi.HierarchicFinderSupport;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
 
 /***********************************************************************************************************************
@@ -42,7 +42,7 @@ import it.tidalwave.util.spi.ExtendedFinderSupport;
 public interface F8<TYPE, EXTENDED_FINDER extends Finder<TYPE>> extends ExtendedFinderSupport<TYPE, EXTENDED_FINDER>
   {
     static class LambdaFinder<TYPE, EXTENDED_FINDER extends it.tidalwave.util.Finder<TYPE>>
-            extends FinderSupport<TYPE, EXTENDED_FINDER>
+            extends HierarchicFinderSupport<TYPE, EXTENDED_FINDER>
             implements F8<TYPE, EXTENDED_FINDER>
       {
         private static final long serialVersionUID = 2688397754942922706L;
@@ -74,14 +74,14 @@ public interface F8<TYPE, EXTENDED_FINDER extends Finder<TYPE>> extends Extended
           }
 
         @Override @Nonnull
-        protected final List<? extends TYPE> computeResults()
+        protected final List<TYPE> computeResults()
           {
             return computeResults.isPresent() ? computeResults.get().apply(this) : super.computeResults();
 //            return computeResults.flatMap(f -> f.apply(this)).orElse((List)super.computeResults());
           }
 
         @Override @Nonnull
-        protected final List<? extends TYPE> computeNeededResults()
+        protected final List<TYPE> computeNeededResults()
           {
             return computeNeededResults.isPresent() ? computeNeededResults.get().apply(this) : super.computeNeededResults();
 //            return computeNeededResults.map(f -> f.apply(this)).orElse((List)super.computeNeededResults());
