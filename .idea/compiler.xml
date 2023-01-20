@@ -43,6 +43,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bluehour" options="-Xlint:all" />
+      <module name="bluehour-macos" options="-Xlint:all" />
+      <module name="bluehour-modules" options="-Xlint:all" />
       <module name="it-tidalwave-accounting-application-javafx" options="-Xlint:all" />
       <module name="it-tidalwave-accounting-importer-ibiz" options="-Xlint:all" />
       <module name="it-tidalwave-accounting-marshalling-xml" options="-Xlint:all" />

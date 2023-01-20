@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/modules/Installers/macOS/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/Installers/macOS/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/JavaFXApplication/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/JavaFXApplication/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/JavaFXUI/src/main/java" charset="UTF-8" />
@@ -8,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/modules/Model/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/Model/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/ModelInMemory/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/ModelInMemory/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/UI/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/UI/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/UICommons/src/main/java" charset="UTF-8" />
@@ -23,7 +26,12 @@
     <file url="file://$PROJECT_DIR$/modules/UIiBizImporter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/UIiBizImporter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/XmlMarshalling/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/XmlMarshalling/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/iBizImporter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/modules/iBizImporter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>
