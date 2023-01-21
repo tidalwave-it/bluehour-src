@@ -63,7 +63,7 @@
         <tft.javafx.version>11.0.1</tft.javafx.version>
         <tft.spring.version>5.3.1</tft.spring.version>
         <steelblue.version>1.1-ALPHA-2</steelblue.version>
-        <thesefoolishthings.version>3.2-ALPHA-15-SNAPSHOT</thesefoolishthings.version>
+        <thesefoolishthings.version>3.2-ALPHA-16</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>

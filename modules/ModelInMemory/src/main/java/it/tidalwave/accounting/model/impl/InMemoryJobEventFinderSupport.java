@@ -30,10 +30,10 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Optional;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdSupport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
 import lombok.NoArgsConstructor;
 
 /***********************************************************************************************************************
@@ -42,8 +42,9 @@ import lombok.NoArgsConstructor;
  *
  **********************************************************************************************************************/
 @NoArgsConstructor
-public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
-                                                    implements ProjectRegistry.JobEventFinder
+public class InMemoryJobEventFinderSupport
+        extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
+        implements ProjectRegistry.JobEventFinder
   {
     private static final long serialVersionUID = 1L;
 

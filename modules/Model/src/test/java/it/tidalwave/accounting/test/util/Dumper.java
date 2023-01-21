@@ -37,7 +37,6 @@ import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.impl.DefaultAs;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
@@ -158,7 +157,8 @@ public class Dumper
         return !Modifier.isStatic(field.getModifiers())
                && !Collection.class.isAssignableFrom(type)
                && !Accounting.class.isAssignableFrom(type)
-               && !DefaultAs.class.isAssignableFrom(type);
+               && !field.getName().equals("as");
+               // && !DefaultAs.class.isAssignableFrom(type);
       };
 
     @CheckForNull

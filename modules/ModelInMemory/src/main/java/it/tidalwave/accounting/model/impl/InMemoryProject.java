@@ -57,7 +57,7 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @Immutable @With
-@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport", "accounting"})
+@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "as", "accounting"})
 public class InMemoryProject implements ProjectSpi
   {
     @Setter // FIXME

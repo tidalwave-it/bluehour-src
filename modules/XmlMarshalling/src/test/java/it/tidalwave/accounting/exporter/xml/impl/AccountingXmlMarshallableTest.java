@@ -38,8 +38,8 @@ import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.test.util.ScenarioFactory;
+import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
 
 /***********************************************************************************************************************
  *
@@ -87,7 +87,7 @@ public class AccountingXmlMarshallableTest
                 fixture.marshal(os);
               }
 
-            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+            assertSameContents(expectedResult, actualResult);
           }
       }
     
@@ -108,6 +108,6 @@ public class AccountingXmlMarshallableTest
             fixture.marshal(os);
           }
         
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+        assertSameContents(expectedResult, actualResult);
       }
   }

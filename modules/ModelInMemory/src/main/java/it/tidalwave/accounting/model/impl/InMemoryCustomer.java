@@ -31,12 +31,12 @@ import javax.annotation.concurrent.Immutable;
 import java.util.Map;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Delegate;
 import lombok.Getter;
@@ -51,7 +51,7 @@ import static java.util.stream.Collectors.toMap;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
+@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "as"}) // FIXME: remove the @Getter
 public class InMemoryCustomer implements CustomerSpi
   {
     private static final long serialVersionUID = 1L;

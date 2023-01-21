@@ -38,8 +38,8 @@ import it.tidalwave.util.spi.AsDelegateProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import it.tidalwave.util.test.FileComparisonUtils;
 import it.tidalwave.accounting.test.util.Dumper;
+import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
 
 /***********************************************************************************************************************
  *
@@ -81,7 +81,7 @@ public class AccountingXmlUnmarshallableTest
                 new Dumper(accounting, pw).dumpAll();
               }
 
-            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+            assertSameContents(expectedResult, actualResult);
           }
       }
     
@@ -109,7 +109,7 @@ public class AccountingXmlUnmarshallableTest
             new Dumper(accounting, pw).dumpAll();
           }
         
-        FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+        assertSameContents(expectedResult, actualResult);
       }
     
     @DataProvider(name = "scenarios")

@@ -46,7 +46,7 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+@Immutable @EqualsAndHashCode @ToString(exclude = {"as"})
 public abstract class InMemoryJobEvent implements JobEvent
   {
     @Delegate

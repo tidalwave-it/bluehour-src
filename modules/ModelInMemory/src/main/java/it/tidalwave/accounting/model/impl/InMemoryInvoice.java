@@ -32,9 +32,7 @@ import java.util.List;
 import java.time.LocalDate;
 import it.tidalwave.util.As;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.F8;
 import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Invoice.Builder;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
@@ -50,7 +48,7 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+@Immutable @EqualsAndHashCode @ToString(exclude = {"as"})
 public class InMemoryInvoice implements InvoiceSpi
   {
     private static final long serialVersionUID = 1L;
@@ -107,7 +105,7 @@ public class InMemoryInvoice implements InvoiceSpi
     @Override @Nonnull
     public Finder<JobEvent> findJobEvents()
       {
-        return F8.ofComputeResults(f -> new CopyOnWriteArrayList<>(jobEvents));
+        return Finder.ofSupplier(() -> new CopyOnWriteArrayList<>(jobEvents));
       }
 
     /*******************************************************************************************************************

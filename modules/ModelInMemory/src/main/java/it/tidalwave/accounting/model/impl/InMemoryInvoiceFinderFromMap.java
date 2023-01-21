@@ -32,11 +32,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import static java.util.stream.Collectors.toList;
 
@@ -46,8 +46,9 @@ import static java.util.stream.Collectors.toList;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InMemoryInvoice, InvoiceRegistry.Finder>
-                                          implements InvoiceRegistry.Finder
+public class InMemoryInvoiceFinderFromMap
+        extends FinderWithIdMapSupport<Invoice, InMemoryInvoice, InvoiceRegistry.Finder>
+        implements InvoiceRegistry.Finder
   {
     private static final long serialVersionUID = 1L;
     
