@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -40,12 +40,12 @@ public class AddressTest
     @Test
     public void toString_must_return_all_the_fields()
       {
-        final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
-                                            .withCity("San Francisco")
-                                            .withZip("12345")
-                                            .withState("CA")
-                                            .withCountry("USA")
-                                            .create();
+        final var a1 = Address.builder().withStreet("Foo Bar rd 20")
+                              .withCity("San Francisco")
+                              .withZip("12345")
+                              .withState("CA")
+                              .withCountry("USA")
+                              .create();
 
         assertThat(a1.toString(), is("Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345)"));
       }

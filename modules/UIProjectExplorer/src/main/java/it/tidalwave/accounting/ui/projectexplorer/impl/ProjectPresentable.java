@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -64,10 +64,10 @@ public class ProjectPresentable implements Presentable
     @Nonnull
     protected Aggregate<PresentationModel> aggregatePresentationModel()
       {
-        final Money budget           = project.getBudget();
+        final var budget           = project.getBudget();
         // FIXME: these are dynamically computed, can be slow - should be also cached? Here or in the data objects?
-        final Money earnings         = project.getEarnings();
-        final Money invoicedEarnings = project.getInvoicedEarnings();
+        final var earnings         = project.getEarnings();
+        final var invoicedEarnings = project.getInvoicedEarnings();
 
         // FIXME: uses the column header names, should be an internal id instead
         return PresentationModelAggregate.newInstance()

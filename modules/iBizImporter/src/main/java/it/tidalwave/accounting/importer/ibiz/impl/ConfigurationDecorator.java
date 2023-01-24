@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -65,7 +65,7 @@ public class ConfigurationDecorator implements Configuration
     @Nonnull
     public Money getMoney (@Nonnull final String key)
       {
-        return new Money(delegate.getBigDecimal(key).round(ROUNDING), "EUR");
+        return Money.of(delegate.getBigDecimal(key).round(ROUNDING), "EUR");
       }
 
     @Nonnull

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -38,13 +38,13 @@ import it.tidalwave.accounting.model.JobEvent;
 public class EventTypeAdapter extends XmlAdapter<String, JobEvent.Type>
   {
     @Override @Nonnull
-    public JobEvent.Type unmarshal(String v) 
+    public JobEvent.Type unmarshal(final String v)
       {
         return JobEvent.Type.valueOf(v.toUpperCase());
       }
 
     @Override @Nonnull
-    public String marshal(JobEvent.Type v)
+    public String marshal(final JobEvent.Type v)
       {
         return v.name().toLowerCase();
       }

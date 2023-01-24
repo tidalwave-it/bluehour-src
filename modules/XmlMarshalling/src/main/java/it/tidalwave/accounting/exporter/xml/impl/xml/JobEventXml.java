@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -98,7 +98,7 @@ public class JobEventXml
     
     public JobEventXml (@Nonnull final JobEvent jobEvent)
       {
-        final JobEvent.Builder builder = jobEvent.toBuilder();
+        final var builder = jobEvent.toBuilder();
         this.id = builder.getId();
         this.type = builder.getType();
         this.startDateTime = builder.getStartDateTime();
@@ -127,7 +127,7 @@ public class JobEventXml
       }
     
     @Nonnull
-    public static List<JobEvent> toJobEvents (@Nullable final List<JobEventXml> jobEventsXml)
+    public static List<JobEvent> toJobEvents (@Nullable final List<? extends JobEventXml> jobEventsXml)
       {
         return (jobEventsXml == null) 
                 ? Collections.emptyList()

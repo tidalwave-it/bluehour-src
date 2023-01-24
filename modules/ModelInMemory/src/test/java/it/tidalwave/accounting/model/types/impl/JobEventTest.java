@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -62,7 +62,7 @@ public class JobEventTest
 //                                              .withVatNumber("1233455345")
 //                                              .withBillingAddress(a1)
 //                                              .create();
-//        final Project p = Project.builder().withAmount(new Money(10500, "EUR"))
+//        final Project p = Project.builder().withAmount(Money.of(10500, "EUR"))
 //                                            .withCustomer(c1)
 //                                            .withName("Project 1")
 //                                            .withDescription("description of project 1")
@@ -70,16 +70,16 @@ public class JobEventTest
 //                   //                         .withEndDate(null)
 //                                            .withNotes("Notes for project 1")
 //                                            .withNumber("1")
-//                                            .withHourlyRate(new Money(43, "EUR"))
+//                                            .withHourlyRate(Money.of(43, "EUR"))
 //                                            .create();
-        final JobEvent j1 = JobEvent.builder().withId(new Id("1"))
-                                              .withName("Consultancy")
-                                              .withDescription("Consultancy description")
-                                              .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
-                                              .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))
-                                              .withHourlyRate(new Money(48, "EUR"))
-                                              .withEarnings(new Money(430, "EUR"))
-                                              .create();
+        final var j1 = JobEvent.builder().withId(new Id("1"))
+                               .withName("Consultancy")
+                               .withDescription("Consultancy description")
+                               .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
+                               .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))
+                               .withHourlyRate(Money.of(48, "EUR"))
+                               .withEarnings(Money.of(430, "EUR"))
+                               .create();
 
         assertThat(j1.toString(), is("InMemoryTimedJobEvent("
                                    + "super=InMemoryJobEvent(id=1, name=Consultancy, description=Consultancy description), "

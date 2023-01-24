@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -88,7 +88,7 @@ public interface Customer extends Identifiable, As
         @Nonnull
         public Customer create()
           {
-            final Customer customer = ObjectFactory.getInstance().createCustomer(this);
+            final var customer = ObjectFactory.getInstance().createCustomer(this);
             callback.register(customer);
             return customer;
           }

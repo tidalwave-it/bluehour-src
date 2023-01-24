@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -30,10 +30,10 @@ import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Optional;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdSupport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdSupport;
 import lombok.NoArgsConstructor;
 
 /***********************************************************************************************************************
@@ -42,8 +42,9 @@ import lombok.NoArgsConstructor;
  *
  **********************************************************************************************************************/
 @NoArgsConstructor
-public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
-                                                    implements ProjectRegistry.JobEventFinder
+public class InMemoryJobEventFinderSupport
+        extends FinderWithIdSupport<JobEvent, InMemoryJobEvent, ProjectRegistry.JobEventFinder>
+        implements ProjectRegistry.JobEventFinder
   {
     private static final long serialVersionUID = 1L;
 
@@ -54,7 +55,7 @@ public class InMemoryJobEventFinderSupport extends FinderWithIdSupport<JobEvent,
       } 
     
     @Override @Nonnull
-    protected Optional<InMemoryJobEvent> findById (@Nonnull final Id id)
+    protected Optional<JobEvent> findById (@Nonnull final Id id)
       {
         return findAll().stream().filter(item -> item.getId().equals(id)).findFirst();
       }  

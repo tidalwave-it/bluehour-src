@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -30,13 +30,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import static java.util.stream.Collectors.toList;
 
@@ -46,8 +46,9 @@ import static java.util.stream.Collectors.toList;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice, InMemoryInvoice, InvoiceRegistry.Finder>
-                                          implements InvoiceRegistry.Finder
+public class InMemoryInvoiceFinderFromMap
+        extends FinderWithIdMapSupport<Invoice, InMemoryInvoice, InvoiceRegistry.Finder>
+        implements InvoiceRegistry.Finder
   {
     private static final long serialVersionUID = 1L;
     
@@ -64,24 +65,24 @@ public class InMemoryInvoiceFinderFromMap extends FinderWithIdMapSupport<Invoice
                                          @Nonnull final Object override)
       {
         super(other, override);
-        final InMemoryInvoiceFinderFromMap source = getSource(InMemoryInvoiceFinderFromMap.class, other, override);
+        final var source = getSource(InMemoryInvoiceFinderFromMap.class, other, override);
         this.project = source.project;
       }
 
     @Override @Nonnull
     public InvoiceRegistry.Finder withProject (@Nonnull final Project project)
       {
-        return clone(new InMemoryInvoiceFinderFromMap(project));
+        return clonedWith(new InMemoryInvoiceFinderFromMap(project));
       }
 
     @Override @Nonnull
-    protected List<InMemoryInvoice> computeResults()
+    protected List<Invoice> computeResults()
       {
-        Stream<InMemoryInvoice> stream = super.computeResults().stream();
+        var stream = super.computeResults().stream();
 
         if (project != null)
           {
-            stream = stream.filter(invoice -> invoice.getProject().equals(project));
+            stream = stream.filter(invoice -> ((InvoiceSpi)invoice).getProject().equals(project));
           }
         
         return stream.collect(toList());

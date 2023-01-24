@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -28,9 +28,7 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
@@ -38,14 +36,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
-import it.tidalwave.accounting.model.types.Money;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.toList;
@@ -106,16 +100,16 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
       {
         try
           {
-            final ConfigurationDecorator configuration = IBizUtils.loadConfiguration(documentFile);
-            final Id projectId = configuration.getIds("projectIDs").get(0);
-            final Project project = projectRegistry.findProjects().withId(projectId).result();
-            final Stream<Id> eventIds = configuration.getIds("jobEventIDs").stream();
+            final var configuration = IBizUtils.loadConfiguration(documentFile);
+            final var projectId = configuration.getIds("projectIDs").get(0);
+            final var project = projectRegistry.findProjects().withId(projectId).result();
+            final var eventIds = configuration.getIds("jobEventIDs").stream();
             // FIXME: could just search events in project (but needs recursive operations in project.findJobEvents())
-            final List<JobEvent> events = eventIds.flatMap(id -> projectRegistry.findJobEvents().withId(id).stream())
-                                                  .collect(toList());
+            final var events = eventIds.flatMap(id -> projectRegistry.findJobEvents().withId(id).stream())
+                                       .collect(toList());
             // FIXME: iBiz duplicates events that are already inside a group - filter them away
-            final Money tax = configuration.getMoney("taxes1");
-            final Money earnings = configuration.getMoney("invoiceAmount");
+            final var tax = configuration.getMoney("taxes1");
+            final var earnings = configuration.getMoney("invoiceAmount");
 
             invoiceRegistry.addInvoice().withId(configuration.getId("uniqueIdentifier"))
                                         .withNumber(configuration.getString("invoiceNumber"))

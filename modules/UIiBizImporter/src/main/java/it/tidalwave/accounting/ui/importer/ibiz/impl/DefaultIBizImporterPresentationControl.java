@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -29,7 +29,6 @@ package it.tidalwave.accounting.ui.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.role.ui.BoundProperty;
@@ -38,7 +37,6 @@ import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.ImportRequest;
-import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentationControl;
@@ -71,7 +69,7 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
       {
         log.info("onImportRequest({})", request);
         presentation.bind(iBizFolder);
-        iBizFolder.set(Paths.get(System.getProperty("user.home") + "/Settings/iBiz"));
+        iBizFolder.set(Path.of(System.getProperty("user.home") + "/Settings/iBiz"));
         presentation.chooseFolder(notificationWithFeedback().withFeedback(feedback().withOnConfirm(this::onConfirm)));
       }
 
@@ -82,9 +80,9 @@ public class DefaultIBizImporterPresentationControl implements IBizImporterPrese
         try
           {
             presentation.lock();
-            final IBizImporter accounting = importerBuilderFactory.newBuilder()
-                                                                  .withPath(iBizFolder.get())
-                                                                  .create();
+            final var accounting = importerBuilderFactory.newBuilder()
+                                                         .withPath(iBizFolder.get())
+                                                         .create();
             accounting.importAll();
             accounting.as(_Saveable_).save();
             messageBus.publish(new AccountingOpenRequest());

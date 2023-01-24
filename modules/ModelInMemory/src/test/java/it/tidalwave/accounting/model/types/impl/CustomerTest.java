@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -51,17 +51,17 @@ public class CustomerTest
     @Test
     public void toString_must_return_all_the_fields()
       {
-        final Address a1 = Address.builder().withStreet("Foo Bar rd 20")
-                                            .withCity("San Francisco")
-                                            .withZip("12345")
-                                            .withState("CA")
-                                            .withCountry("USA")
-                                            .create();
-        final Customer c1 = Customer.builder().withId(new Id("the id"))
-                                              .withName("Acme Corp.")
-                                              .withVatNumber("1233455345")
-                                              .withBillingAddress(a1)
-                                              .create();
+        final var a1 = Address.builder().withStreet("Foo Bar rd 20")
+                              .withCity("San Francisco")
+                              .withZip("12345")
+                              .withState("CA")
+                              .withCountry("USA")
+                              .create();
+        final var c1 = Customer.builder().withId(new Id("the id"))
+                               .withName("Acme Corp.")
+                               .withVatNumber("1233455345")
+                               .withBillingAddress(a1)
+                               .create();
 
         assertThat(c1.toString(), is("InMemoryCustomer(id=the id, name=Acme Corp., billingAddress=Address(street=Foo Bar rd 20, "
                                    + "city=San Francisco, state=CA, country=USA, zip=12345), vatNumber=1233455345)"));

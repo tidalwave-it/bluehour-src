@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -47,7 +47,7 @@ public class JavaFXToolBarModel extends ToolBarModelSupport
       {
         as(_UserActionProvider_).getActions().stream().map((action) ->
           {
-            final Button button = new Button();
+            final var button = new Button();
             // FIXME: move to JavaFXBinder
             button.setText(action.maybeAs(_Displayable_).map(Displayable::getDisplayName).orElse("???"));
             ((JavaFXBinder)binder).bind(button, action);

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -30,11 +30,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.List;
 import java.time.LocalDate;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.F8;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
-import it.tidalwave.accounting.model.Invoice.Builder;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Money;
@@ -50,13 +48,13 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+@Immutable @EqualsAndHashCode @ToString(exclude = "as")
 public class InMemoryInvoice implements InvoiceSpi
   {
     private static final long serialVersionUID = 1L;
 
     @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
+    private final As as = As.forObject(this);
 
     @Getter @Nonnull
     private final Id id;
@@ -68,7 +66,7 @@ public class InMemoryInvoice implements InvoiceSpi
     private final Project project;
 
     @Nonnull
-    private final List<JobEvent> jobEvents; // FIXME: immutablelist
+    private final List<InMemoryJobEvent> jobEvents; // FIXME: immutablelist
 
     @Nonnull
     private final LocalDate date;
@@ -92,7 +90,7 @@ public class InMemoryInvoice implements InvoiceSpi
         this.id = builder.getId();
         this.number = builder.getNumber();
         this.project = builder.getProject();
-        this.jobEvents = builder.getJobEvents();
+        this.jobEvents = (List<InMemoryJobEvent>)builder.getJobEvents();
         this.date = builder.getDate();
         this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
         this.earnings = builder.getEarnings();
@@ -107,7 +105,7 @@ public class InMemoryInvoice implements InvoiceSpi
     @Override @Nonnull
     public Finder<JobEvent> findJobEvents()
       {
-        return F8.ofComputeResults(f -> new CopyOnWriteArrayList<>(jobEvents));
+        return Finder.ofSupplier(() -> new CopyOnWriteArrayList<>(jobEvents));
       }
 
     /*******************************************************************************************************************

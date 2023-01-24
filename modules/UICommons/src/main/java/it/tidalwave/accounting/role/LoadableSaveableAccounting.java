@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -27,11 +27,8 @@
 package it.tidalwave.accounting.role;
 
 import javax.annotation.Nonnull;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import lombok.RequiredArgsConstructor;
 import it.tidalwave.util.PreferencesHandler;
@@ -70,10 +67,10 @@ public class LoadableSaveableAccounting implements Loadable, Saveable
     public Accounting load()
       throws IOException 
       {
-        final Path dataFile = getDataFile();
+        final var dataFile = getDataFile();
         log.info(">>>> loading data from {}...", dataFile);
 
-        try (final InputStream is = new FileInputStream(dataFile.toFile()))
+        try (final var is = Files.newInputStream(dataFile))
           {
             return accounting.as(_Unmarshallable_).unmarshal(is);
           }
@@ -88,10 +85,10 @@ public class LoadableSaveableAccounting implements Loadable, Saveable
     public void save() 
       throws IOException 
       {
-        final Path dataFile = getDataFile();
+        final var dataFile = getDataFile();
         log.info(">>>> saving data to {}...", dataFile);
 
-        try (final OutputStream os = new FileOutputStream(dataFile.toFile()))
+        try (final var os = Files.newOutputStream(dataFile))
           {
             accounting.as(_Marshallable_).marshal(os);
           }

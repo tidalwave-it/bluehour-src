@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -29,14 +29,14 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Map;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Delegate;
 import lombok.Getter;
@@ -51,7 +51,7 @@ import static java.util.stream.Collectors.toMap;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "asSupport"}) // FIXME: remove the @Getter
+@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "as"}) // FIXME: remove the @Getter
 public class InMemoryCustomer implements CustomerSpi
   {
     private static final long serialVersionUID = 1L;
@@ -73,7 +73,7 @@ public class InMemoryCustomer implements CustomerSpi
       }
     
     @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
+    private final As as = As.forObject(this);
 
     @Getter @Nonnull
     private final Id id;

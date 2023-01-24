@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -34,10 +34,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.InvoiceRegistry;
-import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.NoArgsConstructor;
+import static java.util.Comparator.*;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
@@ -67,18 +65,18 @@ public class AccountingXml
     public AccountingXml (@Nonnull final Accounting accounting)
       {
         customersXml = accounting.getCustomerRegistry().findCustomers().stream().map(CustomerXml::new)
-                                                                                .collect(toList());
+                .sorted(comparing(CustomerXml::getId)).collect(toList());
         projectsXml = accounting.getProjectRegistry().findProjects().stream().map(ProjectXml::new)
-                                                                             .collect(toList());
+                .sorted(comparing(ProjectXml::getId)).collect(toList());
         invoicesxml = accounting.getInvoiceRegistry().findInvoices().stream().map(InvoiceXml::new)
-                                                                             .collect(toList());
+                .sorted(comparing(InvoiceXml::getId)).collect(toList());
       }
 
     public void fill (@Nonnull final Accounting accounting)
       {
-        final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
-        final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
-        final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();
+        final var customerRegistry = accounting.getCustomerRegistry();
+        final var projectRegistry = accounting.getProjectRegistry();
+        final var invoiceRegistry = accounting.getInvoiceRegistry();
         customersXml.forEach(customer -> customerRegistry.addCustomer().with(customer.toBuilder()).create());
         projectsXml.forEach(project -> projectRegistry.addProject().with(project.toBuilder(accounting)).create());
         invoicesxml.forEach(invoice -> invoiceRegistry.addInvoice().with(invoice.toBuilder(accounting)).create());

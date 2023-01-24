@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -27,7 +27,6 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
@@ -62,7 +61,7 @@ public class InMemoryObjectFactory implements ObjectFactory
     @Override @Nonnull 
     public JobEvent createJobEvent (@Nonnull final JobEvent.Builder builder)
       {
-        final List<? extends JobEvent> events = builder.getEvents();
+        final var events = builder.getEvents();
         
         if ((events != null) && !events.isEmpty())
           {

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import it.tidalwave.accounting.model.JobEvent;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -59,7 +60,7 @@ public class InMemoryJobEventFinderFromList extends InMemoryJobEventFinderSuppor
       } 
     
     @Override @Nonnull
-    protected List<InMemoryJobEvent> findAll() 
+    protected List<JobEvent> findAll()
       {
         return new CopyOnWriteArrayList<>(events);
       }

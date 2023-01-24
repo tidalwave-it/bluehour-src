@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -43,10 +43,10 @@ import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
@@ -62,6 +62,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @XmlRootElement(name = "invoice") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class InvoiceXml 
   {
+    @Getter
     @XmlAttribute(name = "id")
     @XmlID
     @XmlJavaTypeAdapter(IdAdapter.class)
@@ -97,7 +98,7 @@ public class InvoiceXml
     
     public InvoiceXml (@Nonnull final Invoice invoice)
       {
-        final Invoice.Builder builder = invoice.toBuilder();
+        final var builder = invoice.toBuilder();
         this.id = builder.getId();
         this.number = builder.getNumber();
         this.projectXml = new ProjectXml(builder.getProject());
@@ -115,7 +116,7 @@ public class InvoiceXml
       {
         try 
           {
-            final Project customer = accounting.getProjectRegistry().findProjects().withId(projectXml.getId()).result();
+            final var customer = accounting.getProjectRegistry().findProjects().withId(projectXml.getId()).result();
             return new Invoice.Builder().withId(id)
                                         .withNumber(number)
                                         .withProject(customer)

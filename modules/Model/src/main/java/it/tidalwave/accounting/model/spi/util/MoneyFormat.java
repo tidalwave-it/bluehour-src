@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -49,7 +49,7 @@ public class MoneyFormat
     @Nonnull
     public String format (@Nonnull final Money amount)
       {
-        final String currency = amount.getCurrency();
+        final var currency = amount.getCurrency();
         return String.format("%s %s", Money.getFormat().format(amount.getAmount()),
                                       CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
       }

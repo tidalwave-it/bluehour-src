@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -31,8 +31,8 @@ import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
@@ -57,14 +57,14 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @Immutable @With
-@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "asSupport", "accounting"})
+@AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "as", "accounting"})
 public class InMemoryProject implements ProjectSpi
   {
     @Setter // FIXME
     private Accounting accounting;
     
     @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
+    private final As as = As.forObject(this);
 
     @Getter @Nonnull
     private final Id id;

@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -29,13 +29,11 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import it.tidalwave.util.test.FileComparisonUtils;
-import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import org.testng.annotations.Test;
 import it.tidalwave.accounting.test.util.Dumper;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
 
 /***********************************************************************************************************************
  *
@@ -51,28 +49,29 @@ public class DefaultIBizImporterTest
       {
         AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
         
-//        final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz"); // FIXME
-        final Path iBizFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME
+//        final Path iBizFolder = Path.of("/Users/fritz/Settings/iBiz"); // FIXME
+        final var iBizFolder = Path.of("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME
         
         if (Files.exists(iBizFolder))
           {
-            final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
-            final Path testFolder = Paths.get("target/test-results");
+            final var
+                    expectedResultsFolder = Path.of("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
+            final var testFolder = Path.of("target/test-results");
             Files.createDirectories(testFolder);
-            final Path actualResult = testFolder.resolve("iBizImportDump.txt");
-            final Path expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
+            final var actualResult = testFolder.resolve("iBizImportDump.txt");
+            final var expectedResult = expectedResultsFolder.resolve("iBizImportDump.txt");
 
-            final IBizImporter importer = DefaultIBizImporter.builder()
-                                                             .withPath(iBizFolder)
-                                                             .create();
+            final var importer = DefaultIBizImporter.builder()
+                                                    .withPath(iBizFolder)
+                                                    .create();
             importer.importAll();
 
-            try (final PrintWriter pw = new PrintWriter(actualResult.toFile())) 
+            try (final var pw = new PrintWriter(Files.newBufferedWriter(actualResult)))
               {
                 new Dumper(importer, pw).dumpAll();
               }
 
-            FileComparisonUtils.assertSameContents(expectedResult.toFile(), actualResult.toFile());
+            assertSameContents(expectedResult, actualResult);
           }
       }
   }

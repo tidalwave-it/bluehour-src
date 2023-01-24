@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -56,9 +56,9 @@ public class AccountingXmlMarshallable implements Marshallable
       {
         try 
           {
-            final AccountingXml accountingXml = new AccountingXml(accounting);            
-            final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
-            final Marshaller marshaller = jaxbc.createMarshaller();
+            final var accountingXml = new AccountingXml(accounting);
+            final var jaxbc = JAXBContext.newInstance(AccountingXml.class);
+            final var marshaller = jaxbc.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
             marshaller.marshal(accountingXml, os);

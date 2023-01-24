@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -26,6 +26,7 @@
  */
 package it.tidalwave.accounting.commons;
 
+import it.tidalwave.accounting.model.Accounting;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

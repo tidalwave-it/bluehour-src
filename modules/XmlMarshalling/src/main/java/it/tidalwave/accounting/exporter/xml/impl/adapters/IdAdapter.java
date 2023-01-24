@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -37,13 +37,13 @@ import it.tidalwave.util.Id;
 public class IdAdapter extends XmlAdapter<String, Id> 
   {
     @Override
-    public Id unmarshal(String v)
+    public Id unmarshal(final String v)
       {
         return new Id(v);
       }
 
     @Override
-    public String marshal(Id v) 
+    public String marshal(final Id v)
       {
         return v.stringValue();
       }

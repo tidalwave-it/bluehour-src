@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -37,7 +37,6 @@ import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import it.tidalwave.util.Finder;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
@@ -110,7 +109,7 @@ public class Dumper
         dump(invoice.findJobEvents(), INDENT);
       }
 
-    private void dump (@Nonnull final Finder<JobEvent> events, @Nonnull final String prefix)
+    private void dump (@Nonnull final Finder<? extends JobEvent> events, @Nonnull final String prefix)
       {
         events.stream().forEach(event -> dump(event, prefix));
       }
@@ -128,16 +127,16 @@ public class Dumper
     @Nonnull
     public static String toString (@Nonnull final Object event)
       {
-        final String s = Stream.concat(Arrays.stream(event.getClass().getDeclaredFields()),
-                                       Arrays.stream(event.getClass().getSuperclass().getDeclaredFields()))
-                                        .sorted(comparing(Field::getName))
-                                        .filter(excludeUnwantedFields)
-                                        .peek(field -> field.setAccessible(true))
-                                        .map(field -> field.getName() + "=" + safeGet(field, event))
-                                        .collect(joining(", "));
+        final var s = Stream.concat(Arrays.stream(event.getClass().getDeclaredFields()),
+                                    Arrays.stream(event.getClass().getSuperclass().getDeclaredFields()))
+                            .sorted(comparing(Field::getName))
+                            .filter(excludeUnwantedFields)
+                            .peek(field -> field.setAccessible(true))
+                            .map(field -> field.getName() + "=" + safeGet(field, event))
+                            .collect(joining(", "));
 
         String className;
-        Class<?>[] interfaces = event.getClass().getInterfaces();
+        final var interfaces = event.getClass().getInterfaces();
 
         if (interfaces.length > 0) // assumes the business interface is the first
           {
@@ -154,11 +153,12 @@ public class Dumper
 
     private static final Predicate<? super Field> excludeUnwantedFields = field ->
       {
-        final Class<?> type = field.getType();
+        final var type = field.getType();
         return !Modifier.isStatic(field.getModifiers())
                && !Collection.class.isAssignableFrom(type)
                && !Accounting.class.isAssignableFrom(type)
-               && !AsSupport.class.isAssignableFrom(type);
+               && !"as".equals(field.getName());
+               // && !DefaultAs.class.isAssignableFrom(type);
       };
 
     @CheckForNull
@@ -166,7 +166,7 @@ public class Dumper
       {
         try
           {
-            Object value = field.get(object);
+            var value = field.get(object);
 
             if (value instanceof Customer)
               {

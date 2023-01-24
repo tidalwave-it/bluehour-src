@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -64,14 +64,14 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
     @Override @Nonnull
     public HourlyReport createReport()
       {
-        final StringWriter sw = new StringWriter();
+        final var sw = new StringWriter();
         makeReport(sw);
         return new HourlyReport(sw.toString());
       }
 
     private void makeReport (@Nonnull final Writer w)
       {
-        final PrintWriter pw = new PrintWriter(w);
+        final var pw = new PrintWriter(w);
         System.err.println("CREATE REPORT " + project);
 
         pw.print(SEPARATOR + "\n");
@@ -92,7 +92,7 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
 
         // FIXME: rename getAmount() -> getBudget()
         // FIXME: introduce getBudgetDuration()
-        final Duration duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
+        final var duration = Duration.ofHours((long)project.getBudget().divided(project.getHourlyRate()));
         pw.printf("BUDGET:           %s%n", MONEY_FORMATTER.format(project.getBudget()));
         pw.printf("HOURLY RATE:      %s%n", MONEY_FORMATTER.format(project.getHourlyRate()));
         pw.printf("DURATION:         %s%n", DURATION_FORMATTER.format(duration));
@@ -102,7 +102,7 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
         pw.flush();
       }
 
-    private void addAll (@Nonnull final List<JobEventSpi> results,
+    private void addAll (@Nonnull final List<? super JobEventSpi> results,
                          @Nonnull final List<? extends JobEvent> jobEvents)
       {
         for (final JobEvent jobEvent : jobEvents)

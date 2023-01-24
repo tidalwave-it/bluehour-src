@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -38,13 +38,13 @@ import it.tidalwave.accounting.model.Project;
 public class ProjectStatusAdapter extends XmlAdapter<String, Project.Status>
   {
     @Override @Nonnull
-    public Project.Status unmarshal(String v) 
+    public Project.Status unmarshal (final String v)
       {
         return Project.Status.valueOf(v.toUpperCase());
       }
 
     @Override @Nonnull
-    public String marshal(Project.Status v)
+    public String marshal (final Project.Status v)
       {
         return v.name().toLowerCase();
       }

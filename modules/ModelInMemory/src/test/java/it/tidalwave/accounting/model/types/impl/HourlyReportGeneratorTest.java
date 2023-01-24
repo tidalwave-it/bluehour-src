@@ -24,23 +24,15 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.spi;
+package it.tidalwave.accounting.model.types.impl;
 
-import javax.annotation.Nonnull;
-import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.accounting.model.impl.HourlyReportGeneratorTestSupport;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-public interface CustomerSpi extends Customer
+public class HourlyReportGeneratorTest extends HourlyReportGeneratorTestSupport
   {
-    /*******************************************************************************************************************
-     *
-     *
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    public String getName();
   }

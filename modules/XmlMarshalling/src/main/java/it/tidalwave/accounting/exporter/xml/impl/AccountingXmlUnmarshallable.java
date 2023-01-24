@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import it.tidalwave.role.io.Unmarshallable;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
@@ -51,17 +50,17 @@ public class AccountingXmlUnmarshallable implements Unmarshallable
     private final Accounting accounting;
     
     @Override @Nonnull
-    public <TYPE> TYPE unmarshal (@Nonnull final InputStream is)
+    public <T> T unmarshal (@Nonnull final InputStream is)
       throws IOException 
       {
         try 
           {
-            final JAXBContext jaxbc = JAXBContext.newInstance(AccountingXml.class);
-            final Unmarshaller unmarshaller = jaxbc.createUnmarshaller();
+            final var jaxbc = JAXBContext.newInstance(AccountingXml.class);
+            final var unmarshaller = jaxbc.createUnmarshaller();
             // FIXME: Set encoding
-            final AccountingXml accountingXml = (AccountingXml)unmarshaller.unmarshal(is);
+            final var accountingXml = (AccountingXml)unmarshaller.unmarshal(is);
             accountingXml.fill(accounting);
-            return (TYPE)accounting; 
+            return (T)accounting;
           } 
         catch (JAXBException e) 
           {

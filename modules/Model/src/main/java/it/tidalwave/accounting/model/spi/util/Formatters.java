@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -28,6 +28,7 @@ package it.tidalwave.accounting.model.spi.util;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Locale;
 
 /***********************************************************************************************************************
  *
@@ -36,8 +37,10 @@ import java.time.format.FormatStyle;
  **********************************************************************************************************************/
 public class Formatters
   {
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+    public static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).localizedBy(Locale.UK);
+    public static final DateTimeFormatter DATETIME_FORMATTER =
+            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).localizedBy(Locale.UK);
     public static final MoneyFormat MONEY_FORMATTER = new MoneyFormat();
     public static final DurationFormat DURATION_FORMATTER = new DurationFormat();
   }

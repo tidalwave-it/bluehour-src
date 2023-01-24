@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -30,8 +30,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import it.tidalwave.util.As;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsSupport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.types.Money;
 import lombok.experimental.Delegate;
@@ -46,11 +46,11 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"asSupport"})
+@Immutable @EqualsAndHashCode @ToString(exclude = "as")
 public abstract class InMemoryJobEvent implements JobEvent
   {
     @Delegate
-    private final AsSupport asSupport = new AsSupport(this);
+    private final As as = As.forObject(this);
 
     @Getter @Nonnull
     protected final Id id;

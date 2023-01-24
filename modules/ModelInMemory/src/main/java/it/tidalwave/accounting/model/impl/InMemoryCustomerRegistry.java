@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -30,10 +30,10 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,8 +57,8 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
      * 
      *
      ******************************************************************************************************************/
-    static class InMemoryCustomerFinder extends FinderWithIdMapSupport<Customer, InMemoryCustomer, CustomerRegistry.Finder>
-                                 implements CustomerRegistry.Finder
+    static class InMemoryCustomerFinder
+            extends FinderWithIdMapSupport<Customer, InMemoryCustomer, Finder> implements CustomerRegistry.Finder
       {
         private static final long serialVersionUID = 1L;
     
@@ -94,7 +94,7 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
       {
         return new Customer.Builder(customer -> 
           {
-            final InMemoryCustomer inMemoryCustomer = (InMemoryCustomer)customer;
+            final var inMemoryCustomer = (InMemoryCustomer)customer;
             inMemoryCustomer.setAccounting(accounting);
             customerMapById.put(customer.getId(), inMemoryCustomer);
           });

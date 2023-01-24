@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -27,6 +27,7 @@
 package it.tidalwave.accounting.ui.customerexplorer;
 
 import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.role.ui.PresentationModel;
 
 /***********************************************************************************************************************

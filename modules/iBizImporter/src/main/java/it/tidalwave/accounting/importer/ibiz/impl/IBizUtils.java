@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -50,7 +50,7 @@ public final class IBizUtils
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public static <T> List<T> toList (@Nonnull final Iterator<T> i)
+    public static <T> List<T> toList (@Nonnull final Iterator<? extends T> i)
       {
         final List<T> list = new ArrayList<>();
 

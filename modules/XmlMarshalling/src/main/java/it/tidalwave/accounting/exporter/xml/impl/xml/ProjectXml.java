@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -41,7 +41,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
@@ -112,7 +111,7 @@ public class ProjectXml
     
     public ProjectXml (@Nonnull final Project project)
       {
-        final Project.Builder builder = project.toBuilder();
+        final var builder = project.toBuilder();
         this.id = builder.getId();
         this.customerXml = new CustomerXml(builder.getCustomer());
         this.name = builder.getName();
@@ -132,7 +131,7 @@ public class ProjectXml
       {
         try 
           {
-            final Customer customer = accounting.getCustomerRegistry().findCustomers().withId(customerXml.getId()).result();
+            final var customer = accounting.getCustomerRegistry().findCustomers().withId(customerXml.getId()).result();
             return new Project.Builder().withId(id)
                                         .withCustomer(customer) 
                                         .withName(name)

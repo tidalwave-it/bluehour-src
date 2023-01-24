@@ -5,7 +5,7 @@
  * blueHour
  * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
  * %%
- * Copyright (C) 2013 - 2021 Tidalwave s.a.s. (http://tidalwave.it)
+ * Copyright (C) 2013 - 2023 Tidalwave s.a.s. (http://tidalwave.it)
  * %%
  * *********************************************************************************************************************
  *
@@ -30,11 +30,11 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
-import it.tidalwave.accounting.model.spi.util.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,7 +58,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
      *
      *
      ******************************************************************************************************************/
-    static class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectSpi, ProjectRegistry.ProjectFinder>
+    static class InMemoryProjectFinder extends FinderWithIdMapSupport<Project, ProjectSpi, ProjectFinder>
                                 implements ProjectRegistry.ProjectFinder
       {
         private static final long serialVersionUID = 1L;
@@ -106,7 +106,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
       {
         return new Project.Builder(project ->
           {
-            final InMemoryProject inMemoryProject = (InMemoryProject)project;
+            final var inMemoryProject = (InMemoryProject)project;
             projectMapById.put(project.getId(), inMemoryProject);
             inMemoryProject.setAccounting(accounting);
           });
