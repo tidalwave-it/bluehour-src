@@ -8,66 +8,48 @@ blueHour
 
 blueHour is a small application for accounting and invoicing. Still under development in the early stage.
 
+blueHour requires and is tested with JDKs in this range: [11,12).
+It is released under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
+
+Please have a look at the [project website](http://bluehour.tidalwave.it) for a quick introduction with samples, tutorials, JavaDocs and build reports.
+
 
 Bootstrapping
 -------------
 
 In order to build the project, run from the command line:
 
-```mvn -DskipTests```
-
-The project can be opened and built by a recent version of the NetBeans, Eclipse or Idea IDEs.
-
-
-Documentation
--------------
-
-More information can be found on the [homepage](http://bluehour.tidalwave.it) of the project.
-
-
-Where can I get the latest release?
------------------------------------
-
-You can download source and binaries from the [download page](https://bitbucket.org/tidalwave/bluehour-src/src).
-
-Alternatively you can pull it from the central Maven repositories:
-
-```xml
-<dependency>
-    <groupId>it.tidalwave.accounting<groupId>
-    <artifactId>bluehour</artifactId>
-    <version>-- version --</version>
-</dependency>
+```shell
+mkdir bluehour
+cd bluehour
+git clone https://tidalwave@bitbucket.org/tidalwave/bluehour-src.git .
+mvn -DskipTests
 ```
+
+The project can be opened with a recent version of the [IntelliJ IDEA](https://www.jetbrains.com/idea/), 
+[Apache NetBeans](https://netbeans.apache.org/) or [Eclipse](https://www.eclipse.org/ide/) IDEs.
 
 
 Contributing
 ------------
 
-We accept pull requests via Bitbucket or GitHub.
+Pull requests are accepted via [Bitbucket](https://tidalwave@bitbucket.org/tidalwave/bluehour-src.git) or [GitHub](). There are some guidelines which will make 
+applying pull requests easier:
 
-There are some guidelines which will make applying pull requests easier for us:
-
-* No tabs! Please use spaces for indentation.
+* No tabs: please use spaces for indentation.
 * Respect the code style.
-* Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source
-  ode should be reformatted create a separate PR for this change.
-* Provide TestNG tests for your changes and make sure your changes don't break any existing tests by running
-```mvn clean test```.
+* Create minimal diffs — disable 'on save' actions like 'reformat source code' or 'organize imports' (unless you use the IDEA specific configuration for 
+  this project).
+* Provide [TestNG](https://testng.org/doc/) tests for your changes and make sure your changes don't break any existing tests by running
+```mvn clean test```. You can check whether there are currently broken tests at the [Continuous Integration](http://services.tidalwave.it/ci/view/blueHour) page.
 
 If you plan to contribute on a regular basis, please consider filing a contributor license agreement. Contact us for
- more information
-
-
-License
--------
-
-Code is released under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
+ more information.
 
 
 Additional Resources
 --------------------
 
+* [Issue tracking](http://services.tidalwave.it/jira/browse/BH)
+* [Continuous Integration](http://services.tidalwave.it/ci/view/blueHour)
 * [Tidalwave Homepage](http://tidalwave.it)
-* [Project Issue Tracker (Jira)](http://services.tidalwave.it/jira/browse/BH)
-* [Project Continuous Integration (Jenkins)](http://services.tidalwave.it/ci/view/blueHour)
