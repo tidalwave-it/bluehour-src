@@ -41,7 +41,7 @@
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour</artifactId>
-    <version>1.0-ALPHA-8-SNAPSHOT</version>
+    <version>1.0-ALPHA-9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueHour</name>
     <url>http://bluehour.tidalwave.it</url>
@@ -69,7 +69,10 @@
 
     ================================================================================================================ -->
     <properties>
-        <tft.maven.requiredJdk>[11,16)</tft.maven.requiredJdk>
+        <tft.javac.source>11</tft.javac.source>
+        <tft.javac.target>11</tft.javac.target>
+        <tft.javac.release>11</tft.javac.release>
+        <tft.maven.requiredJdk>[11,12)</tft.maven.requiredJdk>
         <tidalwave.ci.view>blueHour</tidalwave.ci.view>
         <tidalwave.issues>BH</tidalwave.issues>
         <scm.repo.url>git@bitbucket.org:tidalwave/bluehour-src.git</scm.repo.url>
@@ -87,90 +90,90 @@
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
                 <classifier>tests</classifier>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
                 <classifier>tests</classifier>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-importer-ibiz</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
                 <classifier>tests</classifier>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-commons</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-customerexplorer</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-projectexplorer</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-jobeventexplorer</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-hourlyreport</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-ui-importer-ibiz</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.accounting</groupId>
                 <artifactId>bluehour-macos</artifactId>
-                <version>1.0-ALPHA-8-SNAPSHOT</version>
+                <version>1.0-ALPHA-9-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

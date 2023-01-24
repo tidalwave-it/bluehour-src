@@ -31,7 +31,7 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour</artifactId>
-        <version>1.0-ALPHA-8-SNAPSHOT</version>
+        <version>1.0-ALPHA-9-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -41,7 +41,7 @@
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-modules</artifactId>
-    <version>1.0-ALPHA-8-SNAPSHOT</version>
+    <version>1.0-ALPHA-9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueHour (modules)</name>
     <description>The parent POM of all modules.</description>
@@ -50,10 +50,6 @@
 
     ================================================================================================================ -->
     <properties>
-        <tft.javac.source>11</tft.javac.source>
-        <tft.javac.target>11</tft.javac.target>
-        <tft.javac.release>11</tft.javac.release>
-
         <activation.version>1.1.1</activation.version>
         <aquafx.version>0.2</aquafx.version>
         <commons-codec.version>1.9</commons-codec.version>
