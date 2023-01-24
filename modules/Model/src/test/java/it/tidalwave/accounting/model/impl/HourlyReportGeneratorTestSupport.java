@@ -41,13 +41,13 @@ import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-public class DefaultHourlyReportGeneratorTest
+public class HourlyReportGeneratorTestSupport // Can't work here, no implementations; subclassed
   {
     @Test(dataProvider = "projects", dataProviderClass = ScenarioFactory.class)
     public void must_properly_generate_report (@Nonnull final String scenarioName, @Nonnull final ProjectSpi project)
       throws IOException
       {
-        final var expectedResultsFolder = Path.of("src/test/resources/expected-results");
+        final var expectedResultsFolder = Path.of("../Model/src/test/resources/expected-results");
         final var testFolder = Path.of("target/test-results");
         Files.createDirectories(testFolder);
 

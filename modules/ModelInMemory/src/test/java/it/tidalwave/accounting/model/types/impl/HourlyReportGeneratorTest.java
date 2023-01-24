@@ -24,23 +24,15 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.accounting.model.spi.util;
+package it.tidalwave.accounting.model.types.impl;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
+import it.tidalwave.accounting.model.impl.HourlyReportGeneratorTestSupport;
 
 /***********************************************************************************************************************
  *
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-public class Formatters
+public class HourlyReportGeneratorTest extends HourlyReportGeneratorTestSupport
   {
-    public static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).localizedBy(Locale.UK);
-    public static final DateTimeFormatter DATETIME_FORMATTER =
-            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).localizedBy(Locale.UK);
-    public static final MoneyFormat MONEY_FORMATTER = new MoneyFormat();
-    public static final DurationFormat DURATION_FORMATTER = new DurationFormat();
   }
