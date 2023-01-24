@@ -71,4 +71,9 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <!-- Otherwise can't be released because of missing javadocs -->
+        <tft.javadoc.excludePackageNames />
+    </properties>
+
 </project>
