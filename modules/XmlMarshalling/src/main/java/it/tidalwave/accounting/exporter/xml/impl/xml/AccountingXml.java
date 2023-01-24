@@ -38,6 +38,7 @@ import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import lombok.NoArgsConstructor;
+import static java.util.Comparator.*;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
@@ -67,11 +68,11 @@ public class AccountingXml
     public AccountingXml (@Nonnull final Accounting accounting)
       {
         customersXml = accounting.getCustomerRegistry().findCustomers().stream().map(CustomerXml::new)
-                                                                                .collect(toList());
+                .sorted(comparing(CustomerXml::getId)).collect(toList());
         projectsXml = accounting.getProjectRegistry().findProjects().stream().map(ProjectXml::new)
-                                                                             .collect(toList());
+                .sorted(comparing(ProjectXml::getId)).collect(toList());
         invoicesxml = accounting.getInvoiceRegistry().findInvoices().stream().map(InvoiceXml::new)
-                                                                             .collect(toList());
+                .sorted(comparing(InvoiceXml::getId)).collect(toList());
       }
 
     public void fill (@Nonnull final Accounting accounting)

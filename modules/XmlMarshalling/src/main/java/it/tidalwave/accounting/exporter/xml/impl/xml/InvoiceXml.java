@@ -47,6 +47,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
@@ -62,6 +63,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @XmlRootElement(name = "invoice") @XmlAccessorType(FIELD) @XmlAccessorOrder(ALPHABETICAL)
 public class InvoiceXml 
   {
+    @Getter
     @XmlAttribute(name = "id")
     @XmlID
     @XmlJavaTypeAdapter(IdAdapter.class)
