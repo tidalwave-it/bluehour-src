@@ -145,10 +145,10 @@ public final class ScenarioFactory
         final var project4StartDate = LocalDate.parse("2014-02-17");
         final var project4EndDate = LocalDate.parse("2014-06-21");
 
-        final var rate1 = new Money(120, "EUR");
-        final var rate2 = new Money(150, "EUR");
-        final var rate3 = new Money(210, "EUR");
-        final var rate4 = new Money(240, "EUR");
+        final var rate1 = Money.of(120, "EUR");
+        final var rate2 = Money.of(150, "EUR");
+        final var rate3 = Money.of(210, "EUR");
+        final var rate4 = Money.of(240, "EUR");
 
         final var je1 = createJobEvents(project1StartDate, project1EndDate, rate1);
         final var je2 = createJobEvents(project2StartDate, project2EndDate, rate2);
@@ -166,7 +166,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-1")
                     .withEvents(je1)
                     .withHourlyRate(rate1)
-                    .withBudget(new Money(123456, "EUR"))
+                    .withBudget(Money.of(123456, "EUR"))
                     .create();
         final var acmeConsultingProject2 =
                 projectRegistry.addProject()
@@ -179,7 +179,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-2")
                     .withEvents(je2)
                     .withHourlyRate(rate2)
-                    .withBudget(new Money(234567, "EUR"))
+                    .withBudget(Money.of(234567, "EUR"))
                     .create();
         final var acmeFinancingProject1 =
                 projectRegistry.addProject()
@@ -192,7 +192,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-3")
                     .withHourlyRate(rate3)
                     .withEvents(je3)
-                    .withBudget(new Money(345678, "EUR"))
+                    .withBudget(Money.of(345678, "EUR"))
                     .create();
         final var acmeFinancingProject2 =
                 projectRegistry.addProject()
@@ -205,7 +205,7 @@ public final class ScenarioFactory
                     .withNumber("PRJ ACME-4")
                     .withHourlyRate(rate4)
                     .withEvents(je4)
-                    .withBudget(new Money(456789, "EUR"))
+                    .withBudget(Money.of(456789, "EUR"))
                     .create();
 
 
@@ -235,7 +235,7 @@ public final class ScenarioFactory
                                          .withName("Event #" + i)
                                          .withDescription("Description of Event #" + i)
                                          .withType(JobEvent.Type.TIMED)
-                                         .withEarnings(new Money(earnings, "EUR"))
+                                         .withEarnings(Money.of(earnings, "EUR"))
                                          .withStartDateTime(s)
                                          .withEndDateTime(e)
                                          .withHourlyRate(rate)
@@ -266,11 +266,11 @@ public final class ScenarioFactory
             invoiceRegistry.addInvoice().withId(new Id("" + nextId++))
                                         .withDate(lastDate)
                                         .withDueDate(lastDate.plusMonths(2))
-                                        .withEarnings(new Money(new BigDecimal(earnings), "EUR"))
+                                        .withEarnings(Money.of(new BigDecimal(earnings), "EUR"))
                                         .withJobEvents(eventsSubList)
                                         .withNumber(prefix + (i + 1))
                                         .withProject(project)
-                                        .withTax(new Money(new BigDecimal(earnings * taxRate), "EUR"))
+                                        .withTax(Money.of(new BigDecimal(earnings * taxRate), "EUR"))
                                         .create();
           }
       }

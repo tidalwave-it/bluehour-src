@@ -65,7 +65,7 @@ public class ConfigurationDecorator implements Configuration
     @Nonnull
     public Money getMoney (@Nonnull final String key)
       {
-        return new Money(delegate.getBigDecimal(key).round(ROUNDING), "EUR");
+        return Money.of(delegate.getBigDecimal(key).round(ROUNDING), "EUR");
       }
 
     @Nonnull

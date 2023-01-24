@@ -66,7 +66,7 @@ public class ProjectTest
                                .withBillingAddress(a1)
                                .create();
         final var p = Project.builder().withId(new Id("2"))
-                             .withBudget(new Money(10500, "EUR"))
+                             .withBudget(Money.of(10500, "EUR"))
                              .withCustomer(c1)
                              .withName("Project 1")
                              .withDescription("description of project 1")
@@ -74,7 +74,7 @@ public class ProjectTest
                              .withEndDate(parseDate("2014-02-12"))
                              .withNotes("Notes for project 1")
                              .withNumber("1")
-                             .withHourlyRate(new Money(43, "EUR"))
+                             .withHourlyRate(Money.of(43, "EUR"))
                              .create();
         assertThat(p.toString(), is("InMemoryProject(id=2, customer=InMemoryCustomer(id=1, name=Acme Corp., billingAddress="
                                   + "Address(street=Foo Bar rd 20, city=San Francisco, state=CA, country=USA, zip=12345), "

@@ -33,6 +33,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -44,10 +45,10 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor @EqualsAndHashCode
+@Immutable @RequiredArgsConstructor(access = AccessLevel.PRIVATE) @EqualsAndHashCode
 public class Money implements Comparable<Money>
   {
-    public static final Money ZERO = new Money(BigDecimal.ZERO, "EUR");
+    public static final Money ZERO = Money.of(BigDecimal.ZERO, "EUR");
 
     @Getter @Nonnull
     private final BigDecimal amount;
@@ -55,9 +56,21 @@ public class Money implements Comparable<Money>
     @Getter @Nonnull
     private final String currency;
 
-    public Money (final long amount, @Nonnull final String currency)
+    private Money (final long amount, @Nonnull final String currency)
       {
         this(BigDecimal.valueOf(amount), currency);
+      }
+
+    @Nonnull
+    public static Money of (final BigDecimal amount, @Nonnull final String currency)
+      {
+        return new Money(amount, currency);
+      }
+
+    @Nonnull
+    public static Money of (final long amount, @Nonnull final String currency)
+      {
+        return new Money(amount, currency);
       }
 
     @Nonnull
@@ -65,27 +78,21 @@ public class Money implements Comparable<Money>
       throws ParseException
       {
         final var parts = string.split(" ");
-        return new Money((BigDecimal)getFormat().parse(parts[0]), parts[1]);
-      }
-
-    @Override @Nonnull
-    public String toString()
-      {
-        return String.format("%s %s", getFormat().format(amount), currency);
+        return Money.of((BigDecimal)getFormat().parse(parts[0]), parts[1]);
       }
 
     @Nonnull
     public Money add (@Nonnull final Money other)
       {
         checkCurrencies(other);
-        return new Money(amount.add(other.amount), currency);
+        return Money.of(amount.add(other.amount), currency);
       }
 
     @Nonnull
     public Money subtract (@Nonnull final Money other)
       {
         checkCurrencies(other);
-        return new Money(amount.subtract(other.amount), currency);
+        return Money.of(amount.subtract(other.amount), currency);
       }
 
     @Nonnegative
@@ -129,6 +136,12 @@ public class Money implements Comparable<Money>
     public boolean lowerThan (@Nonnull final Money other)
       {
         return compareTo(other) < 0;
+      }
+
+    @Override @Nonnull
+    public String toString()
+      {
+        return String.format("%s %s", getFormat().format(amount), currency);
       }
 
     private void checkCurrencies (@Nonnull final Money other)
