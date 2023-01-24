@@ -72,14 +72,14 @@ public class JobEventTest
 //                                            .withNumber("1")
 //                                            .withHourlyRate(new Money(43, "EUR"))
 //                                            .create();
-        final JobEvent j1 = JobEvent.builder().withId(new Id("1"))
-                                              .withName("Consultancy")
-                                              .withDescription("Consultancy description")
-                                              .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
-                                              .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))
-                                              .withHourlyRate(new Money(48, "EUR"))
-                                              .withEarnings(new Money(430, "EUR"))
-                                              .create();
+        final var j1 = JobEvent.builder().withId(new Id("1"))
+                               .withName("Consultancy")
+                               .withDescription("Consultancy description")
+                               .withStartDateTime(parseDateTime("2014-01-05T12:34:56.0"))
+                               .withEndDateTime(parseDateTime("2014-01-05T13:45:34.0"))
+                               .withHourlyRate(new Money(48, "EUR"))
+                               .withEarnings(new Money(430, "EUR"))
+                               .create();
 
         assertThat(j1.toString(), is("InMemoryTimedJobEvent("
                                    + "super=InMemoryJobEvent(id=1, name=Consultancy, description=Consultancy description), "

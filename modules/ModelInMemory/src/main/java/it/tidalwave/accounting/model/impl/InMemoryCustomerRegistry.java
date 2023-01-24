@@ -58,8 +58,7 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
      *
      ******************************************************************************************************************/
     static class InMemoryCustomerFinder
-            extends FinderWithIdMapSupport<Customer, InMemoryCustomer, Finder>
-            implements CustomerRegistry.Finder
+            extends FinderWithIdMapSupport<Customer, InMemoryCustomer, Finder> implements CustomerRegistry.Finder
       {
         private static final long serialVersionUID = 1L;
     
@@ -95,7 +94,7 @@ public class InMemoryCustomerRegistry implements CustomerRegistry
       {
         return new Customer.Builder(customer -> 
           {
-            final InMemoryCustomer inMemoryCustomer = (InMemoryCustomer)customer;
+            final var inMemoryCustomer = (InMemoryCustomer)customer;
             inMemoryCustomer.setAccounting(accounting);
             customerMapById.put(customer.getId(), inMemoryCustomer);
           });

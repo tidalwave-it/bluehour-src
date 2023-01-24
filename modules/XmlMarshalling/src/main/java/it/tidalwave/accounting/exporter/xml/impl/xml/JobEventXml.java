@@ -98,7 +98,7 @@ public class JobEventXml
     
     public JobEventXml (@Nonnull final JobEvent jobEvent)
       {
-        final JobEvent.Builder builder = jobEvent.toBuilder();
+        final var builder = jobEvent.toBuilder();
         this.id = builder.getId();
         this.type = builder.getType();
         this.startDateTime = builder.getStartDateTime();
@@ -127,7 +127,7 @@ public class JobEventXml
       }
     
     @Nonnull
-    public static List<JobEvent> toJobEvents (@Nullable final List<JobEventXml> jobEventsXml)
+    public static List<JobEvent> toJobEvents (@Nullable final List<? extends JobEventXml> jobEventsXml)
       {
         return (jobEventsXml == null) 
                 ? Collections.emptyList()

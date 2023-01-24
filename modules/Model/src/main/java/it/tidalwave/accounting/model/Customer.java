@@ -88,7 +88,7 @@ public interface Customer extends Identifiable, As
         @Nonnull
         public Customer create()
           {
-            final Customer customer = ObjectFactory.getInstance().createCustomer(this);
+            final var customer = ObjectFactory.getInstance().createCustomer(this);
             callback.register(customer);
             return customer;
           }

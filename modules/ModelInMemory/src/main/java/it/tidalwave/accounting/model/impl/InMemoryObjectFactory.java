@@ -27,7 +27,6 @@
 package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;
@@ -62,7 +61,7 @@ public class InMemoryObjectFactory implements ObjectFactory
     @Override @Nonnull 
     public JobEvent createJobEvent (@Nonnull final JobEvent.Builder builder)
       {
-        final List<? extends JobEvent> events = builder.getEvents();
+        final var events = builder.getEvents();
         
         if ((events != null) && !events.isEmpty())
           {

@@ -106,7 +106,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
         @Nonnull
         public Project create()
           {
-            final Project project = ObjectFactory.getInstance().createProject(this);
+            final var project = ObjectFactory.getInstance().createProject(this);
             callback.register(project);
             return project;
           }

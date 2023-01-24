@@ -26,6 +26,7 @@
  */
 package it.tidalwave.accounting.commons;
 
+import it.tidalwave.accounting.model.Accounting;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

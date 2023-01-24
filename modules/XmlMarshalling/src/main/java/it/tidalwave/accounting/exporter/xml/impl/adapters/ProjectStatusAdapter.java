@@ -38,13 +38,13 @@ import it.tidalwave.accounting.model.Project;
 public class ProjectStatusAdapter extends XmlAdapter<String, Project.Status>
   {
     @Override @Nonnull
-    public Project.Status unmarshal(String v) 
+    public Project.Status unmarshal (final String v)
       {
         return Project.Status.valueOf(v.toUpperCase());
       }
 
     @Override @Nonnull
-    public String marshal(Project.Status v)
+    public String marshal (final Project.Status v)
       {
         return v.name().toLowerCase();
       }

@@ -39,8 +39,8 @@ public class DurationFormat
     @Nonnull
     public String format (@Nonnull final Duration duration)
       {
-        final long hours = duration.toHours();
-        final long minutes = duration.minusHours(hours).toMinutes();
+        final var hours = duration.toHours();
+        final var minutes = duration.minusHours(hours).toMinutes();
         return String.format("%d:%02d", hours, minutes);
       }
   }

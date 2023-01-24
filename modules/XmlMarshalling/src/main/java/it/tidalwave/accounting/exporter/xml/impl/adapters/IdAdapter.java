@@ -37,13 +37,13 @@ import it.tidalwave.util.Id;
 public class IdAdapter extends XmlAdapter<String, Id> 
   {
     @Override
-    public Id unmarshal(String v)
+    public Id unmarshal(final String v)
       {
         return new Id(v);
       }
 
     @Override
-    public String marshal(Id v) 
+    public String marshal(final Id v)
       {
         return v.stringValue();
       }

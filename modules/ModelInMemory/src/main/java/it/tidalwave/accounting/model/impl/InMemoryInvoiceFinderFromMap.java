@@ -30,12 +30,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.types.Money;
 import lombok.RequiredArgsConstructor;
 import static java.util.stream.Collectors.toList;
@@ -65,24 +65,24 @@ public class InMemoryInvoiceFinderFromMap
                                          @Nonnull final Object override)
       {
         super(other, override);
-        final InMemoryInvoiceFinderFromMap source = getSource(InMemoryInvoiceFinderFromMap.class, other, override);
+        final var source = getSource(InMemoryInvoiceFinderFromMap.class, other, override);
         this.project = source.project;
       }
 
     @Override @Nonnull
     public InvoiceRegistry.Finder withProject (@Nonnull final Project project)
       {
-        return clone(new InMemoryInvoiceFinderFromMap(project));
+        return clonedWith(new InMemoryInvoiceFinderFromMap(project));
       }
 
     @Override @Nonnull
     protected List<Invoice> computeResults()
       {
-        Stream<Invoice> stream = super.computeResults().stream();
+        var stream = super.computeResults().stream();
 
         if (project != null)
           {
-            stream = stream.filter(invoice -> ((InMemoryInvoice)invoice).getProject().equals(project));
+            stream = stream.filter(invoice -> ((InvoiceSpi)invoice).getProject().equals(project));
           }
         
         return stream.collect(toList());

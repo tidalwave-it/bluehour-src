@@ -50,7 +50,7 @@ public final class IBizUtils
      * 
      ******************************************************************************************************************/
     @Nonnull
-    public static <T> List<T> toList (@Nonnull final Iterator<T> i)
+    public static <T> List<T> toList (@Nonnull final Iterator<? extends T> i)
       {
         final List<T> list = new ArrayList<>();
 

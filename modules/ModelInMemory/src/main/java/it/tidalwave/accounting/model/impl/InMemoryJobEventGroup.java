@@ -46,7 +46,7 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode(callSuper = true) @ToString(exclude = { "events" }, callSuper = true)
+@Immutable @EqualsAndHashCode(callSuper = true) @ToString(exclude = "events", callSuper = true)
 public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventGroupSpi
   {
     @Nonnull
@@ -84,7 +84,7 @@ public class InMemoryJobEventGroup extends InMemoryJobEvent implements JobEventG
     public LocalDateTime getDateTime()
       {
 //        return findChildren().sorted(comparing(JobEvent::getDateTime)).findFirst().get().getDateTime();  
-        final BinaryOperator<LocalDateTime> min = (a, b) -> (a.compareTo(b) > 0) ? b : a;
+        final BinaryOperator<LocalDateTime> min = (a, b) -> a.isAfter(b) ? b : a;
         return findChildren().stream().map(jobEvent -> (JobEventSpi)jobEvent)
                                       .map(JobEventSpi::getDateTime)
                                       .reduce(min).get();

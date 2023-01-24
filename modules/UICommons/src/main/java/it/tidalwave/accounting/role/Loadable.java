@@ -49,6 +49,6 @@ public interface Loadable
      * @throws  IOException         in case of error
      *
      ******************************************************************************************************************/
-    public <TYPE> TYPE load()
+    public <T> T load()
       throws IOException;
   }

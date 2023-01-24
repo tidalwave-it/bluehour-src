@@ -27,14 +27,10 @@
 package it.tidalwave.accounting.exporter.xml.impl;
 
 import javax.annotation.Nonnull;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -64,25 +60,26 @@ public class AccountingXmlMarshallableTest
     public void must_properly_marshall_iBiz()
       throws Exception
       {
-        final Path iBizFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME
-//        final Path iBizFolder = Paths.get("/Users/fritz/Settings/iBiz"); // FIXME
+        final var iBizFolder = Path.of("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME
+//        final Path iBizFolder = Path.of("/Users/fritz/Settings/iBiz"); // FIXME
         
         if (Files.exists(iBizFolder))
           {
-            final Path expectedResultsFolder = Paths.get("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
-            final Path testFolder = Paths.get("target/test-results");
+            final var
+                    expectedResultsFolder = Path.of("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private");
+            final var testFolder = Path.of("target/test-results");
             Files.createDirectories(testFolder);
-            final Path actualResult = testFolder.resolve("iBizImportMarshalled.xml");
-            final Path expectedResult = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
+            final var actualResult = testFolder.resolve("iBizImportMarshalled.xml");
+            final var expectedResult = expectedResultsFolder.resolve("iBizImportMarshalled.xml");
 
-            final IBizImporter importer = DefaultIBizImporter.builder()
-                                                             .withPath(iBizFolder)
-                                                             .create();
+            final var importer = DefaultIBizImporter.builder()
+                                                    .withPath(iBizFolder)
+                                                    .create();
             importer.importAll();
 
-            final AccountingXmlMarshallable fixture = new AccountingXmlMarshallable(importer);
+            final var fixture = new AccountingXmlMarshallable(importer);
 
-            try (final OutputStream os = new FileOutputStream(actualResult.toFile())) 
+            try (final var os = Files.newOutputStream(actualResult))
               {
                 fixture.marshal(os);
               }
@@ -95,15 +92,15 @@ public class AccountingXmlMarshallableTest
     public void must_properly_marshall (@Nonnull final String scenarioName, @Nonnull final Accounting scenario)
       throws Exception
       {
-        final Path expectedResultsFolder = Paths.get("src/test/resources/expected-results");
-        final Path testFolder = Paths.get("target/test-results");
+        final var expectedResultsFolder = Path.of("src/test/resources/expected-results");
+        final var testFolder = Path.of("target/test-results");
         Files.createDirectories(testFolder);
-        final Path actualResult = testFolder.resolve(scenarioName + ".xml");
-        final Path expectedResult = expectedResultsFolder.resolve(scenarioName + ".xml");
+        final var actualResult = testFolder.resolve(scenarioName + ".xml");
+        final var expectedResult = expectedResultsFolder.resolve(scenarioName + ".xml");
 
-        final AccountingXmlMarshallable fixture = new AccountingXmlMarshallable(scenario);
+        final var fixture = new AccountingXmlMarshallable(scenario);
 
-        try (final OutputStream os = new FileOutputStream(actualResult.toFile())) 
+        try (final var os = Files.newOutputStream(actualResult))
           {
             fixture.marshal(os);
           }

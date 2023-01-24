@@ -106,7 +106,7 @@ public class InMemoryProjectRegistry implements ProjectRegistry
       {
         return new Project.Builder(project ->
           {
-            final InMemoryProject inMemoryProject = (InMemoryProject)project;
+            final var inMemoryProject = (InMemoryProject)project;
             projectMapById.put(project.getId(), inMemoryProject);
             inMemoryProject.setAccounting(accounting);
           });

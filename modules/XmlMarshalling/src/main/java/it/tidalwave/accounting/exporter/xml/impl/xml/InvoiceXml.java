@@ -43,7 +43,6 @@ import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
@@ -99,7 +98,7 @@ public class InvoiceXml
     
     public InvoiceXml (@Nonnull final Invoice invoice)
       {
-        final Invoice.Builder builder = invoice.toBuilder();
+        final var builder = invoice.toBuilder();
         this.id = builder.getId();
         this.number = builder.getNumber();
         this.projectXml = new ProjectXml(builder.getProject());
@@ -117,7 +116,7 @@ public class InvoiceXml
       {
         try 
           {
-            final Project customer = accounting.getProjectRegistry().findProjects().withId(projectXml.getId()).result();
+            final var customer = accounting.getProjectRegistry().findProjects().withId(projectXml.getId()).result();
             return new Invoice.Builder().withId(id)
                                         .withNumber(number)
                                         .withProject(customer)

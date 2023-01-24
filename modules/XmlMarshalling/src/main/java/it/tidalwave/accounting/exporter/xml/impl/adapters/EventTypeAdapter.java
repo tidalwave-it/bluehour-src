@@ -38,13 +38,13 @@ import it.tidalwave.accounting.model.JobEvent;
 public class EventTypeAdapter extends XmlAdapter<String, JobEvent.Type>
   {
     @Override @Nonnull
-    public JobEvent.Type unmarshal(String v) 
+    public JobEvent.Type unmarshal(final String v)
       {
         return JobEvent.Type.valueOf(v.toUpperCase());
       }
 
     @Override @Nonnull
-    public String marshal(JobEvent.Type v)
+    public String marshal(final JobEvent.Type v)
       {
         return v.name().toLowerCase();
       }

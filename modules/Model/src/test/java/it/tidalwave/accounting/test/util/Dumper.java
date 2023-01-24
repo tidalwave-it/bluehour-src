@@ -109,7 +109,7 @@ public class Dumper
         dump(invoice.findJobEvents(), INDENT);
       }
 
-    private void dump (@Nonnull final Finder<JobEvent> events, @Nonnull final String prefix)
+    private void dump (@Nonnull final Finder<? extends JobEvent> events, @Nonnull final String prefix)
       {
         events.stream().forEach(event -> dump(event, prefix));
       }
@@ -127,16 +127,16 @@ public class Dumper
     @Nonnull
     public static String toString (@Nonnull final Object event)
       {
-        final String s = Stream.concat(Arrays.stream(event.getClass().getDeclaredFields()),
-                                       Arrays.stream(event.getClass().getSuperclass().getDeclaredFields()))
-                                        .sorted(comparing(Field::getName))
-                                        .filter(excludeUnwantedFields)
-                                        .peek(field -> field.setAccessible(true))
-                                        .map(field -> field.getName() + "=" + safeGet(field, event))
-                                        .collect(joining(", "));
+        final var s = Stream.concat(Arrays.stream(event.getClass().getDeclaredFields()),
+                                    Arrays.stream(event.getClass().getSuperclass().getDeclaredFields()))
+                            .sorted(comparing(Field::getName))
+                            .filter(excludeUnwantedFields)
+                            .peek(field -> field.setAccessible(true))
+                            .map(field -> field.getName() + "=" + safeGet(field, event))
+                            .collect(joining(", "));
 
         String className;
-        Class<?>[] interfaces = event.getClass().getInterfaces();
+        final var interfaces = event.getClass().getInterfaces();
 
         if (interfaces.length > 0) // assumes the business interface is the first
           {
@@ -153,11 +153,11 @@ public class Dumper
 
     private static final Predicate<? super Field> excludeUnwantedFields = field ->
       {
-        final Class<?> type = field.getType();
+        final var type = field.getType();
         return !Modifier.isStatic(field.getModifiers())
                && !Collection.class.isAssignableFrom(type)
                && !Accounting.class.isAssignableFrom(type)
-               && !field.getName().equals("as");
+               && !"as".equals(field.getName());
                // && !DefaultAs.class.isAssignableFrom(type);
       };
 
@@ -166,7 +166,7 @@ public class Dumper
       {
         try
           {
-            Object value = field.get(object);
+            var value = field.get(object);
 
             if (value instanceof Customer)
               {

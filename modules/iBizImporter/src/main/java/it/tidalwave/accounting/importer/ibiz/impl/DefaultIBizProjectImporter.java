@@ -35,10 +35,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import it.tidalwave.util.Id;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
-import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
@@ -82,7 +80,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
             public FileVisitResult visitFile (@Nonnull final Path file, @Nonnull final BasicFileAttributes attrs)
                     throws IOException
               {
-                if (!file.toFile().getName().equals(".DS_Store"))
+                if (!".DS_Store".equals(file.toFile().getName()))
                   {
                     importProject(file);
                   }
@@ -120,9 +118,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
     private void importProject (@Nonnull final ConfigurationDecorator projectConfig)
       throws NotFoundException
       {
-        final Id customerId = projectConfig.getId("clientIdentifier");
-        final Customer customer = customerRegistry.findCustomers().withId(customerId).result();
-        final IBizProjectStatus status = IBizProjectStatus.values()[projectConfig.getInt("projectStatus")];
+        final var customerId = projectConfig.getId("clientIdentifier");
+        final var customer = customerRegistry.findCustomers().withId(customerId).result();
+        final var status = IBizProjectStatus.values()[projectConfig.getInt("projectStatus")];
 
         if (status.getMappedStatus() == null)
           {
@@ -130,7 +128,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           }
         else
           {
-            final List<JobEvent> jobEvents = importJobEvents(projectConfig.getStream("jobEvents"));
+            final var jobEvents = importJobEvents(projectConfig.getStream("jobEvents"));
             projectRegistry.addProject().withId(projectConfig.getId("uniqueIdentifier"))
                                         .withBudget(projectConfig.getMoney("projectEstimate"))
                                         .withCustomer(customer)
@@ -154,16 +152,15 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private Money getHourlyRate(final ConfigurationDecorator projectConfig,
-                                final List<JobEvent> jobEvents) 
+    private Money getHourlyRate(final ConfigurationDecorator projectConfig, final List<? extends JobEvent> jobEvents)
       throws NotFoundException 
       {
-        Money hourlyRate = projectConfig.getMoney("projectRate");
+        var hourlyRate = projectConfig.getMoney("projectRate");
       
         if ((hourlyRate.compareTo(Money.ZERO) == 0) && !jobEvents.isEmpty())
             // don't use equals() - see http://stackoverflow.com/questions/6787142/bigdecimal-equals-versus-compareto
                                         {
-            JobEvent event = jobEvents.get(0);
+                                          var event = jobEvents.get(0);
             
             while ((event instanceof JobEventGroup) && ((JobEventGroup)event).findChildren().count() > 0)
               {
@@ -184,7 +181,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      *
      ******************************************************************************************************************/
     @Nonnull
-    private List<JobEvent> importJobEvents (@Nonnull final Stream<ConfigurationDecorator> jobEventsConfig)
+    private List<JobEvent> importJobEvents (@Nonnull final Stream<? extends ConfigurationDecorator> jobEventsConfig)
       {
         return jobEventsConfig.map(this::importJobEvent).collect(toList());
       }
@@ -205,7 +202,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
 //        final int taxable = jobEvent.getInt("taxable");
 //        final DateTime lastModifiedDate = jobEvent.getDateTime("lastModifiedDate");
 //        final int paid = jobEvent.getInt("jobEventPaid");
-        final IBizJobEventType type = IBizJobEventType.values()[jobEventConfig.getInt("jobEventType")];
+        final var type = IBizJobEventType.values()[jobEventConfig.getInt("jobEventType")];
 
         return JobEvent.builder().withId(jobEventConfig.getId("uniqueIdentifier"))
                                  .withType(type.getMappedType())

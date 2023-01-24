@@ -48,7 +48,7 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = {"as"})
+@Immutable @EqualsAndHashCode @ToString(exclude = "as")
 public class InMemoryInvoice implements InvoiceSpi
   {
     private static final long serialVersionUID = 1L;
@@ -66,7 +66,7 @@ public class InMemoryInvoice implements InvoiceSpi
     private final Project project;
 
     @Nonnull
-    private final List<JobEvent> jobEvents; // FIXME: immutablelist
+    private final List<InMemoryJobEvent> jobEvents; // FIXME: immutablelist
 
     @Nonnull
     private final LocalDate date;
@@ -90,7 +90,7 @@ public class InMemoryInvoice implements InvoiceSpi
         this.id = builder.getId();
         this.number = builder.getNumber();
         this.project = builder.getProject();
-        this.jobEvents = builder.getJobEvents();
+        this.jobEvents = (List<InMemoryJobEvent>)builder.getJobEvents();
         this.date = builder.getDate();
         this.dueDate = builder.getDueDate(); // FIXME: round to the end of the month?
         this.earnings = builder.getEarnings();

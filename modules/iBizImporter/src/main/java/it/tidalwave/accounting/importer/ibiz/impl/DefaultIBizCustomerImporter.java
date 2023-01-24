@@ -74,11 +74,6 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
           });*/
       }
 
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
 //    @Nonnull
 //    private String getVatNumber (final @Nonnull Contact contact)
 //      {
@@ -99,11 +94,6 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
 //        return vat;
 //      }
 
-    /*******************************************************************************************************************
-     *
-     * 
-     *
-     ******************************************************************************************************************/
 //    @Nonnull
 //    private Address getAddress (final @Nonnull Contact contact)
 //      {

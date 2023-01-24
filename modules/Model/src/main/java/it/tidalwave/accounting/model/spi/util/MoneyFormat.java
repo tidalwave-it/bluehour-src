@@ -49,7 +49,7 @@ public class MoneyFormat
     @Nonnull
     public String format (@Nonnull final Money amount)
       {
-        final String currency = amount.getCurrency();
+        final var currency = amount.getCurrency();
         return String.format("%s %s", Money.getFormat().format(amount.getAmount()),
                                       CURRENCY_SYMBOL_MAP.getOrDefault(currency, currency));
       }

@@ -27,6 +27,7 @@
 package it.tidalwave.accounting.ui.customerexplorer;
 
 import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.role.ui.PresentationModel;
 
 /***********************************************************************************************************************

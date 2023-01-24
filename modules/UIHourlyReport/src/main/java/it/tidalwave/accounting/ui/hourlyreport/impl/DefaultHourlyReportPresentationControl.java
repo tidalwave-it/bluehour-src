@@ -31,7 +31,6 @@ import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
-import it.tidalwave.accounting.model.HourlyReport;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
@@ -55,7 +54,7 @@ public class DefaultHourlyReportPresentationControl implements HourlyReportPrese
     
     @VisibleForTesting void onProjectHourlyReportRequest (@Nonnull @ListensTo final ProjectHourlyReportRequest request)
       {
-        final HourlyReport report = request.getProject().as(_HourlyReportGenerator_).createReport();
+        final var report = request.getProject().as(_HourlyReportGenerator_).createReport();
         presentation.bind();
         presentation.showUp(notificationWithFeedback().withCaption("Project Hourly Report"));
         presentation.populate(PresentationModel.of("???", (PlainTextRenderable) (args) -> report.asString()));

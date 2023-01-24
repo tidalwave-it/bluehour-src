@@ -64,7 +64,7 @@ public class Money implements Comparable<Money>
     public static Money parse (@Nonnull final String string)
       throws ParseException
       {
-        final String[] parts = string.split(" ");
+        final var parts = string.split(" ");
         return new Money((BigDecimal)getFormat().parse(parts[0]), parts[1]);
       }
 
@@ -100,10 +100,10 @@ public class Money implements Comparable<Money>
     @Nonnull
     public static DecimalFormat getFormat()
       {
-        final DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        final var symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
-        final String pattern = "###0.00";
-        final DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+        final var pattern = "###0.00";
+        final var decimalFormat = new DecimalFormat(pattern, symbols);
         decimalFormat.setParseBigDecimal(true);
 
         return decimalFormat;

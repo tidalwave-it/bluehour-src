@@ -35,17 +35,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
@@ -58,7 +54,7 @@ import org.testng.annotations.Test;
  * @author  Fabrizio Giudici
  *
  **********************************************************************************************************************/
-@Slf4j
+@SuppressWarnings("NewClassNamingConvention") @Slf4j
 public final class ScenarioFactory
   {
     private static int nextId = 1;
@@ -110,12 +106,12 @@ public final class ScenarioFactory
         AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
         nextId = 1;
 
-        final Accounting accounting = Accounting.createNew();
-        final CustomerRegistry customerRegistry = accounting.getCustomerRegistry();
-        final ProjectRegistry projectRegistry = accounting.getProjectRegistry();
-        final InvoiceRegistry invoiceRegistry = accounting.getInvoiceRegistry();
+        final var accounting = Accounting.createNew();
+        final var customerRegistry = accounting.getCustomerRegistry();
+        final var projectRegistry = accounting.getProjectRegistry();
+        final var invoiceRegistry = accounting.getInvoiceRegistry();
 
-        final Customer acmeConsulting =
+        final var acmeConsulting =
                 customerRegistry.addCustomer()
                     .withId(new Id("" + nextId++))
                     .withName("ACME Consulting")
@@ -127,7 +123,7 @@ public final class ScenarioFactory
                                                          .create())
                     .withVatNumber("IT6546034963")
                     .create();
-        final Customer acmeFinancing =
+        final var acmeFinancing =
                 customerRegistry.addCustomer()
                     .withId(new Id("" + nextId++))
                     .withName("ACME Financing")
@@ -140,26 +136,26 @@ public final class ScenarioFactory
                     .withVatNumber("IT3465346092")
                   .  create();
 
-        final LocalDate project1StartDate = LocalDate.parse("2013-04-02");
-        final LocalDate project1EndDate = LocalDate.parse("2013-07-04");
-        final LocalDate project2StartDate = LocalDate.parse("2013-05-03");
-        final LocalDate project2EndDate = LocalDate.parse("2013-09-11");
-        final LocalDate project3StartDate = LocalDate.parse("2014-01-22");
-        final LocalDate project3EndDate = LocalDate.parse("2014-03-10");
-        final LocalDate project4StartDate = LocalDate.parse("2014-02-17");
-        final LocalDate project4EndDate = LocalDate.parse("2014-06-21");
+        final var project1StartDate = LocalDate.parse("2013-04-02");
+        final var project1EndDate = LocalDate.parse("2013-07-04");
+        final var project2StartDate = LocalDate.parse("2013-05-03");
+        final var project2EndDate = LocalDate.parse("2013-09-11");
+        final var project3StartDate = LocalDate.parse("2014-01-22");
+        final var project3EndDate = LocalDate.parse("2014-03-10");
+        final var project4StartDate = LocalDate.parse("2014-02-17");
+        final var project4EndDate = LocalDate.parse("2014-06-21");
 
-        final Money rate1 = new Money(120, "EUR");
-        final Money rate2 = new Money(150, "EUR");
-        final Money rate3 = new Money(210, "EUR");
-        final Money rate4 = new Money(240, "EUR");
+        final var rate1 = new Money(120, "EUR");
+        final var rate2 = new Money(150, "EUR");
+        final var rate3 = new Money(210, "EUR");
+        final var rate4 = new Money(240, "EUR");
 
-        final List<JobEvent> je1 = createJobEvents(project1StartDate, project1EndDate, rate1);
-        final List<JobEvent> je2 = createJobEvents(project2StartDate, project2EndDate, rate2);
-        final List<JobEvent> je3 = createJobEvents(project3StartDate, project3EndDate, rate3);
-        final List<JobEvent> je4 = createJobEvents(project4StartDate, project4EndDate, rate4);
+        final var je1 = createJobEvents(project1StartDate, project1EndDate, rate1);
+        final var je2 = createJobEvents(project2StartDate, project2EndDate, rate2);
+        final var je3 = createJobEvents(project3StartDate, project3EndDate, rate3);
+        final var je4 = createJobEvents(project4StartDate, project4EndDate, rate4);
 
-        final Project acmeConsultingProject1 =
+        final var acmeConsultingProject1 =
                 projectRegistry.addProject()
                     .withId(new Id("" + nextId++))
                     .withCustomer(acmeConsulting)
@@ -172,7 +168,7 @@ public final class ScenarioFactory
                     .withHourlyRate(rate1)
                     .withBudget(new Money(123456, "EUR"))
                     .create();
-        final Project acmeConsultingProject2 =
+        final var acmeConsultingProject2 =
                 projectRegistry.addProject()
                     .withId(new Id("" + nextId++))
                     .withCustomer(acmeConsulting)
@@ -185,7 +181,7 @@ public final class ScenarioFactory
                     .withHourlyRate(rate2)
                     .withBudget(new Money(234567, "EUR"))
                     .create();
-        final Project acmeFinancingProject1 =
+        final var acmeFinancingProject1 =
                 projectRegistry.addProject()
                     .withId(new Id("" + nextId++))
                     .withCustomer(acmeFinancing)
@@ -198,7 +194,7 @@ public final class ScenarioFactory
                     .withEvents(je3)
                     .withBudget(new Money(345678, "EUR"))
                     .create();
-        final Project acmeFinancingProject2 =
+        final var acmeFinancingProject2 =
                 projectRegistry.addProject()
                     .withId(new Id("" + nextId++))
                     .withCustomer(acmeFinancing)
@@ -227,14 +223,14 @@ public final class ScenarioFactory
                                                    @Nonnull final Money rate)
       {
         final List<JobEvent> result = new ArrayList<>();
-        final long days = startDate.until(endDate, ChronoUnit.DAYS);
+        final var days = startDate.until(endDate, ChronoUnit.DAYS);
 
-        for (int i = 1; i <= days; i++)
+        for (var i = 1; i <= days; i++)
           {
-            final LocalDateTime s = startDate.plusDays(i - 1).atTime(8, 0).plusMinutes(i * 3);
-            final LocalDateTime e = s.plusMinutes(60 + i * 4);
-            final double hours = s.until(e, ChronoUnit.MINUTES) / 60.0;
-            final BigDecimal earnings = rate.getAmount().multiply(new BigDecimal(hours));
+            final var s = startDate.plusDays(i - 1).atTime(8, 0).plusMinutes(i * 3L);
+            final var e = s.plusMinutes(60 + i * 4L);
+            final var hours = s.until(e, ChronoUnit.MINUTES) / 60.0;
+            final var earnings = rate.getAmount().multiply(new BigDecimal(hours));
             result.add(JobEvent.builder().withId(new Id("" + nextId++))
                                          .withName("Event #" + i)
                                          .withDescription("Description of Event #" + i)
@@ -254,22 +250,18 @@ public final class ScenarioFactory
                                         @Nonnegative final int invoiceCount,
                                         @Nonnull final String prefix)
       {
-        List<? extends JobEvent> jobEvents = project.findChildren().results();
-        int x = jobEvents.size() / (invoiceCount + 1);
+        final List<? extends JobEvent> jobEvents = project.findChildren().results();
+        final var x = jobEvents.size() / (invoiceCount + 1);
 
-//        log.info("jobEvents: {} - invoiceCount: {}", jobEvents.size(), invoiceCount);
-
-        for (int i = 0; i < invoiceCount; i++)
+        for (var i = 0; i < invoiceCount; i++)
           {
-            List<JobEvent> eventsSubList = new ArrayList<>(jobEvents.subList(i * x, i * x + x));
-            // FIXME: hack!
-            List temp = eventsSubList;
-            List<TimedJobEventSpi> timedEventsSubList = temp;
-            final TimedJobEventSpi lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
-            final LocalDate lastDate = lastEvent.getStartDateTime().toLocalDate();
-            final double earnings = timedEventsSubList.stream()
-                                            .mapToDouble(ev -> ev.getEarnings().getAmount().doubleValue()).sum();
-            final double taxRate = 0.20d;
+            final List<? extends JobEvent> eventsSubList = new ArrayList<>(jobEvents.subList(i * x, i * x + x));
+            final var timedEventsSubList = (List<TimedJobEventSpi>)eventsSubList;
+            final var lastEvent = timedEventsSubList.get(eventsSubList.size() - 1);
+            final var lastDate = lastEvent.getStartDateTime().toLocalDate();
+            final var earnings = timedEventsSubList.stream()
+                                                   .mapToDouble(ev -> ev.getEarnings().getAmount().doubleValue()).sum();
+            final var taxRate = 0.20d;
 
             invoiceRegistry.addInvoice().withId(new Id("" + nextId++))
                                         .withDate(lastDate)

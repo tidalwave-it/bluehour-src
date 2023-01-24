@@ -68,7 +68,7 @@ public interface Invoice extends Identifiable, As
         private final Id id;
         private final String number;
         private final Project project;
-        private final List<JobEvent> jobEvents; // FIXME: immutablelist
+        private final List<? extends JobEvent> jobEvents; // FIXME: immutablelist
         private final LocalDate date;
         private final LocalDate dueDate;
         private final Money earnings;
@@ -101,7 +101,7 @@ public interface Invoice extends Identifiable, As
 //                throw new IllegalArgumentException("Illegal project for jobEvent");
 //              }
 
-            final Invoice invoice = ObjectFactory.getInstance().createInvoice(this);
+            final var invoice = ObjectFactory.getInstance().createInvoice(this);
             callback.register(invoice);
             return invoice;
           }

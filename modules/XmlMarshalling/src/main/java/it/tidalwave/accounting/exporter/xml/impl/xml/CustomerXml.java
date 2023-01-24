@@ -70,7 +70,7 @@ public class CustomerXml
     
     public CustomerXml (@Nonnull final Customer customer)
       {
-        final Customer.Builder builder = customer.toBuilder();
+        final var builder = customer.toBuilder();
         this.id = builder.getId();
         this.name = builder.getName();
         this.billingAddressXml = new AddressXml(builder.getBillingAddress());

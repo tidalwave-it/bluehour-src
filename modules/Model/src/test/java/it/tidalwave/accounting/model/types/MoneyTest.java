@@ -40,7 +40,7 @@ public class MoneyTest
     @Test
     public void toString_must_be_properly_computed()
       {
-        final Money m1 = new Money(4053, "EUR");
+        final var m1 = new Money(4053, "EUR");
         assertThat(m1.toString(), is("4053.00 EUR"));
 
       }
@@ -53,9 +53,9 @@ public class MoneyTest
     @Test
     public void isEqualTo_must_work()
       {
-        final Money m1 = new Money(349, "EUR");
-        final Money m2 = new Money(349, "EUR");
-        final Money m3 = new Money(495, "EUR");
+        final var m1 = new Money(349, "EUR");
+        final var m2 = new Money(349, "EUR");
+        final var m3 = new Money(495, "EUR");
 
         assertThat(m1.isEqualTo(m2), is(true));
         assertThat(m2.isEqualTo(m1), is(true));
@@ -66,8 +66,8 @@ public class MoneyTest
     @Test
     public void greaterThan_and_lowerThan_must_work_at_the_opposite()
       {
-        final Money greater = new Money(349, "EUR");
-        final Money lower = new Money(130, "EUR");
+        final var greater = new Money(349, "EUR");
+        final var lower = new Money(130, "EUR");
         assertThat(greater.greaterThan(lower), is(true));
         assertThat(greater.lowerThan(lower)  , is(false));
         assertThat(lower.greaterThan(greater), is(false));
@@ -77,8 +77,8 @@ public class MoneyTest
     @Test
     public void greaterThan_and_lowerThan_must_be_false_when_equality()
       {
-        final Money m1 = new Money(349, "EUR");
-        final Money m2 = new Money(349, "EUR");
+        final var m1 = new Money(349, "EUR");
+        final var m2 = new Money(349, "EUR");
         assertThat(m1.greaterThan(m2), is(false));
         assertThat(m1.lowerThan(m2),   is(false));
         assertThat(m2.greaterThan(m1), is(false));
