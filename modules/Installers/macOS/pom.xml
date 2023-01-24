@@ -32,13 +32,13 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
-        <version>1.0-ALPHA-8-SNAPSHOT</version>
+        <version>1.0-ALPHA-8</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>bluehour-macos</artifactId>
-    <version>1.0-ALPHA-8-SNAPSHOT</version>
+    <version>1.0-ALPHA-8</version>
     <packaging>pom</packaging>
     <name>blueHour - Installer, macOS</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
