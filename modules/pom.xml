@@ -50,10 +50,6 @@
 
     ================================================================================================================ -->
     <properties>
-        <tft.javac.source>11</tft.javac.source>
-        <tft.javac.target>11</tft.javac.target>
-        <tft.javac.release>11</tft.javac.release>
-
         <activation.version>1.1.1</activation.version>
         <aquafx.version>0.2</aquafx.version>
         <commons-codec.version>1.9</commons-codec.version>
