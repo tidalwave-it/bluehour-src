@@ -23,7 +23,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bluehour" target="1.8" />
+      <module name="bluehour" target="11" />
       <module name="bluehour-macos" target="11" />
       <module name="bluehour-modules" target="11" />
       <module name="it-tidalwave-accounting-application-javafx" target="11" />
