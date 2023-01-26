@@ -29,10 +29,10 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.testng.annotations.Test;
 import it.tidalwave.accounting.test.util.Dumper;
-import it.tidalwave.util.spi.AsDelegateProvider;
+import it.tidalwave.role.spi.SystemRoleFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.Test;
 import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
 
 /***********************************************************************************************************************
@@ -47,7 +47,7 @@ public class DefaultIBizImporterTest
     public void must_properly_import()
       throws Exception
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        SystemRoleFactory.reset();
         
 //        final Path iBizFolder = Path.of("/Users/fritz/Settings/iBiz"); // FIXME
         final var iBizFolder = Path.of("/Users/fritz/Business/Tidalwave/Projects/WorkAreas/blueHour/private/iBiz"); // FIXME

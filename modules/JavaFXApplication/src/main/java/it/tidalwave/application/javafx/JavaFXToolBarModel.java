@@ -26,10 +26,10 @@
  */
 package it.tidalwave.application.javafx;
 
-import it.tidalwave.application.spi.ToolBarModelSupport;
 import javax.annotation.Nonnull;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import it.tidalwave.application.spi.ToolBarModelSupport;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import static it.tidalwave.role.ui.Displayable._Displayable_;

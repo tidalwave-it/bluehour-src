@@ -28,11 +28,11 @@ package it.tidalwave.accounting.ui.customerexplorer.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
-import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.accounting.model.spi.CustomerSpi;
+import it.tidalwave.dci.annotation.DciRole;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.util.Parameters.r;
 

@@ -27,11 +27,11 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javafx.scene.control.TableView;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

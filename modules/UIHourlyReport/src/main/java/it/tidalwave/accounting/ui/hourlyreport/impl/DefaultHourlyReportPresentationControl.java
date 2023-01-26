@@ -27,19 +27,19 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.annotation.VisibleForTesting;
-import it.tidalwave.dci.annotation.DciContext;
-import it.tidalwave.messagebus.annotation.ListensTo;
-import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
+import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.role.PlainTextRenderable;
 import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.dci.annotation.DciContext;
+import it.tidalwave.messagebus.annotation.ListensTo;
+import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
 import static it.tidalwave.accounting.model.HourlyReportGenerator._HourlyReportGenerator_;
+import static it.tidalwave.util.ui.UserNotificationWithFeedback.notificationWithFeedback;
 
 /***********************************************************************************************************************
  *

@@ -35,10 +35,10 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import it.tidalwave.accounting.model.Accounting;
 import lombok.NoArgsConstructor;
-import static java.util.Comparator.*;
-import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static java.util.Comparator.*;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *

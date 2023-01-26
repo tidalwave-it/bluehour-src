@@ -28,16 +28,16 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
+import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.Presentable;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.Styleable;
 import it.tidalwave.role.ui.PresentationModelAggregate;
-import it.tidalwave.accounting.model.spi.JobEventSpi;
+import it.tidalwave.role.ui.Styleable;
 import lombok.RequiredArgsConstructor;
-import static it.tidalwave.util.Parameters.r;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
-import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static it.tidalwave.accounting.model.spi.util.Formatters.MONEY_FORMATTER;
+import static it.tidalwave.util.Parameters.r;
 
 /***********************************************************************************************************************
  *

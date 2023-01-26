@@ -27,8 +27,8 @@
 package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -38,20 +38,19 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.NotFoundException;
-import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.ProjectStatusAdapter;
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.util.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *
@@ -129,25 +128,22 @@ public class ProjectXml
     @Nonnull
     public Project.Builder toBuilder (@Nonnull final Accounting accounting)
       {
-        try 
-          {
-            final var customer = accounting.getCustomerRegistry().findCustomers().withId(customerXml.getId()).result();
-            return new Project.Builder().withId(id)
-                                        .withCustomer(customer) 
-                                        .withName(name)
-                                        .withNumber(number)
-                                        .withDescription(description)
-                                        .withNotes(notes)
-                                        .withStatus(status)
-                                        .withHourlyRate(hourlyRate)
-                                        .withBudget(budget)
-                                        .withStartDate(startDate)
-                                        .withEndDate(endDate)
-                                        .withEvents(JobEventXml.toJobEvents(jobEventsXml));
-          } 
-        catch (NotFoundException e) 
-          {
-            throw new RuntimeException(e);
-          }
+        final var customer = accounting.getCustomerRegistry()
+                                       .findCustomers()
+                                       .withId(customerXml.getId())
+                                       .optionalResult()
+                .orElseThrow(RuntimeException::new);
+        return new Project.Builder().withId(id)
+                                    .withCustomer(customer)
+                                    .withName(name)
+                                    .withNumber(number)
+                                    .withDescription(description)
+                                    .withNotes(notes)
+                                    .withStatus(status)
+                                    .withHourlyRate(hourlyRate)
+                                    .withBudget(budget)
+                                    .withStartDate(startDate)
+                                    .withEndDate(endDate)
+                                    .withEvents(JobEventXml.toJobEvents(jobEventsXml));
       }
   }

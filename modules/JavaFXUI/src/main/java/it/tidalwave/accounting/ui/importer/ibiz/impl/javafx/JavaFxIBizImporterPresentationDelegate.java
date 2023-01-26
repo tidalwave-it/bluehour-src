@@ -28,10 +28,10 @@ package it.tidalwave.accounting.ui.importer.ibiz.impl.javafx;
 
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
+import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.BoundProperty;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

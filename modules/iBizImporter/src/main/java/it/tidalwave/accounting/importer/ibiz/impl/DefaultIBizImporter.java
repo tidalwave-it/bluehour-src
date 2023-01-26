@@ -29,8 +29,8 @@ package it.tidalwave.accounting.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
-import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
+import it.tidalwave.accounting.model.Accounting;
 import lombok.experimental.Delegate;
 
 /***********************************************************************************************************************

@@ -28,29 +28,29 @@ package it.tidalwave.accounting.exporter.xml.impl.xml;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.time.LocalDateTime;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.EventTypeAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.LocalDateTimeAdapter;
+import it.tidalwave.accounting.exporter.xml.impl.adapters.MoneyAdapter;
+import it.tidalwave.accounting.model.JobEvent;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.util.Id;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import static java.util.stream.Collectors.toList;
 import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *

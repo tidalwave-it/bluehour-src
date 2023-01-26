@@ -27,20 +27,20 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.role.ui.Visible;
-import it.tidalwave.util.annotation.VisibleForTesting;
-import it.tidalwave.dci.annotation.DciContext;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.messagebus.annotation.ListensTo;
-import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
+import it.tidalwave.util.annotation.VisibleForTesting;
+import it.tidalwave.role.ui.Visible;
+import it.tidalwave.dci.annotation.DciContext;
+import it.tidalwave.messagebus.MessageBus;
+import it.tidalwave.messagebus.annotation.ListensTo;
+import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static java.util.Comparator.comparing;
+import static java.util.Comparator.*;
 import static it.tidalwave.util.Parameters.r;
 import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;

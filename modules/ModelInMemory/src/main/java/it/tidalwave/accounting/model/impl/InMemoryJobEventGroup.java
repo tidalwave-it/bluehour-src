@@ -35,9 +35,9 @@ import java.util.List;
 import java.util.function.BinaryOperator;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

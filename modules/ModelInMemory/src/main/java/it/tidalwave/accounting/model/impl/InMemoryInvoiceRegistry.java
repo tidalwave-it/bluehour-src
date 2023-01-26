@@ -29,9 +29,9 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
-import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.InvoiceRegistry;
+import it.tidalwave.util.Id;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************

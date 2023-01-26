@@ -34,13 +34,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.exporter.xml.impl.adapters.IdAdapter;
+import it.tidalwave.accounting.model.Customer;
+import it.tidalwave.util.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import static javax.xml.bind.annotation.XmlAccessOrder.*;
-import static javax.xml.bind.annotation.XmlAccessType.*;
+import static javax.xml.bind.annotation.XmlAccessOrder.ALPHABETICAL;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /***********************************************************************************************************************
  *

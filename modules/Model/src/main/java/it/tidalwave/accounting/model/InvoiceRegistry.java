@@ -27,9 +27,9 @@
 package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;
-import it.tidalwave.accounting.model.types.Money;
 
 /***********************************************************************************************************************
  *

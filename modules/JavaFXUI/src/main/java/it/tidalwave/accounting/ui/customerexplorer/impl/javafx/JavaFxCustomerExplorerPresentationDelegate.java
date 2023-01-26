@@ -29,9 +29,9 @@ package it.tidalwave.accounting.ui.customerexplorer.impl.javafx;
 import javax.annotation.Nonnull;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

@@ -27,13 +27,6 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.annotation.VisibleForTesting;
-import it.tidalwave.dci.annotation.DciContext;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.Selectable;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.messagebus.annotation.ListensTo;
-import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.Customer;
@@ -41,9 +34,16 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
+import it.tidalwave.util.annotation.VisibleForTesting;
+import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.role.ui.Selectable;
+import it.tidalwave.dci.annotation.DciContext;
+import it.tidalwave.messagebus.MessageBus;
+import it.tidalwave.messagebus.annotation.ListensTo;
+import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static java.util.Comparator.comparing;
+import static java.util.Comparator.*;
 import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 

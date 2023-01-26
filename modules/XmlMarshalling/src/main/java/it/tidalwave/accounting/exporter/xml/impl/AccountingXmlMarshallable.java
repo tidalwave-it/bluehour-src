@@ -27,15 +27,15 @@
 package it.tidalwave.accounting.exporter.xml.impl;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.io.OutputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import java.io.IOException;
-import java.io.OutputStream;
+import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
+import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.role.io.Marshallable;
 import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.accounting.exporter.xml.impl.xml.AccountingXml;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

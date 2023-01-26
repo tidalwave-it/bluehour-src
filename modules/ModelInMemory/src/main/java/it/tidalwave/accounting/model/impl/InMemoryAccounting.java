@@ -26,13 +26,13 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import it.tidalwave.util.As;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import lombok.experimental.Delegate;
+import it.tidalwave.util.As;
 import lombok.Getter;
+import lombok.experimental.Delegate;
 
 /***********************************************************************************************************************
  *

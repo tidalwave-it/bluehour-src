@@ -29,12 +29,12 @@ package it.tidalwave.accounting.exporter.xml.impl;
 import javax.annotation.Nonnull;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import it.tidalwave.util.spi.AsDelegateProvider;
-import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
+import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.accounting.test.util.ScenarioFactory;
+import it.tidalwave.role.spi.SystemRoleFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import it.tidalwave.accounting.test.util.ScenarioFactory;
 import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
 
 /***********************************************************************************************************************
@@ -47,7 +47,7 @@ public class AccountingXmlMarshallableTest
     @BeforeMethod
     public void installEmptyAsSupport()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        SystemRoleFactory.reset();
       }
     
     @Test

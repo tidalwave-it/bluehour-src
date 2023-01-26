@@ -27,11 +27,11 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javafx.scene.control.TreeTableView;
 import javafx.fxml.FXML;
+import javafx.scene.control.TreeTableView;
+import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
-import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

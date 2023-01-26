@@ -28,12 +28,12 @@ package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
-import it.tidalwave.role.ui.Styleable;
+import java.math.BigDecimal;
 import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.role.ui.Styleable;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

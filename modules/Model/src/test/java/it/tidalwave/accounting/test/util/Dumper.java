@@ -26,17 +26,16 @@
  */
 package it.tidalwave.accounting.test.util;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import it.tidalwave.util.Finder;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
@@ -46,9 +45,10 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.model.spi.InvoiceSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.util.Finder;
 import lombok.RequiredArgsConstructor;
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.joining;
+import static java.util.Comparator.*;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *
@@ -82,7 +82,6 @@ public class Dumper
       }
 
     private void dumpInvoices (@Nonnull final Finder<Invoice> invoices)
-      throws IOException
       {
         invoices.stream().map(invoice -> (InvoiceSpi)invoice)
                          .sorted(comparing(InvoiceSpi::getNumber))
@@ -90,7 +89,6 @@ public class Dumper
       }
 
     private void dumpProjects (@Nonnull final Finder<Project> projects)
-      throws IOException
       {
         projects.stream().map(project -> (ProjectSpi)project)
                          .sorted(comparing(ProjectSpi::getName).thenComparing(ProjectSpi::getStartDate))

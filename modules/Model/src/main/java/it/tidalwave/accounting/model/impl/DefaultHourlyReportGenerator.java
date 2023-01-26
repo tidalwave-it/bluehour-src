@@ -33,16 +33,16 @@ import java.util.List;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import it.tidalwave.dci.annotation.DciRole;
-import it.tidalwave.accounting.model.HourlyReportGenerator;
 import it.tidalwave.accounting.model.HourlyReport;
+import it.tidalwave.accounting.model.HourlyReportGenerator;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.dci.annotation.DciRole;
 import lombok.RequiredArgsConstructor;
-import static java.util.Comparator.*;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
+import static java.util.Comparator.*;
 
 /***********************************************************************************************************************
  *

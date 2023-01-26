@@ -28,8 +28,8 @@ package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
 import javax.annotation.Nonnull;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.util.ui.UserNotificationWithFeedback;
 import it.tidalwave.role.ui.PresentationModel;

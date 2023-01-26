@@ -29,12 +29,12 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

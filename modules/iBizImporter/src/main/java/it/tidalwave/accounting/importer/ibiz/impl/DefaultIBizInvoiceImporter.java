@@ -36,13 +36,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import it.tidalwave.util.NotFoundException;
+import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.importer.ibiz.spi.IBizInvoiceImporter;
+import it.tidalwave.util.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *
@@ -102,7 +102,8 @@ public class DefaultIBizInvoiceImporter implements IBizInvoiceImporter
           {
             final var configuration = IBizUtils.loadConfiguration(documentFile);
             final var projectId = configuration.getIds("projectIDs").get(0);
-            final var project = projectRegistry.findProjects().withId(projectId).result();
+            final var project =
+                    projectRegistry.findProjects().withId(projectId).optionalResult().orElseThrow(NotFoundException::new);
             final var eventIds = configuration.getIds("jobEventIDs").stream();
             // FIXME: could just search events in project (but needs recursive operations in project.findJobEvents())
             final var events = eventIds.flatMap(id -> projectRegistry.findJobEvents().withId(id).stream())

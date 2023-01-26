@@ -29,20 +29,20 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Map;
-import it.tidalwave.util.As;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.ProjectRegistry;
-import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
+import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.util.As;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdMapSupport;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Delegate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import static java.util.stream.Collectors.toMap;
+import lombok.experimental.Delegate;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *

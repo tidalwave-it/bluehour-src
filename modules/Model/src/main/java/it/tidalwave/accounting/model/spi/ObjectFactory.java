@@ -26,6 +26,7 @@
  */
 package it.tidalwave.accounting.model.spi;
 
+import java.lang.reflect.InvocationTargetException;
 import javax.annotation.Nonnull;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
@@ -45,10 +46,12 @@ public interface ObjectFactory
         try
           {
             // FIXME: use Singleton
-            return (ObjectFactory)Class.forName("it.tidalwave.accounting.model.impl.InMemoryObjectFactory").newInstance();
+            return (ObjectFactory)Class.forName("it.tidalwave.accounting.model.impl.InMemoryObjectFactory")
+                    .getDeclaredConstructor().newInstance();
 //        return new InMemoryObjectFactory();
           }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException |
+               NoSuchMethodException e)
           {
             throw new RuntimeException(e);
           }

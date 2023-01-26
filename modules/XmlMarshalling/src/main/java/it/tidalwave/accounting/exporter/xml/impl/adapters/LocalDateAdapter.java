@@ -27,9 +27,9 @@
 package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /***********************************************************************************************************************
  *

@@ -35,17 +35,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import it.tidalwave.util.NotFoundException;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizProjectImporter;
 import it.tidalwave.accounting.model.CustomerRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.JobEventGroup;
-import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.util.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *
@@ -119,7 +119,8 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
       throws NotFoundException
       {
         final var customerId = projectConfig.getId("clientIdentifier");
-        final var customer = customerRegistry.findCustomers().withId(customerId).result();
+        final var customer =
+                customerRegistry.findCustomers().withId(customerId).optionalResult().orElseThrow(NotFoundException::new);
         final var status = IBizProjectStatus.values()[projectConfig.getInt("projectStatus")];
 
         if (status.getMappedStatus() == null)
@@ -153,7 +154,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
      ******************************************************************************************************************/
     @Nonnull
     private Money getHourlyRate(final ConfigurationDecorator projectConfig, final List<? extends JobEvent> jobEvents)
-      throws NotFoundException 
+            throws NotFoundException
       {
         var hourlyRate = projectConfig.getMoney("projectRate");
       
@@ -164,7 +165,7 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
             
             while ((event instanceof JobEventGroup) && ((JobEventGroup)event).findChildren().count() > 0)
               {
-                event = ((JobEventGroup)event).findChildren().firstResult();
+                event = ((JobEventGroup)event).findChildren().optionalFirstResult().orElseThrow(NotFoundException::new);
               }
             
             if (event instanceof TimedJobEventSpi)

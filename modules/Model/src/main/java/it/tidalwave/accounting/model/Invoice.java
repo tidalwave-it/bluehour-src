@@ -28,14 +28,14 @@ package it.tidalwave.accounting.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.List;
 import java.time.LocalDate;
-import it.tidalwave.util.Finder;
+import java.util.List;
+import it.tidalwave.accounting.model.spi.ObjectFactory;
+import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.util.As;
+import it.tidalwave.util.Finder;
 import it.tidalwave.util.Id;
 import it.tidalwave.role.Identifiable;
-import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.ObjectFactory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

@@ -26,6 +26,7 @@
  */
 package it.tidalwave.accounting.model;
 
+import java.lang.reflect.InvocationTargetException;
 import javax.annotation.Nonnull;
 import it.tidalwave.util.As;
 
@@ -42,9 +43,11 @@ public interface Accounting extends As
       {
         try
           {
-            return (Accounting)Class.forName("it.tidalwave.accounting.model.impl.InMemoryAccounting").newInstance();
+            return (Accounting)Class.forName("it.tidalwave.accounting.model.impl.InMemoryAccounting")
+                    .getDeclaredConstructor().newInstance();
           }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException |
+               NoSuchMethodException e)
           {
             throw new RuntimeException(e);
           }

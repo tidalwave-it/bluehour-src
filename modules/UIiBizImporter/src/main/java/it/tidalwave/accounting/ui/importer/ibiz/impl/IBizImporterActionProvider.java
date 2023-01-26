@@ -27,14 +27,14 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.commons.ImportRequest;
+import it.tidalwave.application.ToolBarModel;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
 import it.tidalwave.role.ui.spi.MessageSendingUserAction;
-import it.tidalwave.application.ToolBarModel;
-import it.tidalwave.accounting.commons.ImportRequest;
+import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.messagebus.MessageBus;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

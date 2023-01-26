@@ -28,23 +28,23 @@ package it.tidalwave.accounting.test.util;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsDelegateProvider;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.math.BigDecimal;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
+import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import it.tidalwave.util.Id;
+import it.tidalwave.role.spi.SystemRoleFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -96,14 +96,14 @@ public final class ScenarioFactory
     @Nonnull
     public static Accounting createEmptyAccounting()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        SystemRoleFactory.reset();
         return Accounting.createNew();
       }
 
     @Nonnull
     public static Accounting createScenario1()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        SystemRoleFactory.reset();
         nextId = 1;
 
         final var accounting = Accounting.createNew();
@@ -250,7 +250,7 @@ public final class ScenarioFactory
                                         @Nonnegative final int invoiceCount,
                                         @Nonnull final String prefix)
       {
-        final List<? extends JobEvent> jobEvents = project.findChildren().results();
+        final var jobEvents = project.findChildren().results();
         final var x = jobEvents.size() / (invoiceCount + 1);
 
         for (var i = 0; i < invoiceCount; i++)

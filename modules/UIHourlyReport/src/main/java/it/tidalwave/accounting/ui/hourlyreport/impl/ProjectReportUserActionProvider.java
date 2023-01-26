@@ -27,14 +27,14 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.dci.annotation.DciRole;
+import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
+import it.tidalwave.accounting.model.Project;
 import it.tidalwave.role.ui.Displayable;
 import it.tidalwave.role.ui.UserAction;
 import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
 import it.tidalwave.role.ui.spi.MessageSendingUserAction;
+import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.messagebus.MessageBus;
-import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
-import it.tidalwave.accounting.model.Project;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************

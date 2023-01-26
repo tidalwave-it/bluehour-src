@@ -29,10 +29,10 @@ package it.tidalwave.accounting.ui.impl.javafx;
 import javax.annotation.Nonnull;
 import javafx.application.Platform;
 import org.springframework.context.ApplicationContext;
-import it.tidalwave.util.PreferencesHandler;
-import it.tidalwave.ui.javafx.JavaFXSpringApplication;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
+import it.tidalwave.ui.javafx.JavaFXSpringApplication;
+import it.tidalwave.util.PreferencesHandler;
 
 /***********************************************************************************************************************
  *
@@ -45,7 +45,7 @@ public class Main extends JavaFXSpringApplication
       {
         try
           {
-            System.setProperty(PreferencesHandler.PROP_APP_NAME, "blueHour");
+            PreferencesHandler.setAppName("blueHour");
             final var preferenceHandler = PreferencesHandler.getInstance();
             final var logFolder = preferenceHandler.getLogFolder();
             System.setProperty("it.tidalwave.northernwind.bluehour.logFolder", logFolder.toString());

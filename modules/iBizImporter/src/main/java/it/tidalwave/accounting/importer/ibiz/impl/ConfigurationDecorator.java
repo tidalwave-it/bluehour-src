@@ -27,19 +27,19 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 import java.math.MathContext;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import it.tidalwave.util.Id;
-import it.tidalwave.accounting.model.types.Money;
-import lombok.experimental.Delegate;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.configuration.Configuration;
-import static java.util.stream.Collectors.toList;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.util.Id;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Delegate;
+import static java.util.stream.Collectors.*;
 
 /***********************************************************************************************************************
  *

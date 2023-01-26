@@ -28,13 +28,12 @@ package it.tidalwave.accounting.model.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.Collections;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import it.tidalwave.accounting.model.JobEvent;
-import it.tidalwave.accounting.model.JobEvent.Builder;
-import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import it.tidalwave.accounting.model.types.Money;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

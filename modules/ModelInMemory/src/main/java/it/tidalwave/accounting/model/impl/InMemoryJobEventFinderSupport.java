@@ -29,11 +29,11 @@ package it.tidalwave.accounting.model.impl;
 import javax.annotation.Nonnull;
 import java.time.Duration;
 import java.util.Optional;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.FinderWithIdSupport;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.ProjectRegistry;
 import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.util.Id;
+import it.tidalwave.util.spi.FinderWithIdSupport;
 import lombok.NoArgsConstructor;
 
 /***********************************************************************************************************************

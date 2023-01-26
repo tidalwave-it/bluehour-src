@@ -31,22 +31,21 @@ import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
-import it.tidalwave.util.As;
-import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
-import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.accounting.model.ProjectRegistry.JobEventFinder;
-import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
+import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.util.As;
+import it.tidalwave.util.Id;
 import lombok.AllArgsConstructor;
-import lombok.experimental.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.With;
+import lombok.experimental.Delegate;
 import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************

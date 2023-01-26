@@ -27,13 +27,13 @@
 package it.tidalwave.accounting.model.types.impl;
 
 import it.tidalwave.accounting.model.Customer;
-import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.accounting.model.types.Address;
+import it.tidalwave.util.Id;
+import it.tidalwave.role.spi.SystemRoleFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /***********************************************************************************************************************
  *
@@ -45,7 +45,7 @@ public class CustomerTest
     @BeforeMethod
     public void installEmptyAsSupport()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        SystemRoleFactory.reset();
       }
     
     @Test

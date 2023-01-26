@@ -30,14 +30,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import it.tidalwave.util.As;
-import it.tidalwave.util.Id;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.types.Money;
-import lombok.experimental.Delegate;
+import it.tidalwave.util.As;
+import it.tidalwave.util.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.Delegate;
 
 /***********************************************************************************************************************
  *
