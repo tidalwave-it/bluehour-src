@@ -31,11 +31,11 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.util.spi.AsDelegateProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import it.tidalwave.accounting.test.util.Dumper;
+import it.tidalwave.role.spi.OwnerRoleFactoryProvider;
 import static it.tidalwave.util.test.FileComparisonUtils.assertSameContents;
 
 /***********************************************************************************************************************
@@ -48,7 +48,7 @@ public class AccountingXmlUnmarshallableTest
     @BeforeMethod
     public void installEmptyAsSupport()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        OwnerRoleFactoryProvider.set(OwnerRoleFactoryProvider.emptyRoleFactory());
       }
 
     @Test(enabled = false)

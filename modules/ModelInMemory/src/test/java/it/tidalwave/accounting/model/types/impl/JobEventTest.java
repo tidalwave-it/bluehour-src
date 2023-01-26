@@ -28,8 +28,8 @@ package it.tidalwave.accounting.model.types.impl;
 
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.accounting.model.types.Money;
+import it.tidalwave.role.spi.OwnerRoleFactoryProvider;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import static org.hamcrest.MatcherAssert.*;
@@ -46,7 +46,7 @@ public class JobEventTest
     @BeforeMethod
     public void installEmptyAsSupport()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        OwnerRoleFactoryProvider.set(OwnerRoleFactoryProvider.emptyRoleFactory());
       }
     
     @Test

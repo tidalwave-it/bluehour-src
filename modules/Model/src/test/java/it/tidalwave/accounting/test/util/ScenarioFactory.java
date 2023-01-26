@@ -37,7 +37,6 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import it.tidalwave.util.Id;
-import it.tidalwave.util.spi.AsDelegateProvider;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.InvoiceRegistry;
 import it.tidalwave.accounting.model.JobEvent;
@@ -45,6 +44,7 @@ import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.accounting.model.spi.TimedJobEventSpi;
+import it.tidalwave.role.spi.OwnerRoleFactoryProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -96,14 +96,14 @@ public final class ScenarioFactory
     @Nonnull
     public static Accounting createEmptyAccounting()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        OwnerRoleFactoryProvider.set(OwnerRoleFactoryProvider.emptyRoleFactory());
         return Accounting.createNew();
       }
 
     @Nonnull
     public static Accounting createScenario1()
       {
-        AsDelegateProvider.Locator.set(AsDelegateProvider.empty());
+        OwnerRoleFactoryProvider.set(OwnerRoleFactoryProvider.emptyRoleFactory());
         nextId = 1;
 
         final var accounting = Accounting.createNew();
