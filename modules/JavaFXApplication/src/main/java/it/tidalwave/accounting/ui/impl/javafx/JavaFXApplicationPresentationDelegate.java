@@ -31,7 +31,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
-import it.tidalwave.application.ToolBarModel;
+import it.tidalwave.role.ui.ToolBarModel;
 import it.tidalwave.role.ui.javafx.JavaFXBinder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

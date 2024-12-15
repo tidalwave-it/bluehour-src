@@ -27,7 +27,7 @@
 package it.tidalwave.accounting.ui.importer.ibiz.impl.javafx;
 
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
-import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.experimental.Delegate;
 import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
@@ -38,7 +38,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
  **********************************************************************************************************************/
 public class JavaFxIBizImporterPresentation implements IBizImporterPresentation
   {
-    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxIBizImporterPresentation.class);
+    private final NodeAndDelegate<JavaFxIBizImporterPresentation> nad = createNodeAndDelegate(JavaFxIBizImporterPresentation.class);
 
     @Delegate
     private final IBizImporterPresentation delegate = nad.getDelegate();

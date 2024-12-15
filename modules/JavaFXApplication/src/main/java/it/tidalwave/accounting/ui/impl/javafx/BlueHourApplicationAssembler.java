@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
-import it.tidalwave.application.ToolBarModel;
+import it.tidalwave.role.ui.ToolBarModel;
 import it.tidalwave.role.ui.javafx.ApplicationPresentationAssembler;
 import lombok.RequiredArgsConstructor;
 

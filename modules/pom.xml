@@ -51,15 +51,13 @@
     ================================================================================================================ -->
     <properties>
         <activation.version>1.1.1</activation.version>
-        <aquafx.version>0.2</aquafx.version>
         <commons-codec.version>1.9</commons-codec.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <jaxb.version>2.2.11</jaxb.version>
-        <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
         <tft.javafx.version>11.0.1</tft.javafx.version>
-        <tft.spring.version>5.3.1</tft.spring.version>
-        <steelblue.version>1.1-ALPHA-3</steelblue.version>
-        <thesefoolishthings.version>3.2-ALPHA-23</thesefoolishthings.version>
+        <steelblue.version>1.1-ALPHA-4</steelblue.version>
+        <thesefoolishthings.version>3.2-ALPHA-24</thesefoolishthings.version>
+        <tft.aspectjrt.version>1.9.20.1</tft.aspectjrt.version> <!-- Last with JDK 11 support -->
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>

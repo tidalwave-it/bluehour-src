@@ -27,7 +27,7 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl.javafx;
 
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
-import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.Getter;
 import lombok.experimental.Delegate;
 import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
@@ -40,7 +40,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
 public class JavaFxProjectExplorerPresentation implements ProjectExplorerPresentation
   {
     @Getter
-    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxProjectExplorerPresentation.class);
+    private final NodeAndDelegate<JavaFxProjectExplorerPresentation> nad = createNodeAndDelegate(JavaFxProjectExplorerPresentation.class);
 
     @Delegate
     private final ProjectExplorerPresentation delegate = nad.getDelegate();

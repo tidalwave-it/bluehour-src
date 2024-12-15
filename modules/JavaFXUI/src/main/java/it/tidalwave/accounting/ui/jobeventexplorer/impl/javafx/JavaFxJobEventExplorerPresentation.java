@@ -27,7 +27,7 @@
 package it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx;
 
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
-import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.Getter;
 import lombok.experimental.Delegate;
 import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
@@ -40,7 +40,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
 public class JavaFxJobEventExplorerPresentation implements JobEventExplorerPresentation
   {
     @Getter
-    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxJobEventExplorerPresentation.class);
+    private final NodeAndDelegate<JavaFxJobEventExplorerPresentation> nad = createNodeAndDelegate(JavaFxJobEventExplorerPresentation.class);
 
     @Delegate
     private final JobEventExplorerPresentation delegate = nad.getDelegate();

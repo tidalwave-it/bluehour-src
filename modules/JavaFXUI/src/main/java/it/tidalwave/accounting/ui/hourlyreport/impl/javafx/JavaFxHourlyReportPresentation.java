@@ -27,7 +27,7 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
-import it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.NodeAndDelegate;
+import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.experimental.Delegate;
 import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
@@ -38,7 +38,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
  **********************************************************************************************************************/
 public class JavaFxHourlyReportPresentation implements HourlyReportPresentation
   {
-    private final NodeAndDelegate nad = createNodeAndDelegate(JavaFxHourlyReportPresentation.class);
+    private final NodeAndDelegate<JavaFxHourlyReportPresentation> nad = createNodeAndDelegate(JavaFxHourlyReportPresentation.class);
 
     @Delegate
     private final HourlyReportPresentation delegate = nad.getDelegate();

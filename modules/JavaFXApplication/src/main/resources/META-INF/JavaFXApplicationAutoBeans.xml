@@ -46,6 +46,6 @@
 
     <bean name="applicationInitializer" class="it.tidalwave.accounting.ui.impl.javafx.BlueHourApplicationAssembler"/>
 
-    <bean name="toolBar" class="it.tidalwave.application.javafx.JavaFXToolBarModel"/>
+    <bean name="toolBar" class="it.tidalwave.ui.javafx.JavaFXToolBarModel"/>
 
 </beans>
