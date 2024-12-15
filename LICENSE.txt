@@ -1,7 +1,7 @@
 blueHour
 ========
 
-Copyright (C) 2013 - 2023 by Tidalwave_s.a.s. (http://tidalwave.it)
+Copyright (C) 2013 - 2024 Tidalwave_s.a.s. (http://tidalwave.it)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
