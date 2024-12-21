@@ -1,28 +1,27 @@
 /*
- * #%L
- * *********************************************************************************************************************
+ * *************************************************************************************************************************************************************
  *
- * blueHour
- * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
- * %%
- * Copyright (C) 2013 - 2024 Tidalwave s.a.s. (http://tidalwave.it)
- * %%
- * *********************************************************************************************************************
+ * blueHour: open source accounting
+ * http://tidalwave.it/projects/bluehour
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
+ * Copyright (C) 2013 - 2024 by Tidalwave s.a.s. (http://tidalwave.it)
+ *
+ * *************************************************************************************************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.
  *
- * *********************************************************************************************************************
+ * *************************************************************************************************************************************************************
  *
+ * git clone https://bitbucket.org/tidalwave/bluehour-src
+ * git clone https://github.com/tidalwave-it/bluehour-src
  *
- * *********************************************************************************************************************
- * #L%
+ * *************************************************************************************************************************************************************
  */
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
@@ -47,11 +46,11 @@ import static java.util.Comparator.*;
 import static it.tidalwave.role.ui.Presentable._Presentable_;
 import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
 
-/***********************************************************************************************************************
+/***************************************************************************************************************************************************************
  *
  * @author  Fabrizio Giudici
  *
- **********************************************************************************************************************/
+ **************************************************************************************************************************************************************/
 @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultProjectExplorerPresentationControl implements ProjectExplorerPresentationControl
   {
@@ -66,14 +65,12 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
       {
       }
 
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Reacts to the notification that a {@link Customer} has been selected by populating the presentation with
      * his projects.
      * 
      * @param  event  the notification event
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     @VisibleForTesting void onCustomerSelectedEvent (@Nonnull @ListensTo final CustomerSelectedEvent event)
       {
         log.info("onCustomerSelectedEvent({})", event);
@@ -85,15 +82,13 @@ public class DefaultProjectExplorerPresentationControl implements ProjectExplore
                                                  .collect(toCompositePresentationModel()));
       }
     
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Creates a {@link PresentationModel} for a {@link Project} injecting a {@link Selectable} role which fires a
      * {@link ProjectSelectedEvent} on selection.
      * 
      * @param  project      the {@code Project}
      * @return              the {@code PresentationModel}
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     @Nonnull
     @VisibleForTesting PresentationModel createPresentationModelFor (@Nonnull final Project project)
       {

@@ -1,28 +1,27 @@
 /*
- * #%L
- * *********************************************************************************************************************
+ * *************************************************************************************************************************************************************
  *
- * blueHour
- * http://bluehour.tidalwave.it - git clone git@bitbucket.org:tidalwave/bluehour-src.git
- * %%
- * Copyright (C) 2013 - 2024 Tidalwave s.a.s. (http://tidalwave.it)
- * %%
- * *********************************************************************************************************************
+ * blueHour: open source accounting
+ * http://tidalwave.it/projects/bluehour
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
+ * Copyright (C) 2013 - 2024 by Tidalwave s.a.s. (http://tidalwave.it)
+ *
+ * *************************************************************************************************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.
  *
- * *********************************************************************************************************************
+ * *************************************************************************************************************************************************************
  *
+ * git clone https://bitbucket.org/tidalwave/bluehour-src
+ * git clone https://github.com/tidalwave-it/bluehour-src
  *
- * *********************************************************************************************************************
- * #L%
+ * *************************************************************************************************************************************************************
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
@@ -47,11 +46,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.stream.Collectors.*;
 
-/***********************************************************************************************************************
+/***************************************************************************************************************************************************************
  *
  * @author  Fabrizio Giudici
  *
- **********************************************************************************************************************/
+ **************************************************************************************************************************************************************/
 @Slf4j @RequiredArgsConstructor
 public class DefaultIBizProjectImporter implements IBizProjectImporter
   {
@@ -64,11 +63,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
     @Nonnull
     private final Path path;
 
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Imports the projects.
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     @Override
     public void importProjects()
       throws IOException
@@ -90,11 +87,9 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           });
       }
     
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * @throws  IOException  in case of error
-     * 
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     private void importProject (@Nonnull final Path file)
       throws IOException
       {
@@ -108,13 +103,11 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           }
       }
 
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Imports a project from the given configuration object.
      * 
      * @param  projectConfig  the configuration object
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     private void importProject (@Nonnull final ConfigurationDecorator projectConfig)
       throws NotFoundException
       {
@@ -146,12 +139,10 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
           }
       }
 
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Retrieves the hourly rates - if missing from the project description, tries to recover it from the first 
      * meaningful job event.
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     @Nonnull
     private Money getHourlyRate(final ConfigurationDecorator projectConfig, final List<? extends JobEvent> jobEvents)
             throws NotFoundException
@@ -176,22 +167,18 @@ public class DefaultIBizProjectImporter implements IBizProjectImporter
         return hourlyRate;
       }
 
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Imports the job events.
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     @Nonnull
     private List<JobEvent> importJobEvents (@Nonnull final Stream<? extends ConfigurationDecorator> jobEventsConfig)
       {
         return jobEventsConfig.map(this::importJobEvent).collect(toList());
       }
 
-    /*******************************************************************************************************************
-     *
+    /***********************************************************************************************************************************************************
      * Imports a single job event.
-     *
-     ******************************************************************************************************************/
+     **********************************************************************************************************************************************************/
     @Nonnull
     private JobEvent importJobEvent (@Nonnull final ConfigurationDecorator jobEventConfig)
       {
