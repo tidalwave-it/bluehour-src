@@ -105,7 +105,7 @@ public class DefaultHourlyReportGenerator implements HourlyReportGenerator
     private void addAll (@Nonnull final List<? super JobEventSpi> results,
                          @Nonnull final List<? extends JobEvent> jobEvents)
       {
-        for (final JobEvent jobEvent : jobEvents)
+        for (final var jobEvent : jobEvents)
           {
             if (jobEvent instanceof JobEventGroup)
               {
