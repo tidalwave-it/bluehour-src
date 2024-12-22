@@ -38,7 +38,7 @@ import java.util.Locale;
 public class Formatters
   {
     public static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).localizedBy(Locale.UK);
+            DateTimeFormatter.ofPattern("d MMM uuuu").localizedBy(Locale.US); // See https://stackoverflow.com/questions/69267710/
     public static final DateTimeFormatter DATETIME_FORMATTER =
             DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).localizedBy(Locale.UK);
     public static final MoneyFormat MONEY_FORMATTER = new MoneyFormat();
