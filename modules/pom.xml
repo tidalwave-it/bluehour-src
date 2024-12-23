@@ -57,6 +57,7 @@
         <tft.javafx.version>23.0.1</tft.javafx.version>
         <steelblue.version>1.1-ALPHA-4</steelblue.version>
         <thesefoolishthings.version>3.2-ALPHA-24</thesefoolishthings.version>
+        <tft.spring.version>6.2.1</tft.spring.version>
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
