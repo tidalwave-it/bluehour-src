@@ -6,7 +6,7 @@
 blueHour
 ================================
 
-blueHour is a small application for accounting and invoicing. Still under development in the early stage.
+blueHour is a small application for accounting and invoicing.
 
 blueHour requires and is tested with JDKs in this range: [11,12).
 It is released under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
