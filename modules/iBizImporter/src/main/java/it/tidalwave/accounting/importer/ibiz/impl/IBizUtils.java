@@ -31,8 +31,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.io.IOException;
 import java.nio.file.Path;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.plist.XMLPropertyListConfiguration;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
+import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration2.plist.XMLPropertyListConfiguration;
 
 /***************************************************************************************************************************************************************
  *
@@ -70,7 +71,8 @@ public final class IBizUtils
       {
         try
           {
-            return new ConfigurationDecorator(new XMLPropertyListConfiguration(path.toFile()));
+            final var configs = new Configurations();
+            return new ConfigurationDecorator(new XMLPropertyListConfiguration(configs.xml(path.toFile())));
           }
         catch (ConfigurationException e)
           {

@@ -96,8 +96,8 @@
 
         <!-- FIXME: temporary dependency to import data -->
         <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-configuration2</artifactId>
             <scope>test</scope>
             <exclusions>
                 <exclusion>

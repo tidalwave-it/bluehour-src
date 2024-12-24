@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 import java.math.MathContext;
-import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration2.Configuration;
 import it.tidalwave.accounting.model.types.Money;
 import it.tidalwave.util.Id;
 import lombok.RequiredArgsConstructor;
