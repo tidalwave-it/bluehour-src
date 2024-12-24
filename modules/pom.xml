@@ -55,8 +55,8 @@
         <commons-configuration2.version>2.11.0</commons-configuration2.version>
         <jaxb.version>2.2.11</jaxb.version>
         <tft.javafx.version>23.0.1</tft.javafx.version>
-        <steelblue.version>1.1-ALPHA-5</steelblue.version>
-        <thesefoolishthings.version>3.2-ALPHA-24</thesefoolishthings.version>
+        <steelblue.version>1.1-ALPHA-6</steelblue.version>
+        <thesefoolishthings.version>3.2-ALPHA-25</thesefoolishthings.version>
         <tft.spring.version>6.2.1</tft.spring.version>
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
@@ -125,6 +125,11 @@
             <dependency>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-fxml</artifactId>
+                <version>${tft.javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-web</artifactId>
                 <version>${tft.javafx.version}</version>
             </dependency>
 
