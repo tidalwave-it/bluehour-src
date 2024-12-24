@@ -28,6 +28,7 @@ package it.tidalwave.accounting.ui.importer.ibiz.impl;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.ImportRequest;
 import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;
@@ -49,7 +50,7 @@ import static it.tidalwave.util.ui.UserNotificationWithFeedback.*;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
+@Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultIBizImporterPresentationControl implements IBizImporterPresentationControl
   {
     @Nonnull

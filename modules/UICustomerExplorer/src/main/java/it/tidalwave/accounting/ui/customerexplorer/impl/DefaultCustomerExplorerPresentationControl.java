@@ -26,6 +26,7 @@
 package it.tidalwave.accounting.ui.customerexplorer.impl;
 
 import javax.annotation.Nonnull;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
@@ -52,7 +53,7 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
+@Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultCustomerExplorerPresentationControl implements CustomerExplorerPresentationControl
   {
     @Nonnull

@@ -26,8 +26,8 @@
 package it.tidalwave.accounting.impl;
 
 import javax.annotation.Nonnull;
-import javax.annotation.PostConstruct;
 import java.io.IOException;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
@@ -50,7 +50,7 @@ import static it.tidalwave.accounting.role.Loadable._Loadable_;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
+@Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultAccountingController 
   {
     @Nonnull
@@ -62,8 +62,7 @@ public class DefaultAccountingController
     /***********************************************************************************************************************************************************
      * Loads the {@link Accounting} at initialization.
      **********************************************************************************************************************************************************/
-    @PostConstruct
-    @VisibleForTesting void initialize()
+    public void initialize()
       {
         try
           {

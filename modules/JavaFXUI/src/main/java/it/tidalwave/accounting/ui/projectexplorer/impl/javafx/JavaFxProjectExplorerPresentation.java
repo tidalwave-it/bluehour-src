@@ -25,6 +25,7 @@
  */
 package it.tidalwave.accounting.ui.projectexplorer.impl.javafx;
 
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
 import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.Getter;
@@ -36,6 +37,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
+@Component
 public class JavaFxProjectExplorerPresentation implements ProjectExplorerPresentation
   {
     @Getter

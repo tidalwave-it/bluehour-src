@@ -26,6 +26,7 @@
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
 import javax.annotation.Nonnull;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
@@ -45,7 +46,7 @@ import static it.tidalwave.util.ui.UserNotificationWithFeedback.notificationWith
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
+@Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultHourlyReportPresentationControl implements HourlyReportPresentationControl
   {
     @Nonnull

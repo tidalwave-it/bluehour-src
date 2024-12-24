@@ -26,6 +26,7 @@
 package it.tidalwave.accounting.ui.impl.javafx;
 
 import javax.annotation.Nonnull;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.ui.customerexplorer.impl.javafx.JavaFxCustomerExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.impl.javafx.JavaFxJobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.projectexplorer.impl.javafx.JavaFxProjectExplorerPresentation;
@@ -38,7 +39,7 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici (Fabrizio.Giudici@tidalwave.it)
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor
+@Component @RequiredArgsConstructor
 public class BlueHourApplicationAssembler
         implements ApplicationPresentationAssembler<JavaFXApplicationPresentationDelegate>
   {

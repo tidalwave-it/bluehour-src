@@ -26,6 +26,7 @@
 package it.tidalwave.accounting.ui.projectexplorer.impl;
 
 import javax.annotation.Nonnull;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.CustomerSelectedEvent;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.Customer;
@@ -51,7 +52,7 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
+@Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
 public class DefaultProjectExplorerPresentationControl implements ProjectExplorerPresentationControl
   {
     @Nonnull

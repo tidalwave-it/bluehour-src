@@ -25,6 +25,7 @@
  */
 package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.experimental.Delegate;
@@ -35,6 +36,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
+@Component
 public class JavaFxHourlyReportPresentation implements HourlyReportPresentation
   {
     private final NodeAndDelegate<JavaFxHourlyReportPresentation> nad = createNodeAndDelegate(JavaFxHourlyReportPresentation.class);

@@ -28,17 +28,29 @@ package it.tidalwave.accounting.ui.impl.javafx;
 import javax.annotation.Nonnull;
 import javafx.application.Platform;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import it.tidalwave.accounting.impl.DefaultAccountingController;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
-import it.tidalwave.ui.javafx.JavaFXSpringApplication;
+import it.tidalwave.ui.javafx.JavaFXSpringAnnotationApplication;
 import it.tidalwave.util.PreferencesHandler;
+import it.tidalwave.messagebus.spi.SimpleMessageBus;
 
 /***************************************************************************************************************************************************************
  *
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-public class Main extends JavaFXSpringApplication
+@Configuration
+@EnableSpringConfigured
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = "it.tidalwave")
+public class Main extends JavaFXSpringAnnotationApplication
   {
     public static void main (@Nonnull final String ... args)
       {
@@ -71,5 +83,19 @@ public class Main extends JavaFXSpringApplication
         applicationContext.getBean(CustomerExplorerPresentationControl.class).initialize();
         applicationContext.getBean(ProjectExplorerPresentationControl.class).initialize();
         applicationContext.getBean(ProjectExplorerPresentationControl.class).initialize();
+        applicationContext.getBean(DefaultAccountingController.class).initialize();
+      }
+
+    @Bean
+    public SimpleMessageBus applicationMessageBus()
+      {
+        final var executor = new ThreadPoolTaskExecutor();
+        executor.setWaitForTasksToCompleteOnShutdown(false);
+        executor.setThreadNamePrefix("messageBus-");
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(10);
+        executor.setQueueCapacity(10);
+        executor.afterPropertiesSet();
+        return new SimpleMessageBus(executor);
       }
   }

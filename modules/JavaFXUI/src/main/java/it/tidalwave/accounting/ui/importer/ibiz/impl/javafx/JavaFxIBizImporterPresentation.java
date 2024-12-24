@@ -25,6 +25,7 @@
  */
 package it.tidalwave.accounting.ui.importer.ibiz.impl.javafx;
 
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.ui.importer.ibiz.IBizImporterPresentation;
 import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.experimental.Delegate;
@@ -35,6 +36,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
+@Component
 public class JavaFxIBizImporterPresentation implements IBizImporterPresentation
   {
     private final NodeAndDelegate<JavaFxIBizImporterPresentation> nad = createNodeAndDelegate(JavaFxIBizImporterPresentation.class);

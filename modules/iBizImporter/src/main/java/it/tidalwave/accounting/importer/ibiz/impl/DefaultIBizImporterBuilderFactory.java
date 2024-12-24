@@ -26,6 +26,7 @@
 package it.tidalwave.accounting.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
+import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;
 
@@ -34,6 +35,7 @@ import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
+@Component
 public class DefaultIBizImporterBuilderFactory implements IBizImporterBuilderFactory
   {
     @Override @Nonnull
