@@ -79,7 +79,7 @@
         <scm.repo.readonly.url>https://tidalwave@bitbucket.org/tidalwave/bluehour-src.git</scm.repo.readonly.url>
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/bluehour-src/src</scm.repo.browse.url>
         <tft.project.url>http://tidalwave.it/projects/bluehour</tft.project.url>
-        <release.profiles>release-sign-artifacts, installers</release.profiles>
+        <release.profiles>release-sign-artifacts,installers</release.profiles>
     </properties>
 
     <!-- ===============================================================================================================
