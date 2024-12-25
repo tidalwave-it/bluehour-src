@@ -26,20 +26,12 @@
 package it.tidalwave.accounting.ui.impl.javafx;
 
 import javax.annotation.Nonnull;
-import javafx.application.Platform;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import it.tidalwave.accounting.impl.DefaultAccountingController;
-import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
-import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 import it.tidalwave.ui.javafx.JavaFXSpringAnnotationApplication;
-import it.tidalwave.util.PreferencesHandler;
-import it.tidalwave.messagebus.spi.SimpleMessageBus;
+import it.tidalwave.role.ui.annotation.EnableMessageBus;
 
 /***************************************************************************************************************************************************************
  *
@@ -50,52 +42,15 @@ import it.tidalwave.messagebus.spi.SimpleMessageBus;
 @EnableSpringConfigured
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = "it.tidalwave")
+@EnableMessageBus
 public class Main extends JavaFXSpringAnnotationApplication
   {
     public static void main (@Nonnull final String ... args)
       {
-        try
-          {
-            PreferencesHandler.setAppName("blueHour");
-            final var preferenceHandler = PreferencesHandler.getInstance();
-            final var logFolder = preferenceHandler.getLogFolder();
-            System.setProperty("it.tidalwave.northernwind.bluehour.logFolder", logFolder.toString());
-            Platform.setImplicitExit(true);
-            launch(args);
-          }
-        catch (Throwable t)
-          {
-            // Don't use logging facilities here, they could be not initialized
-            t.printStackTrace();
-            System.exit(-1);
-          }
-      }
-
-    /***********************************************************************************************************************************************************
-     * {@inheritDoc}
-     **********************************************************************************************************************************************************/
-    @Override
-    protected void onStageCreated (@Nonnull final ApplicationContext applicationContext)
-      {
-        // FIXME: controllers can't initialize in postconstruct
-        // Too bad because with PAC+EventBus we'd get rid of the control interfaces
-        // Could be fixed by firing a PowerOnNotification, such as in blueMarine II.
-        applicationContext.getBean(CustomerExplorerPresentationControl.class).initialize();
-        applicationContext.getBean(ProjectExplorerPresentationControl.class).initialize();
-        applicationContext.getBean(ProjectExplorerPresentationControl.class).initialize();
-        applicationContext.getBean(DefaultAccountingController.class).initialize();
-      }
-
-    @Bean
-    public SimpleMessageBus applicationMessageBus()
-      {
-        final var executor = new ThreadPoolTaskExecutor();
-        executor.setWaitForTasksToCompleteOnShutdown(false);
-        executor.setThreadNamePrefix("messageBus-");
-        executor.setCorePoolSize(10);
-        executor.setMaxPoolSize(10);
-        executor.setQueueCapacity(10);
-        executor.afterPropertiesSet();
-        return new SimpleMessageBus(executor);
+        launch(Main.class,
+               params().withArgs(args)
+                       .withApplicationName("blueHour")
+                       .withLogFolderPropertyName("it.tidalwave.northernwind.bluehour.logFolder")
+                       .withProperty(K_INITIAL_SIZE, 0.8));
       }
   }

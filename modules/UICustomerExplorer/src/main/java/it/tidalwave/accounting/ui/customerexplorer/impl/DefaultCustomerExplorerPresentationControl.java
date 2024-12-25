@@ -34,7 +34,7 @@ import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
-import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentationControl;
+import it.tidalwave.message.PowerOnEvent;
 import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;
@@ -54,7 +54,7 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  *
  **************************************************************************************************************************************************************/
 @Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
-public class DefaultCustomerExplorerPresentationControl implements CustomerExplorerPresentationControl
+public class DefaultCustomerExplorerPresentationControl
   {
     @Nonnull
     private final MessageBus messageBus;
@@ -65,10 +65,9 @@ public class DefaultCustomerExplorerPresentationControl implements CustomerExplo
     /***********************************************************************************************************************************************************
      * Requests the opening of an {@link Accounting} during initialization.
      **********************************************************************************************************************************************************/
-    @Override
-    public void initialize()
+    @VisibleForTesting void onInitialize (@ListensTo final PowerOnEvent event)
       {
-        log.info("initialize()");  
+        log.info("onInitialize({})", event);
         messageBus.publish(new AccountingOpenRequest());
       }
     

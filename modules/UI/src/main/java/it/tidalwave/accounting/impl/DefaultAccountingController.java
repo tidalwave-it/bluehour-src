@@ -31,6 +31,7 @@ import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
+import it.tidalwave.message.PowerOnEvent;
 import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
@@ -62,11 +63,11 @@ public class DefaultAccountingController
     /***********************************************************************************************************************************************************
      * Loads the {@link Accounting} at initialization.
      **********************************************************************************************************************************************************/
-    public void initialize()
+    @VisibleForTesting void onInitialize (@ListensTo final PowerOnEvent event)
       {
         try
           {
-            log.info("initialize()");
+            log.info("onInitialize({})", event);
             accounting = Accounting.createNew().as(_Loadable_).load();
             messageBus.publish(new AccountingOpenedEvent(accounting));
           }
@@ -79,8 +80,7 @@ public class DefaultAccountingController
     /***********************************************************************************************************************************************************
      * Reply with a message carrying a reference to the {@link Accounting} instance. 
      **********************************************************************************************************************************************************/
-    @VisibleForTesting
-    void onAccountingOpenRequest (@Nonnull @ListensTo final AccountingOpenRequest request)
+    @VisibleForTesting void onAccountingOpenRequest (@Nonnull @ListensTo final AccountingOpenRequest request)
       {
         // already done at this point, just send a response
         messageBus.publish(new AccountingOpenedEvent(accounting));

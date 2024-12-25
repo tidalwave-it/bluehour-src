@@ -33,7 +33,6 @@ import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
 import it.tidalwave.accounting.model.spi.ProjectSpi;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;
-import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentationControl;
 import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.role.ui.Selectable;
@@ -53,18 +52,13 @@ import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePr
  *
  **************************************************************************************************************************************************************/
 @Component @RequiredArgsConstructor @DciContext @SimpleMessageSubscriber @Slf4j
-public class DefaultProjectExplorerPresentationControl implements ProjectExplorerPresentationControl
+public class DefaultProjectExplorerPresentationControl
   {
     @Nonnull
     private final MessageBus messageBus;
 
     @Nonnull
     private final ProjectExplorerPresentation presentation;
-
-    @Override
-    public void initialize() 
-      {
-      }
 
     /***********************************************************************************************************************************************************
      * Reacts to the notification that a {@link Customer} has been selected by populating the presentation with
