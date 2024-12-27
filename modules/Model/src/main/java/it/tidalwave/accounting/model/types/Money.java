@@ -44,15 +44,15 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access = AccessLevel.PRIVATE) @EqualsAndHashCode
+@Immutable @RequiredArgsConstructor(access = AccessLevel.PRIVATE) @Getter @EqualsAndHashCode
 public class Money implements Comparable<Money>
   {
     public static final Money ZERO = Money.of(BigDecimal.ZERO, "EUR");
 
-    @Getter @Nonnull
+    @Nonnull
     private final BigDecimal amount;
 
-    @Getter @Nonnull
+    @Nonnull
     private final String currency;
 
     private Money (final long amount, @Nonnull final String currency)
@@ -77,21 +77,21 @@ public class Money implements Comparable<Money>
       throws ParseException
       {
         final var parts = string.split(" ");
-        return Money.of((BigDecimal)getFormat().parse(parts[0]), parts[1]);
+        return of((BigDecimal)getFormat().parse(parts[0]), parts[1]);
       }
 
     @Nonnull
     public Money add (@Nonnull final Money other)
       {
         checkCurrencies(other);
-        return Money.of(amount.add(other.amount), currency);
+        return of(amount.add(other.amount), currency);
       }
 
     @Nonnull
     public Money subtract (@Nonnull final Money other)
       {
         checkCurrencies(other);
-        return Money.of(amount.subtract(other.amount), currency);
+        return of(amount.subtract(other.amount), currency);
       }
 
     @Nonnegative
@@ -147,8 +147,7 @@ public class Money implements Comparable<Money>
       {
         if (!this.currency.equals(other.currency))
           {
-            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s",
-                                                             this.currency, other.currency));
+            throw new IllegalArgumentException(String.format("Currency mismatch: %s vs %s", this.currency, other.currency));
           }
       }
   }
