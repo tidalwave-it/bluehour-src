@@ -31,13 +31,13 @@
     <parent>
         <groupId>it.tidalwave.accounting</groupId>
         <artifactId>bluehour-modules</artifactId>
-        <version>1.0-ALPHA-10</version>
+        <version>1.0-ALPHA-11-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
-    <version>1.0-ALPHA-10</version>
+    <version>1.0-ALPHA-11-SNAPSHOT</version>
     <name>blueHour :: UI :: JavaFX</name>
     <packaging>jar</packaging>
 
