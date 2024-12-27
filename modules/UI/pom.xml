@@ -38,7 +38,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - UI</name>
+    <name>blueHour :: UI</name>
     <packaging>jar</packaging>
     <description>
         This module contains the UI.

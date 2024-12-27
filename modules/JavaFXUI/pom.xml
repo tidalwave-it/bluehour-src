@@ -38,7 +38,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-javafx</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - UI - JavaFX</name>
+    <name>blueHour :: UI :: JavaFX</name>
     <packaging>jar</packaging>
 
     <properties>

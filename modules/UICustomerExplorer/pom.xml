@@ -39,7 +39,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-customerexplorer</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - UI - Customer Explorer</name>
+    <name>blueHour :: UI :: Customer Explorer</name>
     <packaging>jar</packaging>
     <description>
         This module implements the Customer explorer.

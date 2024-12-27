@@ -37,7 +37,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-marshalling-xml</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - Marshalling - XML</name>
+    <name>blueHour :: Marshalling :: XML</name>
     <packaging>jar</packaging>
     <description>
         This module implements XML marshalling for data structures.

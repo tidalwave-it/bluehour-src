@@ -13,7 +13,7 @@
     <artifactId>it-tidalwave-accounting-application-javafx</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>blueHour - Application (JavaFX)</name>
+    <name>blueHour :: Application (JavaFX)</name>
 
     <properties>
         <tft.javafx.modules>javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.web</tft.javafx.modules>

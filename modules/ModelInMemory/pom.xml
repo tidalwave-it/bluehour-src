@@ -38,7 +38,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-model-impl-inmemory</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - Model, In-Memory Implementation</name>
+    <name>blueHour :: Model :: In-Memory</name>
     <packaging>jar</packaging>
     <description>
         This module provides an in-memory implementation for all model classes.

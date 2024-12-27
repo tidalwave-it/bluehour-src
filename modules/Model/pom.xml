@@ -38,7 +38,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-model</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - Model</name>
+    <name>blueHour :: Model</name>
     <packaging>jar</packaging>
     <description>
         This module implements the data model.

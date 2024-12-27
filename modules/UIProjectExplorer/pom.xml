@@ -38,7 +38,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-projectexplorer</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - UI - Project Explorer</name>
+    <name>blueHour :: UI :: Project Explorer</name>
     <packaging>jar</packaging>
     <description>
         This module implements the project explorer.

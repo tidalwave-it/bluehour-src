@@ -38,7 +38,7 @@
     <groupId>it.tidalwave.accounting</groupId>
     <artifactId>it-tidalwave-accounting-ui-hourlyreport</artifactId>
     <version>1.0-ALPHA-10-SNAPSHOT</version>
-    <name>blueHour - UI - Hourly Report</name>
+    <name>blueHour :: UI :: Hourly Report</name>
     <packaging>jar</packaging>
     <description>
         This module implements the UI for the hourly report.
