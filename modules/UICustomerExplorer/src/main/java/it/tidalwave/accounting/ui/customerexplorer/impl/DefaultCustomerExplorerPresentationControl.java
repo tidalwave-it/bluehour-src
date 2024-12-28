@@ -34,10 +34,10 @@ import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
-import it.tidalwave.message.PowerOnEvent;
+import it.tidalwave.ui.core.message.PowerOnEvent;
 import it.tidalwave.util.annotation.VisibleForTesting;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.Selectable;
+import it.tidalwave.ui.core.role.PresentationModel;
+import it.tidalwave.ui.core.role.Selectable;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
@@ -45,8 +45,8 @@ import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
-import static it.tidalwave.role.ui.Presentable._Presentable_;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
+import static it.tidalwave.ui.core.role.Presentable._Presentable_;
+import static it.tidalwave.ui.core.role.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***************************************************************************************************************************************************************
  *

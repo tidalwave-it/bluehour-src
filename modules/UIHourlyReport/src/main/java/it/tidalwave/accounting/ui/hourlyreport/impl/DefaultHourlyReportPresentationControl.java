@@ -31,15 +31,15 @@ import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentationControl;
 import it.tidalwave.util.annotation.VisibleForTesting;
-import it.tidalwave.role.PlainTextRenderable;
-import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.ui.core.role.PlainTextDisplayable;
+import it.tidalwave.ui.core.role.PresentationModel;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.messagebus.annotation.SimpleMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.accounting.model.HourlyReportGenerator._HourlyReportGenerator_;
-import static it.tidalwave.util.ui.UserNotificationWithFeedback.notificationWithFeedback;
+import static it.tidalwave.ui.core.UserNotificationWithFeedback.notificationWithFeedback;
 
 /***************************************************************************************************************************************************************
  *
@@ -57,6 +57,6 @@ public class DefaultHourlyReportPresentationControl implements HourlyReportPrese
         final var report = request.getProject().as(_HourlyReportGenerator_).createReport();
         presentation.bind();
         presentation.showUp(notificationWithFeedback().withCaption("Project Hourly Report"));
-        presentation.populate(PresentationModel.of("???", (PlainTextRenderable) (args) -> report.asString()));
+        presentation.populate(PresentationModel.of("???", (PlainTextDisplayable)report::asString));
       }
   }

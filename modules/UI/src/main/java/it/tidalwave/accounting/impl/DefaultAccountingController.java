@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;
 import it.tidalwave.accounting.commons.AccountingOpenedEvent;
 import it.tidalwave.accounting.model.Accounting;
-import it.tidalwave.message.PowerOnEvent;
+import it.tidalwave.ui.core.message.PowerOnEvent;
 import it.tidalwave.util.annotation.VisibleForTesting;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;

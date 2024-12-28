@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.steelblue</groupId>
-            <artifactId>it-tidalwave-role-ui-javafx</artifactId>
+            <artifactId>it-tidalwave-ui-javafx</artifactId>
         </dependency>
 
         <dependency>

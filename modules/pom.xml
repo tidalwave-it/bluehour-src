@@ -55,9 +55,8 @@
         <commons-configuration2.version>2.11.0</commons-configuration2.version>
         <jaxb.version>2.2.11</jaxb.version>
         <tft.javafx.version>23.0.1</tft.javafx.version>
-        <steelblue.version>1.1-ALPHA-6</steelblue.version>
-        <thesefoolishthings.version>3.2-ALPHA-25</thesefoolishthings.version>
-        <tft.spring.version>6.2.1</tft.spring.version>
+        <steelblue.version>2.0-ALPHA-5</steelblue.version>
+        <thesefoolishthings.version>4.0-ALPHA-3</thesefoolishthings.version>
 
         <tft.appbundle.name>blueHour</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
@@ -185,7 +184,7 @@
         <!-- Keep this before the mockito-all dependency - see http://stackoverflow.com/questions/15833015/ -->
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
+            <artifactId>hamcrest</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

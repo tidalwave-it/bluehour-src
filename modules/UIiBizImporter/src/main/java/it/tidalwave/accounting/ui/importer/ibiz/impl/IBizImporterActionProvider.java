@@ -27,11 +27,11 @@ package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
 import javax.annotation.Nonnull;
 import it.tidalwave.accounting.commons.ImportRequest;
-import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.ToolBarModel;
-import it.tidalwave.role.ui.UserAction;
-import it.tidalwave.role.ui.spi.DefaultUserActionProvider2;
-import it.tidalwave.role.ui.spi.MessageSendingUserAction;
+import it.tidalwave.ui.core.ToolBarControl;
+import it.tidalwave.ui.core.role.Displayable;
+import it.tidalwave.ui.core.role.UserAction;
+import it.tidalwave.ui.core.role.spi.DefaultUserActionProvider2;
+import it.tidalwave.ui.core.role.spi.MessageSendingUserAction;
 import it.tidalwave.dci.annotation.DciRole;
 import it.tidalwave.messagebus.MessageBus;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@RequiredArgsConstructor @DciRole(datumType = ToolBarModel.class)
+@RequiredArgsConstructor @DciRole(datumType = ToolBarControl.class)
 public class IBizImporterActionProvider extends DefaultUserActionProvider2
   {
     @Nonnull

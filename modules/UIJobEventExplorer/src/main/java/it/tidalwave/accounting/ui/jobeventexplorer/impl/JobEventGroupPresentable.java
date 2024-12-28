@@ -30,16 +30,16 @@ import java.util.Collection;
 import java.util.List;
 import it.tidalwave.accounting.model.spi.JobEventGroupSpi;
 import it.tidalwave.accounting.model.spi.JobEventSpi;
-import it.tidalwave.role.ui.Displayable;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.role.ui.PresentationModelAggregate;
-import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.ui.core.role.Displayable;
+import it.tidalwave.ui.core.role.PresentationModel;
+import it.tidalwave.ui.core.role.PresentationModelAggregate;
+import it.tidalwave.ui.core.role.Styleable;
 import it.tidalwave.dci.annotation.DciRole;
 import static it.tidalwave.accounting.commons.Styleables.RIGHT_ALIGNED;
 import static it.tidalwave.accounting.model.spi.util.Formatters.*;
 import static java.util.Comparator.*;
 import static it.tidalwave.util.Parameters.r;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
+import static it.tidalwave.ui.core.role.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***************************************************************************************************************************************************************
  *

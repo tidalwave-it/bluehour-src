@@ -26,8 +26,8 @@
 package it.tidalwave.accounting.ui.hourlyreport;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.util.ui.UserNotificationWithFeedback;
-import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.ui.core.UserNotificationWithFeedback;
+import it.tidalwave.ui.core.role.PresentationModel;
 
 /***************************************************************************************************************************************************************
  *

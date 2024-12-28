@@ -29,7 +29,6 @@ import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;
 import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.experimental.Delegate;
-import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***************************************************************************************************************************************************************
  *
@@ -39,7 +38,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
 @Component
 public class JavaFxHourlyReportPresentation implements HourlyReportPresentation
   {
-    private final NodeAndDelegate<JavaFxHourlyReportPresentation> nad = createNodeAndDelegate(JavaFxHourlyReportPresentation.class);
+    private final NodeAndDelegate<JavaFxHourlyReportPresentation> nad = NodeAndDelegate.of(JavaFxHourlyReportPresentation.class);
 
     @Delegate
     private final HourlyReportPresentation delegate = nad.getDelegate();

@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.math.BigDecimal;
 import it.tidalwave.accounting.model.types.Money;
-import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.ui.core.role.Styleable;
 import lombok.RequiredArgsConstructor;
 
 /***************************************************************************************************************************************************************

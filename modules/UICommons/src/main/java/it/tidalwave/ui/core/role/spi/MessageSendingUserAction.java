@@ -24,13 +24,13 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.role.ui.spi;
+package it.tidalwave.ui.core.role.spi;
 
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.function.Supplier;
 import it.tidalwave.util.Parameters;
-import it.tidalwave.role.ui.UserAction;
+import it.tidalwave.ui.core.role.UserAction;
 import it.tidalwave.messagebus.MessageBus;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

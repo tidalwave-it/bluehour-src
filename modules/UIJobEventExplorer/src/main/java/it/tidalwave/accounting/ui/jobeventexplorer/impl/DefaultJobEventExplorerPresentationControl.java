@@ -33,7 +33,7 @@ import it.tidalwave.accounting.model.spi.JobEventSpi;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentation;
 import it.tidalwave.accounting.ui.jobeventexplorer.JobEventExplorerPresentationControl;
 import it.tidalwave.util.annotation.VisibleForTesting;
-import it.tidalwave.role.ui.Visible;
+import it.tidalwave.ui.core.role.Visibility;
 import it.tidalwave.dci.annotation.DciContext;
 import it.tidalwave.messagebus.MessageBus;
 import it.tidalwave.messagebus.annotation.ListensTo;
@@ -42,8 +42,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.Comparator.*;
 import static it.tidalwave.util.Parameters.r;
-import static it.tidalwave.role.ui.Presentable._Presentable_;
-import static it.tidalwave.role.ui.spi.PresentationModelCollectors.toCompositePresentationModel;
+import static it.tidalwave.ui.core.role.Presentable._Presentable_;
+import static it.tidalwave.ui.core.role.spi.PresentationModelCollectors.toCompositePresentationModel;
 
 /***************************************************************************************************************************************************************
  *
@@ -82,6 +82,6 @@ public class DefaultJobEventExplorerPresentationControl implements JobEventExplo
                                                 .map(jobEvent -> (JobEventSpi)jobEvent)
                                                 .sorted(comparing(JobEventSpi::getDateTime))
                                                 .map(jobEvent -> jobEvent.as(_Presentable_).createPresentationModel())
-                                                .collect(toCompositePresentationModel(r(Visible.INVISIBLE))));
+                                                .collect(toCompositePresentationModel(r(Visibility.INVISIBLE))));
       }
   }

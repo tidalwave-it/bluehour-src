@@ -24,12 +24,11 @@
  * *********************************************************************************************************************
  * #L%
  */
-package it.tidalwave.role.ui.spi;
+package it.tidalwave.ui.core.role.spi;
 
-import javax.annotation.Nonnull;
-import java.util.Collection;
-import java.util.Collections;
-import it.tidalwave.role.ui.UserAction;
+import jakarta.annotation.Nonnull;
+import java.util.List;
+import it.tidalwave.ui.core.role.UserAction;
 
 /***************************************************************************************************************************************************************
  *
@@ -44,9 +43,9 @@ public class DefaultUserActionProvider2 extends DefaultUserActionProvider
      * {@inheritDoc}
      **********************************************************************************************************************************************************/
     @Override @Nonnull
-    public Collection<? extends UserAction> getActions()
+    public List<UserAction> getActions()
       {
-        return Collections.singletonList(getSingleAction());
+        return List.of(getSingleAction());
       }
 
     /***********************************************************************************************************************************************************

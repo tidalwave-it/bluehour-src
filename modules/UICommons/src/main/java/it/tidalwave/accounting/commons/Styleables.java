@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.commons;
 
-import it.tidalwave.role.ui.Styleable;
+import it.tidalwave.ui.core.role.Styleable;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

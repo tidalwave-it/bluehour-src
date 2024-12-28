@@ -30,8 +30,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
+import it.tidalwave.ui.core.annotation.EnableMessageBus;
 import it.tidalwave.ui.javafx.JavaFXSpringAnnotationApplication;
-import it.tidalwave.role.ui.annotation.EnableMessageBus;
 
 /***************************************************************************************************************************************************************
  *

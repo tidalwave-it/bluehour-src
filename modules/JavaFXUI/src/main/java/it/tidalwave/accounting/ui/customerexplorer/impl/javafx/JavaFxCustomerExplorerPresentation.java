@@ -30,7 +30,6 @@ import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;
 import it.tidalwave.ui.javafx.NodeAndDelegate;
 import lombok.Getter;
 import lombok.experimental.Delegate;
-import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegate;
 
 /***************************************************************************************************************************************************************
  *
@@ -41,7 +40,7 @@ import static it.tidalwave.ui.javafx.JavaFXSafeProxyCreator.createNodeAndDelegat
 public class JavaFxCustomerExplorerPresentation implements CustomerExplorerPresentation
   {
     @Getter
-    private final NodeAndDelegate<JavaFxCustomerExplorerPresentation> nad = createNodeAndDelegate(JavaFxCustomerExplorerPresentation.class);
+    private final NodeAndDelegate<JavaFxCustomerExplorerPresentation> nad = NodeAndDelegate.of(JavaFxCustomerExplorerPresentation.class);
 
     @Delegate
     private final CustomerExplorerPresentation delegate = nad.getDelegate();

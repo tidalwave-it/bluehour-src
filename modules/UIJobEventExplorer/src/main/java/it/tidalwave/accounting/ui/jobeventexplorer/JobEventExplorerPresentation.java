@@ -26,7 +26,7 @@
 package it.tidalwave.accounting.ui.jobeventexplorer;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.ui.core.role.PresentationModel;
 
 /***************************************************************************************************************************************************************
  *
