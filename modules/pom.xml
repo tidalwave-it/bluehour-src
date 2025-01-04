@@ -100,11 +100,6 @@
                 <version>${commons-codec.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.aquafx-project</groupId>
-                <artifactId>aquafx</artifactId>
-                <version>${aquafx.version}</version>
-            </dependency>
             <!-- Should activate by itself with JDK 11+, but it fails with Jenkins Maven integration. -->
             <dependency>
                 <groupId>org.openjfx</groupId>
