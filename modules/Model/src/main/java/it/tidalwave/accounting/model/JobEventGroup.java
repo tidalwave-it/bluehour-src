@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import it.tidalwave.role.SimpleComposite;
 
 /***************************************************************************************************************************************************************
@@ -34,7 +34,7 @@ import it.tidalwave.role.SimpleComposite;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable
+/* @Immutable */
 public interface JobEventGroup extends JobEvent, SimpleComposite<JobEvent>
   {
     @Override @Nonnull

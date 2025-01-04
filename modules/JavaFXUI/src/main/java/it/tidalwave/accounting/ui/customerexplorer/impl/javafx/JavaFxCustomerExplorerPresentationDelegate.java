@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.customerexplorer.impl.javafx;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import it.tidalwave.accounting.ui.customerexplorer.CustomerExplorerPresentation;

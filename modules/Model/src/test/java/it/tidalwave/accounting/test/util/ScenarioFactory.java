@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.test.util;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
+// import javax.annotation.Nonnegative;
+import jakarta.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -246,7 +246,7 @@ public final class ScenarioFactory
 
     private static void createInvoices (@Nonnull final InvoiceRegistry invoiceRegistry,
                                         @Nonnull final Project project,
-                                        @Nonnegative final int invoiceCount,
+                                        /* @Nonnegative */ final int invoiceCount,
                                         @Nonnull final String prefix)
       {
         final var jobEvents = project.findChildren().results();

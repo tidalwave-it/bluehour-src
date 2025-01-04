@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.util.Map;
 import it.tidalwave.accounting.model.Accounting;
 import it.tidalwave.accounting.model.Project;
@@ -50,7 +50,7 @@ import static java.util.stream.Collectors.*;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "as"}) // FIXME: remove the @Getter
+/* @Immutable */ @Getter @EqualsAndHashCode @ToString(exclude = {"accounting", "as"}) // FIXME: remove the @Getter
 public class InMemoryCustomer implements CustomerSpi
   {
     private static final long serialVersionUID = 1L;

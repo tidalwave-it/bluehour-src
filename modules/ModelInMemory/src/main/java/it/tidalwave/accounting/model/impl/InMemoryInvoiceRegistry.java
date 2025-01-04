@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import it.tidalwave.accounting.model.Invoice;

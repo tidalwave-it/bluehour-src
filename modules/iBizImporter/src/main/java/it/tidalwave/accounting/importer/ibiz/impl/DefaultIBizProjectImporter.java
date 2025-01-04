@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.List;
 import java.util.stream.Stream;
 import java.io.IOException;

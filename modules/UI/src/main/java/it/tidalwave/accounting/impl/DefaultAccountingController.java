@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.AccountingOpenRequest;

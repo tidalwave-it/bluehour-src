@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+// import javax.annotation.CheckForNull;
+import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import it.tidalwave.accounting.importer.ibiz.spi.IBizCustomerImporter;
@@ -127,7 +127,7 @@ public class DefaultIBizCustomerImporter implements IBizCustomerImporter
 //      }
     
     @Nonnull
-    private static String trim (@CheckForNull final String string)
+    private static String trim (/* @CheckForNull */ final String string)
       {
         return (string == null) ? "" : string.trim();
       }

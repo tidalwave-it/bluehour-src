@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.xml.bind.JAXBContext;

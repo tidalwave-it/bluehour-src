@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.customerexplorer.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.Collection;
 import it.tidalwave.accounting.model.spi.CustomerSpi;
 import it.tidalwave.ui.core.role.Displayable;

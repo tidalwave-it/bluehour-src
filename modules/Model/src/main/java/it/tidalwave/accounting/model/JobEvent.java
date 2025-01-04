@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +47,7 @@ import lombok.With;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable
+///* @Immutable */
 public interface JobEvent extends Identifiable, As
   {
     public enum Type { TIMED, FLAT }
@@ -56,7 +56,7 @@ public interface JobEvent extends Identifiable, As
      *
      **********************************************************************************************************************************************************/
     @AllArgsConstructor// FIXME (access = PROTECTED)
-    @Immutable @With @Getter @ToString
+    /* @Immutable */ @With @Getter @ToString
     public static class Builder
       {
         private final Id id;

@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
@@ -40,7 +40,7 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @RequiredArgsConstructor 
+/* @Immutable */ @RequiredArgsConstructor 
 public class RedStyleForNegativeMoney implements Styleable
   {
     @Nonnull

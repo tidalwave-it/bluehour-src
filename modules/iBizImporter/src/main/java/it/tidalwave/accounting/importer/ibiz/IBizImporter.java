@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.importer.ibiz;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.io.IOException;
 import java.nio.file.Path;
 import it.tidalwave.accounting.importer.ibiz.impl.DefaultIBizImporter;
@@ -49,7 +49,7 @@ public interface IBizImporter extends Accounting
      *
      **********************************************************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PRIVATE)
-    @Immutable @With @Getter @ToString
+    /* @Immutable */ @With @Getter @ToString
     public static class Builder
       {
         private final Path path;

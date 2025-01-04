@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.impl.javafx;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;

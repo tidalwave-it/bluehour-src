@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -54,7 +54,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @With
+/* @Immutable */ @With
 @AllArgsConstructor(access = PRIVATE) @EqualsAndHashCode @ToString(exclude = {"events", "as", "accounting"})
 public class InMemoryProject implements ProjectSpi
   {

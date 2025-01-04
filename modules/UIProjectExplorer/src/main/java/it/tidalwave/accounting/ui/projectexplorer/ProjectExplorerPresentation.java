@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.projectexplorer;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import it.tidalwave.ui.core.role.PresentationModel;
 
 /***************************************************************************************************************************************************************

@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import lombok.RequiredArgsConstructor;
 
 /***************************************************************************************************************************************************************
@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable
+/* @Immutable */
 @RequiredArgsConstructor
 public class HourlyReport
   {

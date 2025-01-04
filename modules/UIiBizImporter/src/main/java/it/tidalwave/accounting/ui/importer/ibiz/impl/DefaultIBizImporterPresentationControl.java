@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.springframework.stereotype.Component;

@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.types;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,13 +41,13 @@ import static lombok.AccessLevel.PRIVATE;
  * @author Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString
+/* @Immutable */ @Getter @EqualsAndHashCode @ToString
 public class Address
   {
     public static final Address EMPTY = builder().create();
 
     @AllArgsConstructor(access = PRIVATE)
-    @Immutable @With @Getter @ToString
+    /* @Immutable */ @With @Getter @ToString
     public static class Builder
       {
         private final String street;

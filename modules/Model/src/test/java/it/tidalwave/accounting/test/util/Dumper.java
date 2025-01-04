@@ -27,8 +27,8 @@ package it.tidalwave.accounting.test.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+// import javax.annotation.CheckForNull;
+import jakarta.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -158,7 +158,7 @@ public class Dumper
                // && !DefaultAs.class.isAssignableFrom(type);
       };
 
-    @CheckForNull
+    /* @CheckForNull */
     private static Object safeGet (@Nonnull final Field field, @Nonnull final Object object)
       {
         try

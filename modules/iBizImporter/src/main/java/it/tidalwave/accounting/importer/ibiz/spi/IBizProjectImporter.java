@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.importer.ibiz.spi;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.Nullable;
 import java.io.IOException;
 import it.tidalwave.accounting.model.JobEvent;
 import it.tidalwave.accounting.model.Project;
@@ -62,7 +62,7 @@ public interface IBizProjectImporter
         ON_HOLD(Project.Status.CLOSED), // 2  
         DELETED(null);                  // 3
         
-        @Getter @Nullable
+        @Getter /* @Nullable */
         private final Project.Status mappedStatus;
       }
 

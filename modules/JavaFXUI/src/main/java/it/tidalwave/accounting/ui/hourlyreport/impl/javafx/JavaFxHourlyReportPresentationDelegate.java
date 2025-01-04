@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.hourlyreport.impl.javafx;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;

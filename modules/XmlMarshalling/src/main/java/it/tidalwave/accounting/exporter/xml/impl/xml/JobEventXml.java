@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl.xml;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.Nullable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -126,7 +126,7 @@ public class JobEventXml
       }
     
     @Nonnull
-    public static List<JobEvent> toJobEvents (@Nullable final List<? extends JobEventXml> jobEventsXml)
+    public static List<JobEvent> toJobEvents (/* @Nullable */ final List<? extends JobEventXml> jobEventsXml)
       {
         return (jobEventsXml == null) 
                 ? Collections.emptyList()

@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Invoice;
 import it.tidalwave.accounting.model.JobEvent;

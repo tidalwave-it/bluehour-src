@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl.adapters;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import it.tidalwave.accounting.model.JobEvent;
 

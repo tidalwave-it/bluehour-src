@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.hourlyreport.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.ProjectHourlyReportRequest;
 import it.tidalwave.accounting.ui.hourlyreport.HourlyReportPresentation;

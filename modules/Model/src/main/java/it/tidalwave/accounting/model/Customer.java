@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import it.tidalwave.accounting.model.spi.ObjectFactory;
 import it.tidalwave.accounting.model.types.Address;
 import it.tidalwave.util.As;
@@ -50,7 +50,7 @@ public interface Customer extends Identifiable, As
      *
      **********************************************************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PROTECTED)
-    @Immutable @With @Getter @ToString
+    /* @Immutable */ @With @Getter @ToString
     public static class Builder
       {
         public static interface Callback // Lombok @With doesn't support builder subclasses

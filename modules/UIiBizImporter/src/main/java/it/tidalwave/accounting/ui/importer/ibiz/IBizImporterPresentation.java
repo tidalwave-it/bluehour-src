@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.importer.ibiz;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.nio.file.Path;
 import it.tidalwave.ui.core.BoundProperty;
 import it.tidalwave.ui.core.UserNotificationWithFeedback;

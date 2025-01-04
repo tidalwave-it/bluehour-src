@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import it.tidalwave.accounting.commons.ImportRequest;
 import it.tidalwave.ui.core.ToolBarControl;
 import it.tidalwave.ui.core.role.Displayable;

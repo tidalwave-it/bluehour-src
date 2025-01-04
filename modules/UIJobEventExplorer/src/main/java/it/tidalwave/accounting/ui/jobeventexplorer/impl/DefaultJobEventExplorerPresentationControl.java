@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.commons.ProjectSelectedEvent;
 import it.tidalwave.accounting.model.Project;

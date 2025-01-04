@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.projectexplorer.impl.javafx;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import it.tidalwave.accounting.ui.projectexplorer.ProjectExplorerPresentation;

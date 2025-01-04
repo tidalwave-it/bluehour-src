@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.impl.javafx;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ToolBar;

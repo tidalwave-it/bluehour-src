@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.model.spi.util;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.time.Duration;
 
 /***************************************************************************************************************************************************************

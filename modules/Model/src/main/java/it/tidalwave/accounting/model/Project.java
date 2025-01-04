@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +49,7 @@ import lombok.With;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable
+/* @Immutable */
 public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
   {
     public enum Status { OPEN, CLOSED }
@@ -58,7 +58,7 @@ public interface Project extends SimpleComposite<JobEvent>, Identifiable, As
      *
      **********************************************************************************************************************************************************/
     @AllArgsConstructor // FIXME (access = PROTECTED)
-    @Immutable @With @Getter @ToString
+    /* @Immutable */ @With @Getter @ToString
     public static class Builder
       {
         public static interface Callback // Lombok @With doesn't support builder subclasses

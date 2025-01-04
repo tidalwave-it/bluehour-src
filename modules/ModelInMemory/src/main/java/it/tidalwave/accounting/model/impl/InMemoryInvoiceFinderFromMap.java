@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+// import jakarta.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import it.tidalwave.accounting.model.Invoice;
@@ -51,7 +51,7 @@ public class InMemoryInvoiceFinderFromMap
   {
     private static final long serialVersionUID = 1L;
     
-    @Nullable
+    /* @Nullable */
     private final Project project;
 
     public InMemoryInvoiceFinderFromMap (@Nonnull final Map<Id, InMemoryInvoice> invoiceMapById)

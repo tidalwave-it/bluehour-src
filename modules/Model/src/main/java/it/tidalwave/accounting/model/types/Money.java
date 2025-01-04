@@ -25,9 +25,9 @@
  */
 package it.tidalwave.accounting.model.types;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+// import javax.annotation.Nonnegative;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
@@ -44,7 +44,7 @@ import lombok.RequiredArgsConstructor;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access = AccessLevel.PRIVATE) @Getter @EqualsAndHashCode
+/* @Immutable */ @RequiredArgsConstructor(access = AccessLevel.PRIVATE) @Getter @EqualsAndHashCode
 public class Money implements Comparable<Money>
   {
     public static final Money ZERO = Money.of(BigDecimal.ZERO, "EUR");
@@ -94,7 +94,7 @@ public class Money implements Comparable<Money>
         return of(amount.subtract(other.amount), currency);
       }
 
-    @Nonnegative
+    /* @Nonnegative */
     public double divided (@Nonnull final Money other)
       {
         checkCurrencies(other);

@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

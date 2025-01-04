@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -47,7 +47,7 @@ import lombok.experimental.Delegate;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = "as")
+/* @Immutable */ @EqualsAndHashCode @ToString(exclude = "as")
 public class InMemoryInvoice implements InvoiceSpi
   {
     private static final long serialVersionUID = 1L;

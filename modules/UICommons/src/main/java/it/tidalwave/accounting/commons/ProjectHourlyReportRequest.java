@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.commons;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import it.tidalwave.accounting.model.Customer;
 import it.tidalwave.accounting.model.Project;
 import lombok.Getter;

@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;

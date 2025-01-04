@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.importer.ibiz.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 import it.tidalwave.accounting.importer.ibiz.IBizImporter;
 import it.tidalwave.accounting.importer.ibiz.IBizImporterBuilderFactory;

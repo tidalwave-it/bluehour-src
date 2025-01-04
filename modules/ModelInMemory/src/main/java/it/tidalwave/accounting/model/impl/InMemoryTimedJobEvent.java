@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -42,7 +42,7 @@ import lombok.ToString;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
+/* @Immutable */ @EqualsAndHashCode(callSuper = true) @ToString(callSuper = true)
 public class InMemoryTimedJobEvent extends InMemoryJobEvent implements TimedJobEventSpi
   {
     @Getter @Nonnull

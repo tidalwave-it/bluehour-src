@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.exporter.xml.impl.xml;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.time.LocalDate;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessorOrder;

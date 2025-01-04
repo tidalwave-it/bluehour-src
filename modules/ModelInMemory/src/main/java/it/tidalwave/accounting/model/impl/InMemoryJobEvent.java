@@ -25,8 +25,8 @@
  */
 package it.tidalwave.accounting.model.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
+import jakarta.annotation.Nonnull;
+// import javax.annotation.concurrent.Immutable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import it.tidalwave.accounting.model.JobEvent;
@@ -45,7 +45,7 @@ import lombok.experimental.Delegate;
  * @author  Fabrizio Giudici
  *
  **************************************************************************************************************************************************************/
-@Immutable @EqualsAndHashCode @ToString(exclude = "as")
+/* @Immutable */ @EqualsAndHashCode @ToString(exclude = "as")
 public abstract class InMemoryJobEvent implements JobEvent
   {
     @Delegate

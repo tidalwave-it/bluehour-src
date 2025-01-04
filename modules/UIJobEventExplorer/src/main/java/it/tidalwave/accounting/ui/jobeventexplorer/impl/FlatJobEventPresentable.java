@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.ui.jobeventexplorer.impl;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 import it.tidalwave.accounting.model.spi.FlatJobEventSpi;

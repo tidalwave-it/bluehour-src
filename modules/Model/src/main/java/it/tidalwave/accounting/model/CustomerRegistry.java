@@ -25,7 +25,7 @@
  */
 package it.tidalwave.accounting.model;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import it.tidalwave.accounting.model.Project.Builder;
 import it.tidalwave.util.Id;
 import it.tidalwave.util.spi.ExtendedFinderSupport;

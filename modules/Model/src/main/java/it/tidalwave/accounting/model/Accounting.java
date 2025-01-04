@@ -26,7 +26,7 @@
 package it.tidalwave.accounting.model;
 
 import java.lang.reflect.InvocationTargetException;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import it.tidalwave.util.As;
 
 /***************************************************************************************************************************************************************
