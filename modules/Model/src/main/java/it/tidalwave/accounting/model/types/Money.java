@@ -47,7 +47,7 @@ import lombok.RequiredArgsConstructor;
 /* @Immutable */ @RequiredArgsConstructor(access = AccessLevel.PRIVATE) @Getter @EqualsAndHashCode
 public class Money implements Comparable<Money>
   {
-    public static final Money ZERO = Money.of(BigDecimal.ZERO, "EUR");
+    public static final Money ZERO = of(BigDecimal.ZERO, "EUR");
 
     @Nonnull
     private final BigDecimal amount;
