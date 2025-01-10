@@ -1,9 +1,21 @@
-image: maven:3.9.9-openjdk-21
+image: maven:3.9.9-eclipse-temurin-21
 
+clone:
+  # SonarQube Cloud scanner needs the full history to assign issues properly
+  depth: full
+definitions:
+  caches:
+    sonar: ~/.sonar/cache
 pipelines:
-  default:
-    - step:
-        script:
-          - apt-get update
-          - apt-get install -y genisoimage
-          - mvn -B -DskipTests -Pinstallers,it.tidalwave-ci-v1,generate-revision-id
+  branches:
+    master:
+      - step:
+          name: Build and test
+          caches:
+            - maven
+            - sonar
+          script:
+            - apt update && apt install -y libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+            - mvn -B -Pit.tidalwave-metrics-v2,it.tidalwave-ci-v1,it.tidalwave-monocle-profile-v1 -Dtft.profile.metrics.checkstyleGoal= -Dtft.owasp.skip=true
+          artifacts:
+            - '**/target/**'
