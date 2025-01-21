@@ -53,7 +53,7 @@
     <distributionManagement>
         <site>
             <id>bluehour-site</id>
-            <url>http://tidalwave.it/projects/bluehour</url>
+            <url>https://tidalwave.bitbucket.io/bluehour</url>
         </site>
     </distributionManagement>
 

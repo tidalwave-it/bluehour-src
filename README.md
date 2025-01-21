@@ -1,14 +1,14 @@
 ![Maven Central](https://img.shields.io/maven-central/v/it.tidalwave.accounting/bluehour.svg)
 [![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/job/blueHour_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/blueHour)
 [![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/job/blueHour.svg)](http://services.tidalwave.it/ci/view/blueHour)
-[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/job/blueHour.svg)](http://services.tidalwave.it/ci/view/blueHour)
+[![Coverage](https://img.shields.io/jenkins/coverage/jacoco?jobUrl=https%3A%2F%2Fservices.tidalwave.it%2Fci%2Fview%2FblueHour%2Fjob%2FblueHour%2F)](http://services.tidalwave.it/ci/view/blueHour)
 
 blueHour
 ================================
 
 blueHour is a small application for accounting and invoicing.
 
-blueHour requires and is tested with JDKs in this range: [11,12).
+blueHour requires JDKs 21.
 It is released under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
 Please have a look at the [project website](http://bluehour.tidalwave.it) for a quick introduction with samples, tutorials, JavaDocs and build reports.
